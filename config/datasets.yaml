@@ -1,0 +1,23 @@
+datasets:
+  - id: wheat_iwgsc_gff3
+    crop: wheat
+    type: gene_annotation
+    local_path: data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_genomic.gff.gz
+    assembly_report: data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_assembly_report.txt
+    source: "IWGSC / URGI INRAE, PRJNA392179"
+    status: downloaded
+
+  - id: soybean_wm82_v6
+    crop: soybean
+    type: reference_assembly
+    local_path: data/raw/glyma.Wm82.gnm6.ann1.PKSW.gene_models_main.gff3.gz
+    source: "USDA-ARS / Iowa State University, GCA_002905335"
+    status: downloaded
+
+  - id: chickpea_icc4958
+    crop: chickpea
+    type: reference_assembly
+    local_path: data/raw/GCA_000347275.4_ASM34727v4_genomic.gbff.gz
+    assembly_report: data/raw/GCA_000347275.4_ASM34727v4_assembly_report.txt
+    source: "ICRISAT / BGI, PRJNA256933"
+    status: downloaded

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AgriHub KB</title>
+    <meta name="description" content="AgriHub genomic knowledge base prototype." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Manrope:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">AgriHub Genomic Knowledge Base</p>
+        <h1>Explore crop disease resistance as a graph.</h1>
+        <p class="lede">
+          Query wheat, soybean, and chickpea resistance relationships through a
+          browser-friendly API backed by Neo4j.
+        </p>
+      </section>
+
+      <section class="panel controls">
+        <label>
+          Crop
+          <select id="cropSelect">
+            <option value="wheat">Wheat</option>
+            <option value="soybean">Soybean</option>
+            <option value="chickpea">Chickpea</option>
+          </select>
+        </label>
+
+        <label>
+          Variety
+          <select id="varietySelect">
+            <option value="__all__">All varieties</option>
+          </select>
+        </label>
+
+        <button id="searchButton" type="button">Search knowledge graph</button>
+      </section>
+
+      <section class="panel results">
+        <div class="results-header">
+          <h2>Results</h2>
+          <span id="statusText" class="status-pill" role="status" aria-live="polite">Ready</span>
+        </div>
+        <div id="edgeList" class="edge-list"></div>
+      </section>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
