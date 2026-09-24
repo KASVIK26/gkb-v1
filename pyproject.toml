@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agrihub-kb"
+version = "0.1.0"
+description = "AgriHub Genomic Knowledge Base — curator pipeline"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "neo4j>=5.20,<6",
+    "pandas>=2.2,<3",
+    "pyyaml>=6.0,<7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0,<9",
+    "pytest-mock>=3.14,<4",
+    "pre-commit>=3.7,<5",
+    "detect-secrets>=1.5,<2",
+]
+
+[project.scripts]
+agrihub-pipeline = "curator.run_pipeline:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["curator*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "integration: marks tests that require a live Neo4j connection (deselect with -m 'not integration')",
+]

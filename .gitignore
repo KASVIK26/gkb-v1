@@ -1,11 +1,25 @@
+# Secrets (.env.example is committed as the template)
 .env
-.env.example
-__pycache__/
-.pytest_cache/
-.venv/
-venv/
-.claude/
+.env.*
+!.env.example
 
-data/raw/
-data/processed/
-.claude\settings.local.json
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+.venv-*/
+venv/
+
+# Data: raw downloads and intermediates are never committed.
+# Only small checksum manifests are tracked.
+data/*
+!data/manifests/
+
+# Local tooling state
+.wrangler/
+.claude/
+pipeline_run_log.txt

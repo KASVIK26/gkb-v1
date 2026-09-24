@@ -1,23 +1,24 @@
 datasets:
-  - id: wheat_iwgsc_gff3
-    crop: wheat
-    type: gene_annotation
-    local_path: data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_genomic.gff.gz
-    assembly_report: data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_assembly_report.txt
-    source: "IWGSC / URGI INRAE, PRJNA392179"
-    status: downloaded
-
-  - id: soybean_wm82_v6
-    crop: soybean
-    type: reference_assembly
-    local_path: data/raw/glyma.Wm82.gnm6.ann1.PKSW.gene_models_main.gff3.gz
-    source: "USDA-ARS / Iowa State University, GCA_002905335"
-    status: downloaded
-
-  - id: chickpea_icc4958
-    crop: chickpea
-    type: reference_assembly
-    local_path: data/raw/GCA_000347275.4_ASM34727v4_genomic.gbff.gz
-    assembly_report: data/raw/GCA_000347275.4_ASM34727v4_assembly_report.txt
-    source: "ICRISAT / BGI, PRJNA256933"
-    status: downloaded
+- id: wheat_iwgsc_gff3
+  crop: wheat
+  type: gene_annotation
+  local_path: data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_genomic.gff
+  assembly_report: data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_assembly_report.txt
+  source: IWGSC CS RefSeq v2.1, PRJNA669381 — Triticum aestivum cultivar Chinese Spring
+  status: loaded
+- id: soybean_wm82_v6
+  crop: soybean
+  type: gene_annotation
+  local_path: data/raw/glyma.Wm82.gnm6.ann1.PKSW.gene_models_main.gff3
+  source: LIS / USDA-ARS — Glycine max Williams 82, gnm6.ann1
+  status: loaded
+- id: chickpea_icc4958_gff3
+  crop: chickpea
+  type: gene_annotation
+  local_path: data/raw/cicar.ICC4958.gnm2.ann1.LCVX.gene_models_main.gff3
+  source: LegumeInfo — Cicer arietinum ICC4958, gnm2.ann1.LCVX (desi type, ~28,269 genes)
+  # Download from:
+  # https://data.legumeinfo.org/Cicer/arietinum/annotations/ICC4958.gnm2.ann1.LCVX/
+  # File already present as uncompressed .gff3 — no download needed.
+  # If missing: download from LegumeInfo URL above, extract with gunzip.
+  status: downloaded

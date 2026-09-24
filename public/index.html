@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AgriHub KB</title>
-    <meta name="description" content="AgriHub genomic knowledge base prototype." />
+    <meta name="description" content="AgriHub genomic knowledge base — crop disease resistance explorer." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,6 +24,19 @@
         </p>
       </section>
 
+      <!-- Stats bar (E3) — populated by /api/stats on page load -->
+      <div id="statsBar" class="stats-bar" aria-label="Knowledge base statistics" hidden>
+        <span class="stats-item"><span id="statEdges">—</span> resistance edges</span>
+        <span class="stats-sep">·</span>
+        <span class="stats-item"><span id="statGenes">—</span> genes</span>
+        <span class="stats-sep">·</span>
+        <span class="stats-item"><span id="statDiseases">—</span> diseases</span>
+        <span class="stats-sep">·</span>
+        <span class="stats-item"><span id="statVarieties">—</span> varieties</span>
+        <span class="stats-sep">·</span>
+        <span class="stats-item"><span id="statCrops">—</span> crops</span>
+      </div>
+
       <section class="panel controls">
         <label>
           Crop
@@ -42,6 +55,12 @@
         </label>
 
         <button id="searchButton" type="button">Search knowledge graph</button>
+
+        <!-- E1: IoT trigger toggle -->
+        <label class="toggle-label" title="Only show edges where an IoT sensor trigger is defined">
+          <input type="checkbox" id="iotToggle" />
+          IoT-triggered treatments only
+        </label>
       </section>
 
       <section class="panel results">

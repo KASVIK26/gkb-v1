@@ -1,0 +1,9 @@
+# Assembly name:  IWGSC CS RefSeq v2.1
+# Organism name:  Triticum aestivum (bread wheat)
+# Infraspecific name:  cultivar=Chinese Spring
+# Taxid:          4565
+# BioProject:     PRJNA669381
+# GenBank assembly accession: GCA_018294505.1
+# RefSeq assembly accession: GCF_018294505.1
+# Sequence-Name	Sequence-Role	Assigned-Molecule	Assigned-Molecule-Location/Type	GenBank-Accn	Relationship	RefSeq-Accn	Assembly-Unit	Sequence-Length	UCSC-style-name
+Chr1A	assembled-molecule	1A	Chromosome	CM031178.1	=	NC_057794.1	Primary Assembly	598660471	na

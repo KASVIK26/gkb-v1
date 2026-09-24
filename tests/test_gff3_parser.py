@@ -1,90 +1,61 @@
-"""Tests for GFF3 parsing."""
+"""Tests for GFF3 parsing.
 
+Uses a 5-line excerpt of the real IWGSC CS RefSeq v2.1 GFF (tests/fixtures/) so the
+suite runs in CI without the 800 MB source file.
+"""
+
+import gzip
+import shutil
 from pathlib import Path
 
-from curator.parsers.assembly_parser import parse_assembly_report
+import pytest
+
 from curator.parsers.gff_parser import parse_gff3, extract_resistance_genes
 from curator.parsers.genomic_integration import load_chromosome_mappings
 
+FIXTURES = Path(__file__).parent / "fixtures"
+MINI_GFF = FIXTURES / "mini_wheat.gff3"
+MINI_REPORT = FIXTURES / "mini_wheat_assembly_report.txt"
 
-def test_parse_wheat_gff3():
-    """Test parsing the wheat IWGSC GFF3 file."""
-    gff3_path = Path("data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_genomic.gff.gz")
-    
-    if not gff3_path.exists():
-        raise FileNotFoundError(f"Test dataset not found: {gff3_path}")
-    
-    genes = parse_gff3(gff3_path)
-    
-    # Verify that genes were extracted
-    assert len(genes) > 0, "Expected at least one gene from wheat GFF3"
-    
-    # Check gene structure
-    first_gene = genes[0]
-    assert "id" in first_gene
-    assert "chromosome" in first_gene
-    assert "start" in first_gene
-    assert "end" in first_gene
-    assert first_gene["end"] >= first_gene["start"]
-    
-    print(f"✓ Parsed {len(genes)} genes from wheat GFF3")
-    print(f"  Sample: {first_gene['id']} on {first_gene['chromosome']} ({first_gene['start']}-{first_gene['end']})")
+
+def test_parse_gff3_extracts_only_gene_features():
+    genes = parse_gff3(MINI_GFF)
+
+    # region and mRNA lines are skipped; the two gene lines are kept
+    assert [g["id"] for g in genes] == ["gene-LOC123073777", "gene-LOC123185447"]
+    rpm1 = genes[1]
+    assert rpm1["name"] == "LOC123185447"
+    assert (rpm1["start"], rpm1["end"], rpm1["strand"]) == (9963900, 9971358, "-")
+    assert rpm1["length"] == 9971358 - 9963900 + 1
+
+
+def test_parse_gff3_without_mapping_keeps_sequence_id():
+    genes = parse_gff3(MINI_GFF)
+    assert all(g["chromosome"] == "NC_057794.1" for g in genes)
 
 
 def test_parse_gff3_with_chromosome_mapping():
-    """Test parsing with chromosome mapping applied."""
-    gff3_path = Path("data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_genomic.gff.gz")
-    report_path = Path("data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_assembly_report.txt")
-    
-    if not gff3_path.exists() or not report_path.exists():
-        raise FileNotFoundError("Test datasets not found")
-    
-    # Load chromosome mappings from assembly report
-    mappings = load_chromosome_mappings(report_path)
-    
-    genes = parse_gff3(gff3_path, mappings)
-    
-    # Verify mapping was applied
-    assert len(genes) > 0
-    first_gene = genes[0]
-    
-    # Chromosome should be human-readable (1A, 1B, 1D, etc.) if mapping was applied
-    # or the original sequence name if not in mappings
-    print(f"✓ Parsed {len(genes)} genes with chromosome mapping")
-    print(f"  Sample mapped to: {first_gene['chromosome']}")
+    mappings = load_chromosome_mappings(MINI_REPORT)
+    genes = parse_gff3(MINI_GFF, mappings)
+
+    assert all(g["seqname"] == "NC_057794.1" for g in genes)
+    assert all(g["chromosome"] == "1A" for g in genes)
 
 
-def test_extract_wheat_resistance_genes():
-    """Test extracting resistance genes from wheat GFF3."""
-    gff3_path = Path("data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_genomic.gff.gz")
-    report_path = Path("data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_assembly_report.txt")
-    
-    if not gff3_path.exists() or not report_path.exists():
-        raise FileNotFoundError("Test datasets not found")
-    
-    mappings = load_chromosome_mappings(report_path)
-    all_genes = parse_gff3(gff3_path, mappings)
-    
-    # Extract resistance genes
-    resistance_genes = extract_resistance_genes(all_genes)
-    
-    print(f"✓ Found {len(resistance_genes)} resistance genes out of {len(all_genes)} total")
-    if resistance_genes:
-        for gene in resistance_genes[:5]:
-            print(f"  - {gene['id']} on {gene['chromosome']}")
-    else:
-        print("  (Note: No resistance genes found with default keywords in this GFF3)")
+def test_gff3_parsing_handles_gzip(tmp_path):
+    gz_path = tmp_path / "mini_wheat.gff3.gz"
+    with MINI_GFF.open("rb") as src, gzip.open(gz_path, "wb") as dst:
+        shutil.copyfileobj(src, dst)
+
+    assert parse_gff3(gz_path) == parse_gff3(MINI_GFF)
 
 
-def test_gff3_parsing_handles_gzip():
-    """Test that gzipped and uncompressed GFF3 files are handled."""
-    gzipped_path = Path("data/raw/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1_genomic.gff.gz")
-    
-    if not gzipped_path.exists():
-        raise FileNotFoundError(f"Test dataset not found: {gzipped_path}")
-    
-    # Parse gzipped file
-    genes_gz = parse_gff3(gzipped_path)
-    assert len(genes_gz) > 0
-    
-    print(f"✓ Successfully parsed gzipped GFF3 file with {len(genes_gz)} genes")
+def test_parse_gff3_missing_file_raises(tmp_path):
+    with pytest.raises(FileNotFoundError):
+        parse_gff3(tmp_path / "missing.gff3")
+
+
+def test_extract_resistance_genes_matches_keywords():
+    genes = parse_gff3(MINI_GFF)
+    hits = extract_resistance_genes(genes, resistance_keywords=["LOC123185447"])
+    assert [g["id"] for g in hits] == ["gene-LOC123185447"]

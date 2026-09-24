@@ -1,8 +1,16 @@
-"""Test the Neo4j queries that power the API."""
+"""Test the Neo4j queries that power the API.
+
+Needs a live Neo4j instance, so these run only with `-m integration`.
+Legacy: replaced by Postgres CQ tests in Phase 2 (see TECH_STACK.md).
+"""
 
 from __future__ import annotations
 
+import pytest
+
 from curator.db import DBConfig, DBDriver
+
+pytestmark = pytest.mark.integration
 
 
 def test_query_all_varieties_wheat():
