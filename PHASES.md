@@ -754,6 +754,70 @@ are also where most of the work is.
    mosaic virus (both dimensions, real sources pending a schema decision) and chickpea rust
    (trigger only, genuinely thin literature after 4 passes) remain open. Loaded and promoted live
    as `kg_2026_10_21`.
+27. **Phase 5 v2 core built: literature search + grounded LLM extraction, and the v1 pipeline
+   archived.** RESEARCH_ROADMAP.md's Phase 5 is the automated version of the research workflow
+   items 22-26 did by hand across four rounds. Scoped to its highest-value slice first
+   (5.1/5.2 search+metadata, 5.6-5.8 LLM extraction+grounding), explicitly deferring NER, the
+   relevance classifier, JATS table extraction, the review UI, and the large corpus run.
+   - **Archived the v1 literature pipeline** (`fetch_papers.py` -> `paper_extractor.py` ->
+     `approve_extractions.py`, plus `validator.py` which only they used, plus their test) to
+     `archive/legacy_v1/literature_pipeline/`. This is the exact code RESEARCH_ROADMAP.md Sec 2.2
+     D1/D2 documents as the cause of a real incident: 65% of its paper corpus was unrelated to any
+     crop disease (sports medicine, psychiatry, neural stem cells) under a fabricated `TITLE:`/
+     `NOTE:` header sent straight to the LLM, there was no quote-grounding at all, and every
+     record that reached the review queue was invalid. It also targeted Neo4j, a store the current
+     `kg build`/`load`/`promote` system (Postgres) doesn't use. `curator/run_pipeline.py`'s own
+     `ValidationError` (a genomic-dataset-registry check, unrelated to the literature side) was
+     inlined into that file so archiving `validator.py` didn't break it; `curator/db.py`,
+     `curator/loader.py`, `curator/init_constraints.py` and `curator/load_genes.py` are a separate,
+     still-live Neo4j genomic-dataset concern and were left untouched.
+   - **`curator/lit/europepmc.py`**: automates the exact manual check every source in
+     `kg/curated/` has gone through by hand all session -- look the identifier up on Europe PMC,
+     confirm the real title/journal/year/OA status, only then treat it as verified. Raises
+     `PublicationNotFound` on a zero-hit search rather than returning something that could be
+     mistaken for "verified."
+   - **`curator/lit/query_builder.py`**: builds Europe PMC queries programmatically from
+     `config/vocab/diseases.yaml` (crop/name/synonyms/pathogen), never a hand-typed PMID list --
+     the query_builder equivalent of the "verified candidate paper" discipline `candidate_papers.yaml`
+     already established for manual triage.
+   - **`curator/llm/client.py`**: one concrete backend (OpenRouter, already had an API key in
+     `.env`; OpenAI-compatible wire format, multi-model access for later ablations), content-hash
+     cache under `data/llm_cache/` (a cached call makes zero network requests), retry/backoff on
+     429/5xx, and a per-call usage log.
+   - **`curator/llm/prompts/claim_extraction_v1.md`**: the versioned extraction prompt, scoped to
+     the 6 claim types this project has actually been curating (`GENE_CONFERS_RESISTANCE`,
+     `VARIETY_CARRIES_GENE`, `VARIETY_REACTION`, `DISEASE_CAUSED_BY`, `DISEASE_ENV_TRIGGER`,
+     `DISEASE_MANAGED_BY`). Rules baked into the prompt text, not just hoped for: quote must be an
+     exact substring, both entities must appear in the quote, a citation inside the paper's own
+     text is not this paper's finding, gene families ("Sr genes") are not genes, no self-reported
+     confidence. One real schema/prompt mismatch was caught and fixed while writing the first
+     end-to-end test: `GENE_CONFERS_RESISTANCE`'s `resistance_type` and `VARIETY_REACTION`'s
+     `reaction`/`stage` qualifiers are *required* fields with an honest "not stated" value
+     (`"unknown"`/`"unspecified"`) rather than optional -- the initial prompt told the model to
+     omit unstated qualifiers uniformly, which would have made every such claim fail Pydantic
+     validation; fixed before this was ever run against a real paper.
+   - **`curator/extract/ground.py`**: the check the old pipeline never had. `rapidfuzz.fuzz.partial_ratio`
+     (threshold 92, per RESEARCH_ROADMAP.md Sec 6) confirms the quote is genuinely in the fetched
+     text, plus a separate check that both the subject and object mentions actually appear inside
+     that quote. New dependency: `rapidfuzz`.
+   - **`curator/extract/normalize.py`**: resolves free-text mentions to canonical entity IDs.
+     Diseases go through the existing `SynonymIndex.from_disease_vocab()`; genes/varieties get a
+     synonym index built on the fly from whatever's already in the current `KGBundle` (no new
+     vocab file needed -- every `Entity` already carries `.name`/`.synonyms`). An ambiguous name
+     raises rather than guessing, matching this project's established rule. `DISEASE_ENV_TRIGGER`/
+     `DISEASE_MANAGED_BY` claims (object = a brand-new EnvTrigger/Advisory entity with numeric
+     props and a sensor-variable mapping) are deliberately routed to "needs a human-built entity"
+     rather than auto-materialized -- extraction and grounding still run and prove the fact is
+     real, but turning it into a structured entity stays a human step for this pass, same as every
+     env-trigger/advisory added by hand in items 22-26.
+   - **New CLI command**: `agrihub lit extract --pmid <id> --crop <crop>` chains all of the above
+     for one paper and prints a `kg/curated/`-shaped YAML draft to stdout (rejections with reasons
+     to stderr). Writes nothing automatically -- a human reads and pastes it in, same discipline as
+     every research pass so far. The Review UI (5.10) that would remove that manual step is still
+     unbuilt, on purpose.
+   43 new tests, all fully mocked (no live network/LLM calls, no live Postgres needed to pass).
+   `kg build` unaffected (210/60/315/323, unchanged). Not yet run against a real paper end-to-end
+   with a live API key -- that's the natural next step before any corpus-scale run.
 
 ---
 
