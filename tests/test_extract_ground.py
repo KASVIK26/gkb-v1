@@ -70,6 +70,17 @@ def test_ground_candidate_passes():
     result = ground_candidate(quote=quote, source_text=SOURCE_TEXT, entity_mentions=["TestYr1", "stripe rust"])
     assert result.passed
     assert result.reason is None
+    assert result.score >= 92
+
+
+def test_ground_candidate_score_present_even_on_rejection():
+    result = ground_candidate(
+        quote="This gene was previously reported by another group to be fully durable everywhere.",
+        source_text=SOURCE_TEXT,
+        entity_mentions=[],
+    )
+    assert not result.passed
+    assert result.score < 92
 
 
 def test_resolve_entity_from_bundle_finds_gene():

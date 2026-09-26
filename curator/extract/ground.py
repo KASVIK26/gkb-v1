@@ -25,13 +25,20 @@ DEFAULT_THRESHOLD = 92
 class GroundingResult:
     passed: bool
     reason: str | None = None
+    score: float = 0.0  # rapidfuzz partial_ratio (0-100); a transparency signal for the reviewer,
+                        # not itself the pass/fail criterion -- `passed` already reflects `threshold`.
+
+
+def quote_match_score(quote: str, source_text: str) -> float:
+    """The raw rapidfuzz partial_ratio (0-100) between `quote` and `source_text`, 0 for an empty quote."""
+    if not quote or not quote.strip():
+        return 0.0
+    return fuzz.partial_ratio(quote, source_text)
 
 
 def verify_quote(quote: str, source_text: str, *, threshold: int = DEFAULT_THRESHOLD) -> bool:
     """True if `quote` is a genuine (fuzzy-matched) substring of `source_text`."""
-    if not quote or not quote.strip():
-        return False
-    return fuzz.partial_ratio(quote, source_text) >= threshold
+    return quote_match_score(quote, source_text) >= threshold
 
 
 def entities_present(quote: str, mentions: list[str]) -> bool:
@@ -53,17 +60,20 @@ def ground_candidate(
     candidate; pass only the ones that name an actual entity (skip a free-text environmental/
     management description, which won't literally repeat inside its own supporting quote).
     """
+    score = quote_match_score(quote, source_text)
     if len((quote or "").strip()) < MIN_QUOTE_CHARS:
-        return GroundingResult(passed=False, reason=f"quote shorter than {MIN_QUOTE_CHARS} characters")
-    if not verify_quote(quote, source_text, threshold=threshold):
+        return GroundingResult(passed=False, reason=f"quote shorter than {MIN_QUOTE_CHARS} characters", score=score)
+    if score < threshold:
         return GroundingResult(
             passed=False,
             reason="quote does not match the source text closely enough (possible paraphrase or fabrication)",
+            score=score,
         )
     if entity_mentions and not entities_present(quote, entity_mentions):
         missing = [m for m in entity_mentions if m and m.lower() not in quote.lower()]
         return GroundingResult(
             passed=False,
             reason=f"quote does not mention: {', '.join(missing)}",
+            score=score,
         )
-    return GroundingResult(passed=True)
+    return GroundingResult(passed=True, score=score)

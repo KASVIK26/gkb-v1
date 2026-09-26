@@ -29,6 +29,7 @@ _PROMPT_VERSION = "claim_extraction_v1"
 class AcceptedCandidate:
     claim: Claim
     evidence: Evidence
+    grounding_score: float  # rapidfuzz partial_ratio (0-100) between the quote and the fetched text
 
 
 @dataclass
@@ -155,6 +156,6 @@ def extract_paper(
             locator=locator,
             quote=quote,
         )
-        result.accepted.append(AcceptedCandidate(claim=claim, evidence=evidence))
+        result.accepted.append(AcceptedCandidate(claim=claim, evidence=evidence, grounding_score=grounding.score))
 
     return result
