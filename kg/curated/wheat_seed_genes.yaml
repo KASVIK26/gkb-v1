@@ -1,0 +1,350 @@
+# First real (non-toy) curated content, replacing archive/legacy_v1/seed_data.py.
+# Every fact below was checked against its cloning paper's title/abstract on Europe PMC
+# before being written here — none are typed from memory. See RESEARCH_ROADMAP.md §2.2 D3
+# for the specific errors this replaces (Sr33 was wrongly given as chromosome 1B there, then
+# "corrected" to 1DL during the initial audit — also wrong; verified here as 1DS).
+#
+# Status: status defaults to "unreviewed" below (nothing here is force-marked "reviewed" —
+# that's a deliberate human sign-off step, not something to skip even when the sourcing is
+# solid). Flip a claim's `status: reviewed` once you've spot-checked it yourself.
+
+sources:
+  - id: pmid:23811228
+    type: publication
+    title: "The gene Sr33, an ortholog of barley Mla genes, encodes resistance to wheat stem rust race Ug99"
+    year: 2013
+    venue: Science
+    url: https://doi.org/10.1126/science.1239028
+    verified: true
+
+  - id: pmid:23811222
+    type: publication
+    title: "Identification of wheat gene Sr35 that confers resistance to Ug99 stem rust race group"
+    year: 2013
+    venue: Science
+    url: https://pubmed.ncbi.nlm.nih.gov/23811222/
+    verified: true
+
+  - id: pmid:19229000
+    type: publication
+    title: "A putative ABC transporter confers durable resistance to multiple fungal pathogens in wheat"
+    year: 2009
+    venue: Science
+    url: https://doi.org/10.1126/science.1166453
+    verified: true
+
+  - id: pmid:21573954
+    type: publication
+    title: "A multiple resistance locus on chromosome arm 3BS in wheat confers resistance to stem rust (Sr2), leaf rust (Lr27) and powdery mildew"
+    year: 2011
+    venue: "Theoretical and Applied Genetics"
+    url: https://doi.org/10.1007/s00122-011-1611-y
+    verified: true
+
+  - id: pmid:16283230
+    type: publication
+    title: "High-resolution mapping and mutation analysis separate the rust resistance genes Sr31, Lr26 and Yr9 on the short arm of rye chromosome 1"
+    year: 2005
+    venue: "Theoretical and Applied Genetics"
+    url: https://doi.org/10.1007/s00122-005-0098-9
+    verified: true
+
+  - id: pmid:30841334
+    type: publication
+    title: "Detection of Virulence to Wheat Stem Rust Resistance Gene Sr31 in Puccinia graminis f. sp. tritici in Uganda"
+    year: 2000
+    venue: "Plant Disease"
+    url: https://doi.org/10.1094/pdis.2000.84.2.203b
+    verified: true
+
+  - id: cat:maswheat_sr50
+    type: catalogue
+    title: "MASWheat: Stem rust resistance gene Sr50"
+    venue: "MASWheat / GrainGenes"
+    url: https://graingenes.org/GG3/content/maswheat-stem-rust-resistance-gene-sr50
+    verified: true
+
+  - id: pmid:27776114
+    type: publication
+    title: "Wheat Fhb1 encodes a chimeric lectin with agglutinin domains and a pore-forming toxin-like domain conferring resistance to Fusarium head blight"
+    year: 2016
+    venue: "Nature Genetics"
+    url: https://doi.org/10.1038/ng.3706
+    verified: true
+
+  - id: pmid:12807786
+    type: publication
+    title: "Map-based cloning of leaf rust resistance gene Lr21 from the large and polyploid genome of bread wheat"
+    year: 2003
+    venue: Genetics
+    url: https://doi.org/10.1093/genetics/164.2.655
+    verified: true
+
+entities:
+  - id: gene:wheat:Sr33
+    type: Gene
+    name: Sr33
+    crop: wheat
+    props:
+      symbol: Sr33
+      chromosome: 1DS
+      origin_species: "Aegilops tauschii"
+      gene_class: NLR
+      cloned: true
+
+  - id: gene:wheat:Sr35
+    type: Gene
+    name: Sr35
+    crop: wheat
+    props:
+      symbol: Sr35
+      chromosome: 3AL
+      origin_species: "Triticum monococcum"
+      gene_class: NLR
+      cloned: true
+
+  - id: gene:wheat:Lr34
+    type: Gene
+    name: Lr34
+    crop: wheat
+    # Same locus, four names depending on which disease/trait it's discussed for.
+    # RESEARCH_ROADMAP.md §2.2 D3: model as synonyms, not four separate genes.
+    synonyms: [Yr18, Sr57, Pm38]
+    props:
+      symbol: Lr34
+      chromosome: 7DS
+      gene_class: "ABC transporter"
+      cloned: true
+
+  - id: gene:wheat:Sr2
+    type: Gene
+    name: Sr2
+    crop: wheat
+    props:
+      symbol: Sr2
+      chromosome: 3BS
+      gene_class: unknown
+      cloned: false
+      # Deliberately NOT modelled as a synonym of Lr27: the source calls this "a multiple
+      # resistance locus" (tightly linked genes), not a single cloned pleiotropic gene like
+      # Lr34. Don't collapse them into one entity without a cloning paper proving it.
+
+  - id: gene:wheat:Sr31
+    type: Gene
+    name: Sr31
+    crop: wheat
+    props:
+      symbol: Sr31
+      chromosome: 1BL
+      origin_species: "Secale cereale (rye, cv. Petkus)"
+      gene_class: unknown
+      cloned: false
+
+  - id: gene:wheat:Lr26
+    type: Gene
+    name: Lr26
+    crop: wheat
+    props:
+      symbol: Lr26
+      chromosome: 1BL
+      origin_species: "Secale cereale (rye, cv. Petkus)"
+      gene_class: unknown
+      cloned: false
+
+  - id: gene:wheat:Yr9
+    type: Gene
+    name: Yr9
+    crop: wheat
+    props:
+      symbol: Yr9
+      chromosome: 1BL
+      origin_species: "Secale cereale (rye, cv. Petkus)"
+      gene_class: unknown
+      cloned: false
+
+  - id: gene:wheat:Sr50
+    type: Gene
+    name: Sr50
+    crop: wheat
+    props:
+      symbol: Sr50
+      chromosome: "1D"
+      origin_species: "Secale cereale (rye, cv. Imperial)"
+      gene_class: NLR
+      cloned: true
+
+  - id: pt:puccinia_graminis_f_sp_tritici:Ug99
+    type: Pathotype
+    name: Ug99
+    props:
+      designation: Ug99
+      first_reported_year: 1999
+
+  - id: gene:wheat:Fhb1
+    type: Gene
+    name: Fhb1
+    crop: wheat
+    props:
+      symbol: Fhb1
+      chromosome: 3BS
+      origin_species: "Triticum aestivum cv. Sumai 3"
+      # The underlying molecular gene at this QTL is actively debated in the literature
+      # (a pore-forming-toxin-like gene per Rawat et al. 2016 vs. a histidine-rich
+      # calcium-binding protein per a later 2019 paper). Don't overstate certainty here.
+      gene_class: "chimeric lectin / pore-forming toxin-like (mechanism debated)"
+      cloned: true
+
+  - id: gene:wheat:Lr21
+    type: Gene
+    name: Lr21
+    crop: wheat
+    props:
+      symbol: Lr21
+      chromosome: 1DS
+      origin_species: "Aegilops tauschii"
+      gene_class: NLR
+      cloned: true
+
+claims:
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Sr33
+    object: dis:wheat:stem_rust
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: pmid:23811228
+        method: cloned_validated
+        locator: title
+        quote: "The gene Sr33, an ortholog of barley Mla genes, encodes resistance to wheat stem rust race Ug99"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Sr35
+    object: dis:wheat:stem_rust
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: pmid:23811222
+        method: cloned_validated
+        locator: title
+        quote: "Identification of wheat gene Sr35 that confers resistance to Ug99 stem rust race group"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Lr34
+    object: dis:wheat:leaf_rust
+    qualifiers: {resistance_type: APR, spectrum: durable}
+    evidence:
+      - source: pmid:19229000
+        method: cloned_validated
+        locator: abstract
+        quote: "the wheat gene Lr34 has supported resistance to leaf rust, stripe rust, and powdery mildew for more than 50 years"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Lr34
+    object: dis:wheat:stripe_rust
+    qualifiers: {resistance_type: APR, spectrum: durable}
+    evidence:
+      - source: pmid:19229000
+        method: cloned_validated
+        locator: abstract
+        quote: "the wheat gene Lr34 has supported resistance to leaf rust, stripe rust, and powdery mildew for more than 50 years"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Lr34
+    object: dis:wheat:powdery_mildew
+    qualifiers: {resistance_type: APR, spectrum: durable}
+    evidence:
+      - source: pmid:19229000
+        method: cloned_validated
+        locator: abstract
+        quote: "the wheat gene Lr34 has supported resistance to leaf rust, stripe rust, and powdery mildew for more than 50 years"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Sr2
+    object: dis:wheat:stem_rust
+    qualifiers: {resistance_type: APR, spectrum: durable}
+    evidence:
+      - source: pmid:21573954
+        method: qtl_mapping
+        locator: title
+        quote: "A multiple resistance locus on chromosome arm 3BS in wheat confers resistance to stem rust (Sr2), leaf rust (Lr27) and powdery mildew"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Sr31
+    object: dis:wheat:stem_rust
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: pmid:16283230
+        method: qtl_mapping
+        locator: title
+        quote: "High-resolution mapping and mutation analysis separate the rust resistance genes Sr31, Lr26 and Yr9 on the short arm of rye chromosome 1"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Lr26
+    object: dis:wheat:leaf_rust
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: pmid:16283230
+        method: qtl_mapping
+        locator: title
+        quote: "High-resolution mapping and mutation analysis separate the rust resistance genes Sr31, Lr26 and Yr9 on the short arm of rye chromosome 1"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Yr9
+    object: dis:wheat:stripe_rust
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: pmid:16283230
+        method: qtl_mapping
+        locator: title
+        quote: "High-resolution mapping and mutation analysis separate the rust resistance genes Sr31, Lr26 and Yr9 on the short arm of rye chromosome 1"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Sr50
+    object: dis:wheat:stem_rust
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: cat:maswheat_sr50
+        method: review_statement
+        locator: page text
+        quote: "was introgressed into wheat chromosome 1D by translocation from the short arm of rye chromosome rye 1R"
+
+  # Classic example of "gene deployment history" (RESEARCH_ROADMAP.md §12 Phase 12 analytics):
+  # Sr31 was the world's dominant stem-rust-resistance gene for decades via the 1BL.1RS
+  # translocation, until Ug99 broke it in Uganda in 1999 -- the discovery that triggered the
+  # global Ug99 surveillance and breeding effort this whole gene set is drawn from.
+  - type: GENE_PATHOTYPE_INTERACTION
+    subject: gene:wheat:Sr31
+    object: pt:puccinia_graminis_f_sp_tritici:Ug99
+    qualifiers: {outcome: defeated, year: 1999, region: Uganda}
+    evidence:
+      - source: pmid:30841334
+        method: controlled_env
+        locator: abstract
+        quote: "During February 1999, high levels of stem rust infection were observed on entries in wheat (Triticum aestivum) grown in a nursery at Kalengyere Research Station in Uganda"
+
+  - type: PATHOTYPE_VARIANT_OF
+    subject: pt:puccinia_graminis_f_sp_tritici:Ug99
+    object: path:puccinia_graminis_f_sp_tritici
+    evidence:
+      - source: pmid:30841334
+        method: controlled_env
+        locator: abstract
+        quote: "a novel pathotype virulent to the Sr31 resistance gene, designated Pgt-Ug99"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Fhb1
+    object: dis:wheat:fusarium_head_blight
+    qualifiers: {resistance_type: quantitative}
+    evidence:
+      - source: pmid:27776114
+        method: cloned_validated
+        locator: title
+        quote: "Wheat Fhb1 encodes a chimeric lectin with agglutinin domains and a pore-forming toxin-like domain conferring resistance to Fusarium head blight"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Lr21
+    object: dis:wheat:leaf_rust
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: pmid:12807786
+        method: cloned_validated
+        locator: title
+        quote: "Map-based cloning of leaf rust resistance gene Lr21 from the large and polyploid genome of bread wheat"

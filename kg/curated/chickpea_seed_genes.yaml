@@ -1,0 +1,41 @@
+# Chickpea resistance-locus content, mirroring wheat_seed_genes.yaml's sourcing standard.
+#
+# Coverage note, deliberately honest rather than padded: of the 4 in-scope chickpea diseases
+# (config/vocab/diseases.yaml), only Fusarium wilt has a specific, mapped, marker-validated
+# resistance locus in the literature. Dry root rot, collar rot and rust were each searched
+# (Europe PMC, 2026-09-26) and found to have only germplasm-screening/phenotyping studies, with
+# no mapped gene or QTL for any of them -- left uncurated rather than force-fit. This matches
+# the field's actual state: dry root rot and collar rot genetics are genuinely under-studied in
+# chickpea, and rust is a minor disease here with essentially no resistance-mapping literature.
+#
+# Modelled as a QTL (not a Gene) since the source validates a diagnostic SNP marker block over a
+# mapped chromosome region, not a cloned or fully candidate-narrowed gene.
+
+sources:
+  - id: pmid:38337969
+    type: publication
+    title: "Efficient Single Nucleotide Polymorphism Marker-Assisted Selection to Fusarium Wilt in Chickpea"
+    year: 2024
+    venue: "Plants (Basel)"
+    url: https://doi.org/10.3390/plants13030436
+    verified: true
+
+entities:
+  - id: qtl:chickpea:foc5_ca2
+    type: QTL
+    name: "Fusarium wilt race 5 (Foc5) resistance region, Ca2"
+    crop: chickpea
+    props:
+      trait: "Fusarium oxysporum f. sp. ciceris race 5 resistance"
+      chromosome: Ca2
+
+claims:
+  - type: QTL_ASSOCIATION
+    subject: qtl:chickpea:foc5_ca2
+    object: dis:chickpea:fusarium_wilt
+    qualifiers: {}
+    evidence:
+      - source: pmid:38337969
+        method: diagnostic_marker
+        locator: abstract
+        quote: "The results showed a 100% coincidence between phenotype and expected haplotype in plant material evaluated for Foc5"

@@ -4,13 +4,17 @@ The genomic module of AgriHub: an evidence-backed knowledge base linking **wheat
 varieties, resistance genes/QTLs, diseases, pathotypes and the environmental conditions that trigger disease.
 It feeds the IoT risk engine and the phenomic/yield models.
 
-> **Status: restarting (Phase 0 done, 2026-09-25).** The v1 graph and its seed data were found to be unreliable
+> **Status: restarting. Phases 0 and 1 done (2026-09-25). Next: Phase 2 (Supabase + release build).** The v1 graph and its seed data were found to be unreliable
 > and have been archived. See the plan before changing anything.
 
 | Document | Purpose |
 |---|---|
+| [PHASES.md](PHASES.md) | **Start here.** What's done, what's next, open questions — for this repo (Genomic KB) only |
 | [RESEARCH_ROADMAP.md](RESEARCH_ROADMAP.md) | Audit findings and the phase-by-phase plan (source of truth for *what* to build) |
 | [TECH_STACK.md](TECH_STACK.md) | Stack and deployment decisions (source of truth for *how*) |
+| [docs/genomic_datasets.md](docs/genomic_datasets.md) | Survey of additional genomic datasets (pangenomes, SNP arrays, resequencing panels) and why they're deferred for now |
+| [config/sources/candidate_papers.yaml](config/sources/candidate_papers.yaml) | Verified reading list — real, checked papers per disease, triage input for Phase 5 |
+| [config/sources/notified_varieties.yaml](config/sources/notified_varieties.yaml) | Notified wheat/soybean/chickpea varieties for MP/Malwa, tiered by confidence |
 | `docs/archive/` | Superseded v1 plans (PROJECT.md, FUTURE_VISION.md, NEXT_PHASE_TASKS.md, SETUP_GUIDE.md) |
 | `archive/legacy_v1/` | The v1 seed edges and loaders. **Do not load them.** |
 
@@ -32,15 +36,14 @@ Copy `.env.example` to `.env` and fill in the keys you need. `.env` is gitignore
 .\.venv\Scripts\python.exe -m pytest tests -q -m "not integration"
 ```
 
-`-m integration` tests need a live database. They target the legacy Neo4j setup and are replaced by Postgres tests in Phase 2.
+Schema and competency-question tests start a throwaway local PostgreSQL automatically (or use
+`TEST_DATABASE_URL`). They never touch your running servers or Supabase. `-m integration` tests need a live database. They target the legacy Neo4j setup and are replaced by Postgres tests in Phase 2.
 
 ## Data
 
 - `data/` is gitignored except `data/manifests/`. Raw genomes and papers live in `data/raw/` and are never committed.
 - Genome annotations in use: IWGSC CS RefSeq v2.1 (wheat, NCBI GFF + assembly report), Wm82 gnm6 (soybean, LIS GFF3),
   ICC4958 gnm2.ann1 (chickpea, LIS GFF3). Registered in `config/datasets.yaml`.
-- `data/quarantine/` holds the files removed in Phase 0 (irrelevant papers, the gene-less chickpea GBFF,
-  hallucinated review queue). See its README, then delete it.
 
 ## Current code (legacy, being replaced)
 

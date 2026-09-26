@@ -1,0 +1,38 @@
+"""Tests for the agrihub CLI (curator/cli.py)."""
+
+from __future__ import annotations
+
+import psycopg
+import pytest
+from typer.testing import CliRunner
+
+from curator.cli import app
+from curator.graph.pg import create_release_schema, set_search_path
+
+runner = CliRunner()
+
+
+def test_kg_build_reports_counts_and_passes():
+    result = runner.invoke(app, ["kg", "build"])
+    assert result.exit_code == 0, result.output
+    assert "Build OK" in result.output
+    assert '"claims"' in result.output
+
+
+def test_kg_load_against_a_live_database(pg_conn: psycopg.Connection, pg_dsn: str, release_schema: str):
+    tag = release_schema.removeprefix("kg_")
+    result = runner.invoke(app, ["kg", "load", "--release", tag, "--database-url", pg_dsn])
+    assert result.exit_code == 0, result.output
+    assert "Loaded release" in result.output
+
+    set_search_path(pg_conn, release_schema)
+    (gene_count,) = pg_conn.execute(f"SELECT count(*) FROM {release_schema}.v_gene_resistance").fetchone()
+    # wheat: Sr33, Sr35, Lr34 x3, Sr2, Sr31, Lr26, Yr9, Sr50, Fhb1, Lr21 (12)
+    # soybean: Rpp1, Rpp2, Rsv1, Rsv4, Rxp, Rcs3 (6)
+    assert gene_count == 18
+
+
+def test_kg_load_refuses_to_overwrite_an_existing_release(pg_conn: psycopg.Connection, pg_dsn: str, release_schema: str):
+    create_release_schema(pg_conn, release_schema)
+    result = runner.invoke(app, ["kg", "load", "--release", release_schema.removeprefix("kg_"), "--database-url", pg_dsn])
+    assert result.exit_code != 0

@@ -1,0 +1,149 @@
+# Growth-stage scheme, sowing to harvest, for wheat, soybean and chickpea.
+#
+# Canonical internal key: BBCH 2-digit code (00 = dry seed/sowing ... 99 = harvested product).
+#   It is the one scale defined for all three crops and the one used by plant ontologies.
+# Display scale per crop (what farmers and researchers read):
+#   wheat    -> Zadoks decimal code (same numbering as BBCH cereals)
+#   soybean  -> Fehr & Caviness (1977) VE, VC, V1..Vn, R1..R8
+#   chickpea -> phenophases CP0..CP9 (no widely used crop-specific scale; mapped to BBCH principal stages)
+# System stages outside BBCH, needed because soil sensors run all year:
+#   SYS_PRE  = fallow / pre-sowing (soil-borne inoculum build-up, sowing-window advice)
+#   SYS_POST = after harvest (residue-borne inoculum, rotation effects)
+#
+# "≈" BBCH mappings for soybean are approximate. Verify them against the BBCH monograph (Meier, ed., 2001).
+# watch_windows are PLANNING HYPOTHESES from general plant-pathology knowledge (status: hypothesis).
+#   Replace each with a cited window in Phase 8 before the risk engine uses it.
+
+schema_version: 1
+
+system_stages:
+  - {code: SYS_PRE, name: "Fallow / pre-sowing", bbch: null}
+  - {code: SYS_POST, name: "Post-harvest (residue in field)", bbch: null}
+
+stage_tracking:
+  stored_as: "{bbch, display_code, source: reported|estimated_gdd|image_model, confidence, updated_at}"
+  estimation: >-
+    Farmer enters the sowing date and variety (maturity class). The server accumulates gdd_day from
+    the device air temperature (sensors.yaml) and maps thermal time to stage using per-variety
+    calibration. The farmer can confirm or correct the stage in the app, and the phenomic model
+    can later estimate stage from photos. Reported stages always override estimates.
+  gdd_base_temp_c:
+    wheat: {value: 0, status: "common convention; confirm for Indian cultivars"}
+    soybean: {value: 10, status: "common convention; soybean is also photoperiod-sensitive (use latitude-based daylength)"}
+    chickpea:
+      status: "decided 2026-09-25; recalibrate on Malwa observations (see calibration)"
+      primary_model:
+        name: dent-like temperature function x photoperiod function
+        source: "Soltani, Hammer, Torabi, Robertson, Zeinali (2006) Field Crops Research 99:1-13"
+        cardinal_temps_c: {base: 0, optimum_low: 21, optimum_high: 32, ceiling: 40}
+        critical_photoperiod_h: 21   # always above Malwa rabi daylength (~10.7-12 h), so photoperiod always slows development
+        why: >-
+          Linear GDD keeps adding heat units above 32 degC. In Malwa, late-sown chickpea flowers and pods
+          in Feb-Mar, when maxima reach 32-35+ degC, so a capped (dent) function is needed to avoid
+          predicting maturity too early.
+      reporting_gdd:
+        base: 5
+        method: "linear, (Tmax+Tmin)/2 - 5, floored at 0"
+        why: >-
+          Most Indian agromet chickpea papers report heat units with base 5 degC. Compute this too so our
+          numbers are comparable with published sowing-date studies. Do not use it for stage prediction.
+      emergence_phase_base: {value: 4.5, range: [3.75, 4.79], note: "emergence studies; Malwa soils in Oct-Nov are far above this, so the choice barely matters"}
+      published_range: >-
+        0 (Ellis et al. 1986; Soltani et al. 2006 phenology), 4-4.8 (emergence: Verghis et al. 1999;
+        Soltani et al. 2006 emergence; Argentine cv. Norteno 2019), 5 (Indian agromet convention),
+        8 (Singh 1991, emergence-to-flowering), 10 (Jeffrey et al. 2025 Front Plant Sci, stress-oriented model).
+        The value depends on the phase and the fitting method, so there is no single correct number.
+      calibration: >-
+        Once stage observations for Malwa varieties are collected (app reports + field visits, >= 2 seasons,
+        several sowing dates), fit Tb by minimising the coefficient of variation of thermal time to each
+        stage (CV/SD methods). Report the result. A locally calibrated Tb is a small publishable result in itself.
+
+stress_windows:  # abiotic flags for the yield model; hypothesis until cited in Phase 8
+  chickpea:
+    - {id: stress:chickpea:cold_pod_set, bbch: [61, 75], condition: "daily mean air_temp_c < 15 (flower abortion / pod-set failure)", malwa_season: "late Dec-Jan"}
+    - {id: stress:chickpea:heat_flowering, bbch: [61, 79], condition: "daily max air_temp_c > 32-35 (flower drop, poor seed set)", malwa_season: "Feb-Mar, late sowing"}
+
+crops:
+  # ───────────────────────────── WHEAT (Zadoks = BBCH cereals) ─────────────────────────────
+  wheat:
+    display_scale: Zadoks
+    stages:
+      - {bbch: 0,  display: "Z00", name: "Sowing (dry seed)", phase: establishment}
+      - {bbch: 9,  display: "Z09", name: "Emergence (leaf at coleoptile tip)", phase: establishment}
+      - {bbch: 13, display: "Z10-19", name: "Seedling: leaf development (e.g. Z13 = 3 leaves)", phase: vegetative}
+      - {bbch: 21, display: "Z20-29", name: "Tillering", phase: vegetative}
+      - {bbch: 30, display: "Z30", name: "Pseudostem erect (start of stem elongation)", phase: vegetative}
+      - {bbch: 31, display: "Z31", name: "First node detectable", phase: vegetative}
+      - {bbch: 37, display: "Z37", name: "Flag leaf just visible", phase: vegetative}
+      - {bbch: 39, display: "Z39", name: "Flag leaf ligule visible", phase: vegetative}
+      - {bbch: 45, display: "Z41-49", name: "Booting", phase: reproductive}
+      - {bbch: 55, display: "Z50-59", name: "Heading (ear emergence)", phase: reproductive}
+      - {bbch: 61, display: "Z61", name: "Anthesis begins", phase: reproductive}
+      - {bbch: 65, display: "Z65", name: "Mid-anthesis", phase: reproductive}
+      - {bbch: 69, display: "Z69", name: "Anthesis complete", phase: reproductive}
+      - {bbch: 75, display: "Z70-79", name: "Milk development", phase: grain_fill}
+      - {bbch: 85, display: "Z80-89", name: "Dough development", phase: grain_fill}
+      - {bbch: 92, display: "Z91-92", name: "Ripening (grain hard, harvest-ready)", phase: maturity}
+      - {bbch: 99, display: "Harvested", name: "Harvested product", phase: harvest}
+    watch_windows:  # hypothesis
+      - {disease: dis:wheat:stripe_rust,          bbch: [13, 75]}
+      - {disease: dis:wheat:leaf_rust,            bbch: [30, 79]}
+      - {disease: dis:wheat:stem_rust,            bbch: [45, 85]}
+      - {disease: dis:wheat:powdery_mildew,       bbch: [21, 69]}
+      - {disease: dis:wheat:fusarium_head_blight, bbch: [59, 75], critical: [61, 69]}
+
+  # ───────────────────────────── SOYBEAN (Fehr & Caviness) ─────────────────────────────
+  soybean:
+    display_scale: Fehr & Caviness
+    stages:
+      - {bbch: 0,  display: "S0", name: "Sowing (dry seed)", phase: establishment}
+      - {bbch: 5,  display: "S1", name: "Germination (radicle emerged; before emergence)", phase: establishment}
+      - {bbch: 9,  display: "VE", name: "Emergence: cotyledons above soil", bbch_mapping: "≈", phase: establishment}
+      - {bbch: 11, display: "VC", name: "Unifoliolate leaves unrolled", bbch_mapping: "≈", phase: vegetative}
+      - {bbch: 12, display: "V1", name: "First trifoliolate leaf fully developed", bbch_mapping: "≈", phase: vegetative}
+      - {bbch: 13, display: "V2", name: "Second trifoliolate", bbch_mapping: "≈", phase: vegetative}
+      - {bbch: 14, display: "V3", name: "Third trifoliolate", bbch_mapping: "≈", phase: vegetative}
+      - {bbch: 19, display: "Vn", name: "n-th trifoliolate (n >= 4)", bbch_mapping: "≈ 15-19", phase: vegetative}
+      - {bbch: 61, display: "R1", name: "Beginning bloom", bbch_mapping: "≈", phase: reproductive}
+      - {bbch: 65, display: "R2", name: "Full bloom", bbch_mapping: "≈", phase: reproductive}
+      - {bbch: 71, display: "R3", name: "Beginning pod", bbch_mapping: "≈", phase: reproductive}
+      - {bbch: 74, display: "R4", name: "Full pod", bbch_mapping: "≈", phase: reproductive}
+      - {bbch: 76, display: "R5", name: "Beginning seed", bbch_mapping: "≈", phase: seed_fill}
+      - {bbch: 79, display: "R6", name: "Full seed", bbch_mapping: "≈", phase: seed_fill}
+      - {bbch: 81, display: "R7", name: "Beginning maturity", bbch_mapping: "≈", phase: maturity}
+      - {bbch: 89, display: "R8", name: "Full maturity (95% pods mature colour)", bbch_mapping: "≈", phase: maturity}
+      - {bbch: 99, display: "Harvested", name: "Harvested product", phase: harvest}
+    watch_windows:  # hypothesis
+      - {disease: dis:soybean:rhizoctonia_root_rot, bbch: [0, 14]}
+      - {disease: dis:soybean:mosaic_virus,         bbch: [9, 61], note: "early infection most damaging; seed-borne"}
+      - {disease: dis:soybean:bacterial_pustule,    bbch: [14, 79]}
+      - {disease: dis:soybean:frogeye_leaf_spot,    bbch: [61, 79]}
+      - {disease: dis:soybean:rust,                 bbch: [61, 79]}
+      - {disease: dis:soybean:charcoal_rot,         bbch: [9, 81], critical: [71, 81], note: "infects early; expresses under drought at pod/seed fill"}
+      - {disease: dis:soybean:anthracnose,          bbch: [71, 89], note: "also seedling blight from infected seed"}
+      - {disease: dis:soybean:pod_stem_blight,      bbch: [76, 99], note: "worse with delayed harvest"}
+
+  # ───────────────────────────── CHICKPEA (phenophases → BBCH) ─────────────────────────────
+  chickpea:
+    display_scale: Chickpea phenophase (CP)
+    note: "Indeterminate growth: flowering and podding overlap. Record 'first' and '50%' events."
+    stages:
+      - {bbch: 0,  display: "CP0", name: "Sowing (dry seed)", phase: establishment}
+      - {bbch: 5,  display: "CP1a", name: "Germination (hypogeal; cotyledons stay below ground)", phase: establishment}
+      - {bbch: 9,  display: "CP1", name: "Emergence (shoot visible)", phase: establishment}
+      - {bbch: 14, display: "CP2", name: "Seedling: leaves on main stem", phase: vegetative}
+      - {bbch: 22, display: "CP3", name: "Branching: primary and secondary branches", phase: vegetative}
+      - {bbch: 35, display: "CP4", name: "Late vegetative / canopy closure", phase: vegetative}
+      - {bbch: 55, display: "CP5", name: "Flower buds visible", phase: reproductive}
+      - {bbch: 61, display: "CP6a", name: "First flower", phase: reproductive}
+      - {bbch: 65, display: "CP6", name: "50% flowering", phase: reproductive}
+      - {bbch: 71, display: "CP7a", name: "First pod", phase: reproductive}
+      - {bbch: 75, display: "CP7", name: "Pod development / seed filling", phase: seed_fill}
+      - {bbch: 85, display: "CP8a", name: "Pods turning yellow-brown", phase: maturity}
+      - {bbch: 89, display: "CP8", name: "Physiological maturity", phase: maturity}
+      - {bbch: 99, display: "CP9", name: "Harvested", phase: harvest}
+    watch_windows:  # hypothesis
+      - {disease: dis:chickpea:collar_rot,    bbch: [0, 22], note: "first ~6 weeks"}
+      - {disease: dis:chickpea:fusarium_wilt, bbch: [9, 75], critical_windows: [[9, 22], [61, 75]], note: "early and late wilt"}
+      - {disease: dis:chickpea:dry_root_rot,  bbch: [61, 89]}
+      - {disease: dis:chickpea:rust,          bbch: [55, 85]}

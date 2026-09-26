@@ -1,0 +1,227 @@
+# Soybean resistance-gene/locus content, mirroring wheat_seed_genes.yaml's sourcing standard:
+# every fact below was checked against its paper's title/abstract on Europe PMC before being
+# written here. See PHASES.md for the flagged gap this fills (soybean/chickpea had zero
+# curated genes prior to this release).
+#
+# Coverage note, deliberately honest rather than padded: of the 8 in-scope soybean diseases
+# (config/vocab/diseases.yaml), only rust, mosaic virus (SMV), bacterial pustule, and frogeye
+# leaf spot have a well-mapped major-gene/locus literature. Charcoal rot, anthracnose, pod &
+# stem blight and rhizoctonia root rot were searched (Europe PMC, 2026-09-26) and found to have
+# only diffuse multi-QTL/GWAS signal with no single validated locus worth curating as a Gene
+# entity yet -- see e.g. PMID 41477268 for charcoal rot, which reports scattered candidate SNPs
+# rather than a characterised gene. Left uncurated rather than force-fit.
+#
+# None of these loci have been cloned with a positive transgenic-complementation experiment
+# (unlike wheat's Sr33/Sr35/Fhb1/Lr21) -- every `cloned: false` below reflects that, even where
+# a paper narrows a locus to a small interval or a handful of candidate genes.
+
+sources:
+  - id: pmid:37313128
+    type: publication
+    title: "Mapping of a soybean rust resistance in PI 594756 at the Rpp1 locus"
+    year: 2023
+    venue: "Molecular Breeding"
+    url: https://doi.org/10.1007/s11032-023-01358-4
+    verified: true
+
+  - id: pmid:41879855
+    type: publication
+    title: "Dissection of local haplotype diversity at soybean rust loci reveals resistance-associated and context-dependent variation patterns in diverse germplasm"
+    year: 2026
+    venue: "Theoretical and Applied Genetics"
+    url: https://doi.org/10.1007/s00122-026-05209-6
+    verified: true
+
+  - id: pmid:41925523
+    type: publication
+    title: "Rpp2 Encodes a TIR-NBS-WH-LRR Protein that Confers Resistance to Phakopsora pachyrhizi in Soybean"
+    year: 2026
+    venue: "Molecular Plant-Microbe Interactions"
+    url: https://doi.org/10.1094/mpmi-02-26-0013-r
+    verified: true
+
+  - id: pmid:40426039
+    type: publication
+    title: "A tritrophic plant-insect-pathogen system used to develop a closely linked Rag2 and Rsv1-h recombinant haplotype in double-resistant soybean germplasm"
+    year: 2025
+    venue: "BMC Genomics"
+    url: https://doi.org/10.1186/s12864-025-11686-8
+    verified: true
+
+  - id: pmid:35746594
+    type: publication
+    title: "Decades of Genetic Research on Soybean mosaic virus Resistance in Soybean"
+    year: 2022
+    venue: Viruses
+    url: https://doi.org/10.3390/v14061122
+    verified: true
+
+  - id: pmid:40384571
+    type: publication
+    title: "An RNase H-Like gene complements resistance to Bean common mosaic necrosis virus in Phaseolus vulgaris"
+    year: 2025
+    venue: "The Plant Genome"
+    url: https://doi.org/10.1002/tpg2.70046
+    verified: true
+
+  - id: pmid:39273969
+    type: publication
+    title: "Genome-Wide Association Studies and QTL Mapping Reveal a New Locus Associated with Resistance to Bacterial Pustule Caused by Xanthomonas citri pv. glycines in Soybean"
+    year: 2024
+    venue: "Plants (Basel)"
+    url: https://doi.org/10.3390/plants13172484
+    verified: true
+
+  - id: pmid:37313225
+    type: publication
+    title: "Pinpointing Rcs3 for frogeye leaf spot resistance and tracing its origin in soybean breeding"
+    year: 2023
+    venue: "Molecular Breeding"
+    url: https://doi.org/10.1007/s11032-023-01397-x
+    verified: true
+
+entities:
+  - id: gene:soybean:Rpp1
+    type: Gene
+    name: Rpp1
+    crop: soybean
+    props:
+      symbol: Rpp1
+      chromosome: Gm18
+      gene_class: unknown
+      cloned: false
+      # Race-specific locus (donor accession PI 594756 in the source paper below); not yet
+      # narrowed to a single candidate gene, unlike Rpp2.
+
+  - id: gene:soybean:Rpp2
+    type: Gene
+    name: Rpp2
+    crop: soybean
+    props:
+      symbol: Rpp2
+      chromosome: Gm16
+      gene_class: "TIR-NLR (candidate gene Rpp2C7_PI, identified by co-silencing; not transgenically complemented)"
+      cloned: false
+
+  - id: gene:soybean:Rsv1
+    type: Gene
+    name: Rsv1
+    crop: soybean
+    synonyms: ["Rsv1-h"]
+    props:
+      symbol: Rsv1
+      chromosome: Gm13
+      gene_class: unknown
+      cloned: false
+      # Carrier accession PI 96983; the "Rsv1-h" haplotype name in the sources refers to this
+      # same locus, not a separate gene.
+
+  - id: gene:soybean:Rsv4
+    type: Gene
+    name: Rsv4
+    crop: soybean
+    props:
+      symbol: Rsv4
+      chromosome: Gm02
+      gene_class: unknown
+      cloned: false
+      # PMID 35746594 (a review) calls the underlying gene "well validated" among SMV
+      # resistance loci, but no cloning/complementation paper for it was found -- kept
+      # cloned: false rather than trust the review's adjective without a primary source.
+
+  - id: gene:soybean:Rxp
+    type: Gene
+    name: Rxp
+    crop: soybean
+    props:
+      symbol: Rxp
+      chromosome: Gm17
+      gene_class: unknown
+      cloned: false
+
+  - id: gene:soybean:Rcs3
+    type: Gene
+    name: Rcs3
+    crop: soybean
+    props:
+      symbol: Rcs3
+      chromosome: Gm16
+      gene_class: unknown
+      cloned: false
+
+claims:
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:soybean:Rpp1
+    object: dis:soybean:rust
+    qualifiers: {resistance_type: unknown}
+    evidence:
+      - source: pmid:37313128
+        method: qtl_mapping
+        locator: title
+        quote: "Mapping of a soybean rust resistance in PI 594756 at the Rpp1 locus"
+      - source: pmid:41879855
+        method: qtl_mapping
+        locator: abstract
+        quote: "We characterised allelic diversity and local haplotype effects at two important SBR loci on chromosomes 13 and 18 (Rpp1)"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:soybean:Rpp2
+    object: dis:soybean:rust
+    qualifiers: {resistance_type: unknown}
+    evidence:
+      - source: pmid:41925523
+        method: qtl_mapping
+        locator: title
+        quote: "Rpp2 Encodes a TIR-NBS-WH-LRR Protein that Confers Resistance to Phakopsora pachyrhizi in Soybean"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:soybean:Rsv1
+    object: dis:soybean:mosaic_virus
+    qualifiers: {resistance_type: unknown}
+    evidence:
+      - source: pmid:40426039
+        method: qtl_mapping
+        locator: abstract
+        quote: "The colocalization of two resistance (R) genes on chromosome 13 of soybean...that confer resistance against the soybean aphid...and soybean mosaic virus (SMV)"
+      - source: pmid:41879855
+        method: qtl_mapping
+        locator: abstract
+        quote: "distinct soybean mosaic virus-resistant haplotypes were identified at the Rsv1 locus on chromosome 13"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:soybean:Rsv4
+    object: dis:soybean:mosaic_virus
+    qualifiers: {resistance_type: unknown}
+    evidence:
+      - source: pmid:35746594
+        method: review_statement
+        locator: abstract
+        quote: "a gene at the Rsv4 locus has been well validated"
+      - source: pmid:40384571
+        method: review_statement
+        locator: abstract
+        quote: "Rsv4 on Gm02 in G. max are syntenic gene regions that confer resistance to Potyviruses"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:soybean:Rxp
+    object: dis:soybean:bacterial_pustule
+    qualifiers: {resistance_type: unknown}
+    evidence:
+      - source: pmid:39273969
+        method: review_statement
+        locator: abstract
+        quote: "different from the traditional rxp gene located on chromosome 17"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:soybean:Rcs3
+    object: dis:soybean:frogeye_leaf_spot
+    qualifiers: {resistance_type: unknown, spectrum: durable}
+    evidence:
+      - source: pmid:37313225
+        method: qtl_mapping
+        locator: abstract
+        quote: "Rcs3 has provided durable resistance to all known races of C. sojina since its discovery in the cultivar Davis during the 1980s"
+      - source: pmid:37313225
+        method: qtl_mapping
+        locator: abstract
+        quote: "Rcs3 was fine-mapped to a 1.15 Mb interval on chromosome 16"

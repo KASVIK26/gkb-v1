@@ -1,0 +1,207 @@
+# Notified varieties for wheat, soybean and chickpea in Central Zone/MP (primary) and the
+# Peninsular Zone/Maharashtra (secondary) per docs/scope.md. Built 2026-09-26, extended same day.
+#
+# No AICRP/ICAR source document was available from the user, so this was built by direct
+# research. Confidence is NOT uniform across crop x region -- say so plainly rather than hide it:
+#
+#   wheat (MP + Maharashtra): tier "official_document" for nearly everything -- pulled from the
+#              actual government-published table (ICAR-IIWBR, "Wheat Varieties Notified in India
+#              Since 1965"), covering BOTH the Central Zone and the Peninsular Zone, with exact
+#              notification numbers and dates. Extracted directly from the PDF text, not
+#              summarized from a search snippet. One cross-check worth noting: GW 322 appears in
+#              both zone tables with the IDENTICAL notification number (937(E), 04.09.2002) --
+#              internal consistency check passed.
+#   chickpea:  UPGRADED 2026-09-26 to "official_document" for most entries. The DPD chickpea PDF
+#              that failed to connect in the previous pass was reached this time via the Wayback
+#              Machine archive (the live dpd.gov.in server itself is still unreliable from this
+#              network; the archived copy is dated 2024-07-01 and covers releases through 2021).
+#              Covers Central-released AND State-released varieties, i.e. both MP and Maharashtra
+#              directly, from one document.
+#   soybean:   tier "multi_source_corroborated" -- the Directorate of Oilseeds Development's own
+#              soybean page (oilseeds.dac.gov.in) plus cross-checked search results for both MP
+#              and Maharashtra. No single notification-number-level government document was found
+#              or reachable for soybean specifically (unlike wheat/DPD-chickpea).
+#
+# tier: official_document | multi_source_corroborated | single_source (needs more checking)
+# zone: "CZ" = wheat/chickpea Central Zone; "PZ" = wheat Peninsular Zone (Maharashtra+Karnataka);
+#       "MP" / "MH" = state-specific recommendation, not the full zone
+# institute_is_mp / institute_is_mh: true if the releasing institute itself sits in that state
+#   (JNKVV Jabalpur+stations & RVSKVV Gwalior/Sehore for MP; PDKV Akola, MPKV Rahuri/Niphad,
+#   ARI Pune for MH) -- vs. a variety recommended for the state but bred elsewhere in the zone.
+#
+# NOT yet in kg/curated/ -- this is sourced research, not a loaded release. Turning this into
+# Variety entities + VARIETY_RECOMMENDED_FOR_ZONE claims is the next step (Phase 3).
+
+schema_version: 2
+
+wheat:
+  source_document:
+    title: "Wheat Varieties Notified in India Since 1965"
+    publisher: "ICAR-Indian Institute of Wheat & Barley Research, Karnal"
+    url: https://www.aicrpwheatbarleyicar.in/wp-content/uploads/2021/06/wheat-varieties-notified-in-india.pdf
+    note: "Covers notifications up to June 2018. Anything released after that (e.g. MP 3465, 2021) is separately sourced below. Fetched via direct curl this session (the .in domain is reachable that way even when WebFetch alone isn't)."
+
+  central_zone:  # Madhya Pradesh (primary), Chhattisgarh, Gujarat, Kota/Udaipur Raj., Jhansi UP
+    # -- Irrigated, timely sown --
+    - {name: "HI 1544", common_name: Purna, institute: "IARI RS, Indore", institute_is_mp: true, year: 2008, notification: "1108(E), 08.05.2008", zone: CZ, resistance: "field resistance to brown and black rust", tier: official_document}
+    - {name: "GW 366", institute: "JAU, Junagadh", institute_is_mp: false, year: 2007, notification: "122(E), 06.02.2007", zone: CZ, resistance: null, tier: official_document}
+    - {name: "GW 322", institute: "RARS, Vijapur", institute_is_mp: false, year: 2002, notification: "937(E), 04.09.2002", zone: CZ, resistance: null, tier: official_document, note: "same notification number confirmed independently in the Peninsular Zone table below"}
+    - {name: "GW 273", institute: "RARS, Vijapur", institute_is_mp: false, year: 1998, notification: "401(E), 15.05.1998", zone: CZ, resistance: null, tier: official_document}
+    - {name: "HI 1077", common_name: Mangla, institute: "IARI RS, Indore", institute_is_mp: true, year: 1989, notification: "915(E), 06.11.1989", zone: CZ, resistance: null, tier: official_document}
+    - {name: "HD 2278", common_name: Parvati, institute: "IARI, New Delhi", institute_is_mp: false, year: 1984, notification: "596(E), 13.08.1984", zone: CZ, resistance: "high resistance to black rust, brown rust; tolerant to terminal heat", tier: official_document}
+    # -- Irrigated, late sown --
+    - {name: "MP 3336", common_name: "JW 3336", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2013, notification: "2817(E), 19.09.2013", zone: CZ, resistance: "resistance to brown and black rust", tier: official_document}
+    - {name: "MP 1203", institute: "JNKVV RS, Powarkheda", institute_is_mp: true, year: 2009, notification: "454(E), 11.02.2009", zone: CZ, resistance: null, note: "high protein content (13.5%)", tier: official_document}
+    - {name: "HD 2864", common_name: Urja, institute: "IARI, New Delhi", institute_is_mp: false, year: 2005, notification: "122(E), 02.02.2005", zone: CZ, resistance: "highly resistant to brown rust and foot rot; tolerant to black rust", tier: official_document}
+    - {name: "MP 4010", institute: "RVSKVV, Gwalior", institute_is_mp: true, year: 2003, notification: "283(E), 12.03.2003", zone: CZ, resistance: "resistance to black rust, brown rust; tolerant to terminal heat", tier: official_document}
+    - {name: "Raj 4238", institute: "RARI, Durgapura", institute_is_mp: false, year: 2016, notification: "2238(E), 29.06.2016", zone: CZ, resistance: null, tier: official_document}
+    # -- Rainfed / restricted irrigation --
+    - {name: "HI 1500", common_name: Amrita, institute: "IARI RS, Indore", institute_is_mp: true, year: 2003, notification: "283(E), 12.03.2003", zone: CZ, resistance: "resistance to brown rust and black rust", tier: official_document}
+    - {name: "JWS17", common_name: Swapnil, institute: "JNKVV RS, Sagar", institute_is_mp: true, year: 1997, notification: "662(E), 17.09.1997", zone: CZ, resistance: "resistance to brown rust and loose smut", tier: official_document}
+    - {name: "HI 617", common_name: Sujata, institute: "IARI RS, Indore", institute_is_mp: true, year: 1982, notification: "19(E), 14.01.1982", zone: CZ, resistance: null, tier: official_document}
+    - {name: "HI 385", common_name: Mukta, institute: "IARI RS, Indore", institute_is_mp: true, year: 1976, notification: "786(E), 02.02.1976", zone: CZ, resistance: "fairly resistant to all three rusts", tier: official_document}
+    - {name: "MP 3288", common_name: "JW 3288", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2011, notification: "2326(E), 10.10.2011", zone: CZ, resistance: "tolerance to major diseases", tier: official_document}
+    - {name: "MP 3173", common_name: "JW 3173", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2009, notification: "449(E), 11.02.2009", zone: CZ, resistance: null, note: "tolerance to drought", tier: official_document}
+    - {name: "HI 1531", common_name: Harshita, institute: "IARI RS, Indore", institute_is_mp: true, year: 2006, notification: "599(E), 25.04.2006", zone: CZ, resistance: "resistance to brown rust", note: "tolerance to drought", tier: official_document}
+    - {name: "DBW 110", institute: "IIWBR, Karnal", institute_is_mp: false, year: 2015, notification: "268(E), 28.01.2015", zone: CZ, resistance: "resistance to brown rust", tier: official_document}
+    # -- Durum / dicoccum --
+    - {name: "HI 8713", common_name: "Pusa Mangal", institute: "IARI RS, Indore", institute_is_mp: true, year: 2013, notification: "952(E), 10.04.2013", zone: CZ, resistance: "resistance to brown rust, black rust", tier: official_document}
+    - {name: "HI 8759", common_name: "Pusa Tejas", institute: "IARI RS, Indore", institute_is_mp: true, year: 2017, notification: "1007(E), 30.03.2017", zone: CZ, resistance: null, note: "zinc/iron-biofortified durum, good for pasta", tier: official_document}
+    - {name: "HD 4728", common_name: "Pusa Malwi", institute: "IARI, New Delhi", institute_is_mp: false, year: 2016, notification: "2238(E), 29.06.2016", zone: CZ, resistance: "resistance to brown rust, black rust", tier: official_document}
+    - {name: "HI 8737", common_name: "Pusa Anmol", institute: "IARI RS, Indore", institute_is_mp: true, year: 2015, notification: "268(E), 28.01.2015", zone: CZ, resistance: "resistance to brown rust, black rust, Karnal bunt", tier: official_document}
+    - {name: "HI 8498", common_name: "Malav Shakti", institute: "IARI RS, Indore", institute_is_mp: true, year: 1999, notification: "425(E), 08.06.1999", zone: CZ, resistance: "resistance to brown and black rust", tier: official_document}
+    - {name: "HI 8381", common_name: Malvashri, institute: "IARI RS, Indore", institute_is_mp: true, year: 1995, notification: "408(E), 04.05.1995", zone: CZ, resistance: "resistance to brown rust and black rust", tier: official_document}
+    - {name: "HI 8627", common_name: "Malav Kirti", institute: "IARI RS, Indore", institute_is_mp: true, year: 2007, notification: "1703(E), 05.10.2007", zone: CZ, resistance: "resistance to brown and black rust", tier: official_document}
+    - {name: "JNK-4W-184", common_name: Jairaj, institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 1980, notification: "470(E), 19.02.1980", zone: CZ, resistance: "resistance to all three rusts", tier: official_document}
+    # -- Post-2018, not in the source PDF above --
+    - {name: "MP 3465", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2021, notification: "29.01.2021", zone: MP, resistance: null, note: "irrigated timely-sown; avg yield 59.41 q/ha, potential 73.2 q/ha", tier: multi_source_corroborated}
+
+  # peninsular_zone note: positional pairing was needed for Table 2.1.27 (irrigated, timely sown)
+  # because the PDF's text layout separated variety names from their notification numbers.
+  # Verified correct via the GW 322 cross-check above (identical notification number in both zone
+  # tables, matching position 6 in this table's name list). Tables 2.1.28-2.1.31 were
+  # self-contained per entry and needed no re-pairing.
+  peninsular_zone:  # Maharashtra (secondary region) + Karnataka
+    - {name: "MACS 6478", institute: "ARI, Pune", institute_is_mh: true, year: 2014, notification: "1919(E), 30.07.2014", zone: PZ, resistance: "resistance to black and brown rust", note: "good for chapatti quality", tier: official_document}
+    - {name: "UAS 304", institute: "UAS, Dharwad", institute_is_mh: false, year: 2013, notification: "2817(E), 19.09.2013", zone: PZ, resistance: null, tier: official_document}
+    - {name: "MACS 6222", institute: "ARI, Pune", institute_is_mh: true, year: 2010, notification: "733(E), 01.04.2010", zone: PZ, resistance: "resistance to black and brown rust", tier: official_document}
+    - {name: "NIAW 917", common_name: Tapovan, institute: "MPKV ARS, Niphad", institute_is_mh: true, year: 2006, notification: "599(E), 25.04.2006", zone: PZ, resistance: "resistance to brown and black rust", tier: official_document}
+    - {name: "RAJ 4037", institute: "RARI, Durgapura", institute_is_mh: false, year: 2004, notification: "161(E), 04.02.2004", zone: PZ, resistance: "resistance to brown and black rust", tier: official_document}
+    - {name: "DWR 162", institute: "UAS, Dharwad", institute_is_mh: false, year: 1993, notification: "615(E), 17.08.1993", zone: PZ, resistance: "tolerance to brown and black rust", note: "revolutionized PZ bread wheat cultivation on release, per the source document's own narrative", tier: official_document}
+    - {name: "DBW 168", institute: "IIWBR, Karnal", institute_is_mh: false, year: 2018, notification: "1379(E), 27.03.2018", zone: PZ, resistance: "resistance to brown and black rust", note: "very good for chapati and biscuit quality; soft grains", tier: official_document}
+    - {name: "AKW 1071", common_name: Purna, institute: "PDKV, Akola", institute_is_mh: true, year: 1995, notification: "408(E), 04.05.1995", zone: PZ, resistance: null, note: "heat tolerant", tier: official_document}
+    - {name: "HD3090", common_name: "Pusa Amulya", institute: "IARI, New Delhi", institute_is_mh: false, year: 2014, notification: "244(E), 24.01.2014", zone: PZ, resistance: "resistance to brown and black rust", tier: official_document}
+    - {name: "AKAW 4627", institute: "PDKV, Akola", institute_is_mh: true, year: 2012, notification: "456(E), 16.03.2012", zone: PZ, resistance: "resistance to brown and black rust", tier: official_document}
+    - {name: "HD 2932", common_name: "Pusa Wheat 111", institute: "IARI, New Delhi", institute_is_mh: false, year: 2008, notification: "1108(E), 08.05.2008", zone: PZ, resistance: "resistance to brown and black rust", note: "also notified for CZ, see above", tier: official_document}
+    - {name: "HD 2833", common_name: "Pusa Wheat 105", institute: "IARI, New Delhi", institute_is_mh: false, year: 2006, notification: "599(E), 25.04.2006", zone: PZ, resistance: "adult plant resistance to brown and black rust", note: "excellent chapatti quality", tier: official_document}
+    - {name: "HUW 510", common_name: "Malviya 510", institute: "BHU, Varanasi", institute_is_mh: false, year: 2001, notification: "92(E), 02.02.2001", zone: PZ, resistance: "resistance to brown and black rust", tier: official_document}
+    - {name: "DWR 195", common_name: Anuradha, institute: "UAS, Dharwad", institute_is_mh: false, year: 1995, notification: "408(E), 04.05.1995", zone: PZ, resistance: "resistance to brown and black rust", tier: official_document}
+    - {name: "HD 2781", common_name: Aditya, institute: "IARI, New Delhi", institute_is_mh: false, year: 2002, notification: "937(E), 04.09.2002", zone: PZ, resistance: "resistance to brown rust", tier: official_document}
+    - {name: "K 9644", common_name: Atal, institute: "CSAUA&T, Kanpur", institute_is_mh: false, year: 2000, notification: "340(E), 03.04.2000", zone: PZ, resistance: "resistance to brown and black rust; heat tolerant", tier: official_document}
+    - {name: "UAS 375", institute: "UAS, Dharwad", institute_is_mh: false, year: 2018, notification: "1379(E), 27.03.2018", zone: PZ, resistance: "resistance to brown and black rust", tier: official_document}
+    - {name: "HI 1605", common_name: "Pusa Ujala", institute: "IARI RS, Indore", institute_is_mh: false, year: 2017, notification: "1007(E), 30.03.2017", zone: PZ, resistance: "resistance to brown and black rust", note: "also bred at the Indore station (MP), recommended into PZ", tier: official_document}
+    - {name: "HD 2987", common_name: "Pusa Bahar", institute: "IARI, New Delhi", institute_is_mh: false, year: 2011, notification: "632(E), 25.03.2011", zone: PZ, resistance: null, note: "high iron content, good chapatti quality", tier: official_document}
+    - {name: "NIAW 1415", common_name: Netravati, institute: "MPKV RS, Niphad", institute_is_mh: true, year: 2011, notification: "632(E), 25.03.2011", zone: PZ, resistance: null, tier: official_document}
+    - {name: "MACS 4028", institute: "ARI, Pune", institute_is_mh: true, year: 2018, notification: "1379(E), 27.03.2018", zone: PZ, resistance: "high resistance to stem and leaf rust", note: "early maturing (102 days), high protein (14.7%)", tier: official_document}
+    - {name: "MACS 3949", institute: "ARI, Pune", institute_is_mh: true, year: 2017, notification: "1007(E), 30.03.2017", zone: PZ, resistance: "resistance to stem and leaf rusts", note: "durum, good pasta quality", tier: official_document}
+
+chickpea:
+  source_document:
+    title: "Central & State Released Varieties - Chickpea (Gram/Chana)"
+    publisher: "Directorate of Pulses Development, Bhopal (M.P.)"
+    url: https://dpd.gov.in/i)%20Chickpea%20Varieties.pdf
+    archived_url: http://web.archive.org/web/20240701080736/https://dpd.gov.in/i)%20Chickpea%20Varieties.pdf
+    note: >-
+      Reached via the Wayback Machine 2026-09-26 (the live dpd.gov.in server was unreachable
+      again via WebFetch, but IS reachable via plain curl from this session -- reflected in
+      `curl` succeeding directly on the live URL too, moot once the archive worked first).
+      Covers Central-released varieties (up to 2021) and separately State-released varieties
+      (up to 2021, older releases mixed in). Both MP and Maharashtra entries pulled from this
+      one document, replacing every `single_source`/`null`-year chickpea entry from the previous
+      pass with a dated, sourced one.
+
+  central_zone:  # released nationally, with area of adoption spanning multiple CZ states
+    - {name: "Shubhra", common_name: "IPCK 2002-29", institute: "ICAR-IIPR, Kanpur", institute_is_mp: false, year: 2009, area_of_adoption: "CZ (MP, CG, MH, GJ)", resistance: "moderately resistant to wilt", note: "escapes pod borer damage", tier: official_document}
+    - {name: "Raj Vijay Gram 203", common_name: "RVG 203 / JSC 56", institute: "RVSKVV AICRP RAK, Sehore (MP)", institute_is_mp: true, year: 2013, area_of_adoption: "CZ (MP, MH, GJ), NWPZ (UP, RJ)", resistance: "moderately resistant to wilt and dry root rot", note: "irrigated and late sown", tier: official_document}
+    - {name: "Raj Vijay Gram 202", common_name: "RVG 202 / JSC 55", institute: "RVSKVV AICRP RAK, Sehore (MP)", institute_is_mp: true, year: 2015, area_of_adoption: "CZ (MP, CG, GJ, MH), NWPZ (RJ, UP)", resistance: "moderately resistant to wilt, dry root rot and collar rot (per this official document)", note: "CONFLICTING EVIDENCE: an independent field study (not this document) found RVG 202 highly susceptible to FOC -- keep both facts visible rather than resolve them here; a candidate for db/cq/cq10_conflicting_reactions.sql once loaded", tier: official_document}
+    - {name: "JG 36", common_name: "Jawahar Gram 36", institute: "JNKVV, Jabalpur (MP)", institute_is_mp: true, year: 2016, area_of_adoption: "CZ - MP; NWPZ - UP", resistance: "tolerant to wilt", note: "semi-spreading, dark brown seed; rainfed and irrigated", tier: official_document}
+    - {name: "Super Annigeri-1", common_name: MABCWR-SAI, institute: "UAS, Raichur (Karnataka)", institute_is_mp: false, year: 2019, area_of_adoption: "SZ (AP, KA), CZ (MH, GJ)", resistance: null, note: "MABC-derived, drought tolerant", tier: official_document}
+    - {name: "Pusa Chickpea 10216", common_name: "BGM 10216", institute: "ICAR-IIPR, Kanpur", institute_is_mp: false, year: 2020, area_of_adoption: "CZ (BK-UP, MP, MH, GJ)", resistance: null, note: "first MABB-derived chickpea variety in India; drought tolerant", tier: official_document}
+    - {name: "Pusa Parvati", common_name: BG3062, institute: "ICAR-IIPR, Kanpur", institute_is_mp: false, year: 2020, area_of_adoption: "CZ (MH, MP, BK-UP, S.RJ)", resistance: "highly resistant to wilt, dry root rot and stunt", tier: official_document}
+    - {name: "Jawahar Gram Kabuli 6", common_name: "JGK 6 / JGK 2017-32", institute: "AICRP, JNKVV Jabalpur (MP)", institute_is_mp: true, year: 2021, area_of_adoption: "NWPZ (HR, J&K, PN, RJ, UP)", resistance: null, note: "lodging tolerant, shattering resistant", tier: official_document}
+    - {name: "Raj Vijay Kabuli Gram 2020", common_name: RVSSG-63, institute: "RVSKVV AICRP RAK, Sehore (MP)", institute_is_mp: true, year: 2021, area_of_adoption: "NWPZ (HR, PN, RJ, UK)", resistance: "moderately resistant to stunt", note: "tolerant to pod borer and pulse beetle in storage", tier: official_document}
+    - {name: "Raj Vijay Gram 204", common_name: "RVG 204 / RVSSG-8102", institute: "RVSKVV AICRP RAK, Sehore (MP)", institute_is_mp: true, year: 2021, area_of_adoption: "CZ (MP, CG, RJ, GJ, MH)", resistance: "tolerant to wilt", note: "amenable to machine harvesting, desi type", tier: official_document}
+    - {name: "Pusa Chickpea 20211", common_name: "Pusa Chickpea Manav", institute: "ICAR-IARI & ICRISAT", institute_is_mp: false, year: 2021, area_of_adoption: "CZ (MP, GJ, MH)", resistance: "moderately resistant to dry root rot, collar rot and stunt; moderately resistant to pod borer", note: "rice-based cropping systems; yield potential double that of existing varieties", tier: official_document}
+
+  madhya_pradesh_state:  # state-released, area of adoption given directly as Madhya Pradesh
+    - {name: "JGK-2", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2007, resistance: "resistant to collar rot, root rot; moderately resistant to wilt and dry root rot", note: "rainfed", tier: official_document}
+    - {name: "JGK-3", common_name: "JGK 19", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2007, resistance: "resistant to wilt", note: "rainfed", tier: official_document}
+    - {name: "Jawahar Gram 226", common_name: "JG 226", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2007, resistance: "resistant to wilt and root rot complex", note: "rainfed", tier: official_document}
+    - {name: "JAKI 9218", institute: "PDKV, Akola (Maharashtra)", institute_is_mp: false, year: 2008, resistance: "resistant to wilt, root rot and collar rot", note: "irrigated; area of adoption given as Madhya Pradesh despite the Maharashtra-based institute", tier: official_document}
+    - {name: "JG 14", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2009, resistance: "resistant to wilt", note: "heat tolerant; suitable for late-sown MP conditions; better milling quality -- year now confirmed (previously null)", tier: official_document}
+    - {name: "Jawahar Chana 6", common_name: "JG 6", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2009, resistance: "resistant to Fusarium wilt; moderately resistant to dry root rot", note: "timely sown and irrigated", tier: official_document}
+    - {name: "Raj Vijay Kabuli Gram 201", common_name: "RVG 201 / JSC 40", institute: "RVSKVV AICRP RAK, Sehore", institute_is_mp: true, year: 2011, resistance: "moderately resistant to wilt", note: "early-maturing desi type -- year corrected to 2011 (previously recorded as 2012)", tier: official_document}
+    - {name: "Raj Vijay Kabuli Gram 101", common_name: "RVG 101 / JSC 42", institute: "RVSKVV AICRP RAK, Sehore", institute_is_mp: true, year: 2012, resistance: "moderately resistant to wilt", note: "large-seeded kabuli, early maturing", tier: official_document}
+    - {name: "JG 12", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2014, area_of_adoption: "Madhya Pradesh", resistance: "moderately resistant to wilt, dry root rot", note: "normal sown condition", tier: official_document}
+    - {name: "JGK 5", institute: "AICRP, JNKVV Jabalpur", institute_is_mp: true, year: 2016, area_of_adoption: "Madhya Pradesh", resistance: "resistant to Fusarium wilt; moderate resistance to root rot", note: "irrigated and normal sown", tier: official_document}
+    - {name: "Raj Vijay Gram 205", common_name: "RVG 205 / RVSSG-32", institute: "RVSKVV AICRP RAK, Sehore", institute_is_mp: true, year: 2019, resistance: "tolerant to wilt", note: "green-seeded chickpea", tier: official_document}
+    - {name: "Raj Vijay Kabuli Gram 111", common_name: "RVG 111 / RVSSG-24", institute: "RVSKVV AICRP RAK, Sehore", institute_is_mp: true, year: 2019, resistance: "tolerant to wilt", note: "kabuli type", tier: official_document}
+    - {name: "Raj Vijay Kabuli Gram 151", common_name: "RVG 151 / RVSSG-37", institute: "RVSKVV AICRP RAK, Sehore", institute_is_mp: true, year: 2019, resistance: "tolerant to wilt", note: "extra-large-seeded kabuli", tier: official_document}
+    - {name: "Raj Vijay Gram 210", common_name: RVG 210, institute: "RVSKVV AICRP RAK, Sehore", institute_is_mp: true, year: 2021, resistance: "resistant to Fusarium wilt", note: "timely sown and sequential cropping systems; tolerant to pod borer", tier: official_document}
+    - {name: "Raj Vijay Kabuli Gram 121", common_name: "RVKG 121", institute: "RVSKVV AICRP RAK, Sehore", institute_is_mp: true, year: 2021, resistance: "moderately resistant to Fusarium wilt and dry root rot", note: "tolerant to pod borer and pulse beetle in storage", tier: official_document}
+
+  maharashtra_state:  # state-released and centrally-released-but-MH-adopted, Maharashtra entries
+    - {name: "Rajas", common_name: "Phule-G-9425-9", institute: "MPKV, Rahuri", institute_is_mh: true, year: 2007, area_of_adoption: "NWPZ + CZ(MH), NHZ(J&K)", resistance: "resistant to Fusarium wilt", note: "late sown", tier: official_document}
+    - {name: "Akash", common_name: "BDNG 797", institute: "ARS, Badnapur, Jalna", institute_is_mh: true, year: 2007, resistance: "resistant to wilt; tolerant to pod borer", note: "rainfed desi", tier: official_document}
+    - {name: "Digvijay", institute: "MPKV, Rahuri", institute_is_mh: true, year: 2007, resistance: "resistant to Fusarium wilt", note: "rainfed, optimum-sown irrigated and late sown", tier: official_document}
+    - {name: "Kripa", common_name: "Phule G 0517", institute: "MPKV, Rahuri", institute_is_mh: true, year: 2009, area_of_adoption: "CZ (MH, MP), SZ (KA)", resistance: "tolerant to Fusarium wilt", note: "irrigated", tier: official_document}
+    - {name: "PKV Kabuli 4", institute: "PDKV, Akola", institute_is_mh: true, year: 2010, area_of_adoption: "CZ (MH, MP)", resistance: "moderately resistant to Fusarium wilt, dry root rot and Botrytis grey mould", note: "irrigated", tier: official_document}
+    - {name: "PKV Harita", common_name: "AKG 9303-12", institute: "PDKV, Akola", institute_is_mh: true, year: 2012, resistance: "tolerant to wilt and drought", note: "bold seeded, Vidarbha region; rainfed", tier: official_document}
+    - {name: "BDNGK 798", institute: "ARS, Badnapur, Jalna", institute_is_mh: true, year: 2016, resistance: "moderately resistant to wilt and stunt", note: "kabuli type, white seed", tier: official_document}
+    - {name: "Phule Vikrant", common_name: "Phule G 0405", institute: "MPKV, Rahuri", institute_is_mh: true, year: 2018, area_of_adoption: "CZ (GJ, MP, MH)", resistance: "moderately resistant to Fusarium wilt", note: "timely sown", tier: official_document}
+    - {name: "PDKV Kanchan", common_name: "AKG-1109", institute: "ICAR-IIPR (trial), released as PDKV variety", institute_is_mh: true, year: 2019, resistance: "resistant to Fusarium wilt", note: "early sown", tier: official_document}
+    - {name: "Phule Vikram", common_name: "Phule G 08108", institute: "MPKV, Rahuri", institute_is_mh: true, year: 2020, resistance: "wilt resistant", note: "suitable for mechanical harvesting", tier: official_document}
+
+soybean:
+  source_document:
+    title: "Soybean varieties for Madhya Pradesh"
+    publisher: "Directorate of Oilseeds Development (DOD), Hyderabad"
+    url: https://oilseeds.dac.gov.in/Soyabean.aspx
+    note: "No single notification-number-level document found or reachable for soybean, unlike wheat (AICRP/IIWBR) and chickpea (DPD). This remains the weakest-sourced of the three crops."
+
+  madhya_pradesh:
+    - {name: "RVS 2001-4", institute: "RAK CoA, RVSKVV Sehore/Bhopal", institute_is_mp: true, year: 2014, resistance: "tolerant to major leaf, pod and root diseases; tolerant to girdle beetle and semi-looper", tier: multi_source_corroborated}
+    - {name: "JS 20-29", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2014, resistance: "resistant to Yellow Mosaic Virus and charcoal rot", note: "yield ~21.25 q/ha", tier: multi_source_corroborated}
+    - {name: "JS 20-34", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2014, resistance: "resistant to charcoal rot; tolerant to girdle beetle and stem fly", tier: multi_source_corroborated}
+    - {name: "NRC 86", common_name: "Ahilya-6", institute: "IISR, Indore", institute_is_mp: true, year: 2015, resistance: "resistant to bacterial pustule, pod blight, collar rot; tolerant to girdle beetle and stem fly", tier: multi_source_corroborated}
+    - {name: "Raj Soya-18", institute: "RAK CoA, RVSKVV Sehore", institute_is_mp: true, year: 2017, resistance: null, tier: multi_source_corroborated}
+    - {name: "Raj Soya-24", institute: "RAK CoA, RVSKVV Sehore", institute_is_mp: true, year: 2017, resistance: "resistant to Yellow Mosaic Virus", tier: multi_source_corroborated}
+    - {name: "JS 20-69", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2016, resistance: null, note: "yield ~18.52 q/ha", tier: multi_source_corroborated}
+    - {name: "JS 20-116", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2019, resistance: "resistant to Yellow Mosaic Virus and charcoal rot", note: "yield ~21.22 q/ha", tier: multi_source_corroborated}
+    - {name: "JS 93-05", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2002, resistance: null, tier: single_source}
+    - {name: "JS 335", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: null, resistance: null, note: "the long-dominant MP variety, now reported as susceptible to several biotic stresses after decades of near-monoculture use -- itself a useful genetic-vulnerability data point (RESEARCH_ROADMAP.md Phase 12); exact release year still not confirmed after a second pass", tier: single_source}
+    - {name: "JS 95-60", institute: "JNKVV, Jabalpur", institute_is_mp: true, year: 2007, resistance: null, note: "early-maturing (85-90 days), suited to low-rainfall/upland conditions", tier: multi_source_corroborated}
+    - {name: "NRC 157", institute: "IISR, Indore", institute_is_mp: true, year: null, resistance: "moderately resistant to Alternaria leaf spot, bacterial pustule, target leaf spot", note: "state government recommendation, MP; exact year still not confirmed after a second pass", tier: single_source}
+    - {name: "NRC 136", institute: "IISR, Indore", institute_is_mp: true, year: null, resistance: "moderately resistant to Mungbean Yellow Mosaic Virus", note: "India's first drought-tolerant soybean variety per source; exact year still not confirmed after a second pass", tier: single_source}
+
+  maharashtra:
+    - {name: "MAUS 71", institute: "PDKV, Akola", institute_is_mh: true, year: null, resistance: "good performance for charcoal-rot resistance in a comparative screening (AUDPC 56.81, root-rot severity score 1.57)", note: "release year not confirmed this pass", tier: single_source}
+    - {name: "MAUS 81", institute: "PDKV, Akola", institute_is_mh: true, year: null, resistance: null, note: "release year and resistance profile not confirmed this pass beyond confirming the variety and institute are real", tier: single_source}
+    - {name: "MAUS 612", institute: "PDKV, Akola", institute_is_mh: true, year: null, resistance: "reported rust and pest resistant", note: "early maturing (93-98 days); release year not confirmed this pass", tier: single_source}
+    - {name: "MAUS 725", institute: "PDKV, Akola", institute_is_mh: true, year: null, resistance: null, note: "maturity ~97 days, yield ~2087 kg/ha per source; release year not confirmed this pass", tier: single_source}
+    - {name: "MACS 58", institute: "ARI, Pune", institute_is_mh: true, year: null, resistance: null, note: "district-recommended for Akola per source; release year not confirmed this pass", tier: single_source}
+    - {name: "Parbhani Sona", common_name: "MAUS 47", institute: "PDKV, Akola", institute_is_mh: true, year: null, resistance: null, note: "district-recommended for Maharashtra per source; release year not confirmed this pass", tier: single_source}
+    - {name: "Pratishta", common_name: "MAUS 61-2", institute: "PDKV, Akola", institute_is_mh: true, year: null, resistance: null, note: "district-recommended for Maharashtra per source; release year not confirmed this pass", tier: single_source}
+    - {name: "Shakti", common_name: "MAUS 81", institute: "PDKV, Akola", institute_is_mh: true, year: null, resistance: null, note: "listed under two common names across sources (Shakti and the bare MAUS 81 code) -- flag for a closer look to confirm they're the same variety, not two", tier: single_source}
+    - {name: "JS 335", institute: "JNKVV, Jabalpur (recommended in Maharashtra too)", institute_is_mh: false, year: null, resistance: null, note: "district-recommended for Akola per source; see the fuller entry under soybean.madhya_pradesh", tier: single_source}
+    - {name: "JS 93-05", institute: "JNKVV, Jabalpur (recommended in Maharashtra too)", institute_is_mh: false, year: null, resistance: null, note: "district-recommended for Akola per source; MP release year (2002) is in soybean.madhya_pradesh, not independently reconfirmed for the Maharashtra recommendation specifically", tier: single_source}
+    - {name: "JS 80-21", institute: "JNKVV, Jabalpur (recommended in Maharashtra too)", institute_is_mh: false, year: null, resistance: null, note: "district-recommended for Akola per source; release year not confirmed this pass", tier: single_source}
+
+# Open items:
+#  1. Confirm the still-null release years above (several MAUS entries, JS 335, NRC 157/136,
+#     MACS 58) -- a soybean-specific notification-number document, if one exists, would fix these
+#     the way the DPD/AICRP documents fixed wheat and chickpea.
+#  2. Verify "Shakti"/"MAUS 81" are or aren't the same variety.
+#  3. Cross-check RVG 202's conflicting resistance reports before writing a VARIETY_REACTION claim.
+#  4. Maharashtra coverage is now real for wheat (official) and chickpea (official) but still
+#     thin and single-sourced for soybean -- worth a dedicated follow-up pass.

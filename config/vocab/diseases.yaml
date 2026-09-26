@@ -1,0 +1,197 @@
+# Priority diseases for KG v1 (scope frozen 2026-09-25; see docs/scope.md).
+# IDs are stable and shared by the KG, the risk API, the IoT module and the phenomic model.
+#
+# ncbi_taxon: resolve in Phase 3.1 by name lookup. Do not hand-type taxon IDs.
+# drivers: the *kind* of conditions that matter (qualitative). Numeric envelopes live in
+#   kg/curated/env_triggers.yaml and must carry citations (RESEARCH_ROADMAP.md §7).
+# sensor_coupling: how directly the IoT stack can see the drivers:
+#   direct   = measured by the device (soil temp/moisture, air temp, RH)
+#   proxy    = needs a derived variable (leaf-wetness estimate, rain from API)
+#   indirect = mainly driven by inoculum or vector, weather only modulates it
+
+schema_version: 1
+
+diseases:
+  # ─────────────────────────────── SOYBEAN ───────────────────────────────
+  - id: dis:soybean:rust
+    crop: soybean
+    name: Soybean rust
+    synonyms: [Asian soybean rust]
+    pathogen: Phakopsora pachyrhizi
+    pathogen_type: fungus (obligate biotroph)
+    habitat: foliar, airborne urediniospores
+    drivers: [leaf wetness duration, moderate air temperature, high RH]
+    sensor_coupling: proxy
+
+  - id: dis:soybean:charcoal_rot
+    crop: soybean
+    name: Charcoal rot
+    pathogen: Macrophomina phaseolina
+    pathogen_type: fungus (soil-borne, microsclerotia)
+    habitat: root and lower stem
+    drivers: [high soil temperature, low soil moisture / terminal drought, high air temperature]
+    sensor_coupling: direct
+    notes: >-
+      Same pathogen as chickpea dry root rot (Rhizoctonia bataticola is its sclerotial state).
+      In the soybean (kharif) to chickpea (rabi) rotation common in central India, soil inoculum
+      carries across both crops. Model this as a shared Pathogen node.
+
+  - id: dis:soybean:frogeye_leaf_spot
+    crop: soybean
+    name: Frogeye leaf spot
+    pathogen: Cercospora sojina
+    pathogen_type: fungus
+    habitat: foliar (also pods/seed)
+    drivers: [warm air temperature, high RH, prolonged leaf wetness]
+    sensor_coupling: proxy
+
+  - id: dis:soybean:anthracnose
+    crop: soybean
+    name: Anthracnose (pod blight)
+    pathogen: Colletotrichum truncatum
+    pathogen_type: fungus (seed-borne and residue-borne)
+    habitat: stem, petiole, pods
+    drivers: [warm and wet weather, prolonged wetness, rain splash]
+    sensor_coupling: proxy
+
+  - id: dis:soybean:pod_stem_blight
+    crop: soybean
+    name: Pod and stem blight
+    pathogen: Diaporthe phaseolorum var. sojae
+    pathogen_type: fungus (Diaporthe/Phomopsis complex; residue- and seed-borne)
+    habitat: stems, pods, seed
+    drivers: [warm wet weather during pod fill to maturity, delayed harvest]
+    sensor_coupling: proxy
+
+  - id: dis:soybean:rhizoctonia_root_rot
+    crop: soybean
+    name: Rhizoctonia root rot
+    pathogen: Rhizoctonia solani
+    pathogen_type: fungus (soil-borne; anastomosis groups differ)
+    habitat: roots, hypocotyl (seedling)
+    drivers: [warm soil, moderate to high soil moisture, seedling stage]
+    sensor_coupling: direct
+    notes: >-
+      R. solani AG1-IA also causes aerial blight in India. That is a different disease (foliar,
+      humid canopy). Keep it as a separate ID if it is added later.
+
+  - id: dis:soybean:bacterial_pustule
+    crop: soybean
+    name: Bacterial pustule
+    pathogen: Xanthomonas citri pv. glycines
+    pathogen_synonyms: [Xanthomonas axonopodis pv. glycines]
+    pathogen_type: bacterium (seed- and residue-borne)
+    habitat: foliar
+    drivers: [warm temperature, rain splash, wind-driven rain, high RH]
+    sensor_coupling: proxy
+
+  - id: dis:soybean:mosaic_virus
+    crop: soybean
+    name: Soybean mosaic
+    pathogen: Soybean mosaic virus (SMV, Potyvirus)
+    pathogen_type: virus (seed-borne; aphid-transmitted, non-persistent)
+    habitat: systemic
+    drivers: [infected seed, aphid vector activity (temperature-dependent), early-season infection]
+    sensor_coupling: indirect
+    notes: Weather drives vector activity, not infection directly. Seed health and variety matter most.
+
+  # ─────────────────────────────── WHEAT ───────────────────────────────
+  # "Rust diseases" = three distinct pathosystems with different resistance genes
+  # (Yr / Lr / Sr) and different temperature optima. The group ID is for UI grouping only.
+  - id: dis:wheat:stripe_rust
+    crop: wheat
+    group: dis:wheat:rusts
+    name: Stripe rust
+    synonyms: [yellow rust]
+    pathogen: Puccinia striiformis f. sp. tritici
+    pathogen_type: fungus (obligate biotroph, airborne)
+    habitat: foliar
+    drivers: [cool air temperature, dew / leaf wetness, high RH]
+    sensor_coupling: proxy
+
+  - id: dis:wheat:leaf_rust
+    crop: wheat
+    group: dis:wheat:rusts
+    name: Leaf rust
+    synonyms: [brown rust]
+    pathogen: Puccinia triticina
+    pathogen_type: fungus (obligate biotroph, airborne)
+    habitat: foliar
+    drivers: [moderate air temperature, dew / leaf wetness]
+    sensor_coupling: proxy
+
+  - id: dis:wheat:stem_rust
+    crop: wheat
+    group: dis:wheat:rusts
+    name: Stem rust
+    synonyms: [black rust]
+    pathogen: Puccinia graminis f. sp. tritici
+    pathogen_type: fungus (obligate biotroph, airborne)
+    habitat: stem and leaf
+    drivers: [warm air temperature, dew / leaf wetness]
+    sensor_coupling: proxy
+
+  - id: dis:wheat:powdery_mildew
+    crop: wheat
+    name: Powdery mildew
+    pathogen: Blumeria graminis f. sp. tritici
+    pathogen_type: fungus (obligate biotroph, airborne)
+    habitat: foliar
+    drivers: [moderate temperature, high RH without free water, dense canopy / low light]
+    sensor_coupling: direct
+
+  - id: dis:wheat:fusarium_head_blight
+    crop: wheat
+    name: Fusarium head blight
+    synonyms: [head scab]
+    pathogen: Fusarium graminearum species complex
+    pathogen_type: fungus (residue-borne; mycotoxin DON)
+    habitat: spike
+    drivers: [warm and wet or humid weather at anthesis, rain]
+    sensor_coupling: proxy
+
+  # ─────────────────────────────── CHICKPEA ───────────────────────────────
+  - id: dis:chickpea:fusarium_wilt
+    crop: chickpea
+    name: Fusarium wilt
+    pathogen: Fusarium oxysporum f. sp. ciceris
+    pathogen_type: fungus (soil-borne, chlamydospores; multiple races)
+    habitat: vascular (root-borne)
+    drivers: [warm soil temperature, soil moisture stress]
+    sensor_coupling: direct
+    notes: Race identity matters for resistance; store as Pathotype nodes.
+
+  - id: dis:chickpea:dry_root_rot
+    crop: chickpea
+    name: Dry root rot
+    pathogen: Macrophomina phaseolina
+    pathogen_synonyms: [Rhizoctonia bataticola (sclerotial state)]
+    pathogen_type: fungus (soil-borne)
+    habitat: root
+    drivers: [high soil temperature, soil moisture deficit at flowering-podding]
+    sensor_coupling: direct
+    notes: Shares its pathogen with dis:soybean:charcoal_rot (see note there).
+
+  - id: dis:chickpea:collar_rot
+    crop: chickpea
+    name: Collar rot
+    pathogen: Athelia rolfsii
+    pathogen_synonyms: [Sclerotium rolfsii]
+    pathogen_type: fungus (soil-borne, sclerotia)
+    habitat: collar region (seedling)
+    drivers: [high soil moisture, warm soil temperature, undecomposed organic matter]
+    sensor_coupling: direct
+
+  - id: dis:chickpea:rust
+    crop: chickpea
+    name: Chickpea rust
+    pathogen: Uromyces ciceris-arietini
+    pathogen_type: fungus (airborne)
+    habitat: foliar
+    drivers: [cool to moderate temperature, high RH, leaf wetness]
+    sensor_coupling: proxy
+
+groups:
+  - id: dis:wheat:rusts
+    name: Wheat rusts
+    members: [dis:wheat:stripe_rust, dis:wheat:leaf_rust, dis:wheat:stem_rust]

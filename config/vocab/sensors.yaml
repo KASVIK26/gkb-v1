@@ -1,0 +1,139 @@
+# Sensor variable vocabulary shared by the IoT device (AgriNode, ESP32-S3), the ingest API,
+# the risk engine and the KG env-trigger library. Frozen hardware as of 2026-09-25.
+# Variable names here are the ONLY names allowed in env_triggers.yaml conditions.
+#
+# valid_range = physical plausibility for QC, not the sensor's accuracy spec.
+# Items marked "confirm" must be checked against the sensor datasheet before release.
+
+schema_version: 1
+
+hardware:
+  - id: sn3002
+    model: SN-3002 soil multi-parameter probe
+    bus: RS485 / Modbus RTU
+    install_metadata_required: [depth_cm, distance_to_plant_cm, soil_texture]
+  - id: aht20
+    model: AHT20
+    bus: I2C
+    install_metadata_required: [height_cm, radiation_shield]
+  - id: bme280
+    model: BME280
+    bus: I2C
+    install_metadata_required: [height_cm, radiation_shield]
+  - id: veml7700
+    model: VEML7700
+    bus: I2C
+    install_metadata_required: [height_cm, orientation]
+  - id: sd3031
+    model: SD3031 RTC
+    bus: I2C
+    note: Time source is NTP with RTC fallback. Timestamps are sent in UTC.
+
+# ───────────────────────────── MEASURED ─────────────────────────────
+measured:
+  - {name: soil_moisture_vwc, unit: "%", source: sn3002, valid_range: [0, 100], disease_role: primary}
+  - {name: soil_temp_c, unit: "degC", source: sn3002, valid_range: [-10, 70], disease_role: primary}
+  - {name: soil_ph, unit: "pH", source: sn3002, valid_range: [3, 10], disease_role: secondary}
+  - name: soil_ec
+    unit: "uS/cm (confirm; dashboard shows 'raw')"
+    source: sn3002
+    valid_range: [0, 20000]
+    disease_role: secondary
+  - name: soil_n
+    unit: "mg/kg (confirm)"
+    source: sn3002
+    valid_range: [0, 2000]
+    disease_role: feature_only
+    caveat: &npk_caveat >-
+      Low-cost multi-parameter probes are widely reported to estimate NPK indirectly (largely
+      from conductivity) rather than measure available nutrients. Do not use them as disease
+      triggers or agronomic advice until they are validated against lab soil tests. Treat them
+      as a relative indicator only.
+  - {name: soil_p, unit: "mg/kg (confirm)", source: sn3002, valid_range: [0, 2000], disease_role: feature_only, caveat: *npk_caveat}
+  - {name: soil_k, unit: "mg/kg (confirm)", source: sn3002, valid_range: [0, 2000], disease_role: feature_only, caveat: *npk_caveat}
+  - {name: soil_salinity, unit: "mg/L (confirm)", source: sn3002, valid_range: [0, 20000], disease_role: secondary}
+  - {name: soil_tds, unit: "mg/L (confirm)", source: sn3002, valid_range: [0, 20000], disease_role: secondary}
+  - {name: air_temp_c_aht20, unit: "degC", source: aht20, valid_range: [-10, 55], disease_role: input_to_fusion}
+  - {name: air_rh_aht20, unit: "%", source: aht20, valid_range: [0, 100], disease_role: input_to_fusion}
+  - {name: air_temp_c_bme280, unit: "degC", source: bme280, valid_range: [-10, 55], disease_role: input_to_fusion}
+  - {name: air_rh_bme280, unit: "%", source: bme280, valid_range: [0, 100], disease_role: input_to_fusion}
+  - {name: air_pressure_hpa, unit: "hPa", source: bme280, valid_range: [800, 1100], disease_role: secondary}
+  - {name: light_lux, unit: "lux", source: veml7700, valid_range: [0, 150000], disease_role: secondary}
+  # estimated altitude (BME280) is NOT ingested: it is a function of pressure. Store site elevation as metadata.
+
+# ─────────────────────────── FUSED (server-side) ───────────────────────────
+fused:
+  - name: air_temp_c
+    unit: degC
+    rule: >-
+      Use the sensor inside a radiation shield at canopy height as primary (set per device in
+      device metadata). The other sensor is used for QC. If the primary fails QC, fall back to the
+      secondary with a quality flag.
+  - name: air_rh
+    unit: "%"
+    rule: same as air_temp_c
+    note: >-
+      The prototype screenshot (2026-08-23) shows AHT20 81.2% vs BME280 71.9% RH at the same time.
+      A 9-point gap exceeds both sensors' accuracy, which points to placement (BME280 self-heating
+      inside an enclosure is a common cause) or calibration. Fix before collecting data for research.
+
+# ─────────────────────────── DERIVED (server-side) ───────────────────────────
+# These stand in for the missing leaf-wetness and rain sensors. Each proxy must be
+# validated in Phase 8 (back-test) and reported with its uncertainty.
+derived:
+  - name: dew_point_c
+    unit: degC
+    formula: "Magnus: g = ln(RH/100) + b*T/(c+T); Td = c*g/(b-g); b=17.62, c=243.12"
+  - name: dew_point_depression_c
+    unit: degC
+    formula: "air_temp_c - dew_point_c"
+  - name: vpd_kpa
+    unit: kPa
+    formula: "es*(1-RH/100); es = 0.6112*exp(17.62*T/(243.12+T))"
+  - name: rh_ge_90_h
+    unit: h
+    formula: "count of hours in window whose hourly mean air_rh >= 90"
+    role: leaf-wetness proxy (RH-threshold method)
+  - name: est_leaf_wet_h
+    unit: h
+    formula: "hours classified wet by a validated leaf-wetness model (RH threshold and/or dew-point depression)"
+    role: leaf-wetness proxy. The model choice is made and validated in Phase 8.
+  - name: is_daylight
+    unit: bool
+    formula: "light_lux > threshold (tune; also cross-check with computed sunrise/sunset)"
+  - name: gdd_day
+    unit: degC-day
+    formula: "max(0, (Tmax + Tmin)/2 - Tbase(crop))"
+    role: growth-stage estimation (see growth_stages.yaml)
+  - name: soil_wetting_event
+    unit: bool
+    formula: "rise in soil_moisture_vwc over 1 h above a threshold (tune per soil)"
+    role: rain/irrigation event proxy
+  - name: pressure_tendency_3h_hpa
+    unit: hPa
+    formula: "air_pressure_hpa(t) - air_pressure_hpa(t-3h)"
+    role: weather-change indicator
+
+# ─────────────────────────── EXTERNAL (by field lat/lon) ───────────────────────────
+external:
+  - name: rain_mm
+    unit: mm
+    source: "weather API (e.g. Open-Meteo, non-commercial; NASA POWER daily for history)"
+    role: replaces the missing rain gauge; also used for forecasts (risk in the next 3-5 days)
+  - name: wind_speed_ms
+    unit: m/s
+    source: weather API
+    role: leaf-wetness models, spore dispersal
+
+# ─────────────────────────── SAMPLING & QC ───────────────────────────
+sampling:
+  device_poll: "air/light every 10 s; soil every 60 s (2 s polling of the soil probe adds no information)"
+  device_aggregate: "1-minute records: mean, min, max, n for each measured variable"
+  upload: "batch every 15 min over HTTPS; buffer to flash while offline and resend with the original timestamps"
+  server_rollups: [hourly, daily]
+qc_flags:
+  - range: value outside valid_range
+  - flatline: identical value for > 30 min (soil) or > 10 min (air)
+  - spike: change per minute beyond a physical limit
+  - disagreement: "|air_temp_c_aht20 - air_temp_c_bme280| > 1.0 degC or |RH diff| > 5 %"
+  - gap: missing minutes in an hour > 20 %

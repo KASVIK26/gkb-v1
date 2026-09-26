@@ -3,6 +3,12 @@
 > **Companion to** [RESEARCH_ROADMAP.md](RESEARCH_ROADMAP.md). Where the two disagree on technology, **this file wins**.
 > **Date:** 2026-09-25 · **Team size:** 1 (owner builds and runs everything)
 > **Target:** a live, public research platform. Researchers use a web dashboard and the API. Farmers use a mobile-friendly app. The IoT and phenomic modules call the API.
+>
+> ⚠️ **Scope correction, 2026-09-25 — read [PHASES.md](PHASES.md) first.** This repo builds **only** the Genomic
+> Knowledge Base — one of four independent products (phenomics on Lightning AI, IoT device with its own Supabase
+> project, this GKB, and a separate mobile+dashboard app). Sections below that describe a shared `ops`/ingest
+> schema, `/v1/ingest`, or farmer-account tables in **this** Supabase project are **superseded** — the IoT device
+> has its own database, not this one. Not yet rewritten pending the open questions in PHASES.md.
 
 ---
 
@@ -11,7 +17,7 @@
 | Layer | Current | **Decision** | Why, in one line |
 |---|---|---|---|
 | Source of truth | The Neo4j graph itself (lost when Aura deleted it) | **Versioned files in git** (`kg/*.tsv`) + releases on Zenodo/R2 | Knowledge survives any database or hosting failure |
-| Serving database | Neo4j AuraDB Free | **PostgreSQL 16+** with **PostGIS**, **pg_trgm**, later **pgvector** (managed: **Neon**) | One boring database covers graph-shaped facts, maps, fuzzy search, sensor data and embeddings |
+| Serving database | Neo4j AuraDB Free | **PostgreSQL** with **PostGIS**, **pg_trgm**, later **pgvector**, managed on **Supabase** (Mumbai region) | One boring database covers graph-shaped facts, maps, fuzzy search, sensor data and embeddings; Supabase adds auth, RLS, realtime and storage you already know |
 | Graph | Neo4j as the engine | Graph as the **data model** (entities + claims + evidence tables), plus **graph exports** for researchers | Keeps the KG research value without running a second production database |
 | Analytics / ML | none | **DuckDB + Parquet** (offline, notebooks, bulk downloads) | Fast, free, zero-ops |
 | API | Cloudflare Pages Functions (JS) → Neo4j HTTPS Query API | **FastAPI (Python 3.12)** in a container on **Google Cloud Run**, with **Cloudflare** in front | One language shared with the pipeline; auto OpenAPI docs; one risk engine instead of a JS port |
@@ -23,7 +29,7 @@
 | Pipeline / cron | manual scripts | `agrihub` CLI; heavy genome jobs run locally; scheduled jobs in **GitHub Actions** | Free, versioned, reproducible |
 | Internal curation tool | CLI `input()` loop | **Streamlit** review app, behind **Cloudflare Access** | Fast to build; not public |
 | LLM | Groq via urllib, unused Gemini SDK, OpenRouter key | One provider-agnostic client (`httpx`); model ID and prompt version pinned in every evidence row | Reproducibility; free-tier flexibility |
-| Auth | none | Public read (rate-limited) · **API keys** for researchers · Cloudflare Access for admin/review | The minimum that is safe |
+| Auth | none | **Supabase Auth** for dashboard/app users (researchers sign in; farmers anonymous, then phone) · public read endpoints rate-limited · **API keys** for programmatic research access · Cloudflare Access for admin/review | One identity system; FastAPI verifies Supabase JWTs |
 | Observability | none | **Sentry** (errors) · Cloud Run logs · uptime monitor · Cloudflare Web Analytics | Free tiers are enough |
 | Python | 3.14 locally, 3.11/3.12 in CI | **3.12 everywhere** (Docker image, CI, local via `uv`) | Stop "works on my machine" |
 
@@ -92,22 +98,57 @@
 
 **Escape hatch:** because the graph is a build artifact, you can later add Neo4j as a **read-only replica** built from the same release files, without redesigning anything.
 
-### ADR-2: Why Neon for managed Postgres
+### ADR-2: Supabase for managed Postgres (decided 2026-09-25, replaces the earlier Neon choice)
 
-| Option | Pros | Cons | Verdict |
-|---|---|---|---|
-| **Neon** | Free tier suspends compute but **does not delete**; resumes in about a second; **database branching** (a copy of the DB per PR or release); PostGIS, pg_trgm, pgvector supported; serverless driver | Free storage is small (~0.5 GB, enough for the KG, not for years of sensor data); cold resume adds latency to the first query | ✅ **Default** |
-| Supabase | Postgres + auth + storage + auto REST API | **Free projects pause after ~1 week idle** (the same failure mode as Aura); Pro is ~$25/month | Good if you later want its auth/storage; otherwise not needed |
-| Institute VM (IIT Indore) or a cheap VPS running Postgres in Docker | Cheapest per GB; full control; institutional credibility and longevity | **You** handle backups, updates and security; one machine is a single point of failure | ✅ Option B (see §6) |
-| Cloud SQL / RDS | Enterprise-grade | Costly for this scale | ❌ |
+**Why Supabase:** you have shipped several full-stack projects on it. For a one-person team, familiarity beats small
+technical differences. It is still plain PostgreSQL, so everything in ADR-1 holds. It also adds pieces this
+project needs anyway:
 
-*Check current free-tier limits before committing. Providers change them often, and you should record the terms you relied on in `docs/interfaces.md`.*
+| Supabase feature | Used for |
+|---|---|
+| Postgres + `postgis`, `pg_trgm`, `vector` extensions | KG release schemas, zone maps, fuzzy search, later semantic search |
+| **Auth** (email, OAuth, phone OTP, anonymous sign-in) | Researcher accounts on the dashboard; farmers can start anonymously and link a phone later |
+| **Row Level Security + auto REST (PostgREST) via `supabase-js`** | User-owned app data (profiles, fields, devices, alerts, saved searches) without writing CRUD endpoints |
+| **Realtime** | Live device readings and new risk alerts pushed to the dashboard and PWA |
+| **Storage** (private buckets with RLS) | Farmer crop photos for the phenomic model (consented) |
+| **`pg_cron`** | Hourly sensor rollups, refreshing materialised views, retention jobs |
+| **Supabase CLI** migrations and local stack | Versioned SQL migrations in `supabase/migrations/`; `supabase start` for a local copy (needs Docker) |
+
+**What stays outside Supabase, and why:**
+- **FastAPI stays the public, versioned API** (`/v1` KG queries, `/v1/risk`, `/v1/ingest`, `/v1/features`). Researchers need
+  a stable contract that doesn't change when table layouts change, plus the Python risk engine and shared pydantic
+  models. FastAPI verifies Supabase JWTs for signed-in endpoints, so there is one identity system.
+- **Edge Functions:** not used. They would add a third runtime (Deno/TypeScript) to maintain. Use at most one for a webhook if ever needed.
+- **Cloudflare R2** for large public files (KG releases, raw PDFs, genome derivatives): zero egress fees. Supabase Storage is only for private user uploads.
+
+**Known limits and how the design handles them:**
+
+| Limit (verify current terms) | Mitigation |
+|---|---|
+| **Free projects pause after about 1 week without activity** (the Aura failure mode) | (1) The KG is rebuilt from `kg/` files in minutes, so a pause or loss is never fatal. (2) During development, a scheduled GitHub Action does real work weekly (CQ tests against staging), which keeps the project active. (3) **Upgrade production to Pro before public launch.** |
+| Free database size is small (~500 MB) | Full reference-gene table stays in DuckDB/Parquet; only NLR/candidate genes go in Postgres. Raw 1-minute sensor data is kept ~90 days, then archived to Parquet on R2; hourly rollups stay in Postgres. |
+| Database branching is a paid feature | Two projects instead: `agrihub-staging` (free) and `agrihub-prod` (Pro at launch). KG releases load into a new schema and switch atomically (ADR-7), so no branch is needed for that. |
+| Direct DB host is IPv6-only unless you buy the IPv4 add-on | Use the **Supavisor pooler** strings: *transaction mode* (port 6543) for the API on Cloud Run; *session mode* (port 5432) for migrations and `COPY` bulk loads from IPv4-only networks (home ISP, GitHub Actions). |
+
+**Setup (Phase 2, task 2.0).** You create the account and projects yourself, and keep keys out of chat and git.
+
+| Setting | Choice |
+|---|---|
+| Projects | `agrihub-staging` (free, use for development now) · `agrihub-prod` (create near launch, Pro) |
+| Region | **South Asia (Mumbai)**, closest to Indore. Put Cloud Run in `asia-south1` (Mumbai) too. |
+| Extensions | enable `postgis`, `pg_trgm` now (Supabase installs them in the `extensions` schema); `vector` later |
+| Schemas | `kg_<release>` + `kg_current` views (KG, **not exposed** to PostgREST) · `ops` (ingest, not exposed) · `public` (app tables, **RLS on every table**) · `api` (views you choose to expose, optional) |
+| Roles | Supabase built-ins (`anon`, `authenticated`, `service_role`) for app access · custom `pipeline_rw` (loader) and `api_ro` (FastAPI) roles for direct SQL |
+| Keys | publishable/anon key → frontend only · secret/service-role key → server only, **never** in the frontend or git |
+| Connection strings | `DATABASE_URL` = transaction pooler (API) · `DATABASE_URL_DIRECT` = session pooler (migrations, bulk load) |
+| Local development | `supabase start` (Docker) for a full local copy, **or** work directly against `agrihub-staging`. Unit and CQ tests use a throwaway local Postgres, and CI uses a Postgres service container, so tests never touch Supabase. |
+| Backups | Supabase daily backups (Pro) + nightly `pg_dump` of prod to R2 (GitHub Action) + canonical `kg/` files in git |
 
 ### ADR-3: Why a FastAPI container instead of Cloudflare Functions
 
 - **One language.** The same `pydantic` models (from `curator/model/`), normalisers, **risk engine** and confidence scorer are imported by the pipeline *and* the API. Without this you would maintain the risk engine twice (the JS port in the roadmap's Phase 8.4 is no longer needed).
 - **OpenAPI for free.** Interactive docs at `/docs` for researchers; typed TypeScript client generated for the dashboard (`openapi-typescript`); property-based API testing with **Schemathesis**.
-- **Mature DB access** (psycopg 3 / asyncpg with connection pooling) and **Alembic** migrations.
+- **Mature DB access** (psycopg 3 / asyncpg through the Supabase transaction pooler). Migrations for app/ops tables use the **Supabase CLI** (`supabase/migrations/*.sql`); KG release schemas are created by the loader.
 - **Cloud Run** scales to zero, has a generous free request allowance, deploys from a Dockerfile, and holds secrets in Secret Manager. At launch, set **min-instances = 1** to remove cold starts for farmers (a small monthly cost).
 - **Keep Cloudflare in front** (DNS, TLS, CDN caching of GET responses, WAF, rate-limiting rules). Most farmer reads (variety/disease pages) are cacheable for minutes to hours, so the backend stays quiet and cheap.
 
@@ -128,14 +169,14 @@
 - Store readings in a `sensor_reading` table **partitioned by month** with a BRIN index on `ts`, and a rollup table (hourly aggregates) feeding the risk engine.
 - The risk engine runs **on ingest** (or hourly via Cloud Scheduler) and writes `field_risk` rows, which drive app notifications.
 - Skip MQTT for now. Add a managed broker only if you need device commands or sub-minute data.
-- When sensor data outgrows the free database, move raw readings to a paid Neon tier, TimescaleDB, or Parquet on R2 (with the hourly rollups kept in Postgres).
+- Keep raw 1-minute readings ~90 days in Postgres, then archive them to Parquet on R2 (a `pg_cron` or GitHub Action job). Hourly rollups stay in Postgres. **Supabase Realtime** pushes new readings and alerts to the dashboard.
 
 ### ADR-6: Phenomic model serving
 
 - Export the trained model to **ONNX** (quantised INT8 where accuracy allows).
 - Preferred: **on-device inference** in the PWA (ONNX Runtime Web). It works offline, costs nothing to serve, and keeps farmer photos private.
 - Fallback: a CPU inference container on Cloud Run (`POST /v1/diagnose`), which fuses the model's probabilities with the **KB prior** from `/v1/features`.
-- Store images only with consent, in R2, under a data policy.
+- Store images only with consent, in a **private Supabase Storage bucket** with RLS (owner-only), under a data policy.
 
 ### ADR-7: Knowledge release model ("blue/green data")
 
@@ -159,7 +200,8 @@
                │   fetch (typed client)    │           app (Cloud Run)       images (consented)
                └──────────────────────────►│                  │
                                            ▼                  ▼
-                                  Neon PostgreSQL (prod)  ◄── pipeline writes (separate role)
+                                  Supabase PostgreSQL (Mumbai) ◄── pipeline writes (pipeline_rw)
+                                  + Auth · RLS/PostgREST · Realtime · Storage · pg_cron
                                   PostGIS · pg_trgm · jsonb · partitions · (pgvector)
                                   schemas: kg_<release> + kg_current views, ops (keys, devices,
                                   sensor readings, field risk), audit
@@ -173,9 +215,9 @@
 
 | Env | Database | API | Frontend |
 |---|---|---|---|
-| local | Docker `postgis/postgis:16` | `uvicorn --reload` | `vite dev` |
-| preview/staging | **Neon branch** per PR or release candidate | Cloud Run `agrihub-api-staging` | Pages preview URL |
-| production | Neon main | Cloud Run `agrihub-api` (min 1 instance at launch) | Pages production + custom domain |
+| local | `supabase start` (Docker) or `agrihub-staging`; tests use a throwaway Postgres | `uvicorn --reload` | `vite dev` |
+| staging | Supabase project `agrihub-staging` | Cloud Run `agrihub-api-staging` | Pages preview URL |
+| production | Supabase project `agrihub-prod` (Pro) | Cloud Run `agrihub-api` (min 1 instance at launch) | Pages production + custom domain |
 
 ---
 
@@ -251,7 +293,7 @@ The competency questions from the roadmap become **SQL** (tested in `tests/cq/`)
 | Cloudflare Pages + DNS + CDN + WAF + Access (≤ 50 users) | Free | Free |
 | Cloudflare R2 | Free tier (~10 GB, no egress fees) | A few $ as data grows |
 | Cloud Run (API + review app) | Free tier | ~$5–15/month with min-instances = 1 |
-| Neon Postgres | Free | ~$19–25/month (paid tier: more storage, longer point-in-time restore) |
+| Supabase | Free (staging) | ~$25/month Pro for prod (no pausing, daily backups, more storage; includes a small compute credit) |
 | Sentry, uptime monitor, GitHub Actions (public repo) | Free | Free |
 | Domain | — | ~$10–15/year |
 | **Total** | **$0** | **~$25–40/month** |
@@ -294,7 +336,8 @@ The competency questions from the roadmap become **SQL** (tested in `tests/cq/`)
 - API keys and device keys stored as **hashes**; per-key rate limits (Cloudflare rules + `slowapi`).
 - CORS allowlist (your domains only). HTTPS everywhere. Secrets live in GitHub Secrets and Cloud Run Secret Manager.
 - `pre-commit` with `detect-secrets`, `ruff`, `mypy`; Dependabot for dependencies.
-- **Backups:** Neon point-in-time restore, plus a nightly `pg_dump` to R2 (keep 30 days), plus canonical files in git/Zenodo. **Test a restore every quarter.**
+- **Backups:** Supabase daily backups (Pro), plus a nightly `pg_dump` to R2 (keep 30 days), plus canonical files in git/Zenodo. **Test a restore every quarter.**
+- **Supabase specifics:** RLS enabled on every `public` table (no exceptions); KG and ops schemas not exposed to PostgREST; the secret/service-role key only in server-side secrets.
 - **Farmer data:** collect the minimum (field location at village/district precision, variety, sowing date). Get consent. Publish a privacy notice aligned with India's DPDP Act. No personal data in logs.
 - **Advice disclaimer:** risk flags are decision support, and chemical advice comes only from official Package-of-Practices sources with a citation shown.
 - **Licences:** data CC-BY 4.0 (respecting source licences), code MIT/Apache-2.0, `CITATION.cff`.
@@ -307,7 +350,7 @@ The competency questions from the roadmap become **SQL** (tested in `tests/cq/`)
 |---|---|
 | Python env and locking | **uv** (`uv sync`, `uv.lock`), Python 3.12 |
 | Lint / format / types | ruff, mypy (strict on `curator/model`, `api/`) |
-| DB migrations | Alembic (ops schema); the release loader creates the `kg_*` schemas |
+| DB migrations | Supabase CLI (`supabase migration new`, `supabase db push`) for `public`/`ops`; the release loader creates the `kg_*` schemas |
 | Tests | pytest, pytest-postgresql or Testcontainers, Schemathesis (API), Playwright (a few end-to-end flows) |
 | Frontend | pnpm, Vite, TypeScript strict, ESLint, Vitest |
 | CI/CD | GitHub Actions: lint → test → build image → deploy staging → manual approval → prod |
@@ -320,11 +363,11 @@ The competency questions from the roadmap become **SQL** (tested in `tests/cq/`)
 
 | Step | What | Maps to roadmap |
 |---|---|---|
-| M1 | Pin Python 3.12 with `uv`; drop `gffutils` and `google-generativeai`; add FastAPI, psycopg, SQLAlchemy core, Alembic, pydantic, duckdb | Phase 0 |
-| M2 | `docker-compose.yml` with `postgis/postgis:16`; Alembic base migration for the `ops` schema | Phase 2 |
+| M1 | Pin Python 3.12 with `uv`; drop `gffutils` and `google-generativeai`; add FastAPI, psycopg, pydantic, duckdb, supabase CLI | Phase 0 |
+| M2 | ✅ `supabase init` done (`supabase/` scaffold + `migrations/20260925081644_enable_extensions.sql`, run manually in the SQL Editor). Remaining: migration for the `ops` and `public` app tables (with RLS) | Phase 2 |
 | M3 | Replace the Neo4j loader with the **Postgres release loader** (schema-per-release, COPY from TSV, materialised views, `kg_current` repoint). Delete `curator/db.py`, `load_genes.py`, `seed_loader.py`, `init_constraints.py`. | Phase 2 (tasks 2.3/2.4) |
 | M4 | New `api/` package (FastAPI) importing `curator.model` and `curator.risk`; implement `/v1/stats`, `/v1/search`, `/v1/varieties/{id}` first | Phase 10 (start early) |
-| M5 | Dockerfile + Cloud Run staging deploy via GitHub Actions; Neon project + staging branch; Cloudflare DNS `api.` subdomain | Phase 2/10 |
+| M5 | Dockerfile + Cloud Run staging deploy (asia-south1) via GitHub Actions; Supabase `agrihub-staging` project; Cloudflare DNS `api.` subdomain | Phase 2/10 |
 | M6 | Delete `functions/api/*.js` and `wrangler.toml` once the dashboard calls the new API | Phase 10 |
 | M7 | New `web/` (React/Vite/TS PWA) replacing `public/`; generated API client; research profile pages first, farmer pages second | Phase 10 |
 | M8 | `/v1/ingest` + `ops.sensor_*` + risk job | Phase 8/11 |
@@ -343,9 +386,10 @@ gkb-v1/
 ├── api/               (FastAPI app: routers/, deps.py, settings.py; imports curator.model & curator.risk)
 ├── web/               (React + Vite + TS PWA: src/farm, src/research, src/api-client generated)
 ├── tools/review_app/  (Streamlit, internal)
-├── db/                (alembic/ for ops schema; release_loader.sql; views/)
+├── db/                (KG release schema DDL, CQ queries, release loader SQL)
 ├── kg/                (canonical versioned knowledge files + manifest)
 ├── eval/  analysis/  tests/  docs/
-├── docker-compose.yml  Dockerfile  pyproject.toml  uv.lock
+├── supabase/          (config.toml, migrations/ for public + ops schemas, seed.sql)
+├── Dockerfile  pyproject.toml  uv.lock
 └── .github/workflows/ (ci.yml, deploy.yml, kg-release.yml, lit-refresh.yml, backup.yml)
 ```

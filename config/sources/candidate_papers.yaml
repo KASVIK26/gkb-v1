@@ -1,0 +1,276 @@
+# Verified candidate paper bibliography, one entry per disease (config/vocab/diseases.yaml IDs).
+# Built 2026-09-26 by targeted search + identity verification (Europe PMC lookup by PMID/PMCID,
+# or a direct search-engine hit on the real title/journal/PMID/DOI together) for EVERY entry below
+# -- never typed from memory. This directly replaces the pattern that failed in
+# scripts/fetch_papers.py's old CURATED_PAPERS list (RESEARCH_ROADMAP.md Appendix B): that list's
+# PMIDs were never checked and pointed at unrelated papers.
+#
+# What this file IS: a vetted reading list -- real papers, on the right pathogen, with a short
+# factual note on what each says about (a) environmental conditions and (b) management, so you can
+# sanity-check them before anything is extracted.
+# What this file is NOT: KG claims. `key_findings` below are my summary for triage, not a
+# verbatim-quoted, grounded Evidence record -- turning these into VARIETY_REACTION /
+# DISEASE_ENV_TRIGGER / DISEASE_MANAGED_BY claims (with the actual quote checked against full
+# text) is Phase 5 work, done through curator/extractors, not by copying key_findings into kg/curated/.
+#
+# verified_via:
+#   europepmc_id     - looked up by its own PMID/PMCID on Europe PMC, title matched
+#   europepmc_title  - looked up by exact title on Europe PMC, PMID/DOI matched
+#   search_result    - title/journal/identifier confirmed directly in live search-engine results
+#                       (no PMID exists, e.g. an extension publication) -- weaker than the above,
+#                       flagged explicitly, never silently treated as peer-reviewed
+#
+# source_type: peer_reviewed_primary | peer_reviewed_review | extension_publication
+#
+# Coverage: all 17 in-scope diseases have at least one entry. Depth varies with how much the
+# literature itself covers each disease -- that unevenness is real, not a search gap (e.g.
+# chickpea rust has genuinely little forecasting literature compared to wheat rusts).
+
+schema_version: 1
+
+wheat:
+  dis:wheat:stripe_rust:
+    - pmid: "42111728"
+      title: "A weather-informed decision tree framework for predicting stripe rust outbreaks in wheat"
+      journal: "Frontiers in Plant Science"
+      year: 2026
+      authors: "Anand S, Sandhu SK, Biswas B, Tak PS"
+      url: https://pubmed.ncbi.nlm.nih.gov/42111728/
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      key_findings:
+        environmental: >-
+          Decision-tree model built on weather-driven predictors; a related Moroccan modelling study
+          (unverified separately -- flagged, not cited on its own) reports RH > 92% and 4-16 degC for
+          >= 4 continuous hours, rainfall <= 0.1 mm, as the optimum infection window.
+        management: "Not the focus of this paper (forecasting model); pair with fungicide-timing sources below."
+
+  dis:wheat:leaf_rust:
+    - pmid: "38952372"
+      title: "Genotypes, epidemiological variables and fungicides application associated with wheat leaf rust development and grain yield"
+      journal: Heliyon
+      year: 2024
+      authors: "Aatif HM, Saeed S, Ali Y, et al."
+      url: https://pubmed.ncbi.nlm.nih.gov/38952372/
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      key_findings:
+        environmental: "Infection needs <25 degC (optimum 15-20 degC) and >= 3 h leaf wetness/dew; epidemics follow a mild winter + warm wet spring."
+        management: "Single/double fungicide sprays at Zadoks 3, 4.3, 5.4; prothioconazole was the most effective single choice; protecting the flag leaf is the priority target."
+
+  dis:wheat:stem_rust:
+    - doi: 10.1111/ppa.70203
+      title: "Strengthening Predictive Models for Wheat Stem Rust Infection Risk in a Changing Climate: Gaps and Opportunities"
+      journal: "Plant Pathology"
+      year: 2026
+      authors: "Morier-Gxoyiya C, Bebber DP, Saunders DGO"
+      url: https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.70203
+      source_type: peer_reviewed_review
+      verified_via: search_result
+      note: "No PMID returned by Europe PMC (very recent); DOI confirmed directly on the publisher site."
+      key_findings:
+        environmental: "Reviews existing weather-driven infection-risk models and their data gaps; general optimum ~10-15 degC with intermittent rain/dew (per related sources)."
+        management: "DMI fungicides (tebuconazole, propiconazole) effective but costly and resistance-prone; global rust surveillance network is the primary early-warning tool."
+
+  dis:wheat:powdery_mildew:
+    - pmid: "30699700"
+      title: "Development of Weather- and Airborne Inoculum-Based Models to Describe Disease Severity of Wheat Powdery Mildew"
+      journal: "Plant Disease"
+      year: 2015
+      authors: "Cao X, Yao D, Xu X, et al."
+      url: https://pubmed.ncbi.nlm.nih.gov/30699700/
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      key_findings:
+        environmental: "Optimum 15-21 degC with RH > 70%; no free water needed (unlike the rusts); declines fast above ~22-24 degC with RH < 85%."
+        management: "Short (7-10 day) latent period gives high epidemic potential; timing fungicide ahead of that window matters more than for slower diseases."
+
+  dis:wheat:fusarium_head_blight:
+    - doi: 10.1111/ppa.13839
+      title: "Weather-based models for forecasting Fusarium head blight risks in wheat and barley: A review"
+      journal: "Plant Pathology"
+      year: 2024
+      authors: "Matengu TT, Bullock PR, Mkhabela MS, et al."
+      url: https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.13839
+      source_type: peer_reviewed_review
+      verified_via: search_result
+      note: "No PMID returned by Europe PMC; DOI confirmed directly on the publisher site."
+      key_findings:
+        environmental: "Models use temperature/RH/rainfall in 5-15 day windows pre- and post-anthesis; infection tied to head-wetting from simultaneous rain + high RH near anthesis."
+        management: "Fungicide must be applied at anthesis or within 5 days after -- the single highest-leverage timing fact for an IoT alert on this disease."
+
+soybean:
+  dis:soybean:rust:
+    - pmid: "32716274"
+      title: "Performance and Profitability of Rain-Based Thresholds for Timing Fungicide Applications in Soybean Rust Control"
+      journal: "Plant Disease"
+      year: 2020
+      authors: "Beruski GC, Del Ponte EM, Pereira AB, et al."
+      url: https://pubmed.ncbi.nlm.nih.gov/32716274/
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      key_findings:
+        environmental: "Infection at 10-27.5 degC (optimum 20-23 degC) with >= 6 h dew/leaf wetness."
+        management: "Rain-based action thresholds for fungicide timing outperform calendar-based spraying in both efficacy and cost."
+
+  dis:soybean:charcoal_rot:
+    - pmid: "42535844"
+      title: "Economic Impact, Epidemiology and Environmental Drivers of Charcoal Rot of Soybean"
+      journal: Phytopathology
+      year: 2026
+      authors: "Vaghefi N, Thorne BJ, Blanch SG, et al."
+      url: https://pubmed.ncbi.nlm.nih.gov/42535844/
+      source_type: peer_reviewed_review
+      verified_via: europepmc_id
+      key_findings:
+        environmental: "Thermophilic, low-moisture pathogen; disease severity rises at 28-35 degC soil/air temperature combined with low rainfall/soil moisture deficit -- directly matches the soil-probe data AgriNode already measures."
+        management: "Resistant cultivars are the most promising lever; cultural practices (irrigation scheduling to avoid moisture stress) are the main non-genetic control."
+
+  dis:soybean:frogeye_leaf_spot:
+    - pmid: "41957394"
+      title: "Modeling the environment-related risk of frogeye leaf spot (Cercospora sojina) in soybean across the United States"
+      journal: "Scientific Reports"
+      year: 2026
+      authors: "Gonzalez-Acuna JF, Allen TW, Bish MD, et al."
+      url: https://pubmed.ncbi.nlm.nih.gov/41957394/
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      key_findings:
+        environmental: "Best model: 30-day moving average of hours with RH >= 80% (peak risk at 15-20 h/day) combined with max temperature 24-36 degC."
+        management: "QoI-fungicide resistance (Cytochrome b G143A mutation) is now widespread; Rcs-gene resistant cultivars + rotation/tillage are the sustainable path; spray window is growth stage R3-R5."
+
+  dis:soybean:anthracnose:
+    - pmid: "33609073"
+      title: "Soybean anthracnose caused by Colletotrichum species: Current status and future prospects"
+      journal: "Molecular Plant Pathology"
+      year: 2021
+      authors: "Boufleur TR, Ciampi-Guillardi M, Tikami I, et al."
+      doi: 10.1111/mpp.13036
+      url: https://pubmed.ncbi.nlm.nih.gov/33609073/
+      source_type: peer_reviewed_review
+      verified_via: europepmc_title
+      key_findings:
+        environmental: "Warm temperatures with >= 12 h of rain/dew/fog are the optimum infection conditions; seed-borne primary inoculum, so early-season warm-wet spells matter most."
+        management: "Chemical seed treatment is the main control; fungicide sensitivity is declining, and phosphite-based seed treatments show promise as an alternative."
+
+  dis:soybean:pod_stem_blight:
+    - title: "An Overview of Pod and Stem Blight and Diaporthe Seed Decay"
+      publisher: "Crop Protection Network"
+      year: null
+      url: https://cropprotectionnetwork.org/publications/an-overview-of-pod-and-stem-blight-and-phomopsis-seed-decay
+      source_type: extension_publication
+      verified_via: search_result
+      note: >-
+        Not a peer-reviewed journal article -- a US land-grant-university-consortium extension
+        publication, correctly labelled as such. No PMID exists for this type of document.
+      key_findings:
+        environmental: "Warm humid/wet weather before maturity, and any delay in harvest during warm wet weather, both drive incidence and severity."
+        management: "Non-legume crop rotation to decay infested residue; timely harvest is the single most controllable management lever."
+    - title: "Evaluation of Commercial Soybean Cultivars for Reaction to Phomopsis Seed Decay"
+      journal: "Plant Disease"
+      doi: 10.1094/PDIS-02-17-0204-RE
+      source_type: peer_reviewed_primary
+      verified_via: search_result
+      note: "PMID not confirmed via Europe PMC in this pass; DOI confirmed on the publisher site. Re-verify before treating as fully checked."
+      key_findings:
+        environmental: "Late-season rainfall differences between otherwise-similar years were the main driver of year-to-year incidence differences."
+        management: "Cultivar screening data for resistance to Phomopsis seed decay specifically."
+
+  dis:soybean:rhizoctonia_root_rot:
+    - doi: 10.1111/ppa.12733
+      title: "Rhizoctonia solani: taxonomy, population biology and management of rhizoctonia seedling disease of soybean"
+      journal: "Plant Pathology"
+      year: 2018
+      authors: "Ajayi-Oyetunde OO, Bradley CA"
+      url: https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.12733
+      source_type: peer_reviewed_review
+      verified_via: search_result
+      note: "No PMID returned by Europe PMC; DOI confirmed directly on the publisher site."
+      key_findings:
+        environmental: "Unusually broad tolerance: causes root rot across 20-32 degC and from 25% to 100% soil moisture-holding capacity -- wider than most soybean seedling pathogens, so a narrow trigger window is not appropriate for this one."
+        management: "Few resistant genotypes exist; management leans on integrated cultural + chemical + biological control and seed treatment."
+
+  dis:soybean:bacterial_pustule:
+    - doi: 10.1111/ppa.70000
+      title: "Bacterial Pustule Disease in Soybean: Occurrence, Host-Pathogen Interactions and Management"
+      journal: "Plant Pathology"
+      year: 2025
+      authors: "Wang S, Jiang Y, Huo Z, et al."
+      url: https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.70000
+      source_type: peer_reviewed_review
+      verified_via: search_result
+      note: "No PMID returned by Europe PMC (very recent); DOI confirmed directly on the publisher site."
+      key_findings:
+        environmental: "Warm (30-33 degC) wet weather with RH > 70%; spread by rain splash and wind-driven rain; requires leaf wetness for infection; cultivation on wet foliage spreads it further."
+        management: "Resistant cultivars + disease-free seed + tillage to decompose infested residue; avoid field work when foliage is wet."
+
+  dis:soybean:mosaic_virus:
+    - pmid: "30780699"
+      title: "Similarities in Seed and Aphid Transmission Among Soybean mosaic virus Isolates"
+      journal: "Plant Disease"
+      year: 2007
+      authors: "Domier LL, Steinlage TA, Hobbs HA, et al."
+      doi: 10.1094/pdis-91-5-0546
+      url: https://pubmed.ncbi.nlm.nih.gov/30780699/
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      key_findings:
+        environmental: "Not weather-driven in the usual sense -- aphid vector activity (temperature-dependent) and seed transmission rate (up to 75%, cultivar/strain dependent) are the drivers, matching this disease's 'indirect' sensor coupling in docs/scope.md."
+        management: "Virus-free certified seed + avoiding late planting (reduces aphid-transmission window); no fully SMV-resistant commercial cultivars exist yet."
+
+chickpea:
+  dis:chickpea:fusarium_wilt:
+    - pmid: "18943575"
+      title: "Quantitative Modeling of the Effects of Temperature and Inoculum Density of Fusarium oxysporum f. sp. ciceris Races 0 and 5 on Development of Fusarium Wilt in Chickpea Cultivars"
+      journal: Phytopathology
+      year: 2007
+      authors: "Navas-Cortes JA, Landa BB, Mendez-Rodriguez MA, Jimenez-Diaz RM"
+      url: https://pubmed.ncbi.nlm.nih.gov/18943575/
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      key_findings:
+        environmental: "Race 5 optimum 22-26 degC soil temperature, race 0 optimum 24-28 degC; a mere 3 degC rise (24->27 degC) can flip a cultivar from highly resistant to highly susceptible -- an unusually sharp, quantified threshold worth prioritising for the trigger library."
+        management: "Resistant cultivars matched to the locally prevalent race; soil solarization (2 weeks), organic manure, adjusted sowing date."
+
+  dis:chickpea:dry_root_rot:
+    - pmid: "33753791"
+      title: "Low soil moisture predisposes field-grown chickpea plants to dry root rot disease: evidence from simulation modeling and correlation analysis"
+      journal: "Scientific Reports"
+      year: 2021
+      authors: "Sinha R, Irulappan V, Patil BS, et al."
+      url: https://pubmed.ncbi.nlm.nih.gov/33753791/
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      key_findings:
+        environmental: "Optimal disease progression at soil temperature ~35 degC and soil moisture content <= 60% -- India survey data (separate source) puts MP among the emerging hotspots, directly relevant to the project's Malwa focus."
+        management: "No robust resistant sources identified yet in the literature reviewed; management is largely agronomic (irrigation scheduling to avoid moisture stress at flowering/podding)."
+
+  dis:chickpea:collar_rot:
+    - pmid: "30158943"
+      title: "Exploring Combined Effect of Abiotic (Soil Moisture) and Biotic (Sclerotium rolfsii Sacc.) Stress on Collar Rot Development in Chickpea"
+      journal: "Frontiers in Plant Science"
+      year: 2018
+      authors: "Tarafdar A, Rani TS, Chandran USS, et al."
+      url: https://pubmed.ncbi.nlm.nih.gov/30158943/
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      key_findings:
+        environmental: "Peak incidence at 80% soil moisture content, 25-30 degC soil temperature -- the opposite moisture regime from dry root rot/wilt above, worth double-checking the risk engine distinguishes them correctly."
+        management: "Chemical control is difficult; low organic matter and good drainage reduce risk; seedling stage (first ~6 weeks) is the vulnerable window per docs scope."
+
+  dis:chickpea:rust:
+    - title: "Field Diagnosis of Chickpea Diseases and their Control"
+      publisher: ICRISAT
+      year: 2012
+      url: https://oar.icrisat.org/6601/1/InfoBulletin_28-ICRISAT_2012.pdf
+      source_type: extension_publication
+      verified_via: search_result
+      note: >-
+        Chickpea rust has noticeably thinner forecasting/epidemiology literature than the other 16
+        diseases -- consistent with it being a comparatively minor chickpea disease, not a search
+        gap. This ICRISAT information bulletin is the most concrete source found; a specific
+        peer-reviewed weather-threshold paper for Uromyces ciceris-arietini was not located in this
+        pass and should not be assumed to exist without another look.
+      key_findings:
+        environmental: "Cool, moist weather (~20-25 degC) favours development, though free rain is not essential; symptoms usually appear later in the season."
+        management: "Fungicide control has historically had limited success; resistant-cultivar development and early sowing are the primary recommended strategies."

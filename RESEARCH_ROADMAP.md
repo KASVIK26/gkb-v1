@@ -2,8 +2,13 @@
 
 > **Status:** This is the planning document for the restart. It replaces the task lists in the old `PROJECT.md`, `FUTURE_VISION.md`, `NEXT_PHASE_TASKS.md` and `SETUP_GUIDE.md`, which are now in `docs/archive/`.
 > **Audit date:** 2026-09-25
-> **Tech stack:** see [TECH_STACK.md](TECH_STACK.md). It supersedes the Neo4j/Cloudflare-Functions choices below. Serving DB = PostgreSQL (Neon), API = FastAPI on Cloud Run, frontend = React/Vite PWA. The *graph data model* in §4 is unchanged; it is stored as entity/claim/evidence tables.
-> **Scope:** Genomic leg of the three-module AgriHub system (Phenomic model + IoT device + Genomic KB) for **wheat, soybean, chickpea**, focused on disease and yield prediction.
+> **Tech stack:** see [TECH_STACK.md](TECH_STACK.md). It supersedes the Neo4j/Cloudflare-Functions choices below. Serving DB = PostgreSQL on Supabase, API = FastAPI on Cloud Run, frontend = React/Vite PWA. The *graph data model* in §4 is unchanged; it is stored as entity/claim/evidence tables.
+> **Scope:** Genomic leg of the four-part AgriHub system (Phenomic model + IoT device + Genomic KB + mobile/dashboard app) for **wheat, soybean, chickpea**, focused on disease and yield prediction.
+>
+> ⚠️ **Scope correction, 2026-09-25 — read [PHASES.md](PHASES.md) first.** This repo is **only** the Genomic
+> Knowledge Base. The IoT device has its **own separate Supabase project** for sensor logs — it is not stored
+> here. Phase 8 and Phase 11 below (written when a shared backend was assumed) need rescoping once the open
+> questions in PHASES.md are answered; treat their endpoint/schema details as provisional.
 
 ---
 
@@ -101,7 +106,7 @@ Check every row against the *Catalogue of Gene Symbols for Wheat*, SoyBase, and 
 
 | Seed claim | Problem | Correct / action |
 |---|---|---|
-| Sr33 on 1B, "APR", carried by Chinese Spring | Sr33 is on **1DL** (from *Ae. tauschii*). It is an all-stage NLR, and Chinese Spring does not carry it. | Fix chromosome, type and variety |
+| Sr33 on 1B, "APR", carried by Chinese Spring | Sr33 is on **1DS** (from *Ae. tauschii*; Periyannan et al. 2013, *Science*, PMID 23811228). It is an all-stage NLR, and Chinese Spring does not carry it. | Fix chromosome, type and variety — verified and loaded correctly in `kg/curated/wheat_seed_genes.yaml` |
 | Sr35 on "9B" | **Wheat has no chromosome 9.** Sr35 is on **3AL** (from *T. monococcum*). | Fix |
 | Sr36 on 2D | Sr36 is on **2BS** (from *T. timopheevii*) | Fix |
 | Sr39 on 7B, "APR" | On **2B** (*Ae. speltoides* translocation), all-stage | Fix |
@@ -232,7 +237,7 @@ QTL positions in papers use different assemblies: CS RefSeq v1.0 vs v2.1, Wm82.a
                    ┌───────────────────────┼─────────────────────────┐
                    ▼                       ▼                         ▼
           PostgreSQL + PostGIS       DuckDB/Parquet             Release bundle
-          (Neon; schema per release) (analytics, ML)            (Zenodo DOI, KGX TSV)
+          (Supabase; schema/release)  (analytics, ML)            (Zenodo DOI, KGX TSV)
                    │
                    ▼
    FastAPI /v1 on Cloud Run (Cloudflare in front): /search /varieties /risk /features /claims /stats
@@ -250,7 +255,7 @@ QTL positions in papers use different assemblies: CS RefSeq v1.0 vs v2.1, Wm82.a
 4. **Structured sources first, LLM second.** Use the LLM only where no structured source exists, and always with grounding.
 5. **Everything is versioned:** dataset checksums, prompt versions, model IDs, ontology versions, KG release tags.
 
-**Recommended stack (free):** Python 3.12, `pydantic` v2 (schemas), `httpx` + `tenacity` (HTTP/retry), `lxml` (JATS XML), `duckdb` + `pyarrow` (staging), `rapidfuzz` (grounding), `typer` (CLI), `psycopg` + `fastapi` (serving), `pronto` (ontologies), `pytest`. PostGIS in Docker for development and Neon in production. Full reasoning is in TECH_STACK.md. Keep the LLM provider behind one interface (`curator/llm/client.py`) so it can be swapped. Pin model IDs and log them per record.
+**Recommended stack (free):** Python 3.12, `pydantic` v2 (schemas), `httpx` + `tenacity` (HTTP/retry), `lxml` (JATS XML), `duckdb` + `pyarrow` (staging), `rapidfuzz` (grounding), `typer` (CLI), `psycopg` + `fastapi` (serving), `pronto` (ontologies), `pytest`. Supabase (Postgres + PostGIS) for staging/production, a throwaway local Postgres for tests. Full reasoning is in TECH_STACK.md. Keep the LLM provider behind one interface (`curator/llm/client.py`) so it can be swapped. Pin model IDs and log them per record.
 
 ---
 
@@ -456,41 +461,41 @@ Paper (verified PMID/PMCID, OA license)
   disease: dis:wheat:stripe_rust
   phase: infection
   growth_stage: {scale: zadoks, from: 30, to: 75}
-  conditions:                       # all must hold within the window
+  conditions:                       # all must hold within the window; names from config/vocab/sensors.yaml
     - {variable: air_temp_c, min: 7, max: 15, aggregation: mean, window_h: 24}
-    - {variable: leaf_wetness_h, min: 3, aggregation: sum, window_h: 24}
+    - {variable: est_leaf_wet_h, min: 3, aggregation: sum, window_h: 24}   # proxy: no leaf-wetness sensor on AgriNode
   zones: [zone:wheat:NHZ, zone:wheat:NWPZ]
   evidence: [ev:…, ev:…]           # REQUIRED: no evidence, no load
   validated: {method: backtest_nasa_power, hit_rate: null, false_alarm_rate: null}
 ```
 
-**The variable names must match exactly what the IoT device measures.** Agree a shared sensor vocabulary with the IoT team in Phase 1: air temperature, RH, leaf wetness (duration), soil moisture, soil temperature, rainfall, and possibly canopy temperature.
+**Variable names must come from `config/vocab/sensors.yaml`** (AgriNode hardware, frozen). The device has no leaf-wetness or rain sensor, so triggers use the derived proxies (`rh_ge_90_h`, `est_leaf_wet_h`, `soil_wetting_event`) and weather-API `rain_mm`. Proxy validity is part of the Phase 8 back-test.
 
 ### 7.2 Starting hypotheses (for planning only)
 
 The ranges below are typical textbook ranges from plant-pathology knowledge. **Do not load them as they are.** Each must be replaced by a cited value from the literature or AICRP/ICAR advisories in Phase 8.
 
-| Crop | Disease | Indicative favourable conditions | Susceptible stage |
-|---|---|---|---|
-| Wheat | Stripe/yellow rust | Cool 7–15 °C, dew/leaf wetness ≥ 3–6 h | Tillering → grain fill (NHZ/NWPZ, Jan–Feb) |
-| Wheat | Leaf/brown rust | 15–25 °C, ≥ 3–6 h free moisture | Jointing → grain fill |
-| Wheat | Stem/black rust | 18–30 °C, 6–8 h dew | Heading → grain fill (CZ/PZ) |
-| Wheat | Spot blotch | Warm and humid, 20–30 °C, RH > 90% | Grain fill (NEPZ) |
-| Wheat | Karnal bunt | ~18–24 °C, RH > 70%, rain/cloudy at heading | Heading–anthesis |
-| Wheat | Powdery mildew | 15–22 °C, high RH, no free water | Vegetative → heading (NHZ) |
-| Wheat | Fusarium head blight | 25–30 °C, prolonged wetness at anthesis | Anthesis |
-| Wheat | Wheat blast | 25–30 °C, ≥ 10 h wetness at heading | Heading |
-| Soybean | Rust (*P. pachyrhizi*) | 15–28 °C, ≥ 6 h leaf wetness, RH > 90% | Flowering → pod fill |
-| Soybean | Charcoal rot | Hot and dry, soil temperature > 30 °C, moisture deficit | Pod fill (terminal drought) |
-| Soybean | Rhizoctonia aerial blight | 25–32 °C, RH > 85–90%, continuous rain, dense canopy | Flowering–pod |
-| Soybean | Anthracnose / pod blight | Warm and wet, 25–30 °C, prolonged wetness | Pod development |
-| Soybean | Phytophthora root rot | Saturated/waterlogged soil, 25–30 °C | Seedling → early vegetative |
-| Soybean | YMV (whitefly-borne) | Hot, dry spells favour the vector (indirect trigger) | Early vegetative |
-| Chickpea | Fusarium wilt | Soil temperature 25–30 °C, moisture stress | Seedling and flowering |
-| Chickpea | Dry root rot | Soil temperature > 30 °C + moisture deficit | Flowering–podding (CZ/SZ) |
-| Chickpea | Ascochyta blight | 15–25 °C, RH > 85% / rain, long wetness | Vegetative → podding (NWPZ) |
-| Chickpea | Botrytis grey mould | 15–25 °C, RH > 90–95%, dense canopy | Flowering–podding (NEPZ) |
-| Chickpea | Collar rot | High soil moisture, 25–30 °C | Seedling |
+Scope is the 17 disease IDs in `docs/scope.md`. Stage windows use BBCH (`config/vocab/growth_stages.yaml`). Items written as qualitative only need a cited numeric envelope.
+
+| Crop | Disease | Indicative favourable conditions | Main sensor variables | Watch window (BBCH) |
+|---|---|---|---|---|
+| Soybean | Rust | 15–28 °C, ≥ 6 h leaf wetness, RH > 90% | air_temp_c, est_leaf_wet_h, rh_ge_90_h | 61–79 (R1–R6) |
+| Soybean | Charcoal rot | Hot and dry: soil temperature > 30 °C, moisture deficit | soil_temp_c, soil_moisture_vwc, air_temp_c | 9–81, critical 71–81 |
+| Soybean | Frogeye leaf spot | Warm (≈ 25–30 °C), humid, prolonged wetness | air_temp_c, est_leaf_wet_h | 61–79 |
+| Soybean | Anthracnose | Warm and wet (≈ 25–30 °C), prolonged wetness, rain splash | air_temp_c, est_leaf_wet_h, rain_mm | 71–89 |
+| Soybean | Pod and stem blight | Warm, wet weather from pod fill to maturity; delayed harvest | air_temp_c, rh_ge_90_h, rain_mm | 76–99 |
+| Soybean | Rhizoctonia root rot | Warm soil, moderate–high soil moisture, seedlings | soil_temp_c, soil_moisture_vwc | 0–14 |
+| Soybean | Bacterial pustule | Warm (≈ 30 °C+), rain splash / wind-driven rain | air_temp_c, rain_mm, soil_wetting_event | 14–79 |
+| Soybean | Soybean mosaic (SMV) | Indirect: aphid activity and infected seed | air_temp_c (vector activity) | 9–61 |
+| Wheat | Stripe/yellow rust | Cool 7–15 °C, dew/leaf wetness ≥ 3–6 h | air_temp_c, est_leaf_wet_h | 13–75 |
+| Wheat | Leaf/brown rust | 15–25 °C, ≥ 3–6 h free moisture | air_temp_c, est_leaf_wet_h | 30–79 |
+| Wheat | Stem/black rust | 18–30 °C, 6–8 h dew | air_temp_c, est_leaf_wet_h | 45–85 |
+| Wheat | Powdery mildew | 15–22 °C, high RH, no free water, dense canopy | air_temp_c, air_rh, light_lux | 21–69 |
+| Wheat | Fusarium head blight | 25–30 °C, prolonged wetness or rain at anthesis | air_temp_c, rh_ge_90_h, rain_mm | 59–75, critical 61–69 |
+| Chickpea | Fusarium wilt | Soil temperature ≈ 25–30 °C, moisture stress | soil_temp_c, soil_moisture_vwc | 9–75 (early and late wilt) |
+| Chickpea | Dry root rot | Soil temperature > 30 °C + moisture deficit | soil_temp_c, soil_moisture_vwc, air_temp_c | 61–89 |
+| Chickpea | Collar rot | High soil moisture, ≈ 25–30 °C, seedlings | soil_moisture_vwc, soil_temp_c | 0–22 |
+| Chickpea | Rust | Cool–moderate temperature, high RH, leaf wetness | air_temp_c, rh_ge_90_h | 55–85 |
 
 ### 7.3 Risk engine (`POST /api/risk`)
 
@@ -522,6 +527,11 @@ Estimates assume 1 person working about 20 h/week. Phases 5/6 and 7/8 can run in
 
 ### Phase 1: Scope, competency questions, schema v2 (week 2)
 
+> **Status 2026-09-25: done.** Scope and vocabularies: `docs/scope.md`, `config/vocab/`. Models: `curator/model/`.
+> ID and synonym rules: `curator/normalize/`. Release schema: `db/release_schema.sql` (+ PostGIS add-on).
+> CQ1 and CQ3–CQ11 as SQL: `db/cq/`. They are tested on a synthetic toy KG in a throwaway Postgres
+> (`tests/test_cq.py`). CQ2 and CQ12 wait for the risk engine (Phases 8 and 11).
+
 | Task | Deliverable | AC |
 |---|---|---|
 | 1.1 Freeze scope: priority diseases per crop (about 6–8 each, from the table in 7.2 plus team input) and zones | `docs/scope.md` | Agreed list |
@@ -534,10 +544,11 @@ Estimates assume 1 person working about 20 h/week. Phases 5/6 and 7/8 can run in
 
 | Task | Deliverable | AC |
 |---|---|---|
+| 2.0 **Supabase setup** (decided 2026-09-25): project `agrihub-staging` in the Mumbai region, roles `pipeline_rw`/`api_ro`, pooler URLs in `.env` (TECH_STACK.md ADR-2). ✅ `supabase init` and `supabase/migrations/20260925081644_enable_extensions.sql` (`pg_trgm`, `postgis`) already done locally — run it in the project's SQL Editor (see `supabase/README.md`), then create the roles/pooler config. | Supabase project + `.env.example` entries filled in | `psql $DATABASE_URL -c "select postgis_version()"` works from the laptop |
 | 2.1 Canonical store layout: `kg/nodes/*.tsv`, `kg/claims.tsv`, `kg/evidence.tsv`, `kg/publications.tsv` (+ JSON schema per file) | `kg/` | Schema validation in CI |
 | 2.2 `agrihub` CLI (typer): `ingest`, `extract`, `review`, `build`, `load`, `release`, `stats` | `curator/cli.py` | `agrihub --help` lists the commands |
 | 2.3 Deterministic builder: claims → confidence → materialised relations → release TSVs for Postgres `COPY` | `curator/graph/build.py` | Two builds from the same input produce identical output hashes |
-| 2.4 Local PostGIS via Docker Compose, plus `agrihub kg load --release <tag>` (schema per release, atomic `kg_current` repoint) | `docker-compose.yml`, `db/` | Full rebuild < 20 min |
+| 2.4 `agrihub kg load --release <tag>` into Supabase staging (schema per release, atomic `kg_current` repoint); optional `supabase start` for a local copy | `db/`, `supabase/` | Full rebuild < 20 min |
 | 2.5 Build manifest: dataset checksums, ontology versions, prompt versions, git SHA | `kg/manifest.json` | Written on every build |
 | 2.6 Nightly or on-demand GitHub Action: validate `kg/`, build, run CQ tests (against a Postgres service container) | `.github/workflows/kg.yml` | Green |
 
@@ -707,7 +718,7 @@ gkb-v1/
 | Env triggers with citations and back-test metrics | All priority diseases |
 | CQ tests passing | 12/12 |
 | Full rebuild time from canonical files | < 20 min |
-| Database size | KG < 0.5 GB in Postgres (fits the Neon free tier); sensor data partitioned and rolled up |
+| Database size | KG < 0.5 GB in Postgres (fits the Supabase free tier; prod on Pro); sensor data partitioned and rolled up |
 
 ---
 
