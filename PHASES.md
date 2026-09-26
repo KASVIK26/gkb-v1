@@ -369,7 +369,22 @@ are also where most of the work is.
    genuinely needs a different route, not another automated attempt. **This closes out the
    env-trigger research thread for this session at 6 of 17 diseases** — the rest need either
    institutional journal access or sources that just don't exist yet in the literature.
-   `DISEASE_MANAGED_BY` claims are still not started at all.
+   **Fourth pass, same day**: turned to `DISEASE_MANAGED_BY` claims, reusing sources already
+   fetched for the trigger work rather than starting a new reading pass. Confirmed 2 real ones:
+   wheat leaf rust's own full text explicitly names prothioconazole as "the first choice among
+   all treatments" (1-2 sprays at its own stem-elongation/booting/heading timings — not converted
+   to standard Zadoks codes since the paper's own decimal notation doesn't obviously map to them),
+   and soybean frogeye leaf spot's abstract confirms fungicide-stewardship framing (avoid QoI
+   overreliance) as the paper's own point. Checked and found genuinely empty on management:
+   chickpea collar rot's full text (purely mechanistic, no recommendations of any kind despite
+   naming a more-resistant cultivar) and chickpea Fusarium wilt (paper is paywalled, but its own
+   abstract is purely a temperature model with no management content — flagged as "not checked
+   against full text" rather than "disproven," since that's a different, weaker claim than the
+   others). Also caught and flagged 2 more unverified figures found in passing: collar rot's
+   "25-30 degC" (the 80% soil-moisture figure next to it is real; the temperature figure isn't)
+   and frogeye leaf spot's more specific mechanism/cultivar/timing claims (the QoI-resistance
+   framing itself is real; the specifics around it aren't). 2 of 17 diseases now have a real
+   management claim.
 
 ---
 

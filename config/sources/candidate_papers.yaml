@@ -157,7 +157,18 @@ soybean:
       verified_via: europepmc_id
       key_findings:
         environmental: "Best model: 30-day moving average of hours with RH >= 80% (peak risk at 15-20 h/day) combined with max temperature 24-36 degC."
-        management: "QoI-fungicide resistance (Cytochrome b G143A mutation) is now widespread; Rcs-gene resistant cultivars + rotation/tillage are the sustainable path; spray window is growth stage R3-R5."
+        management: >-
+          PARTIALLY VERIFIED 2026-09-26: the abstract does confirm QoI-resistance-driven fungicide
+          stewardship as the paper's own point -- see kg/curated/env_triggers_v1.yaml
+          (adv:soybean:frogeye_leaf_spot_fungicide_stewardship), quoting "Fungicides are a key
+          management tool, particularly when susceptible cultivars are planted; however, widespread
+          QoI resistance has raised concern about overreliance on the remaining effective fungicide
+          classes." The specific mechanism ("Cytochrome b G143A mutation"), "Rcs-gene resistant
+          cultivars + rotation/tillage", and the "R3-R5" spray window are NOT in the abstract and
+          were not separately confirmed -- do not treat those specifics as sourced to this paper.
+          Original text, kept for the record: "QoI-fungicide resistance (Cytochrome b G143A
+          mutation) is now widespread; Rcs-gene resistant cultivars + rotation/tillage are the
+          sustainable path; spray window is growth stage R3-R5."
 
   dis:soybean:anthracnose:
     - pmid: "33609073"
@@ -264,7 +275,13 @@ chickpea:
       verified_via: europepmc_id
       key_findings:
         environmental: "Race 5 optimum 22-26 degC soil temperature, race 0 optimum 24-28 degC; a mere 3 degC rise (24->27 degC) can flip a cultivar from highly resistant to highly susceptible -- an unusually sharp, quantified threshold worth prioritising for the trigger library."
-        management: "Resistant cultivars matched to the locally prevalent race; soil solarization (2 weeks), organic manure, adjusted sowing date."
+        management: >-
+          NOT CHECKED AGAINST FULL TEXT (this paper is not open access -- confirmed via Europe PMC
+          2026-09-26, isOpenAccess: N). The abstract itself is purely a temperature-modeling study
+          and says nothing about management. This text below is unconfirmed, not disproven --
+          different from the UNVERIFIED entries elsewhere in this file where an open full text was
+          checked and came back empty. Original text: "Resistant cultivars matched to the locally
+          prevalent race; soil solarization (2 weeks), organic manure, adjusted sowing date."
 
   dis:chickpea:dry_root_rot:
     - pmid: "33753791"
@@ -300,8 +317,23 @@ chickpea:
       source_type: peer_reviewed_primary
       verified_via: europepmc_id
       key_findings:
-        environmental: "Peak incidence at 80% soil moisture content, 25-30 degC soil temperature -- the opposite moisture regime from dry root rot/wilt above, worth double-checking the risk engine distinguishes them correctly."
-        management: "Chemical control is difficult; low organic matter and good drainage reduce risk; seedling stage (first ~6 weeks) is the vulnerable window per docs scope."
+        environmental: >-
+          PARTIALLY VERIFIED 2026-09-26: the 80% soil-moisture figure is real and confirmed
+          verbatim in the abstract ("Maximum incidence was observed at 80% SMC, followed by 100
+          and 60% SMC") -- see kg/curated/env_triggers_v1.yaml
+          (env:chickpea:collar_rot_soil_moisture). The "25-30 degC soil temperature" figure is NOT
+          confirmed -- the abstract explicitly has no temperature thresholds at all, so this stays
+          unmodelled as a claim. Original text, kept for the record: "Peak incidence at 80% soil
+          moisture content, 25-30 degC soil temperature -- the opposite moisture regime from dry
+          root rot/wilt above, worth double-checking the risk engine distinguishes them correctly."
+        management: >-
+          UNVERIFIED (checked 2026-09-26, full text -- this paper is open access, PMCID
+          PMC6104659): no management or control recommendations of any kind appear in the
+          Introduction, Discussion or Conclusion. The paper is purely mechanistic (gene expression
+          under moisture stress); it does name ICCV 05530 as more resistant than Annigeri but never
+          recommends it for management. Do not cite the text below as this paper's finding.
+          Original text: "Chemical control is difficult; low organic matter and good drainage
+          reduce risk; seedling stage (first ~6 weeks) is the vulnerable window per docs scope."
 
   dis:chickpea:rust:
     - title: "Field Diagnosis of Chickpea Diseases and their Control"

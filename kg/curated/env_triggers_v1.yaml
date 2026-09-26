@@ -177,6 +177,25 @@ entities:
         - {variable: dew_point_c, min: 6.2, aggregation: mean, window_h: 24}
         - {variable: air_rh, min: 94, aggregation: mean, window_h: 24}
 
+  - id: adv:wheat:leaf_rust_fungicide_timing
+    type: Advisory
+    # The source paper labels its spray timings "Zadok's scale 3, ZS 4.3, ZS 5.4" -- an unusual
+    # decimal notation, not the standard two-digit Zadoks codes (e.g. Z43, Z54) used in
+    # config/vocab/growth_stages.yaml. Not converted to a bbch_from/bbch_to here since AdvisoryProps
+    # has no such field, and normalising the paper's own odd notation without being sure it maps
+    # cleanly to Z43/Z54 would be a guess, not a grounded fact.
+    name: "Prothioconazole spray, one or two applications, at the paper's own stem-elongation/booting/heading timings"
+    crop: wheat
+    props:
+      action_type: chemical
+
+  - id: adv:soybean:frogeye_leaf_spot_fungicide_stewardship
+    type: Advisory
+    name: "Avoid QoI-fungicide overreliance; combine with resistant cultivars"
+    crop: soybean
+    props:
+      action_type: chemical
+
 claims:
   - type: DISEASE_ENV_TRIGGER
     subject: dis:wheat:leaf_rust
@@ -240,3 +259,21 @@ claims:
         method: field_multi_env
         locator: "full text, Results (CART model)"
         quote: "Yellow rust severity remained moderate (34-39%) when Tmin < 9.1 °C, Tdew ≥ 6.2 °C and RHm ≥ 94%"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:wheat:leaf_rust
+    object: adv:wheat:leaf_rust_fungicide_timing
+    evidence:
+      - source: pmid:38952372
+        method: field_multi_env
+        locator: "full text, Results/Discussion"
+        quote: "Single and two sprays of prothioconazole, were found to be the first choice among all treatments to reduce the disease severity and increase grain production"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:soybean:frogeye_leaf_spot
+    object: adv:soybean:frogeye_leaf_spot_fungicide_stewardship
+    evidence:
+      - source: pmid:41957394
+        method: review_statement
+        locator: abstract
+        quote: "Fungicides are a key management tool, particularly when susceptible cultivars are planted; however, widespread QoI resistance has raised concern about overreliance on the remaining effective fungicide classes"
