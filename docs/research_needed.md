@@ -1,199 +1,177 @@
 # Research needed: environmental triggers, management practices, and a few genes
 
-**Purpose of this file**: a self-contained research brief for finding real, citable papers to fill
-specific gaps in the AgriHub Genomic Knowledge Base (GKB). Hand this to any AI tool or use it
-yourself. It lists exactly what's missing, per disease, and exactly what's already been tried and
-ruled out — so you don't duplicate work already done.
+**Updated 2026-09-26** after two research passes (via two different AI tools) already closed 5
+diseases' trigger+advisory gaps and partially filled several more. This version only lists what's
+**still actually missing** — don't re-suggest sources already tried and ruled out below, they're
+listed precisely so you don't duplicate that work.
 
-## What "done" looks like — read this before searching
+**Progress so far**: 9 of 17 diseases now have a real environmental trigger (up from 0 at the start
+of this research thread); 9 of 17 have a real management advisory. **5 diseases are fully done**
+on both fronts: wheat leaf rust, chickpea collar rot, chickpea dry root rot, soybean charcoal rot,
+soybean frogeye leaf spot — don't search for more on these unless you want to add a *second*,
+independent corroborating source (not required).
 
-Every fact in this knowledge base is a claim backed by a **real, checked source**: a PMID or DOI,
-a verbatim quote from the paper's own abstract or full text, and a note on whether it's open
-access. Nothing is typed from memory or accepted just because a title sounds relevant — this
-project's predecessor failed specifically because of fabricated/unverified facts, so the bar here
-is real and non-negotiable.
+---
 
-**For each disease below, what I need back is:**
+## How to use this file (same standard as before, repeated because it matters)
+
+Every fact in this knowledge base is a claim backed by a **real, checked source**: a PMID or DOI, a
+verbatim quote from the paper's own abstract or full text, and a note on whether it's open access.
+For each finding, report back:
 
 1. **PMID and/or DOI** — the real identifier, not a guess.
 2. **Title, journal, year** — exactly as published.
-3. **Open access?** — check via `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:<PMID>&format=json` (look for `"isOpenAccess"` and a `"pmcid"`). Full text matters — many abstracts don't contain the actual numbers, only the full text does.
-4. **The exact verbatim quote** containing the number(s) or practice — not a paraphrase. Copy the
-   sentence(s) directly from the abstract or full text.
-5. **Which specific gap it fills** — see the disease sections below.
+3. **Open access?** — check via `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:<PMID>&format=json`. If Europe PMC returns zero hits (common for old or very recent papers), that's not disqualifying — say so and give a publisher/journal-archive link instead (this has worked twice already: an APS Phytopathology back-issues page and an MDPI article page both had to be reached directly).
+4. **The exact verbatim quote** containing the number(s) or practice — not a paraphrase.
+5. **Which specific gap it fills** (see below) — and say clearly if it's the paper's **own**
+   experimental/field result versus a citation to a *different* paper (this distinction mattered
+   twice already: one paper's management timing was its own data, but a nearby sentence about
+   infection conditions turned out to cite an unrelated, unreachable 2001 paper).
 
-If you can't find a paper that gives a *real number* (not a vague "warm and humid"), say so
-explicitly rather than reporting a paper that doesn't actually contain what's needed. Several
-entries below list papers that were already tried and found to have *no usable numbers even in
-their full text* — don't re-report those as if they were new finds unless you found something in
-them that was missed.
+**Do not promote a tested range to a threshold.** If a paper tested 20/24/28/32°C and found
+infection at all four, that's evidence the range does *NOT* discriminate risk — not evidence that
+"20-32°C is the threshold." This exact mistake was caught and reversed once already this session.
 
-### The two kinds of gap
-
-- **Environmental trigger**: a real, numeric threshold (temperature °C, relative humidity %,
-  leaf-wetness/dew hours, soil moisture %, rainfall) tied to infection, sporulation, spread, or
-  disease expression. Must be a number from the paper's own data, not a general statement.
-- **Management practice**: a specific, actionable recommendation (fungicide + timing, resistant
-  cultivar names, cultural practice) with the paper's own reasoning, not "integrated management is
-  recommended."
-
-The available sensor variables (what a numeric threshold needs to be expressed in) are: air
-temperature (°C), relative humidity (%), soil temperature (°C), soil moisture (% VWC), dew point
-(°C), hours/day with RH ≥ 80% or ≥ 90% (30-day rolling average supported), rainfall (mm), wind
-speed (m/s). A finding expressed in different units (e.g., leaf wetness duration in hours, or a
-qualitative "high/low" without numbers) is still worth reporting — just note it clearly so it can
-be mapped later.
+Available sensor variables: air temperature (°C), relative humidity (%), soil temperature (°C),
+soil moisture (% VWC), dew point (°C), hours/day with RH ≥ 80% or ≥ 90% (30-day rolling average
+supported), rainfall (mm), wind speed (m/s), leaf-wetness-hours proxies.
 
 ---
 
 ## Wheat
 
-### Stem rust (*Puccinia graminis* f. sp. *tritici*) — dis:wheat:stem_rust
-**Have:** 5 genes (Sr2, Sr31, Sr33, Sr35, Sr50), 31 variety-reaction records. **Missing:** env
-trigger, management advisory.
-**Already tried:** the one candidate paper (a 2026 *Plant Pathology* review, DOI
-10.1111/ppa.70203) isn't indexed in Europe PMC at all (too recent) — its "~10-15°C with
-intermittent rain/dew" figure was never independently confirmed and shouldn't be trusted without
-reading the actual paper.
-**Need:** a primary paper (not another review) with real temperature/humidity/rain thresholds for
-stem rust urediniospore germination or infection, and/or DMI-fungicide timing recommendations with
-real efficacy data.
-
 ### Powdery mildew (*Blumeria graminis* f. sp. *tritici*) — dis:wheat:powdery_mildew
-**Have:** 3 genes (Lr34/Pm38, Pm6, Pm37). **Missing:** env trigger, management advisory, variety
-reactions (the wheat variety source document never reports powdery mildew reactions at all — a
-genuine document gap, not something more searching fixes).
-**Already tried:** the one candidate paper (PMID 30699700, *Plant Disease* 2015) is **not open
-access** — its abstract only reports model R² (72.4%), no actual temperature/RH numbers. The
-"15-21°C, RH>70%" figures previously associated with it were never actually confirmed in this
-paper and should be treated as unsourced.
-**Need:** an open-access primary paper (or one you can get full text for) with real temperature/RH
-thresholds for infection or the 7-10 day latent period, and fungicide timing relative to that
-latent period.
+**Status: still completely empty** — 3 genes only, zero trigger, zero advisory, zero variety
+reactions (the wheat variety source document never mentions this disease at all — a document gap,
+not fixable by more paper search).
+**Already tried and ruled out:** PMID 30699700 (*Plant Disease* 2015) — not open access, abstract
+has no real numbers at all (only model R²=72.4%). This is the *only* candidate paper found so far
+for this disease across two research passes — genuinely under-covered.
+**Need:** any open-access (or full-text-reachable) primary paper with real temperature/RH
+thresholds for infection, or the 7-10 day latent period, or fungicide timing relative to it. This
+is the highest-priority remaining wheat gap — completely uncovered after two passes.
 
-### Fusarium head blight (*Fusarium graminearum* / *F. culmorum*) — dis:wheat:fusarium_head_blight
-**Have:** 2 genes (Fhb1, Fhb7). **Missing:** env trigger, management advisory, variety reactions.
-**Already tried:** the one candidate paper (a 2024 *Plant Pathology* review, DOI 10.1111/ppa.13839)
-isn't indexed in Europe PMC at all — its "5-15 day windows pre/post anthesis" and "apply fungicide
-at anthesis or within 5 days" figures were never independently confirmed.
-**Need:** a primary paper with real temperature/RH/rainfall windows around anthesis (BBCH 59-69)
-tied to infection risk, and/or confirmed fungicide-timing efficacy data (a very high-value find —
-FHB's anthesis-timing fungicide window is one of the most actionable IoT-alert opportunities in
-the whole project).
+### Fusarium head blight — dis:wheat:fusarium_head_blight
+**Status: has a management advisory now; still missing an env trigger.**
+**Already tried and ruled out:** a 2024 review (DOI 10.1111/ppa.13839) isn't indexed anywhere
+checkable. A 2021 *Agronomy* paper (DOI 10.3390/agronomy11081549, confirmed open access) gave real
+management data (now in the KG) but its one sentence on infection conditions ("20-30°C, ≥16h
+wetness") is a **citation to a 2001 paper** (Rossi, Ravanetti, Pattori, Giosuè, *Journal of Plant
+Pathology* 83:189-198, 2001) that could not be found indexed anywhere (Europe PMC: zero hits).
+**Need:** track down that 2001 Rossi et al. paper directly (try the *Journal of Plant Pathology*
+archive, or search by exact title: "Influence of temperature and humidity on the infection of
+wheat spikes by some fungi causing fusarium head blight"), or any other primary paper with real
+temperature/RH/rain-duration numbers tied to infection risk around anthesis (BBCH 59-69).
+
+### Stem rust (*Puccinia graminis* f. sp. *tritici*) — dis:wheat:stem_rust
+**Status: has a real env trigger now (rain + wetness + temperature onset rule); still missing a
+management advisory.**
+**Already tried and ruled out:** the one candidate review (DOI 10.1111/ppa.70203) isn't indexed
+anywhere checkable.
+**Need:** DMI-fungicide timing/efficacy data with real numbers (percent control, application
+timing relative to infection), similar in spirit to the FHB fungicide-timing paper already used.
 
 ### Stripe rust (*Puccinia striiformis* f. sp. *tritici*) — dis:wheat:stripe_rust
-**Have:** 4 genes, 1 env trigger (a real one: cold/humid CART-model window from PMID 42111728),
-2 variety-reaction records. **Missing:** management advisory only.
-**Need:** fungicide timing or resistant-variety-deployment guidance specific to stripe rust, ideally
-from the same paper family (PMID 42111728, *Frontiers in Plant Science* 2026) or a companion paper.
+**Status: has a real env trigger (cold/humid CART-model window); still missing a management
+advisory.**
+**Need:** fungicide timing or resistant-variety-deployment guidance with real efficacy data —
+ideally from the same paper family as the existing trigger (PMID 42111728, *Frontiers in Plant
+Science* 2026) or a companion paper, but any real primary source works.
 
 ---
 
 ## Soybean
 
 ### Rust (*Phakopsora pachyrhizi*) — dis:soybean:rust
-**Have:** 3 genes (Rpp1, Rpp2, Rpp3), 1 variety-reaction record. **Missing:** env trigger,
-management advisory.
-**Already tried:** the original candidate paper (PMID 32716274, *Plant Disease* 2020) is **not
-open access**; a fuzzy-logic paper (PMID 35062631, *Sensors* 2022, open access, PMCID PMC8781736)
-confirmed the leaf-wetness-proxy methodology (RH ≥ 90% converted to hours — matches this project's
-own sensor design) but doesn't give the actual numeric thresholds itself; it cites an uncited/
-unindexed reference ("Lotufo et al.") for those. **Finding that specific Lotufo et al. paper (or
-any paper with the actual fuzzy-set boundaries) would directly close this gap.**
-**Need:** temperature/leaf-wetness-hour thresholds for infection, and/or real fungicide-timing
-efficacy data (a real, open-access alternative to PMID 32716274).
+**Status: has 2 real env triggers now (classic 1976 temperature/dew-duration data); still missing a
+management advisory.**
+**Already tried and ruled out:** PMID 32716274 (*Plant Disease* 2020) is not open access — its
+abstract only names model classes, no real management numbers.
+**Need:** real fungicide-timing efficacy data (percent control at specific application timings), or
+resistant-cultivar deployment guidance with actual supporting data.
 
 ### Bacterial pustule (*Xanthomonas citri* pv. *glycines*) — dis:soybean:bacterial_pustule
-**Have:** 1 gene (Rxp), 2 variety-reaction records. **Missing:** env trigger, management advisory.
-**Already tried:** two different search angles on Europe PMC (general epidemiology + weather/rain
-splash) returned no primary paper with real numbers at all — this may be a genuinely thin area of
-the literature, but a third search angle or a non-Europe-PMC-indexed source could still turn
-something up.
-**Need:** any real temperature/humidity/leaf-wetness threshold for infection, or timing/practice
-recommendations (avoiding field work on wet foliage, seed treatment, resistant cultivars) with a
-real source.
+**Status: still completely empty on trigger/advisory** (has 1 gene, Rxp, and 2 variety-reaction
+records).
+**Already tried and ruled out:** two different search angles across two research passes (general
+epidemiology, weather/rain-splash, and a lead toward inoculation-condition papers around 28°C/high
+RH that were correctly flagged as inoculation protocols, not field-risk thresholds) found nothing
+usable. This is a genuinely thin area of the literature so far.
+**Need:** any real field-condition (not inoculation-chamber) temperature/humidity/leaf-wetness
+threshold tied to natural infection or spread, or a real cultural/chemical practice with supporting
+data.
 
 ### Soybean mosaic virus (SMV) — dis:soybean:mosaic_virus
-**Have:** 2 genes (Rsv1, Rsv4). **Missing:** env trigger, management advisory, variety reactions
-(the soybean source documents only mention "Yellow Mosaic Virus," a different virus, correctly
-excluded — this is a genuine document gap).
-**Already tried:** the original candidate paper (PMID 30780699) is about strain transmission
-genetics, not management, and doesn't support the "up to 75% seed transmission" or "no resistant
-cultivars exist" claims once checked (real max is 43%). A 2026 aphid-habitat MaxEnt model (PMID
-42318120, open access) identifies temperature seasonality as important but gives no usable numeric
-threshold.
-**Need:** since SMV spreads via aphid vectors (temperature-dependent) and seed transmission (not
-classic weather-triggered infection), the most useful find here would be planting-date guidance,
-seed-certification/virus-free-seed practices with real efficacy data, or **Rsv3's chromosome
-location** (tried 3 times, not found — a real paper naming it directly, e.g. Suh et al.'s original
-Rsv3 mapping paper, would also help complete the gene catalogue).
+**Status: still completely empty on trigger/advisory** (has 2 genes: Rsv1, Rsv4).
+**Already tried and ruled out:** the original candidate paper is about strain transmission
+genetics, not management. A 2026 aphid-habitat MaxEnt model identifies temperature seasonality as
+important but gives no usable field threshold.
+**Need:** since SMV spreads via aphid vectors (temperature-dependent) and seed transmission rather
+than classic weather-triggered infection, useful finds here would be: (a) planting-date guidance or
+seed-certification/virus-free-seed practices with real efficacy data, or (b) **Rsv3's chromosome
+location** (tried repeatedly across both passes, still not found — a paper directly naming Suh et
+al.'s original Rsv3 mapping work, or any paper giving its physical/genetic map position, would also
+complete the gene catalogue for this disease).
 
 ### Anthracnose (*Colletotrichum* spp.) — dis:soybean:anthracnose
-**Have:** 1 management advisory (seed treatment + declining fungicide efficacy, verified from full
-text). **Missing:** genes/QTL (confirmed genuinely absent from the literature — a dedicated search
-found no mapped resistance locus in soybean specifically), env trigger.
-**Already tried:** the one candidate review paper (PMID 33609073, open access, PMCID PMC7938629)
-was checked in full text — no numeric temperature/duration thresholds anywhere, only "warm and
-humid conditions" qualitatively.
-**Need:** a primary paper with real temperature/rain-duration thresholds for infection (seed-borne,
-so early-season conditions matter most).
+**Status: has a management advisory (seed treatment); still missing an env trigger.** (Genes/QTL
+confirmed genuinely absent from the literature for soybean specifically — don't re-search that.)
+**Already tried and ruled out:** the one candidate review (PMID 33609073, open access, full text
+checked) has no numeric temperature/duration thresholds anywhere, only "warm and humid conditions"
+qualitatively.
+**Need:** a primary paper with real temperature/rain-duration thresholds for infection — seed-borne
+disease, so early-season conditions matter most.
 
 ### Pod and stem blight / Phomopsis seed decay — dis:soybean:pod_stem_blight
-**Have:** 1 management advisory (6 named resistant cultivars, real data), 1 variety-reaction
-record. **Missing:** genes/QTL (confirmed absent), env trigger.
-**Already tried:** an extension publication (Crop Protection Network) gives one real number — seed
-moisture <19% prevents infection — but that's a *seed*-moisture threshold, not something the field
-sensors (soil/air only) can measure, so it can't be used as-is.
-**Need:** a primary paper with a real field-condition (not seed-moisture) threshold — rainfall or
-RH during pod-fill/maturity, tied to incidence.
+**Status: has a management advisory (6 named resistant cultivars, real data); still missing an env
+trigger.** (Genes/QTL confirmed absent.)
+**Already tried and ruled out:** an extension publication gives a real number (seed moisture <19%
+prevents infection) but that's *seed*-moisture, not something field sensors (soil/air only) can
+measure.
+**Need:** a primary paper with a real **field-condition** threshold — rainfall or RH during
+pod-fill/maturity, tied to incidence, not seed-internal moisture.
 
 ### Rhizoctonia root rot (*Rhizoctonia solani*) — dis:soybean:rhizoctonia_root_rot
-**Have:** 1 management advisory (cultural + chemical, from a real abstract quote). **Missing:**
-genes/QTL (confirmed absent — few resistant genotypes exist per the literature itself), env
-trigger, variety reactions.
-**Already tried:** the one candidate review (DOI 10.1111/ppa.12733, not open access) — abstract
-gave no numeric temperature/moisture range at all; the "20-32°C, 25-100% moisture" figures
-previously written down were never actually in this paper.
-**Need:** a primary paper (ideally open access) with a real temperature/soil-moisture range for
-seedling disease severity.
+**Status: has a management advisory (2 independent sources now); env trigger deliberately NOT
+created.** (Genes/QTL confirmed absent — few resistant genotypes exist per the literature itself.)
+**Already tried and ruled out — read this carefully before searching more**: a primary study
+(Dorrance et al. 2003, PMID 30812954) tested 20/24/28/32°C and found infection at **all four** —
+i.e., this is evidence that temperature does NOT discriminate risk in that range, not evidence for
+a 20-32°C threshold. Do not re-propose that range. A real, different, discriminating threshold
+(if one exists in the literature) is what's needed, not a repeat of this same non-finding.
+**Need:** a paper that found temperature or moisture conditions that DO limit or discriminate
+Rhizoctonia infection risk (i.e., a paper testing a wider or different range than 20-32°C /
+25-100% MHC, where a real limiting boundary shows up).
 
 ---
 
 ## Chickpea
 
 ### Fusarium wilt — dis:chickpea:fusarium_wilt
-**Have:** 1 gene + 1 QTL, 2 env triggers (real ones, race-specific soil temperature optima), 31
-variety-reaction records. **Missing:** management advisory only.
-**Already tried:** the main environmental-trigger paper (PMID 18943575) is not open access and its
-abstract has no management content — it's purely a temperature-modeling study.
+**Status: has 2 real env triggers (race-specific soil temperature optima); still missing a
+management advisory.**
+**Already tried and ruled out:** the main trigger paper (PMID 18943575) is not open access and its
+abstract has no management content at all — purely a temperature-modeling study.
 **Need:** soil solarization, sowing-date adjustment, or resistant-cultivar-deployment guidance with
-real supporting data (a review or field trial, not another modeling paper).
-
-### Collar rot (*Sclerotium rolfsii*) — dis:chickpea:collar_rot
-**Have:** 1 env trigger (real: 80% soil moisture peak incidence), 4 variety-reaction records.
-**Missing:** genes/QTL (confirmed absent from the literature), management advisory.
-**Already tried:** the trigger's own source paper (PMID 30158943, open access) was checked in full
-text for management content — none exists; it's a purely mechanistic gene-expression study.
-**Need:** a different paper with real cultural/chemical control recommendations and supporting
-data — drainage, organic matter, seedling-stage protection (first ~6 weeks) are documented
-elsewhere as plausible levers but need a real citable source.
+real supporting data (a field trial or review, not another modeling paper).
 
 ### Rust (*Uromyces ciceris-arietini*) — dis:chickpea:rust
-**Have:** nothing at all — zero genes, triggers, advisories, or variety reactions.
-**Already tried:** confirmed via two independent searches that chickpea rust genuinely has very
-thin genetics/epidemiology literature compared to the other 16 diseases (it's a minor disease for
-this crop) — the best source found, an ICRISAT extension bulletin, has a PDF text layer too
-fragmented to extract or confirm any real numbers from.
-**Need:** literally anything with real numbers or practices — a peer-reviewed paper specifically on
-*Uromyces ciceris-arietini* epidemiology or management, if one exists. This is the single
-thinnest-covered disease in the whole KG; even a modest, honest finding here would be valuable.
+**Status: still completely empty — the single thinnest-covered disease in the whole knowledge
+base.**
+**Already tried and ruled out:** two independent Europe PMC searches found nothing with real
+numbers. An ICRISAT extension bulletin (the best source located) has a PDF text layer too
+fragmented to extract or confirm any real figures from it.
+**Need:** literally anything with real numbers or named practices — a peer-reviewed paper
+specifically on *Uromyces ciceris-arietini* epidemiology or management, if one exists at all. Try
+broadening to Indian Journal of Agricultural Sciences, ICRISAT technical reports (a cleaner PDF/
+HTML version than the one already tried), or non-English-language sources. If genuinely nothing
+exists, say so explicitly — an honest "the literature doesn't have this" is a valid, useful answer
+for this one.
 
 ---
 
 ## When you find something
 
-Report back with the 5 items listed at the top (PMID/DOI, title/journal/year, open-access status,
-verbatim quote, which gap it fills). I'll independently re-verify each one against Europe PMC (or
-the paper directly) before writing it into the knowledge graph — that verification step happens
-regardless of which tool found the lead, since this project's whole standard is "checked
-independently," not "sounds right."
+Report back with the 5 items listed at the top. Everything gets independently re-verified against
+Europe PMC (or the publisher/archive page directly) before it goes into the knowledge graph —
+that step happens regardless of which tool found the lead.
