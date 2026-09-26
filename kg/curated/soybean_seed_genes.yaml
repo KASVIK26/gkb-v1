@@ -16,6 +16,14 @@
 # a paper narrows a locus to a small interval or a handful of candidate genes.
 
 sources:
+  - id: pmid:38569009
+    type: publication
+    title: "The Soybean Rpp3 Gene Encodes a TIR-NBS-LRR Protein that Confers Resistance to Phakopsora pachyrhizi"
+    year: 2024
+    venue: "Molecular Plant-Microbe Interactions"
+    url: https://doi.org/10.1094/mpmi-01-24-0007-r
+    verified: true
+
   - id: pmid:37313128
     type: publication
     title: "Mapping of a soybean rust resistance in PI 594756 at the Rpp1 locus"
@@ -103,6 +111,20 @@ entities:
       gene_class: "TIR-NLR (candidate gene Rpp2C7_PI, identified by co-silencing; not transgenically complemented)"
       cloned: false
 
+  - id: gene:soybean:Rpp3
+    type: Gene
+    name: Rpp3
+    crop: soybean
+    # Same evidentiary pattern as Rpp2: fine-mapped to a 371-kb interval containing 5 candidate
+    # NBS-LRR genes (Rpp3C), which were co-silenced together (not individually) and compromised
+    # resistance -- so the causal gene within the 5 hasn't been narrowed further, and this isn't
+    # a positive transgenic-complementation result either.
+    props:
+      symbol: Rpp3
+      chromosome: Gm06
+      gene_class: "NBS-LRR (5 candidate Rpp3C genes at the locus, co-silenced together; not narrowed to one)"
+      cloned: false
+
   - id: gene:soybean:Rsv1
     type: Gene
     name: Rsv1
@@ -173,6 +195,16 @@ claims:
         method: qtl_mapping
         locator: title
         quote: "Rpp2 Encodes a TIR-NBS-WH-LRR Protein that Confers Resistance to Phakopsora pachyrhizi in Soybean"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:soybean:Rpp3
+    object: dis:soybean:rust
+    qualifiers: {resistance_type: unknown}
+    evidence:
+      - source: pmid:38569009
+        method: qtl_mapping
+        locator: abstract
+        quote: "Five Rpp3C genes were identified in both Rpp3-resistant soybean lines, and co-silencing these genes compromised resistance to P. pachyrhizi"
 
   - type: GENE_CONFERS_RESISTANCE
     subject: gene:soybean:Rsv1

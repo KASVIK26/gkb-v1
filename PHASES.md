@@ -424,6 +424,12 @@ are also where most of the work is.
    resistant, two others "highly susceptible... with nearly whole spike bleached" — so
    `resistance_type: quantitative, spectrum: "genotype-context-dependent"` rather than a universal
    drop-in claim. Wheat gene catalogue is now 15. Loaded and promoted live as `kg_2026_10_10`.
+12. Added **Rpp3** to soybean rust (previously only Rpp1/Rpp2, out of the 8 known Rpp1-Rpp7 +
+   Rpp6907 loci) — same evidentiary pattern as Rpp2: fine-mapped to a 371-kb interval on Gm06
+   containing 5 candidate NBS-LRR genes (Rpp3C), co-silenced together (not narrowed to one, not
+   transgenically complemented) — `cloned: false`. Rpp4/Rpp5 were searched but didn't turn up a
+   comparably documented paper in this pass; not pursued further to avoid scope creep in a single
+   sitting. Soybean gene catalogue is now 7. Loaded and promoted live as `kg_2026_10_11`.
 
 ---
 
