@@ -47,11 +47,14 @@ Schema and competency-question tests start a throwaway local PostgreSQL automati
 
 ## Current code (legacy, being replaced)
 
-`curator/` holds the v1 parsers (GFF3, assembly report, GBFF) and a Groq-based paper extractor. The parsers
-carry forward into Phase 4; the extractor is replaced in Phase 5.
+`curator/parsers/`, `curator/db.py`, `curator/run_pipeline.py`, `curator/load_genes.py`,
+`curator/validator.py` and `curator/init_constraints.py` are v1, Neo4j-era code under review for
+removal. A Groq-based paper extractor is legacy too and is replaced in Phase 5.
 
-`curator/graph/`, `curator/model/` and `curator/normalize/` are the **current**, Postgres/Supabase-based KG
-pipeline (`agrihub kg build/load/promote/current`) — not legacy.
+`curator/graph/`, `curator/model/`, `curator/normalize/` and `curator/genome/` are the **current**,
+Postgres/Supabase-based KG pipeline (`agrihub kg build/load/promote/current`,
+`agrihub genome build-refgenes/load-refgenes`) — not legacy. `curator/genome/` is a fresh Phase 4
+implementation (started 2026-09-26), deliberately independent of `curator/parsers/`.
 
 `functions/` and `public/` were the v1 Cloudflare Pages demo (Neo4j-backed) and have been **rewritten
 (2026-09-26)** against the live Supabase KG via `public.kg_*` bridge views

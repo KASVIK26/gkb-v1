@@ -81,7 +81,7 @@ are also where most of the work is.
 | 1 | Scope, data model, ID rules, release schema, competency questions | ✅ **Done** |
 | 2 | Supabase live setup + versioned build pipeline | ✅ **Done** — five real releases (`kg_2026_10_1` through `_5`) built; `kg_current` atomic switchover live and pointing at `kg_2026_10_5`; `kg/manifest.json` (checksums, git SHA, counts) written on every `kg load`, verified by reading it back |
 | 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
-| 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | ⬜ Not started |
+| 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | 🟡 **4.1/4.2/4.6 done** (streaming parser, domain-based NLR classification, chromosome stats) for chickpea+soybean; wheat structural data loaded but not NLR-classified (its GFF has no domain annotations at all). **4.3/4.4 (BLAST/DIAMOND sequence anchoring) not started** — needs new tooling, see §5 |
 | 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Source discovery done** — verified bibliography for all 17 diseases (`config/sources/candidate_papers.yaml`); the grounded-extraction pipeline itself not started |
 | 6 | Gold-standard evaluation of the extraction pipeline | ⬜ Not started |
 | 7 | Structured trial/germplasm data (AICRP, GRIN) | ⬜ Not started |
@@ -482,6 +482,38 @@ are also where most of the work is.
    hits on Europe PMC at all, a genuinely different, weaker state than "checked and found
    wanting." No KG content changed in this pass (`kg_current` still `kg_2026_10_14`) -- pure
    documentation accuracy.
+17. **Rebuilt the demo dashboard** (`public/` + `functions/`) against Supabase — it was the v1
+   Cloudflare Pages demo, querying Neo4j, dead since that database was deleted. New
+   `public.kg_*` bridge views (`supabase/migrations/20260926120000_dashboard_views.sql`) sit on
+   top of `kg_current` and stay correct across every future promotion. Added the actual new
+   capability: `functions/api/triggers.js` takes a crop, optional variety, and sensor readings,
+   and reports which `DISEASE_ENV_TRIGGER` claims fire, with the matched disease's advisory and
+   the variety's own documented reaction if known — a real, if single-snapshot-simplified, first
+   exercise of the trigger/advisory data (not the real windowed risk engine, Phase 11, not built).
+   Tested end-to-end locally via `wrangler pages dev` against the live database across all three
+   crops. See `public/README.md`.
+18. **Started Phase 4 (genomic layer)**, tasks 4.1/4.2/4.6: rewrote the GFF3 parser as a genuine
+   streaming generator (`curator/genome/refgenes.py`, new module — deliberately not touching
+   `curator/parsers/`, which is Neo4j-era code under review for removal in a separate pass) that
+   preserves `Dbxref`/`Note`/`ancestorIdentifier`, and added NLR/RLK classification using
+   InterPro domain accessions individually verified against the InterPro API (not typed from
+   memory): NB-ARC (IPR002182) for the core NLR call, TIR (IPR000157) → TNL, RPW8 (IPR008808) →
+   RNL, kinase (IPR000719) + LRR family domains → RLK. Ran against the real genome files in
+   `data/raw/`: chickpea 318/30,257 genes flagged NLR/RLK (1.1%), soybean 807/48,387 (1.7%,
+   plausibly higher than chickpea given soybean's known extra whole-genome duplication), wheat
+   0/136,408 — wheat's NCBI RefSeq GFF carries no domain annotations at all (only free-text
+   `description`), so it's loaded with structural data only rather than guessed from a keyword
+   match on that text (a real test — `test_wheat_has_no_domain_data_so_is_never_flagged` — locks
+   this in). Runs in ~9s for all 3 crops combined (AC was "<5 min for wheat alone"). Loaded into
+   `kg_2026_10_14`'s `ref_gene` table (215,046 rows) via a new, independent `agrihub genome
+   build-refgenes` / `agrihub genome load-refgenes` CLI pair — deliberately not folded into
+   `kg load`, since reference-genome data doesn't change with each curated-content release.
+   **A genuine cross-check passed**: soybean's Gm18 is the single most NLR-dense chromosome in
+   the real genome (84 flagged genes) — and that's exactly the chromosome our independently
+   literature-sourced `gene:soybean:Rpp1` (rust resistance) sits on.
+   **Not done**: tasks 4.3/4.4 (anchoring cloned genes and markers via DIAMOND/BLASTP) need those
+   tools installed, which this environment doesn't have — flagged rather than faked with a weaker
+   substitute; installing bioinformatics binaries is a decision for the user, not made silently.
 
 ---
 

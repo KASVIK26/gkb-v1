@@ -15,6 +15,8 @@ from pathlib import Path
 import psycopg
 import typer
 
+from curator.genome.build import DATA_INTERIM, build_all, summarize
+from curator.genome.load import load_ref_genes
 from curator.graph.bundle import KGBundle
 from curator.graph.kg_files import load_curated_dir
 from curator.graph.manifest import MANIFEST_PATH, write_manifest
@@ -28,7 +30,9 @@ KG_CURATED_DIR = ROOT_DIR / "kg" / "curated"
 
 app = typer.Typer(add_completion=False, help="AgriHub Genomic KB — build and load knowledge graph releases.")
 kg_app = typer.Typer(add_completion=False, help="Knowledge-graph build/load commands.")
+genome_app = typer.Typer(add_completion=False, help="Reference-genome extraction commands (Phase 4).")
 app.add_typer(kg_app, name="kg")
+app.add_typer(genome_app, name="genome")
 
 
 def _build_bundle() -> KGBundle:
@@ -133,6 +137,35 @@ def current_cmd(
         else:
             release = current_release(conn)
             typer.echo(release if release else "(no release has been promoted yet)")
+
+
+@genome_app.command("build-refgenes")
+def build_refgenes(
+    out_dir: Path = typer.Option(DATA_INTERIM, help="Where to write refgenes_<crop>.parquet"),
+) -> None:
+    """Parse the 3 real genome files in data/raw/ into per-crop RefGene Parquet files, with
+    domain-based NLR/RLK classification for chickpea/soybean (see curator/genome/refgenes.py's
+    module docstring for why wheat isn't classified the same way)."""
+    frames = build_all(out_dir=out_dir)
+    typer.echo(f"Wrote {len(frames)} Parquet file(s) to {out_dir}")
+    typer.echo(summarize(frames))
+
+
+@genome_app.command("load-refgenes")
+def load_refgenes(
+    release: str = typer.Option(..., help="Release tag whose ref_gene table to load into, e.g. 2026_10_14"),
+    database_url: str = typer.Option(
+        ..., envvar="DATABASE_URL_DIRECT", help="Postgres connection string (direct/session pooler)."
+    ),
+    parquet_dir: Path = typer.Option(DATA_INTERIM, help="Directory with refgenes_<crop>.parquet files."),
+) -> None:
+    """Load refgenes_<crop>.parquet (from `genome build-refgenes`) into an existing release
+    schema's ref_gene table. Independent of `kg load` -- run this after it, against the same or
+    any other already-created release schema."""
+    schema = f"kg_{release}"
+    with psycopg.connect(database_url, autocommit=True) as conn:
+        counts = load_ref_genes(conn, schema, parquet_dir=parquet_dir)
+    typer.secho(f"Loaded ref_gene rows into {schema}: {json.dumps(counts)}", fg=typer.colors.GREEN)
 
 
 if __name__ == "__main__":
