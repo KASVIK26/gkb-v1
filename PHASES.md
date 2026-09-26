@@ -438,6 +438,20 @@ are also where most of the work is.
    does NOT mention phosphite-based treatments — flagged that specific figure as unconfirmed in
    `candidate_papers.yaml` rather than carried into the claim. 4 of 17 diseases now have a real
    management claim (up from 2). Loaded and promoted live as `kg_2026_10_12`.
+14. Swept the remaining unprocessed `candidate_papers.yaml` entries for accuracy and found the
+   most serious issue yet: soybean rust's management claim ("rain-based thresholds outperform
+   calendar-based spraying in both efficacy and cost") isn't just unverified — the paper's own
+   abstract **contradicts** it, stating "the economic analysis showed no significant differences
+   in the risk of not offsetting the costs of fungicide sprays regardless of the system." Flagged
+   as CONTRADICTED (a stronger, more specific flag than UNVERIFIED) rather than lumped in with the
+   others. Also found soybean rhizoctonia root rot's environmental figures aren't in its abstract
+   (flagged UNVERIFIED), but its management framing partially is — added a 5th
+   `DISEASE_MANAGED_BY` claim from that real quote. Caught and immediately fixed my own mistake
+   mid-edit: briefly wrote a fabricated PMID for the rhizoctonia paper (it genuinely has none, only
+   a DOI, confirmed earlier in this same file) before catching it and switching to a `doi:` source
+   ID instead — a reminder that this failure mode is easy to slip into even while doing the
+   verification work meant to prevent it, not just something that happens when skipping steps.
+   5 of 17 diseases now have a management claim. Loaded and promoted live as `kg_2026_10_13`.
 
 ---
 

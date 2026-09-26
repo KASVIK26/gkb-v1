@@ -87,6 +87,16 @@ sources:
     url: https://pubmed.ncbi.nlm.nih.gov/33609073/
     verified: true
 
+  - id: doi:10.1111/ppa.12733
+    type: publication
+    # No PMID exists for this paper -- confirmed via Europe PMC search (2026-09-26), which returns
+    # it by DOI/title but with no PMID field. Do not invent one; cite by DOI instead.
+    title: "Rhizoctonia solani: taxonomy, population biology and management of rhizoctonia seedling disease of soybean"
+    year: 2018
+    venue: "Plant Pathology"
+    url: https://doi.org/10.1111/ppa.12733
+    verified: true
+
 entities:
   - id: env:wheat:leaf_rust_field_conditions
     type: EnvTrigger
@@ -222,6 +232,16 @@ entities:
     props:
       action_type: chemical
 
+  - id: adv:soybean:rhizoctonia_root_rot_integrated_control
+    type: Advisory
+    # The abstract mentions both cultural and chemical control together as the real-world response
+    # to a lack of resistant genotypes; action_type only allows one value, so "cultural" was picked
+    # as representative -- the chemical-control half of the same fact is in the quote, not lost.
+    name: "Cultural + chemical control, given the dearth of resistant genotypes"
+    crop: soybean
+    props:
+      action_type: cultural
+
 claims:
   - type: DISEASE_ENV_TRIGGER
     subject: dis:wheat:leaf_rust
@@ -325,3 +345,12 @@ claims:
         method: review_statement
         locator: "full text, Disease Management"
         quote: "in recent years several studies have shown that fungicide efficiency is gradually reducing against soybean anthracnose"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:soybean:rhizoctonia_root_rot
+    object: adv:soybean:rhizoctonia_root_rot_integrated_control
+    evidence:
+      - source: doi:10.1111/ppa.12733
+        method: review_statement
+        locator: abstract
+        quote: "due to the dearth of resistant soybean genotypes...effective management options have mostly relied upon a combination of cultural and chemical control options"

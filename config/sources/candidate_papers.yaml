@@ -123,8 +123,24 @@ soybean:
       source_type: peer_reviewed_primary
       verified_via: europepmc_id
       key_findings:
-        environmental: "Infection at 10-27.5 degC (optimum 20-23 degC) with >= 6 h dew/leaf wetness."
-        management: "Rain-based action thresholds for fungicide timing outperform calendar-based spraying in both efficacy and cost."
+        environmental: >-
+          UNVERIFIED (checked 2026-09-26): this paper is not open access, and its abstract only
+          names the model classes used (rain-based DSV50/DSV80, leaf-wetness-duration-temperature
+          DVIP6/DVIP9) without giving the actual degree/hour values -- the "10-27.5 degC / >=6h"
+          figures below are not in the abstract. Do not cite them to this source without the full
+          text. Original text, kept for the record: "Infection at 10-27.5 degC (optimum 20-23
+          degC) with >= 6 h dew/leaf wetness."
+        management: >-
+          CONTRADICTED 2026-09-26 (not just unverified -- the abstract actively says the opposite
+          of what was written here): the abstract states "the economic analysis showed no
+          significant differences in the risk of not offsetting the costs of fungicide sprays
+          regardless of the system," and its actual conclusion is that the rain-based system is
+          "a good candidate" for its "simplicity and profitability" (parity, not superiority) --
+          not that it "outperforms" the calendar system "in both efficacy and cost" as the
+          original text below claimed. That original claim overstated the paper's own finding and
+          must not be used. Original (incorrect) text, kept for the record: "Rain-based action
+          thresholds for fungicide timing outperform calendar-based spraying in both efficacy and
+          cost."
 
   dis:soybean:charcoal_rot:
     - pmid: "42535844"
@@ -239,8 +255,21 @@ soybean:
       verified_via: search_result
       note: "No PMID returned by Europe PMC; DOI confirmed directly on the publisher site."
       key_findings:
-        environmental: "Unusually broad tolerance: causes root rot across 20-32 degC and from 25% to 100% soil moisture-holding capacity -- wider than most soybean seedling pathogens, so a narrow trigger window is not appropriate for this one."
-        management: "Few resistant genotypes exist; management leans on integrated cultural + chemical + biological control and seed treatment."
+        environmental: >-
+          UNVERIFIED (checked 2026-09-26): this paper is not open access; its abstract does not
+          mention the "20-32 degC" or "25-100%" figures at all. Do not cite them to this source
+          without the full text. Original text, kept for the record: "Unusually broad tolerance:
+          causes root rot across 20-32 degC and from 25% to 100% soil moisture-holding capacity --
+          wider than most soybean seedling pathogens, so a narrow trigger window is not appropriate
+          for this one."
+        management: >-
+          PARTIALLY VERIFIED 2026-09-26 (abstract): "due to the dearth of resistant soybean
+          genotypes... effective management options have mostly relied upon a combination of
+          cultural and chemical control options" confirms the general framing ("few resistant
+          genotypes," "cultural + chemical control") but not the specific mention of "biological
+          control and seed treatment," which aren't named in the abstract. Original text, kept for
+          the record: "Few resistant genotypes exist; management leans on integrated cultural +
+          chemical + biological control and seed treatment."
 
   dis:soybean:bacterial_pustule:
     - doi: 10.1111/ppa.70000
