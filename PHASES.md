@@ -81,7 +81,7 @@ are also where most of the work is.
 | 1 | Scope, data model, ID rules, release schema, competency questions | ✅ **Done** |
 | 2 | Supabase live setup + versioned build pipeline | ✅ **Done** — five real releases (`kg_2026_10_1` through `_5`) built; `kg_current` atomic switchover live and pointing at `kg_2026_10_5`; `kg/manifest.json` (checksums, git SHA, counts) written on every `kg load`, verified by reading it back |
 | 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
-| 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | 🟡 **4.1/4.2/4.6 done** (streaming parser, domain-based NLR classification, chromosome stats) for chickpea+soybean; wheat structural data loaded but not NLR-classified (its GFF has no domain annotations at all). **4.3/4.4 (BLAST/DIAMOND sequence anchoring) not started** — needs new tooling, see §5 |
+| 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | 🟡 **4.1/4.2/4.6 done** (streaming parser, domain-based NLR classification, chromosome stats) for chickpea+soybean; wheat structural data loaded but not NLR-classified (its GFF has no domain annotations at all). **4.3 started**: NCBI BLAST+ installed, 1 gene (Lr34) confidently anchored to its real chromosome/position; 3 more attempted and correctly rejected (see below). **4.4 (marker anchoring) not started** |
 | 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Source discovery done** — verified bibliography for all 17 diseases (`config/sources/candidate_papers.yaml`); the grounded-extraction pipeline itself not started |
 | 6 | Gold-standard evaluation of the extraction pipeline | ⬜ Not started |
 | 7 | Structured trial/germplasm data (AICRP, GRIN) | ⬜ Not started |
@@ -511,9 +511,38 @@ are also where most of the work is.
    **A genuine cross-check passed**: soybean's Gm18 is the single most NLR-dense chromosome in
    the real genome (84 flagged genes) — and that's exactly the chromosome our independently
    literature-sourced `gene:soybean:Rpp1` (rust resistance) sits on.
-   **Not done**: tasks 4.3/4.4 (anchoring cloned genes and markers via DIAMOND/BLASTP) need those
-   tools installed, which this environment doesn't have — flagged rather than faked with a weaker
-   substitute; installing bioinformatics binaries is a decision for the user, not made silently.
+   **Not done at the time**: tasks 4.3/4.4 needed BLAST/DIAMOND, not installed — flagged rather
+   than faked with a weaker substitute.
+19. **User approved installing BLAST+; did task 4.3 (cloned-gene anchoring)**. Installed NCBI
+   BLAST+ 2.17.0 (official ftp.ncbi.nlm.nih.gov build, ~143MB, extracted to `.tools/`, gitignored
+   — a portable/no-admin install, not added to system PATH). Found and downloaded the 3 real
+   reference proteomes needed to BLAST against (chickpea + soybean from the same LegumeInfo
+   DataStore the GFF3s came from; wheat from NCBI's own FTP for the same GCF assembly) — these
+   didn't exist locally before, `data/raw/` only had GFF3s and assembly reports.
+   For query sequences, fetched real published protein sequences (NCBI/UniProt, each cross-checked
+   against its cloning paper's author list or gene-name field before use) for the 4 wheat genes
+   that have one at all among our 11 `cloned: true` entries: Sr33, Sr35, Lr34, Lr21. Ran BLASTP
+   against the IWGSC CS RefSeq v2.1 proteome.
+   **Result: only Lr34 anchored with confidence** — chromosome 7D, 48,949,410-48,961,453
+   (97.4% identity, matches the literature exactly). Sr33 and Sr35 are donor-species introgressions
+   (Aegilops tauschii, Triticum monococcum) that the Chinese Spring reference never carried in the
+   first place, so their ~87-90%-identity best hits are the closest native paralogs, not a real
+   anchor -- no claim written. Lr21's best hit was only 63.6% identity, too divergent to call.
+   **A serious near-miss, caught and documented rather than silently avoided**: Lr34's single
+   highest-scoring BLAST hit (100% identity) sits on chromosome **4A** -- directly contradicting
+   the well-established literature chromosome (7DS, Krattinger et al. 2009, already cited in this
+   file). Cross-checking every hit's chromosome against the literature (not just taking rank order)
+   found the real anchor at ~97% identity on 7D instead; the 4A hit is a same-family ABC-transporter
+   paralog. Taking "best BLAST hit" at face value would have anchored Lr34 to the wrong chromosome
+   -- the exact class of error this whole project was rebuilt to stop making. Documented as a
+   standing methodology note in `kg/curated/wheat_seed_genes.yaml` for whoever does this at scale.
+   Also caught and fixed a real ID-consistency bug while wiring this up: the curated `RefGene`
+   entity used `locus_id: LOC123169079`, but the bulk `ref_gene` table (loaded by
+   `curator/genome/refgenes.py`) actually stores wheat IDs as `gene-LOC123169079` (its raw GFF ID
+   has no colon to strip a prefix from, unlike chickpea/soybean) -- the two didn't join until
+   fixed. Loaded and promoted live as `kg_2026_10_16` (188 entities, 293 claims), verified the
+   anchor resolves correctly by joining `v_gene_located_at` all the way through to the real
+   chromosome/coordinates. Task 4.4 (marker sequence anchoring) is still not started.
 
 ---
 

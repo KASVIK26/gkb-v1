@@ -30,6 +30,11 @@ py -3.12 -m venv .venv
 
 Copy `.env.example` to `.env` and fill in the keys you need. `.env` is gitignored.
 
+Phase 4's `agrihub genome build-refgenes` needs no extra tooling. `agrihub genome anchor-genes`-style
+sequence anchoring (Phase 4 task 4.3, not yet wired into the CLI) needs NCBI BLAST+ — download the
+Windows build from `ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/` and extract to `.tools/`
+(gitignored; no system PATH change needed, the code calls it by full path).
+
 ## Tests
 
 ```powershell

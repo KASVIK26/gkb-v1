@@ -11,6 +11,25 @@
 # 2026-09-26 addition: Yr6NLR1/Yr6NLR2, Pm6 (=Pm52), and Pm37 -- verified the same way, but this
 # time by pulling the papers' own open-access full text (Europe PMC fullTextXML), not just the
 # abstract, since none of the three had the chromosome/validation details in their abstract alone.
+#
+# 2026-09-26, Phase 4.3 (BLASTP anchoring): tried anchoring all 4 of the wheat genes that have a
+# real, complete, verifiable published protein sequence (Sr33, Sr35, Lr34, Lr21) against the
+# IWGSC CS RefSeq v2.1 proteome. Only Lr34 produced a confident anchor (GENE_LOCATED_AT below).
+# Sr33 and Sr35's donor species (Aegilops tauschii, Triticum monococcum) mean the Chinese Spring
+# reference never carried the actual introgressed allele in the first place -- their best hits
+# (~87-90% identity) are the closest native wheat paralogs, not the anchor point, so no claim was
+# written for them. Lr21's best hit was only 63.6% identity, too divergent to call confidently.
+#
+# IMPORTANT CAUGHT ERROR, worth keeping the record of: Lr34's single highest-scoring BLAST hit
+# (100% identity, LOC123087958) is on chromosome 4A -- which contradicts the well-established
+# literature chromosome (7DS, Krattinger et al. 2009, cited above as pmid:19229000). Taking "best
+# hit by score" at face value would have anchored Lr34 to the wrong chromosome. The actual anchor
+# used below (LOC123169079, chromosome 7D, ~97% identity, two isoforms) was found by checking each
+# hit's chromosome against the literature instead of trusting rank order -- the 4A hit is a
+# same-family ABC-transporter paralog, not Lr34. Automating "best hit" anchoring at scale would
+# need this same cross-check built in, not just a raw top-hit take.
+
+
 
 sources:
   - id: pmid:23811228
@@ -122,6 +141,13 @@ sources:
     year: 2022
     venue: Plants
     url: https://doi.org/10.3390/plants11162074
+    verified: true
+
+  - id: ds:iwgsc_v2_1_blastp_lr34_anchor
+    type: dataset
+    title: "BLASTP of Lr34 (Krattinger et al. 2009, GenBank ADK62371.1) against the IWGSC CS RefSeq v2.1 proteome"
+    venue: "NCBI BLAST+ 2.17.0, run locally against public reference data"
+    url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/018/294/505/GCF_018294505.1_IWGSC_CS_RefSeq_v2.1/
     verified: true
 
 entities:
@@ -323,6 +349,24 @@ entities:
       origin_species: "Thinopyrum elongatum 7EL segment; horizontally acquired from an endophytic Epichloe fungus"
       gene_class: "glutathione S-transferase (GST); detoxifies trichothecenes via de-epoxidation"
       cloned: true
+
+  - id: ref:wheat:LOC123169079
+    type: RefGene
+    name: "ABC transporter G family member 50 (LOC123169079)"
+    crop: wheat
+    # locus_id below is "gene-LOC123169079", not the bare "LOC123169079" -- that's the ID exactly
+    # as written in the IWGSC GFF and how curator/genome/refgenes.py stores it in the bulk
+    # ref_gene table (its ID has no colon to strip a prefix from, unlike chickpea/soybean's IDs),
+    # so this stays joinable with that table rather than introducing a second, inconsistent form.
+    props:
+      locus_id: gene-LOC123169079
+      assembly: IWGSC_CS_RefSeq_v2.1
+      chromosome: "7D"
+      start_bp: 48949410
+      end_bp: 48961453
+      strand: "-"
+      description: "ABC transporter G family member 50"
+      is_nlr: false
 
 claims:
   - type: GENE_CONFERS_RESISTANCE
@@ -531,3 +575,13 @@ claims:
         method: field_single_env
         locator: "full text, Results"
         quote: "7E/7D showed high level resistance to FHB with only several spikelets bleached while SNTE122 and TNT-B were highly susceptible to FHB with nearly whole spike bleached"
+
+  - type: GENE_LOCATED_AT
+    subject: gene:wheat:Lr34
+    object: ref:wheat:LOC123169079
+    qualifiers: {method: blast, assembly: IWGSC_CS_RefSeq_v2.1, identity_pct: 97.4}
+    evidence:
+      - source: ds:iwgsc_v2_1_blastp_lr34_anchor
+        method: computational
+        locator: "blastp hit XP_044442862.1 (isoform X2), gene LOC123169079"
+        quote: "Query gene:wheat:Lr34|ADK62371.1 (1402 aa) vs subject XP_044442862.1 'ABC transporter G family member 50 isoform X2 [Triticum aestivum]': 97.432% identity over 1402/1402 aa, 1 gap, e-value 0.0, bitscore 2845"

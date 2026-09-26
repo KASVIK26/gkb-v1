@@ -26,3 +26,6 @@ data/*
 .wrangler/
 .claude/
 pipeline_run_log.txt
+
+# Downloaded bioinformatics binaries (NCBI BLAST+) -- not committed, ~370MB extracted.
+.tools/
