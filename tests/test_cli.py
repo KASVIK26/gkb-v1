@@ -39,9 +39,9 @@ def test_kg_load_against_a_live_database(pg_conn: psycopg.Connection, pg_dsn: st
     (gene_count,) = pg_conn.execute(f"SELECT count(*) FROM {release_schema}.v_gene_resistance").fetchone()
     # wheat: Sr33, Sr35, Lr34 x3, Sr2, Sr31, Lr26, Yr9, Sr50, Fhb1, Lr21 (12)
     # wheat: Yr6NLR1, Yr6NLR2, Pm6, Pm37 x2 diseases, Fhb7 (6)
-    # soybean: Rpp1, Rpp2, Rpp3, Rsv1, Rsv4, Rxp, Rcs3 (7)
+    # soybean: Rpp1, Rpp2, Rpp3, Rsv1, Rsv3, Rsv4, Rxp, Rcs3 (8)
     # chickpea: Ca_14301 (1)
-    assert gene_count == 26
+    assert gene_count == 27
 
 
 def test_kg_load_refuses_to_overwrite_an_existing_release(pg_conn: psycopg.Connection, pg_dsn: str, release_schema: str):

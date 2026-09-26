@@ -161,6 +161,123 @@ sources:
     # directly on the American Phytopathological Society's own back-issues archive instead.
     verified: true
 
+  # --- 2026-09-26, third research pass (3 external AI reports, independently re-verified before
+  # writing anything below): each new source was checked by at least one of Europe PMC full text,
+  # OpenAlex/Semantic Scholar metadata, or the publisher/author's own copy of the paper (academia.edu,
+  # a university lab site, or the journal's own OA archive) -- never trusted from the report alone.
+
+  - id: doi:10.4454/JPP.V83I3.1128
+    type: publication
+    title: "Influence of Temperature and Humidity on the Infection of Wheat Spikes by Some Fungi Causing Fusarium Head Blight"
+    year: 2001
+    venue: "Journal of Plant Pathology"
+    url: https://doi.org/10.4454/JPP.V83I3.1128
+    # No PMID (pre-dates PubMed indexing for this journal; Europe PMC and OpenAlex both show zero
+    # PMID). Not open access via the publisher, but the full abstract is independently reachable
+    # verbatim on academia.edu, uploaded by the paper's own first author (Vittorio Rossi) --
+    # confirmed word-for-word against a second, independent secondary quote of the same sentence.
+    verified: true
+
+  - id: pmid:30140185
+    type: publication
+    title: "Combined Effect of CO2 and Temperature on Wheat Powdery Mildew Development"
+    year: 2018
+    venue: "The Plant Pathology Journal"
+    url: https://doi.org/10.5423/PPJ.OA.11.2017.0226
+    # Open access, PMCID PMC6097819 -- confirmed via Europe PMC search and fullTextXML fetch.
+    verified: true
+
+  - id: doi:10.1007/s10343-025-01270-1
+    type: publication
+    title: "Effects of Timing and Dosage of Fungicide Applications On Control of Emerging Stem Rust Races (Puccinia graminis f. sp. tritici) in Winter Wheat"
+    year: 2026
+    venue: "Journal of Crop Health"
+    url: https://doi.org/10.1007/s10343-025-01270-1
+    # Open access, CC BY, published 03 Dec 2025 online / vol 78 art. 3 (2026) -- confirmed live on
+    # Springer Link (full text loads, no paywall).
+    verified: true
+
+  - id: doi:10.25174/2582-2675/2020/100849
+    type: publication
+    title: "Efficacy of fungicides in managing yellow rust of wheat"
+    year: 2020
+    venue: "Journal of Cereal Research"
+    url: https://doi.org/10.25174/2582-2675/2020/100849
+    # Open access (ICAR ePubs / Society for Advancement of Wheat and Barley Research) -- full PDF
+    # downloaded and read directly.
+    verified: true
+
+  - id: pmid:30764186
+    type: publication
+    title: "Effect of Fungicide and Timing of Application on Soybean Rust Severity and Yield"
+    year: 2009
+    venue: "Plant Disease"
+    url: https://doi.org/10.1094/PDIS-93-3-0243
+    # Full PDF downloaded directly (soydiseases.illinois.edu, a University of Illinois soybean
+    # pathology lab mirror). The PDF itself states: "This article is in the public domain and not
+    # copyrightable. It may be freely reprinted with customary crediting of the source. The
+    # American Phytopathological Society, 2009." -- so despite Plant Disease being a subscription
+    # journal by default (Europe PMC/OpenAlex both show isOpenAccess=false at the DOI), this
+    # specific article is public domain because of USDA-ARS co-authorship.
+    verified: true
+
+  - id: doi:10.5423/RPD.2003.9.3.131
+    type: publication
+    title: "Influence of Temperature, Wetness Duration and Fungicides on Fungal Growth and Disease Progress of Soybean Anthracnose Caused by Colletotrichum spp."
+    year: 2003
+    venue: "Research in Plant Disease"
+    url: https://www.koreascience.or.kr/article/JAKO200315875831081.page
+    # An external report gave only a KoreaScience article ID with no resolvable DOI/authors --
+    # tracked down directly on koreascience.or.kr, which gives the real DOI, both authors (Oh,
+    # Jeung-Haing; Kim, Gyu-Hong, Dankook University), full bilingual abstract, and confirms this
+    # is the journal's own English-language abstract, not a re-translation.
+    verified: true
+
+  - id: doi:10.1094/PD-65-62
+    type: publication
+    title: "Epidemiology of Phomopsis Seed Decay of Soybean in Illinois"
+    year: 1981
+    venue: "Plant Disease"
+    url: https://www.apsnet.org/publications/plantdisease/backissues/Documents/1981Articles/PlantDisease65n01_62.pdf
+    # Freely downloadable PDF directly from APS's own back-issues archive (same pattern used
+    # elsewhere in this file for old APS content) -- full text read, not abstract-only.
+    verified: true
+
+  - id: doi:10.36253/phyto-17030
+    type: publication
+    title: "Soil moisture and soil type affect Rhizoctonia root rot and yield components of soybean plants"
+    year: 2026
+    venue: "Phytopathologia Mediterranea"
+    url: https://doi.org/10.36253/phyto-17030
+    # Open access, CC BY 4.0 (Firenze University Press) -- full PDF downloaded and read directly,
+    # including all supplementary tables. This is a DIFFERENT experiment/variable from Dorrance et
+    # al. 2003 (pmid:30812954): Dorrance found soil moisture (25/50/75/100% MHC) had "no
+    # significant main effect on disease severity" (only on stand/root-weight/vigor) -- this 2026
+    # paper directly measured RRR disease-severity score itself (not just yield/stand) against
+    # soil moisture (50/65/80/95% WHC) and found a real, strong (R^2 mostly >0.70), linear,
+    # negative relationship. This is the genuine "different, discriminating threshold" this file
+    # was missing -- not a repeat of Dorrance's non-finding.
+    verified: true
+
+  - id: doi:10.3390/agriculture12060773
+    type: publication
+    title: "Integrating Sowing Date with Chickpea Genotypes in Managing Fusarium Wilt in Morocco"
+    year: 2022
+    venue: Agriculture
+    url: https://doi.org/10.3390/agriculture12060773
+    # Open access, CC BY (MDPI, DOAJ-indexed) -- full text read directly on mdpi.com.
+    verified: true
+
+  - id: doi:10.56093/ijas.v94i7.140504
+    type: publication
+    title: "Field efficacy of novel fungicides against chickpea rust (Uromyces ciceris-arietini)"
+    year: 2024
+    venue: "The Indian Journal of Agricultural Sciences"
+    url: https://doi.org/10.56093/ijas.v94i7.140504
+    # Open access, CC BY-NC-SA, DOAJ-indexed (ICAR) -- abstract independently confirmed via
+    # OpenAlex's inverted-index full abstract text, word-for-word.
+    verified: true
+
 entities:
   - id: env:wheat:leaf_rust_field_conditions
     type: EnvTrigger
@@ -302,13 +419,20 @@ entities:
     # to a lack of resistant genotypes; action_type only allows one value, so "cultural" was picked
     # as representative -- the chemical-control half of the same fact is in the quote, not lost.
     #
-    # DELIBERATELY NO DISEASE_ENV_TRIGGER for this disease, checked 2026-09-26: Dorrance et al.
-    # 2003 (pmid:30812954) tested 20/24/28/32 degC and found infection occurred at all four --
+    # NO temperature-based DISEASE_ENV_TRIGGER for this disease, checked 2026-09-26: Dorrance et
+    # al. 2003 (pmid:30812954) tested 20/24/28/32 degC and found infection occurred at all four --
     # "the temperatures evaluated in this study were not limiting to the isolates tested." That is
     # evidence AGAINST a 20-32 degC trigger, not evidence for one; encoding that range as a
-    # min/max EnvTrigger condition would invert what the paper actually found. The same paper also
-    # tested 25/50/75/100% soil moisture holding capacity with no clean monotonic relationship --
-    # also not modelled. This is why no soybean:rhizoctonia_root_rot EnvTrigger entity exists.
+    # min/max EnvTrigger condition would invert what the paper actually found. Dorrance's own
+    # moisture arm (25/50/75/100% MHC) also found "no significant main effect on disease severity"
+    # (only on stand/root weight) -- so that arm isn't modelled as a trigger either.
+    #
+    # UPDATE 2026-09-26 (third pass): a real, discriminating moisture-severity relationship WAS
+    # found in a different, newer, larger study -- see env:soybean:rhizoctonia_low_moisture_severity
+    # below (doi:10.36253/phyto-17030), which measured RRR severity itself (not just stand/yield)
+    # against soil moisture across 2 experiments and 5 soil types. That is now this disease's only
+    # EnvTrigger, and it is about MOISTURE, not temperature -- Dorrance's temperature non-finding
+    # above still stands and is not contradicted.
     name: "Cultural + chemical control, given the dearth of resistant genotypes"
     crop: soybean
     props:
@@ -407,6 +531,136 @@ entities:
       conditions:
         - {variable: air_temp_c, min: 15, max: 17.5, aggregation: mean, window_h: 24}
         - {variable: est_leaf_wet_h, min: 8, aggregation: sum, window_h: 24}
+
+  - id: env:wheat:fusarium_head_blight_infection_temp
+    type: EnvTrigger
+    name: "Wheat FHB (F. graminearum): controlled-environment infection-frequency optimum"
+    crop: wheat
+    props:
+      # The paper's own detached-spike inoculation experiment tested 10.0-35.0 degC and found
+      # F. graminearum's infection-frequency optimum at 28.0-29.0 degC (F. avenaceum shared this
+      # optimum; M. nivale and F. culmorum had lower, different optima not modelled here since
+      # F. graminearum is this KB's DISEASE_CAUSED_BY pathogen for FHB). Modelled as a band around
+      # the paper's own optimum rather than the full 10-35 degC tested range, since the tested
+      # range is not itself the infection-conducive window.
+      phase: infection
+      bbch_from: 59
+      bbch_to: 69
+      conditions:
+        - {variable: air_temp_c, min: 26, max: 31, aggregation: mean, window_h: 24}
+
+  - id: env:wheat:powdery_mildew_temp_ceiling
+    type: EnvTrigger
+    name: "Wheat powdery mildew: temperature ceiling above which disease does not develop"
+    crop: wheat
+    props:
+      # The paper's own phytotron data (6 CO2 x temperature combinations, 3 trial repeats): disease
+      # index was 68-79 at 18-22 degC, 37-72 at 22-26 degC, and a flat 0.00 at 26-30 degC
+      # regardless of CO2 level -- a real discriminating cutoff, not a correlation. Modelled as a
+      # max-bound condition (risk exists only when the 24h mean stays below the paper's own
+      # lower edge of the "no disease" band) rather than inventing a lower bound the paper
+      # doesn't give a clean number for.
+      phase: infection
+      bbch_from: 30
+      bbch_to: 79
+      conditions:
+        - {variable: air_temp_c, max: 26, aggregation: mean, window_h: 24}
+
+  - id: env:soybean:anthracnose_wetness_duration
+    type: EnvTrigger
+    name: "Soybean anthracnose (C. truncatum): minimum wetness duration for lesion development at 30 degC"
+    crop: soybean
+    props:
+      # The paper's own controlled-environment data: C. truncatum (the main soybean anthracnose
+      # species) needed >=8h of wetness at 30 degC for lesions to develop; at >=32h wetness,
+      # lesions were larger at 25 than 30 degC. Modelled the primary 30 degC/8h rule since it is
+      # the paper's own clearest single threshold; the secondary 25 degC/32h crossover is not
+      # separately modelled to avoid inventing a second, less-supported rule.
+      phase: infection
+      bbch_from: 0
+      bbch_to: 89
+      conditions:
+        - {variable: air_temp_c, min: 28, max: 32, aggregation: mean, window_h: 24}
+        - {variable: est_leaf_wet_h, min: 8, aggregation: sum, window_h: 24}
+
+  - id: env:soybean:pod_stem_blight_rainfall_podfill
+    type: EnvTrigger
+    name: "Soybean Phomopsis seed decay: rainfall during pod fill drives incidence (field-condition, not seed-moisture)"
+    crop: soybean
+    props:
+      # The paper's own 3-year, >8,000-seedlot Illinois field study: a high positive correlation
+      # (r^2=0.75 in the multiple-regression model, Y=-4.0+0.35X, X = total rainfall in cm over
+      # Aug+Sep+Oct) was found between rainfall during pod fill/maturation and percent seed decay;
+      # temperature and geography were NOT the dominant factors. The paper's own accumulation
+      # window is 3 months (~2160h), which exceeds this model's 720h (30-day) window_h cap -- the
+      # 130mm/720h threshold below is a monthly-equivalent approximation of the paper's 3-month
+      # regression (roughly the rainfall needed, sustained for a month, to reach the paper's own
+      # "high incidence" range), not a value the paper states directly.
+      phase: infection
+      bbch_from: 71
+      bbch_to: 89
+      conditions:
+        - {variable: rain_mm, min: 130, aggregation: sum, window_h: 720}
+
+  - id: env:soybean:rhizoctonia_low_moisture_severity
+    type: EnvTrigger
+    name: "Soybean Rhizoctonia root rot: low soil moisture (<=65% WHC) intensifies severity"
+    crop: soybean
+    props:
+      # This is a genuinely different, discriminating finding from Dorrance et al. 2003's
+      # non-finding on temperature (see the DELIBERATELY-NO-TRIGGER note on
+      # adv:soybean:rhizoctonia_root_rot_integrated_control below, which stays accurate: that note
+      # is about TEMPERATURE and about Dorrance's own MOISTURE arm, which found no significant
+      # main effect on disease SEVERITY specifically -- only on stand/root weight). This 2026 paper
+      # measured RRR severity itself against soil moisture across 2 greenhouse experiments, 5 soil
+      # types: severity fell linearly and significantly (R^2 mostly >0.70) as moisture rose from
+      # 50 to 95% WHC; at <=65% WHC severity was consistently high (well-developed symptoms,
+      # scores >=3) regardless of soil type. Modelled as an inverse condition (risk when moisture
+      # stays AT OR BELOW the paper's own low-moisture band) using max only, matching this file's
+      # existing pattern for other "low value = risk" triggers (e.g. dry_root_rot_soil_moisture).
+      # Phase is "expression" (not "infection") because the paper's own severity effect is a
+      # season-long moisture regime, not a discrete infection event -- same reasoning as
+      # env:soybean:charcoal_rot_high_temp's phase choice.
+      phase: expression
+      bbch_from: 0
+      bbch_to: 99
+      conditions:
+        - {variable: soil_moisture_vwc, max: 65, aggregation: mean, window_h: 24}
+
+  - id: adv:wheat:stem_rust_fungicide_timing
+    type: Advisory
+    name: "Curative fungicide 1, 3 or 5 days after inoculation gives effective stem rust control; azole+strobilurin or azole+carboxamide mixtures outperform azole alone"
+    crop: wheat
+    props:
+      action_type: chemical
+
+  - id: adv:wheat:stripe_rust_fungicide_efficacy
+    type: Advisory
+    name: "Two foliar sprays of tebuconazole 25 EC give near-complete (99.64%) yellow rust control; azoxystrobin+difenoconazole gives the best yield response"
+    crop: wheat
+    props:
+      action_type: chemical
+
+  - id: adv:soybean:rust_fungicide_timing_yield
+    type: Advisory
+    name: "Fungicide timing should track first detection of rust: spray at GS R1 if rust appears before R3, spray at R3/R5 if it appears after -- yield gains 12-114% over untreated"
+    crop: soybean
+    props:
+      action_type: chemical
+
+  - id: adv:chickpea:fusarium_wilt_sowing_date
+    type: Advisory
+    name: "Early sowing (mid-December vs. mid-February) significantly reduces Fusarium wilt incidence, AUDPC and disease-progress rate; pair with partially resistant genotypes"
+    crop: chickpea
+    props:
+      action_type: cultural
+
+  - id: adv:chickpea:rust_fungicide_efficacy
+    type: Advisory
+    name: "Two sprays of azoxystrobin 18.2% + difenoconazole 11.4% SC at a 15-day interval cut rust severity by >77%"
+    crop: chickpea
+    props:
+      action_type: chemical
 
 claims:
   - type: DISEASE_ENV_TRIGGER
@@ -596,3 +850,93 @@ claims:
         method: controlled_env
         locator: abstract
         quote: "at 15-17.5 C with 16-18 hours of dew...8-10 hours at 15-17.5 C"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:wheat:fusarium_head_blight
+    object: env:wheat:fusarium_head_blight_infection_temp
+    evidence:
+      - source: doi:10.4454/JPP.V83I3.1128
+        method: controlled_env
+        locator: abstract
+        quote: "F. avenaceum and F. graminearum showed the highest infection frequency, with optimum at 28.0-29.0°C; M. nivale and especially F. culmorum had a lower infection frequency, with optimum at 18.0°C and 26.5°C, respectively"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:wheat:powdery_mildew
+    object: env:wheat:powdery_mildew_temp_ceiling
+    evidence:
+      - source: pmid:30140185
+        method: controlled_env
+        locator: "full text, Results"
+        quote: "no disease was observed under high-temperature treatments, either with ambient or increased CO2"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:wheat:stem_rust
+    object: adv:wheat:stem_rust_fungicide_timing
+    evidence:
+      - source: doi:10.1007/s10343-025-01270-1
+        method: field_multi_env
+        locator: abstract
+        quote: "The timing of fungicide application proved to be a crucial factor"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:wheat:stripe_rust
+    object: adv:wheat:stripe_rust_fungicide_efficacy
+    evidence:
+      - source: doi:10.25174/2582-2675/2020/100849
+        method: field_multi_env
+        locator: abstract
+        quote: "Tebuconazole 25 EC @ 0.1% was the most effective with mean disease severity (MDS) of 1.84 % and mean disease control (MDC) of 99.64% over the unsprayed check (48.39%)"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:soybean:rust
+    object: adv:soybean:rust_fungicide_timing_yield
+    evidence:
+      - source: pmid:30764186
+        method: field_multi_env
+        locator: abstract
+        quote: "Soybean yields from plots treated with fungicides were 16 to 114% greater than yields from no fungicide control plots in four locations in Paraguay, 12 to 55% greater in two locations in the United States, and 31% greater in Zimbabwe"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:soybean:anthracnose
+    object: env:soybean:anthracnose_wetness_duration
+    evidence:
+      - source: doi:10.5423/RPD.2003.9.3.131
+        method: controlled_env
+        locator: abstract
+        quote: "At least 8 hrs. of wetness period was requird for the pathogen to develop lesions at $30^{\\circ}C$"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:soybean:pod_stem_blight
+    object: env:soybean:pod_stem_blight_rainfall_podfill
+    evidence:
+      - source: doi:10.1094/PD-65-62
+        method: field_multi_env
+        locator: abstract
+        quote: "A high positive correlation was found between disease incidence and rainfall during pod fill, indicating that moisture, rather than temperature or geographic area, is the dominant environmental factor in disease development"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:soybean:rhizoctonia_root_rot
+    object: env:soybean:rhizoctonia_low_moisture_severity
+    evidence:
+      - source: doi:10.36253/phyto-17030
+        method: controlled_env
+        locator: abstract
+        quote: "High soil moisture (≥ 80% WHC) mitigated RRR, and extended the soybean growth cycle. Low soil moisture (50–65% WHC) intensified RRR severity, increased plant death, and reduced soybean grain yields"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:chickpea:fusarium_wilt
+    object: adv:chickpea:fusarium_wilt_sowing_date
+    evidence:
+      - source: doi:10.3390/agriculture12060773
+        method: field_multi_env
+        locator: "full text, Results"
+        quote: "Late sowing showed high values for the three disease parameters"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:chickpea:rust
+    object: adv:chickpea:rust_fungicide_efficacy
+    evidence:
+      - source: doi:10.56093/ijas.v94i7.140504
+        method: field_multi_env
+        locator: abstract
+        quote: "minimizes the rust severity to the tune of >77%"

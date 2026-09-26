@@ -648,6 +648,63 @@ are also where most of the work is.
      soybean rhizoctonia figures.
    9 of 17 diseases now have an env trigger (up from 7); 9 of 17 have a management claim (up from
    8). Loaded and promoted live as `kg_2026_10_19`.
+25. **Third research pass, 3 independent AI reports against an updated `docs/research_needed.md`
+   — by far the largest single haul, 11 genuine findings.** Every claim independently re-verified
+   before writing anything (Europe PMC, OpenAlex/Semantic Scholar metadata, direct publisher/OA
+   mirrors, or a downloaded full-text PDF read start-to-finish) — never trusted from a report's own
+   quote alone. Two of the three reports independently converged on the same Fusarium head blight
+   and soybean rust sources, a strong corroboration signal; one report's own "verified" Rhizoctonia
+   moisture claim (misreading Dorrance 2003's stand/vigor data as a disease-severity finding) was
+   caught and not used — its abstract explicitly says "no significant main effect on disease
+   severity" for that moisture arm.
+   - **Wheat FHB finally has an env trigger**: tracked down the actual Rossi et al. 2001 paper
+     (the one the 2021 Agronomy paper's "20-30°C, >=16h" sentence had cited but didn't itself
+     report) via academia.edu, uploaded by the author himself. Own controlled-environment data:
+     F. graminearum infection-frequency optimum 28.0-29.0°C (detached-spike inoculation,
+     10.0-35.0°C tested range).
+   - **Wheat powdery mildew has its first-ever content of any kind**: a real, discriminating
+     temperature ceiling — 0.00 disease index at 26-30°C regardless of CO2, vs. 37-79 at 18-26°C
+     (Matić et al. 2018, open access, PMC6097819; confirmed via Europe PMC's fullTextXML endpoint).
+     Correctly distinguished the paper's own data from its citation of Manners & Hossain 1963.
+   - **Wheat stem rust and stripe rust now have management advisories**: Schmitt et al. 2026 (open
+     access, Journal of Crop Health) for stem rust — curative DMI+strobilurin/carboxamide mixtures
+     1-5 days post-inoculation; Basandrai et al. 2020 (open access, ICAR) for stripe rust —
+     tebuconazole gave 99.64% disease control across 2 seasons. Both full PDFs downloaded and read.
+   - **Soybean rust now has a management advisory**: Mueller et al. 2009 — a genuinely public-domain
+     APS article (confirmed by the PDF's own copyright line, despite Plant Disease defaulting to
+     subscription access) with real multi-country field yield data: 16-114% yield gain over
+     untreated, growth-stage timing (R1 vs. R3/R5) depending on when rust was first detected.
+   - **Soybean anthracnose finally has an env trigger**: tracked an external report's bare
+     KoreaScience article ID down to its real DOI, authors, and bilingual abstract directly on
+     koreascience.or.kr — >=8h wetness at 30°C required for C. truncatum lesion development.
+   - **Soybean pod & stem blight finally has a field-condition env trigger**: Shortt et al. 1981
+     (APS back-issues archive, full PDF) — a 3-year, >8,000-seedlot Illinois study found rainfall
+     during pod fill (not temperature or geography) was the dominant factor (r²=0.75).
+   - **Soybean Rhizoctonia root rot finally has a real, discriminating env trigger** — the gap this
+     project explicitly flagged as unresolved twice before: Balbinotti et al. 2026 (open access,
+     Phytopathologia Mediterranea, full PDF read including supplementary tables) directly measured
+     RRR *severity* (not just stand/yield, unlike Dorrance 2003) against soil moisture across 2
+     greenhouse experiments and 5 soil types — severity fell linearly (R²mostly >0.70) as moisture
+     rose from 50% to 95% WHC. This does not contradict Dorrance's temperature non-finding, which
+     stands unchanged; it's a different variable, a different (and more direct) measurement, and a
+     genuinely different, newer, larger study.
+   - **Chickpea Fusarium wilt and chickpea rust now have management advisories**: Elbouazaoui et
+     al. 2022 (MDPI, open access) — early (mid-December) sowing significantly reduced all three
+     wilt-severity parameters vs. late (mid-February) sowing, in a 2-season Morocco field trial.
+     Sabale et al. 2024 (DOAJ, open access) — two sprays of azoxystrobin+difenoconazole cut rust
+     severity >77% with a 2.32 cost:benefit ratio — chickpea rust goes from the single thinnest
+     disease in the KB to having real management content.
+   - **Soybean mosaic virus's Rsv3 gene finally has a chromosome**: found by name per this
+     project's own repeated, explicit ask. Suh et al. 2011 (Gold OA, confirmed via 5 independent
+     mirrors of the exact abstract text) mapped Rsv3 to a 154-kbp interval on chromosome 14
+     (linkage group B2) containing a CC-NB-LRR gene cluster — added as `gene:soybean:Rsv3`,
+     `cloned: false` (locus/cluster, not a single complemented gene). A follow-on paper narrowing
+     this to one candidate gene (Glyma14g38533) was left as an unconfirmed lead, not curated.
+   **14 of 17 diseases now have an env trigger** (up from 9) and **14 of 17 now have a management
+   claim** (up from 9) — the biggest single jump in coverage on both fronts so far. Only soybean
+   bacterial pustule and soybean mosaic virus remain genuinely open on trigger/advisory after three
+   independent research passes — treated as a real literature gap, not a search failure. Loaded and
+   promoted live as `kg_2026_10_20`.
 
 ---
 

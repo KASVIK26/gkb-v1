@@ -88,6 +88,19 @@ sources:
     url: https://doi.org/10.1007/s11032-023-01397-x
     verified: true
 
+  # --- 2026-09-26, third research pass: found by name per a prior research brief's explicit ask
+  # ("Rsv3's chromosome, tried repeatedly, still not found"). Europe PMC has zero hits (The Plant
+  # Genome is not a PMC-participating journal), but the exact abstract text was independently
+  # confirmed word-for-word across 5 separate mirrors (Wiley's own page, DOAJ, KRIBB's open-access
+  # repository, IngentaConnect, and a university OA aggregator).
+  - id: doi:10.3835/plantgenome2010.11.0024
+    type: publication
+    title: "The Rsv3 Locus Conferring Resistance to Soybean Mosaic Virus is Associated with a Cluster of Coiled-Coil Nucleotide-Binding Leucine-Rich Repeat Genes"
+    year: 2011
+    venue: "The Plant Genome"
+    url: https://doi.org/10.3835/plantgenome2010.11.0024
+    verified: true
+
 entities:
   - id: gene:soybean:Rpp1
     type: Gene
@@ -150,6 +163,22 @@ entities:
       # PMID 35746594 (a review) calls the underlying gene "well validated" among SMV
       # resistance loci, but no cloning/complementation paper for it was found -- kept
       # cloned: false rather than trust the review's adjective without a primary source.
+
+  - id: gene:soybean:Rsv3
+    type: Gene
+    name: Rsv3
+    crop: soybean
+    props:
+      symbol: Rsv3
+      chromosome: Gm14
+      gene_class: "coiled-coil NB-LRR (CC-NB-LRR) cluster, not narrowed to one gene"
+      cloned: false
+      # The source paper mapped Rsv3 to a 154-kbp interval on chromosome 14 (linkage group B2)
+      # containing a cluster of CC-NB-LRR candidate genes -- a locus/cluster mapping, not a single
+      # cloned+complemented gene, so cloned stays false. A later paper (Redekar et al. 2016, Plant
+      # Genome 9(2)) reportedly narrows this further to one candidate, Glyma14g38533, but that
+      # paper's own open-access status and full text were not checked this session -- treat as an
+      # unconfirmed lead, not curated here.
 
   - id: gene:soybean:Rxp
     type: Gene
@@ -233,6 +262,16 @@ claims:
         method: review_statement
         locator: abstract
         quote: "Rsv4 on Gm02 in G. max are syntenic gene regions that confer resistance to Potyviruses"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:soybean:Rsv3
+    object: dis:soybean:mosaic_virus
+    qualifiers: {resistance_type: unknown}
+    evidence:
+      - source: doi:10.3835/plantgenome2010.11.0024
+        method: qtl_mapping
+        locator: abstract
+        quote: "The Soybean mosaic virus (SMV) resistance locus, Rsv3, previously mapped between markers A519F/R and M3Satt in the soybean molecular linkage group B2 (chromosome 14), has been characterized by examination of the soybean genome sequence. The 154 kbp interval encompassing Rsv3 contains a family of closely related coiled-coil nucleotide-binding leucine-rich repeat (CC-NB-LRR) genes."
 
   - type: GENE_CONFERS_RESISTANCE
     subject: gene:soybean:Rxp
