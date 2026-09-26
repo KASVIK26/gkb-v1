@@ -570,6 +570,27 @@ are also where most of the work is.
    into a numeric `EnvTrigger` condition it doesn't actually support; used qualitatively in the
    advisory instead. 7 of 17 diseases now have an env trigger, 7 of 17 have a management claim.
    Loaded and promoted live as `kg_2026_10_17`.
+22. **Continued the research pass; confirmed several more genuine gaps rather than forcing weak
+   data.** Env triggers: soybean bacterial pustule (2 different search angles, zero primary papers
+   with real numbers at all — genuinely thin literature) and soybean mosaic virus (aphid-vector
+   temperature data exists at the species-distribution-model level, e.g. a 2026 MaxEnt habitat-
+   suitability paper, but nothing at the field-trigger level) stay uncovered. Soybean rust's env
+   trigger led to a fuzzy-logic paper (PMID 35062631, OA) that confirmed our own `rh_ge_90_h`
+   sensor-vocab design matches real published methodology ("leaf wetness determined by...RH >= 90%,
+   converted into hours") but doesn't itself give the numeric thresholds — it cites a different,
+   unindexed paper for those. Rsv3 (soybean SMV) still has no confirmed chromosome after a third
+   search attempt.
+   **Checked something more useful than another paper search**: re-examined the *already-sourced*
+   variety documents directly for the diseases with zero `VARIETY_REACTION` claims (wheat powdery
+   mildew/FHB, soybean frogeye leaf spot/mosaic virus/rhizoctonia/anthracnose). Confirmed these are
+   genuine **source-document gaps**, not mapping bugs: the wheat AICRP PDF never mentions powdery
+   mildew or FHB for any variety (only rust and Karnal bunt); the soybean sources only ever mention
+   "Yellow Mosaic Virus" (correctly excluded from SMV per `resistance_text.py`'s documented rule —
+   verified this exclusion is firing correctly, not swallowing real SMV data) and never mention
+   frogeye/rhizoctonia/anthracnose at all. Closing these needs a richer soybean variety-notification
+   document (if one exists — unlike wheat/chickpea, no AICRP-style official soybean release PDF was
+   found in the original variety research pass) or germplasm screening-trial data (Phase 7), not
+   more searching of what's already in hand.
 
 ---
 
