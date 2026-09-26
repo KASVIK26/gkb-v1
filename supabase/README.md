@@ -38,6 +38,13 @@ files are the same either way; only how they get executed differs. For each new 
    ```
 3. Optional, only if you want to test the zone-map tables now: same schema,
    **`db/release_schema_postgis.sql`** after step 2.
+4. **`migrations/20260926120000_dashboard_views.sql`** — creates the `public.kg_*` bridge views
+   the demo dashboard (`public/app.js` + `functions/api/*.js`) reads via PostgREST's default
+   `public`-schema exposure. **Applied 2026-09-27** against the live project (this was the cause
+   of the dashboard's `Could not find the table 'public.kg_stats'`/`'public.kg_varieties'` 404s —
+   the migration file existed in the repo but had never actually been run). Safe to re-run
+   (`CREATE OR REPLACE VIEW`); re-run it any time `db/release_schema.sql`'s view definitions
+   change, since these bridge views select specific columns from `kg_current.v_*` by name.
 
 Nothing else needs turning on for Phase 1. `pg_cron` is deliberately **not** enabled yet
 (see the comment at the top of the extensions migration) — turn it on via
