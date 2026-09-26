@@ -82,7 +82,14 @@ wheat:
       source_type: peer_reviewed_primary
       verified_via: europepmc_id
       key_findings:
-        environmental: "Optimum 15-21 degC with RH > 70%; no free water needed (unlike the rusts); declines fast above ~22-24 degC with RH < 85%."
+        environmental: >-
+          UNVERIFIED (checked 2026-09-26): this paper's abstract, freely available via Europe PMC,
+          contains no temperature/RH numbers at all -- just "generalized R2 of 72.4%" for a
+          temperature+humidity model. The "15-21 degC / RH>70%" figures below were apparently
+          typed from a full-text read or general knowledge, not this abstract. Do not cite as this
+          paper's finding without pulling the full text. Kept here (not deleted) as a record of
+          what needs re-checking: "Optimum 15-21 degC with RH > 70%; no free water needed (unlike
+          the rusts); declines fast above ~22-24 degC with RH < 85%."
         management: "Short (7-10 day) latent period gives high epidemic potential; timing fungicide ahead of that window matters more than for slower diseases."
 
   dis:wheat:fusarium_head_blight:
@@ -123,7 +130,14 @@ soybean:
       source_type: peer_reviewed_review
       verified_via: europepmc_id
       key_findings:
-        environmental: "Thermophilic, low-moisture pathogen; disease severity rises at 28-35 degC soil/air temperature combined with low rainfall/soil moisture deficit -- directly matches the soil-probe data AgriNode already measures."
+        environmental: >-
+          UNVERIFIED (checked 2026-09-26): this paper's abstract only says "high maximum air
+          temperatures and low rainfalls" are associated with charcoal rot -- no numeric
+          thresholds at all. The "28-35 degC" figure below is not in the abstract; do not cite it
+          as this paper's finding without the full text. Kept here as a record of what needs
+          re-checking: "disease severity rises at 28-35 degC soil/air temperature combined with
+          low rainfall/soil moisture deficit -- directly matches the soil-probe data AgriNode
+          already measures."
         management: "Resistant cultivars are the most promising lever; cultural practices (irrigation scheduling to avoid moisture stress) are the main non-genetic control."
 
   dis:soybean:frogeye_leaf_spot:
@@ -242,7 +256,13 @@ chickpea:
       source_type: peer_reviewed_primary
       verified_via: europepmc_id
       key_findings:
-        environmental: "Optimal disease progression at soil temperature ~35 degC and soil moisture content <= 60% -- India survey data (separate source) puts MP among the emerging hotspots, directly relevant to the project's Malwa focus."
+        environmental: >-
+          UNVERIFIED (checked 2026-09-26): this paper's abstract identifies "low soil moisture"
+          and "average maximum temperature of the months October and November" as predictors in an
+          ANN model, but gives no numeric degC or % thresholds at all. The "~35 degC / <=60%"
+          figures below are not in the abstract; do not cite them as this paper's finding without
+          the full text. Kept here as a record of what needs re-checking: "Optimal disease
+          progression at soil temperature ~35 degC and soil moisture content <= 60%."
         management: "No robust resistant sources identified yet in the literature reviewed; management is largely agronomic (irrigation scheduling to avoid moisture stress at flowering/podding)."
 
   dis:chickpea:collar_rot:

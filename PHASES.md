@@ -313,8 +313,21 @@ are also where most of the work is.
    mapped locus: soybean charcoal rot/anthracnose/pod & stem blight/rhizoctonia root rot (diffuse QTL/GWAS
    signal only, no single validated gene), chickpea dry root rot/collar rot/rust (screening studies only,
    no mapped locus at all in the literature as of this search). Turning
-   `config/sources/candidate_papers.yaml`'s findings into cited `DISEASE_ENV_TRIGGER`/`DISEASE_MANAGED_BY`
-   claims (Phase 5/8) is still not started.
+8. ~~Turn `config/sources/candidate_papers.yaml`'s findings into cited `DISEASE_ENV_TRIGGER` claims~~
+   **Started 2026-09-26, first batch done** — `kg/curated/env_triggers_v1.yaml`, loaded and live as
+   `kg_2026_10_4`. **Important finding while doing this**: re-checking each candidate paper's
+   `key_findings.environmental` text against its actual freely-available Europe PMC abstract found
+   that 3 of them do **not** hold up — the numeric thresholds for wheat powdery mildew, chickpea dry
+   root rot, and soybean charcoal rot are not present in those abstracts at all (likely typed from a
+   full-text read that isn't accessible now, or general knowledge, and mis-attributed). Flagged
+   inline in `candidate_papers.yaml` with an `UNVERIFIED` note on each, original text preserved for
+   reference. Only 4 diseases got a real trigger this round — wheat leaf rust, chickpea Fusarium
+   wilt (both Foc races), chickpea collar rot, soybean frogeye leaf spot — because those 4 are the
+   ones whose abstracts actually contained a quotable number. The other diseases' candidate papers
+   need full-text access (institutional login or PMC OA subset) to do properly, not another
+   abstract-only pass. Added `rh_ge_80_h` to `config/vocab/sensors.yaml` (mirrors `rh_ge_90_h` at a
+   lower cutoff) since the frogeye leaf spot model needed it. `DISEASE_MANAGED_BY` claims and the
+   remaining 13 diseases' triggers are still not started.
 
 ---
 

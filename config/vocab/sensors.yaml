@@ -94,6 +94,14 @@ derived:
     unit: h
     formula: "count of hours in window whose hourly mean air_rh >= 90"
     role: leaf-wetness proxy (RH-threshold method)
+  - name: rh_ge_80_h
+    unit: h
+    formula: "count of hours in window whose hourly mean air_rh >= 80"
+    role: >-
+      Same RH-threshold method as rh_ge_90_h at a lower cutoff. Added for the frogeye leaf spot
+      risk model (Gonzalez-Acuna et al. 2026, PMID 41957394), which is built on a 30-day moving
+      average of daily hours with RH >= 80% -- a different cutoff from the leaf-wetness proxy
+      above, not a duplicate of it.
   - name: est_leaf_wet_h
     unit: h
     formula: "hours classified wet by a validated leaf-wetness model (RH threshold and/or dew-point depression)"

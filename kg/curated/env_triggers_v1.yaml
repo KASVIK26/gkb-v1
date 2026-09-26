@@ -1,0 +1,167 @@
+# First real DISEASE_ENV_TRIGGER content (Phase 5/8 work: config/sources/candidate_papers.yaml's
+# `key_findings` turned into cited, quote-grounded claims). Read this file's history before
+# trusting any future addition to it:
+#
+# When re-checking each candidate paper's `key_findings.environmental` text against its actual,
+# freely available abstract (2026-09-26), most of them did NOT hold up -- the numeric thresholds
+# I'd written in candidate_papers.yaml for wheat powdery mildew, chickpea dry root rot, and
+# soybean charcoal rot are not present in those papers' abstracts at all (they must have come from
+# a full-text read I no longer have access to, or from general knowledge, and got mis-attributed
+# to a paper's own abstract when the reading-list file was written). Wheat stripe rust's own entry
+# in candidate_papers.yaml already self-flagged this same risk ("unverified separately -- flagged,
+# not cited on its own"). This confirms candidate_papers.yaml's own warning was correct: its
+# key_findings are a triage summary, NOT a grounded Evidence record, and must be re-verified
+# against real abstract/full-text before becoming a claim -- never copied over trusting the
+# reading-list file alone, no matter how "verified_via: europepmc_id" that file's source entry is.
+#
+# Only 4 diseases below have a trigger, because only 4 candidate papers' FREELY AVAILABLE
+# abstracts (not full text -- not fetched in this pass) actually contained a real, quotable
+# numeric threshold when re-checked one by one. The rest are a real, open gap -- either the
+# abstract itself is silent on numbers (powdery mildew, dry root rot, charcoal rot) or Europe PMC
+# returned no abstract at all (the FHB review, too recent to be indexed). Getting the rest right
+# needs full-text access (e.g. an institutional login, or the PMC open-access subset where the
+# paper qualifies), not another abstract-only pass.
+
+sources:
+  - id: pmid:38952372
+    type: publication
+    title: "Genotypes, epidemiological variables and fungicides application associated with wheat leaf rust development and grain yield"
+    year: 2024
+    venue: Heliyon
+    url: https://pubmed.ncbi.nlm.nih.gov/38952372/
+    verified: true
+
+  - id: pmid:18943575
+    type: publication
+    title: "Quantitative Modeling of the Effects of Temperature and Inoculum Density of Fusarium oxysporum f. sp. ciceris Races 0 and 5 on Development of Fusarium Wilt in Chickpea Cultivars"
+    year: 2007
+    venue: Phytopathology
+    url: https://pubmed.ncbi.nlm.nih.gov/18943575/
+    verified: true
+
+  - id: pmid:30158943
+    type: publication
+    title: "Exploring Combined Effect of Abiotic (Soil Moisture) and Biotic (Sclerotium rolfsii Sacc.) Stress on Collar Rot Development in Chickpea"
+    year: 2018
+    venue: "Frontiers in Plant Science"
+    url: https://pubmed.ncbi.nlm.nih.gov/30158943/
+    verified: true
+
+  - id: pmid:41957394
+    type: publication
+    title: "Modeling the environment-related risk of frogeye leaf spot (Cercospora sojina) in soybean across the United States"
+    year: 2026
+    venue: "Scientific Reports"
+    url: https://pubmed.ncbi.nlm.nih.gov/41957394/
+    verified: true
+
+entities:
+  - id: env:wheat:leaf_rust_field_conditions
+    type: EnvTrigger
+    name: "Wheat leaf rust: field-observed temperature/humidity range for rising severity"
+    crop: wheat
+    props:
+      # Field-correlation data from a single research station across 2 seasons, NOT a
+      # controlled-inoculation infection threshold -- weighted accordingly (field_single_env)
+      # rather than treated as a lab-validated infection window.
+      phase: spread
+      bbch_from: 30
+      bbch_to: 79
+      conditions:
+        - {variable: air_temp_c, min: 17.8, max: 30, aggregation: max, window_h: 24}
+        - {variable: air_rh, min: 76.3, max: 85, aggregation: max, window_h: 24}
+
+  - id: env:chickpea:fusarium_wilt_foc5_soil_temp
+    type: EnvTrigger
+    name: "Chickpea Fusarium wilt (Foc race 5): optimum soil temperature for infection"
+    crop: chickpea
+    props:
+      phase: infection
+      bbch_from: 9
+      bbch_to: 75
+      conditions:
+        - {variable: soil_temp_c, min: 22, max: 26, aggregation: mean, window_h: 24}
+
+  - id: env:chickpea:fusarium_wilt_foc0_soil_temp
+    type: EnvTrigger
+    name: "Chickpea Fusarium wilt (Foc race 0): optimum soil temperature for infection"
+    crop: chickpea
+    props:
+      phase: infection
+      bbch_from: 9
+      bbch_to: 75
+      conditions:
+        - {variable: soil_temp_c, min: 24, max: 28, aggregation: mean, window_h: 24}
+
+  - id: env:chickpea:collar_rot_soil_moisture
+    type: EnvTrigger
+    name: "Chickpea collar rot: soil moisture band associated with rising incidence"
+    crop: chickpea
+    props:
+      # The source paper tested 4 discrete levels (40/60/80/100% soil moisture content) and found
+      # disease rising from 40% ("limiting") through 60/80/100% ("optimum" band, peaking at 80%).
+      # Modelled as a single min bound at the paper's own "lower optimum" (60%) rather than
+      # inventing a precise continuous curve the paper doesn't give.
+      phase: infection
+      bbch_from: 0
+      bbch_to: 22
+      conditions:
+        - {variable: soil_moisture_vwc, min: 60, aggregation: mean, window_h: 24}
+
+  - id: env:soybean:frogeye_leaf_spot_rh_temp
+    type: EnvTrigger
+    name: "Soybean frogeye leaf spot: 30-day RH-hours + max temperature risk model"
+    crop: soybean
+    props:
+      phase: spread
+      bbch_from: 61
+      bbch_to: 79
+      conditions:
+        - {variable: rh_ge_80_h, min: 15, max: 20, aggregation: mean, window_h: 720}
+        - {variable: air_temp_c, min: 24, max: 36, aggregation: max, window_h: 24}
+
+claims:
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:wheat:leaf_rust
+    object: env:wheat:leaf_rust_field_conditions
+    evidence:
+      - source: pmid:38952372
+        method: field_single_env
+        locator: abstract
+        quote: "Leaf rust severity (%) increased with an increase in maximum temperature (17.8-30 °C), maximum relative humidity (76.3-85 %)"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:chickpea:fusarium_wilt
+    object: env:chickpea:fusarium_wilt_foc5_soil_temp
+    evidence:
+      - source: pmid:18943575
+        method: controlled_env
+        locator: abstract
+        quote: "The models estimated 22 to 26 degrees C as the most favorable soil temperature for infection of cvs. P-2245 and PV-61 by Foc-5"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:chickpea:fusarium_wilt
+    object: env:chickpea:fusarium_wilt_foc0_soil_temp
+    evidence:
+      - source: pmid:18943575
+        method: controlled_env
+        locator: abstract
+        quote: "24 to 28 degrees C for infection of cv. P-2245 by Foc-0"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:chickpea:collar_rot
+    object: env:chickpea:collar_rot_soil_moisture
+    evidence:
+      - source: pmid:30158943
+        method: controlled_env
+        locator: abstract
+        quote: "Maximum incidence was observed at 80% SMC, followed by 100 and 60% SMC"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:soybean:frogeye_leaf_spot
+    object: env:soybean:frogeye_leaf_spot_rh_temp
+    evidence:
+      - source: pmid:41957394
+        method: field_multi_env
+        locator: abstract
+        quote: "FLS risk peaked when the 30-d ma of daily hours of RH ≥ 80% was 15–20 h and maximum temperature was 24–36 °C"
