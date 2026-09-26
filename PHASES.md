@@ -295,7 +295,18 @@ are also where most of the work is.
 4. ~~MP/Malwa notified variety lists, wheat/soybean/chickpea~~, ~~retry the DPD chickpea PDF~~,
    ~~fill confirmed-null years~~, ~~same pass for Maharashtra~~, ~~turn it into loaded `Variety`
    entities and claims~~. **All done 2026-09-26** — `kg_2026_10_2` is live with 108 varieties.
-   Remaining: soybean's still-`null` years; confirm "Shakti"/"MAUS 81" aren't double-counted.
+   ~~Remaining: soybean's still-`null` years; confirm "Shakti"/"MAUS 81" aren't double-counted~~
+   **Done 2026-09-26** — found ICAR-IISR Indore's archived national variety list
+   (`web.archive.org/web/20220617113918/…/varieties.html`, direct fetch to the live site failed
+   the same way `dpd.gov.in` did earlier). Confirmed "Shakti" and "MAUS 81" are one variety (the
+   list names it "MAUS 81 (Shakti)") — merged the two duplicate entries into one, so the release
+   entity count actually **dropped** by 1 (173 → 172), which is correct. Filled in 6 previously
+   `null` years (JS 335→1994, Samrudhi/MAUS 71→2002, MAUS 612→2018, MACS 58→1989, Parbhani
+   Sona/MAUS 47→2000, Pratishta/MAUS 61-2→2002), each cross-checked against two independent
+   tables on the same source page. NRC 157 and MAUS 725 genuinely don't appear on that list at
+   all (checked, not just unlucky) — still `null`, needs a different source. NRC 136 has an
+   ambiguous, HTML-extraction-garbled fragment that isn't trustworthy enough to use — still
+   `null`. Loaded and promoted live as `kg_2026_10_5`.
 5. Rewrite the superseded sections of `TECH_STACK.md` and `docs/interfaces.md` (currently just flagged with
    warning banners) to match the confirmed architecture — still pending, no rush since the banners cover it.
 6. ~~Build the `kg_current` atomic-switchover mechanism~~ **Done 2026-09-26** — `curator/graph/promote.py`
