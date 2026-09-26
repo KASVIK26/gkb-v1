@@ -79,7 +79,7 @@ are also where most of the work is.
 |---|---|---|
 | 0 | Cleanup: bad data removed, tests fixed, secrets hooked, docs consolidated | ✅ **Done** |
 | 1 | Scope, data model, ID rules, release schema, competency questions | ✅ **Done** |
-| 2 | Supabase live setup + versioned build pipeline | 🟡 **Core done** — three real releases (`kg_2026_10_1/2/3`) built; `kg_current` atomic switchover live and pointing at `kg_2026_10_3`, verified by reading it back. Remaining: build manifest |
+| 2 | Supabase live setup + versioned build pipeline | ✅ **Done** — five real releases (`kg_2026_10_1` through `_5`) built; `kg_current` atomic switchover live and pointing at `kg_2026_10_5`; `kg/manifest.json` (checksums, git SHA, counts) written on every `kg load`, verified by reading it back |
 | 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 10 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
 | 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | ⬜ Not started |
 | 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Source discovery done** — verified bibliography for all 17 diseases (`config/sources/candidate_papers.yaml`); the grounded-extraction pipeline itself not started |
@@ -314,8 +314,14 @@ are also where most of the work is.
    `agrihub kg promote --release X` / `agrihub kg current [--history]`, 7 tests in `tests/test_promote.py`
    proving the view-swap is atomic (every `kg_current` view repoints in one transaction, verified via
    `information_schema.view_table_usage` rather than trusting `pg_get_viewdef`'s search-path-dependent
-   text). `kg_2026_10_2` was promoted live first, then superseded by `kg_2026_10_3` below. The build
-   manifest (task 2.5, checksums/versions) is still not started.
+   text). `kg_2026_10_2` was promoted live first, then superseded by `kg_2026_10_3` below.
+   ~~The build manifest (task 2.5, checksums/versions) is still not started~~ **Done 2026-09-26** —
+   `curator/graph/manifest.py` (`build_manifest`, `write_manifest`), wired into `agrihub kg load`
+   behind a `--manifest-path` option (so tests never touch the tracked file); writes `kg/manifest.json`
+   with per-file SHA-256 checksums for every file that actually feeds the bundle (split from
+   `sensors.yaml`, which only constrains validation and never emits content), plus the git HEAD SHA
+   and dirty flag and entity/claim/evidence counts. 6 tests in `tests/test_manifest.py`. Retroactively
+   generated for the currently-live `kg_2026_10_5`.
 7. ~~Continue expanding curated genes (soybean/chickpea genes not started at all yet)~~ **Done 2026-09-26,
    partially** — `kg/curated/soybean_seed_genes.yaml` (6 genes: Rpp1/Rpp2 rust, Rsv1/Rsv4 mosaic virus,
    Rxp bacterial pustule, Rcs3 frogeye leaf spot — each PMID-verified via Europe PMC on 2026-09-26) and

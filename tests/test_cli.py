@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 import psycopg
 import pytest
 from typer.testing import CliRunner
@@ -19,11 +21,19 @@ def test_kg_build_reports_counts_and_passes():
     assert '"claims"' in result.output
 
 
-def test_kg_load_against_a_live_database(pg_conn: psycopg.Connection, pg_dsn: str, release_schema: str):
+def test_kg_load_against_a_live_database(pg_conn: psycopg.Connection, pg_dsn: str, release_schema: str, tmp_path):
     tag = release_schema.removeprefix("kg_")
-    result = runner.invoke(app, ["kg", "load", "--release", tag, "--database-url", pg_dsn])
+    manifest_path = tmp_path / "manifest.json"
+    result = runner.invoke(
+        app, ["kg", "load", "--release", tag, "--database-url", pg_dsn, "--manifest-path", str(manifest_path)]
+    )
     assert result.exit_code == 0, result.output
     assert "Loaded release" in result.output
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert manifest["release"] == tag
+    assert manifest["counts"]["entities"] > 0
+    assert "config/vocab/diseases.yaml" in manifest["content_sources"]
 
     set_search_path(pg_conn, release_schema)
     (gene_count,) = pg_conn.execute(f"SELECT count(*) FROM {release_schema}.v_gene_resistance").fetchone()

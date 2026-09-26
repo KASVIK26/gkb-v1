@@ -17,6 +17,7 @@ import typer
 
 from curator.graph.bundle import KGBundle
 from curator.graph.kg_files import load_curated_dir
+from curator.graph.manifest import MANIFEST_PATH, write_manifest
 from curator.graph.pg import GateError, create_release_schema, load_bundle
 from curator.graph.promote import PromoteError, current_release, promote, release_history
 from curator.graph.variety_import import variety_bundle
@@ -68,6 +69,9 @@ def load(
         ..., envvar="DATABASE_URL_DIRECT", help="Postgres connection string (direct/session pooler, not the transaction pooler)."
     ),
     postgis: bool = typer.Option(False, help="Also create the PostGIS zone-map tables (db/release_schema_postgis.sql)."),
+    manifest_path: Path = typer.Option(
+        MANIFEST_PATH, help="Where to write the build manifest (checksums, git SHA, counts). Tests override this."
+    ),
 ) -> None:
     """Build, validate, and load a brand-new KG release schema. Refuses to overwrite an existing one."""
     schema = f"kg_{release}"
@@ -90,7 +94,9 @@ def load(
             conn.execute(f"DROP SCHEMA {schema} CASCADE")
             raise typer.Exit(code=1) from exc
 
+    manifest = write_manifest(bundle, release=release, path=manifest_path)
     typer.secho(f"Loaded release '{schema}': {json.dumps(counts)}", fg=typer.colors.GREEN)
+    typer.echo(f"Manifest written to {manifest_path} (git_sha={manifest['git_sha']}, dirty={manifest['git_dirty']})")
     typer.echo(f"Note: this does not repoint kg_current — run `agrihub kg promote --release {release}` to go live.")
 
 

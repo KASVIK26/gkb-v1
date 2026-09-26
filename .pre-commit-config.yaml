@@ -4,7 +4,10 @@ repos:
     hooks:
       - id: detect-secrets
         args: ["--baseline", ".secrets.baseline"]
-        exclude: ^(data/|\.venv|\.wrangler/|tests/fixtures/)
+        # kg/manifest.json is intentionally full of SHA-256/git-SHA hex strings that change on
+        # every build -- that's its whole purpose, not a secret leak, and baselining one specific
+        # hash value would need redoing on every single build.
+        exclude: ^(data/|\.venv|\.wrangler/|tests/fixtures/|kg/manifest\.json)
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
