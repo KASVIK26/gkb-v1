@@ -620,6 +620,34 @@ are also where most of the work is.
    to verified claims — that discipline was correct and nothing further was done with those here
    either. Loaded and promoted live as `kg_2026_10_18`. 8 of 17 diseases now have a management
    claim (up from 7); the env-trigger count is unchanged at 7/17.
+24. **Second research pass via a different AI tool (Grok), same `docs/research_needed.md` brief —
+   the strongest batch yet.** All 3 concrete findings independently re-verified before use (2
+   against Europe PMC, 1 — too old to be indexed there — directly against the American
+   Phytopathological Society's own back-issues archive, reached via the browser pane after
+   `WebFetch` got a 403). All 3 fill diseases that had **zero** env trigger or advisory before this:
+   - **Wheat stem rust finally has an env trigger**: a field-validated mechanistic model
+     (Salotti, Bove & Rossi 2022, open access) with a precise Onset rule — rain >=1mm/h, followed
+     by a >=3h wetness period, with mean temperature 15-32°C during that period. Modelled as 3
+     independent conditions (our `EnvTrigger` schema can't express "temperature specifically
+     during the detected wetness window" as a compound rule) — documented as an approximation.
+   - **Wheat FHB finally has a management advisory**: real field-trial data (González-Domínguez
+     et al. 2021, MDPI, open access, not indexed in Europe PMC at all — confirmed by loading the
+     page directly in the browser instead) — fungicide efficacy was >90% for FHB incidence when
+     applied 1-4 days *before* infection, dropping to 58% at 5 days *after*. This is the paper's
+     own primary 2-year field result, not a citation. A second sentence in the same paper
+     ("infection occurs... at 20-30°C with >=16h wetness") is *not* this paper's own finding —
+     it cites a 2001 paper that isn't indexed anywhere I could check, so it's recorded as a lead,
+     not a claim.
+   - **Soybean rust finally has an env trigger**: a classic 1976 primary paper (Marchetti,
+     Melching & Bromfield) — germination 10-28.5°C, no infection above 27.5°C, and two distinct
+     favourable infection bands (20-25°C with >=6h dew; 15-17.5°C with >=8h dew). Modelled as two
+     separate `EnvTrigger` entities matching the paper's own two-band structure, not one merged
+     range. **Likely explains an old mystery**: this paper's real numbers are probably the actual
+     origin of the "10-27.5°C / >=6h" figures previously flagged UNVERIFIED against a *different*,
+     2020 paper — the same "misattributed, not fabricated" pattern already seen once with the
+     soybean rhizoctonia figures.
+   9 of 17 diseases now have an env trigger (up from 7); 9 of 17 have a management claim (up from
+   8). Loaded and promoted live as `kg_2026_10_19`.
 
 ---
 

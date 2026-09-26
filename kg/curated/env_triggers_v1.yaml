@@ -134,6 +134,33 @@ sources:
     url: https://doi.org/10.1094/PDIS.2003.87.5.533
     verified: true
 
+  - id: pmid:35693159
+    type: publication
+    title: "Development and Validation of a Mechanistic, Weather-Based Model for Predicting Puccinia graminis f. sp. tritici Infections and Stem Rust Progress in Wheat"
+    year: 2022
+    venue: "Frontiers in Plant Science"
+    url: https://doi.org/10.3389/fpls.2022.897680
+    verified: true
+
+  - id: doi:10.3390/agronomy11081549
+    type: publication
+    title: "Efficacy of Fungicides against Fusarium Head Blight Depends on the Timing Relative to Infection Rather than on Wheat Growth Stage"
+    year: 2021
+    venue: Agronomy
+    url: https://doi.org/10.3390/agronomy11081549
+    verified: true
+
+  - id: doi:10.1094/Phyto-66-461
+    type: publication
+    title: "The Effects of Temperature and Dew Period on Germination and Infection by Uredospores of Phakopsora pachyrhizi"
+    year: 1976
+    venue: Phytopathology
+    url: https://www.apsnet.org/publications/phytopathology/backissues/Documents/1976Abstracts/Phyto66_461.htm
+    # No PMID found (checked Europe PMC by DOI, author search, and title search -- zero hits,
+    # this old a paper simply isn't indexed there). Existence and abstract independently confirmed
+    # directly on the American Phytopathological Society's own back-issues archive instead.
+    verified: true
+
 entities:
   - id: env:wheat:leaf_rust_field_conditions
     type: EnvTrigger
@@ -326,6 +353,61 @@ entities:
     props:
       action_type: biological
 
+  - id: env:wheat:stem_rust_infection_onset
+    type: EnvTrigger
+    name: "Wheat stem rust: mechanistic infection-onset rule (rain, wetness, temperature)"
+    crop: wheat
+    props:
+      # The paper's own Onset rule is a compound/sequential condition -- a rain event, THEN a
+      # wetness period following it, with a mean temperature check specifically during that
+      # wetness period. Our TriggerCondition model checks independent windowed bounds, not
+      # sequential/conditional logic, so this is an approximation: rain and leaf-wetness-hours are
+      # checked as their own independent conditions, and temperature is checked as a 24h mean
+      # rather than specifically "during the wetness period." Tmin=4/Tmax=35 for uredospore
+      # germination (broader, secondary parameterization in the source paper) are not modelled
+      # separately here -- the Onset rule is the paper's own primary decision criterion.
+      phase: infection
+      bbch_from: 45
+      bbch_to: 85
+      conditions:
+        - {variable: rain_mm, min: 1, aggregation: sum, window_h: 1}
+        - {variable: est_leaf_wet_h, min: 3, aggregation: sum, window_h: 24}
+        - {variable: air_temp_c, min: 15, max: 32, aggregation: mean, window_h: 24}
+
+  - id: adv:wheat:fusarium_head_blight_fungicide_timing
+    type: Advisory
+    name: "Apply DMI or DMI+SDHI fungicide 1-4 days before infection, not after -- efficacy drops sharply post-infection"
+    crop: wheat
+    props:
+      action_type: chemical
+
+  - id: env:soybean:rust_infection_20_25c
+    type: EnvTrigger
+    # The source paper describes two distinct favourable temperature/dew-duration bands, not one
+    # generalised rule -- modelled as two separate EnvTrigger entities to match the paper's own
+    # structure exactly rather than inventing a merged range it doesn't state.
+    name: "Soybean rust: infection at 20-25 degC with >=6h dew/leaf wetness"
+    crop: soybean
+    props:
+      phase: infection
+      bbch_from: 61
+      bbch_to: 79
+      conditions:
+        - {variable: air_temp_c, min: 20, max: 25, aggregation: mean, window_h: 24}
+        - {variable: est_leaf_wet_h, min: 6, aggregation: sum, window_h: 24}
+
+  - id: env:soybean:rust_infection_15_17_5c
+    type: EnvTrigger
+    name: "Soybean rust: infection at 15-17.5 degC with >=8h dew/leaf wetness"
+    crop: soybean
+    props:
+      phase: infection
+      bbch_from: 61
+      bbch_to: 79
+      conditions:
+        - {variable: air_temp_c, min: 15, max: 17.5, aggregation: mean, window_h: 24}
+        - {variable: est_leaf_wet_h, min: 8, aggregation: sum, window_h: 24}
+
 claims:
   - type: DISEASE_ENV_TRIGGER
     subject: dis:wheat:leaf_rust
@@ -478,3 +560,39 @@ claims:
         method: controlled_env
         locator: abstract
         quote: "Disease incidence was reduced up to 47% in treatments where captan (fungicide) or antagonistic Pseudomonas sp. CDB 35 was applied"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:wheat:stem_rust
+    object: env:wheat:stem_rust_infection_onset
+    evidence:
+      - source: pmid:35693159
+        method: field_multi_env
+        locator: "full text, Methods"
+        quote: "(i) rain event (P) ≥ 1 mm h–1; (ii) the wetness period (WD) following rain is ≥3 h; and (iii) mean temperature during WD (Tw) is between 15 and 32°C"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:wheat:fusarium_head_blight
+    object: adv:wheat:fusarium_head_blight_fungicide_timing
+    evidence:
+      - source: doi:10.3390/agronomy11081549
+        method: controlled_env
+        locator: "full text, Discussion"
+        quote: "When DMI (T1) or DMI + SDHI (T3) fungicides were applied 1 or 4 days before infection, efficacy was >90% for FHB incidence and >78% for DON contamination. When these fungicides were applied 5 days post-infection, the average efficacy was lower (58% for FHB incidence and from 45 to 56% for DON concentration depending on the fungicide)."
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:soybean:rust
+    object: env:soybean:rust_infection_20_25c
+    evidence:
+      - source: doi:10.1094/Phyto-66-461
+        method: controlled_env
+        locator: abstract
+        quote: "Maximal infection of Wayne soybean leaves occurred at 20-25 C with 10-12 hours of dew...The minimal dew period for infection was 6 hours at 20-25 C"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:soybean:rust
+    object: env:soybean:rust_infection_15_17_5c
+    evidence:
+      - source: doi:10.1094/Phyto-66-461
+        method: controlled_env
+        locator: abstract
+        quote: "at 15-17.5 C with 16-18 hours of dew...8-10 hours at 15-17.5 C"

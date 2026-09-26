@@ -98,6 +98,29 @@ wheat:
         environmental: "Reviews existing weather-driven infection-risk models and their data gaps; general optimum ~10-15 degC with intermittent rain/dew (per related sources)."
         management: "DMI fungicides (tebuconazole, propiconazole) effective but costly and resistance-prone; global rust surveillance network is the primary early-warning tool."
 
+    - pmid: "35693159"
+      title: "Development and Validation of a Mechanistic, Weather-Based Model for Predicting Puccinia graminis f. sp. tritici Infections and Stem Rust Progress in Wheat"
+      journal: "Frontiers in Plant Science"
+      year: 2022
+      authors: "Salotti I, Bove F, Rossi V"
+      url: https://doi.org/10.3389/fpls.2022.897680
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      note: >-
+        Found 2026-09-26 via a research pass done with a second AI tool (Grok), independently
+        re-verified against Europe PMC (metadata + full text) before use. Open access, PMCID
+        PMC9184802. This finally fills stem rust's completely empty env-trigger gap.
+      key_findings:
+        environmental: >-
+          VERIFIED 2026-09-26 (full text, Methods): "(i) rain event (P) >= 1 mm h-1; (ii) the
+          wetness period (WD) following rain is >=3 h; and (iii) mean temperature during WD (Tw)
+          is between 15 and 32 degC" -- see kg/curated/env_triggers_v1.yaml
+          (env:wheat:stem_rust_infection_onset). This is the paper's own field-validated Onset
+          rule (posterior probability 0.78 for correctly predicting infections), not a citation to
+          another source. Germination bounds Tmin=4 degC/Tmax=35 degC are secondary parameterization,
+          not modelled as a separate trigger.
+        management: "Not the focus of this paper (infection-risk model, not a fungicide-timing study)."
+
   dis:wheat:powdery_mildew:
     - pmid: "30699700"
       title: "Development of Weather- and Airborne Inoculum-Based Models to Describe Disease Severity of Wheat Powdery Mildew"
@@ -139,6 +162,38 @@ wheat:
         environmental: "Models use temperature/RH/rainfall in 5-15 day windows pre- and post-anthesis; infection tied to head-wetting from simultaneous rain + high RH near anthesis."
         management: "Fungicide must be applied at anthesis or within 5 days after -- the single highest-leverage timing fact for an IoT alert on this disease."
 
+    - title: "Efficacy of Fungicides against Fusarium Head Blight Depends on the Timing Relative to Infection Rather than on Wheat Growth Stage"
+      journal: Agronomy
+      year: 2021
+      authors: "Gonzalez-Dominguez E, Meriggi P, Ruggeri M, Rossi V"
+      doi: 10.3390/agronomy11081549
+      url: https://www.mdpi.com/2073-4395/11/8/1549
+      source_type: peer_reviewed_primary
+      verified_via: search_result
+      note: >-
+        Found 2026-09-26 via a research pass done with a second AI tool (Grok), independently
+        re-verified before use. Not indexed in Europe PMC at all (checked by DOI and by title,
+        zero hits both times) -- confirmed instead by loading the MDPI page directly in the
+        browser (WebFetch got a 403, the browser pane didn't). Open access (CC BY 4.0). This
+        finally fills FHB's completely empty management gap.
+      key_findings:
+        environmental: >-
+          The paper's OWN Discussion states "Infection by F. graminearum occurs after a rain, when
+          temperatures range from 20 to 30 degC and with at least 16 h of wetness" -- but this
+          sentence carries a citation to a different paper (Rossi, Ravanetti, Pattori, Giosue 2001,
+          J. Plant Pathol. 83:189-198), which is NOT this paper's own experimental result. That 2001
+          paper was searched for on Europe PMC and not found/indexed -- so this figure is a LEAD,
+          not independently confirmed against its actual primary source, and is not modelled as a
+          claim here.
+        management: >-
+          VERIFIED 2026-09-26 (full text, Discussion, this IS the paper's own primary field-trial
+          result across 2017-2018): "When DMI (T1) or DMI + SDHI (T3) fungicides were applied 1 or
+          4 days before infection, efficacy was >90% for FHB incidence and >78% for DON
+          contamination. When these fungicides were applied 5 days post-infection, the average
+          efficacy was lower (58% for FHB incidence and from 45 to 56% for DON concentration
+          depending on the fungicide)." -- see kg/curated/env_triggers_v1.yaml
+          (adv:wheat:fusarium_head_blight_fungicide_timing).
+
 soybean:
   dis:soybean:rust:
     - pmid: "32716274"
@@ -168,6 +223,37 @@ soybean:
           must not be used. Original (incorrect) text, kept for the record: "Rain-based action
           thresholds for fungicide timing outperform calendar-based spraying in both efficacy and
           cost."
+
+    - title: "The Effects of Temperature and Dew Period on Germination and Infection by Uredospores of Phakopsora pachyrhizi"
+      journal: Phytopathology
+      year: 1976
+      authors: "Marchetti MA, Melching JS, Bromfield KR"
+      doi: 10.1094/Phyto-66-461
+      url: https://www.apsnet.org/publications/phytopathology/backissues/Documents/1976Abstracts/Phyto66_461.htm
+      source_type: peer_reviewed_primary
+      verified_via: search_result
+      note: >-
+        Found 2026-09-26 via a research pass done with a second AI tool (Grok), independently
+        re-verified before use. Not indexed in Europe PMC at all (checked by DOI and by author
+        search, zero hits both times) -- confirmed instead directly on the American
+        Phytopathological Society's own back-issues abstract archive (apsnet.org), which the
+        browser pane could load even though WebFetch got a 403. This finally fills soybean rust's
+        completely empty env-trigger gap. IMPORTANT: this classic paper's real numbers (germination
+        10-28.5 degC, no infection above 27.5 degC) are very likely the actual origin of the
+        "10-27.5 degC / >=6h" figures flagged UNVERIFIED against the Beruski et al. 2020 paper
+        above -- so, like the soybean rhizoctonia case, probably misattributed rather than
+        fabricated.
+      key_findings:
+        environmental: >-
+          VERIFIED 2026-09-26 (abstract, confirmed directly on apsnet.org): "Uredospores of
+          Phakopsora pachyrhizi germinated between 10 C and 28.5 C, with a broad optimum in the
+          range 15-25 C... Maximal infection of Wayne soybean leaves occurred at 20-25 C with 10-12
+          hours of dew and at 15-17.5 C with 16-18 hours of dew. The minimal dew period for
+          infection was 6 hours at 20-25 C, and 8-10 hours at 15-17.5 C. Infection did not occur
+          above 27.5 C." -- modelled as two separate EnvTrigger entities (one per temperature band)
+          in kg/curated/env_triggers_v1.yaml, matching the paper's own two-band structure rather
+          than inventing one merged range.
+        management: "Not the focus of this paper (a controlled-environment germination/infection study, not a field management trial)."
 
   dis:soybean:charcoal_rot:
     - pmid: "42535844"
