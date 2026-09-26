@@ -9,12 +9,12 @@ import yaml
 
 from curator.loader import build_load_query
 from curator.run_pipeline import (
+    ValidationError,
     load_dataset_registry,
     select_downloaded_datasets,
     update_dataset_status,
     process_dataset,
 )
-from curator.validator import ValidationError
 
 
 def test_build_load_query_uses_merge_only():

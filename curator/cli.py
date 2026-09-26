@@ -25,6 +25,8 @@ from curator.graph.pg import GateError, create_release_schema, load_bundle
 from curator.graph.promote import PromoteError, current_release, promote, release_history
 from curator.graph.variety_import import variety_bundle
 from curator.graph.vocab_entities import reference_bundle
+from curator.lit.run_extraction import extract_paper
+from curator.model.claims import Source
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 KG_CURATED_DIR = ROOT_DIR / "kg" / "curated"
@@ -32,8 +34,10 @@ KG_CURATED_DIR = ROOT_DIR / "kg" / "curated"
 app = typer.Typer(add_completion=False, help="AgriHub Genomic KB — build and load knowledge graph releases.")
 kg_app = typer.Typer(add_completion=False, help="Knowledge-graph build/load commands.")
 genome_app = typer.Typer(add_completion=False, help="Reference-genome extraction commands (Phase 4).")
+lit_app = typer.Typer(add_completion=False, help="Literature search and grounded LLM extraction (Phase 5).")
 app.add_typer(kg_app, name="kg")
 app.add_typer(genome_app, name="genome")
+app.add_typer(lit_app, name="lit")
 
 
 def _build_bundle() -> KGBundle:
@@ -186,6 +190,68 @@ def classify_wheat_domains_cmd(
     typer.secho(
         f"Classified {len(df):,} wheat genes: {len(nlr):,} NLR/RLK ({len(nlr) / len(df):.2%})", fg=typer.colors.GREEN
     )
+
+
+def _draft_yaml(source: Source, accepted: list) -> str:
+    """Render accepted candidates as a kg/curated/-shaped draft (see kg/curated/README.md).
+
+    This is deliberately just text for a human to read and paste in by hand -- Phase 5's own
+    review UI (RESEARCH_ROADMAP.md 5.10) is the next step that would write kg/curated/ directly,
+    and hasn't been built yet."""
+    import yaml
+
+    doc = {
+        "sources": [{
+            "id": source.id,
+            "type": source.type.value,
+            "title": source.title,
+            "year": source.year,
+            "venue": source.venue,
+            "verified": source.verified,
+        }],
+        "claims": [
+            {
+                "type": item.claim.type.value,
+                "subject": item.claim.subject_id,
+                "object": item.claim.object_id,
+                "qualifiers": item.claim.qualifiers,
+                "status": "unreviewed",
+                "evidence": [{
+                    "source": item.evidence.source_id,
+                    "method": item.evidence.method.value,
+                    "locator": item.evidence.locator,
+                    "quote": item.evidence.quote,
+                    "extractor": item.evidence.extractor,
+                }],
+            }
+            for item in accepted
+        ],
+    }
+    return yaml.dump(doc, sort_keys=False, allow_unicode=True, default_flow_style=False)
+
+
+@lit_app.command("extract")
+def lit_extract_cmd(
+    identifier: str = typer.Option(..., "--pmid", "--id", help="pmid:<digits> or doi:<doi> (verified live against Europe PMC)."),
+    crop: str = typer.Option(..., help="wheat | soybean | chickpea"),
+    model: str = typer.Option(None, help="Override the default OpenRouter model (for ablations)."),
+) -> None:
+    """Fetch one verified paper, extract candidate claims via a grounded LLM call, and print
+    accepted candidates as a kg/curated/-shaped YAML draft (stdout) plus rejected candidates with
+    their reasons (stderr). Writes nothing -- a human reviews and pastes accepted output by hand,
+    exactly as every source in this project has been checked so far."""
+    pmid_or_doi = identifier if ":" in identifier else f"pmid:{identifier}"
+    result = extract_paper(pmid_or_doi, crop=crop, model=model)
+
+    typer.echo(f"# {result.source.title} ({result.source.year}, {result.source.venue})", err=True)
+    typer.echo(f"# {len(result.accepted)} accepted, {len(result.rejected)} rejected", err=True)
+    for rejected in result.rejected:
+        typer.secho(f"REJECTED: {rejected.reason}", fg=typer.colors.YELLOW, err=True)
+
+    if result.accepted:
+        typer.echo(_draft_yaml(result.source, result.accepted))
+    else:
+        typer.secho("No candidates survived grounding + normalization.", fg=typer.colors.YELLOW, err=True)
 
 
 if __name__ == "__main__":

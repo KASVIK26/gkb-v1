@@ -52,14 +52,18 @@ Schema and competency-question tests start a throwaway local PostgreSQL automati
 
 ## Current code (legacy, being replaced)
 
-`curator/parsers/`, `curator/db.py`, `curator/run_pipeline.py`, `curator/load_genes.py`,
-`curator/validator.py` and `curator/init_constraints.py` are v1, Neo4j-era code under review for
-removal. A Groq-based paper extractor is legacy too and is replaced in Phase 5.
+`curator/parsers/`, `curator/db.py`, `curator/run_pipeline.py`, `curator/load_genes.py` and
+`curator/init_constraints.py` are v1, Neo4j-era code under review for removal. The old Groq-based
+paper extractor (`fetch_papers.py` → `paper_extractor.py` → `approve_extractions.py`, plus
+`validator.py`) has been archived to `archive/legacy_v1/literature_pipeline/` (2026-09-26) — see
+its README there for why, and `RESEARCH_ROADMAP.md` §2.2 D1/D2 for the incident that caused it.
 
-`curator/graph/`, `curator/model/`, `curator/normalize/` and `curator/genome/` are the **current**,
-Postgres/Supabase-based KG pipeline (`agrihub kg build/load/promote/current`,
-`agrihub genome build-refgenes/load-refgenes`) — not legacy. `curator/genome/` is a fresh Phase 4
-implementation (started 2026-09-26), deliberately independent of `curator/parsers/`.
+`curator/graph/`, `curator/model/`, `curator/normalize/`, `curator/genome/` and (new, 2026-09-26)
+`curator/lit/`/`curator/llm/`/`curator/extract/` are the **current**, Postgres/Supabase-based KG
+pipeline (`agrihub kg build/load/promote/current`, `agrihub genome build-refgenes/load-refgenes`,
+`agrihub lit extract`) — not legacy. `curator/genome/` is a fresh Phase 4 implementation, and
+`curator/lit/`/`curator/llm/`/`curator/extract/` are Phase 5 v2 (search, grounded LLM extraction),
+both deliberately independent of the legacy code above.
 
 `functions/` and `public/` were the v1 Cloudflare Pages demo (Neo4j-backed) and have been **rewritten
 (2026-09-26)** against the live Supabase KG via `public.kg_*` bridge views

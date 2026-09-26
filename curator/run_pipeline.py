@@ -12,7 +12,10 @@ from curator.init_constraints import create_constraints
 from curator.parsers.gbff_parser import GBFFFormatError, parse_gbff
 from curator.parsers.gff_parser import parse_gff3
 from curator.parsers.genomic_integration import load_chromosome_mappings
-from curator.validator import ValidationError
+
+
+class ValidationError(ValueError):
+    """Raised when the dataset registry does not conform to the expected schema."""
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -74,8 +77,8 @@ def process_dataset(dataset: dict) -> dict:
     GFF3 reference annotation files use systematic locus IDs (e.g., LOC123...,
     Glyma.01G...) that do not map to curated resistance gene names (Sr33, Yr18,
     Rps1, ...). Gene-level resistance knowledge must come from:
-      - curator/seed_loader.py  (the 22 curated seed resistance genes)
-      - curator/extractors/paper_extractor.py  (AI extraction from papers)
+      - archive/legacy_v1/seed_loader.py  (the 22 curated seed resistance genes, retired)
+      - curator/lit/ + curator/llm/ + curator/extract/  (grounded LLM extraction, Phase 5)
 
     This function instead reads the GFF3, counts genes and chromosomes, and
     stores those counts as properties on the Crop node in Neo4j.
