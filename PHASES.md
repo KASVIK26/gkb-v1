@@ -430,6 +430,14 @@ are also where most of the work is.
    transgenically complemented) — `cloned: false`. Rpp4/Rpp5 were searched but didn't turn up a
    comparably documented paper in this pass; not pursued further to avoid scope creep in a single
    sitting. Soybean gene catalogue is now 7. Loaded and promoted live as `kg_2026_10_11`.
+13. Reused 2 papers already fetched in full text for the trigger work to add 2 more
+   `DISEASE_MANAGED_BY` claims rather than starting new searches: chickpea dry root rot's own
+   Introduction confirms agronomic management (sowing time/location, soil amendments, irrigation
+   scheduling) is a real recommendation; soybean anthracnose's full-text Disease Management
+   section confirms both seed-treatment fungicides and declining fungicide efficacy, but explicitly
+   does NOT mention phosphite-based treatments — flagged that specific figure as unconfirmed in
+   `candidate_papers.yaml` rather than carried into the claim. 4 of 17 diseases now have a real
+   management claim (up from 2). Loaded and promoted live as `kg_2026_10_12`.
 
 ---
 

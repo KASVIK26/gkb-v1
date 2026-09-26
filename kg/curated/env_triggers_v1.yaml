@@ -79,6 +79,14 @@ sources:
     url: https://pubmed.ncbi.nlm.nih.gov/42111728/
     verified: true
 
+  - id: pmid:33609073
+    type: publication
+    title: "Soybean anthracnose caused by Colletotrichum species: Current status and future prospects"
+    year: 2021
+    venue: "Molecular Plant Pathology"
+    url: https://pubmed.ncbi.nlm.nih.gov/33609073/
+    verified: true
+
 entities:
   - id: env:wheat:leaf_rust_field_conditions
     type: EnvTrigger
@@ -196,6 +204,24 @@ entities:
     props:
       action_type: chemical
 
+  - id: adv:chickpea:dry_root_rot_agronomic_management
+    type: Advisory
+    name: "Adjust sowing time/location, soil amendments and irrigation to avoid DRR-predisposing conditions"
+    crop: chickpea
+    props:
+      action_type: cultural
+
+  - id: adv:soybean:anthracnose_seed_treatment
+    type: Advisory
+    # Checked all three specifics from the original candidate_papers.yaml key_finding against this
+    # paper's own full-text Disease Management section: seed treatment and declining fungicide
+    # sensitivity are both real and quoted below; "phosphite-based seed treatments show promise"
+    # is NOT in this paper at all -- flagged as such in candidate_papers.yaml, not included here.
+    name: "Systemic fungicide seed treatment; fungicide efficacy is declining"
+    crop: soybean
+    props:
+      action_type: chemical
+
 claims:
   - type: DISEASE_ENV_TRIGGER
     subject: dis:wheat:leaf_rust
@@ -277,3 +303,25 @@ claims:
         method: review_statement
         locator: abstract
         quote: "Fungicides are a key management tool, particularly when susceptible cultivars are planted; however, widespread QoI resistance has raised concern about overreliance on the remaining effective fungicide classes"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:chickpea:dry_root_rot
+    object: adv:chickpea:dry_root_rot_agronomic_management
+    evidence:
+      - source: pmid:33753791
+        method: review_statement
+        locator: "full text, Introduction"
+        quote: "Altering sowing time/location, application of soil amendments and irrigation schedule that otherwise predispose plants to DRR disease development can be used to manage the disease to an extent"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:soybean:anthracnose
+    object: adv:soybean:anthracnose_seed_treatment
+    evidence:
+      - source: pmid:33609073
+        method: review_statement
+        locator: "full text, Disease Management"
+        quote: "To prevent the disease, seeds can be treated with systemic fungicides such as carboxanilide, dimethyldithiocarbamate, benzimidazoles, or triazoles"
+      - source: pmid:33609073
+        method: review_statement
+        locator: "full text, Disease Management"
+        quote: "in recent years several studies have shown that fungicide efficiency is gradually reducing against soybean anthracnose"

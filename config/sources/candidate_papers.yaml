@@ -190,7 +190,14 @@ soybean:
           what needs a different source: "Warm temperatures with >= 12 h of rain/dew/fog are the
           optimum infection conditions; seed-borne primary inoculum, so early-season warm-wet
           spells matter most."
-        management: "Chemical seed treatment is the main control; fungicide sensitivity is declining, and phosphite-based seed treatments show promise as an alternative."
+        management: >-
+          PARTIALLY VERIFIED 2026-09-26 (full text, Disease Management section): "seed treatment"
+          and "declining fungicide sensitivity" are both real and quoted -- see
+          kg/curated/env_triggers_v1.yaml (adv:soybean:anthracnose_seed_treatment). "Phosphite-based
+          seed treatments show promise as an alternative" is NOT in this paper anywhere; do not
+          cite it to this source. Original text, kept for the record: "Chemical seed treatment is
+          the main control; fungicide sensitivity is declining, and phosphite-based seed
+          treatments show promise as an alternative."
 
   dis:soybean:pod_stem_blight:
     - title: "An Overview of Pod and Stem Blight and Diaporthe Seed Decay"
@@ -305,7 +312,17 @@ chickpea:
           here are still NOT confirmed anywhere in this paper; do not cite them. Original
           superseded text, kept for the record: "Optimal disease progression at soil temperature
           ~35 degC and soil moisture content <= 60%."
-        management: "No robust resistant sources identified yet in the literature reviewed; management is largely agronomic (irrigation scheduling to avoid moisture stress at flowering/podding)."
+        management: >-
+          PARTIALLY VERIFIED 2026-09-26 (full text, Introduction): the "largely agronomic"
+          framing is real and quoted -- see kg/curated/env_triggers_v1.yaml
+          (adv:chickpea:dry_root_rot_agronomic_management): "Altering sowing time/location,
+          application of soil amendments and irrigation schedule that otherwise predispose plants
+          to DRR disease development can be used to manage the disease to an extent." The specific
+          "flowering/podding" timing detail and the "no robust resistant sources identified"
+          claim are NOT confirmed in this paper -- do not cite those specifics to this source.
+          Original text, kept for the record: "No robust resistant sources identified yet in the
+          literature reviewed; management is largely agronomic (irrigation scheduling to avoid
+          moisture stress at flowering/podding)."
 
   dis:chickpea:collar_rot:
     - pmid: "30158943"
