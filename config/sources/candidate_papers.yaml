@@ -199,6 +199,32 @@ soybean:
           practices (irrigation scheduling to avoid moisture stress) are the main non-genetic
           control."
 
+    - pmid: "42046470"
+      title: "Interaction of Soil Type and Elevated Temperature Drives the Emergence of Macrophomina phaseolina in Soybean Fields"
+      journal: "The Plant Pathology Journal"
+      year: 2026
+      doi: 10.5423/ppj.oa.02.2026.0014
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      note: "Found 2026-09-26 in a second search pass specifically for a primary paper with real numeric thresholds, since the first charcoal-rot source above didn't have any."
+      key_findings:
+        environmental: >-
+          VERIFIED 2026-09-26 (full text, open access, PMCID PMC13243901): at 35 degC, "disease
+          incidence caused by M. phaseolina increased significantly, reaching 92.4% and 100% for
+          isolates ASH20-001 and ASH21-025, respectively," versus weaker pathogenicity at 25 degC --
+          see kg/curated/env_triggers_v1.yaml (env:soybean:charcoal_rot_high_temp). Separately,
+          moisture stress was operationalised as watering frequency, not a soil-moisture percentage
+          ("once per day" vs "once every three days"), so it isn't modelled as a numeric
+          EnvTrigger condition -- the qualitative finding is used in the advisory instead.
+        management: >-
+          VERIFIED 2026-09-26 (full text): no specific control measure is recommended -- the
+          paper's own conclusion calls only for "continued monitoring of thermophilic pathogens...
+          and development of management strategies tailored to upland production systems," and
+          separately states moisture stress "significantly increased charcoal rot severity,
+          strengthening the competitive advantage of M. phaseolina" -- used as the basis for
+          adv:soybean:charcoal_rot_irrigation_management (avoid moisture stress under high soil
+          temperature), which is the one concrete, actionable lever this paper actually supports.
+
   dis:soybean:frogeye_leaf_spot:
     - pmid: "41957394"
       title: "Modeling the environment-related risk of frogeye leaf spot (Cercospora sojina) in soybean across the United States"

@@ -1,19 +1,19 @@
 {
-  "release": "2026_10_16",
-  "built_at": "2026-09-26T12:19:02.439130+00:00",
-  "git_sha": "2ca82d2e1e3f2299b33370706a2cd1bd574adfad",
+  "release": "2026_10_17",
+  "built_at": "2026-09-26T13:23:52.153004+00:00",
+  "git_sha": "d7e81f8a2d8a934190a0b88c29d191a7a7aec31a",
   "git_dirty": true,
   "counts": {
-    "sources": 39,
-    "entities": 188,
-    "claims": 293,
-    "evidence": 299
+    "sources": 40,
+    "entities": 190,
+    "claims": 295,
+    "evidence": 301
   },
   "content_sources": {
     "config/vocab/diseases.yaml": "sha256:aab1e2394ee223f88db0d08fcce79702a348870e5cde434b5fae7aaa42bd70e5",
     "config/sources/notified_varieties.yaml": "sha256:a50a1a2758931c34ce5fe965f30659e10cda8dc683a2d691fb975da93433a447",
     "kg/curated/chickpea_seed_genes.yaml": "sha256:dce22ec42768d4029b5cc32a60bf6bf23ecc3f73a26dcd8e9930791d3b69310c",
-    "kg/curated/env_triggers_v1.yaml": "sha256:703c146b543ab2318215f9a3579b43be2f3288c5d1d51c2028306163d718c18d",
+    "kg/curated/env_triggers_v1.yaml": "sha256:dd1f03dbfc60449ef5de8bef22ade75f93d210a7f21694d3af3bb68492586de1",
     "kg/curated/soybean_seed_genes.yaml": "sha256:8164a6ae305cc186832ebc17e6d8c240959c18d065083fc160a04740b8679d17",
     "kg/curated/wheat_seed_genes.yaml": "sha256:4f8485a95524d0c4d6478cc44ffc9cbf85a09698fa28e7a3c473f9a3181683ae"
   },

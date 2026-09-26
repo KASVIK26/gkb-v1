@@ -558,6 +558,18 @@ are also where most of the work is.
    RLK=841 — closely in line with soybean's 1.7% and chickpea's 1.1% from the same classifier.
    Reloaded into `kg_2026_10_16`'s `ref_gene` table, replacing the old all-`is_nlr=false` wheat
    rows. Wheat's genomic layer (4.1/4.2) is now on equal footing with soybean/chickpea's.
+21. **Resumed targeted literature research on soybean's remaining gaps**, per the user's choice
+   (manual research passes now, not Phase 5 yet). A second search specifically for a primary
+   paper with real numbers (rather than trusting the one review already in
+   `candidate_papers.yaml`, which had none) found one for charcoal rot: an open-access 2026 Plant
+   Pathology Journal paper with a genuinely quotable result — disease incidence "reaching 92.4%
+   and 100%" at 35 degC soil temperature vs. weaker pathogenicity at 25 degC. Added
+   `env:soybean:charcoal_rot_high_temp` (soil_temp_c >= 35, mean/24h) and an irrigation-management
+   advisory. The same paper's moisture-stress finding was reported as watering *frequency* ("once
+   per day" vs "once every three days"), not a soil-moisture percentage — deliberately not forced
+   into a numeric `EnvTrigger` condition it doesn't actually support; used qualitatively in the
+   advisory instead. 7 of 17 diseases now have an env trigger, 7 of 17 have a management claim.
+   Loaded and promoted live as `kg_2026_10_17`.
 
 ---
 

@@ -105,6 +105,14 @@ sources:
     url: https://doi.org/10.1094/PDIS-02-17-0204-RE
     verified: true
 
+  - id: pmid:42046470
+    type: publication
+    title: "Interaction of Soil Type and Elevated Temperature Drives the Emergence of Macrophomina phaseolina in Soybean Fields"
+    year: 2026
+    venue: "The Plant Pathology Journal"
+    url: https://doi.org/10.5423/ppj.oa.02.2026.0014
+    verified: true
+
 entities:
   - id: env:wheat:leaf_rust_field_conditions
     type: EnvTrigger
@@ -257,6 +265,28 @@ entities:
     props:
       action_type: varietal
 
+  - id: env:soybean:charcoal_rot_high_temp
+    type: EnvTrigger
+    name: "Soybean charcoal rot: high soil temperature driving M. phaseolina dominance/severity"
+    crop: soybean
+    props:
+      # The source ran controlled incubation at 25 vs 35 degC; modelled as a soil_temp_c mean
+      # bound since charcoal rot is soil-borne and this is what AgriNode's soil probe measures.
+      # The paper's moisture-stress finding (watering frequency, not a % soil moisture value) is
+      # NOT modelled as a numeric condition here -- see adv:soybean:charcoal_rot_irrigation_management.
+      phase: expression
+      bbch_from: 9
+      bbch_to: 81
+      conditions:
+        - {variable: soil_temp_c, min: 35, aggregation: mean, window_h: 24}
+
+  - id: adv:soybean:charcoal_rot_irrigation_management
+    type: Advisory
+    name: "Avoid moisture stress (maintain regular irrigation), especially under high soil temperature"
+    crop: soybean
+    props:
+      action_type: cultural
+
 claims:
   - type: DISEASE_ENV_TRIGGER
     subject: dis:wheat:leaf_rust
@@ -378,3 +408,21 @@ claims:
         method: field_multi_env
         locator: abstract
         quote: "One MG IV cultivar (Morsoy R2 491) and five MG V cultivars (Progeny 5650, Progeny 5706, Asgrow 5606, Asgrow 5831, and Dyna-Gro33C59) had significantly (P ≤ 0.05) lower percent seed infected by P. longicolla than their respective susceptible checks and other cultivars in the same tests"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:soybean:charcoal_rot
+    object: env:soybean:charcoal_rot_high_temp
+    evidence:
+      - source: pmid:42046470
+        method: controlled_env
+        locator: "full text, Results"
+        quote: "disease incidence caused by M. phaseolina increased significantly, reaching 92.4% and 100% for isolates ASH20-001 and ASH21-025, respectively"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:soybean:charcoal_rot
+    object: adv:soybean:charcoal_rot_irrigation_management
+    evidence:
+      - source: pmid:42046470
+        method: controlled_env
+        locator: "full text, Results"
+        quote: "moisture stress (reduced irrigation) significantly increased charcoal rot severity, strengthening the competitive advantage of M. phaseolina"
