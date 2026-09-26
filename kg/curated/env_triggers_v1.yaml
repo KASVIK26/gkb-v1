@@ -113,6 +113,27 @@ sources:
     url: https://doi.org/10.5423/ppj.oa.02.2026.0014
     verified: true
 
+  - id: pmid:22282609
+    type: publication
+    title: "Biological Control of Chickpea Collar Rot by Co-inoculation of Antagonistic Bacteria and Compatible Rhizobia"
+    year: 2010
+    venue: "Indian Journal of Microbiology"
+    url: https://doi.org/10.1007/s12088-011-0083-8
+    # isOpenAccess: N per Europe PMC despite a PMCID existing (PMC3209840) -- full text is not
+    # actually retrievable (fullTextXML returned a server error). Everything cited from this
+    # source below is from the abstract only, not the fuller per-treatment table a second-hand
+    # research report claimed to quote -- that table was not independently re-verified and is
+    # deliberately not carried into this file. See PHASES.md for how this source was found.
+    verified: true
+
+  - id: pmid:30812954
+    type: publication
+    title: "Temperature, Moisture, and Seed Treatment Effects on Rhizoctonia solani Root Rot of Soybean"
+    year: 2003
+    venue: "Plant Disease"
+    url: https://doi.org/10.1094/PDIS.2003.87.5.533
+    verified: true
+
 entities:
   - id: env:wheat:leaf_rust_field_conditions
     type: EnvTrigger
@@ -253,6 +274,14 @@ entities:
     # The abstract mentions both cultural and chemical control together as the real-world response
     # to a lack of resistant genotypes; action_type only allows one value, so "cultural" was picked
     # as representative -- the chemical-control half of the same fact is in the quote, not lost.
+    #
+    # DELIBERATELY NO DISEASE_ENV_TRIGGER for this disease, checked 2026-09-26: Dorrance et al.
+    # 2003 (pmid:30812954) tested 20/24/28/32 degC and found infection occurred at all four --
+    # "the temperatures evaluated in this study were not limiting to the isolates tested." That is
+    # evidence AGAINST a 20-32 degC trigger, not evidence for one; encoding that range as a
+    # min/max EnvTrigger condition would invert what the paper actually found. The same paper also
+    # tested 25/50/75/100% soil moisture holding capacity with no clean monotonic relationship --
+    # also not modelled. This is why no soybean:rhizoctonia_root_rot EnvTrigger entity exists.
     name: "Cultural + chemical control, given the dearth of resistant genotypes"
     crop: soybean
     props:
@@ -286,6 +315,16 @@ entities:
     crop: soybean
     props:
       action_type: cultural
+
+  - id: adv:chickpea:collar_rot_biological_seed_treatment
+    type: Advisory
+    # A candidate practice from a single glasshouse study, not a field-validated universal
+    # recommendation -- deliberately not overstated as such (matches the caution the paper's own
+    # abstract quote supports, nothing more).
+    name: "Seed bio-priming with Pseudomonas sp. CDB35 (or captan) reduced disease incidence in a glasshouse trial"
+    crop: chickpea
+    props:
+      action_type: biological
 
 claims:
   - type: DISEASE_ENV_TRIGGER
@@ -399,6 +438,10 @@ claims:
         method: review_statement
         locator: abstract
         quote: "due to the dearth of resistant soybean genotypes...effective management options have mostly relied upon a combination of cultural and chemical control options"
+      - source: pmid:30812954
+        method: controlled_env
+        locator: abstract
+        quote: "None of the seed treatments evaluated in this study provided 100% control of the four isolates tested"
 
   - type: DISEASE_MANAGED_BY
     subject: dis:soybean:pod_stem_blight
@@ -426,3 +469,12 @@ claims:
         method: controlled_env
         locator: "full text, Results"
         quote: "moisture stress (reduced irrigation) significantly increased charcoal rot severity, strengthening the competitive advantage of M. phaseolina"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:chickpea:collar_rot
+    object: adv:chickpea:collar_rot_biological_seed_treatment
+    evidence:
+      - source: pmid:22282609
+        method: controlled_env
+        locator: abstract
+        quote: "Disease incidence was reduced up to 47% in treatments where captan (fungicide) or antagonistic Pseudomonas sp. CDB 35 was applied"

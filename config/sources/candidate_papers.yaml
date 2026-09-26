@@ -345,6 +345,39 @@ soybean:
           the record: "Few resistant genotypes exist; management leans on integrated cultural +
           chemical + biological control and seed treatment."
 
+    - pmid: "30812954"
+      title: "Temperature, Moisture, and Seed Treatment Effects on Rhizoctonia solani Root Rot of Soybean"
+      journal: "Plant Disease"
+      year: 2003
+      authors: "Dorrance AE, Kleinhenz MD, McClure SA, Tuttle NT"
+      url: https://pubmed.ncbi.nlm.nih.gov/30812954/
+      doi: 10.1094/PDIS.2003.87.5.533
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      note: >-
+        Found 2026-09-26 via a research pass done with another AI tool (docs/research_needed.md),
+        independently re-verified against Europe PMC before use. Not open access, no PMCID.
+        IMPORTANT: this is very likely the real origin of the "20-32 degC / 25-100% MHC" figures
+        that were flagged UNVERIFIED against the review above (pmid not available for that one) --
+        so those numbers probably weren't fabricated, just misattributed to the wrong source. But
+        the INTERPRETATION was backwards either way: this paper's own point is the opposite of "the
+        threshold is 20-32 degC" -- see below.
+      key_findings:
+        environmental: >-
+          VERIFIED 2026-09-26 (abstract) -- and a critical correction to the record above: "The
+          temperatures evaluated in this study were not limiting to the isolates tested" across all
+          four tested values (20, 24, 28, 32 degC) -- i.e. this is evidence AGAINST treating
+          20-32 degC as a discriminating trigger range, not evidence for one. Encoding it as a
+          min/max EnvTrigger condition would invert the paper's actual finding. Soil moisture
+          (25/50/75/100% MHC) showed no clean monotonic relationship either. See the comment on
+          adv:soybean:rhizoctonia_root_rot_integrated_control in
+          kg/curated/env_triggers_v1.yaml for why no EnvTrigger entity exists for this disease.
+        management: >-
+          VERIFIED 2026-09-26 (abstract): "None of the seed treatments evaluated in this study
+          provided 100% control of the four isolates tested" -- added as a second evidence citation
+          on the existing adv:soybean:rhizoctonia_root_rot_integrated_control claim, reinforcing
+          (from an independent primary study) that no single treatment is fully protective.
+
   dis:soybean:bacterial_pustule:
     - doi: 10.1111/ppa.70000
       title: "Bacterial Pustule Disease in Soybean: Occurrence, Host-Pathogen Interactions and Management"
@@ -474,6 +507,31 @@ chickpea:
           recommends it for management. Do not cite the text below as this paper's finding.
           Original text: "Chemical control is difficult; low organic matter and good drainage
           reduce risk; seedling stage (first ~6 weeks) is the vulnerable window per docs scope."
+
+    - pmid: "22282609"
+      title: "Biological Control of Chickpea Collar Rot by Co-inoculation of Antagonistic Bacteria and Compatible Rhizobia"
+      journal: "Indian Journal of Microbiology"
+      year: 2010
+      authors: "Hameeda B, Harini G, Rupela OP, Kumar Rao JVD, Reddy G"
+      url: https://pubmed.ncbi.nlm.nih.gov/22282609/
+      doi: 10.1007/s12088-011-0083-8
+      source_type: peer_reviewed_primary
+      verified_via: europepmc_id
+      note: >-
+        Found 2026-09-26 via a research pass done with another AI tool, given the research brief
+        in docs/research_needed.md, then independently re-verified here against Europe PMC before
+        use (per that brief's own stated verification requirement). Europe PMC flags this as NOT
+        open access despite having a PMCID (PMC3209840) -- fullTextXML returned a server error, so
+        only the abstract could actually be checked. The other tool's report included a detailed
+        per-treatment disease-incidence table (83%/80%/67%/47%/53%/47% across 6 treatment
+        combinations) that would need full-text access to independently confirm -- NOT carried
+        into kg/curated/ at that granularity; only the single abstract-level figure below is used.
+      key_findings:
+        management: >-
+          VERIFIED 2026-09-26 (abstract): "Disease incidence was reduced up to 47% in treatments
+          where captan (fungicide) or antagonistic Pseudomonas sp. CDB 35 was applied" -- see
+          kg/curated/env_triggers_v1.yaml (adv:chickpea:collar_rot_biological_seed_treatment).
+          Glasshouse study; field validation not established by this paper.
 
   dis:chickpea:rust:
     - title: "Field Diagnosis of Chickpea Diseases and their Control"

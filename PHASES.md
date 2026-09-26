@@ -591,6 +591,35 @@ are also where most of the work is.
    document (if one exists — unlike wheat/chickpea, no AICRP-style official soybean release PDF was
    found in the original variety research pass) or germplasm screening-trial data (Phase 7), not
    more searching of what's already in hand.
+23. **Wrote `docs/research_needed.md`** at the user's request — a self-contained brief for the 10
+   diseases still missing an env trigger or advisory, listing exactly what's missing and what's
+   already been tried per disease, meant to be handed to other AI tools. **The user ran it through
+   another AI tool and returned a research report**; every claim in it was independently
+   re-verified against Europe PMC before use (per the brief's own stated rule), not trusted at
+   face value. Two genuinely new, real findings survived verification:
+   - **Chickpea collar rot finally has a management advisory** (previously the whole disease had
+     zero: `dis:chickpea:collar_rot` had a trigger but nothing else) — Hameeda et al. 2010,
+     confirmed via abstract: "Disease incidence was reduced up to 47%" with *Pseudomonas* sp.
+     CDB35 or captan seed treatment. The other tool's report included a detailed per-treatment
+     table (83%/80%/67%/47%/53%/47%) that would need full-text access to verify — Europe PMC
+     flags this paper as NOT open access despite having a PMCID, and `fullTextXML` returned a
+     server error, so that table was deliberately **not** carried into the KG at that granularity;
+     only the single abstract-level figure is used.
+   - **Soybean rhizoctonia root rot's management advisory gained a second, independent
+     citation** (Dorrance et al. 2003, verified) — but its real value was a correction, not an
+     addition: this paper tested 20/24/28/32°C and found infection at *all four*, i.e. "the
+     temperatures evaluated in this study were not limiting to the isolates tested." That's very
+     likely the actual origin of the "20-32°C" figure that had been sitting in
+     `candidate_papers.yaml` flagged UNVERIFIED against a *different* paper — so the number
+     probably wasn't fabricated, just misattributed. More importantly, its meaning is the opposite
+     of a threshold: it's evidence that temperature does *not* discriminate risk in that range, so
+     no `EnvTrigger` was created from it. Documented explicitly in both files so this isn't
+     mis-encoded as a min/max condition later.
+   The other tool's report also correctly declined to promote two "LEAD-ONLY" items (soybean
+   bacterial pustule inoculation conditions, a secondary-source soybean rust leaf-wetness figure)
+   to verified claims — that discipline was correct and nothing further was done with those here
+   either. Loaded and promoted live as `kg_2026_10_18`. 8 of 17 diseases now have a management
+   claim (up from 7); the env-trigger count is unchanged at 7/17.
 
 ---
 
