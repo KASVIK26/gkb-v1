@@ -357,7 +357,19 @@ are also where most of the work is.
    powdery mildew, soybean charcoal rot, soybean rust, soybean mosaic virus, soybean rhizoctonia
    root rot, soybean bacterial pustule, the second soybean pod & stem blight source. **6 of 17
    diseases now have a real trigger** (up from 4). Loaded and promoted live as `kg_2026_10_6`.
-   `DISEASE_MANAGED_BY` claims and the remaining 11 diseases' triggers are still not started.
+   **Third pass, same day, closing out this thread for now**: checked the 2 remaining
+   extension-publication sources directly (no Europe PMC gate — freely hosted pages/PDFs).
+   Soybean pod & stem blight's Crop Protection Network page has one real number ("seeds will not
+   become infected once moisture is below 19 percent") but it's a *seed*-moisture threshold —
+   AgriNode has no grain-moisture sensor, only soil and air, so it's documented in
+   `candidate_papers.yaml` but not modelled as an `EnvTrigger`. Chickpea rust's ICRISAT bulletin
+   PDF's text layer is too fragmented to locate or confirm its own "~20-25 degC" figure — flagged
+   UNVERIFIED like the others rather than trusted. Also confirmed wheat stem rust's and wheat
+   FHB's DOIs aren't indexed in Europe PMC at all (too recent), so full-text access for those two
+   genuinely needs a different route, not another automated attempt. **This closes out the
+   env-trigger research thread for this session at 6 of 17 diseases** — the rest need either
+   institutional journal access or sources that just don't exist yet in the literature.
+   `DISEASE_MANAGED_BY` claims are still not started at all.
 
 ---
 

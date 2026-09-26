@@ -192,7 +192,13 @@ soybean:
         Not a peer-reviewed journal article -- a US land-grant-university-consortium extension
         publication, correctly labelled as such. No PMID exists for this type of document.
       key_findings:
-        environmental: "Warm humid/wet weather before maturity, and any delay in harvest during warm wet weather, both drive incidence and severity."
+        environmental: >-
+          CHECKED 2026-09-26 (full page fetch): the qualitative text below does hold up, and there
+          is one genuinely quotable number: "Seeds will not become infected once moisture is below
+          19 percent." Not usable as a config/vocab/sensors.yaml-mappable EnvTrigger, though --
+          AgriNode has no seed/grain-moisture sensor, only soil and air, so this stays documented
+          here rather than in kg/curated/. Original text: "Warm humid/wet weather before maturity,
+          and any delay in harvest during warm wet weather, both drive incidence and severity."
         management: "Non-legume crop rotation to decay infested residue; timely harvest is the single most controllable management lever."
     - title: "Evaluation of Commercial Soybean Cultivars for Reaction to Phomopsis Seed Decay"
       journal: "Plant Disease"
@@ -311,5 +317,11 @@ chickpea:
         peer-reviewed weather-threshold paper for Uromyces ciceris-arietini was not located in this
         pass and should not be assumed to exist without another look.
       key_findings:
-        environmental: "Cool, moist weather (~20-25 degC) favours development, though free rain is not essential; symptoms usually appear later in the season."
+        environmental: >-
+          UNVERIFIED (checked 2026-09-26): attempted a direct fetch of this PDF and could not
+          locate a rust-specific section or confirm the "~20-25 degC" figure below anywhere in the
+          extracted text (the PDF's text layer is heavily fragmented). Do not treat this number as
+          confirmed. Original text, kept for the record: "Cool, moist weather (~20-25 degC)
+          favours development, though free rain is not essential; symptoms usually appear later in
+          the season."
         management: "Fungicide control has historically had limited success; resistant-cultivar development and early sowing are the primary recommended strategies."
