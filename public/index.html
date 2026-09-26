@@ -19,16 +19,16 @@
         <p class="eyebrow">AgriHub Genomic Knowledge Base</p>
         <h1>Explore crop disease resistance as a graph.</h1>
         <p class="lede">
-          Query wheat, soybean, and chickpea resistance relationships through a
-          browser-friendly API backed by Neo4j.
+          Query wheat, soybean, and chickpea resistance relationships, and check simulated
+          IoT sensor readings against the trigger library — backed by the live Supabase KG.
         </p>
       </section>
 
-      <!-- Stats bar (E3) — populated by /api/stats on page load -->
+      <!-- Stats bar — populated by /api/stats on page load -->
       <div id="statsBar" class="stats-bar" aria-label="Knowledge base statistics" hidden>
-        <span class="stats-item"><span id="statEdges">—</span> resistance edges</span>
+        <span class="stats-item"><span id="statEdges">—</span> claims</span>
         <span class="stats-sep">·</span>
-        <span class="stats-item"><span id="statGenes">—</span> genes</span>
+        <span class="stats-item"><span id="statGenes">—</span> genes/QTLs</span>
         <span class="stats-sep">·</span>
         <span class="stats-item"><span id="statDiseases">—</span> diseases</span>
         <span class="stats-sep">·</span>
@@ -37,38 +37,121 @@
         <span class="stats-item"><span id="statCrops">—</span> crops</span>
       </div>
 
-      <section class="panel controls">
-        <label>
-          Crop
-          <select id="cropSelect">
-            <option value="wheat">Wheat</option>
-            <option value="soybean">Soybean</option>
-            <option value="chickpea">Chickpea</option>
-          </select>
-        </label>
+      <nav class="tabs" role="tablist" aria-label="View">
+        <button class="tab-btn" data-tab="browse" role="tab" aria-selected="true">Browse the graph</button>
+        <button class="tab-btn" data-tab="triggers" role="tab" aria-selected="false">Check sensor readings</button>
+      </nav>
 
-        <label>
-          Variety
-          <select id="varietySelect">
-            <option value="__all__">All varieties</option>
-          </select>
-        </label>
+      <!-- ─────────────────────── TAB: Browse the graph ─────────────────────── -->
+      <section id="tab-browse" class="tab-panel" data-active="true">
+        <section class="panel controls">
+          <label>
+            Crop
+            <select id="cropSelect">
+              <option value="wheat">Wheat</option>
+              <option value="soybean">Soybean</option>
+              <option value="chickpea">Chickpea</option>
+            </select>
+          </label>
 
-        <button id="searchButton" type="button">Search knowledge graph</button>
+          <label>
+            Variety
+            <select id="varietySelect">
+              <option value="__all__">All varieties</option>
+            </select>
+          </label>
 
-        <!-- E1: IoT trigger toggle -->
-        <label class="toggle-label" title="Only show edges where an IoT sensor trigger is defined">
-          <input type="checkbox" id="iotToggle" />
-          IoT-triggered treatments only
-        </label>
+          <button id="searchButton" type="button">Search knowledge graph</button>
+        </section>
+
+        <section class="panel results">
+          <div class="results-header">
+            <h2>Variety reactions</h2>
+            <span id="reactionStatusText" class="status-pill" role="status" aria-live="polite">Select a variety</span>
+          </div>
+          <p class="edge-meta panel-note">
+            Documented disease reactions (VARIETY_REACTION claims) for the selected variety.
+          </p>
+          <div id="reactionList" class="edge-list"></div>
+        </section>
+
+        <section class="panel results">
+          <div class="results-header">
+            <h2>Gene resistance</h2>
+            <span id="geneStatusText" class="status-pill" role="status" aria-live="polite">Ready</span>
+          </div>
+          <p class="edge-meta panel-note">
+            All GENE_CONFERS_RESISTANCE claims for the selected crop. Not yet linked to specific
+            varieties in this KG (no VARIETY_CARRIES_GENE claims are loaded), so this list is
+            crop-wide, not variety-specific.
+          </p>
+          <div id="geneList" class="edge-list"></div>
+        </section>
       </section>
 
-      <section class="panel results">
-        <div class="results-header">
-          <h2>Results</h2>
-          <span id="statusText" class="status-pill" role="status" aria-live="polite">Ready</span>
-        </div>
-        <div id="edgeList" class="edge-list"></div>
+      <!-- ─────────────────────── TAB: Check sensor readings ─────────────────────── -->
+      <section id="tab-triggers" class="tab-panel" data-active="false">
+        <p class="demo-warning">
+          <strong>Demo, not the real risk engine:</strong> each trigger's conditions describe a
+          value <em>aggregated over a time window</em> (e.g. "mean over 24h"). This form compares
+          the single number you type directly against those bounds — a snapshot check, not a real
+          windowed calculation. Useful for exercising the KG's real trigger/advisory data; not a
+          substitute for the actual engine (not built yet).
+        </p>
+
+        <section class="panel controls">
+          <label>
+            Crop
+            <select id="triggerCropSelect">
+              <option value="wheat">Wheat</option>
+              <option value="soybean">Soybean</option>
+              <option value="chickpea">Chickpea</option>
+            </select>
+          </label>
+
+          <label>
+            Variety (optional — cross-references its known reaction)
+            <select id="triggerVarietySelect">
+              <option value="__all__">All varieties</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="panel controls sensor-grid">
+          <label>
+            Air temperature (°C)
+            <input type="number" step="0.1" id="reading-air_temp_c" placeholder="e.g. 22" />
+          </label>
+          <label>
+            Air relative humidity (%)
+            <input type="number" step="0.1" id="reading-air_rh" placeholder="e.g. 85" />
+          </label>
+          <label>
+            Soil temperature (°C)
+            <input type="number" step="0.1" id="reading-soil_temp_c" placeholder="e.g. 24" />
+          </label>
+          <label>
+            Soil moisture (% VWC)
+            <input type="number" step="0.1" id="reading-soil_moisture_vwc" placeholder="e.g. 65" />
+          </label>
+          <label>
+            Dew point (°C)
+            <input type="number" step="0.1" id="reading-dew_point_c" placeholder="e.g. 7" />
+          </label>
+          <label>
+            Hours/day with RH ≥ 80% (30-day mean)
+            <input type="number" step="0.1" id="reading-rh_ge_80_h" placeholder="e.g. 17" />
+          </label>
+          <button id="checkTriggersButton" type="button">Check disease risk</button>
+        </section>
+
+        <section class="panel results">
+          <div class="results-header">
+            <h2>Trigger results</h2>
+            <span id="triggerStatusText" class="status-pill" role="status" aria-live="polite">Ready</span>
+          </div>
+          <div id="triggerList" class="edge-list"></div>
+        </section>
       </section>
     </main>
     <script type="module" src="./app.js"></script>

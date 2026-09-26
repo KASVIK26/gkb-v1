@@ -93,6 +93,50 @@ h1 {
   font-weight: 700;
 }
 
+/* ── Tabs ───────────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tab-btn {
+  font: inherit;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.tab-btn[aria-selected="true"] {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: white;
+  border-color: transparent;
+}
+
+.tab-panel[data-active="false"] {
+  display: none;
+}
+
+.demo-warning {
+  margin: 0 0 16px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(165, 120, 20, 0.1);
+  border: 1px solid rgba(165, 120, 20, 0.25);
+  color: #6b4d10;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.panel-note {
+  margin: -6px 0 14px;
+  font-size: 0.88rem;
+}
+
 /* ── Panel + controls ──────────────────────────────────────────── */
 .panel {
   background: var(--panel);
@@ -137,6 +181,7 @@ label {
 }
 
 select,
+input[type="number"],
 button {
   font: inherit;
   border-radius: 16px;
@@ -144,9 +189,18 @@ button {
   min-height: 48px;
 }
 
-select {
+select,
+input[type="number"] {
   padding: 0 14px;
   background: #fff;
+}
+
+.sensor-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sensor-grid button {
+  grid-column: 1 / -1;
 }
 
 button {
@@ -227,6 +281,19 @@ button {
   background: rgba(255, 245, 243, 0.9);
 }
 
+.edge-card-fired {
+  border-color: rgba(31, 107, 68, 0.3);
+  background: rgba(230, 244, 234, 0.85);
+}
+
+.condition-list {
+  margin: 8px 0;
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+
 .edge-card h3 {
   margin: 0 0 8px;
   font-size: 1.05rem;
@@ -292,11 +359,16 @@ button {
 }
 
 @media (max-width: 820px) {
-  .controls {
+  .controls,
+  .sensor-grid {
     grid-template-columns: 1fr;
   }
 
   .stats-bar {
     border-radius: 16px;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
   }
 }

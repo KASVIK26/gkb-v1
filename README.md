@@ -47,6 +47,14 @@ Schema and competency-question tests start a throwaway local PostgreSQL automati
 
 ## Current code (legacy, being replaced)
 
-`curator/` holds the v1 parsers (GFF3, assembly report, GBFF), a Groq-based paper extractor and Neo4j loaders.
-`functions/` and `public/` hold the v1 Cloudflare Pages demo. The parsers carry forward into Phase 4. The loaders,
-extractor and Pages Functions are replaced in Phases 2, 5 and 10.
+`curator/` holds the v1 parsers (GFF3, assembly report, GBFF) and a Groq-based paper extractor. The parsers
+carry forward into Phase 4; the extractor is replaced in Phase 5.
+
+`curator/graph/`, `curator/model/` and `curator/normalize/` are the **current**, Postgres/Supabase-based KG
+pipeline (`agrihub kg build/load/promote/current`) — not legacy.
+
+`functions/` and `public/` were the v1 Cloudflare Pages demo (Neo4j-backed) and have been **rewritten
+(2026-09-26)** against the live Supabase KG via `public.kg_*` bridge views
+(`supabase/migrations/20260926120000_dashboard_views.sql`) — see [public/README.md](public/README.md) for
+what it can do and how to run it locally. It is a demo query layer, not the real risk-engine API
+(RESEARCH_ROADMAP.md Phase 11, not built yet).

@@ -3,6 +3,9 @@
 .env.*
 !.env.example
 
+# Cloudflare Pages Functions local-dev secrets (wrangler pages dev reads this)
+.dev.vars
+
 # Python
 __pycache__/
 *.py[cod]
