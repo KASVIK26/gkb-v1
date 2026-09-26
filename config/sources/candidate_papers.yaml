@@ -40,9 +40,15 @@ wheat:
       verified_via: europepmc_id
       key_findings:
         environmental: >-
-          Decision-tree model built on weather-driven predictors; a related Moroccan modelling study
-          (unverified separately -- flagged, not cited on its own) reports RH > 92% and 4-16 degC for
-          >= 4 continuous hours, rainfall <= 0.1 mm, as the optimum infection window.
+          RESOLVED 2026-09-26: the originally-flagged "Moroccan study, unverified" figures below
+          were never used in a claim and are superseded. Pulled this paper's own full text (it's
+          open access, PMCID PMC13152867) and used its own CART decision-tree result instead --
+          see kg/curated/env_triggers_v1.yaml (env:wheat:stripe_rust_cold_humid_window): "Yellow
+          rust severity remained moderate (34-39%) when Tmin < 9.1 degC, Tdew >= 6.2 degC and RHm
+          >= 94%." A separate higher-severity branch exists too (uses sunshine-hours and a "humid
+          thermal index" not in our sensor vocab) but wasn't modelled. Original superseded text,
+          kept for the record: a related Moroccan modelling study (unverified separately) reports
+          RH > 92% and 4-16 degC for >= 4 continuous hours, rainfall <= 0.1 mm.
         management: "Not the focus of this paper (forecasting model); pair with fungicide-timing sources below."
 
   dis:wheat:leaf_rust:
@@ -164,7 +170,15 @@ soybean:
       source_type: peer_reviewed_review
       verified_via: europepmc_title
       key_findings:
-        environmental: "Warm temperatures with >= 12 h of rain/dew/fog are the optimum infection conditions; seed-borne primary inoculum, so early-season warm-wet spells matter most."
+        environmental: >-
+          UNVERIFIED (checked 2026-09-26, full text -- this paper is open access, PMCID
+          PMC7938629, so this is not just an abstract-only check): the full text only says
+          "Favoured by warm and humid conditions" with no numeric temperature or duration
+          anywhere. The "warm temperatures with >= 12 h of rain/dew/fog" figure below is not in
+          this paper at all; do not cite it as this paper's finding. Kept here as a record of
+          what needs a different source: "Warm temperatures with >= 12 h of rain/dew/fog are the
+          optimum infection conditions; seed-borne primary inoculum, so early-season warm-wet
+          spells matter most."
         management: "Chemical seed treatment is the main control; fungicide sensitivity is declining, and phosphite-based seed treatments show promise as an alternative."
 
   dis:soybean:pod_stem_blight:
@@ -257,12 +271,17 @@ chickpea:
       verified_via: europepmc_id
       key_findings:
         environmental: >-
-          UNVERIFIED (checked 2026-09-26): this paper's abstract identifies "low soil moisture"
-          and "average maximum temperature of the months October and November" as predictors in an
-          ANN model, but gives no numeric degC or % thresholds at all. The "~35 degC / <=60%"
-          figures below are not in the abstract; do not cite them as this paper's finding without
-          the full text. Kept here as a record of what needs re-checking: "Optimal disease
-          progression at soil temperature ~35 degC and soil moisture content <= 60%."
+          PARTIALLY RESOLVED 2026-09-26: the abstract alone (checked first) has no numeric
+          thresholds, but the full text (open access, PMCID PMC7985499) does have real, usable
+          numbers -- see kg/curated/env_triggers_v1.yaml
+          (env:chickpea:dry_root_rot_soil_moisture): "The soil moisture content in LSM and CS was
+          5-10%, whereas in the control and PS, it was around 15-25%," with the combined
+          low-moisture+pathogen treatment showing the highest disease incidence. No specific soil
+          temperature threshold was found even in the full text -- temperature is discussed only
+          as a correlate, not a cited number. The "~35 degC / <=60%" figures originally written
+          here are still NOT confirmed anywhere in this paper; do not cite them. Original
+          superseded text, kept for the record: "Optimal disease progression at soil temperature
+          ~35 degC and soil moisture content <= 60%."
         management: "No robust resistant sources identified yet in the literature reviewed; management is largely agronomic (irrigation scheduling to avoid moisture stress at flowering/podding)."
 
   dis:chickpea:collar_rot:

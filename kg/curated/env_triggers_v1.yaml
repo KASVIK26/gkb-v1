@@ -14,13 +14,21 @@
 # against real abstract/full-text before becoming a claim -- never copied over trusting the
 # reading-list file alone, no matter how "verified_via: europepmc_id" that file's source entry is.
 #
-# Only 4 diseases below have a trigger, because only 4 candidate papers' FREELY AVAILABLE
-# abstracts (not full text -- not fetched in this pass) actually contained a real, quotable
-# numeric threshold when re-checked one by one. The rest are a real, open gap -- either the
-# abstract itself is silent on numbers (powdery mildew, dry root rot, charcoal rot) or Europe PMC
-# returned no abstract at all (the FHB review, too recent to be indexed). Getting the rest right
-# needs full-text access (e.g. an institutional login, or the PMC open-access subset where the
-# paper qualifies), not another abstract-only pass.
+# UPDATE 2026-09-26 (second pass, same day): Europe PMC serves full-text XML for the
+# open-access subset (endpoint: /webservices/rest/{PMCID}/fullTextXML, found via a
+# `isOpenAccess`/`pmcid` check on the search API first) -- this unlocked 2 more diseases whose
+# abstracts alone were silent: chickpea dry root rot (the actual number is a soil-moisture
+# contrast between stress treatments, not the "35 degC / <=60%" figure that still isn't
+# confirmed anywhere) and wheat stripe rust (using the paper's own CART decision-tree result,
+# replacing the "unverified Moroccan study" citation that was flagged from the start). Two more
+# open-access full texts (soybean anthracnose, wheat powdery mildew's paper was NOT open access
+# so stays unresolved) were checked and still had no numbers even in full text -- see the
+# now-doubly-confirmed UNVERIFIED note added to soybean anthracnose in candidate_papers.yaml.
+# Soybean charcoal rot's review and several soybean/wheat Wiley papers are confirmed NOT
+# open-access (checked via the same isOpenAccess flag) -- those still need real institutional
+# access, not another automated attempt.
+#
+# 6 diseases now have a trigger. The rest are a real, open gap for the reasons above.
 
 sources:
   - id: pmid:38952372
@@ -53,6 +61,22 @@ sources:
     year: 2026
     venue: "Scientific Reports"
     url: https://pubmed.ncbi.nlm.nih.gov/41957394/
+    verified: true
+
+  - id: pmid:33753791
+    type: publication
+    title: "Low soil moisture predisposes field-grown chickpea plants to dry root rot disease: evidence from simulation modeling and correlation analysis"
+    year: 2021
+    venue: "Scientific Reports"
+    url: https://pubmed.ncbi.nlm.nih.gov/33753791/
+    verified: true
+
+  - id: pmid:42111728
+    type: publication
+    title: "A weather-informed decision tree framework for predicting stripe rust outbreaks in wheat"
+    year: 2026
+    venue: "Frontiers in Plant Science"
+    url: https://pubmed.ncbi.nlm.nih.gov/42111728/
     verified: true
 
 entities:
@@ -120,6 +144,39 @@ entities:
         - {variable: rh_ge_80_h, min: 15, max: 20, aggregation: mean, window_h: 720}
         - {variable: air_temp_c, min: 24, max: 36, aggregation: max, window_h: 24}
 
+  - id: env:chickpea:dry_root_rot_soil_moisture
+    type: EnvTrigger
+    name: "Chickpea dry root rot: low soil moisture predisposing window"
+    crop: chickpea
+    props:
+      # From the paper's own stress-treatment comparison (full text, not just the abstract,
+      # which is silent on numbers): the low-soil-moisture and combined-stress treatments were
+      # both held at 5-10% soil moisture vs. 15-25% for the well-watered control/pathogen-only
+      # treatment, and disease incidence was highest in the combined (low-moisture + pathogen)
+      # treatment. Modelled as a max bound at the paper's own upper edge of the stressed range.
+      phase: infection
+      bbch_from: 61
+      bbch_to: 89
+      conditions:
+        - {variable: soil_moisture_vwc, max: 10, aggregation: mean, window_h: 24}
+
+  - id: env:wheat:stripe_rust_cold_humid_window
+    type: EnvTrigger
+    name: "Wheat stripe rust: cold, humid decision-tree window (moderate-severity branch)"
+    crop: wheat
+    props:
+      # This is the paper's own CART model's "moderate severity" branch (34-39% severity), not
+      # its higher-severity branch, which also uses sunshine-hours and a "humid thermal index"
+      # composite that aren't in config/vocab/sensors.yaml -- modelled only the branch whose
+      # variables map cleanly onto sensors we actually have, rather than approximating the rest.
+      phase: infection
+      bbch_from: 13
+      bbch_to: 75
+      conditions:
+        - {variable: air_temp_c, max: 9.1, aggregation: min, window_h: 24}
+        - {variable: dew_point_c, min: 6.2, aggregation: mean, window_h: 24}
+        - {variable: air_rh, min: 94, aggregation: mean, window_h: 24}
+
 claims:
   - type: DISEASE_ENV_TRIGGER
     subject: dis:wheat:leaf_rust
@@ -165,3 +222,21 @@ claims:
         method: field_multi_env
         locator: abstract
         quote: "FLS risk peaked when the 30-d ma of daily hours of RH ≥ 80% was 15–20 h and maximum temperature was 24–36 °C"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:chickpea:dry_root_rot
+    object: env:chickpea:dry_root_rot_soil_moisture
+    evidence:
+      - source: pmid:33753791
+        method: controlled_env
+        locator: "full text, Results"
+        quote: "The soil moisture content in LSM and CS was 5-10%, whereas in the control and PS, it was around 15-25%"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:wheat:stripe_rust
+    object: env:wheat:stripe_rust_cold_humid_window
+    evidence:
+      - source: pmid:42111728
+        method: field_multi_env
+        locator: "full text, Results (CART model)"
+        quote: "Yellow rust severity remained moderate (34-39%) when Tmin < 9.1 °C, Tdew ≥ 6.2 °C and RHm ≥ 94%"

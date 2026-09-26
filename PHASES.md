@@ -343,8 +343,21 @@ are also where most of the work is.
    ones whose abstracts actually contained a quotable number. The other diseases' candidate papers
    need full-text access (institutional login or PMC OA subset) to do properly, not another
    abstract-only pass. Added `rh_ge_80_h` to `config/vocab/sensors.yaml` (mirrors `rh_ge_90_h` at a
-   lower cutoff) since the frogeye leaf spot model needed it. `DISEASE_MANAGED_BY` claims and the
-   remaining 13 diseases' triggers are still not started.
+   lower cutoff) since the frogeye leaf spot model needed it.
+   **Second batch, same day**: found that Europe PMC serves full-text XML for the open-access
+   subset (`GET /webservices/rest/{PMCID}/fullTextXML`, after checking `isOpenAccess`/`pmcid` on
+   the search API) — not institutional access, just a different endpoint. This unlocked 2 more
+   diseases whose abstracts alone were silent: chickpea dry root rot (real soil-moisture contrast
+   from the full text, though the original "~35 degC / <=60%" figures still aren't confirmed
+   anywhere) and wheat stripe rust (the paper's own CART decision-tree result — Tmin<9.1degC,
+   Tdew>=6.2degC, RHm>=94% — replacing the "unverified Moroccan study" citation that was flagged
+   from day one). Also checked soybean anthracnose's full text (it's OA too) and confirmed it has
+   no numbers at all even there — flagged UNVERIFIED like the other three. Checked and confirmed
+   NOT open-access (so genuinely need institutional access, not another automated attempt): wheat
+   powdery mildew, soybean charcoal rot, soybean rust, soybean mosaic virus, soybean rhizoctonia
+   root rot, soybean bacterial pustule, the second soybean pod & stem blight source. **6 of 17
+   diseases now have a real trigger** (up from 4). Loaded and promoted live as `kg_2026_10_6`.
+   `DISEASE_MANAGED_BY` claims and the remaining 11 diseases' triggers are still not started.
 
 ---
 
