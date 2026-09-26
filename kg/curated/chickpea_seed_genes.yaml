@@ -3,13 +3,19 @@
 # Coverage note, deliberately honest rather than padded: of the 4 in-scope chickpea diseases
 # (config/vocab/diseases.yaml), only Fusarium wilt has a specific, mapped, marker-validated
 # resistance locus in the literature. Dry root rot, collar rot and rust were each searched
-# (Europe PMC, 2026-09-26) and found to have only germplasm-screening/phenotyping studies, with
-# no mapped gene or QTL for any of them -- left uncurated rather than force-fit. This matches
-# the field's actual state: dry root rot and collar rot genetics are genuinely under-studied in
-# chickpea, and rust is a minor disease here with essentially no resistance-mapping literature.
+# (Europe PMC, 2026-09-26, re-confirmed with a full-text pass too) and found to have only
+# germplasm-screening/phenotyping studies, with no mapped gene or QTL for any of them -- left
+# uncurated rather than force-fit. This matches the field's actual state: dry root rot and collar
+# rot genetics are genuinely under-studied in chickpea, and rust is a minor disease here with
+# essentially no resistance-mapping literature.
 #
-# Modelled as a QTL (not a Gene) since the source validates a diagnostic SNP marker block over a
-# mapped chromosome region, not a cloned or fully candidate-narrowed gene.
+# qtl:chickpea:foc5_ca2 is modelled as a QTL (not a Gene) since its source validates a diagnostic
+# SNP marker block over a mapped chromosome region, not a cloned or fully candidate-narrowed gene.
+#
+# gene:chickpea:Ca_14301 (added 2026-09-26) is the well-known chickpea "foc1-foc4 cluster" on
+# CaLG02 -- possibly the SAME broader hotspot region as qtl:chickpea:foc5_ca2 above (both land on
+# physical chromosome Ca2), but the two sources don't establish that identity explicitly, so they
+# are kept as two separate entities rather than merged on a guess.
 
 sources:
   - id: pmid:38337969
@@ -18,6 +24,14 @@ sources:
     year: 2024
     venue: "Plants (Basel)"
     url: https://doi.org/10.3390/plants13030436
+    verified: true
+
+  - id: pmid:30631246
+    type: publication
+    title: "Super Annigeri 1 and improved JG 74: two Fusarium wilt-resistant introgression lines developed using marker-assisted backcrossing approach in chickpea"
+    year: 2019
+    venue: "Molecular Breeding"
+    url: https://pubmed.ncbi.nlm.nih.gov/30631246/
     verified: true
 
 entities:
@@ -29,6 +43,32 @@ entities:
       trait: "Fusarium oxysporum f. sp. ciceris race 5 resistance"
       chromosome: Ca2
 
+  - id: gene:chickpea:Ca_14301
+    type: Gene
+    name: Ca_14301
+    crop: chickpea
+    # The classic multi-race "foc1-foc4 cluster" on CaLG02 (pseudomolecule Ca2), flanked by
+    # markers GA16 and TA96. Not modelled as ASR/monogenic: the source paper's own transgressive
+    # segregation data in backcross lines "suggests the resistance to be quantitative in nature,"
+    # even though a single named candidate gene (an NB-ARC domain disease-resistance protein) sits
+    # in the interval -- hence resistance_type: quantitative below, and cloned: false.
+    #
+    # Not linked here via a formal VARIETY_CARRIES_GENE claim to var:chickpea:SUPERANNIGERI1
+    # (config/sources/notified_varieties.yaml), even though the same source paper is literally
+    # about introgressing this exact locus into that exact variety via marker-assisted
+    # backcrossing (foreground markers TA59/TA96/TR19/TA27, donor WR 315) -- kg/curated/*.yaml is
+    # tested in isolation from the variety-import layer (tests/test_kg_files.py's
+    # _production_bundle() deliberately excludes variety_bundle()), so a claim citing a
+    # variety-layer entity ID would be a dangling reference from that test's point of view. If
+    # this connection is worth encoding as a graph claim later, it belongs in
+    # curator/graph/variety_import.py (which already owns var:chickpea:SUPERANNIGERI1), not here.
+    props:
+      symbol: Ca_14301
+      chromosome: Ca2
+      origin_species: "WR 315 (desi landrace donor)"
+      gene_class: "candidate NB-ARC domain disease-resistance protein"
+      cloned: false
+
 claims:
   - type: QTL_ASSOCIATION
     subject: qtl:chickpea:foc5_ca2
@@ -39,3 +79,13 @@ claims:
         method: diagnostic_marker
         locator: abstract
         quote: "The results showed a 100% coincidence between phenotype and expected haplotype in plant material evaluated for Foc5"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:chickpea:Ca_14301
+    object: dis:chickpea:fusarium_wilt
+    qualifiers: {resistance_type: quantitative, spectrum: "foc1-foc4 cluster (multi-race)"}
+    evidence:
+      - source: pmid:30631246
+        method: diagnostic_marker
+        locator: "full text, Results/Discussion"
+        quote: "two adjacent resistance gene clusters on CaLG02 flanked by STMS markers GA16 and TA96 (foc1-foc4 cluster)"

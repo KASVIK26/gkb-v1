@@ -398,6 +398,21 @@ are also where most of the work is.
    properly. All 4 verified via Europe PMC full-text XML (open access), same rigor as the original
    10. Gene catalogue is now 14 wheat / 6 soybean / 1 chickpea QTL. Loaded and promoted live as
    `kg_2026_10_8`.
+10. Exhaustively re-checked soybean's 4 remaining gene-less diseases (charcoal rot, anthracnose,
+   pod & stem blight, rhizoctonia root rot) via full-text/dedicated searches — all 4 confirmed
+   genuinely gapped in the literature, not just under-searched (e.g. the one charcoal-rot GWAS
+   paper explicitly reports 23 candidate genes across 6 loci with no leading candidate, "no
+   explicit ranking or mechanistic validation of any individual gene"). Then found and added
+   **gene:chickpea:Ca_14301** — the well-known chickpea "foc1-foc4 cluster" on CaLG02
+   (pseudomolecule Ca2), a multi-race Fusarium wilt resistance region, modelled as
+   `resistance_type: quantitative` per the source's own transgressive-segregation evidence rather
+   than treated as a clean monogenic gene. This is the same locus marker-assisted-backcrossed into
+   **Super Annigeri-1** (a variety already in `notified_varieties.yaml`) — a genuine
+   cross-reference, but deliberately NOT encoded as a `VARIETY_CARRIES_GENE` claim in
+   `kg/curated/`, since `tests/test_kg_files.py`'s `_production_bundle()` tests that layer in
+   isolation from `variety_bundle()` by design; documented in a comment instead, with a note that
+   it belongs in `variety_import.py` if it's ever formalised as a claim. Chickpea gene catalogue is
+   now 1 QTL + 1 gene. Loaded and promoted live as `kg_2026_10_9`.
 
 ---
 
