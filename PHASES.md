@@ -468,6 +468,20 @@ are also where most of the work is.
    least once against its real source (abstract or full text), not just trusted as originally
    written. 6 of 17 diseases now have a management claim. Loaded and promoted live as
    `kg_2026_10_14`.
+16. **Audit correction pass**: double-checked the "every entry checked" claim above and found it
+   wasn't quite true yet -- 6 fields across 4 diseases had never actually been flagged, some
+   silently correct (no action needed) but several genuinely wrong. Found: wheat leaf rust's
+   environmental figure was flat-out superseded (the real, used figure is different field-
+   correlation data, and the never-corrected old figure was still sitting there unflagged) and its
+   "protecting the flag leaf" management detail was never confirmed; wheat powdery mildew's
+   management claim was never checked (paper not open access); soybean charcoal rot's management
+   claim doesn't just lack confirmation -- the abstract argues close to the opposite emphasis
+   ("agronomic practices... should not be dismissed" vs. the original "resistant cultivars are the
+   most promising lever"). Also added explicit "NOT INDEPENDENTLY CHECKED" flags to wheat stem
+   rust, wheat FHB, and soybean bacterial pustule's remaining fields -- these 3 sources return zero
+   hits on Europe PMC at all, a genuinely different, weaker state than "checked and found
+   wanting." No KG content changed in this pass (`kg_current` still `kg_2026_10_14`) -- pure
+   documentation accuracy.
 
 ---
 

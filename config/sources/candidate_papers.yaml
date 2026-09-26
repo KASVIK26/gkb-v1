@@ -61,8 +61,23 @@ wheat:
       source_type: peer_reviewed_primary
       verified_via: europepmc_id
       key_findings:
-        environmental: "Infection needs <25 degC (optimum 15-20 degC) and >= 3 h leaf wetness/dew; epidemics follow a mild winter + warm wet spring."
-        management: "Single/double fungicide sprays at Zadoks 3, 4.3, 5.4; prothioconazole was the most effective single choice; protecting the flag leaf is the priority target."
+        environmental: >-
+          SUPERSEDED 2026-09-26: this figure was never actually used -- the real abstract data
+          (field-observed correlation, not a lab infection threshold) is what's in
+          kg/curated/env_triggers_v1.yaml (env:wheat:leaf_rust_field_conditions): severity rose
+          with "maximum temperature (17.8-30 degC), maximum relative humidity (76.3-85%)." The
+          "<25 degC / >=3h leaf wetness" figures below don't match that and were never confirmed
+          against this paper's abstract -- do not cite them. Original text, kept for the record:
+          "Infection needs <25 degC (optimum 15-20 degC) and >= 3 h leaf wetness/dew; epidemics
+          follow a mild winter + warm wet spring."
+        management: >-
+          PARTIALLY VERIFIED 2026-09-26 (full text): "prothioconazole was the most effective
+          single choice" and the Zadoks-scale spray timing are both real and quoted in
+          kg/curated/env_triggers_v1.yaml (adv:wheat:leaf_rust_fungicide_timing). "Protecting the
+          flag leaf is the priority target" does NOT appear in the full text and was not
+          confirmed -- do not cite it to this source. Original text, kept for the record: "Single/
+          double fungicide sprays at Zadoks 3, 4.3, 5.4; prothioconazole was the most effective
+          single choice; protecting the flag leaf is the priority target."
 
   dis:wheat:stem_rust:
     - doi: 10.1111/ppa.70203
@@ -75,6 +90,11 @@ wheat:
       verified_via: search_result
       note: "No PMID returned by Europe PMC (very recent); DOI confirmed directly on the publisher site."
       key_findings:
+        # NOT INDEPENDENTLY CHECKED (2026-09-26): this DOI returns zero hits on Europe PMC (too
+        # recent/not indexed there), so neither key_finding below could be verified OR disproven --
+        # a genuinely different, weaker state than the UNVERIFIED/CONTRADICTED entries elsewhere in
+        # this file, where an abstract or full text WAS available to check against. Treat both
+        # fields below as entirely unconfirmed until the source can actually be read.
         environmental: "Reviews existing weather-driven infection-risk models and their data gaps; general optimum ~10-15 degC with intermittent rain/dew (per related sources)."
         management: "DMI fungicides (tebuconazole, propiconazole) effective but costly and resistance-prone; global rust surveillance network is the primary early-warning tool."
 
@@ -96,7 +116,11 @@ wheat:
           paper's finding without pulling the full text. Kept here (not deleted) as a record of
           what needs re-checking: "Optimum 15-21 degC with RH > 70%; no free water needed (unlike
           the rusts); declines fast above ~22-24 degC with RH < 85%."
-        management: "Short (7-10 day) latent period gives high epidemic potential; timing fungicide ahead of that window matters more than for slower diseases."
+        management: >-
+          NOT INDEPENDENTLY CHECKED (2026-09-26): this paper is not open access (confirmed via
+          Europe PMC, isOpenAccess: N), so this claim could not be verified or disproven. Original
+          text, kept for the record: "Short (7-10 day) latent period gives high epidemic
+          potential; timing fungicide ahead of that window matters more than for slower diseases."
 
   dis:wheat:fusarium_head_blight:
     - doi: 10.1111/ppa.13839
@@ -109,6 +133,9 @@ wheat:
       verified_via: search_result
       note: "No PMID returned by Europe PMC; DOI confirmed directly on the publisher site."
       key_findings:
+        # NOT INDEPENDENTLY CHECKED (2026-09-26): same situation as wheat stem rust above -- this
+        # DOI returns zero hits on Europe PMC, so neither field below could be verified or
+        # disproven. Treat both as entirely unconfirmed until the source can actually be read.
         environmental: "Models use temperature/RH/rainfall in 5-15 day windows pre- and post-anthesis; infection tied to head-wetting from simultaneous rain + high RH near anthesis."
         management: "Fungicide must be applied at anthesis or within 5 days after -- the single highest-leverage timing fact for an IoT alert on this disease."
 
@@ -160,7 +187,17 @@ soybean:
           re-checking: "disease severity rises at 28-35 degC soil/air temperature combined with
           low rainfall/soil moisture deficit -- directly matches the soil-probe data AgriNode
           already measures."
-        management: "Resistant cultivars are the most promising lever; cultural practices (irrigation scheduling to avoid moisture stress) are the main non-genetic control."
+        management: >-
+          UNVERIFIED (checked 2026-09-26, abstract -- this paper isn't open access for full text,
+          but the abstract itself is readable): "resistant cultivars are the most promising lever"
+          does not appear in the abstract. What the abstract actually discusses is more nuanced:
+          "a perception that agronomic practices such as crop rotation and cover cropping are
+          ineffective" is called a misconception, and the paper argues "traditional agronomic
+          practices should not be dismissed but re-evaluated under local conditions" -- i.e. the
+          opposite emphasis from "resistant cultivars are the most promising lever." Original
+          text, kept for the record: "Resistant cultivars are the most promising lever; cultural
+          practices (irrigation scheduling to avoid moisture stress) are the main non-genetic
+          control."
 
   dis:soybean:frogeye_leaf_spot:
     - pmid: "41957394"
@@ -293,6 +330,9 @@ soybean:
       verified_via: search_result
       note: "No PMID returned by Europe PMC (very recent); DOI confirmed directly on the publisher site."
       key_findings:
+        # NOT INDEPENDENTLY CHECKED (2026-09-26): same situation as wheat stem rust/FHB above --
+        # this DOI returns zero hits on Europe PMC, so neither field below could be verified or
+        # disproven. Treat both as entirely unconfirmed until the source can actually be read.
         environmental: "Warm (30-33 degC) wet weather with RH > 70%; spread by rain splash and wind-driven rain; requires leaf wetness for infection; cultivation on wet foliage spreads it further."
         management: "Resistant cultivars + disease-free seed + tillage to decompose infested residue; avoid field work when foliage is wet."
 
@@ -430,4 +470,9 @@ chickpea:
           confirmed. Original text, kept for the record: "Cool, moist weather (~20-25 degC)
           favours development, though free rain is not essential; symptoms usually appear later in
           the season."
-        management: "Fungicide control has historically had limited success; resistant-cultivar development and early sowing are the primary recommended strategies."
+        management: >-
+          UNVERIFIED (checked 2026-09-26): same PDF-extraction problem as the environmental
+          figure above -- could not locate a rust-specific management section or confirm this text
+          anywhere in the fragmented extracted content. Original text, kept for the record:
+          "Fungicide control has historically had limited success; resistant-cultivar development
+          and early sowing are the primary recommended strategies."
