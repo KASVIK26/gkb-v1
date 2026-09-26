@@ -97,6 +97,14 @@ sources:
     url: https://doi.org/10.1111/ppa.12733
     verified: true
 
+  - id: pmid:30677383
+    type: publication
+    title: "Evaluation of Commercial Soybean Cultivars for Reaction to Phomopsis Seed Decay"
+    year: 2018
+    venue: "Plant Disease"
+    url: https://doi.org/10.1094/PDIS-02-17-0204-RE
+    verified: true
+
 entities:
   - id: env:wheat:leaf_rust_field_conditions
     type: EnvTrigger
@@ -242,6 +250,13 @@ entities:
     props:
       action_type: cultural
 
+  - id: adv:soybean:pod_stem_blight_resistant_cultivars
+    type: Advisory
+    name: "Plant a lower-infection cultivar (6 identified: Morsoy R2 491, Progeny 5650/5706, Asgrow 5606/5831, Dyna-Gro33C59)"
+    crop: soybean
+    props:
+      action_type: varietal
+
 claims:
   - type: DISEASE_ENV_TRIGGER
     subject: dis:wheat:leaf_rust
@@ -354,3 +369,12 @@ claims:
         method: review_statement
         locator: abstract
         quote: "due to the dearth of resistant soybean genotypes...effective management options have mostly relied upon a combination of cultural and chemical control options"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:soybean:pod_stem_blight
+    object: adv:soybean:pod_stem_blight_resistant_cultivars
+    evidence:
+      - source: pmid:30677383
+        method: field_multi_env
+        locator: abstract
+        quote: "One MG IV cultivar (Morsoy R2 491) and five MG V cultivars (Progeny 5650, Progeny 5706, Asgrow 5606, Asgrow 5831, and Dyna-Gro33C59) had significantly (P ≤ 0.05) lower percent seed infected by P. longicolla than their respective susceptible checks and other cultivars in the same tests"

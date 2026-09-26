@@ -452,6 +452,22 @@ are also where most of the work is.
    ID instead — a reminder that this failure mode is easy to slip into even while doing the
    verification work meant to prevent it, not just something that happens when skipping steps.
    5 of 17 diseases now have a management claim. Loaded and promoted live as `kg_2026_10_13`.
+15. Finished the audit sweep. Soybean mosaic virus's environmental claim had a second real
+   contradiction: the source paper reports seed transmission "ranged from 0 to 43%," not the
+   "up to 75%" figure that had been written — flagged CONTRADICTED; its management claim
+   (virus-free seed, avoiding late planting, no resistant cultivars) doesn't appear anywhere in
+   that paper at all (it's purely transmission genetics), flagged UNVERIFIED with a note that a
+   different source is needed. Separately, re-checked the Phomopsis-seed-decay cultivar paper
+   (soybean pod & stem blight) that had an unconfirmed PMID from the original research pass —
+   found and confirmed PMID 30677383 this time. Its environmental claim (late-season rainfall
+   driving incidence) isn't in the abstract, but it has real, strong management data: 6 named
+   cultivars (Morsoy R2 491, Progeny 5650/5706, Asgrow 5606/5831, Dyna-Gro33C59) with
+   significantly lower Phomopsis seed infection than susceptible checks — added as a 6th
+   `DISEASE_MANAGED_BY` claim, the first `varietal`-type advisory in the KG. This closes out the
+   candidate_papers.yaml accuracy audit for this session: every entry has now been checked at
+   least once against its real source (abstract or full text), not just trusted as originally
+   written. 6 of 17 diseases now have a management claim. Loaded and promoted live as
+   `kg_2026_10_14`.
 
 ---
 

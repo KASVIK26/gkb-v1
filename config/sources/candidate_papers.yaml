@@ -234,15 +234,26 @@ soybean:
           here rather than in kg/curated/. Original text: "Warm humid/wet weather before maturity,
           and any delay in harvest during warm wet weather, both drive incidence and severity."
         management: "Non-legume crop rotation to decay infested residue; timely harvest is the single most controllable management lever."
-    - title: "Evaluation of Commercial Soybean Cultivars for Reaction to Phomopsis Seed Decay"
+    - pmid: "30677383"
+      title: "Evaluation of Commercial Soybean Cultivars for Reaction to Phomopsis Seed Decay"
       journal: "Plant Disease"
       doi: 10.1094/PDIS-02-17-0204-RE
       source_type: peer_reviewed_primary
-      verified_via: search_result
-      note: "PMID not confirmed via Europe PMC in this pass; DOI confirmed on the publisher site. Re-verify before treating as fully checked."
+      verified_via: europepmc_id
+      note: "PMID confirmed 2026-09-26 (was previously unconfirmed) -- found via Europe PMC's DOI search, title matches exactly."
       key_findings:
-        environmental: "Late-season rainfall differences between otherwise-similar years were the main driver of year-to-year incidence differences."
-        management: "Cultivar screening data for resistance to Phomopsis seed decay specifically."
+        environmental: >-
+          UNVERIFIED (checked 2026-09-26): the abstract has no discussion of late-season rainfall
+          or year-to-year incidence differences at all -- it's a single-location (Stoneville, MS),
+          two-season cultivar screening trial, not a weather-driver study. Original text, kept for
+          the record: "Late-season rainfall differences between otherwise-similar years were the
+          main driver of year-to-year incidence differences."
+        management: >-
+          VERIFIED 2026-09-26 -- see kg/curated/env_triggers_v1.yaml
+          (adv:soybean:pod_stem_blight_resistant_cultivars): 6 cultivars (1 MG IV, 5 MG V) had
+          significantly lower Phomopsis seed infection than susceptible checks, named explicitly:
+          "Morsoy R2 491" and "Progeny 5650, Progeny 5706, Asgrow 5606, Asgrow 5831, and
+          Dyna-Gro33C59."
 
   dis:soybean:rhizoctonia_root_rot:
     - doi: 10.1111/ppa.12733
@@ -296,8 +307,25 @@ soybean:
       source_type: peer_reviewed_primary
       verified_via: europepmc_id
       key_findings:
-        environmental: "Not weather-driven in the usual sense -- aphid vector activity (temperature-dependent) and seed transmission rate (up to 75%, cultivar/strain dependent) are the drivers, matching this disease's 'indirect' sensor coupling in docs/scope.md."
-        management: "Virus-free certified seed + avoiding late planting (reduces aphid-transmission window); no fully SMV-resistant commercial cultivars exist yet."
+        environmental: >-
+          CONTRADICTED 2026-09-26 (not just unverified): the abstract reports seed transmission
+          "ranged from 0 to 43%" across 6 soybean lines x 8 SMV strains -- the "up to 75%" figure
+          below is not this paper's number and overstates it. The abstract also says nothing about
+          temperature-dependent aphid vector activity at all; that framing isn't sourced to this
+          paper either. What the abstract DOES support: transmission rate is strongly
+          strain-by-cultivar-dependent (e.g. SMV 746 was 43% in one line, 0% in three others).
+          Original text, kept for the record: "Not weather-driven in the usual sense -- aphid
+          vector activity (temperature-dependent) and seed transmission rate (up to 75%,
+          cultivar/strain dependent) are the drivers, matching this disease's 'indirect' sensor
+          coupling in docs/scope.md."
+        management: >-
+          UNVERIFIED (checked 2026-09-26): none of "virus-free certified seed," "avoiding late
+          planting," or "no fully SMV-resistant commercial cultivars exist" appear anywhere in
+          this paper's abstract -- it's purely about strain-specific seed/aphid transmission
+          genetics, not management practice. This paper is not open access, so full text wasn't
+          checked; a different source is needed for this disease's management claim. Original
+          text, kept for the record: "Virus-free certified seed + avoiding late planting (reduces
+          aphid-transmission window); no fully SMV-resistant commercial cultivars exist yet."
 
 chickpea:
   dis:chickpea:fusarium_wilt:
