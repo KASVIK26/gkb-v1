@@ -108,6 +108,22 @@ sources:
     url: https://doi.org/10.1038/s41467-026-69717-1
     verified: true
 
+  - id: pmid:32273397
+    type: publication
+    title: "Horizontal gene transfer of Fhb7 from fungus underlies Fusarium head blight resistance in wheat"
+    year: 2020
+    venue: Science
+    url: https://doi.org/10.1126/science.aba5435
+    verified: true
+
+  - id: pmid:36015378
+    type: publication
+    title: "Distribution, Polymorphism and Function Characteristics of the GST-Encoding Fhb7 in Triticeae"
+    year: 2022
+    venue: Plants
+    url: https://doi.org/10.3390/plants11162074
+    verified: true
+
 entities:
   - id: gene:wheat:Sr33
     type: Gene
@@ -282,6 +298,30 @@ entities:
       chromosome: 7AL
       origin_species: "Triticum monococcum (introgressed into bread wheat via T. timopheevii)"
       gene_class: NLR
+      cloned: true
+
+  - id: gene:wheat:Fhb7
+    type: Gene
+    name: Fhb7
+    crop: wheat
+    # Native locus is the very distal end of Thinopyrum elongatum chromosome arm 7EL -- not a
+    # wheat chromosome letter (config/vocab chromosome validation only allows A/B/D genomes), so
+    # `chromosome` records where it ends up in the specific resistant genotype these sources
+    # discuss (a 7E/7D wheat-Thinopyrum substitution line), following the same convention already
+    # used for Sr31/Lr26/Yr9 (rye donor, recorded on the wheat 1BL arm they translocated onto) and
+    # Sr50 (rye donor, recorded on wheat 1D).
+    #
+    # IMPORTANT NUANCE, not swept under the rug: pmid:36015378 found Fhb7-homolog-carrying lines
+    # with sharply DIFFERENT FHB outcomes -- the 7E/7D line was highly resistant, but two other
+    # lines carrying near-identical (>=94% identical) Fhb7 homologs (SNTE122, TNT-B) were "highly
+    # susceptible to FHB with nearly whole spike bleached." Fhb7's resistance is genuinely
+    # genotype-context-dependent, not a universal drop-in fix -- don't model it as if carrying any
+    # Fhb7 homolog guarantees resistance.
+    props:
+      symbol: Fhb7
+      chromosome: "7D"
+      origin_species: "Thinopyrum elongatum 7EL segment; horizontally acquired from an endophytic Epichloe fungus"
+      gene_class: "glutathione S-transferase (GST); detoxifies trichothecenes via de-epoxidation"
       cloned: true
 
 claims:
@@ -477,3 +517,17 @@ claims:
         method: cloned_validated
         locator: "full text, Results"
         quote: "NC99BGTAG11 and NLR-1 transgenic lines conferred specifically moderate resistance to the Pt race THDS"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Fhb7
+    object: dis:wheat:fusarium_head_blight
+    qualifiers: {resistance_type: quantitative, spectrum: "genotype-context-dependent -- see entity comment"}
+    evidence:
+      - source: pmid:32273397
+        method: cloned_validated
+        locator: abstract
+        quote: "confers broad resistance to Fusarium species by detoxifying trichothecenes through de-epoxidation"
+      - source: pmid:36015378
+        method: field_single_env
+        locator: "full text, Results"
+        quote: "7E/7D showed high level resistance to FHB with only several spikelets bleached while SNTE122 and TNT-B were highly susceptible to FHB with nearly whole spike bleached"

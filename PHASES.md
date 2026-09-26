@@ -413,6 +413,17 @@ are also where most of the work is.
    isolation from `variety_bundle()` by design; documented in a comment instead, with a note that
    it belongs in `variety_import.py` if it's ever formalised as a claim. Chickpea gene catalogue is
    now 1 QTL + 1 gene. Loaded and promoted live as `kg_2026_10_9`.
+11. Added **Fhb7** to wheat's FHB gene coverage (previously only Fhb1) — the well-known,
+   Science-2020-cloned glutathione S-transferase from *Thinopyrum elongatum* that detoxifies
+   trichothecenes. Its native locus (7EL, a Thinopyrum chromosome) doesn't fit our wheat-only
+   chromosome validation, so `chromosome` records the wheat arm it's introgressed onto in the
+   specific resistant genotype cited (7D), same convention already used for the rye-donor
+   Sr31/Lr26/Yr9 cluster. Deliberately documented a real complication found while verifying it,
+   rather than presenting a clean story: a follow-up paper (PMID 36015378) found wheat-Thinopyrum
+   lines carrying near-identical (>=94%) Fhb7 homologs with **opposite** FHB outcomes — one highly
+   resistant, two others "highly susceptible... with nearly whole spike bleached" — so
+   `resistance_type: quantitative, spectrum: "genotype-context-dependent"` rather than a universal
+   drop-in claim. Wheat gene catalogue is now 15. Loaded and promoted live as `kg_2026_10_10`.
 
 ---
 
