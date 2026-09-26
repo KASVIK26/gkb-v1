@@ -17,6 +17,7 @@ import typer
 
 from curator.genome.build import DATA_INTERIM, build_all, summarize
 from curator.genome.load import load_ref_genes
+from curator.genome.wheat_domains import classify_wheat_ref_genes
 from curator.graph.bundle import KGBundle
 from curator.graph.kg_files import load_curated_dir
 from curator.graph.manifest import MANIFEST_PATH, write_manifest
@@ -166,6 +167,25 @@ def load_refgenes(
     with psycopg.connect(database_url, autocommit=True) as conn:
         counts = load_ref_genes(conn, schema, parquet_dir=parquet_dir)
     typer.secho(f"Loaded ref_gene rows into {schema}: {json.dumps(counts)}", fg=typer.colors.GREEN)
+
+
+@genome_app.command("classify-wheat-domains")
+def classify_wheat_domains_cmd(
+    refgenes_parquet: Path = typer.Option(
+        DATA_INTERIM / "refgenes_wheat.parquet", help="Output of `genome build-refgenes` to enrich in place."
+    ),
+) -> None:
+    """Fill in real InterPro-based NLR/RLK classification for wheat's ref_gene rows, by coordinate
+    overlap against IWGSC's own gene annotation (NCBI's RefSeq GFF carries no domain data of its
+    own -- see curator/genome/wheat_domains.py). Requires the IWGSC functional-annotation and
+    gene-annotation files downloaded to data/raw/ (not committed; see PHASES.md for the URGI URLs).
+    Overwrites refgenes_wheat.parquet in place; re-run `genome load-refgenes` afterwards."""
+    df = classify_wheat_ref_genes(refgenes_parquet=refgenes_parquet)
+    df.to_parquet(refgenes_parquet, index=False)
+    nlr = df[df["is_nlr"]]
+    typer.secho(
+        f"Classified {len(df):,} wheat genes: {len(nlr):,} NLR/RLK ({len(nlr) / len(df):.2%})", fg=typer.colors.GREEN
+    )
 
 
 if __name__ == "__main__":

@@ -1,0 +1,5 @@
+##gff-version 3
+Chr1A	IWGSC_v2.1	gene	1142826	1144427	52	+	.	ID=TraesCS1A03G0004000;previous_id=TraesCS1A02G001800;primconf=HC;Name=TraesCS1A03G0004000;cds=CDS_OK;mapping=fullPerfectMatch
+Chr1A	IWGSC_v2.1	gene	9963850	9971400	48	-	.	ID=TraesCS1A03G0021300;primconf=HC;Name=TraesCS1A03G0021300;cds=CDS_OK;mapping=fullPerfectMatch
+Chr1A	IWGSC_v2.1	gene	20000000	20001000	40	+	.	ID=TraesCS1A03G0040000;primconf=HC;Name=TraesCS1A03G0040000;cds=CDS_OK;mapping=fullPerfectMatch
+Chr1A	IWGSC_v2.1	gene	20000500	20002000	40	+	.	ID=TraesCS1A03G0040100;primconf=HC;Name=TraesCS1A03G0040100;cds=CDS_OK;mapping=fullPerfectMatch

@@ -543,6 +543,21 @@ are also where most of the work is.
    fixed. Loaded and promoted live as `kg_2026_10_16` (188 entities, 293 claims), verified the
    anchor resolves correctly by joining `v_gene_located_at` all the way through to the real
    chromosome/coordinates. Task 4.4 (marker sequence anchoring) is still not started.
+20. **Closed wheat's NLR-classification gap** (flagged in item 18) using a real external dataset,
+   at the user's direction. The user found the right URGI (IWGSC) download pages and asked which
+   file was needed; fetched `iwgsc_refseqv2.1_functional_annotation.zip` directly (URGI is
+   reachable from this environment, no relay needed) — real InterPro/Pfam/GO annotation per wheat
+   gene, keyed by IWGSC's own `TraesCS...` gene IDs. Those IDs don't match NCBI's `LOC...` IDs
+   already loaded (checked: the official ID-correspondence file only cross-references IWGSC's own
+   annotation versions against each other, never against NCBI) — so also downloaded IWGSC's own
+   gene-coordinate GFF3 (415MB) and built a coordinate-overlap join instead
+   (`curator/genome/wheat_domains.py`), verified first on a gene both annotations independently
+   place at the same position give or take a few bp. Genes with an ambiguous (0 or 2+) overlapping
+   IWGSC gene are deliberately left unclassified rather than guessed at — a real test locks this
+   in. **Result: 2,184 of 136,408 wheat genes now flagged NLR/RLK (1.60%)** — TNL=6, RNL=3, NL=1334,
+   RLK=841 — closely in line with soybean's 1.7% and chickpea's 1.1% from the same classifier.
+   Reloaded into `kg_2026_10_16`'s `ref_gene` table, replacing the old all-`is_nlr=false` wheat
+   rows. Wheat's genomic layer (4.1/4.2) is now on equal footing with soybean/chickpea's.
 
 ---
 
