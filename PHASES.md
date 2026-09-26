@@ -705,6 +705,55 @@ are also where most of the work is.
    bacterial pustule and soybean mosaic virus remain genuinely open on trigger/advisory after three
    independent research passes — treated as a real literature gap, not a search failure. Loaded and
    promoted live as `kg_2026_10_20`.
+26. **Fourth research pass (3 more AI reports) on the last 4 gaps — 2 of 4 fully closed, 1
+   correctly rejected for a fabricated citation, 1 found real sources blocked by a schema gap.**
+   - **Wheat powdery mildew now has a management advisory** (its last remaining gap): two
+     independent, fully-verified own-field-trial papers, not just one. Luo et al. 2021 (open
+     access, PMC7943856, full PDF read start to finish) — a 2-year China field trial found
+     powdery mildew disease index rose monotonically with nitrogen rate in BOTH monocropped and
+     intercropped wheat, worst at 270 kg N/ha; "nitrogen fertilization with 180 kg/ha was found to
+     be optimal" for balancing disease against yield. Wang et al. 2022 (open access, PMC9149294,
+     quote confirmed via Europe PMC fulltext) — variety resistance alone gave ~80% "control
+     efficacy" with zero fungicide, and the same fungicide was far more effective on a resistant
+     than a susceptible variety background (98.28% vs. 77.45%). **Wheat is now fully resolved.**
+   - **Soybean bacterial pustule now has both a trigger and an advisory** (previously the
+     thinnest-covered disease remaining): Kang et al. 2021 (open access, Korean Society of Plant
+     Pathology, full PDF read) — a 3-year nationwide Korean field survey found the percentage of
+     infected fields more than doubled (7.0%→7.8%→17.0%) in the year with 241 mm of August rain
+     vs. 76-111 mm in the other two years; real field-incidence data, not an inoculation-chamber
+     correlation, closing an angle three prior passes couldn't. Hong et al. 2012 (not open access,
+     but full abstract independently confirmed via a Gyeongsang National University institutional
+     mirror) — a 2-year Korea field trial found delaying planting 15-30 days significantly reduced
+     disease in susceptible/moderately susceptible cultivars, with no effect on a resistant
+     cultivar. **Fully resolved.**
+   - **Chickpea rust's trigger remains open, correctly.** One report's central citation (a
+     "Krishikosh M.Sc. thesis by Mekala Sudheer Kumar, 2024") does not hold up: the item link
+     404s and the named author returns zero hits anywhere searchable — not used. A second report's
+     own two leads were self-flagged by that report as too weak to promote (an uncited extension
+     figure; an unreferenced sentence in the chickpea-rust management paper's own introduction,
+     which that paper's own methods confirm collected zero weather data). Both assessments were
+     independently corroborated rather than overridden. A real, unexplored lead surfaced in this
+     pass's own verification search — a Krishikosh Ph.D. thesis (not the fabricated M.Sc. one)
+     covering "survey, variability of pathogen, aerobiology... integrated disease management" for
+     chickpea rust, plus a 2024 ResearchGate paper on chickpea rust distribution in Andhra Pradesh
+     — neither read this session; worth a fifth pass.
+   - **Soybean mosaic virus: real sources found, but blocked by a schema gap, not by the
+     literature.** As predicted, the useful literature here is genuinely different in kind —
+     1979 and 2000 Korean Journal of Crop Science field papers, independently verified word-for-
+     word against koreascholar.com's own English abstracts (real authors, real page numbers, real
+     quotes): planting-date effects on necrotic-strain SMV infection, and aphid-population timing
+     tracking SMV incidence spikes. Neither paper has a DOI or PMID (both pre-date this journal's
+     DOI assignment), and `Source.id` only accepts `pmid:`/`doi:` for `type=publication` --
+     recorded as fully-verified leads in `env_triggers_v1.yaml`'s source comments rather than
+     forced into the schema or given a fabricated identifier. A separate report's citation for
+     this gap (DOI 10.1094/PDIS-91-10-1255) was caught presenting the wrong title for that DOI
+     (the real paper, confirmed via Europe PMC, is "Potential for Integrated Management of Soybean
+     Virus Disease," not what was claimed) — not used, since a title mismatch this direct means
+     the rest of the citation can't be trusted without independently re-reading the real paper.
+   **15 of 17 diseases now have an env trigger; 16 of 17 have a management claim.** Only soybean
+   mosaic virus (both dimensions, real sources pending a schema decision) and chickpea rust
+   (trigger only, genuinely thin literature after 4 passes) remain open. Loaded and promoted live
+   as `kg_2026_10_21`.
 
 ---
 

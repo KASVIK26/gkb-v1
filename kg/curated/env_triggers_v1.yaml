@@ -278,6 +278,72 @@ sources:
     # OpenAlex's inverted-index full abstract text, word-for-word.
     verified: true
 
+  # --- 2026-09-26, fourth research pass (3 more AI reports against the "final 4 gaps" brief).
+  # One report's chickpea-rust "thesis" citation (Krishikosh, "Mekala Sudheer Kumar 2024") could
+  # not be verified -- the item link 404s and the author name returns zero hits anywhere on the
+  # web. Not used. Another report cited DOI 10.1094/PDIS-91-10-1255 under a title ("Host Plant
+  # Resistance and Insecticide Application for Management of Soybean Mosaic Virus and Bean Pod
+  # Mottle Virus") that does NOT match that DOI's real title ("Potential for Integrated Management
+  # of Soybean Virus Disease," Pedersen et al. 2007, confirmed via Europe PMC) -- its quotes were
+  # not used either, since a title mismatch this direct means the rest of that citation can't be
+  # trusted without independently re-reading the real paper, which was not accessible this session.
+  # Two other real, verified 1979/2000 Korean-journal SMV findings (planting-date effect on
+  # necrotic-strain infection; aphid-population timing vs. SMV incidence) were independently
+  # confirmed via koreascholar.com's own English abstracts, but neither paper has a DOI or PMID
+  # (both pre-date this journal's DOI assignment) -- this schema's Source.id only accepts
+  # `pmid:`/`doi:` for type=publication, so they are recorded here as leads, not claims:
+  #   - Shin, D.C. et al. (1979). "Effect of Planting Date on the Infection of Necrotic Soybean
+  #     SMV." Korean J. Crop Sci. 24(3):59-66. No DOI. "SMV-N infection was decreased by delaying
+  #     the planting dates" (own 1975-76 field trial, 30 cultivars x 4 planting dates).
+  #   - Kim, Y.H. et al. (2000). "Seasonal Occurrence of Aphids and Selection of Insecticides for
+  #     Controlling Aphids Transmitting Soybean Mosaic Virus." Korean J. Crop Sci. 45(6):353-355.
+  #     No DOI. "In early seeding, SMV incidence increased rapidly between 20 June and 30 June,
+  #     suggesting that virus spread was strongly correlated with increased colonization of
+  #     aphids" (own field trial).
+  # Both are genuine, independently verified, real findings -- flagging for a future session to
+  # either extend Source.id to accept a non-DOI journal-article prefix, or find an
+  # institutionally-assigned identifier (e.g. a KCI article ID) that fits the existing pattern.
+
+  - id: pmid:33719313
+    type: publication
+    title: "Effects of Nitrogen and Intercropping on the Occurrence of Wheat Powdery Mildew and Stripe Rust and the Relationship With Crop Yield"
+    year: 2021
+    venue: "Frontiers in Plant Science"
+    url: https://doi.org/10.3389/fpls.2021.637393
+    # Open access, PMC7943856 (PMCID confirmed via OpenAlex) -- full PDF downloaded from Frontiers
+    # and read start to finish, not abstract-only.
+    verified: true
+
+  - id: pmid:35651769
+    type: publication
+    title: "The Quantitative Analyses for the Effects of Two Wheat Varieties With Different Resistance Levels on the Fungicide Control Efficacies to Powdery Mildew"
+    year: 2022
+    venue: "Frontiers in Plant Science"
+    url: https://doi.org/10.3389/fpls.2022.864192
+    # Open access, PMC9149294 -- quote confirmed via Europe PMC's fullTextXML endpoint.
+    verified: true
+
+  - id: pmid:34897256
+    type: publication
+    title: "Characterization of Xanthomonas citri pv. glycines Population Genetics and Virulence in a National Survey of Bacterial Pustule Disease in Korea"
+    year: 2021
+    venue: "The Plant Pathology Journal"
+    url: https://doi.org/10.5423/PPJ.FT.11.2021.0164
+    # Open access, CC BY-NC (Korean Society of Plant Pathology) -- full PDF downloaded and read
+    # start to finish.
+    verified: true
+
+  - id: doi:10.1016/j.cropro.2012.07.014
+    type: publication
+    title: "Differential effect of delayed planting on soybean cultivars varying in susceptibility to bacterial pustule and wildfire in Korea"
+    year: 2012
+    venue: "Crop Protection"
+    url: https://doi.org/10.1016/j.cropro.2012.07.014
+    # Not open access (standard Elsevier subscription) -- full abstract independently confirmed
+    # verbatim via a Gyeongsang National University institutional repository mirror
+    # (scholarworks.gnu.ac.kr), which reproduces the complete English abstract.
+    verified: true
+
 entities:
   - id: env:wheat:leaf_rust_field_conditions
     type: EnvTrigger
@@ -662,6 +728,58 @@ entities:
     props:
       action_type: chemical
 
+  - id: adv:wheat:powdery_mildew_nitrogen_management
+    type: Advisory
+    # The paper's own 2-year field trial (monocropped AND intercropped wheat, Yunnan, China):
+    # disease index rose monotonically with N rate at every step (N0=0, N1=90, N2=180, N3=270
+    # kg/ha), worst at N3 in both seasons. The "180 kg/ha optimal" figure is the paper's own
+    # yield/disease balance point specifically for its wheat/faba-bean intercropping system --
+    # the portable, general finding is the direction (more N = worse powdery mildew), which held
+    # in monocropped wheat too, not just the intercrop.
+    name: "Avoid excess nitrogen (disease worsens monotonically with N rate); ~180 kg/ha balanced disease control against yield in an intercropping system"
+    crop: wheat
+    props:
+      action_type: cultural
+
+  - id: adv:wheat:powdery_mildew_variety_fungicide
+    type: Advisory
+    # Own 2-year field trial. On the highly resistant variety, variety resistance ALONE (no
+    # fungicide) gave ~80% "control efficacy" relative to the susceptible variety, and the same
+    # fungicide was far more effective on the resistant background (98.28% vs. 77.45% at
+    # comparable/higher dose on the susceptible variety).
+    name: "Deploy resistant varieties (resistance alone gives ~80% control); fungicide efficacy is much higher on resistant than susceptible backgrounds"
+    crop: wheat
+    props:
+      action_type: varietal
+
+  - id: env:soybean:bacterial_pustule_august_rainfall
+    type: EnvTrigger
+    # The paper's own 3-year, nationwide Korean field survey (372/309/372 fields/year): percentage
+    # of infected fields more than doubled (7.0% to 7.8% to 17.0%) in the year with 241 mm of
+    # August rain vs. the two years with 76-111 mm. A correlation across 3 years/one weather
+    # variable, not a controlled dose-response, but real field incidence data tied to a real new
+    # field survey -- modelled as a rainfall-sum condition over the August window the paper itself
+    # measured.
+    name: "Soybean bacterial pustule: high August rainfall associated with a large jump in field infection rate"
+    crop: soybean
+    props:
+      phase: infection
+      bbch_from: 30
+      bbch_to: 89
+      conditions:
+        - {variable: rain_mm, min: 200, aggregation: sum, window_h: 720}
+
+  - id: adv:soybean:bacterial_pustule_delayed_planting
+    type: Advisory
+    # Own 2-year field trial (2009-2010, Suwon and Naju, Korea), 4 cultivars x 4 planting dates.
+    # Delaying planting 15-30 days significantly reduced disease in highly/moderately susceptible
+    # cultivars under moderate disease pressure (effect weakened under high disease pressure in
+    # the most-susceptible cultivar); the resistant cultivar showed no planting-date effect at all.
+    name: "Delay planting 15-30 days for susceptible/moderately susceptible cultivars to reduce bacterial pustule incidence; resistant cultivars are unaffected by planting date"
+    crop: soybean
+    props:
+      action_type: cultural
+
 claims:
   - type: DISEASE_ENV_TRIGGER
     subject: dis:wheat:leaf_rust
@@ -940,3 +1058,43 @@ claims:
         method: field_multi_env
         locator: abstract
         quote: "minimizes the rust severity to the tune of >77%"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:wheat:powdery_mildew
+    object: adv:wheat:powdery_mildew_nitrogen_management
+    evidence:
+      - source: pmid:33719313
+        method: field_multi_env
+        locator: "full text, Conclusion"
+        quote: "In general terms, nitrogen fertilization with 180 kg.ha−1 was found to be optimal."
+      - source: pmid:33719313
+        method: field_multi_env
+        locator: "full text, Results"
+        quote: "the incidence and disease index of powdery mildew in monocropped and intercropped wheat displayed an increasing trend as the levels of N increased"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:wheat:powdery_mildew
+    object: adv:wheat:powdery_mildew_variety_fungicide
+    evidence:
+      - source: pmid:35651769
+        method: field_multi_env
+        locator: "full text, Results"
+        quote: "the control efficacies (effect of variety resistance) to mildew on highly resistant variety reached 79.72%"
+
+  - type: DISEASE_ENV_TRIGGER
+    subject: dis:soybean:bacterial_pustule
+    object: env:soybean:bacterial_pustule_august_rainfall
+    evidence:
+      - source: pmid:34897256
+        method: field_multi_env
+        locator: "full text, Results and Discussion"
+        quote: "241 mm of total precipitation in 2017 versus only 111.3 and 76.2 mm in 2015 and 2016, respectively"
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:soybean:bacterial_pustule
+    object: adv:soybean:bacterial_pustule_delayed_planting
+    evidence:
+      - source: doi:10.1016/j.cropro.2012.07.014
+        method: field_multi_env
+        locator: abstract
+        quote: "the results from this study indicate that delayed soybean planting reduced the bacterial disease incidence and differentially affected resistant and susceptible cultivars"
