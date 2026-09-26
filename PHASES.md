@@ -80,7 +80,7 @@ are also where most of the work is.
 | 0 | Cleanup: bad data removed, tests fixed, secrets hooked, docs consolidated | ✅ **Done** |
 | 1 | Scope, data model, ID rules, release schema, competency questions | ✅ **Done** |
 | 2 | Supabase live setup + versioned build pipeline | ✅ **Done** — five real releases (`kg_2026_10_1` through `_5`) built; `kg_current` atomic switchover live and pointing at `kg_2026_10_5`; `kg/manifest.json` (checksums, git SHA, counts) written on every `kg load`, verified by reading it back |
-| 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 10 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
+| 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
 | 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | ⬜ Not started |
 | 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Source discovery done** — verified bibliography for all 17 diseases (`config/sources/candidate_papers.yaml`); the grounded-extraction pipeline itself not started |
 | 6 | Gold-standard evaluation of the extraction pipeline | ⬜ Not started |
@@ -385,6 +385,19 @@ are also where most of the work is.
    and frogeye leaf spot's more specific mechanism/cultivar/timing claims (the QoI-resistance
    framing itself is real; the specifics around it aren't). 2 of 17 diseases now have a real
    management claim.
+9. Expanded `kg/curated/wheat_seed_genes.yaml` with 4 more verified genes (2026-09-26), giving
+   wheat its first dedicated stripe-rust and powdery-mildew genes beyond the Lr34-synonym cluster:
+   **Yr6NLR1 + Yr6NLR2** (7BL, stripe rust) — a genuine two-gene NLR pair, both required together
+   (neither single mutant is resistant; crossing complementary mutants restores it; VIGS-silencing
+   either one increases susceptibility) — modelled as two separate Gene entities since that's what
+   they are, not a naming quirk. **Pm6/Pm52** (2BL, powdery mildew, from *T. timopheevii*,
+   transgenic-complementation validated). **Pm37** (7AL, powdery mildew + narrow-spectrum leaf
+   rust to race THDS only, from *T. monococcum*) — a *different allele* of the stem-rust locus
+   Sr22 (94.22% identity, "distinct functional divergence" per the source), not a synonym of it;
+   documented in a comment since there's no `ALLELE_OF` claim type to represent that relationship
+   properly. All 4 verified via Europe PMC full-text XML (open access), same rigor as the original
+   10. Gene catalogue is now 14 wheat / 6 soybean / 1 chickpea QTL. Loaded and promoted live as
+   `kg_2026_10_8`.
 
 ---
 

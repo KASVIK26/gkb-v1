@@ -7,6 +7,10 @@
 # Status: status defaults to "unreviewed" below (nothing here is force-marked "reviewed" —
 # that's a deliberate human sign-off step, not something to skip even when the sourcing is
 # solid). Flip a claim's `status: reviewed` once you've spot-checked it yourself.
+#
+# 2026-09-26 addition: Yr6NLR1/Yr6NLR2, Pm6 (=Pm52), and Pm37 -- verified the same way, but this
+# time by pulling the papers' own open-access full text (Europe PMC fullTextXML), not just the
+# abstract, since none of the three had the chromosome/validation details in their abstract alone.
 
 sources:
   - id: pmid:23811228
@@ -78,6 +82,30 @@ sources:
     year: 2003
     venue: Genetics
     url: https://doi.org/10.1093/genetics/164.2.655
+    verified: true
+
+  - id: pmid:41035198
+    type: publication
+    title: "Genome-based mutant RNA mapping identifies an NLR pair underlying Yr6-mediated stripe rust resistance in wheat"
+    year: 2026
+    venue: "Plant Communications"
+    url: https://doi.org/10.1016/j.xplc.2025.101542
+    verified: true
+
+  - id: pmid:41126526
+    type: publication
+    title: "Wheat powdery mildew resistance gene Pm52/Pm6 from Triticum timopheevii encodes an NLR protein with an integrated PRK domain"
+    year: 2025
+    venue: "Plant Communications"
+    url: https://doi.org/10.1016/j.xplc.2025.101569
+    verified: true
+
+  - id: pmid:41702935
+    type: publication
+    title: "Pm37 as a susceptible Sr22 allele confers resistance to wheat powdery mildew and leaf rust"
+    year: 2026
+    venue: "Nature Communications"
+    url: https://doi.org/10.1038/s41467-026-69717-1
     verified: true
 
 entities:
@@ -202,6 +230,57 @@ entities:
       symbol: Lr21
       chromosome: 1DS
       origin_species: "Aegilops tauschii"
+      gene_class: NLR
+      cloned: true
+
+  - id: gene:wheat:Yr6NLR1
+    type: Gene
+    name: Yr6NLR1
+    crop: wheat
+    # A genuine two-gene NLR pair: BOTH genes are required together for Yr6 resistance (neither
+    # mutant alone is resistant; crossing complementary mutants restores it). Modelled as two
+    # separate Gene entities rather than one, since that's what they are -- not a naming quirk
+    # like Lr34/Yr18/Sr57/Pm38.
+    props:
+      symbol: Yr6NLR1
+      chromosome: 7BL
+      gene_class: "NLR (paired sensor/helper with Yr6NLR2)"
+      cloned: true
+
+  - id: gene:wheat:Yr6NLR2
+    type: Gene
+    name: Yr6NLR2
+    crop: wheat
+    props:
+      symbol: Yr6NLR2
+      chromosome: 7BL
+      gene_class: "NLR (paired sensor/helper with Yr6NLR1)"
+      cloned: true
+
+  - id: gene:wheat:Pm6
+    type: Gene
+    name: Pm6
+    crop: wheat
+    synonyms: ["Pm52"]
+    props:
+      symbol: Pm6
+      chromosome: 2BL
+      origin_species: "Triticum timopheevii"
+      gene_class: "NLR with integrated PRK (pseudo-receptor kinase) domain"
+      cloned: true
+
+  - id: gene:wheat:Pm37
+    type: Gene
+    name: Pm37
+    crop: wheat
+    # A DIFFERENT allele of the Sr22 (stem rust) locus, not a synonym of it: 94.22% amino-acid
+    # identity but "distinct functional divergence" per the source paper. No Sr22 entity exists
+    # in this file yet, so the relationship is documented here in text rather than as a claim --
+    # there's no ALLELE_OF claim type in the model to represent it properly.
+    props:
+      symbol: Pm37
+      chromosome: 7AL
+      origin_species: "Triticum monococcum (introgressed into bread wheat via T. timopheevii)"
       gene_class: NLR
       cloned: true
 
@@ -348,3 +427,53 @@ claims:
         method: cloned_validated
         locator: title
         quote: "Map-based cloning of leaf rust resistance gene Lr21 from the large and polyploid genome of bread wheat"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Yr6NLR1
+    object: dis:wheat:stripe_rust
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: pmid:41035198
+        method: cloned_validated
+        locator: "full text, Results"
+        quote: "The resulting F1 plants displayed resistance to Pst CYR34 (V26), whereas the M3 and M7 parents were susceptible"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Yr6NLR2
+    object: dis:wheat:stripe_rust
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: pmid:41035198
+        method: cloned_validated
+        locator: "full text, Results"
+        quote: "Silencing either of the NLRs in CDC_Stanley and AvocetYr6 increased susceptibility to CYR34 (V26)"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Pm6
+    object: dis:wheat:powdery_mildew
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: pmid:41126526
+        method: cloned_validated
+        locator: "full text, Results"
+        quote: "In the T1 generation, all plants carrying the NLR-PRK transgene exhibited resistance to isolate B37, whereas segregants lacking the transgene and wild-type Fielder plants remained susceptible"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Pm37
+    object: dis:wheat:powdery_mildew
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: pmid:41702935
+        method: cloned_validated
+        locator: "full text, Results"
+        quote: "were immune to the Bgt isolate E09 and an additional 30 tested Bgt isolates...demonstrate[ing] that NLR-1 is sufficient to confer powdery mildew resistance"
+
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Pm37
+    object: dis:wheat:leaf_rust
+    qualifiers: {resistance_type: ASR, spectrum: "narrow -- race THDS only"}
+    evidence:
+      - source: pmid:41702935
+        method: cloned_validated
+        locator: "full text, Results"
+        quote: "NC99BGTAG11 and NLR-1 transgenic lines conferred specifically moderate resistance to the Pt race THDS"
