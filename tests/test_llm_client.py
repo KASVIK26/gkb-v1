@@ -8,7 +8,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from curator.llm.client import LLMClient, LLMClientError
+from curator.llm.client import DEFAULT_MODEL, NVIDIA_DEFAULT_MODEL, NVIDIA_URL, OPENROUTER_URL, LLMClient, LLMClientError
 
 
 def _mock_chat_response(content: str, *, prompt_tokens=10, completion_tokens=5):
@@ -78,6 +78,38 @@ def test_missing_api_key_raises(tmp_path):
     client = LLMClient(api_key="", cache_dir=tmp_path)
     with pytest.raises(LLMClientError, match="OPEN_ROUTER_API_KEY"):
         client.complete("system", "user", model="test-model")
+
+
+def test_default_provider_is_openrouter(tmp_path):
+    client = LLMClient(api_key="test-key", cache_dir=tmp_path)
+    assert client._url == OPENROUTER_URL
+    with patch("urllib.request.urlopen", return_value=_mock_chat_response("[]")):
+        response = client.complete("system", "user")  # no model given -- should use DEFAULT_MODEL
+    assert response.model == DEFAULT_MODEL
+
+
+def test_nvidia_provider_uses_nvidia_url_and_key(tmp_path, monkeypatch):
+    monkeypatch.setenv("NVIDIA_API_KEY", "nvidia-test-key")
+    client = LLMClient(provider="nvidia", cache_dir=tmp_path)
+    assert client._url == NVIDIA_URL
+    with patch("urllib.request.urlopen", return_value=_mock_chat_response("[]")) as mock_open:
+        response = client.complete("system", "user")  # no model given -- should use NVIDIA_DEFAULT_MODEL
+    assert response.model == NVIDIA_DEFAULT_MODEL
+    called_request = mock_open.call_args[0][0]
+    assert called_request.full_url == NVIDIA_URL
+    assert called_request.headers["Authorization"] == "Bearer nvidia-test-key"
+
+
+def test_nvidia_provider_missing_key_raises_with_nvidia_message(tmp_path, monkeypatch):
+    monkeypatch.delenv("NVIDIA_API_KEY", raising=False)
+    client = LLMClient(provider="nvidia", cache_dir=tmp_path)
+    with pytest.raises(LLMClientError, match="NVIDIA_API_KEY"):
+        client.complete("system", "user", model="test-model")
+
+
+def test_unknown_provider_raises_valueerror(tmp_path):
+    with pytest.raises(ValueError, match="Unknown provider"):
+        LLMClient(provider="not-a-real-provider", cache_dir=tmp_path)
 
 
 def test_usage_log_gets_a_line_per_call(tmp_path):

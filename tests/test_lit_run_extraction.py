@@ -137,10 +137,11 @@ def test_extract_paper_handles_invalid_llm_json(monkeypatch):
 
 def test_extract_paper_prefers_fulltext_when_open_access(monkeypatch):
     fulltext_marker = "TestYr1 confers all-stage resistance to stripe rust in wheat, from the full text version."
+    fulltext_xml = f"<article><body><sec><title>Results</title><p>{fulltext_marker}</p></sec></body></article>"
     monkeypatch.setattr(
         europepmc, "get_record", lambda identifier: _fake_record(isOpenAccess="Y", pmcid="PMC123")
     )
-    monkeypatch.setattr(europepmc, "fetch_fulltext_xml", lambda pmcid: fulltext_marker)
+    monkeypatch.setattr(europepmc, "fetch_fulltext_xml", lambda pmcid: fulltext_xml)
     candidates = [{
         "claim_type": "GENE_CONFERS_RESISTANCE",
         "subject": {"type": "Gene", "text": "TestYr1"},
@@ -152,6 +153,30 @@ def test_extract_paper_prefers_fulltext_when_open_access(monkeypatch):
         "pmid:34897256", crop="wheat", llm_client=_FakeLLMClient(json.dumps(candidates)), bundle=toy_bundle()
     )
     assert len(result.accepted) == 1
+
+
+def test_extract_paper_falls_back_to_abstract_on_malformed_fulltext_xml(monkeypatch):
+    # Real bug found live (PHASES.md item 33): fetch_fulltext_xml's result was previously sent
+    # straight to the LLM with no parsing at all. Now that it's parsed as JATS XML, malformed XML
+    # must fall back to the abstract rather than crash or silently send tag soup.
+    monkeypatch.setattr(
+        europepmc, "get_record", lambda identifier: _fake_record(isOpenAccess="Y", pmcid="PMC123")
+    )
+    monkeypatch.setattr(europepmc, "fetch_fulltext_xml", lambda pmcid: "<not><valid</xml")
+    candidates = [{
+        "claim_type": "GENE_CONFERS_RESISTANCE",
+        "subject": {"type": "Gene", "text": "TestYr1"},
+        "object": {"type": "Disease", "text": "stripe rust"},
+        "qualifiers": {"resistance_type": "unknown"},
+        "evidence": {
+            "quote": "TestYr1 confers all-stage resistance to stripe rust in wheat under field conditions.",
+            "section": "abstract",
+        },
+    }]
+    result = extract_paper(
+        "pmid:34897256", crop="wheat", llm_client=_FakeLLMClient(json.dumps(candidates)), bundle=toy_bundle()
+    )
+    assert len(result.accepted) == 1  # grounded against the abstract, since the "full text" was unusable
 
 
 # ─────────────────────── retry=True (opt-in corrective pass) ───────────────────────

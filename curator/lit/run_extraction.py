@@ -9,6 +9,7 @@ them into a curated YAML file. See curator/cli.py's `lit extract` subcommand for
 from __future__ import annotations
 
 import json
+import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 
 from curator.extract.ground import ground_candidate
@@ -17,7 +18,7 @@ from curator.graph.bundle import KGBundle
 from curator.graph.kg_files import load_curated_dir
 from curator.graph.variety_import import variety_bundle
 from curator.graph.vocab_entities import reference_bundle
-from curator.lit import europepmc
+from curator.lit import europepmc, jats
 from curator.llm.client import DEFAULT_MODEL, LLMClient
 from curator.model.claims import Claim, Evidence, Source
 from curator.model.enums import Crop, EvidenceMethod, SourceType
@@ -129,9 +130,14 @@ def extract_paper(
     text = None
     section = "abstract"
     if metadata.is_open_access and metadata.pmcid:
-        text = europepmc.fetch_fulltext_xml(metadata.pmcid)
-        if text:
-            section = "full text"
+        fulltext_xml = europepmc.fetch_fulltext_xml(metadata.pmcid)
+        if fulltext_xml:
+            try:
+                text = jats.extract_plain_text(fulltext_xml)
+            except ET.ParseError:
+                text = None  # malformed XML -- fall back to the abstract below, don't send tag soup
+            if text:
+                section = "full text"
     if not text:
         text = europepmc.abstract_from_record(record)
 

@@ -1,11 +1,19 @@
-"""A small, provider-agnostic LLM client: one concrete backend (OpenRouter), content-hash
+"""A small, provider-agnostic LLM client: two concrete backends (OpenRouter, NVIDIA), content-hash
 caching, retry/backoff, and per-call token/cost logging.
 
-Backend choice: OpenRouter (OPEN_ROUTER_API_KEY) rather than the old extractor's Groq call --
-OpenRouter speaks the same OpenAI-compatible chat-completions wire format (so the request/backoff
-shape below is a known-good pattern) but exposes many models, including open-weight ones, through
-one key. That directly serves RESEARCH_ROADMAP.md Sec 6.1's later ablation requirement ("at least
-one open-weight model for reproducibility") without a second client to write.
+Backend choice: both OpenRouter (OPEN_ROUTER_API_KEY) and NVIDIA's API catalog (NVIDIA_API_KEY,
+https://integrate.api.nvidia.com/v1) speak the same OpenAI-compatible chat-completions wire format,
+so one small client class covers both -- just a different base URL and API-key env var per
+`provider`. This directly serves RESEARCH_ROADMAP.md Sec 6.1's ablation requirement ("2-3 different
+LLMs") without a second client class to write and keep in sync.
+
+NVIDIA model choice, verified live (2026-09-27, PHASES.md item 33) rather than assumed: NVIDIA's own
+flagship `nvidia/nemotron-3-super-120b-a12b` turned out to be a reasoning model that burns its whole
+token budget on `reasoning_content` and ignores `response_format` entirely -- wrong tool for a fast,
+structured-extraction task. `nvidia/llama-3.1-nemotron-70b-instruct`, `nvidia/llama-3.1-nemotron-51b-instruct`,
+and `mistralai/mistral-large-2-instruct` all 404 ("not deployed for this account") despite being
+listed by `/v1/models`. `z-ai/glm-5.3-flash` is the one that actually works: fast, obeys
+`response_format: json_schema` exactly, no reasoning preamble -- hence `NVIDIA_DEFAULT_MODEL` below.
 
 Caching and logging live under `data/llm_cache/` by default; pass `cache_dir` to point tests at a
 temp directory instead so the test suite never touches real cache state.
@@ -33,7 +41,14 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_CACHE_DIR = Path(__file__).resolve().parents[2] / "data" / "llm_cache"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-DEFAULT_MODEL = "meta-llama/llama-3.3-70b-instruct"  # overridable per call for ablations
+NVIDIA_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
+DEFAULT_MODEL = "meta-llama/llama-3.3-70b-instruct"  # OpenRouter default, overridable per call
+NVIDIA_DEFAULT_MODEL = "z-ai/glm-5.3-flash"  # verified live -- see module docstring for why this one
+
+_PROVIDERS = {
+    "openrouter": (OPENROUTER_URL, "OPEN_ROUTER_API_KEY"),
+    "nvidia": (NVIDIA_URL, "NVIDIA_API_KEY"),
+}
 
 _MAX_RETRIES = 5
 _BASE_WAIT_S = 2
@@ -55,8 +70,21 @@ class LLMResponse:
 
 
 class LLMClient:
-    def __init__(self, *, api_key: str | None = None, cache_dir: Path | str = DEFAULT_CACHE_DIR):
-        self._api_key = api_key if api_key is not None else os.environ.get("OPEN_ROUTER_API_KEY", "")
+    def __init__(
+        self,
+        *,
+        provider: str = "openrouter",
+        api_key: str | None = None,
+        cache_dir: Path | str = DEFAULT_CACHE_DIR,
+    ):
+        try:
+            url, env_var = _PROVIDERS[provider]
+        except KeyError:
+            raise ValueError(f"Unknown provider {provider!r}; expected one of {sorted(_PROVIDERS)}") from None
+        self._provider = provider
+        self._url = url
+        self._api_key = api_key if api_key is not None else os.environ.get(env_var, "")
+        self._api_key_env_var = env_var
         self._cache_dir = Path(cache_dir)
 
     def _cache_path(self, cache_key: str) -> Path:
@@ -81,7 +109,7 @@ class LLMClient:
     def _call_api(self, *, system: str, user: str, model: str, temperature: float) -> dict:
         if not self._api_key:
             raise LLMClientError(
-                "OPEN_ROUTER_API_KEY is not set. Set it in .env before calling the LLM client."
+                f"{self._api_key_env_var} is not set. Set it in .env before calling the LLM client."
             )
         payload = json.dumps({
             "model": model,
@@ -94,7 +122,7 @@ class LLMClient:
 
         for attempt in range(_MAX_RETRIES):
             request = urllib.request.Request(
-                OPENROUTER_URL,
+                self._url,
                 data=payload,
                 headers={
                     "Content-Type": "application/json",
@@ -126,10 +154,13 @@ class LLMClient:
         system: str,
         user: str,
         *,
-        model: str = DEFAULT_MODEL,
+        model: str | None = None,
         temperature: float = 0.0,
     ) -> LLMResponse:
-        """Run one chat completion, transparently cached by (model, system, user, temperature)."""
+        """Run one chat completion, transparently cached by (model, system, user, temperature).
+        `model` defaults to this client's own provider default (DEFAULT_MODEL for OpenRouter,
+        NVIDIA_DEFAULT_MODEL for NVIDIA) when not given explicitly."""
+        model = model or (NVIDIA_DEFAULT_MODEL if self._provider == "nvidia" else DEFAULT_MODEL)
         cache_key = content_hash(
             "llmcache", {"model": model, "system": system, "user": user, "temperature": temperature}
         )
