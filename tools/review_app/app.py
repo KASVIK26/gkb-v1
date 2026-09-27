@@ -81,6 +81,24 @@ st.caption(
 reviewer = st.text_input("Your name (recorded on every approve/reject)", value=st.session_state["reviewer"])
 st.session_state["reviewer"] = reviewer
 
+
+def _normalise_identifier(value: str) -> str:
+    """Convert common PMID/DOI input forms to the API's canonical identifier."""
+    identifier = value.strip()
+    lower_identifier = identifier.lower()
+    if lower_identifier.startswith("https://doi.org/"):
+        return f"doi:{identifier[len('https://doi.org/'):]}"
+    if lower_identifier.startswith("http://doi.org/"):
+        return f"doi:{identifier[len('http://doi.org/'):]}"
+    if lower_identifier.startswith("doi.org/"):
+        return f"doi:{identifier[len('doi.org/'):]}"
+    if identifier.lower().startswith("doi:"):
+        return f"doi:{identifier[4:]}"
+    if identifier.isdigit():
+        return f"pmid:{identifier}"
+    return identifier
+
+
 tab_extract, tab_review, tab_export = st.tabs(["Extract", "Review queue", "Export"])
 
 # ─────────────────────────────── Extract tab ───────────────────────────────
@@ -106,7 +124,7 @@ with tab_extract:
         identifier = st.text_input("PMID or DOI", placeholder="e.g. 34897256 or doi:10.5423/PPJ.FT.11.2021.0164")
 
     if st.button("Extract", type="primary", disabled=not identifier.strip()):
-        pmid_or_doi = identifier.strip() if ":" in identifier else f"pmid:{identifier.strip()}"
+        pmid_or_doi = _normalise_identifier(identifier)
         with st.spinner(f"Fetching, verifying, extracting ({provider}), grounding..."):
             try:
                 st.session_state["last_extraction"] = _api_post(
