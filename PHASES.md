@@ -83,7 +83,7 @@ are also where most of the work is.
 | 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
 | 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | 🟡 **4.1/4.2/4.6 done** (streaming parser, domain-based NLR classification, chromosome stats) for chickpea+soybean; wheat structural data loaded but not NLR-classified (its GFF has no domain annotations at all). **4.3 started**: NCBI BLAST+ installed, 1 gene (Lr34) confidently anchored to its real chromosome/position; 3 more attempted and correctly rejected (see below). **4.4 (marker anchoring) not started** |
 | 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Core pipeline + review UI + graph visualizer done and tested end-to-end** — search/verify (Europe PMC), grounded LLM extraction, quote-grounding, normalization (`curator/lit`/`curator/llm`/`curator/extract`); a staging Postgres schema + FastAPI service (`api/`) + Streamlit review app (`tools/review_app/`) + `agrihub lit export-staged` take a paper from extraction through human approval to a `kg build`-ready YAML without ever touching `kg_current` directly, verified against 2 real papers (one 0-candidate outcome, one correctly-rejected unverifiable DOI). A separate, read-only full-graph visualizer (Cytoscape.js) is also live on the dashboard. Still missing: dictionary NER (5.5), relevance classifier (5.4), JATS table extraction (5.3/5.9 — variety-reaction tables in papers are invisible to it), and the corpus-scale run (5.11 wants 300–500 papers; only 2 have gone through the live pipeline) |
-| 6 | Gold-standard evaluation of the extraction pipeline | 🟡 **5-paper pilot complete, 2026-09-27** (task 6.1's own "pilot on 5, then revise" checkpoint): guideline + harness are real and working; **2 of 5 papers scored a clean 1.00 precision/recall/F1, 3 of 5 failed on well-diagnosed, recurring root causes** (cross-sentence quoting, entity-text formatting, pathogen/disease object confusion) — see §3 items 29-30. One real code bug found and fixed (a vocab-synonym wiring gap). Still needed for the real gold standard: 40 more papers, a second independent annotator (double-annotation + κ), and the 6.4 ablations |
+| 6 | Gold-standard evaluation of the extraction pipeline | 🟡 **5-paper pilot + first real 6.4 ablation, 2026-09-27**: guideline + harness are real and working; v1 prompt scores 2/5 clean, 3/5 fail on well-diagnosed causes (§3 items 29-30). A few-shot prompt variant (v2) was built and A/B tested against the same 5 papers — **a genuine negative result**: v2 scored worse (1/5) and introduced a new failure mode, so v1 stays production (§3 item 31). One real code bug found and fixed (a vocab-synonym wiring gap). Still needed for the real gold standard: 40 more papers, a second independent annotator (double-annotation + κ) |
 | 7 | Structured trial/germplasm data (AICRP, GRIN) | ⬜ Not started — biggest lever on the `VARIETY_REACTION` count (234 today vs. a ≥3,000 target; literature alone won't close that gap) |
 | 8 | Environmental trigger library | 🟡 **15/17 diseases have a cited env trigger, 16/17 have a management advisory** (manual research passes, see §3 items 21–26) — but no back-testing against historical weather (NASA POWER) and no risk-scoring engine (`curator/risk/`) yet |
 | 9 | Confidence scoring, conflict detection, QC reports | 🟡 Partially built early (see §3) |
@@ -991,6 +991,44 @@ are also where most of the work is.
      testing few-shot worked examples (showing the multi-sentence-quote pattern explicitly) against
      the current zero-shot rule-list prompt, which this session's evidence suggests is a more
      promising direction than further rule-list edits.
+31. **Ran the item-30 ablation for real, same day -- a genuine negative result, kept as one.**
+   Added a `prompt_version` parameter to `curator.lit.run_extraction.extract_paper` (previously
+   hardcoded to `claim_extraction_v1`, which made a real prompt-variant ablation impossible to run
+   at all -- a small, reusable capability, not specific to this one test) and a matching
+   `--prompt-version` flag on `eval/run_eval.py`. Wrote `curator/llm/prompts/claim_extraction_v2.md`:
+   same field/rule contract as v1, but replaces the 3 prose-only rules added in item 30 (already
+   shown not to reliably change behavior) with 4 worked input->output examples targeting exactly
+   the failure patterns diagnosed so far -- cross-sentence quoting, multi-disease splitting, the
+   FHB-parenthetical case verbatim, and the pathogen-vs-disease object confusion.
+   - **Ran all 5 pilot papers again with v2 and compared directly against item 30's v1 numbers on
+     the same papers, same gold files, same harness.** Result: **v2 is worse, not better** --
+     1 of 5 clean (only Lr21) versus v1's 2 of 5. **Sr33 regressed**: it scored a clean 1.00 under
+     v1 and failed under v2 (`"quote does not mention: wheat stem rust"` -- the model's object
+     wording changed for the worse between the two prompts on a paper that previously worked fine).
+     **Lr34 and Rcs3 got a new, different failure mode**: instead of the item-30 "entity missing
+     from quote" rejection, both now failed with `"quote does not match the source text closely
+     enough (possible paraphrase or fabrication)"` -- the grounding fuzzy-match score itself dropped
+     below threshold, meaning the model's quotes stopped being clean verbatim substrings under v2,
+     plausibly because the few-shot examples' own phrasing bled into how it constructed quotes.
+     **Fhb1 failed identically to item 30** -- worth stressing that Example 3 in the v2 prompt is
+     almost a line-for-line match to Fhb1's real failure (a QTL called "FHB" without the full name
+     nearby), and it *still* didn't transfer to the real case.
+   - **Conclusion, stated plainly rather than softened**: this specific few-shot formulation (4
+     examples appended to the existing zero-shot rule list) is not the fix. It doesn't reliably fix
+     the target patterns and it introduces a new failure mode on top. `claim_extraction_v1` stays
+     the production prompt (the CLI's default, unchanged) -- `v2` is kept in the repo as a real,
+     honest ablation record, not deleted to hide a negative result. This is exactly the kind of
+     outcome RESEARCH_ROADMAP.md Sec 6.1's ablation section exists to catch before anyone assumes
+     "add examples" is a free win.
+   - Test suite: 222 passing, unchanged (no new tests this item -- `prompt_version`'s default-None
+     behavior is already covered by every existing `extract_paper` test). `kg build` unaffected.
+   - **Revised next steps for Phase 6**, given this result: few-shot prompting in this form is not
+     worth pursuing further without a different mechanism -- the two most promising untried
+     directions are (a) a corrective second pass that retries a *specific* rejected candidate with
+     its actual rejection reason fed back (closer to how a human reviewer would fix a near-miss)
+     rather than trying to prevent every mistake in one zero-shot/few-shot call, and (b) chunking
+     the input so the model sees less competing context per call. The 40-paper corpus expansion and
+     the second-annotator/kappa work (both still fully open) don't depend on resolving this first.
 
 ---
 

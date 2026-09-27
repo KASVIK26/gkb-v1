@@ -39,11 +39,11 @@ class ExtractionResult:
     rejected: list[RejectedCandidate] = field(default_factory=list)
 
 
-def _load_prompt() -> str:
+def _load_prompt(version: str) -> str:
     from pathlib import Path
 
     return Path(__file__).resolve().parents[1].joinpath(
-        "llm", "prompts", f"{_PROMPT_VERSION}.md"
+        "llm", "prompts", f"{version}.md"
     ).read_text(encoding="utf-8")
 
 
@@ -72,12 +72,17 @@ def extract_paper(
     llm_client: LLMClient | None = None,
     bundle: KGBundle | None = None,
     model: str | None = None,
+    prompt_version: str | None = None,
 ) -> ExtractionResult:
     """Fetch, verify, extract, ground, and normalize claims from one paper.
 
     `identifier` is "pmid:<digits>" or "doi:<doi>" (the same grammar curator.model.claims.Source
     requires). Raises europepmc.PublicationNotFound if the identifier doesn't resolve to a real
     paper -- there is no such thing as extracting from an unverified source in this pipeline.
+
+    `prompt_version` selects curator/llm/prompts/<prompt_version>.md (default: claim_extraction_v1,
+    the production prompt) -- overridable so eval/run_eval.py can run a real Phase 6.4 ablation
+    between prompt variants without duplicating this function.
     """
     record = europepmc.get_record(identifier)
     metadata = europepmc.metadata_from_record(record, identifier)
@@ -104,8 +109,9 @@ def extract_paper(
             RejectedCandidate(reason="no abstract or full text available from Europe PMC", raw={})
         ])
 
+    version = prompt_version or _PROMPT_VERSION
     client = llm_client or LLMClient()
-    system_prompt = _load_prompt()
+    system_prompt = _load_prompt(version)
     response = client.complete(system_prompt, text, model=model or DEFAULT_MODEL)
 
     try:
@@ -120,7 +126,7 @@ def extract_paper(
         ])
 
     entities = (bundle or _current_bundle()).entities
-    extractor = f"llm:{response.model}@{_PROMPT_VERSION}"
+    extractor = f"llm:{response.model}@{version}"
     result = ExtractionResult(source=source)
 
     for raw in raw_candidates:

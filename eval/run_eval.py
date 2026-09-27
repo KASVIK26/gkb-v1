@@ -164,6 +164,9 @@ def run(
     identifier: str = typer.Option(..., help="pmid:<digits> or doi:<doi> -- the paper the gold file annotates"),
     crop: str = typer.Option(..., help="wheat | soybean | chickpea"),
     model: str = typer.Option(None, help="Override the default LLM model (for later ablations)"),
+    prompt_version: str = typer.Option(
+        None, "--prompt-version", help="e.g. claim_extraction_v2 -- default: the production v1 prompt"
+    ),
 ) -> None:
     """Run a real extraction (live Europe PMC + live LLM) and score it against a gold file.
 
@@ -179,7 +182,7 @@ def run(
             f"Warning: no gold claims in {gold} have source_id == {identifier!r} "
             f"({len(all_gold)} total in file, for other papers)."
         )
-    result = extract_paper(identifier, crop=crop, model=model)
+    result = extract_paper(identifier, crop=crop, model=model, prompt_version=prompt_version)
     report = score_extraction(gold_claims, result)
     typer.echo(f"Source: {result.source.title} ({result.source.id})")
     typer.echo(f"Accepted: {len(result.accepted)}  Rejected: {len(result.rejected)}  Gold: {len(gold_claims)}")
