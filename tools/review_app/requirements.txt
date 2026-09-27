@@ -1,0 +1,10 @@
+# Used by Streamlit Community Cloud to build this app's environment. Installs the whole repo
+# (editable) with the `review` extra, so `streamlit`/`requests` are available for the app itself
+# AND `curator` is importable for the Export tab's `python -m curator.cli lit export-staged`
+# subprocess call (which needs curator's own base dependencies: psycopg, pydantic, typer,
+# rapidfuzz -- all pulled in automatically since they're the base package's own `dependencies`).
+#
+# Streamlit Cloud runs `pip install -r <this file>` with the repository root as the working
+# directory, so the relative path `.` below resolves to the repo root correctly regardless of
+# this file's own location inside tools/review_app/.
+-e .[review]

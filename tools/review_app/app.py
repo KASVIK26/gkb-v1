@@ -21,6 +21,16 @@ from pathlib import Path
 import requests
 import streamlit as st
 
+# Streamlit Community Cloud's secrets manager populates st.secrets, not the process environment --
+# bridge it into os.environ so the plain os.environ.get(...) calls below (and the Export tab's
+# subprocess, which inherits this process's environment) see DATABASE_URL_DIRECT/API_BASE_URL the
+# same way they would from a local .env. A no-op locally, where no secrets.toml exists.
+try:
+    for _key, _value in st.secrets.items():
+        os.environ.setdefault(_key, str(_value))
+except Exception:
+    pass
+
 API_BASE_URL = os.environ.get("API_BASE_URL", "http://localhost:8000")
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CROPS = ["wheat", "soybean", "chickpea"]

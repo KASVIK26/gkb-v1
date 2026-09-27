@@ -37,9 +37,27 @@ environment variable if you're running it elsewhere.
   `agrihub lit export-staged`. You still review the file, `git add` it, and run
   `agrihub kg build`/`kg load`/`kg promote` yourself — this only automates the typing.
 
-## Deploying later
+## Deploying (Streamlit Community Cloud)
 
-This is a local tool for now — no auth beyond whatever protects your machine. If it's ever
-deployed somewhere reachable over the network, put it behind Cloudflare Access (or an equivalent
-identity-aware proxy) in front of it, and lock the `api/` service's CORS allowlist down to that
-deployment's origin. Neither of those is set up yet.
+No auth beyond whatever protects the URL — fine for a showcase, not for anything with real
+reviewer accountability. If this needs real access control later, put it behind Cloudflare Access
+(or an equivalent identity-aware proxy) in front of it.
+
+1. Push this repo to GitHub (Streamlit Cloud deploys from a GitHub repo, not a local checkout).
+2. At [share.streamlit.io](https://share.streamlit.io), create a new app pointing at this repo,
+   branch `master`, main file path `tools/review_app/app.py`. It picks up
+   `tools/review_app/requirements.txt` automatically (installs this repo editable with the
+   `review` extra, so `curator` is importable for the Export tab's CLI call too).
+3. In the app's **Settings → Secrets**, paste (TOML format):
+   ```toml
+   API_BASE_URL = "https://<your-api-service>.onrender.com"
+   DATABASE_URL_DIRECT = "postgresql://...."   # only needed for the Export tab
+   ```
+   (`app.py` bridges `st.secrets` into `os.environ` on startup, so the existing
+   `os.environ.get(...)` calls and the Export tab's subprocess both see these.)
+4. Once deployed, go back to the `api/` service's CORS setting (`API_CORS_ORIGINS`) and add this
+   app's `https://<name>.streamlit.app` origin, or extraction requests will be blocked by the
+   browser's CORS check.
+
+See the repo root's deployment guide for the `api/` service's own deployment (Render) and the
+public dashboard's (Cloudflare Pages).

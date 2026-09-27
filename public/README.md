@@ -43,6 +43,22 @@ Only the **publishable/anon** key belongs here — never the secret/service-role
 views are read-only and granted to Supabase's `anon` role specifically so this is safe to expose
 client-side.
 
+## Deploying (Cloudflare Pages)
+
+```bash
+npx wrangler login                     # one-time, opens a browser OAuth flow
+npx wrangler pages project create gkb-v1 --production-branch master
+npx wrangler pages deploy public --project-name gkb-v1
+```
+
+Then, in the Cloudflare dashboard (Workers & Pages → gkb-v1 → Settings → Environment variables),
+add `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` for the **Production** environment (same
+publishable/anon values as `.dev.vars`, never the secret/service-role key) and redeploy
+(`npx wrangler pages deploy public --project-name gkb-v1` again) so the Functions pick them up.
+
+See the repo root's deployment guide for the full picture, including the two Python services this
+dashboard doesn't depend on.
+
 ## Known simplifications (deliberate, not bugs)
 
 - **Single-snapshot trigger checks, not windowed aggregation.** Each `EnvTrigger` condition
