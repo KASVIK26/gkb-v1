@@ -177,6 +177,9 @@ def run(
     extraction_passes: int = typer.Option(
         3, "--extraction-passes", help="langextract backend only: number of pooled extraction passes"
     ),
+    provider: str = typer.Option(
+        "openrouter", "--provider", help="custom backend only: openrouter | gemini | groq"
+    ),
 ) -> None:
     """Run a real extraction (live Europe PMC + live LLM) and score it against a gold file.
 
@@ -193,12 +196,17 @@ def run(
             f"({len(all_gold)} total in file, for other papers)."
         )
     if backend == "langextract":
-        from curator.extract.langextract_pipeline import NVIDIA_DEFAULT_MODEL, extract_paper_langextract
+        from curator.extract.langextract_pipeline import GEMINI_DEFAULT_MODEL, extract_paper_langextract
         result = extract_paper_langextract(
-            identifier, crop=crop, model=model or NVIDIA_DEFAULT_MODEL, extraction_passes=extraction_passes
+            identifier, crop=crop, model=model or GEMINI_DEFAULT_MODEL, extraction_passes=extraction_passes
         )
     elif backend == "custom":
-        result = extract_paper(identifier, crop=crop, model=model, prompt_version=prompt_version, retry=retry)
+        from curator.llm.client import LLMClient
+        llm_client = LLMClient(provider=provider) if provider != "openrouter" else None
+        result = extract_paper(
+            identifier, crop=crop, llm_client=llm_client, model=model,
+            prompt_version=prompt_version, retry=retry,
+        )
     else:
         raise typer.BadParameter(f"Unknown backend {backend!r}; expected 'custom' or 'langextract'")
     report = score_extraction(gold_claims, result)

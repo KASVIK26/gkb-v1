@@ -8,7 +8,16 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from curator.llm.client import DEFAULT_MODEL, NVIDIA_DEFAULT_MODEL, NVIDIA_URL, OPENROUTER_URL, LLMClient, LLMClientError
+from curator.llm.client import (
+    DEFAULT_MODEL,
+    GEMINI_DEFAULT_MODEL,
+    GEMINI_URL,
+    GROQ_DEFAULT_MODEL,
+    GROQ_URL,
+    OPENROUTER_URL,
+    LLMClient,
+    LLMClientError,
+)
 
 
 def _mock_chat_response(content: str, *, prompt_tokens=10, completion_tokens=5):
@@ -88,22 +97,54 @@ def test_default_provider_is_openrouter(tmp_path):
     assert response.model == DEFAULT_MODEL
 
 
-def test_nvidia_provider_uses_nvidia_url_and_key(tmp_path, monkeypatch):
-    monkeypatch.setenv("NVIDIA_API_KEY", "nvidia-test-key")
-    client = LLMClient(provider="nvidia", cache_dir=tmp_path)
-    assert client._url == NVIDIA_URL
+def test_gemini_provider_uses_gemini_url_and_key(tmp_path, monkeypatch):
+    monkeypatch.setenv("GEMINI_API_KEY", "gemini-test-key")
+    client = LLMClient(provider="gemini", cache_dir=tmp_path)
+    assert client._url == GEMINI_URL
     with patch("urllib.request.urlopen", return_value=_mock_chat_response("[]")) as mock_open:
-        response = client.complete("system", "user")  # no model given -- should use NVIDIA_DEFAULT_MODEL
-    assert response.model == NVIDIA_DEFAULT_MODEL
+        response = client.complete("system", "user")  # no model given -- should use GEMINI_DEFAULT_MODEL
+    assert response.model == GEMINI_DEFAULT_MODEL
     called_request = mock_open.call_args[0][0]
-    assert called_request.full_url == NVIDIA_URL
-    assert called_request.headers["Authorization"] == "Bearer nvidia-test-key"
+    assert called_request.full_url == GEMINI_URL
+    assert called_request.headers["Authorization"] == "Bearer gemini-test-key"
 
 
-def test_nvidia_provider_missing_key_raises_with_nvidia_message(tmp_path, monkeypatch):
-    monkeypatch.delenv("NVIDIA_API_KEY", raising=False)
-    client = LLMClient(provider="nvidia", cache_dir=tmp_path)
-    with pytest.raises(LLMClientError, match="NVIDIA_API_KEY"):
+def test_gemini_provider_disables_thinking_mode(tmp_path):
+    # Without this, gemini-3.5-flash defaults to an invisible "thinking" pass that can burn the
+    # whole token budget and return no content at all -- verified live, see module docstring.
+    client = LLMClient(provider="gemini", api_key="test-key", cache_dir=tmp_path)
+    with patch("urllib.request.urlopen", return_value=_mock_chat_response("[]")) as mock_open:
+        client.complete("system", "user")
+    called_request = mock_open.call_args[0][0]
+    sent_payload = json.loads(called_request.data)
+    assert sent_payload["reasoning_effort"] == "none"
+
+
+def test_gemini_provider_missing_key_raises_with_gemini_message(tmp_path, monkeypatch):
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    client = LLMClient(provider="gemini", cache_dir=tmp_path)
+    with pytest.raises(LLMClientError, match="GEMINI_API_KEY"):
+        client.complete("system", "user", model="test-model")
+
+
+def test_groq_provider_uses_groq_url_and_key(tmp_path, monkeypatch):
+    monkeypatch.setenv("GROQ_API_KEY", "groq-test-key")
+    client = LLMClient(provider="groq", cache_dir=tmp_path)
+    assert client._url == GROQ_URL
+    with patch("urllib.request.urlopen", return_value=_mock_chat_response("[]")) as mock_open:
+        response = client.complete("system", "user")  # no model given -- should use GROQ_DEFAULT_MODEL
+    assert response.model == GROQ_DEFAULT_MODEL
+    called_request = mock_open.call_args[0][0]
+    assert called_request.full_url == GROQ_URL
+    assert called_request.headers["Authorization"] == "Bearer groq-test-key"
+    sent_payload = json.loads(called_request.data)
+    assert "reasoning_effort" not in sent_payload  # that's a gemini-specific quirk, not groq's
+
+
+def test_groq_provider_missing_key_raises_with_groq_message(tmp_path, monkeypatch):
+    monkeypatch.delenv("GROQ_API_KEY", raising=False)
+    client = LLMClient(provider="groq", cache_dir=tmp_path)
+    with pytest.raises(LLMClientError, match="GROQ_API_KEY"):
         client.complete("system", "user", model="test-model")
 
 

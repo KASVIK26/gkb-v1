@@ -17,6 +17,13 @@ already enforces that). LangExtract only replaces the "get a well-grounded (quot
 candidate out of an LLM" step; everything downstream is identical to the custom pipeline, so
 `ExtractionResult`/`AcceptedCandidate`/`RejectedCandidate` are the same shapes staging, the review
 app, and eval/run_eval.py already understand.
+
+Model backend: Gemini (`GEMINI_API_KEY`), via Gemini's own OpenAI-compatible endpoint. NVIDIA was
+tried first and dropped, 2026-09-25/27 -- its models either 404'd for this account or (the one that
+did work) repeatedly timed out on a real full-text paper via LangExtract for reasons never
+root-caused (PHASES.md item 33). `gemini-3.5-flash` needs `reasoning_effort: "none"` passed through
+`provider_kwargs` or it defaults to an invisible "thinking" pass that can burn the whole token
+budget with no content at all -- verified live before writing this, same as `curator.llm.client`.
 """
 
 from __future__ import annotations
@@ -31,14 +38,18 @@ from curator.extract.normalize import RejectedCandidate, build_claim_candidate
 from curator.graph.bundle import KGBundle
 from curator.lit import europepmc, jats
 from curator.lit.run_extraction import AcceptedCandidate, ExtractionResult, _current_bundle, _method_for
-from curator.llm.client import NVIDIA_DEFAULT_MODEL
+from curator.llm.client import GEMINI_DEFAULT_MODEL
 from curator.model.claims import Evidence, Source
 from curator.model.enums import Crop, SourceType
 
-NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1"  # OpenAI SDK base_url (no /chat/completions
-#                                                            suffix -- the SDK appends that itself,
-#                                                            unlike curator.llm.client's raw urllib
-#                                                            NVIDIA_URL, which is the full endpoint).
+# OpenAI-SDK base_url (no /chat/completions suffix -- the SDK appends that itself, unlike
+# curator.llm.client's raw urllib GEMINI_URL, which is the full endpoint). Routed through
+# provider="openai" rather than LangExtract's native Gemini provider (which uses the google-genai
+# SDK, with its own separate thinking-mode config we haven't verified) so the exact same
+# reasoning_effort="none" fix already verified in curator.llm.client applies here too -- confirmed
+# live: reasoning_effort passed via provider_kwargs does reach the real API call (LangExtract's
+# BaseLanguageModel.merge_kwargs merges constructor-time provider_kwargs with each call).
+GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai"
 _PIPELINE_VERSION = "langextract_v1"
 
 # Alignment quality -> a 0-100 "grounding score" for consistency with the custom pipeline's
@@ -209,9 +220,9 @@ def extract_paper_langextract(
     identifier: str,
     *,
     crop: Crop | str,
-    model: str = NVIDIA_DEFAULT_MODEL,
+    model: str = GEMINI_DEFAULT_MODEL,
     api_key: str | None = None,
-    base_url: str = NVIDIA_BASE_URL,
+    base_url: str = GEMINI_BASE_URL,
     extraction_passes: int = 3,
     bundle: KGBundle | None = None,
 ) -> ExtractionResult:
@@ -246,14 +257,14 @@ def extract_paper_langextract(
             RejectedCandidate(reason="no abstract or full text available from Europe PMC", raw={})
         ])
 
-    key = api_key if api_key is not None else os.environ.get("NVIDIA_API_KEY", "")
+    key = api_key if api_key is not None else os.environ.get("GEMINI_API_KEY", "")
     document = lx.extract(
         text_or_documents=text,
         prompt_description=_PROMPT_DESCRIPTION,
         examples=_EXAMPLES,
         config=ModelConfig(
             model_id=model, provider="openai",
-            provider_kwargs={"api_key": key, "base_url": base_url},
+            provider_kwargs={"api_key": key, "base_url": base_url, "reasoning_effort": "none"},
         ),
         extraction_passes=extraction_passes,
         show_progress=False,

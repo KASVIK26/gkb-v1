@@ -82,7 +82,7 @@ are also where most of the work is.
 | 2 | Supabase live setup + versioned build pipeline | ✅ **Done** — five real releases (`kg_2026_10_1` through `_5`) built; `kg_current` atomic switchover live and pointing at `kg_2026_10_5`; `kg/manifest.json` (checksums, git SHA, counts) written on every `kg load`, verified by reading it back |
 | 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
 | 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | 🟡 **4.1/4.2/4.6 done** (streaming parser, domain-based NLR classification, chromosome stats) for chickpea+soybean; wheat structural data loaded but not NLR-classified (its GFF has no domain annotations at all). **4.3 started**: NCBI BLAST+ installed, 1 gene (Lr34) confidently anchored to its real chromosome/position; 3 more attempted and correctly rejected (see below). **4.4 (marker anchoring) not started** |
-| 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Core pipeline + review UI + graph visualizer + real full-paper test done, 2026-09-27** — search/verify (Europe PMC), grounded LLM extraction, quote-grounding, normalization (`curator/lit`/`curator/llm`/`curator/extract`), now including a real JATS full-text parser (`curator/lit/jats.py`, task 5.3) after a real bug was found sending raw XML to the LLM; a staging Postgres schema + FastAPI service (`api/`) + Streamlit review app (`tools/review_app/`) + `agrihub lit export-staged` take a paper from extraction through human approval to a `kg build`-ready YAML. A second extraction backend (Google's LangExtract, `curator/extract/langextract_pipeline.py`) is built and proven correct at small scale, but **not yet usable for real full-text papers** — 3 live attempts via NVIDIA all timed out on a real ~32K-character paper, root cause not yet found (§3 item 33). A separate, read-only full-graph visualizer (Cytoscape.js) is also live on the dashboard. Still missing: dictionary NER (5.5), relevance classifier (5.4), JATS table extraction (5.9 — variety-reaction tables in papers are invisible to it), and the corpus-scale run (5.11 wants 300–500 papers; only 6 have gone through the live pipeline: 5 abstracts + 1 real full paper) |
+| 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Core pipeline + review UI + graph visualizer + real full-paper test done, 2026-09-27** — search/verify (Europe PMC), grounded LLM extraction, quote-grounding, normalization (`curator/lit`/`curator/llm`/`curator/extract`), now including a real JATS full-text parser (`curator/lit/jats.py`, task 5.3) after a real bug was found sending raw XML to the LLM; a staging Postgres schema + FastAPI service (`api/`) + Streamlit review app (`tools/review_app/`) + `agrihub lit export-staged` take a paper from extraction through human approval to a `kg build`-ready YAML. A second extraction backend (Google's LangExtract, `curator/extract/langextract_pipeline.py`) is built and proven correct at small scale, but its full-paper timeout is unresolved — 3 live attempts via NVIDIA all timed out on a real ~32K-character paper (§3 item 33); **NVIDIA has since been dropped entirely** (code deleted, not deprecated) in favor of Gemini (now LangExtract's default) and Groq, both verified live and real-tested through the actual pipeline with clean 1.00 precision/recall/F1 results (§3 item 34) — the full-paper timeout itself hasn't been retried against Gemini yet. A separate, read-only full-graph visualizer (Cytoscape.js) is also live on the dashboard. Still missing: dictionary NER (5.5), relevance classifier (5.4), JATS table extraction (5.9 — variety-reaction tables in papers are invisible to it), and the corpus-scale run (5.11 wants 300–500 papers; only 6 have gone through the live pipeline: 5 abstracts + 1 real full paper) |
 | 6 | Gold-standard evaluation of the extraction pipeline | 🟡 **5-paper pilot + 2 real 6.4 ablations, 2026-09-27**: guideline + harness are real and working; v1 prompt scores 2/5 clean, 3/5 fail on well-diagnosed causes (§3 items 29-30). Two interventions tried and A/B tested against the same 5 papers — a few-shot prompt (v2, item 31) and a corrective retry pass (item 32) — **both come back net negative/mixed**, and both independently produced the same quote-fidelity-degradation side effect, a stronger cross-cutting finding than either alone. v1 stays production, `retry` stays opt-in and off everywhere live. One real code bug found and fixed (a vocab-synonym wiring gap). Still needed: 40 more papers, a second independent annotator (double-annotation + κ), and the now-evidence-backed two-step (quote-then-structure) architecture as the next attempt |
 | 7 | Structured trial/germplasm data (AICRP, GRIN) | ⬜ Not started — biggest lever on the `VARIETY_REACTION` count (234 today vs. a ≥3,000 target; literature alone won't close that gap) |
 | 8 | Environmental trigger library | 🟡 **15/17 diseases have a cited env trigger, 16/17 have a management advisory** (manual research passes, see §3 items 21–26) — but no back-testing against historical weather (NASA POWER) and no risk-scoring engine (`curator/risk/`) yet |
@@ -1167,6 +1167,48 @@ are also where most of the work is.
      rate/latency dashboards directly rather than inferring from wall-clock time alone. Until then,
      the custom pipeline remains the only backend proven to work end-to-end on real full-text
      papers, not just abstracts.
+34. **Dropped NVIDIA entirely, switched to Gemini, added and tested Groq once, at the user's
+   direction, 2026-09-27.** NVIDIA's unresolved full-paper timeout from item 33 was never going to
+   be worth chasing further given two other keys were sitting unused (`GEMINI_API_KEY`,
+   `GROQ_API_KEY`) — this closes that thread by removing the code rather than leaving it as dead
+   weight, and replaces it with two providers verified live before being wired in, not assumed.
+   - **`curator/llm/client.py`**: removed `NVIDIA_URL`/`NVIDIA_DEFAULT_MODEL`/the `"nvidia"` provider
+     entry entirely (not deprecated, deleted). Added `"gemini"` (Google's own OpenAI-compatible
+     endpoint, `generativelanguage.googleapis.com/v1beta/openai/`) and `"groq"`
+     (`api.groq.com/openai/v1`) as real provider options alongside the unchanged `openrouter`
+     default. **A real, live-caught gotcha**: `gemini-3.5-flash` (LangExtract's own documented
+     default model) silently defaults to a "thinking" pass over this endpoint — a raw test with
+     `max_tokens: 200` came back with `finish_reason: "length"` and `content: "Here is the JSON"`,
+     the actual answer never emitted, ~195 of the 200 tokens spent on an invisible
+     `thought_signature` blob. Passing `reasoning_effort: "none"` fixes it cleanly (confirmed:
+     15 completion tokens, `finish_reason: "stop"`, correct JSON) — `complete()` now sends this
+     automatically whenever `provider="gemini"`. Groq's `openai/gpt-oss-120b` needed no such fix.
+     6 new/replaced tests (the 2 old NVIDIA-specific tests are gone, not just renamed).
+   - **`curator/extract/langextract_pipeline.py`**: now targets Gemini by default
+     (`GEMINI_BASE_URL`, `GEMINI_DEFAULT_MODEL`, the same `reasoning_effort: "none"` fix applied via
+     `provider_kwargs` — confirmed live this actually reaches the real API call, by reading
+     LangExtract's own source: `BaseLanguageModel.merge_kwargs` merges constructor-time
+     `provider_kwargs` with each call's runtime kwargs, and `reasoning_effort` is on the OpenAI
+     provider's explicit pass-through allowlist — not assumed from the docs, verified by reading
+     `langextract/providers/openai.py` directly, then confirmed with one more live end-to-end call
+     before treating it as real).
+   - **`eval/run_eval.py`**: added `--provider openrouter|gemini|groq` for the `custom` backend
+     (mirroring the existing `--backend`/`--extraction-passes` pattern), so any future ablation
+     across providers uses the same harness as everything else this session, not a one-off script.
+   - **A real, live test of each new provider through the actual pipeline** (not just a raw curl
+     check) — re-ran the already-known-good Sr33 paper (`pmid:23811228`) with each: **Groq
+     (`openai/gpt-oss-120b`) and Gemini (`gemini-3.5-flash`) both scored a clean 1.00 precision/
+     recall/F1**, identical to the OpenRouter baseline on this paper, grounding score 100.0 for
+     both. Both made the same minor extra-extraction attempt (treating "Ug99"/"wheat stem rust" as
+     separate `Disease` entities, correctly rejected at normalization) — the same behavior across
+     three different providers on the same input suggests this is a prompt-clarity gap, not a
+     model-specific quirk, worth a future look but not urgent.
+   - Test suite: 250 passing (up from 247), same 3 pre-existing unrelated Neo4j-credential
+     failures. `kg build` unaffected.
+   - **Where this leaves the LangExtract full-paper timeout from item 33**: still open, but no
+     longer worth chasing on NVIDIA specifically now that the provider is gone — the next real test
+     of that hypothesis would be re-running the same full-paper attempt against Gemini instead, now
+     that the wiring is in place, before assuming it's an NVIDIA-only problem.
 
 ---
 

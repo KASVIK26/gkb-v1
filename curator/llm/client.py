@@ -1,19 +1,22 @@
-"""A small, provider-agnostic LLM client: two concrete backends (OpenRouter, NVIDIA), content-hash
-caching, retry/backoff, and per-call token/cost logging.
+"""A small, provider-agnostic LLM client: three concrete backends (OpenRouter, Gemini, Groq),
+content-hash caching, retry/backoff, and per-call token/cost logging.
 
-Backend choice: both OpenRouter (OPEN_ROUTER_API_KEY) and NVIDIA's API catalog (NVIDIA_API_KEY,
-https://integrate.api.nvidia.com/v1) speak the same OpenAI-compatible chat-completions wire format,
-so one small client class covers both -- just a different base URL and API-key env var per
-`provider`. This directly serves RESEARCH_ROADMAP.md Sec 6.1's ablation requirement ("2-3 different
-LLMs") without a second client class to write and keep in sync.
+Backend choice: all three speak (or offer) the same OpenAI-compatible chat-completions wire format
+-- OpenRouter natively, Gemini via Google's own `/v1beta/openai/` compatibility layer, Groq via
+`api.groq.com/openai/v1` -- so one small client class covers all of them, just a different base URL
+and API-key env var per `provider`. This directly serves RESEARCH_ROADMAP.md Sec 6.1's ablation
+requirement ("2-3 different LLMs") without a second client class to write and keep in sync.
 
-NVIDIA model choice, verified live (2026-09-27, PHASES.md item 33) rather than assumed: NVIDIA's own
-flagship `nvidia/nemotron-3-super-120b-a12b` turned out to be a reasoning model that burns its whole
-token budget on `reasoning_content` and ignores `response_format` entirely -- wrong tool for a fast,
-structured-extraction task. `nvidia/llama-3.1-nemotron-70b-instruct`, `nvidia/llama-3.1-nemotron-51b-instruct`,
-and `mistralai/mistral-large-2-instruct` all 404 ("not deployed for this account") despite being
-listed by `/v1/models`. `z-ai/glm-5.3-flash` is the one that actually works: fast, obeys
-`response_format: json_schema` exactly, no reasoning preamble -- hence `NVIDIA_DEFAULT_MODEL` below.
+(NVIDIA's API catalog was tried and dropped, 2026-09-27, PHASES.md item 33: its flagship model was a
+reasoning model that ignored `response_format` entirely, several other listed models 404'd for this
+account, and full-paper-scale requests via LangExtract repeatedly timed out for reasons never
+root-caused. Removed rather than kept as dead weight.)
+
+Model choices, verified live rather than assumed (2026-09-27): `gemini-3.5-flash` (LangExtract's own
+documented default) also defaults to a "thinking" mode over the OpenAI-compat endpoint -- burning its
+token budget on invisible reasoning and returning `finish_reason: "length"` with no content unless
+`reasoning_effort: "none"` is explicitly passed, which `complete()` does automatically for the
+`gemini` provider. Groq's `openai/gpt-oss-120b` works cleanly with no extra parameters needed.
 
 Caching and logging live under `data/llm_cache/` by default; pass `cache_dir` to point tests at a
 temp directory instead so the test suite never touches real cache state.
@@ -41,13 +44,21 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_CACHE_DIR = Path(__file__).resolve().parents[2] / "data" / "llm_cache"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-NVIDIA_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
+GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
+GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 DEFAULT_MODEL = "meta-llama/llama-3.3-70b-instruct"  # OpenRouter default, overridable per call
-NVIDIA_DEFAULT_MODEL = "z-ai/glm-5.3-flash"  # verified live -- see module docstring for why this one
+GEMINI_DEFAULT_MODEL = "gemini-3.5-flash"  # verified live -- see module docstring for the caveat
+GROQ_DEFAULT_MODEL = "openai/gpt-oss-120b"  # verified live -- see module docstring
 
+_PROVIDER_DEFAULT_MODEL = {
+    "openrouter": DEFAULT_MODEL,
+    "gemini": GEMINI_DEFAULT_MODEL,
+    "groq": GROQ_DEFAULT_MODEL,
+}
 _PROVIDERS = {
     "openrouter": (OPENROUTER_URL, "OPEN_ROUTER_API_KEY"),
-    "nvidia": (NVIDIA_URL, "NVIDIA_API_KEY"),
+    "gemini": (GEMINI_URL, "GEMINI_API_KEY"),
+    "groq": (GROQ_URL, "GROQ_API_KEY"),
 }
 
 _MAX_RETRIES = 5
@@ -111,14 +122,20 @@ class LLMClient:
             raise LLMClientError(
                 f"{self._api_key_env_var} is not set. Set it in .env before calling the LLM client."
             )
-        payload = json.dumps({
+        payload_dict = {
             "model": model,
             "messages": [
                 {"role": "system", "content": system},
                 {"role": "user", "content": user},
             ],
             "temperature": temperature,
-        }).encode("utf-8")
+        }
+        if self._provider == "gemini":
+            # Without this, gemini-3.5-flash defaults to an invisible "thinking" pass that can burn
+            # the whole token budget and return finish_reason="length" with no content at all --
+            # verified live, see module docstring.
+            payload_dict["reasoning_effort"] = "none"
+        payload = json.dumps(payload_dict).encode("utf-8")
 
         for attempt in range(_MAX_RETRIES):
             request = urllib.request.Request(
@@ -158,9 +175,8 @@ class LLMClient:
         temperature: float = 0.0,
     ) -> LLMResponse:
         """Run one chat completion, transparently cached by (model, system, user, temperature).
-        `model` defaults to this client's own provider default (DEFAULT_MODEL for OpenRouter,
-        NVIDIA_DEFAULT_MODEL for NVIDIA) when not given explicitly."""
-        model = model or (NVIDIA_DEFAULT_MODEL if self._provider == "nvidia" else DEFAULT_MODEL)
+        `model` defaults to this client's own provider's default model when not given explicitly."""
+        model = model or _PROVIDER_DEFAULT_MODEL[self._provider]
         cache_key = content_hash(
             "llmcache", {"model": model, "system": system, "user": user, "temperature": temperature}
         )
