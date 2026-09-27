@@ -48,6 +48,24 @@ def _load_prompt(version: str) -> str:
     ).read_text(encoding="utf-8")
 
 
+def _strip_markdown_fence(content: str) -> str:
+    """Strip a ```json ... ``` (or bare ``` ... ```) wrapper if present.
+
+    The prompt explicitly says "no markdown fences" -- but a real full-paper run (PHASES.md item 33,
+    31,939 characters of input, far longer than any of the 5 abstract-only pilot papers) got one
+    anyway despite otherwise producing a complete, well-formed JSON array. Stripping defensively
+    rather than rejecting a response that's actually fine is worth more than enforcing the letter of
+    an instruction the model didn't follow."""
+    stripped = content.strip()
+    if stripped.startswith("```"):
+        stripped = stripped[3:]
+        if stripped.lstrip().startswith("json"):
+            stripped = stripped.lstrip()[4:]
+        if stripped.endswith("```"):
+            stripped = stripped[:-3]
+    return stripped.strip()
+
+
 def _current_bundle() -> KGBundle:
     """Same composition as curator.cli._build_bundle() -- entities to resolve candidates against."""
     from curator.cli import KG_CURATED_DIR
@@ -152,7 +170,7 @@ def extract_paper(
     response = client.complete(system_prompt, text, model=model or DEFAULT_MODEL)
 
     try:
-        raw_candidates = json.loads(response.content)
+        raw_candidates = json.loads(_strip_markdown_fence(response.content))
     except json.JSONDecodeError:
         return ExtractionResult(source=source, rejected=[
             RejectedCandidate(reason="LLM returned invalid JSON", raw={"content": response.content})

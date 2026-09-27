@@ -82,7 +82,7 @@ are also where most of the work is.
 | 2 | Supabase live setup + versioned build pipeline | ✅ **Done** — five real releases (`kg_2026_10_1` through `_5`) built; `kg_current` atomic switchover live and pointing at `kg_2026_10_5`; `kg/manifest.json` (checksums, git SHA, counts) written on every `kg load`, verified by reading it back |
 | 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
 | 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | 🟡 **4.1/4.2/4.6 done** (streaming parser, domain-based NLR classification, chromosome stats) for chickpea+soybean; wheat structural data loaded but not NLR-classified (its GFF has no domain annotations at all). **4.3 started**: NCBI BLAST+ installed, 1 gene (Lr34) confidently anchored to its real chromosome/position; 3 more attempted and correctly rejected (see below). **4.4 (marker anchoring) not started** |
-| 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Core pipeline + review UI + graph visualizer done and tested end-to-end** — search/verify (Europe PMC), grounded LLM extraction, quote-grounding, normalization (`curator/lit`/`curator/llm`/`curator/extract`); a staging Postgres schema + FastAPI service (`api/`) + Streamlit review app (`tools/review_app/`) + `agrihub lit export-staged` take a paper from extraction through human approval to a `kg build`-ready YAML without ever touching `kg_current` directly, verified against 2 real papers (one 0-candidate outcome, one correctly-rejected unverifiable DOI). A separate, read-only full-graph visualizer (Cytoscape.js) is also live on the dashboard. Still missing: dictionary NER (5.5), relevance classifier (5.4), JATS table extraction (5.3/5.9 — variety-reaction tables in papers are invisible to it), and the corpus-scale run (5.11 wants 300–500 papers; only 2 have gone through the live pipeline) |
+| 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Core pipeline + review UI + graph visualizer + real full-paper test done, 2026-09-27** — search/verify (Europe PMC), grounded LLM extraction, quote-grounding, normalization (`curator/lit`/`curator/llm`/`curator/extract`), now including a real JATS full-text parser (`curator/lit/jats.py`, task 5.3) after a real bug was found sending raw XML to the LLM; a staging Postgres schema + FastAPI service (`api/`) + Streamlit review app (`tools/review_app/`) + `agrihub lit export-staged` take a paper from extraction through human approval to a `kg build`-ready YAML. A second extraction backend (Google's LangExtract, `curator/extract/langextract_pipeline.py`) is built and proven correct at small scale, but **not yet usable for real full-text papers** — 3 live attempts via NVIDIA all timed out on a real ~32K-character paper, root cause not yet found (§3 item 33). A separate, read-only full-graph visualizer (Cytoscape.js) is also live on the dashboard. Still missing: dictionary NER (5.5), relevance classifier (5.4), JATS table extraction (5.9 — variety-reaction tables in papers are invisible to it), and the corpus-scale run (5.11 wants 300–500 papers; only 6 have gone through the live pipeline: 5 abstracts + 1 real full paper) |
 | 6 | Gold-standard evaluation of the extraction pipeline | 🟡 **5-paper pilot + 2 real 6.4 ablations, 2026-09-27**: guideline + harness are real and working; v1 prompt scores 2/5 clean, 3/5 fail on well-diagnosed causes (§3 items 29-30). Two interventions tried and A/B tested against the same 5 papers — a few-shot prompt (v2, item 31) and a corrective retry pass (item 32) — **both come back net negative/mixed**, and both independently produced the same quote-fidelity-degradation side effect, a stronger cross-cutting finding than either alone. v1 stays production, `retry` stays opt-in and off everywhere live. One real code bug found and fixed (a vocab-synonym wiring gap). Still needed: 40 more papers, a second independent annotator (double-annotation + κ), and the now-evidence-backed two-step (quote-then-structure) architecture as the next attempt |
 | 7 | Structured trial/germplasm data (AICRP, GRIN) | ⬜ Not started — biggest lever on the `VARIETY_REACTION` count (234 today vs. a ≥3,000 target; literature alone won't close that gap) |
 | 8 | Environmental trigger library | 🟡 **15/17 diseases have a cited env trigger, 16/17 have a management advisory** (manual research passes, see §3 items 21–26) — but no back-testing against historical weather (NASA POWER) and no risk-scoring engine (`curator/risk/`) yet |
@@ -1081,6 +1081,92 @@ are also where most of the work is.
      followed by a second call that structures a claim from an already-quote-verified span) is now
      the most evidence-backed untried direction, ahead of further single-call prompt or retry
      variants.
+33. **Extraction pipeline v3: fixed a real raw-XML bug, added NVIDIA as a second LLM provider,
+   adopted LangExtract as an alternate backend, ran a real full-paper test — one clean success, one
+   real bug caught and fixed, and one genuine, unresolved operational failure, all reported as they
+   actually happened, 2026-09-27.** Follows directly from the user's own request to rethink the
+   extraction strategy, add the newly-supplied `NVIDIA_API_KEY`, and try adopting a library like
+   LangExtract rather than keep patching the custom prompt.
+   - **`curator/lit/jats.py`** — a real, previously-unknown bug, found live before this item's own
+     test could even begin: `europepmc.fetch_fulltext_xml`'s result had **always** been sent to the
+     LLM completely unparsed. Fetching the real, already-vetted OA paper `pmid:30140185` (wheat
+     powdery mildew, `kg/curated/env_triggers_v1.yaml` line 187) returned 134,698 characters of raw
+     `<article>` XML tag soup — none of the 5 pilot papers were open access, so this had never been
+     exercised. This is RESEARCH_ROADMAP.md's own still-open task 5.3. Fixed with a real recursive
+     JATS section walker (documents nest `<sec>` inside `<sec>`), producing 31,939 characters of
+     clean, section-labelled plain text and excluding the reference list. 6 new tests plus a
+     regression test on the one existing test that had been (unrealistically) mocking full text as
+     plain text instead of real XML.
+   - **NVIDIA provider support** (`curator/llm/client.py`) — generalized `LLMClient` to a `provider`
+     parameter (`openrouter`, unchanged default, or `nvidia`), verified live rather than assumed:
+     NVIDIA's own flagship `nvidia/nemotron-3-super-120b-a12b` turned out to be a **reasoning
+     model** that burns its whole token budget on `reasoning_content` and ignores
+     `response_format` entirely — wrong tool for fast structured extraction. Three other promising
+     IDs (`nvidia/llama-3.1-nemotron-70b-instruct`, `nvidia/llama-3.1-nemotron-51b-instruct`,
+     `mistralai/mistral-large-2-instruct`) 404 ("not deployed for this account") despite being
+     listed by `/v1/models`. **`z-ai/glm-5.3-flash`** is the one that actually works: fast, obeys
+     `response_format: json_schema` exactly, `finish_reason: "stop"` — now `NVIDIA_DEFAULT_MODEL`.
+     4 new tests.
+   - **LangExtract adoption** (`curator/extract/langextract_pipeline.py`) — Google's LangExtract
+     library as an alternate extraction+grounding backend: character-interval alignment
+     (`char_interval`, `alignment_status`) instead of a fuzzy pass/fail score, plus pooled
+     multi-pass extraction for recall. Verified live end-to-end on a trivial one-sentence input
+     before writing any production code: LangExtract + NVIDIA (`z-ai/glm-5.3-flash`) correctly
+     extracted and exactly aligned (`MATCH_EXACT`) a real test claim in seconds. Reuses
+     `curator.extract.normalize.build_claim_candidate` unchanged for entity resolution (never
+     trusts LangExtract's own attributes as final IDs) and produces the same `ExtractionResult`
+     shape, so nothing downstream needs to change. Few-shot examples are the same 4 real diagnosed
+     patterns from `claim_extraction_v2.md` (items 30-31) plus one worked example per remaining
+     claim type. 6 new tests, fully mocked. `eval/run_eval.py` gained `--backend custom|langextract`
+     and `--extraction-passes`.
+   - **A second real bug caught by the full-paper test itself**: the custom backend's first live
+     run against the real 31,939-character full text failed with `"LLM returned invalid JSON"`.
+     The cached raw response showed why: a complete, well-formed JSON array, wrapped in a
+     ` ```json ... ``` ` markdown fence the prompt explicitly says not to add — never seen on any
+     of the 5 short abstract-only pilot papers, another instance of this session's recurring
+     pattern (longer/more complex input -> worse instruction-following). Fixed with a small,
+     defensive `_strip_markdown_fence` helper in `curator/lit/run_extraction.py` rather than
+     rejecting a response that was otherwise completely fine. 4 new tests.
+   - **The real full-paper result, custom backend (after the fence fix): a clean, honest run.**
+     Gold: 2 claims annotated directly from the real parsed full text, following
+     `docs/annotation_guidelines.md` (a `DISEASE_ENV_TRIGGER` from the abstract's own primary
+     finding, and a `DISEASE_CAUSED_BY` for the pathogen using the paper's own abbreviation "Bgt",
+     which `config/vocab/diseases.yaml` has **no** registered synonym for — a parallel, not-yet-
+     fixed instance of the same abbreviation-coverage gap found and fixed for "FHB"/"C. sojina" in
+     item 30). Result: **4 real candidates extracted, all correctly grounded, all rejected at
+     normalization** (3 `DISEASE_ENV_TRIGGER` + 1 `DISEASE_MANAGED_BY`, each needing a human-built
+     entity — exactly the known, correct Phase-5 design limit, not a model failure) — this paper is
+     a climate-effect physiology study, so its findings are almost entirely environmental triggers
+     and management inference, not gene resistance, and the model correctly recognized that. Recall
+     0.00 on the 2 gold claims (the `DISEASE_ENV_TRIGGER` one lands in `gold_needs_human_entity` as
+     expected; the `DISEASE_CAUSED_BY` fact about Bgt was never re-extracted at all from the
+     introduction, a genuine miss). Grounding itself worked correctly on all 4 real candidates found.
+   - **The langextract backend could not be evaluated on this paper — a genuine, unresolved
+     operational failure, reported rather than hidden.** Three separate live attempts against the
+     same real 31,939-character text all failed to complete: a 3-pass run at LangExtract's default
+     `max_char_buffer=1000` (splitting the paper into ~32 chunks, i.e. up to ~96 calls) ran 24+
+     minutes with no result and was killed; a 1-pass retry at the same default chunking ran 13+
+     minutes and was killed; a diagnostic with `max_char_buffer=16000` (~2 chunks, to test whether
+     chunk count was the driver) ran 19+ minutes and was killed too, undermining that hypothesis --
+     wall-clock time did not scale down with a 16x reduction in chunk count, which points at
+     something else (per-request latency for a large prompt on this specific NVIDIA
+     model/account, or account-level throttling not visible from outside) rather than LangExtract's
+     chunking logic itself. This is **not** evidence against the grounding approach's quality --
+     the exact same code path succeeded in seconds on a one-sentence smoke test earlier in this
+     item -- it is specifically a full-document-scale, NVIDIA-account-scale problem, not yet
+     diagnosed to its root cause.
+   - Test suite: 247 passing (up from 226 at the start of this item), same 3 pre-existing unrelated
+     Neo4j-credential failures. `kg build` unaffected.
+   - **Where this leaves things**: the custom backend (OpenRouter) is the only one with a real,
+     completed full-paper result, and it now has one fewer failure mode than before this item
+     (fence-stripping). LangExtract's grounding mechanism is proven correct at small scale but
+     **not yet usable for full-text papers via NVIDIA** until the timeout is root-caused —
+     candidates for the next session: test the raw NVIDIA endpoint directly with one large
+     synchronous request (isolate whether this is LangExtract-specific or NVIDIA/model-specific),
+     try a different NVIDIA model for long-context calls, or check NVIDIA's own account-level
+     rate/latency dashboards directly rather than inferring from wall-clock time alone. Until then,
+     the custom pipeline remains the only backend proven to work end-to-end on real full-text
+     papers, not just abstracts.
 
 ---
 

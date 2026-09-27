@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 
 from curator.lit import europepmc
-from curator.lit.run_extraction import extract_paper
+from curator.lit.run_extraction import _strip_markdown_fence, extract_paper
 from curator.llm.client import LLMResponse
 
 from kg_toy import STRIPE, YR1, toy_bundle
@@ -153,6 +153,43 @@ def test_extract_paper_prefers_fulltext_when_open_access(monkeypatch):
         "pmid:34897256", crop="wheat", llm_client=_FakeLLMClient(json.dumps(candidates)), bundle=toy_bundle()
     )
     assert len(result.accepted) == 1
+
+
+def test_strip_markdown_fence_removes_json_fence():
+    fenced = '```json\n[{"a": 1}]\n```'
+    assert _strip_markdown_fence(fenced) == '[{"a": 1}]'
+
+
+def test_strip_markdown_fence_removes_bare_fence():
+    fenced = '```\n[{"a": 1}]\n```'
+    assert _strip_markdown_fence(fenced) == '[{"a": 1}]'
+
+
+def test_strip_markdown_fence_leaves_unfenced_content_alone():
+    assert _strip_markdown_fence('[{"a": 1}]') == '[{"a": 1}]'
+
+
+def test_extract_paper_accepts_a_fenced_json_response(monkeypatch):
+    # Real bug found live on a real full-paper run (PHASES.md item 33): the model wrapped an
+    # otherwise complete, well-formed JSON array in a ```json ... ``` fence despite the prompt
+    # explicitly saying not to -- previously rejected outright as "invalid JSON".
+    monkeypatch.setattr(europepmc, "get_record", lambda identifier: _fake_record())
+    candidates = [{
+        "claim_type": "GENE_CONFERS_RESISTANCE",
+        "subject": {"type": "Gene", "text": "TestYr1"},
+        "object": {"type": "Disease", "text": "stripe rust"},
+        "qualifiers": {"resistance_type": "ASR"},
+        "evidence": {
+            "quote": "TestYr1 confers all-stage resistance to stripe rust in wheat under field conditions.",
+            "section": "abstract",
+        },
+    }]
+    fenced_content = "```json\n" + json.dumps(candidates) + "\n```"
+    result = extract_paper(
+        "pmid:34897256", crop="wheat", llm_client=_FakeLLMClient(fenced_content), bundle=toy_bundle()
+    )
+    assert len(result.accepted) == 1
+    assert len(result.rejected) == 0
 
 
 def test_extract_paper_falls_back_to_abstract_on_malformed_fulltext_xml(monkeypatch):
