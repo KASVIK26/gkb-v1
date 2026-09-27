@@ -189,10 +189,19 @@
           <p class="edge-meta panel-note">
             Every node and claim currently in the live KG, fetched once and cached in your
             browser — pick a crop, a disease, or specific relationship types to focus the view.
-            Click a node to highlight its neighborhood; click empty space to reset.
+            Hover a node to see its name, click it to highlight its neighborhood and list its
+            relationships below, click empty space to reset.
           </p>
           <div class="graph-layout">
-            <div id="graphCanvas" class="graph-canvas"></div>
+            <div class="graph-canvas-wrap">
+              <div id="graphCanvas" class="graph-canvas"></div>
+              <div class="graph-zoom-controls">
+                <button id="graphZoomIn" type="button" title="Zoom in" aria-label="Zoom in">+</button>
+                <button id="graphZoomOut" type="button" title="Zoom out" aria-label="Zoom out">−</button>
+                <button id="graphZoomFit" type="button" title="Fit to screen" aria-label="Fit to screen">⤢</button>
+              </div>
+              <div id="graphTooltip" class="graph-tooltip" hidden></div>
+            </div>
             <div id="graphLegend" class="graph-legend"></div>
           </div>
           <div id="graphDetail" class="graph-detail" hidden></div>

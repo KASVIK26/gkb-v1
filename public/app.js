@@ -273,6 +273,10 @@ const graphStatusText = document.getElementById("graphStatusText");
 const graphCanvas = document.getElementById("graphCanvas");
 const graphLegend = document.getElementById("graphLegend");
 const graphDetail = document.getElementById("graphDetail");
+const graphTooltip = document.getElementById("graphTooltip");
+const graphZoomIn = document.getElementById("graphZoomIn");
+const graphZoomOut = document.getElementById("graphZoomOut");
+const graphZoomFit = document.getElementById("graphZoomFit");
 
 // Matches curator.model.enums.EntityType -- one color per node type, shown in the legend.
 const NODE_COLORS = {
@@ -375,21 +379,47 @@ function renderGraphLegend(nodes) {
   );
 }
 
+// Tuned so ~200 nodes settle without piling on top of each other -- more repulsion/spacing than
+// cytoscape's defaults, and nodeDimensionsIncludeLabels so a node's (usually hidden) label still
+// counts toward its footprint when one is shown.
+const GRAPH_LAYOUT = {
+  name: "cose",
+  animate: false,
+  fit: true,
+  padding: 32,
+  nodeDimensionsIncludeLabels: true,
+  nodeRepulsion: () => 14000,
+  idealEdgeLength: () => 100,
+  edgeElasticity: () => 100,
+  nodeOverlap: 24,
+  componentSpacing: 120,
+  gravity: 0.6,
+  numIter: 2000,
+  coolingFactor: 0.97,
+  minTemp: 1.0,
+};
+
+function graphLayout() {
+  return cy.layout(GRAPH_LAYOUT);
+}
+
 function resetGraphHighlight() {
   if (!cy) return;
-  cy.elements().removeClass("highlighted dimmed");
+  cy.elements().removeClass("highlighted dimmed show-label");
   graphDetail.hidden = true;
 }
 
 function showNodeDetail(node) {
-  cy.elements().addClass("dimmed").removeClass("highlighted");
-  node.closedNeighborhood().removeClass("dimmed");
+  cy.elements().addClass("dimmed").removeClass("highlighted show-label");
+  const neighborhood = node.closedNeighborhood();
+  neighborhood.removeClass("dimmed");
+  neighborhood.nodes().addClass("show-label");
   node.addClass("highlighted");
 
   const lines = node.connectedEdges().map((edge) => {
     const outgoing = edge.source().id() === node.id();
     const other = outgoing ? edge.target() : edge.source();
-    return `<li>${outgoing ? "→" : "←"} <strong>${edge.data("label")}</strong> ${outgoing ? "→" : "←"} ${other.data("label")}</li>`;
+    return `<li>${outgoing ? "→" : "←"} <strong>${edge.data("claimLabel")}</strong> ${outgoing ? "→" : "←"} ${other.data("label")}</li>`;
   });
 
   graphDetail.hidden = false;
@@ -399,12 +429,39 @@ function showNodeDetail(node) {
   `;
 }
 
+function positionTooltip(evt) {
+  const containerRect = graphCanvas.getBoundingClientRect();
+  const original = evt.originalEvent;
+  let x, y;
+  if (original && typeof original.clientX === "number") {
+    x = original.clientX - containerRect.left;
+    y = original.clientY - containerRect.top;
+  } else {
+    const rendered = evt.target.renderedPosition ? evt.target.renderedPosition() : evt.target.renderedMidpoint();
+    x = rendered.x;
+    y = rendered.y;
+  }
+  graphTooltip.style.left = `${x}px`;
+  graphTooltip.style.top = `${y}px`;
+}
+
+function showTooltip(evt, html) {
+  graphTooltip.innerHTML = html;
+  graphTooltip.hidden = false;
+  positionTooltip(evt);
+}
+
+function hideTooltip() {
+  graphTooltip.hidden = true;
+}
+
 function renderGraph() {
   if (!graphCache) return;
   const { nodes, edges } = filteredGraph();
   setStatus(graphStatusText, `${nodes.length} node(s) / ${edges.length} edge(s)`, "ready");
   renderGraphLegend(nodes);
   graphDetail.hidden = true;
+  hideTooltip();
 
   const elements = [
     ...nodes.map((n) => ({ data: { id: n.id, label: n.name, type: n.type } })),
@@ -413,7 +470,7 @@ function renderGraph() {
         id: e.claim_id,
         source: e.subject_id,
         target: e.object_id,
-        label: e.claim_type.replaceAll("_", " ").toLowerCase(),
+        claimLabel: e.claim_type.replaceAll("_", " ").toLowerCase(),
         claimType: e.claim_type,
       },
     })),
@@ -428,44 +485,83 @@ function renderGraph() {
           selector: "node",
           style: {
             "background-color": (ele) => NODE_COLORS[ele.data("type")] || DEFAULT_NODE_COLOR,
-            label: "data(label)",
+            label: "",
             color: "#172018",
             "font-size": "10px",
             "text-valign": "bottom",
             "text-margin-y": 4,
-            width: 22,
-            height: 22,
+            "text-background-color": "#fbfaf6",
+            "text-background-opacity": 0.85,
+            "text-background-padding": "2px",
+            width: 16,
+            height: 16,
+            "border-width": 1,
+            "border-color": "rgba(255,255,255,0.9)",
           },
         },
+        // Labels stay off canvas by default (that was the main source of "text on text" clutter
+        // at ~200 nodes) -- shown only on hover (.hovered) or for a clicked node's neighborhood
+        // (.show-label), via the JS event handlers below.
+        { selector: "node.show-label, node.hovered", style: { label: "data(label)" } },
         {
           selector: "edge",
           style: {
-            width: 1.5,
-            "line-color": "rgba(23,32,24,0.25)",
-            "target-arrow-color": "rgba(23,32,24,0.35)",
+            width: 1.2,
+            "line-color": "rgba(23,32,24,0.2)",
+            "target-arrow-color": "rgba(23,32,24,0.3)",
             "target-arrow-shape": "triangle",
+            "arrow-scale": 0.7,
             "curve-style": "bezier",
-            label: "data(label)",
-            "font-size": "8px",
-            color: "#5d6a61",
-            "text-rotation": "autorotate",
+            // No on-canvas edge label -- with hundreds of edges the text just overlapped itself;
+            // the relationship name shows in the hover tooltip and the click-detail list instead.
           },
         },
-        { selector: "node.highlighted", style: { "border-width": 3, "border-color": "#2f6b44" } },
-        { selector: "node.dimmed, edge.dimmed", style: { opacity: 0.15 } },
+        { selector: "node.highlighted", style: { "border-width": 3, "border-color": "#2f6b44", width: 22, height: 22 } },
+        { selector: "node.dimmed, edge.dimmed", style: { opacity: 0.12 } },
+        { selector: "edge.hovered", style: { "line-color": "#2f6b44", "target-arrow-color": "#2f6b44", width: 2.2, opacity: 1 } },
       ],
-      layout: { name: "cose", animate: false, fit: true, padding: 24 },
+      layout: GRAPH_LAYOUT,
+      minZoom: 0.15,
+      maxZoom: 4,
       wheelSensitivity: 0.2,
     });
+
     cy.on("tap", "node", (evt) => showNodeDetail(evt.target));
     cy.on("tap", (evt) => {
       if (evt.target === cy) resetGraphHighlight();
     });
+    cy.on("mouseover", "node", (evt) => {
+      evt.target.addClass("hovered");
+      showTooltip(evt, `<strong>${evt.target.data("label")}</strong><br>${evt.target.data("type")}`);
+    });
+    cy.on("mouseout", "node", (evt) => {
+      evt.target.removeClass("hovered");
+      hideTooltip();
+    });
+    cy.on("mousemove", "node", positionTooltip);
+    cy.on("mouseover", "edge", (evt) => {
+      const edge = evt.target;
+      edge.addClass("hovered");
+      showTooltip(evt, `<strong>${edge.data("claimLabel")}</strong><br>${edge.source().data("label")} → ${edge.target().data("label")}`);
+    });
+    cy.on("mouseout", "edge", (evt) => {
+      evt.target.removeClass("hovered");
+      hideTooltip();
+    });
+    cy.on("mousemove", "edge", positionTooltip);
   } else {
     cy.elements().remove();
     cy.add(elements);
-    cy.layout({ name: "cose", animate: false, fit: true, padding: 24 }).run();
+    graphLayout().run();
   }
+}
+
+function zoomGraphBy(factor) {
+  if (!cy) return;
+  const width = graphCanvas.clientWidth;
+  const height = graphCanvas.clientHeight;
+  const level = Math.max(cy.minZoom(), Math.min(cy.maxZoom(), cy.zoom() * factor));
+  cy.animate({ zoom: { level, renderedPosition: { x: width / 2, y: height / 2 } } }, { duration: 150 });
 }
 
 graphCropSelect.addEventListener("change", () => {
@@ -473,6 +569,9 @@ graphCropSelect.addEventListener("change", () => {
   renderGraph();
 });
 graphDiseaseSelect.addEventListener("change", renderGraph);
+graphZoomIn.addEventListener("click", () => zoomGraphBy(1.35));
+graphZoomOut.addEventListener("click", () => zoomGraphBy(1 / 1.35));
+graphZoomFit.addEventListener("click", () => cy && cy.animate({ fit: { eles: cy.elements(), padding: 32 } }, { duration: 200 }));
 
 // ---------------------------------------------------------------------------
 // Initialise
