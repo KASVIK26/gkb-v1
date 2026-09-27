@@ -9,7 +9,7 @@ from unittest.mock import patch
 import pytest
 from fastapi.testclient import TestClient
 
-from api.deps import get_db, get_llm_client
+from api.deps import get_db
 from api.main import app
 from curator.extract.normalize import RejectedCandidate
 from curator.graph import staging
@@ -30,7 +30,6 @@ def staging_conn(pg_conn):
 @pytest.fixture()
 def client(staging_conn):
     app.dependency_overrides[get_db] = lambda: staging_conn
-    app.dependency_overrides[get_llm_client] = lambda: object()  # never actually called; extract_paper is mocked
     yield TestClient(app)
     app.dependency_overrides.clear()
 
@@ -77,6 +76,39 @@ def test_extract_stages_accepted_candidates_and_returns_both_lists(client):
     assert accepted["staged_id"] > 0
     assert len(body["rejected"]) == 1
     assert "does not mention" in body["rejected"][0]["reason"]
+
+
+def test_extract_defaults_to_gemini_provider_and_echoes_it(client):
+    with patch("api.routers.lit.extract_paper", return_value=_fake_result()) as mock_extract, \
+         patch("api.routers.lit.europepmc.fetch_abstract", return_value="An abstract about wheat."), \
+         patch("api.routers.lit.assess_source", return_value=SourceAssessment(relevant=True, notes="Looks relevant.")):
+        response = client.post("/lit/extract", json={"identifier": "pmid:34897256", "crop": "wheat"})
+
+    assert response.status_code == 200
+    assert response.json()["provider"] == "gemini"
+    called_llm_client = mock_extract.call_args.kwargs["llm_client"]
+    assert called_llm_client._provider == "gemini"
+
+
+def test_extract_honors_an_explicit_provider_choice(client):
+    with patch("api.routers.lit.extract_paper", return_value=_fake_result()) as mock_extract, \
+         patch("api.routers.lit.europepmc.fetch_abstract", return_value="An abstract about wheat."), \
+         patch("api.routers.lit.assess_source", return_value=SourceAssessment(relevant=True, notes="Looks relevant.")):
+        response = client.post(
+            "/lit/extract", json={"identifier": "pmid:34897256", "crop": "wheat", "provider": "groq"}
+        )
+
+    assert response.status_code == 200
+    assert response.json()["provider"] == "groq"
+    called_llm_client = mock_extract.call_args.kwargs["llm_client"]
+    assert called_llm_client._provider == "groq"
+
+
+def test_extract_rejects_an_unknown_provider(client):
+    response = client.post(
+        "/lit/extract", json={"identifier": "pmid:34897256", "crop": "wheat", "provider": "not-a-real-provider"}
+    )
+    assert response.status_code == 400
 
 
 def test_extract_returns_404_for_unverifiable_paper(client):

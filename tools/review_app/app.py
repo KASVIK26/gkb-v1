@@ -24,6 +24,7 @@ import streamlit as st
 API_BASE_URL = os.environ.get("API_BASE_URL", "http://localhost:8000")
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CROPS = ["wheat", "soybean", "chickpea"]
+PROVIDERS = ["gemini", "openrouter", "groq"]  # matches curator.llm.client's real provider set
 
 st.set_page_config(page_title="GKB paper review", layout="wide")
 
@@ -81,18 +82,25 @@ with tab_extract:
         "its metadata typed and marked unverified by hand, which is a separate feature."
     )
 
-    col1, col2 = st.columns([1, 2])
+    col1, col2, col3 = st.columns([1, 1, 2])
     with col1:
         crop = st.selectbox("Crop", CROPS)
     with col2:
+        provider = st.selectbox(
+            "LLM provider", PROVIDERS, index=0,
+            help="Which LLM backend does the extraction. Gemini is the default; OpenRouter and "
+                 "Groq are real alternatives, not placeholders -- useful for comparing results "
+                 "on the same paper.",
+        )
+    with col3:
         identifier = st.text_input("PMID or DOI", placeholder="e.g. 34897256 or doi:10.5423/PPJ.FT.11.2021.0164")
 
     if st.button("Extract", type="primary", disabled=not identifier.strip()):
         pmid_or_doi = identifier.strip() if ":" in identifier else f"pmid:{identifier.strip()}"
-        with st.spinner("Fetching, verifying, extracting, grounding..."):
+        with st.spinner(f"Fetching, verifying, extracting ({provider}), grounding..."):
             try:
                 st.session_state["last_extraction"] = _api_post(
-                    "/lit/extract", {"identifier": pmid_or_doi, "crop": crop}
+                    "/lit/extract", {"identifier": pmid_or_doi, "crop": crop, "provider": provider}
                 )
             except ApiError as exc:
                 st.session_state["last_extraction"] = None
@@ -112,7 +120,7 @@ with tab_extract:
             icon = "🟢" if assessment["relevant"] else ("🟡" if assessment["relevant"] is False else "⚪")
             st.info(f"{icon} **AI opinion on this source** (not a fact): {assessment['notes']}")
 
-        st.markdown(f"**{len(result['accepted'])} accepted, {len(result['rejected'])} rejected**")
+        st.markdown(f"**{len(result['accepted'])} accepted, {len(result['rejected'])} rejected** — extracted with `{result['provider']}`")
 
         for item in result["accepted"]:
             with st.container(border=True):

@@ -19,7 +19,7 @@ from curator.graph.kg_files import load_curated_dir
 from curator.graph.variety_import import variety_bundle
 from curator.graph.vocab_entities import reference_bundle
 from curator.lit import europepmc, jats
-from curator.llm.client import DEFAULT_MODEL, LLMClient
+from curator.llm.client import LLMClient
 from curator.model.claims import Claim, Evidence, Source
 from curator.model.enums import Crop, EvidenceMethod, SourceType
 
@@ -74,7 +74,7 @@ def _current_bundle() -> KGBundle:
 
 
 def _retry_candidate(
-    raw: dict, reason: str, *, source_text: str, llm_client: LLMClient, model: str
+    raw: dict, reason: str, *, source_text: str, llm_client: LLMClient, model: str | None
 ) -> dict | None:
     """One corrective pass for a rejected candidate (claim_retry_v1.md): show the model its own
     mistake and the exact rejection reason, ask for one fixed JSON object or `null`. Never raises --
@@ -167,7 +167,12 @@ def extract_paper(
     version = prompt_version or _PROMPT_VERSION
     client = llm_client or LLMClient()
     system_prompt = _load_prompt(version)
-    response = client.complete(system_prompt, text, model=model or DEFAULT_MODEL)
+    # `model=model` (not `model or DEFAULT_MODEL`) -- a real bug this shipped with: forcing
+    # OpenRouter's DEFAULT_MODEL here overrode any other provider's own default whenever the
+    # caller didn't name a model explicitly, so selecting "gemini"/"groq" silently made requests
+    # for an OpenRouter-only model ID. Passing `None` through lets LLMClient.complete() resolve
+    # its own provider-appropriate default instead.
+    response = client.complete(system_prompt, text, model=model)
 
     try:
         raw_candidates = json.loads(_strip_markdown_fence(response.content))
@@ -225,7 +230,7 @@ def extract_paper(
 
         if retry:
             corrected = _retry_candidate(
-                raw, outcome.reason, source_text=text, llm_client=client, model=model or DEFAULT_MODEL
+                raw, outcome.reason, source_text=text, llm_client=client, model=model
             )
             if corrected is not None:
                 retried_outcome = _ground_and_build(corrected, extractor_tag=f"{extractor}+retry")

@@ -9,7 +9,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from curator.llm.client import DEFAULT_MODEL, LLMClient
+from curator.llm.client import LLMClient
 
 _PROMPT_VERSION = "source_assessment_v1"
 
@@ -46,7 +46,11 @@ def assess_source(
         f"Title: {title}\nVenue: {venue or 'unknown'}\nYear: {year or 'unknown'}\n"
         f"Target crop: {crop}\n\nAbstract:\n{abstract}"
     )
-    response = client.complete(_load_prompt(), user, model=model or DEFAULT_MODEL)
+    # `model=model` (not `model or DEFAULT_MODEL`) -- the same bug found and fixed in
+    # curator/lit/run_extraction.py: forcing OpenRouter's DEFAULT_MODEL here overrode whatever
+    # provider the caller's `llm_client` actually was, silently making a Gemini/Groq client request
+    # an OpenRouter-only model ID. `None` lets LLMClient.complete() resolve its own default.
+    response = client.complete(_load_prompt(), user, model=model)
 
     try:
         parsed = json.loads(response.content)

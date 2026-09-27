@@ -21,7 +21,7 @@ from curator.llm.client import LLMClient, LLMClientError
 from curator.llm.source_assessment import assess_source
 from curator.model.enums import EVIDENCE_WEIGHT, EvidenceMethod
 
-from api.deps import get_db, get_llm_client
+from api.deps import get_db
 
 router = APIRouter(prefix="/lit", tags=["lit"])
 
@@ -35,6 +35,7 @@ def _model_from_extractor(extractor: str) -> str:
 class ExtractRequest(BaseModel):
     identifier: str = Field(..., description="pmid:<digits> or doi:<doi>, e.g. pmid:34897256")
     crop: str = Field(..., description="wheat | soybean | chickpea")
+    provider: str = Field("gemini", description="openrouter | gemini | groq -- which LLM backend to extract with")
 
 
 class AcceptedOut(BaseModel):
@@ -67,6 +68,7 @@ class ExtractResponse(BaseModel):
     source_year: int | None
     source_verified: bool
     source_assessment: SourceAssessmentOut | None
+    provider: str
     accepted: list[AcceptedOut]
     rejected: list[RejectedOut]
 
@@ -75,8 +77,11 @@ class ExtractResponse(BaseModel):
 def extract(
     req: ExtractRequest,
     conn: psycopg.Connection = Depends(get_db),
-    llm: LLMClient = Depends(get_llm_client),
 ) -> ExtractResponse:
+    try:
+        llm = LLMClient(provider=req.provider)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     try:
         result = extract_paper(req.identifier, crop=req.crop, llm_client=llm)
     except europepmc.PublicationNotFound as exc:
@@ -140,6 +145,7 @@ def extract(
         source_year=result.source.year,
         source_verified=result.source.verified,
         source_assessment=assessment_out,
+        provider=req.provider,
         accepted=accepted_out,
         rejected=[RejectedOut(reason=r.reason) for r in result.rejected],
     )
