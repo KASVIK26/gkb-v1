@@ -1209,6 +1209,51 @@ are also where most of the work is.
      longer worth chasing on NVIDIA specifically now that the provider is gone — the next real test
      of that hypothesis would be re-running the same full-paper attempt against Gemini instead, now
      that the wiring is in place, before assuming it's an NVIDIA-only problem.
+35. **Added an LLM-provider dropdown to the review UI (user request) — and it immediately caught a
+   real, serious bug that predates it, 2026-09-28.** The user reported a live extraction on a real
+   chickpea paper (`pmid:18943575`, a genuine primary paper modeling temperature/inoculum-density
+   effects on Fusarium wilt) scoring 0 accepted, 7 rejected, 6 of them `"quote does not mention:
+   Fusarium wilt"`. Fetching the real abstract confirmed why before touching any code: it names the
+   disease "Fusarium wilt" exactly **once**, in the closing sentence — every other sentence (including
+   all the real, valuable quantitative findings, e.g. "22 to 26 degrees C as the most favorable soil
+   temperature... for infection... by Foc-5") refers to it as "disease development" or by the
+   pathogen's race codes (Foc-0/Foc-5), the same cross-sentence/indirect-reference pattern diagnosed
+   repeatedly this session (items 30-32), now confirmed on a new crop and a paper whose facts are
+   genuinely extractable and valuable, not a contrived example.
+   - **The feature**: `ExtractRequest.provider` (`gemini` default, or `openrouter`/`groq`), threaded
+     into a per-request `LLMClient(provider=req.provider)` in `api/routers/lit.py` — the previously
+     fixed `get_llm_client` FastAPI dependency is gone entirely (a request-body field can't flow
+     through a plain `Depends()`, so the client is built directly in the handler instead).
+     `tools/review_app/app.py` gets a real `st.selectbox` next to Crop, and the results line now
+     says which provider actually ran (`"0 accepted, 7 rejected — extracted with gemini"`), so a
+     0-accepted result is never ambiguous about what was tried. `api/deps.py` shrinks back to just
+     the DB dependency.
+   - **A real, serious bug the dropdown build caught immediately**: both
+     `curator/lit/run_extraction.py` and `curator/llm/source_assessment.py` had
+     `model=model or DEFAULT_MODEL` — hardcoding OpenRouter's default model string regardless of
+     which provider's `LLMClient` was actually passed in. Selecting "gemini" in the UI would have
+     silently sent Gemini's API a request for `meta-llama/llama-3.3-70b-instruct` (an OpenRouter-only
+     model ID) -- and since `LLMClient`'s cache key is `(model, system, user, temperature)`, both the
+     wrongly-computed "gemini" call and the real OpenRouter call hashed to the **same** cache entry,
+     so the dropdown would have silently served a stale OpenRouter response and reported it as
+     `"extracted with gemini"`, never actually reaching Gemini's API at all. Caught by checking
+     `data/llm_cache/usage.log` after a live 3-provider comparison showed suspiciously identical
+     results across all three. Fixed by passing `model=model` (`None` when unset) so
+     `LLMClient.complete()`'s own provider-aware default resolution (already built and tested in
+     item 34) actually gets used.
+   - **Verified live, post-fix, through the real running app** (not just curl): the same chickpea
+     paper via Gemini now genuinely fails differently — down from 7 grounding-stage rejections to 2
+     normalization-stage rejections (`could not resolve subject 'infection of cvs. P-2245 and PV-61
+     by Foc-5'`), a real, different outcome confirming the fix and the dropdown both work. Groq hit a
+     403 (`error code: 1010`) on this specific longer request after several earlier test calls
+     today — plausibly a free-tier rate limit, not a code defect, since the exact same Groq path
+     scored a clean 1.00 precision/recall/F1 on Sr33 earlier this session (item 34). 11 new/updated
+     tests. Test suite: 253 passing, same 3 pre-existing unrelated Neo4j failures.
+   - **Where this leaves the underlying grounding limitation**: unresolved, and this is now the
+     third independently-confirmed real-world case of it (Lr34, Rcs3, and now this chickpea paper) —
+     stronger evidence than before that it's common in real scientific writing, not an edge case.
+     The item-32 hypothesis (a two-step quote-then-structure architecture) remains the most
+     evidence-backed untried fix.
 
 ---
 
