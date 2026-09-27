@@ -25,9 +25,10 @@ subject      - {"type": "<Gene|Variety|Disease>", "text": "<exact name as it app
 object       - {"type": "<Disease|Gene|Pathogen|EnvTrigger|Advisory>", "text": "<exact name, or a
                 short factual description if the object is an environmental condition or a
                 management practice rather than a named entity>"}
-qualifiers   - a JSON object with any of: resistance_type ("race-specific"|"durable"|"QTL"|
-               "unknown"), reaction ("R"|"MR"|"I"|"MS"|"S"|"HS"), stage ("seedling"|"adult"|
-               "unspecified"), pathotype, location, season, action_type ("cultural"|"biological"|
+qualifiers   - a JSON object with any of: resistance_type ("ASR" for all-stage/seedling resistance,
+               "APR" for adult-plant resistance, "quantitative", or "unknown"), reaction ("R"|"MR"|
+               "I"|"MS"|"S"|"HS"), stage ("seedling"|"adult"|"unspecified"), pathotype, location,
+               season, action_type ("cultural"|"biological"|
                "chemical"|"varietal"|"monitoring"). Omit any qualifier you cannot support from the
                text; do not guess a value.
 evidence     - {"quote": "<the exact sentence(s) from the text, verbatim, that state this fact>",
@@ -49,11 +50,17 @@ discarded)
 4. **Gene families are not genes.** "Sr genes", "Lr genes", "the Rpp loci" are not a specific gene
    — do not extract a GENE_CONFERS_RESISTANCE claim unless a specific symbol/number/allele is
    named (e.g. "Sr33", "Rpp1", "Rhg1-a").
+4a. **One disease per claim, even when the text lists several at once.** If a sentence says a gene
+    confers resistance to multiple diseases (e.g. "Lr34 has supported resistance to leaf rust,
+    stripe rust, and powdery mildew"), do NOT put the whole list in one `object.text`. Emit one
+    separate claim per disease, each with `object.text` set to just that one disease's name — the
+    schema's object is always a single entity, and a joined list will fail the entity-in-quote
+    check and get the claim discarded entirely rather than partially accepted.
 5. **Do not invent a qualifier value.** If the reaction score, growth stage, pathotype, location,
    season, or action type isn't stated, omit that qualifier key entirely rather than guessing.
    Exceptions, because the schema itself requires these two keys and gives them an honest
    "not stated" value rather than making them optional: `GENE_CONFERS_RESISTANCE` always needs
-   `resistance_type` (use `"unknown"` if the text doesn't say race-specific/durable/QTL);
+   `resistance_type` (use `"unknown"` if the text doesn't say all-stage/adult-plant/quantitative);
    `VARIETY_REACTION` always needs both `reaction` (R/MR/I/MS/S/HS — do not extract this claim at
    all if the text gives no reaction class, since there is no "unknown" option for it) and `stage`
    (use `"unspecified"` if the growth stage isn't stated).

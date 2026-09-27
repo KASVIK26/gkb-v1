@@ -83,7 +83,7 @@ are also where most of the work is.
 | 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
 | 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | 🟡 **4.1/4.2/4.6 done** (streaming parser, domain-based NLR classification, chromosome stats) for chickpea+soybean; wheat structural data loaded but not NLR-classified (its GFF has no domain annotations at all). **4.3 started**: NCBI BLAST+ installed, 1 gene (Lr34) confidently anchored to its real chromosome/position; 3 more attempted and correctly rejected (see below). **4.4 (marker anchoring) not started** |
 | 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Core pipeline + review UI + graph visualizer done and tested end-to-end** — search/verify (Europe PMC), grounded LLM extraction, quote-grounding, normalization (`curator/lit`/`curator/llm`/`curator/extract`); a staging Postgres schema + FastAPI service (`api/`) + Streamlit review app (`tools/review_app/`) + `agrihub lit export-staged` take a paper from extraction through human approval to a `kg build`-ready YAML without ever touching `kg_current` directly, verified against 2 real papers (one 0-candidate outcome, one correctly-rejected unverifiable DOI). A separate, read-only full-graph visualizer (Cytoscape.js) is also live on the dashboard. Still missing: dictionary NER (5.5), relevance classifier (5.4), JATS table extraction (5.3/5.9 — variety-reaction tables in papers are invisible to it), and the corpus-scale run (5.11 wants 300–500 papers; only 2 have gone through the live pipeline) |
-| 6 | Gold-standard evaluation of the extraction pipeline | ⬜ **Not started — the main gap now that the pipeline itself works.** No hand-annotated gold set, no precision/recall/hallucination-rate measurement; this is what turns Phase 5 from "built" into "research-grade" (RESEARCH_ROADMAP.md §6.1) |
+| 6 | Gold-standard evaluation of the extraction pipeline | 🟡 **Started 2026-09-27**: annotation guideline (`docs/annotation_guidelines.md`) and a tested eval harness (`eval/run_eval.py`) are done and real; piloted live against 2 real papers, catching and fixing 2 genuine prompt bugs in the process (see §3 item 29). Still needed for the real gold standard: 43 more papers, a second independent annotator (double-annotation + κ), and the 6.4 ablations |
 | 7 | Structured trial/germplasm data (AICRP, GRIN) | ⬜ Not started — biggest lever on the `VARIETY_REACTION` count (234 today vs. a ≥3,000 target; literature alone won't close that gap) |
 | 8 | Environmental trigger library | 🟡 **15/17 diseases have a cited env trigger, 16/17 have a management advisory** (manual research passes, see §3 items 21–26) — but no back-testing against historical weather (NASA POWER) and no risk-scoring engine (`curator/risk/`) yet |
 | 9 | Confidence scoring, conflict detection, QC reports | 🟡 Partially built early (see §3) |
@@ -874,6 +874,65 @@ are also where most of the work is.
      to the pipeline), and the corpus-scale run (only 2 papers have gone through the live pipeline
      so far, against a target of 300–500). None of that blocks starting Phase 6 (gold-standard
      evaluation), which only needs the extraction pipeline to exist, not to be run at scale yet.
+29. **Phase 6 kickoff: annotation guideline + eval harness, piloted live against 2 real papers,
+   2026-09-27.** Scoped deliberately: a real, usable guideline and a real, tested harness this
+   session; the full ~45-paper double-annotated gold set (6.2) and model ablations (6.4) are
+   explicitly not attempted yet — 6.2 needs a second independent annotator's time, a real
+   methodological requirement, not something to skip past.
+   - **`docs/annotation_guidelines.md`** — scopes annotation to the 6 claim types the pipeline
+     actually extracts (`curator/extract/normalize.py`'s `SUPPORTED_CLAIM_TYPES`), documents the
+     required qualifiers per claim type straight from `curator/model/claims.py`'s `QUALIFIERS`
+     dict, the exact quote rules `curator/extract/ground.py` enforces (verbatim substring, ≥20
+     chars, both entities present), and a "don't mistake this for a miss" note for
+     `DISEASE_ENV_TRIGGER`/`DISEASE_MANAGED_BY`, whose object is always a brand-new entity that
+     `build_claim_candidate` deliberately routes to a human rather than auto-creating.
+   - **A real bug caught while writing the guideline, fixed before any pilot ran**:
+     `claim_extraction_v1.md` told the model to emit `resistance_type` values `"race-specific"/
+     "durable"/"QTL"`, but the actual `ResistanceType` enum the `Claim` model validates against is
+     `ASR`/`APR`/`quantitative`/`unknown` — any claim following the prompt's own instruction would
+     fail Pydantic validation and silently become a `RejectedCandidate`, not because the LLM found
+     nothing, but because the prompt told it to emit an illegal value. Fixed in the prompt.
+   - **`eval/schema.py` (`GoldClaim` model) + `eval/run_eval.py`** — a harness scoring a live
+     `extract_paper()` run against a hand-annotated JSONL gold file: strict match (type + subject_id
+     + object_id + qualifiers, the same fields `Claim.id`'s content hash already uses) and relaxed
+     match (qualifiers ignored) precision/recall/F1, plus grounding-score stats and rejection-reason
+     counts. Two categories of gold claim are deliberately reported separately rather than
+     miscounted as pipeline misses: claims needing a human-built entity (`DISEASE_ENV_TRIGGER`/
+     `DISEASE_MANAGED_BY`, a known Phase-5 design decision) and claims the annotator couldn't
+     resolve against the current KG vocab (a real coverage gap, not a model failure). Every run is
+     live (real Europe PMC + real LLM call) — no caching/replay, matching this project's standing
+     "never fabricate a result" rule. 8 new tests in `tests/test_eval_harness.py`, fully synthetic
+     (hand-built `Claim`/`GoldClaim` objects), proving the matching logic before it ever touched
+     real data.
+   - **Real 2-paper pilot** (`eval/gold/wheat_pilot.jsonl`) — fetched the actual Europe PMC text for
+     `pmid:19229000` (Lr34) and `pmid:23811228` (Sr33) via `curator.lit.europepmc` (the same
+     functions `extract_paper` itself calls, so the gold quote is checked against the identical
+     text the model saw), read them, and hand-wrote one real `GENE_CONFERS_RESISTANCE` gold claim
+     per paper. **Sr33: a clean success** — strict precision/recall/F1 all 1.00, grounding score
+     100.0. **Lr34: a genuine, informative miss.** Root cause diagnosed precisely: the abstract's
+     resistance claim is indirect ("leaf rust, stripe rust, and powdery mildew ... The wheat gene
+     Lr34 has supported resistance to these pathogens"), and the model's first attempt combined all
+     three diseases into one candidate's `object.text` — the schema requires one specific disease
+     entity per claim, so the joined string never matched any single disease id and got rejected as
+     "not a claim type in scope" at normalization.
+   - **Caught a second real bug from the pilot itself, fixed and re-verified live**: added an
+     explicit prompt rule ("one disease per claim, even when the text lists several at once").
+     Re-ran Lr34 live: the model **did** correctly split into 3 separate per-disease candidates
+     after the fix — real, confirmed progress — but a **new, deeper limitation surfaced**: each
+     split candidate reused the sentence about Lr34 itself as its quote, which doesn't literally
+     contain the disease name (that only appears in the preceding sentence), so all 3 still failed
+     the entity-in-quote grounding check. The model isn't yet reliably combining adjacent sentences
+     into one quote span for this indirect-reference pattern, even though the prompt's own Rule 1
+     already permits it. **Deliberately left open for the next revision pass** (per task 6.1's own
+     "pilot on 5 papers, then revise" cadence) rather than iterating further on prompt wording in
+     this same session, which would drift into 6.4 (ablations) territory before the harness has
+     even been piloted on enough papers to know if this is a one-off or a pattern.
+   - Test suite: 221 passing (up from 213), same 3 pre-existing unrelated Neo4j-credential
+     failures. `kg build` unaffected (no `kg/curated/` changes this item).
+   - **Immediate next step for Phase 6**: 3 more real pilot papers (to reach the "5 papers, then
+     revise" checkpoint), specifically including at least one with a *direct* single-disease
+     resistance statement to check whether the indirect-reference quoting gap generalizes or was
+     specific to Lr34's phrasing.
 
 ---
 
