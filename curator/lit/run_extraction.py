@@ -54,6 +54,29 @@ def _current_bundle() -> KGBundle:
     return KGBundle.merge(reference_bundle(), variety_bundle(), load_curated_dir(KG_CURATED_DIR))
 
 
+def _retry_candidate(
+    raw: dict, reason: str, *, source_text: str, llm_client: LLMClient, model: str
+) -> dict | None:
+    """One corrective pass for a rejected candidate (claim_retry_v1.md): show the model its own
+    mistake and the exact rejection reason, ask for one fixed JSON object or `null`. Never raises --
+    a malformed or unusable retry response just means "no fix", falling back to the original
+    rejection, the same way every other malformed-LLM-output path in this file already behaves."""
+    retry_prompt = _load_prompt("claim_retry_v1")
+    user_message = (
+        f"SOURCE TEXT:\n{source_text}\n\n"
+        f"CANDIDATE THAT WAS REJECTED:\n{json.dumps(raw)}\n\n"
+        f"REJECTION REASON:\n{reason}"
+    )
+    response = llm_client.complete(retry_prompt, user_message, model=model)
+    try:
+        parsed = json.loads(response.content)
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(parsed, dict):
+        return None
+    return parsed
+
+
 def _method_for(section: str | None) -> EvidenceMethod:
     """Default every automatically-extracted claim to the LOWEST evidence weight
     (review_statement, 0.35) regardless of section. The extractor cannot reliably tell a
@@ -73,6 +96,7 @@ def extract_paper(
     bundle: KGBundle | None = None,
     model: str | None = None,
     prompt_version: str | None = None,
+    retry: bool = False,
 ) -> ExtractionResult:
     """Fetch, verify, extract, ground, and normalize claims from one paper.
 
@@ -83,6 +107,13 @@ def extract_paper(
     `prompt_version` selects curator/llm/prompts/<prompt_version>.md (default: claim_extraction_v1,
     the production prompt) -- overridable so eval/run_eval.py can run a real Phase 6.4 ablation
     between prompt variants without duplicating this function.
+
+    `retry`: opt-in, off by default. When True, a candidate rejected by grounding or normalization
+    gets one corrective pass (claim_retry_v1.md, curator.lit.run_extraction._retry_candidate) before
+    being given up on. A claim accepted only after this pass gets "+retry" appended to its
+    Evidence.extractor, so it's always visible as such rather than indistinguishable from a
+    first-try success. Default False keeps every existing caller's behavior (and every existing
+    test in tests/test_lit_run_extraction.py) unchanged.
     """
     record = europepmc.get_record(identifier)
     metadata = europepmc.metadata_from_record(record, identifier)
@@ -129,7 +160,7 @@ def extract_paper(
     extractor = f"llm:{response.model}@{version}"
     result = ExtractionResult(source=source)
 
-    for raw in raw_candidates:
+    def _ground_and_build(raw: dict, *, extractor_tag: str = extractor) -> AcceptedCandidate | RejectedCandidate:
         evidence_block = raw.get("evidence") or {}
         quote = evidence_block.get("quote", "")
         locator = evidence_block.get("section", section)
@@ -144,13 +175,11 @@ def extract_paper(
 
         grounding = ground_candidate(quote=quote, source_text=text, entity_mentions=entity_mentions)
         if not grounding.passed:
-            result.rejected.append(RejectedCandidate(reason=grounding.reason or "grounding failed", raw=raw))
-            continue
+            return RejectedCandidate(reason=grounding.reason or "grounding failed", raw=raw)
 
         built = build_claim_candidate(raw, entities=entities, crop=crop)
         if isinstance(built, RejectedCandidate):
-            result.rejected.append(built)
-            continue
+            return built
 
         claim = built
         method = _method_for(locator)
@@ -158,10 +187,31 @@ def extract_paper(
             claim_id=claim.id,
             source_id=source.id,
             method=method,
-            extractor=extractor,
+            extractor=extractor_tag,
             locator=locator,
             quote=quote,
         )
-        result.accepted.append(AcceptedCandidate(claim=claim, evidence=evidence, grounding_score=grounding.score))
+        return AcceptedCandidate(claim=claim, evidence=evidence, grounding_score=grounding.score)
+
+    for raw in raw_candidates:
+        outcome = _ground_and_build(raw)
+        if isinstance(outcome, AcceptedCandidate):
+            result.accepted.append(outcome)
+            continue
+
+        if retry:
+            corrected = _retry_candidate(
+                raw, outcome.reason, source_text=text, llm_client=client, model=model or DEFAULT_MODEL
+            )
+            if corrected is not None:
+                retried_outcome = _ground_and_build(corrected, extractor_tag=f"{extractor}+retry")
+                if isinstance(retried_outcome, AcceptedCandidate):
+                    result.accepted.append(retried_outcome)
+                    continue
+                outcome = RejectedCandidate(
+                    reason=f"{outcome.reason} (retried: {retried_outcome.reason})", raw=raw
+                )
+
+        result.rejected.append(outcome)
 
     return result

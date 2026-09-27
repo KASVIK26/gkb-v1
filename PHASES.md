@@ -83,7 +83,7 @@ are also where most of the work is.
 | 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
 | 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | 🟡 **4.1/4.2/4.6 done** (streaming parser, domain-based NLR classification, chromosome stats) for chickpea+soybean; wheat structural data loaded but not NLR-classified (its GFF has no domain annotations at all). **4.3 started**: NCBI BLAST+ installed, 1 gene (Lr34) confidently anchored to its real chromosome/position; 3 more attempted and correctly rejected (see below). **4.4 (marker anchoring) not started** |
 | 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Core pipeline + review UI + graph visualizer done and tested end-to-end** — search/verify (Europe PMC), grounded LLM extraction, quote-grounding, normalization (`curator/lit`/`curator/llm`/`curator/extract`); a staging Postgres schema + FastAPI service (`api/`) + Streamlit review app (`tools/review_app/`) + `agrihub lit export-staged` take a paper from extraction through human approval to a `kg build`-ready YAML without ever touching `kg_current` directly, verified against 2 real papers (one 0-candidate outcome, one correctly-rejected unverifiable DOI). A separate, read-only full-graph visualizer (Cytoscape.js) is also live on the dashboard. Still missing: dictionary NER (5.5), relevance classifier (5.4), JATS table extraction (5.3/5.9 — variety-reaction tables in papers are invisible to it), and the corpus-scale run (5.11 wants 300–500 papers; only 2 have gone through the live pipeline) |
-| 6 | Gold-standard evaluation of the extraction pipeline | 🟡 **5-paper pilot + first real 6.4 ablation, 2026-09-27**: guideline + harness are real and working; v1 prompt scores 2/5 clean, 3/5 fail on well-diagnosed causes (§3 items 29-30). A few-shot prompt variant (v2) was built and A/B tested against the same 5 papers — **a genuine negative result**: v2 scored worse (1/5) and introduced a new failure mode, so v1 stays production (§3 item 31). One real code bug found and fixed (a vocab-synonym wiring gap). Still needed for the real gold standard: 40 more papers, a second independent annotator (double-annotation + κ) |
+| 6 | Gold-standard evaluation of the extraction pipeline | 🟡 **5-paper pilot + 2 real 6.4 ablations, 2026-09-27**: guideline + harness are real and working; v1 prompt scores 2/5 clean, 3/5 fail on well-diagnosed causes (§3 items 29-30). Two interventions tried and A/B tested against the same 5 papers — a few-shot prompt (v2, item 31) and a corrective retry pass (item 32) — **both come back net negative/mixed**, and both independently produced the same quote-fidelity-degradation side effect, a stronger cross-cutting finding than either alone. v1 stays production, `retry` stays opt-in and off everywhere live. One real code bug found and fixed (a vocab-synonym wiring gap). Still needed: 40 more papers, a second independent annotator (double-annotation + κ), and the now-evidence-backed two-step (quote-then-structure) architecture as the next attempt |
 | 7 | Structured trial/germplasm data (AICRP, GRIN) | ⬜ Not started — biggest lever on the `VARIETY_REACTION` count (234 today vs. a ≥3,000 target; literature alone won't close that gap) |
 | 8 | Environmental trigger library | 🟡 **15/17 diseases have a cited env trigger, 16/17 have a management advisory** (manual research passes, see §3 items 21–26) — but no back-testing against historical weather (NASA POWER) and no risk-scoring engine (`curator/risk/`) yet |
 | 9 | Confidence scoring, conflict detection, QC reports | 🟡 Partially built early (see §3) |
@@ -1029,6 +1029,58 @@ are also where most of the work is.
      rather than trying to prevent every mistake in one zero-shot/few-shot call, and (b) chunking
      the input so the model sees less competing context per call. The 40-paper corpus expansion and
      the second-annotator/kappa work (both still fully open) don't depend on resolving this first.
+32. **Built and A/B-tested the corrective retry pass from item 31's own recommendation -- a mixed,
+   genuinely instructive result, not a clean win.** Added `retry: bool = False` to
+   `curator.lit.run_extraction.extract_paper` (opt-in, so every existing caller and test is
+   unaffected by default) and a new `curator/llm/prompts/claim_retry_v1.md`: when a candidate is
+   rejected, it gets one corrective pass showing the model its own candidate, the source text, and
+   the exact rejection reason, asking for a fixed JSON object or `null`. A claim accepted only after
+   this pass is tagged `+retry` on its `Evidence.extractor`, so it's always visible as such. Also
+   added a matching `--retry` flag to `eval/run_eval.py`. 4 new tests in
+   `tests/test_lit_run_extraction.py` (a sequential fake LLM client returning different responses
+   per call), all passing; all 6 pre-existing tests in that file still pass unmodified.
+   - **Ran the same 5-paper A/B comparison used for the v2 ablation** (`--retry` on the production
+     `claim_extraction_v1` prompt, same 5 papers, same gold files). Result, per paper against the
+     item-30 no-retry baseline:
+     - **Lr21**: unchanged, still 1.00/1.00/1.00 -- this paper had nothing to retry.
+     - **Sr33**: **regressed**. Was a clean 1.00 precision under item 30; with retry, strict
+       precision dropped to 0.50 -- the correct claim was still found, but retry caused an
+       *additional*, spurious accepted claim not in gold to appear alongside it.
+     - **Lr34**: a genuine partial improvement at the relaxed level (relaxed recall 0.00 -> 1.00 --
+       the correct disease was finally found, evidence that the multi-disease-split fix from item
+       30 combined with retry can work), but strict precision/recall stayed at 0.00 (wrong
+       qualifier value) and it also picked up an extra unmatched accepted claim, plus one of its
+       two originally-rejected candidates failed differently after retry (a **new** "quote does not
+       match the source text closely enough (possible paraphrase or fabrication)" rejection, where
+       the original failure had been a clean entity-missing-from-quote rejection).
+     - **Fhb1**: still fully failed, and the retry attempt converted its failure into the same new
+       paraphrase-type rejection rather than fixing it.
+     - **Rcs3**: still fully failed on its target claim, plus picked up an extra unmatched accepted
+       claim, and its retry attempt also converted into the same new paraphrase-type rejection.
+   - **The real, cross-cutting finding**: on 3 of the 4 papers where retry actually ran, the retry
+     attempt's own response failed grounding's fuzzy-match check (a **new** failure mode, not the
+     original one) -- meaning the model paraphrased instead of copying verbatim when asked to fix
+     something, exactly the same quote-fidelity degradation the few-shot v2 prompt independently
+     produced in item 31. Two unrelated interventions (a few-shot rewrite, and a corrective retry
+     call) both had this same side effect, which is stronger evidence than either alone: this
+     particular model (`meta-llama/llama-3.3-70b-instruct`) seems to lose verbatim-quoting fidelity
+     specifically when given more to reason about (extra examples, or an existing candidate plus a
+     reason to revise), not because of anything specific to either prompt's wording.
+   - **No paper reached a clean strict fix via retry, and one previously-clean paper regressed.**
+     Net effect across this 5-paper sample leans negative-to-neutral, not positive. `retry` stays
+     opt-in (default `False`); it is **not** enabled in `api/`, `tools/review_app/`, or any other
+     live caller -- this ablation's own evidence is exactly why not, per the same "measure before
+     trusting" discipline as the rest of Phase 6.
+   - Test suite: 226 passing (up from 222), same 3 pre-existing unrelated Neo4j-credential
+     failures. `kg build` unaffected.
+   - **Revised hypothesis for the next attempt, given three independent interventions now sharing
+     the same quote-fidelity-degradation symptom**: the problem may be architectural rather than
+     about prompt wording at all -- asking one call to both *find the exact verbatim quote* and
+     *structure the claim* at the same time may be what causes drift under any added cognitive load.
+     A two-step pipeline (a first, simpler call that only extracts and verifies an exact quote span,
+     followed by a second call that structures a claim from an already-quote-verified span) is now
+     the most evidence-backed untried direction, ahead of further single-call prompt or retry
+     variants.
 
 ---
 

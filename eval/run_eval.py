@@ -167,6 +167,9 @@ def run(
     prompt_version: str = typer.Option(
         None, "--prompt-version", help="e.g. claim_extraction_v2 -- default: the production v1 prompt"
     ),
+    retry: bool = typer.Option(
+        False, "--retry", help="Give a rejected candidate one corrective pass (claim_retry_v1.md) before giving up"
+    ),
 ) -> None:
     """Run a real extraction (live Europe PMC + live LLM) and score it against a gold file.
 
@@ -182,7 +185,7 @@ def run(
             f"Warning: no gold claims in {gold} have source_id == {identifier!r} "
             f"({len(all_gold)} total in file, for other papers)."
         )
-    result = extract_paper(identifier, crop=crop, model=model, prompt_version=prompt_version)
+    result = extract_paper(identifier, crop=crop, model=model, prompt_version=prompt_version, retry=retry)
     report = score_extraction(gold_claims, result)
     typer.echo(f"Source: {result.source.title} ({result.source.id})")
     typer.echo(f"Accepted: {len(result.accepted)}  Rejected: {len(result.rejected)}  Gold: {len(gold_claims)}")
