@@ -30,6 +30,10 @@ api = [
     "fastapi>=0.115,<1",
     "uvicorn[standard]>=0.30,<1",
 ]
+review = [
+    "streamlit>=1.38,<2",
+    "requests>=2.31,<3",
+]
 
 [project.scripts]
 agrihub-pipeline = "curator.run_pipeline:main"
