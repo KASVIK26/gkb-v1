@@ -5,13 +5,29 @@
 // ---------------------------------------------------------------------------
 
 const tabButtons = document.querySelectorAll(".tab-btn");
-const tabPanels = { browse: document.getElementById("tab-browse"), triggers: document.getElementById("tab-triggers") };
+const tabPanels = {
+  browse: document.getElementById("tab-browse"),
+  triggers: document.getElementById("tab-triggers"),
+  graph: document.getElementById("tab-graph"),
+};
+
+let graphInitialized = false;
 
 for (const btn of tabButtons) {
   btn.addEventListener("click", () => {
     for (const b of tabButtons) b.setAttribute("aria-selected", String(b === btn));
     for (const [name, panel] of Object.entries(tabPanels)) {
       panel.dataset.active = String(name === btn.dataset.tab);
+    }
+    if (btn.dataset.tab === "graph") {
+      if (!graphInitialized) {
+        graphInitialized = true;
+        loadGraphData();
+      } else if (cy) {
+        // The canvas was display:none while hidden -- cytoscape needs an explicit resize/fit.
+        cy.resize();
+        cy.fit();
+      }
     }
   });
 }
@@ -245,6 +261,218 @@ async function checkTriggers() {
 
 triggerCropSelect.addEventListener("change", () => loadVarietiesInto(triggerCropSelect, triggerVarietySelect));
 checkTriggersButton.addEventListener("click", checkTriggers);
+
+// ---------------------------------------------------------------------------
+// TAB: Visualize the graph
+// ---------------------------------------------------------------------------
+
+const graphCropSelect = document.getElementById("graphCropSelect");
+const graphDiseaseSelect = document.getElementById("graphDiseaseSelect");
+const graphClaimTypesContainer = document.getElementById("graphClaimTypes");
+const graphStatusText = document.getElementById("graphStatusText");
+const graphCanvas = document.getElementById("graphCanvas");
+const graphLegend = document.getElementById("graphLegend");
+const graphDetail = document.getElementById("graphDetail");
+
+// Matches curator.model.enums.EntityType -- one color per node type, shown in the legend.
+const NODE_COLORS = {
+  Crop: "#8a6d3b",
+  Variety: "#2f6b44",
+  Gene: "#1f4e31",
+  QTL: "#3d7a99",
+  Marker: "#6a4f9c",
+  RefGene: "#4a5b8c",
+  Disease: "#a53c31",
+  Pathogen: "#c76b2e",
+  Pathotype: "#c76b2e",
+  EnvTrigger: "#1a7a8c",
+  AgroZone: "#7a8c1a",
+  Advisory: "#2f6b44",
+};
+const DEFAULT_NODE_COLOR = "#5d6a61";
+
+// Fetched once from /api/graph and kept here for the life of the page -- every filter change
+// (crop, disease, relationship type) re-derives the visible subgraph from this cache instead of
+// hitting the network again. This is the "fast, cache it, synchronous" requirement: at 210
+// entities / 315 claims the full graph is small enough that client-side filtering is instant.
+let graphCache = null;
+let cy = null; // the cytoscape instance, created lazily on first activation of this tab
+
+async function loadGraphData() {
+  setStatus(graphStatusText, "Loading graph...", "loading");
+  try {
+    const response = await fetch("/api/graph");
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || "Could not load the graph");
+    graphCache = payload;
+    populateGraphFilters(payload);
+    renderGraph();
+  } catch (error) {
+    setStatus(graphStatusText, "Error", "error");
+    graphCanvas.innerHTML = `<div class="edge-card edge-card-error"><h3>Could not load the graph</h3><p class="edge-meta">${error.message}</p></div>`;
+  }
+}
+
+function populateGraphFilters(payload) {
+  const claimTypes = [...new Set(payload.edges.map((e) => e.claim_type))].sort();
+  graphClaimTypesContainer.replaceChildren(
+    ...claimTypes.map((type) => {
+      const label = document.createElement("label");
+      label.className = "graph-checkbox";
+      label.innerHTML = `<input type="checkbox" value="${type}" checked /> ${type.replaceAll("_", " ").toLowerCase()}`;
+      label.querySelector("input").addEventListener("change", renderGraph);
+      return label;
+    }),
+  );
+  updateDiseaseOptions();
+}
+
+function updateDiseaseOptions() {
+  if (!graphCache) return;
+  const crop = graphCropSelect.value;
+  const diseases = graphCache.nodes
+    .filter((n) => n.type === "Disease" && (crop === "__all__" || n.crop === crop))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const previous = graphDiseaseSelect.value;
+  graphDiseaseSelect.replaceChildren(
+    Object.assign(document.createElement("option"), { value: "__all__", textContent: "All diseases" }),
+    ...diseases.map((d) => Object.assign(document.createElement("option"), { value: d.id, textContent: d.name })),
+  );
+  const values = ["__all__", ...diseases.map((d) => d.id)];
+  graphDiseaseSelect.value = values.includes(previous) ? previous : "__all__";
+}
+
+function filteredGraph() {
+  if (!graphCache) return { nodes: [], edges: [] };
+  const crop = graphCropSelect.value;
+  const disease = graphDiseaseSelect.value;
+  const checkedTypes = new Set(
+    [...graphClaimTypesContainer.querySelectorAll("input:checked")].map((cb) => cb.value),
+  );
+
+  let edges = graphCache.edges.filter((e) => checkedTypes.has(e.claim_type));
+  if (crop !== "__all__") {
+    edges = edges.filter((e) => e.subject_crop === crop || e.object_crop === crop);
+  }
+  if (disease !== "__all__") {
+    edges = edges.filter((e) => e.subject_id === disease || e.object_id === disease);
+  }
+
+  const nodeIds = new Set(edges.flatMap((e) => [e.subject_id, e.object_id]));
+  const nodes = graphCache.nodes.filter((n) => nodeIds.has(n.id));
+  return { nodes, edges };
+}
+
+function renderGraphLegend(nodes) {
+  const types = [...new Set(nodes.map((n) => n.type))].sort();
+  graphLegend.replaceChildren(
+    ...types.map((type) => {
+      const item = document.createElement("span");
+      item.className = "graph-legend-item";
+      item.innerHTML = `<span class="graph-legend-swatch" style="background:${NODE_COLORS[type] || DEFAULT_NODE_COLOR}"></span>${type}`;
+      return item;
+    }),
+  );
+}
+
+function resetGraphHighlight() {
+  if (!cy) return;
+  cy.elements().removeClass("highlighted dimmed");
+  graphDetail.hidden = true;
+}
+
+function showNodeDetail(node) {
+  cy.elements().addClass("dimmed").removeClass("highlighted");
+  node.closedNeighborhood().removeClass("dimmed");
+  node.addClass("highlighted");
+
+  const lines = node.connectedEdges().map((edge) => {
+    const outgoing = edge.source().id() === node.id();
+    const other = outgoing ? edge.target() : edge.source();
+    return `<li>${outgoing ? "→" : "←"} <strong>${edge.data("label")}</strong> ${outgoing ? "→" : "←"} ${other.data("label")}</li>`;
+  });
+
+  graphDetail.hidden = false;
+  graphDetail.innerHTML = `
+    <h3>${node.data("label")} <span class="edge-meta">(${node.data("type")})</span></h3>
+    <ul class="condition-list">${lines.join("")}</ul>
+  `;
+}
+
+function renderGraph() {
+  if (!graphCache) return;
+  const { nodes, edges } = filteredGraph();
+  setStatus(graphStatusText, `${nodes.length} node(s) / ${edges.length} edge(s)`, "ready");
+  renderGraphLegend(nodes);
+  graphDetail.hidden = true;
+
+  const elements = [
+    ...nodes.map((n) => ({ data: { id: n.id, label: n.name, type: n.type } })),
+    ...edges.map((e) => ({
+      data: {
+        id: e.claim_id,
+        source: e.subject_id,
+        target: e.object_id,
+        label: e.claim_type.replaceAll("_", " ").toLowerCase(),
+        claimType: e.claim_type,
+      },
+    })),
+  ];
+
+  if (!cy) {
+    cy = window.cytoscape({
+      container: graphCanvas,
+      elements,
+      style: [
+        {
+          selector: "node",
+          style: {
+            "background-color": (ele) => NODE_COLORS[ele.data("type")] || DEFAULT_NODE_COLOR,
+            label: "data(label)",
+            color: "#172018",
+            "font-size": "10px",
+            "text-valign": "bottom",
+            "text-margin-y": 4,
+            width: 22,
+            height: 22,
+          },
+        },
+        {
+          selector: "edge",
+          style: {
+            width: 1.5,
+            "line-color": "rgba(23,32,24,0.25)",
+            "target-arrow-color": "rgba(23,32,24,0.35)",
+            "target-arrow-shape": "triangle",
+            "curve-style": "bezier",
+            label: "data(label)",
+            "font-size": "8px",
+            color: "#5d6a61",
+            "text-rotation": "autorotate",
+          },
+        },
+        { selector: "node.highlighted", style: { "border-width": 3, "border-color": "#2f6b44" } },
+        { selector: "node.dimmed, edge.dimmed", style: { opacity: 0.15 } },
+      ],
+      layout: { name: "cose", animate: false, fit: true, padding: 24 },
+      wheelSensitivity: 0.2,
+    });
+    cy.on("tap", "node", (evt) => showNodeDetail(evt.target));
+    cy.on("tap", (evt) => {
+      if (evt.target === cy) resetGraphHighlight();
+    });
+  } else {
+    cy.elements().remove();
+    cy.add(elements);
+    cy.layout({ name: "cose", animate: false, fit: true, padding: 24 }).run();
+  }
+}
+
+graphCropSelect.addEventListener("change", () => {
+  updateDiseaseOptions();
+  renderGraph();
+});
+graphDiseaseSelect.addEventListener("change", renderGraph);
 
 // ---------------------------------------------------------------------------
 // Initialise

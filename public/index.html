@@ -40,6 +40,7 @@
       <nav class="tabs" role="tablist" aria-label="View">
         <button class="tab-btn" data-tab="browse" role="tab" aria-selected="true">Browse the graph</button>
         <button class="tab-btn" data-tab="triggers" role="tab" aria-selected="false">Check sensor readings</button>
+        <button class="tab-btn" data-tab="graph" role="tab" aria-selected="false">Visualize the graph</button>
       </nav>
 
       <!-- ─────────────────────── TAB: Browse the graph ─────────────────────── -->
@@ -153,7 +154,52 @@
           <div id="triggerList" class="edge-list"></div>
         </section>
       </section>
+
+      <!-- ─────────────────────── TAB: Visualize the graph ─────────────────────── -->
+      <section id="tab-graph" class="tab-panel" data-active="false">
+        <section class="panel controls graph-controls">
+          <label>
+            Crop
+            <select id="graphCropSelect">
+              <option value="__all__">All crops</option>
+              <option value="wheat">Wheat</option>
+              <option value="soybean">Soybean</option>
+              <option value="chickpea">Chickpea</option>
+            </select>
+          </label>
+
+          <label>
+            Disease
+            <select id="graphDiseaseSelect">
+              <option value="__all__">All diseases</option>
+            </select>
+          </label>
+
+          <label class="graph-claim-types">
+            Relationship types
+            <div id="graphClaimTypes" class="graph-checkbox-group"></div>
+          </label>
+        </section>
+
+        <section class="panel results graph-results">
+          <div class="results-header">
+            <h2>Full knowledge graph</h2>
+            <span id="graphStatusText" class="status-pill" role="status" aria-live="polite">Loading...</span>
+          </div>
+          <p class="edge-meta panel-note">
+            Every node and claim currently in the live KG, fetched once and cached in your
+            browser — pick a crop, a disease, or specific relationship types to focus the view.
+            Click a node to highlight its neighborhood; click empty space to reset.
+          </p>
+          <div class="graph-layout">
+            <div id="graphCanvas" class="graph-canvas"></div>
+            <div id="graphLegend" class="graph-legend"></div>
+          </div>
+          <div id="graphDetail" class="graph-detail" hidden></div>
+        </section>
+      </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
     <script type="module" src="./app.js"></script>
   </body>
 </html>

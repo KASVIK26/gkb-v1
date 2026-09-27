@@ -358,9 +358,107 @@ button {
   }
 }
 
+/* ── Graph visualizer ──────────────────────────────────────────── */
+.graph-controls {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) 2fr;
+}
+
+.graph-claim-types {
+  font-weight: 700;
+}
+
+.graph-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-weight: 500;
+}
+
+.graph-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.graph-checkbox input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.graph-results {
+  display: flex;
+  flex-direction: column;
+}
+
+.graph-layout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.graph-canvas {
+  flex: 1;
+  height: 560px;
+  min-width: 0;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.graph-legend {
+  width: 160px;
+  flex-shrink: 0;
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.72);
+  align-self: stretch;
+}
+
+.graph-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.graph-legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.graph-detail {
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(23, 32, 24, 0.08);
+}
+
+.graph-detail[hidden] {
+  display: none;
+}
+
+.graph-detail h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
 @media (max-width: 820px) {
   .controls,
-  .sensor-grid {
+  .sensor-grid,
+  .graph-controls {
     grid-template-columns: 1fr;
   }
 
@@ -370,5 +468,21 @@ button {
 
   .tabs {
     flex-wrap: wrap;
+  }
+
+  .graph-layout {
+    flex-direction: column;
+  }
+
+  .graph-legend {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .graph-canvas {
+    flex: none;
+    width: 100%;
+    height: 420px;
   }
 }
