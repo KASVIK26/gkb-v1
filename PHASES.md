@@ -4,7 +4,7 @@
 for **this repo only**. Read it, correct anything wrong, and it becomes the thing we both check each session.
 `RESEARCH_ROADMAP.md` and `TECH_STACK.md` hold the reasoning; this file holds the status.
 
-**Last updated:** 2026-09-25
+**Last updated:** 2026-09-27
 
 ---
 
@@ -82,10 +82,10 @@ are also where most of the work is.
 | 2 | Supabase live setup + versioned build pipeline | ✅ **Done** — five real releases (`kg_2026_10_1` through `_5`) built; `kg_current` atomic switchover live and pointing at `kg_2026_10_5`; `kg/manifest.json` (checksums, git SHA, counts) written on every `kg load`, verified by reading it back |
 | 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
 | 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | 🟡 **4.1/4.2/4.6 done** (streaming parser, domain-based NLR classification, chromosome stats) for chickpea+soybean; wheat structural data loaded but not NLR-classified (its GFF has no domain annotations at all). **4.3 started**: NCBI BLAST+ installed, 1 gene (Lr34) confidently anchored to its real chromosome/position; 3 more attempted and correctly rejected (see below). **4.4 (marker anchoring) not started** |
-| 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Source discovery done** — verified bibliography for all 17 diseases (`config/sources/candidate_papers.yaml`); the grounded-extraction pipeline itself not started |
-| 6 | Gold-standard evaluation of the extraction pipeline | ⬜ Not started |
-| 7 | Structured trial/germplasm data (AICRP, GRIN) | ⬜ Not started |
-| 8 | Environmental trigger library | ⬜ Not started — **scope narrowed**, see §7 |
+| 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Core pipeline + review UI + graph visualizer done and tested end-to-end** — search/verify (Europe PMC), grounded LLM extraction, quote-grounding, normalization (`curator/lit`/`curator/llm`/`curator/extract`); a staging Postgres schema + FastAPI service (`api/`) + Streamlit review app (`tools/review_app/`) + `agrihub lit export-staged` take a paper from extraction through human approval to a `kg build`-ready YAML without ever touching `kg_current` directly, verified against 2 real papers (one 0-candidate outcome, one correctly-rejected unverifiable DOI). A separate, read-only full-graph visualizer (Cytoscape.js) is also live on the dashboard. Still missing: dictionary NER (5.5), relevance classifier (5.4), JATS table extraction (5.3/5.9 — variety-reaction tables in papers are invisible to it), and the corpus-scale run (5.11 wants 300–500 papers; only 2 have gone through the live pipeline) |
+| 6 | Gold-standard evaluation of the extraction pipeline | ⬜ **Not started — the main gap now that the pipeline itself works.** No hand-annotated gold set, no precision/recall/hallucination-rate measurement; this is what turns Phase 5 from "built" into "research-grade" (RESEARCH_ROADMAP.md §6.1) |
+| 7 | Structured trial/germplasm data (AICRP, GRIN) | ⬜ Not started — biggest lever on the `VARIETY_REACTION` count (234 today vs. a ≥3,000 target; literature alone won't close that gap) |
+| 8 | Environmental trigger library | 🟡 **15/17 diseases have a cited env trigger, 16/17 have a management advisory** (manual research passes, see §3 items 21–26) — but no back-testing against historical weather (NASA POWER) and no risk-scoring engine (`curator/risk/`) yet |
 | 9 | Confidence scoring, conflict detection, QC reports | 🟡 Partially built early (see §3) |
 | 10 | API for the other three products | ⬜ Not started — **shape depends on Q1/Q2** |
 | 11 | Integration contracts with (a)/(b)/(d) | ⬜ Not started — **reframed**, see §7 |
@@ -818,6 +818,62 @@ are also where most of the work is.
    43 new tests, all fully mocked (no live network/LLM calls, no live Postgres needed to pass).
    `kg build` unaffected (210/60/315/323, unchanged). Not yet run against a real paper end-to-end
    with a live API key -- that's the natural next step before any corpus-scale run.
+28. **Closed the loop from item 27: the full extract-review-export pipeline, plus a separate graph
+   visualizer, built and run end-to-end against real papers, 2026-09-27.** Directly answers item
+   27's own "next step" (a live run with a real API key) and adds the human-review layer Phase 5
+   still needed (task 5.10).
+   - **`staging` schema** (`supabase/migrations/20260927000000_staging_claims.sql`) — a new Postgres
+     schema, deliberately *not* inside any `kg_<release>` schema, so `curator/graph/promote.py`'s
+     `_relations_in_schema()` (which only ever inspects the one schema it's told to release) cannot
+     see it by construction. This is the actual non-contamination guarantee: a candidate claim can
+     sit in `staging.pending_claim` for review without ever being reachable from `kg_current`.
+   - **`api/` FastAPI service** — `POST /lit/extract` runs the existing Phase-5-v2 pipeline
+     unchanged, then a *second*, separate LLM call (`curator/llm/source_assessment.py`) gives an
+     advisory-only opinion on whether the source paper looks relevant/credible (explicitly labelled
+     as an opinion, never blocking extraction) — this is the "LLM should check the source and
+     recommend whether to use it" requirement. Every accepted candidate is staged with its
+     grounding score and source opinion attached. `GET /lit/pending` / `POST .../approve` /
+     `POST .../reject` complete the review loop. 5 new tests against a real throwaway Postgres.
+   - **`agrihub lit export-staged`** — turns every `status='approved'` staged claim into a
+     `kg/curated/*.yaml` file and marks it `exported` (audit trail kept, not deleted). The file
+     still goes through the exact same, unmodified `kg build` release gates as every hand-curated
+     file — this command automates the typing, not the trust decision. Caught and fixed a CHECK-
+     constraint bug during testing (the constraint forbade `reviewer`/`reviewed_at` on `exported`
+     rows, which inherit them from the earlier `approved` step).
+   - **`tools/review_app/`** — a local Streamlit app (Extract / Review queue / Export tabs) talking
+     to `api/` over HTTP only, matching the exact tool TECH_STACK.md's M9 already specified.
+     Confidence (grounding score, evidence-method weight) and sources are shown on every candidate,
+     per the user's explicit "confidence scores and sources" requirement. Found and fixed a real bug
+     via live testing, not a written test: `_api_post`'s error path raised a bare `RuntimeError`
+     that the UI's `except requests.HTTPError` could never catch, so an API failure (e.g. extracting
+     an unverifiable DOI) rendered a raw Python traceback instead of a clean message — fixed with a
+     proper `ApiError` exception type used consistently across every API call site in the app.
+   - **Live end-to-end smoke test**: PMID 34897256 (a real, previously-hand-curated paper) — real
+     Europe PMC verification, real LLM source-assessment opinion, 0 accepted/0 rejected as a
+     legitimate outcome (the LLM found no facts of the 6 currently-supported claim types in this
+     paper's text, it didn't fail). `doi:10.3835/plantgenome2010.11.0024` (known from earlier
+     research passes to be real but unindexed in Europe PMC) — correctly produced a 404, which the
+     fixed UI now shows cleanly.
+   - **Graph visualizer** (a separate ask, not Phase 5) — `public.kg_graph_nodes`/`kg_graph_edges`
+     bridge views (`supabase/migrations/20260927010000_graph_views.sql`), a new `/api/graph`
+     Cloudflare function, and a third dashboard tab rendering the *entire* live KG (205 nodes / 315
+     edges) as an interactive Cytoscape.js graph — fetched once, cached in the browser, filtered
+     client-side by crop/disease/relationship-type with zero re-fetches. Caught and fixed a real
+     mobile-layout bug live in the browser pane (a `flex: 1` rule collapsed the canvas to ~2px tall
+     once the layout switched to a column on narrow viewports — flex-basis 0% with no defined
+     parent height to grow into). **UX pass after user feedback the same day**: at ~200 nodes the
+     initial always-on labels overlapped badly. Fixed by hiding node labels by default (shown only
+     on hover, or for a clicked node's highlighted neighborhood), moving edge relationship labels
+     off the canvas entirely into a hover tooltip and the existing click-detail list, adding +/-/fit
+     zoom controls, and tuning the `cose` layout (higher node repulsion/spacing,
+     `nodeDimensionsIncludeLabels`) so nodes spread out instead of piling on top of each other.
+   - Test suite: 213 passing (up from ~170 before this session's Phase 5 work), same 3
+     pre-existing unrelated Neo4j-credential failures. `kg build` unchanged (210/60/315/323).
+   - **What's genuinely still open in Phase 5 after this**: dictionary NER, the relevance
+     classifier, JATS table extraction (variety-reaction tables in papers are currently invisible
+     to the pipeline), and the corpus-scale run (only 2 papers have gone through the live pipeline
+     so far, against a target of 300–500). None of that blocks starting Phase 6 (gold-standard
+     evaluation), which only needs the extraction pipeline to exist, not to be run at scale yet.
 
 ---
 
