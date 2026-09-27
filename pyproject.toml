@@ -34,6 +34,9 @@ review = [
     "streamlit>=1.38,<2",
     "requests>=2.31,<3",
 ]
+extract = [
+    "langextract[openai]>=1.7,<2",
+]
 
 [project.scripts]
 agrihub-pipeline = "curator.run_pipeline:main"

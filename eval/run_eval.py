@@ -170,6 +170,13 @@ def run(
     retry: bool = typer.Option(
         False, "--retry", help="Give a rejected candidate one corrective pass (claim_retry_v1.md) before giving up"
     ),
+    backend: str = typer.Option(
+        "custom", "--backend",
+        help="'custom' (curator.lit.run_extraction, default) or 'langextract' (curator.extract.langextract_pipeline)",
+    ),
+    extraction_passes: int = typer.Option(
+        3, "--extraction-passes", help="langextract backend only: number of pooled extraction passes"
+    ),
 ) -> None:
     """Run a real extraction (live Europe PMC + live LLM) and score it against a gold file.
 
@@ -185,7 +192,15 @@ def run(
             f"Warning: no gold claims in {gold} have source_id == {identifier!r} "
             f"({len(all_gold)} total in file, for other papers)."
         )
-    result = extract_paper(identifier, crop=crop, model=model, prompt_version=prompt_version, retry=retry)
+    if backend == "langextract":
+        from curator.extract.langextract_pipeline import NVIDIA_DEFAULT_MODEL, extract_paper_langextract
+        result = extract_paper_langextract(
+            identifier, crop=crop, model=model or NVIDIA_DEFAULT_MODEL, extraction_passes=extraction_passes
+        )
+    elif backend == "custom":
+        result = extract_paper(identifier, crop=crop, model=model, prompt_version=prompt_version, retry=retry)
+    else:
+        raise typer.BadParameter(f"Unknown backend {backend!r}; expected 'custom' or 'langextract'")
     report = score_extraction(gold_claims, result)
     typer.echo(f"Source: {result.source.title} ({result.source.id})")
     typer.echo(f"Accepted: {len(result.accepted)}  Rejected: {len(result.rejected)}  Gold: {len(gold_claims)}")
