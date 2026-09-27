@@ -48,7 +48,10 @@ def reference_bundle(path: Path = VOCAB_DIR / "diseases.yaml") -> KGBundle:
             props = {}
             if d.get("pathogen_type"):
                 props["pathogen_type"] = d["pathogen_type"]
-            entities[pathogen_id] = Entity(id=pathogen_id, type="Pathogen", name=pathogen_name, props=props)
+            entities[pathogen_id] = Entity(
+                id=pathogen_id, type="Pathogen", name=pathogen_name,
+                synonyms=d.get("pathogen_synonyms", []), props=props,
+            )
 
         claim = Claim(type="DISEASE_CAUSED_BY", subject_id=d["id"], object_id=pathogen_id)
         claims.append(claim)

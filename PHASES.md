@@ -83,7 +83,7 @@ are also where most of the work is.
 | 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
 | 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | 🟡 **4.1/4.2/4.6 done** (streaming parser, domain-based NLR classification, chromosome stats) for chickpea+soybean; wheat structural data loaded but not NLR-classified (its GFF has no domain annotations at all). **4.3 started**: NCBI BLAST+ installed, 1 gene (Lr34) confidently anchored to its real chromosome/position; 3 more attempted and correctly rejected (see below). **4.4 (marker anchoring) not started** |
 | 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Core pipeline + review UI + graph visualizer done and tested end-to-end** — search/verify (Europe PMC), grounded LLM extraction, quote-grounding, normalization (`curator/lit`/`curator/llm`/`curator/extract`); a staging Postgres schema + FastAPI service (`api/`) + Streamlit review app (`tools/review_app/`) + `agrihub lit export-staged` take a paper from extraction through human approval to a `kg build`-ready YAML without ever touching `kg_current` directly, verified against 2 real papers (one 0-candidate outcome, one correctly-rejected unverifiable DOI). A separate, read-only full-graph visualizer (Cytoscape.js) is also live on the dashboard. Still missing: dictionary NER (5.5), relevance classifier (5.4), JATS table extraction (5.3/5.9 — variety-reaction tables in papers are invisible to it), and the corpus-scale run (5.11 wants 300–500 papers; only 2 have gone through the live pipeline) |
-| 6 | Gold-standard evaluation of the extraction pipeline | 🟡 **Started 2026-09-27**: annotation guideline (`docs/annotation_guidelines.md`) and a tested eval harness (`eval/run_eval.py`) are done and real; piloted live against 2 real papers, catching and fixing 2 genuine prompt bugs in the process (see §3 item 29). Still needed for the real gold standard: 43 more papers, a second independent annotator (double-annotation + κ), and the 6.4 ablations |
+| 6 | Gold-standard evaluation of the extraction pipeline | 🟡 **5-paper pilot complete, 2026-09-27** (task 6.1's own "pilot on 5, then revise" checkpoint): guideline + harness are real and working; **2 of 5 papers scored a clean 1.00 precision/recall/F1, 3 of 5 failed on well-diagnosed, recurring root causes** (cross-sentence quoting, entity-text formatting, pathogen/disease object confusion) — see §3 items 29-30. One real code bug found and fixed (a vocab-synonym wiring gap). Still needed for the real gold standard: 40 more papers, a second independent annotator (double-annotation + κ), and the 6.4 ablations |
 | 7 | Structured trial/germplasm data (AICRP, GRIN) | ⬜ Not started — biggest lever on the `VARIETY_REACTION` count (234 today vs. a ≥3,000 target; literature alone won't close that gap) |
 | 8 | Environmental trigger library | 🟡 **15/17 diseases have a cited env trigger, 16/17 have a management advisory** (manual research passes, see §3 items 21–26) — but no back-testing against historical weather (NASA POWER) and no risk-scoring engine (`curator/risk/`) yet |
 | 9 | Confidence scoring, conflict detection, QC reports | 🟡 Partially built early (see §3) |
@@ -933,6 +933,64 @@ are also where most of the work is.
      revise" checkpoint), specifically including at least one with a *direct* single-disease
      resistance statement to check whether the indirect-reference quoting gap generalizes or was
      specific to Lr34's phrasing.
+30. **Reached the 5-paper pilot checkpoint, same day.** Fetched and gold-annotated 3 more real
+   papers exactly as flagged in item 29's next step: `pmid:12807786` (Lr21, wheat, a *direct*
+   single-disease statement — added specifically to test the item-29 hypothesis) and
+   `pmid:27776114` (Fhb1, wheat) into `eval/gold/wheat_pilot.jsonl`; `pmid:37313225` (Rcs3,
+   soybean — deliberately the *same* indirect-reference pattern as Lr34, to test whether that gap
+   generalizes across papers/crops) into a new `eval/gold/soybean_pilot.jsonl`. Also found and
+   fixed a real scoping bug in the harness itself before trusting any of these numbers: `GoldClaim`
+   had no `source_id` field, so scoring one paper's extraction against a multi-paper gold file
+   double-counted other papers' claims as false negatives (confirmed by a wrong Sr33 recall of
+   0.50 that should have been 1.00) — added `source_id` and a filter step in `eval/run_eval.py`'s
+   CLI, re-verified both original papers score correctly in isolation now.
+   - **Full 5-paper pilot result**: **Sr33 and Lr21 both score a clean 1.00 precision/recall/F1**
+     (Lr21 specifically confirms direct, single-sentence resistance statements work reliably).
+     **Lr34, Fhb1, and Rcs3 all failed** — 3 of 5, a real 40% strict recall on this tiny sample, not
+     glossed over.
+   - **One real, structural code bug found and fixed**: `config/vocab/diseases.yaml`'s
+     `pathogen_synonyms` field (already used for Xanthomonas) was silently ignored --
+     `curator/graph/vocab_entities.py`'s `reference_bundle()` built every `Pathogen` `Entity` with
+     no `synonyms=` at all, so this field has likely never actually worked since it was added.
+     Fixed (wired `synonyms=d.get("pathogen_synonyms", [])` into the `Entity` constructor); added
+     `test_reference_bundle_wires_pathogen_synonyms` (`tests/test_kg_files.py`) as a permanent
+     regression test; added two real abbreviation synonyms while at it — `FHB` for
+     `dis:wheat:fusarium_head_blight` and `C. sojina` for the Cercospora sojina pathogen — verified
+     both resolve correctly in isolation.
+   - **Two prompt revisions attempted on the live Lr34/Rcs3 failure; neither reliably fixed it,
+     and that result is itself the honest finding.** Added explicit rules to
+     `claim_extraction_v1.md`: (2a) combine an adjacent sentence into the quote when the
+     disease name is only in the preceding sentence; (2b) don't add a parenthetical
+     abbreviation/expansion to `object.text` that isn't literally in the quote. Re-running live:
+     Lr34 failed identically (quote still didn't include the adjacent sentence). Fhb1 failed
+     identically (`object.text` was still `"Fusarium head blight (FHB)"`, not literally in its
+     quote) -- confirming this specific run's failure was a **grounding**-stage rejection, before
+     the new `FHB` synonym fix above could ever be reached (that fix is real and will help a future
+     candidate that names the object as bare `"FHB"`, just not this exact sampled response). Rcs3
+     produced a genuinely different response this time (real LLM sampling variance from the changed
+     system prompt) that got *past* grounding (96.9 score) but was then rejected at
+     normalization for a **new** reason: the model set `object` to the pathogen `"C. sojina"`
+     instead of the disease `"Frogeye leaf spot"` for a `GENE_CONFERS_RESISTANCE` claim --- and
+     `build_claim_candidate` only ever attempts to resolve that claim type's object as a `Disease`
+     (from `CLAIM_SIGNATURE`, never from the LLM's own stated `object.type`), so no pathogen
+     synonym could ever have fixed it. One targeted prompt edit, one re-sampled response, one new
+     failure mode -- concrete, first-hand evidence that ad hoc single-shot prompt tweaking has
+     unpredictable effects and needs the systematic treatment RESEARCH_ROADMAP.md already reserves
+     for task 6.4 (multiple runs, real ablations), not more one-off edits in this session.
+   - Test suite: 222 passing (up from 221 -- the new pathogen-synonym regression test), same 3
+     pre-existing unrelated Neo4j-credential failures. `kg build` unaffected (210/60/315/323).
+   - **Where this leaves Phase 6**: the guideline and harness are proven correct and are producing
+     real, actionable, non-fabricated signal -- exactly their job. The pipeline's current
+     single-shot prompt has a genuine, now well-characterized recall ceiling around 40-60% on
+     indirect/cross-sentence resistance statements, separate from and in addition to its precision
+     (which is excellent when grounding does pass -- both real successes scored 100.0 grounding).
+     Next steps, in order: (1) 40 more pilot papers to see if this failure rate and pattern holds
+     at scale, stratified per RESEARCH_ROADMAP.md Sec 6.1 (15 papers x 3 crops); (2) a second,
+     independent annotator on whatever's been annotated so far, to get a real Cohen's kappa before
+     trusting any precision/recall number as "the" number; (3) 6.4 ablations -- specifically,
+     testing few-shot worked examples (showing the multi-sentence-quote pattern explicitly) against
+     the current zero-shot rule-list prompt, which this session's evidence suggests is a more
+     promising direction than further rule-list edits.
 
 ---
 

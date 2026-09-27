@@ -46,6 +46,16 @@ def test_reference_bundle_passes_its_own_gates():
     assert bundle.gate_errors() == []
 
 
+def test_reference_bundle_wires_pathogen_synonyms():
+    # config/vocab/diseases.yaml's `pathogen_synonyms` field used to be silently ignored --
+    # the Pathogen Entity was built with no `synonyms=` at all, so even a paper's own common
+    # abbreviated form (e.g. "C. sojina" for Cercospora sojina) could never resolve. Caught via
+    # eval/run_eval.py's live pilot (PHASES.md item 29).
+    bundle = reference_bundle()
+    cercospora = next(e for e in bundle.entities if e.id == "path:cercospora_sojina")
+    assert "C. sojina" in cercospora.synonyms
+
+
 # ─────────────────────────── load_curated_file() ───────────────────────────
 def test_load_curated_file_parses_claim_and_nested_evidence(tmp_path):
     doc = {

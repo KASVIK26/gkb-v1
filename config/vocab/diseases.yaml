@@ -40,6 +40,7 @@ diseases:
     crop: soybean
     name: Frogeye leaf spot
     pathogen: Cercospora sojina
+    pathogen_synonyms: [C. sojina]
     pathogen_type: fungus
     habitat: foliar (also pods/seed)
     drivers: [warm air temperature, high RH, prolonged leaf wetness]
@@ -143,7 +144,7 @@ diseases:
   - id: dis:wheat:fusarium_head_blight
     crop: wheat
     name: Fusarium head blight
-    synonyms: [head scab]
+    synonyms: [head scab, FHB]
     pathogen: Fusarium graminearum species complex
     pathogen_type: fungus (residue-borne; mycotoxin DON)
     habitat: spike

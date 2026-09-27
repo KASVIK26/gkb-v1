@@ -44,6 +44,16 @@ discarded)
 2. **Both `subject.text` and `object.text` (when object is a named entity) must actually appear
    in the quote you give** — a true sentence elsewhere in the paper that doesn't mention both
    parties does not support this specific claim.
+2a. **If the disease/entity name isn't in the same sentence as the resistance statement, extend
+    your quote to include the immediately adjacent sentence that names it** (e.g. "Frogeye leaf
+    spot is caused by X. Rcs3 has provided resistance to all known races of X." — quote both
+    sentences together, not just the second one, since the second sentence alone never mentions
+    "frogeye leaf spot"). Rule 1 already permits combining adjacent sentences into one quote; use
+    that here rather than dropping the claim or quoting only the sentence that mentions the gene.
+2b. **`object.text`/`subject.text` must use exactly the wording that appears in your quote** — do
+    not add a parenthetical abbreviation or expansion that isn't literally there (e.g. if your
+    quote says "FHB resistance breeding", write `object.text: "FHB"`, not
+    `"Fusarium head blight (FHB)"`, even if the paper spells out the full name elsewhere).
 3. **Only extract the paper's own result.** If a sentence cites another paper for a number or
    finding (e.g. "as reported by Smith et al. [12]", or a reference marker attached to the
    sentence), do not extract it as this paper's own finding — skip it, even if it looks useful.
