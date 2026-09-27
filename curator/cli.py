@@ -25,6 +25,7 @@ from curator.graph.pg import GateError, create_release_schema, load_bundle
 from curator.graph.promote import PromoteError, current_release, promote, release_history
 from curator.graph.variety_import import variety_bundle
 from curator.graph.vocab_entities import reference_bundle
+from curator.graph import staging
 from curator.lit.run_extraction import extract_paper
 from curator.model.claims import Source
 
@@ -252,6 +253,70 @@ def lit_extract_cmd(
         typer.echo(_draft_yaml(result.source, result.accepted))
     else:
         typer.secho("No candidates survived grounding + normalization.", fg=typer.colors.YELLOW, err=True)
+
+
+def _render_staged_yaml(rows: list[dict]) -> str:
+    """Render approved staging.pending_claim rows (joined to their source) as a kg/curated/-shaped
+    YAML draft -- same shape and rules as _draft_yaml, generalized to many sources/claims at once."""
+    import yaml
+
+    sources_by_id: dict[str, dict] = {}
+    claims: list[dict] = []
+    for row in rows:
+        sources_by_id.setdefault(row["source_id"], {
+            "id": row["source_id"],
+            "type": row["source_type"],
+            "title": row["source_title"],
+            "year": row["source_year"],
+            "venue": row["source_venue"],
+            "verified": row["source_verified"],
+        })
+        claims.append({
+            "type": row["claim_type"],
+            "subject": row["subject_id"],
+            "object": row["object_id"],
+            "qualifiers": row["qualifiers"],
+            "status": "unreviewed",
+            "evidence": [{
+                "source": row["source_id"],
+                "method": row["method"],
+                "locator": row["locator"],
+                "quote": row["quote"],
+                "extractor": row["extractor"],
+            }],
+        })
+    doc = {"sources": list(sources_by_id.values()), "claims": claims}
+    return yaml.dump(doc, sort_keys=False, allow_unicode=True, default_flow_style=False)
+
+
+@lit_app.command("export-staged")
+def lit_export_staged_cmd(
+    out: Path = typer.Option(..., help="Output path, e.g. kg/curated/pending_2026_09_27.yaml"),
+    database_url: str = typer.Option(
+        ..., envvar="DATABASE_URL_DIRECT", help="Postgres connection string (direct/session pooler)."
+    ),
+) -> None:
+    """Export every staging.pending_claim row with status='approved' into a kg/curated/-shaped YAML
+    file, then mark those rows 'exported' (kept, not deleted -- an audit trail of what left staging
+    and when). This automates the typing, not the judgment call: the file still needs a human
+    `git add` + `agrihub kg build`/`load`/`promote` -- the exact same release gates every
+    hand-written curated file already goes through are what actually prevents contamination, and
+    nothing here bypasses them."""
+    with psycopg.connect(database_url, autocommit=True) as conn:
+        rows = staging.list_approved_for_export(conn)
+        if not rows:
+            typer.secho("No approved staged claims to export.", fg=typer.colors.YELLOW)
+            raise typer.Exit(code=0)
+
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(_render_staged_yaml(rows), encoding="utf-8")
+        staging.mark_exported(conn, [row["id"] for row in rows])
+
+    typer.secho(
+        f"Exported {len(rows)} approved claim(s) from {len({r['source_id'] for r in rows})} source(s) to {out}",
+        fg=typer.colors.GREEN,
+    )
+    typer.echo("Next: review the file, `git add` it, then `agrihub kg build` to check it passes the release gates.")
 
 
 if __name__ == "__main__":

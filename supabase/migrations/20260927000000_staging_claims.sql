@@ -51,7 +51,10 @@ CREATE TABLE staging.pending_claim (
     rejection_reason  text,
     created_at        timestamptz NOT NULL DEFAULT now(),
     CHECK ((status = 'rejected') = (rejection_reason IS NOT NULL)),
-    CHECK ((status IN ('approved', 'rejected')) = (reviewer IS NOT NULL AND reviewed_at IS NOT NULL))
+    -- 'exported' rows were approved first and keep their reviewer/reviewed_at from that step
+    -- (an audit trail, not cleared) -- so this must require the reviewer fields for 'exported' too,
+    -- not just 'approved'/'rejected'. Only 'pending_review' has neither set yet.
+    CHECK ((status IN ('approved', 'rejected', 'exported')) = (reviewer IS NOT NULL AND reviewed_at IS NOT NULL))
 );
 CREATE INDEX pending_claim_status_idx ON staging.pending_claim (status);
 CREATE INDEX pending_claim_source_idx ON staging.pending_claim (source_id);
