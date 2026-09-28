@@ -36,8 +36,13 @@ CREATE TABLE staging.pending_claim (
     subject_id        text NOT NULL,
     object_id         text NOT NULL,
     qualifiers        jsonb NOT NULL DEFAULT '{}',
+    -- 'needs_review': a fully valid Claim (entity resolution succeeded) whose quote didn't clear
+    -- the automated grounding threshold -- see 20260928000000_staging_needs_review.sql, the
+    -- incremental migration actually applied to the live database (this file is the from-scratch
+    -- bootstrap `ensure_staging_schema` uses for a throwaway test Postgres instance that never ran
+    -- that migration by hand; both must describe the same final schema).
     status            text NOT NULL DEFAULT 'pending_review'
-                        CHECK (status IN ('pending_review', 'approved', 'rejected', 'exported')),
+                        CHECK (status IN ('pending_review', 'needs_review', 'approved', 'rejected', 'exported')),
     source_id         text NOT NULL REFERENCES staging.pending_source (id),
     method            text NOT NULL,
     extractor         text NOT NULL,
@@ -49,11 +54,16 @@ CREATE TABLE staging.pending_claim (
     reviewer          text,
     reviewed_at       timestamptz,
     rejection_reason  text,
+    flag_reason       text,   -- the pipeline's own reason for 'needs_review', distinct from a human's rejection_reason
     created_at        timestamptz NOT NULL DEFAULT now(),
     CHECK ((status = 'rejected') = (rejection_reason IS NOT NULL)),
+    -- One-directional, unlike the rejection_reason check above: 'needs_review' is not a terminal
+    -- status (it can move to 'approved'/'rejected' just like 'pending_review' can), so an equality
+    -- would break the moment a flagged row got reviewed and flag_reason was still set.
+    CHECK (status <> 'needs_review' OR flag_reason IS NOT NULL),
     -- 'exported' rows were approved first and keep their reviewer/reviewed_at from that step
     -- (an audit trail, not cleared) -- so this must require the reviewer fields for 'exported' too,
-    -- not just 'approved'/'rejected'. Only 'pending_review' has neither set yet.
+    -- not just 'approved'/'rejected'. Only 'pending_review'/'needs_review' have neither set yet.
     CHECK ((status IN ('approved', 'rejected', 'exported')) = (reviewer IS NOT NULL AND reviewed_at IS NOT NULL))
 );
 CREATE INDEX pending_claim_status_idx ON staging.pending_claim (status);

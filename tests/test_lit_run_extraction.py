@@ -81,13 +81,17 @@ def test_extract_paper_accepts_a_grounded_candidate(monkeypatch):
     assert result.source.title == "A test paper about TestYr1"
 
 
-def test_extract_paper_rejects_ungrounded_quote(monkeypatch):
+def test_extract_paper_flags_a_fabricated_quote(monkeypatch):
+    # Entity resolution succeeds (both names are real and resolve fine) even though the quote
+    # doesn't actually appear in the source text -- grounding failure no longer discards a
+    # candidate before normalization gets a chance to run. It becomes flagged for a human's
+    # judgment, not silently rejected with no valid claim left to approve.
     monkeypatch.setattr(europepmc, "get_record", lambda identifier: _fake_record())
     candidates = [{
         "claim_type": "GENE_CONFERS_RESISTANCE",
         "subject": {"type": "Gene", "text": "TestYr1"},
         "object": {"type": "Disease", "text": "stripe rust"},
-        "qualifiers": {},
+        "qualifiers": {"resistance_type": "unknown"},
         "evidence": {"quote": "This fact was actually never stated anywhere in the source text.", "section": "abstract"},
     }]
     llm_client = _FakeLLMClient(json.dumps(candidates))
@@ -95,8 +99,30 @@ def test_extract_paper_rejects_ungrounded_quote(monkeypatch):
     result = extract_paper("pmid:34897256", crop="wheat", llm_client=llm_client, bundle=toy_bundle())
 
     assert len(result.accepted) == 0
-    assert len(result.rejected) == 1
-    assert "does not match" in result.rejected[0].reason
+    assert len(result.rejected) == 0
+    assert len(result.flagged) == 1
+    flagged = result.flagged[0]
+    assert flagged.claim.subject_id == YR1
+    assert flagged.claim.object_id == STRIPE
+    assert "does not match" in flagged.flag_reason
+
+
+def test_extract_paper_flags_entity_not_mentioned_in_quote(monkeypatch):
+    # The exact recurring real-world pattern (PHASES.md item 30): the disease name is only in the
+    # preceding sentence, so a quote covering just the resistance sentence never repeats it. Entity
+    # resolution still succeeds -- this must land in `flagged`, not silently vanish as `rejected`.
+    monkeypatch.setattr(europepmc, "get_record", lambda identifier: _fake_record(abstractText=_RETRY_TEXT))
+    llm_client = _FakeLLMClient(json.dumps(_ungrounded_candidate()))
+
+    result = extract_paper("pmid:34897256", crop="wheat", llm_client=llm_client, bundle=toy_bundle())
+
+    assert len(result.accepted) == 0
+    assert len(result.rejected) == 0
+    assert len(result.flagged) == 1
+    flagged = result.flagged[0]
+    assert flagged.claim.subject_id == YR1
+    assert flagged.claim.object_id == STRIPE
+    assert "does not mention" in flagged.flag_reason
 
 
 def test_extract_paper_rejects_unresolvable_entity(monkeypatch):
@@ -119,6 +145,9 @@ def test_extract_paper_rejects_unresolvable_entity(monkeypatch):
     assert len(result.accepted) == 0
     assert len(result.rejected) == 1
     assert "subject" in result.rejected[0].reason
+    # Diagnostic-only, but still attached: the grounding score was computed even though this
+    # candidate never became a valid claim (see RejectedCandidate.grounding_score).
+    assert result.rejected[0].grounding_score is not None
 
 
 def test_extract_paper_handles_no_text_available(monkeypatch):
@@ -224,6 +253,9 @@ _RETRY_TEXT = "Stripe rust is a major wheat disease. TestYr1 has provided resist
 def _ungrounded_candidate() -> list[dict]:
     # Real bug pattern from the 5-paper pilot (PHASES.md item 30): the disease name is only in the
     # preceding sentence, so a quote that only covers the resistance sentence never mentions it.
+    # Entity resolution succeeds regardless -- this is the `flagged` bucket, not `rejected` (see
+    # test_extract_paper_flags_entity_not_mentioned_in_quote above), so it's no longer useful for
+    # exercising the retry path below (retry only fires on a true, unresolvable rejection).
     return [{
         "claim_type": "GENE_CONFERS_RESISTANCE",
         "subject": {"type": "Gene", "text": "TestYr1"},
@@ -233,7 +265,20 @@ def _ungrounded_candidate() -> list[dict]:
     }]
 
 
-def test_extract_paper_retry_fixes_a_previously_ungrounded_candidate(monkeypatch):
+def _unresolvable_candidate() -> list[dict]:
+    # A typo'd gene name fails entity resolution (curator.extract.normalize) -- a genuine rejection
+    # regardless of grounding, and exactly the kind of mistake the corrective retry pass exists to
+    # fix (the model's own error, not the automated grounding threshold being too strict).
+    return [{
+        "claim_type": "GENE_CONFERS_RESISTANCE",
+        "subject": {"type": "Gene", "text": "TestYr1-typo"},
+        "object": {"type": "Disease", "text": "stripe rust"},
+        "qualifiers": {"resistance_type": "unknown"},
+        "evidence": {"quote": _RETRY_TEXT, "section": "abstract"},
+    }]
+
+
+def test_extract_paper_retry_fixes_a_previously_unresolvable_candidate(monkeypatch):
     monkeypatch.setattr(europepmc, "get_record", lambda identifier: _fake_record(abstractText=_RETRY_TEXT))
     corrected = {
         "claim_type": "GENE_CONFERS_RESISTANCE",
@@ -242,7 +287,7 @@ def test_extract_paper_retry_fixes_a_previously_ungrounded_candidate(monkeypatch
         "qualifiers": {"resistance_type": "unknown"},
         "evidence": {"quote": _RETRY_TEXT, "section": "abstract"},
     }
-    llm_client = _SequentialFakeLLMClient([json.dumps(_ungrounded_candidate()), json.dumps(corrected)])
+    llm_client = _SequentialFakeLLMClient([json.dumps(_unresolvable_candidate()), json.dumps(corrected)])
 
     result = extract_paper("pmid:34897256", crop="wheat", llm_client=llm_client, bundle=toy_bundle(), retry=True)
 
@@ -254,7 +299,7 @@ def test_extract_paper_retry_fixes_a_previously_ungrounded_candidate(monkeypatch
 
 def test_extract_paper_retry_disabled_by_default(monkeypatch):
     monkeypatch.setattr(europepmc, "get_record", lambda identifier: _fake_record(abstractText=_RETRY_TEXT))
-    llm_client = _SequentialFakeLLMClient([json.dumps(_ungrounded_candidate()), json.dumps([])])
+    llm_client = _SequentialFakeLLMClient([json.dumps(_unresolvable_candidate()), json.dumps([])])
 
     result = extract_paper("pmid:34897256", crop="wheat", llm_client=llm_client, bundle=toy_bundle())
 
@@ -265,21 +310,21 @@ def test_extract_paper_retry_disabled_by_default(monkeypatch):
 
 def test_extract_paper_retry_returns_null_stays_rejected(monkeypatch):
     monkeypatch.setattr(europepmc, "get_record", lambda identifier: _fake_record(abstractText=_RETRY_TEXT))
-    llm_client = _SequentialFakeLLMClient([json.dumps(_ungrounded_candidate()), "null"])
+    llm_client = _SequentialFakeLLMClient([json.dumps(_unresolvable_candidate()), "null"])
 
     result = extract_paper("pmid:34897256", crop="wheat", llm_client=llm_client, bundle=toy_bundle(), retry=True)
 
     assert len(result.accepted) == 0
     assert len(result.rejected) == 1
-    assert "does not mention" in result.rejected[0].reason
+    assert "subject" in result.rejected[0].reason
 
 
 def test_extract_paper_retry_invalid_response_falls_back_to_original_rejection(monkeypatch):
     monkeypatch.setattr(europepmc, "get_record", lambda identifier: _fake_record(abstractText=_RETRY_TEXT))
-    llm_client = _SequentialFakeLLMClient([json.dumps(_ungrounded_candidate()), "not valid json"])
+    llm_client = _SequentialFakeLLMClient([json.dumps(_unresolvable_candidate()), "not valid json"])
 
     result = extract_paper("pmid:34897256", crop="wheat", llm_client=llm_client, bundle=toy_bundle(), retry=True)
 
     assert len(result.accepted) == 0
     assert len(result.rejected) == 1
-    assert "does not mention" in result.rejected[0].reason
+    assert "subject" in result.rejected[0].reason

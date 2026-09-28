@@ -1254,6 +1254,60 @@ are also where most of the work is.
      stronger evidence than before that it's common in real scientific writing, not an edge case.
      The item-32 hypothesis (a two-step quote-then-structure architecture) remains the most
      evidence-backed untried fix.
+36. **Fixed the underlying architecture, not another prompt tweak (user request, 2026-09-28).** The
+   user's own read of the UI after items 30-35: real, correctly-typed candidates were being silently
+   discarded with no way for a human to approve them, and the per-paper report was too flat --
+   "just rejected", no confidence detail, no digest. Root cause, confirmed by tracing the code (not
+   assumed): `curator/lit/run_extraction.py::_ground_and_build` ran grounding (quote-matching)
+   **before** entity resolution and returned the moment grounding failed -- so the exact recurring
+   cross-sentence pattern (items 30-32, 35) never even reached `build_claim_candidate`, leaving
+   nothing valid to stage or approve.
+   - **The fix**: entity resolution now always runs; a passing/failing grounding check is attached
+     to an already-resolved claim as a confidence signal, not a gate that runs first. Three outcomes
+     now instead of two: `AcceptedCandidate` (grounded, `status='pending_review'`, unchanged),
+     `FlaggedCandidate` (entity resolution succeeded, quote didn't clear the threshold,
+     `status='needs_review'` -- new), `RejectedCandidate` (no valid claim could be built at all --
+     unresolvable entity, unsupported claim type, schema failure; unchanged in spirit, but now also
+     carries the grounding score for diagnostics even though it's not approvable).
+   - **New `needs_review` staging status**: a real migration
+     (`supabase/migrations/20260928000000_staging_needs_review.sql`), applied directly to the live
+     Supabase database this session and verified with a real insert/approve round-trip (a
+     `needs_review` row rejects an insert without `flag_reason`, accepts one with it, and survives
+     an approve transition with `flag_reason` intact as a historical record -- a one-directional
+     CHECK, not an equality, since unlike `rejected`, `needs_review` is not a terminal status).
+     `approve_pending`/`reject_pending` widened to accept either `pending_review` or `needs_review`.
+   - **Richer per-paper report**: `RejectedOut` grew from a bare `reason` string to also carry the
+     LLM's own attempted claim type/subject/object/quote (already sitting unused in
+     `RejectedCandidate.raw`) so a genuinely-unextractable candidate is still shown with real
+     context, not just an opaque error. New `curator/llm/paper_summary.py` (mirrors
+     `source_assessment.py`'s exact best-effort pattern) generates a bullet-point digest of the
+     paper's own findings from the same text `extract_paper` already fetched -- no second fetch.
+   - **UI redesign** (`tools/review_app/app.py`): the Extract tab now shows the paper summary up
+     top, then three sections -- "✅ Ready to approve", "🟡 Needs your review" (with the exact flag
+     reason shown), "⚪ Not extractable" -- with inline Approve/Reject buttons directly on
+     accepted/flagged cards (reusing the same `/lit/pending/{id}/approve|reject` endpoints the
+     Review tab already had), so a researcher can act immediately instead of switching tabs. The
+     Review tab now pulls both `pending_review` and `needs_review` queues.
+   - **Verified live, not just unit-tested**: re-ran the same chickpea paper from item 35
+     (`pmid:18943575`) through the fixed pipeline -- the two remaining candidates (both genuinely
+     unresolvable `DISEASE_ENV_TRIGGER` subjects, e.g. `"infection of cvs. P-2245 and PV-61 by
+     Foc-5"` isn't a real Disease entity name) now display with their full claim type/quote instead
+     of a bare reason, and the new paper summary produced six accurate, real findings (temperature
+     optima, inoculum densities, cultivar susceptibility) with no code guidance beyond the prompt.
+     A live full-text run (`pmid:30140185`, reused from item 33) hit a pre-existing, unrelated
+     `TimeoutError` in `curator/llm/client.py`'s raw `urllib` call on Gemini's response for a large
+     request -- the same class of full-paper latency issue item 33 hit on NVIDIA, not a regression
+     from this change; left open rather than papered over.
+   - Test suite: 260 passing (up from 253), same 3 pre-existing unrelated Neo4j failures. New/updated
+     tests: `tests/test_lit_run_extraction.py` (flagged-bucket coverage, retry tests retargeted to a
+     genuine unresolvable-entity fixture since their original "ungrounded quote" fixture is now
+     correctly a flagged candidate, not a rejected one), `tests/test_api_lit.py` (a full
+     stage→list→approve round-trip for a `needs_review` candidate, paper-summary failure survival),
+     new `tests/test_paper_summary.py`.
+   - **What's still open**: candidates that fail *normalization* (unresolvable entity, unsupported
+     claim type) remain informational-only by design this pass -- approving them would need a manual
+     entity-override UI, scoped out explicitly rather than half-built. The full-text LLM timeout
+     above is unrelated but still real.
 
 ---
 

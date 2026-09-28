@@ -20,7 +20,7 @@ from curator.graph.variety_import import variety_bundle
 from curator.graph.vocab_entities import reference_bundle
 from curator.lit import europepmc, jats
 from curator.llm.client import LLMClient
-from curator.model.claims import Claim, Evidence, Source
+from curator.model.claims import MIN_QUOTE_CHARS, Claim, Evidence, Source
 from curator.model.enums import Crop, EvidenceMethod, SourceType
 
 _PROMPT_VERSION = "claim_extraction_v1"
@@ -34,9 +34,26 @@ class AcceptedCandidate:
 
 
 @dataclass
+class FlaggedCandidate:
+    """A fully valid Claim/Evidence (entity resolution succeeded) whose quote didn't clear the
+    automated grounding threshold -- a candidate for a human to approve or reject, not a dead end.
+    See curator/extract/ground.py's DEFAULT_THRESHOLD and entities_present() for what can trigger
+    this (most commonly: the quote is real but paraphrases or doesn't literally repeat an entity
+    name that appears in a nearby sentence)."""
+
+    claim: Claim
+    evidence: Evidence
+    grounding_score: float
+    flag_reason: str
+
+
+@dataclass
 class ExtractionResult:
     source: Source
+    text: str = ""       # the exact text extract_paper sent to the LLM (abstract or JATS full text)
+    section: str = ""    # "abstract" | "full text"
     accepted: list[AcceptedCandidate] = field(default_factory=list)
+    flagged: list[FlaggedCandidate] = field(default_factory=list)
     rejected: list[RejectedCandidate] = field(default_factory=list)
 
 
@@ -177,19 +194,21 @@ def extract_paper(
     try:
         raw_candidates = json.loads(_strip_markdown_fence(response.content))
     except json.JSONDecodeError:
-        return ExtractionResult(source=source, rejected=[
+        return ExtractionResult(source=source, text=text, section=section, rejected=[
             RejectedCandidate(reason="LLM returned invalid JSON", raw={"content": response.content})
         ])
     if not isinstance(raw_candidates, list):
-        return ExtractionResult(source=source, rejected=[
+        return ExtractionResult(source=source, text=text, section=section, rejected=[
             RejectedCandidate(reason="LLM returned a non-array JSON value", raw={"content": response.content})
         ])
 
     entities = (bundle or _current_bundle()).entities
     extractor = f"llm:{response.model}@{version}"
-    result = ExtractionResult(source=source)
+    result = ExtractionResult(source=source, text=text, section=section)
 
-    def _ground_and_build(raw: dict, *, extractor_tag: str = extractor) -> AcceptedCandidate | RejectedCandidate:
+    def _ground_and_build(
+        raw: dict, *, extractor_tag: str = extractor
+    ) -> AcceptedCandidate | FlaggedCandidate | RejectedCandidate:
         evidence_block = raw.get("evidence") or {}
         quote = evidence_block.get("quote", "")
         locator = evidence_block.get("section", section)
@@ -202,13 +221,22 @@ def extract_paper(
         # a free-text env-trigger/advisory description won't repeat verbatim in its own quote.
         entity_mentions = [subject_text] if object_type in ("EnvTrigger", "Advisory") else [subject_text, object_text]
 
+        # Grounding and normalization run independently now (see normalize.build_claim_candidate's
+        # docstring): a quote that doesn't clear the fuzzy/entity-mention bar no longer prevents
+        # entity resolution from being attempted at all. This recovers the common real-world case of
+        # a true, well-supported claim whose quote paraphrases or doesn't literally repeat an entity
+        # name mentioned nearby -- it still becomes a fully valid Claim, just flagged for a human
+        # instead of silently discarded.
         grounding = ground_candidate(quote=quote, source_text=text, entity_mentions=entity_mentions)
-        if not grounding.passed:
-            return RejectedCandidate(reason=grounding.reason or "grounding failed", raw=raw)
+
+        if len((quote or "").strip()) < MIN_QUOTE_CHARS:
+            # Evidence's own validator requires >= MIN_QUOTE_CHARS for an "llm:" extractor -- must
+            # not even attempt to build one, or construction raises. Reuse grounding's own message.
+            return RejectedCandidate(reason=grounding.reason or "quote too short", raw=raw, grounding_score=grounding.score)
 
         built = build_claim_candidate(raw, entities=entities, crop=crop)
         if isinstance(built, RejectedCandidate):
-            return built
+            return RejectedCandidate(reason=built.reason, raw=raw, grounding_score=grounding.score)
 
         claim = built
         method = _method_for(locator)
@@ -220,12 +248,20 @@ def extract_paper(
             locator=locator,
             quote=quote,
         )
-        return AcceptedCandidate(claim=claim, evidence=evidence, grounding_score=grounding.score)
+        if grounding.passed:
+            return AcceptedCandidate(claim=claim, evidence=evidence, grounding_score=grounding.score)
+        return FlaggedCandidate(
+            claim=claim, evidence=evidence, grounding_score=grounding.score,
+            flag_reason=grounding.reason or "grounding did not pass",
+        )
 
     for raw in raw_candidates:
         outcome = _ground_and_build(raw)
         if isinstance(outcome, AcceptedCandidate):
             result.accepted.append(outcome)
+            continue
+        if isinstance(outcome, FlaggedCandidate):
+            result.flagged.append(outcome)
             continue
 
         if retry:
@@ -237,8 +273,13 @@ def extract_paper(
                 if isinstance(retried_outcome, AcceptedCandidate):
                     result.accepted.append(retried_outcome)
                     continue
+                if isinstance(retried_outcome, FlaggedCandidate):
+                    result.flagged.append(retried_outcome)
+                    continue
                 outcome = RejectedCandidate(
-                    reason=f"{outcome.reason} (retried: {retried_outcome.reason})", raw=raw
+                    reason=f"{outcome.reason} (retried: {retried_outcome.reason})",
+                    raw=raw,
+                    grounding_score=outcome.grounding_score,
                 )
 
         result.rejected.append(outcome)

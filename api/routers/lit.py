@@ -18,6 +18,7 @@ from curator.graph import staging
 from curator.lit import europepmc
 from curator.lit.run_extraction import extract_paper
 from curator.llm.client import LLMClient, LLMClientError
+from curator.llm.paper_summary import summarize_paper
 from curator.llm.source_assessment import assess_source
 from curator.model.enums import EVIDENCE_WEIGHT, EvidenceMethod
 
@@ -30,6 +31,22 @@ def _model_from_extractor(extractor: str) -> str:
     """"llm:<model>@<prompt_version>" -> "<model>"."""
     body = extractor.removeprefix("llm:")
     return body.split("@", 1)[0]
+
+
+def _rejected_out(rejected) -> "RejectedOut":
+    """Best-effort diagnostic detail from the LLM's own raw candidate dict -- whatever shape it had
+    (a per-candidate rejection has subject/object/evidence blocks; a whole-paper rejection like
+    "no text available" has an empty or unrelated raw dict, so every field but `reason` is None)."""
+    raw = rejected.raw or {}
+    evidence_block = raw.get("evidence") or {}
+    return RejectedOut(
+        reason=rejected.reason,
+        claim_type=raw.get("claim_type"),
+        subject_text=(raw.get("subject") or {}).get("text"),
+        object_text=(raw.get("object") or {}).get("text"),
+        quote=evidence_block.get("quote"),
+        grounding_score=rejected.grounding_score,
+    )
 
 
 class ExtractRequest(BaseModel):
@@ -52,13 +69,37 @@ class AcceptedOut(BaseModel):
     extractor: str
 
 
+class FlaggedOut(BaseModel):
+    staged_id: int
+    claim_type: str
+    subject_id: str
+    object_id: str
+    qualifiers: dict[str, Any]
+    quote: str
+    locator: str | None
+    method: str
+    method_weight: float
+    grounding_score: float
+    extractor: str
+    flag_reason: str
+
+
 class RejectedOut(BaseModel):
     reason: str
+    claim_type: str | None = None
+    subject_text: str | None = None
+    object_text: str | None = None
+    quote: str | None = None
+    grounding_score: float | None = None
 
 
 class SourceAssessmentOut(BaseModel):
     relevant: bool | None
     notes: str
+
+
+class PaperSummaryOut(BaseModel):
+    bullets: list[str]
 
 
 class ExtractResponse(BaseModel):
@@ -68,8 +109,10 @@ class ExtractResponse(BaseModel):
     source_year: int | None
     source_verified: bool
     source_assessment: SourceAssessmentOut | None
+    paper_summary: PaperSummaryOut | None
     provider: str
     accepted: list[AcceptedOut]
+    flagged: list[FlaggedOut]
     rejected: list[RejectedOut]
 
 
@@ -109,6 +152,22 @@ def extract(
     except Exception:  # noqa: BLE001 -- advisory signal only, never propagate
         assessment_out = None
 
+    # Paper summary is advisory only too -- same best-effort pattern, reuses the exact text/section
+    # extract_paper already fetched rather than fetching anything a second time.
+    summary_out: PaperSummaryOut | None = None
+    try:
+        summary = summarize_paper(
+            title=result.source.title,
+            venue=result.source.venue,
+            year=result.source.year,
+            text=result.text,
+            crop=req.crop,
+            llm_client=llm,
+        )
+        summary_out = PaperSummaryOut(bullets=summary.bullets)
+    except Exception:  # noqa: BLE001 -- advisory signal only, never propagate
+        summary_out = None
+
     staging.ensure_staging_schema(conn)
     staging.insert_pending_source(conn, result.source)
 
@@ -138,6 +197,35 @@ def extract(
             )
         )
 
+    flagged_out: list[FlaggedOut] = []
+    for item in result.flagged:
+        staged_id = staging.insert_pending_claim(
+            conn,
+            claim=item.claim,
+            evidence=item.evidence,
+            llm_model=_model_from_extractor(item.evidence.extractor),
+            grounding_score=item.grounding_score,
+            source_relevance=assessment_dict,
+            status="needs_review",
+            flag_reason=item.flag_reason,
+        )
+        flagged_out.append(
+            FlaggedOut(
+                staged_id=staged_id,
+                claim_type=item.claim.type.value,
+                subject_id=item.claim.subject_id,
+                object_id=item.claim.object_id,
+                qualifiers=item.claim.qualifiers,
+                quote=item.evidence.quote or "",
+                locator=item.evidence.locator,
+                method=item.evidence.method.value,
+                method_weight=EVIDENCE_WEIGHT[item.evidence.method],
+                grounding_score=item.grounding_score,
+                extractor=item.evidence.extractor,
+                flag_reason=item.flag_reason,
+            )
+        )
+
     return ExtractResponse(
         source_id=result.source.id,
         source_title=result.source.title,
@@ -145,9 +233,11 @@ def extract(
         source_year=result.source.year,
         source_verified=result.source.verified,
         source_assessment=assessment_out,
+        paper_summary=summary_out,
         provider=req.provider,
         accepted=accepted_out,
-        rejected=[RejectedOut(reason=r.reason) for r in result.rejected],
+        flagged=flagged_out,
+        rejected=[_rejected_out(r) for r in result.rejected],
     )
 
 
@@ -171,6 +261,7 @@ class PendingOut(BaseModel):
     llm_model: str | None
     grounding_score: float | None
     source_relevance: dict[str, Any] | None
+    flag_reason: str | None = None
 
 
 @router.get("/pending", response_model=list[PendingOut])
@@ -197,6 +288,7 @@ def list_pending(status: str = "pending_review", conn: psycopg.Connection = Depe
             llm_model=row["llm_model"],
             grounding_score=row["grounding_score"],
             source_relevance=row["source_relevance"],
+            flag_reason=row.get("flag_reason"),
         )
         for row in rows
     ]

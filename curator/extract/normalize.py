@@ -40,6 +40,8 @@ SUPPORTED_CLAIM_TYPES = frozenset({
 class RejectedCandidate:
     reason: str
     raw: dict[str, Any]
+    grounding_score: float | None = None  # set by run_extraction.py even when this candidate never
+                                           # became a valid Claim -- a diagnostic signal only.
 
 
 def resolve_disease(text: str, crop: Crop | str) -> str | None:
@@ -73,12 +75,14 @@ def build_claim_candidate(
     entities: list,
     crop: Crop | str,
 ) -> Claim | RejectedCandidate:
-    """Turn one grounded LLM candidate dict into a real Claim, or a rejection with a reason.
+    """Turn one raw LLM candidate dict into a real Claim, or a rejection with a reason.
 
-    Assumes `candidate` has already passed curator.extract.ground.ground_candidate -- this
-    function only handles claim-type validity and entity resolution, not quote verification.
-    The matching Evidence row is built separately via `build_evidence` (see
-    curator.lit.run_extraction for how the two are assembled into one candidate).
+    Runs independently of curator.extract.ground.ground_candidate -- this function only handles
+    claim-type validity and entity resolution, not quote verification. run_extraction.py calls both
+    unconditionally and uses grounding's pass/fail as a confidence signal on an already-resolved
+    claim, not a gate before resolution is attempted. The matching Evidence row is built separately
+    via `build_evidence` (see curator.lit.run_extraction for how the two are assembled into one
+    candidate).
     """
     raw_type = candidate.get("claim_type", "")
     try:
@@ -103,8 +107,8 @@ def build_claim_candidate(
         return RejectedCandidate(
             reason=(
                 f"{claim_type.value} needs a new {next(iter(object_types)).value} entity "
-                "(props, sensor-variable mapping) built by hand -- extraction and grounding "
-                "passed, but entity construction is out of scope for this pass"
+                "(props, sensor-variable mapping) built by hand -- entity construction is out "
+                "of scope for this pass"
             ),
             raw=candidate,
         )

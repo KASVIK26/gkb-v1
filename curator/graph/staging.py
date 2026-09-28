@@ -65,15 +65,17 @@ def insert_pending_claim(
     llm_model: str | None,
     grounding_score: float | None,
     source_relevance: dict[str, Any] | None,
+    status: str = "pending_review",
+    flag_reason: str | None = None,
 ) -> int:
     row = conn.execute(
         """
         INSERT INTO staging.pending_claim
-            (claim_type, subject_id, object_id, qualifiers, source_id, method, extractor,
-             locator, quote, llm_model, grounding_score, source_relevance)
-        VALUES (%(claim_type)s, %(subject_id)s, %(object_id)s, %(qualifiers)s, %(source_id)s,
-                %(method)s, %(extractor)s, %(locator)s, %(quote)s, %(llm_model)s,
-                %(grounding_score)s, %(source_relevance)s)
+            (claim_type, subject_id, object_id, qualifiers, status, source_id, method, extractor,
+             locator, quote, llm_model, grounding_score, source_relevance, flag_reason)
+        VALUES (%(claim_type)s, %(subject_id)s, %(object_id)s, %(qualifiers)s, %(status)s,
+                %(source_id)s, %(method)s, %(extractor)s, %(locator)s, %(quote)s, %(llm_model)s,
+                %(grounding_score)s, %(source_relevance)s, %(flag_reason)s)
         RETURNING id
         """,
         {
@@ -81,6 +83,7 @@ def insert_pending_claim(
             "subject_id": claim.subject_id,
             "object_id": claim.object_id,
             "qualifiers": Jsonb(claim.qualifiers),
+            "status": status,
             "source_id": evidence.source_id,
             "method": evidence.method.value,
             "extractor": evidence.extractor,
@@ -89,6 +92,7 @@ def insert_pending_claim(
             "llm_model": llm_model,
             "grounding_score": grounding_score,
             "source_relevance": Jsonb(source_relevance) if source_relevance is not None else None,
+            "flag_reason": flag_reason,
         },
     ).fetchone()
     return row[0]
@@ -111,9 +115,11 @@ def list_pending(conn: psycopg.Connection, *, status: str = "pending_review") ->
 
 
 def approve_pending(conn: psycopg.Connection, claim_id: int, *, reviewer: str) -> None:
+    # A 'needs_review' row is a fully valid Claim that just didn't clear the automated grounding
+    # threshold -- a human approving it here is exactly the override this status exists for.
     conn.execute(
         "UPDATE staging.pending_claim SET status = 'approved', reviewer = %(reviewer)s, reviewed_at = now()"
-        " WHERE id = %(id)s AND status = 'pending_review'",
+        " WHERE id = %(id)s AND status IN ('pending_review', 'needs_review')",
         {"reviewer": reviewer, "id": claim_id},
     )
 
@@ -121,7 +127,7 @@ def approve_pending(conn: psycopg.Connection, claim_id: int, *, reviewer: str) -
 def reject_pending(conn: psycopg.Connection, claim_id: int, *, reviewer: str, reason: str) -> None:
     conn.execute(
         "UPDATE staging.pending_claim SET status = 'rejected', reviewer = %(reviewer)s, reviewed_at = now(),"
-        " rejection_reason = %(reason)s WHERE id = %(id)s AND status = 'pending_review'",
+        " rejection_reason = %(reason)s WHERE id = %(id)s AND status IN ('pending_review', 'needs_review')",
         {"reviewer": reviewer, "reason": reason, "id": claim_id},
     )
 
