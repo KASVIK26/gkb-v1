@@ -21,6 +21,20 @@ from pathlib import Path
 import requests
 import streamlit as st
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
+# Local dev convenience: `streamlit run` doesn't source .env the way a shell invocation of
+# `uvicorn`/`pytest` might -- without this, DATABASE_URL_DIRECT is silently missing (breaking the
+# Export tab's CLI subprocess) unless the launching shell happened to export it first. `override`
+# defaults to False, so a real environment variable already set always wins. A no-op if
+# python-dotenv isn't installed or there's no local .env (e.g. on Streamlit Community Cloud).
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(REPO_ROOT / ".env")
+except Exception:
+    pass
+
 # Streamlit Community Cloud's secrets manager populates st.secrets, not the process environment --
 # bridge it into os.environ so the plain os.environ.get(...) calls below (and the Export tab's
 # subprocess, which inherits this process's environment) see DATABASE_URL_DIRECT/API_BASE_URL the
@@ -32,7 +46,6 @@ except Exception:
     pass
 
 API_BASE_URL = os.environ.get("API_BASE_URL", "http://localhost:8000")
-REPO_ROOT = Path(__file__).resolve().parents[2]
 CROPS = ["wheat", "soybean", "chickpea"]
 PROVIDERS = ["gemini", "openrouter", "groq"]  # matches curator.llm.client's real provider set
 
@@ -111,13 +124,18 @@ def _score_badge(score: float | None) -> str:
 
 
 def _render_claim_card(
-    item: dict, *, note: str | None = None, note_kind: str = "info",
+    item: dict, *, key_prefix: str, note: str | None = None, note_kind: str = "info",
     footer_caption: str | None = None, actionable: bool = True,
 ) -> None:
     """One claim card, reused by the Extract tab (accepted/flagged, freshly staged) and the Review
     tab (any status, any past extraction). `note` is an extra callout above the quote -- a flag
     reason, an AI source opinion, or nothing. `actionable` gates the inline Approve/Reject buttons;
-    the Extract tab's "not extractable" cards pass False since there's no valid claim to act on."""
+    the Extract tab's "not extractable" cards pass False since there's no valid claim to act on.
+
+    `key_prefix` must be unique per call *site* (not per item): Streamlit runs every tab's code on
+    every rerun regardless of which tab is visually selected, so a just-staged candidate shown in
+    both the Extract tab and the Review tab's queue in the same run would otherwise collide on the
+    same widget key (StreamlitDuplicateElementKey) since both use the same staged_id."""
     staged_id = item.get("staged_id") or item.get("id")
     with st.container(border=True):
         st.markdown(f"**{item['subject_id']}** → `{item['claim_type']}` → **{item['object_id']}**")
@@ -147,7 +165,7 @@ def _render_claim_card(
 
         col_approve, col_reject, col_reason = st.columns([1, 1, 3])
         with col_approve:
-            if st.button("✅ Approve", key=f"approve-{staged_id}", disabled=not reviewer.strip()):
+            if st.button("✅ Approve", key=f"{key_prefix}-approve-{staged_id}", disabled=not reviewer.strip()):
                 try:
                     _api_post(f"/lit/pending/{staged_id}/approve", {"reviewer": reviewer})
                 except (ApiError, requests.RequestException) as exc:
@@ -156,10 +174,10 @@ def _render_claim_card(
                     st.session_state["actioned"][staged_id] = "approved"
                     st.rerun()
         with col_reject:
-            reject_clicked = st.button("❌ Reject", key=f"reject-{staged_id}", disabled=not reviewer.strip())
+            reject_clicked = st.button("❌ Reject", key=f"{key_prefix}-reject-{staged_id}", disabled=not reviewer.strip())
         with col_reason:
             reason = st.text_input(
-                "Reason (required to reject)", key=f"reason-{staged_id}",
+                "Reason (required to reject)", key=f"{key_prefix}-reason-{staged_id}",
                 label_visibility="collapsed", placeholder="Reason (required to reject)",
             )
         if reject_clicked:
@@ -243,7 +261,7 @@ with tab_extract:
         if not accepted:
             st.caption("None this time.")
         for item in accepted:
-            _render_claim_card(item)
+            _render_claim_card(item, key_prefix="extract-accepted")
 
         st.markdown("#### 🟡 Needs your review")
         st.caption(
@@ -254,7 +272,7 @@ with tab_extract:
         if not flagged:
             st.caption("None this time.")
         for item in flagged:
-            _render_claim_card(item, note=f"⚠️ Flagged: {item['flag_reason']}", note_kind="warning")
+            _render_claim_card(item, key_prefix="extract-flagged", note=f"⚠️ Flagged: {item['flag_reason']}", note_kind="warning")
 
         st.markdown("#### ⚪ Not extractable")
         st.caption(
@@ -308,7 +326,7 @@ with tab_review:
         relevance = row.get("source_relevance")
         if relevance and relevance.get("notes"):
             source_note += f" · AI opinion: {relevance['notes']}"
-        _render_claim_card(row, note=note, note_kind="warning" if note else "info", footer_caption=source_note)
+        _render_claim_card(row, key_prefix="review", note=note, note_kind="warning" if note else "info", footer_caption=source_note)
 
 # ─────────────────────────────── Export tab ───────────────────────────────
 with tab_export:
