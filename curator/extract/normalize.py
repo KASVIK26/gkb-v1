@@ -19,11 +19,13 @@ from curator.model.enums import CLAIM_SIGNATURE, ClaimType, Crop, EntityType, Ev
 from curator.normalize.ids import parse_id
 from curator.normalize.synonyms import AmbiguousName, SynonymIndex
 
-# Object types that name a brand-new, per-fact entity (an EnvTrigger's numeric conditions, an
-# Advisory's practice) rather than something already in the vocabulary. These can never be
-# resolved by synonym lookup -- they don't exist yet. Building them (props, sensor-variable
-# mapping, bbch range) is deliberately left to a human curator for this pass of Phase 5;
-# see curator/llm/prompts/claim_extraction_v1.md's own note on this.
+# Object types whose entities (an EnvTrigger's numeric conditions, an Advisory's practice) this
+# pipeline never auto-creates -- building one (props, sensor-variable mapping, bbch range) is
+# deliberately left to a human curator for this pass of Phase 5; see
+# curator/llm/prompts/claim_extraction_v1.md's own note on this. build_claim_candidate still tries
+# `_resolve_mention` against these types first (a second paper reporting a fact the KG already has
+# one of should reuse it), and only falls back to the "needs a new entity" rejection when that
+# resolution genuinely fails.
 NEW_ENTITY_TYPES = frozenset({EntityType.ENV_TRIGGER, EntityType.ADVISORY})
 
 SUPPORTED_CLAIM_TYPES = frozenset({
@@ -103,18 +105,21 @@ def build_claim_candidate(
     if subject_id is None:
         return RejectedCandidate(reason=f"could not resolve subject {subject!r}", raw=candidate)
 
-    if object_types & NEW_ENTITY_TYPES:
-        return RejectedCandidate(
-            reason=(
-                f"{claim_type.value} needs a new {next(iter(object_types)).value} entity "
-                "(props, sensor-variable mapping) built by hand -- entity construction is out "
-                "of scope for this pass"
-            ),
-            raw=candidate,
-        )
-
     object_id = _resolve_mention(obj, object_types, entities=entities, crop=crop)
     if object_id is None:
+        if object_types & NEW_ENTITY_TYPES:
+            # Try resolving against an already-curated entity before giving up -- a second paper
+            # reporting a fact the KG already has an EnvTrigger/Advisory for should reuse it, not
+            # be told it "needs a new entity" every time. Only synthesize a brand-new one when no
+            # existing entity's name/synonyms match; this pipeline still never auto-creates one.
+            return RejectedCandidate(
+                reason=(
+                    f"{claim_type.value} needs a new {next(iter(object_types)).value} entity "
+                    "(props, sensor-variable mapping) built by hand -- entity construction is out "
+                    "of scope for this pass"
+                ),
+                raw=candidate,
+            )
         return RejectedCandidate(reason=f"could not resolve object {obj!r}", raw=candidate)
 
     qualifiers = candidate.get("qualifiers") or {}

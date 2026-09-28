@@ -10,7 +10,7 @@ from curator.model.entities import Entity
 from curator.model.enums import EntityType
 from curator.normalize.synonyms import AmbiguousName
 
-from kg_toy import STRIPE, YR1, toy_bundle
+from kg_toy import STRIPE, TRIG, YR1, toy_bundle
 
 SOURCE_TEXT = (
     "TestYr1 confers all-stage resistance to stripe rust in wheat under field conditions. "
@@ -119,7 +119,42 @@ def test_build_claim_candidate_accepts_gene_confers_resistance():
     assert result.qualifiers["resistance_type"] == "ASR"
 
 
-def test_build_claim_candidate_rejects_new_entity_object():
+def test_build_claim_candidate_resolves_existing_env_trigger_instead_of_rejecting():
+    # A second paper reporting a fact the KG already has an EnvTrigger for should reuse it, not be
+    # told it "needs a new entity" every time -- build_claim_candidate tries resolution first.
+    entities = toy_bundle().entities
+    candidate = {
+        "claim_type": "DISEASE_ENV_TRIGGER",
+        "subject": {"type": "Disease", "text": "stripe rust"},
+        "object": {"type": "EnvTrigger", "text": "TEST stripe rust infection window"},
+        "qualifiers": {},
+    }
+    result = build_claim_candidate(candidate, entities=entities, crop="wheat")
+
+    assert not isinstance(result, RejectedCandidate)
+    assert result.subject_id == STRIPE
+    assert result.object_id == TRIG
+
+
+def test_build_claim_candidate_resolves_existing_advisory_instead_of_rejecting():
+    entities = toy_bundle().entities + [
+        Entity(id="adv:wheat:TESTADV1", type="Advisory", name="TEST fungicide timing advisory",
+               crop="wheat", props={"action_type": "chemical"}),
+    ]
+    candidate = {
+        "claim_type": "DISEASE_MANAGED_BY",
+        "subject": {"type": "Disease", "text": "stripe rust"},
+        "object": {"type": "Advisory", "text": "TEST fungicide timing advisory"},
+        "qualifiers": {},
+    }
+    result = build_claim_candidate(candidate, entities=entities, crop="wheat")
+
+    assert not isinstance(result, RejectedCandidate)
+    assert result.subject_id == STRIPE
+    assert result.object_id == "adv:wheat:TESTADV1"
+
+
+def test_build_claim_candidate_rejects_new_entity_object_when_none_match():
     entities = toy_bundle().entities
     candidate = {
         "claim_type": "DISEASE_ENV_TRIGGER",
