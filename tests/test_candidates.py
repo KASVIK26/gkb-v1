@@ -279,3 +279,19 @@ def test_an_en_dash_name_resolves_to_the_existing_variety(bundle):
     result = _run(bundle, cand, text=text)
     claims = list(result.claims.values())
     assert claims and claims[0]["subject"] == "var:soybean:RVS20014" and not result.entities
+
+
+def test_an_extra_key_in_the_source_block_is_ignored_but_not_elsewhere(bundle):
+    ok = _candidate(source={"kind": "publication", "pmid": "99999001", "title": "Leaf rust reactions of Indian wheat varieties", "primary": True})
+    assert _run(bundle, ok).counts() == {"accepted": 1}
+    typo = _candidate(qualifiers={"reaction": "MR", "stage": "adult", "locaton": "Indore"})
+    assert _run(bundle, typo).counts() == {"rejected": 1}
+
+
+def test_a_new_qtl_for_a_disease_gets_that_disease_as_its_trait_but_a_marker_still_needs_its_type(bundle):
+    text = PAPER_TEXT + " MQTL1A.1 flanked by Glu-A3 and Xgwm136 is associated with leaf rust resistance (LOD 5.2)."
+    cand = _candidate(claim_type="QTL_ASSOCIATION", subject={"text": "MQTL1A.1", "type": "QTL"}, object={"text": "leaf rust", "type": "Disease"},
+                      qualifiers={"lod": 5.2}, quote="MQTL1A.1 flanked by Glu-A3 and Xgwm136 is associated with leaf rust resistance (LOD 5.2).", evidence_basis="primary_qtl")
+    result = _run(bundle, cand, text=text)
+    assert result.counts() == {"accepted": 1}
+    assert result.entities["qtl:wheat:MQTL1A.1"].props["trait"] == "leaf rust resistance"

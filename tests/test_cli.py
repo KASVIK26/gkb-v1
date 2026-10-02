@@ -42,7 +42,8 @@ def test_kg_load_against_a_live_database(pg_conn: psycopg.Connection, pg_dsn: st
     # soybean: Rpp1, Rpp2, Rpp3, Rsv1, Rsv3, Rsv4, Rxp, Rcs3 (8)
     # chickpea: Ca_14301 (1)
     # wheat: Sr24 (1, added 2026-10-02)
-    assert gene_count == 28
+    # + 72 distinct gene-disease claims added 2026-10-03 (work order WO04: Pm/Fhb catalogue with donor species, rust genes, soybean Rpp/Rsv/Rcs, chickpea wilt genes)
+    assert gene_count == 100
 
 
 def test_kg_load_refuses_to_overwrite_an_existing_release(pg_conn: psycopg.Connection, pg_dsn: str, release_schema: str):

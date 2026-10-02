@@ -46,6 +46,7 @@ _URL_CHECKED_TYPES = frozenset({SourceType.OFFICIAL_DOCUMENT, SourceType.TRIAL_R
 
 
 def normalise(text: str) -> str:
+    text = re.sub(r"\s*\|\s*", " ", text)  # table cell separators: ours (see _table_rows) or a model's rendering of a table; never the paper's
     text = html.unescape(text)  # Europe PMC titles arrive as "&lt;i&gt;Fusarium&lt;/i&gt;"
     text = text.replace(chr(0), "").replace(chr(0xAD), "")  # PDF ligature remnants ("bioforti<NUL>ed") and soft hyphens
     text = re.sub(r"</?(?:i|b|em|strong|sub|sup|span|u)\b[^<>]*>", "", text)  # inline formatting: no gap
@@ -58,14 +59,18 @@ def normalise(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip().casefold()
 
 
-def _captions(root: ET.Element) -> list[str]:
-    """Figure and table captions: real sentences of the paper (e.g. 'JG 62, the susceptible check, completely
-    wilted...') that the plain-text body leaves out."""
-    out = []
-    for wrapper in list(root.iter("fig")) + list(root.iter("table-wrap")):
-        caption = wrapper.find("caption")
+def _display_blocks(root: ET.Element) -> list[str]:
+    """Tables and figures in document order, each as caption THEN rows: real sentences of the paper that the plain-text body leaves out,
+    in the order a person reads them (caption, header, row), because a quote's fragments are checked in order."""
+    out: list[str] = []
+    for element in root.iter():
+        if element.tag not in ("table-wrap", "fig"):
+            continue
+        caption = element.find("caption")
         if caption is not None:
             out.append(_squash("".join(caption.itertext())))
+        if element.tag == "table-wrap":
+            out.extend(row for _, row in _table_rows(element))
     return out
 
 
@@ -86,8 +91,7 @@ def fetch_source_text(source_id: str) -> str | None:
             try:
                 root = ET.fromstring(_DOCTYPE_RE.sub("", xml_text))
                 parts.append(jats.extract_plain_text(xml_text))
-                parts.extend(row for _, row in _table_rows(root))
-                parts.extend(_captions(root))
+                parts.extend(_display_blocks(root))
             except ET.ParseError:
                 pass
     return " ".join(p for p in parts if p)
@@ -186,6 +190,8 @@ def check_quote(quote: str, source_text: str) -> str:
     """exact: every fragment appears verbatim, in order. spacing: identical once all whitespace is ignored (PDF text often
     splits a word: "sriganga naga"). fuzzy: each is very close but not identical. missing: neither."""
     text = normalise(source_text)
+    if normalise(quote) in text:
+        return "exact"  # as written, brackets and all: "[L.]" in "Glycine max [L.] Merr." is the paper's text, not an editorial cut
     fragments = quote_fragments(quote)
     window = SHORT_PIECE_WINDOW if _all_short(quote) else None
     if _in_order(fragments, text, window=window):

@@ -79,7 +79,11 @@ class Mention(_Strict):
     advisory: dict[str, Any] | None = None  # only for Advisory objects: the structured practice
 
 
-class SourceRef(_Strict):
+class SourceRef(BaseModel):
+    """Extra keys here are ignored: a model adding e.g. `primary` to its source block must not sink the claim."""
+
+    model_config = ConfigDict(extra="ignore")
+
     kind: str  # "publication" | "official_document"
     pmid: str | None = None
     doi: str | None = None
@@ -375,7 +379,8 @@ def _prepare_mention(m: Mention, c: Candidate, known: list, new_entities: list) 
         close = [n for n in pool if _near_duplicate(n, m.text)]
         if close:
             raise _Stop("needs_review", f"new {m.type.value} {m.text!r} is very close to existing {close[0]!r}")
-        new_entities.append(_new_entity(m, crop, known + new_entities))
+        default_trait = f"{c.object.text} resistance" if (c.claim_type is ClaimType.QTL_ASSOCIATION and m is c.subject) else None
+        new_entities.append(_new_entity(m, crop, known + new_entities, default_trait=default_trait))
         return m
     return m  # unresolved: build_claim_candidate will reject with the reason, and we log the missing entity
 
@@ -383,7 +388,7 @@ def _prepare_mention(m: Mention, c: Candidate, known: list, new_entities: list) 
 AUTO_CREATE = frozenset({EntityType.VARIETY, EntityType.GENE, EntityType.QTL, EntityType.MARKER, EntityType.PATHOTYPE})
 
 
-def _new_entity(m: Mention, crop: str, known: list) -> Entity:
+def _new_entity(m: Mention, crop: str, known: list, *, default_trait: str | None = None) -> Entity:
     """Build the entity a candidate introduces, from the candidate's own `props`; never invent a property."""
     name, props = m.text.strip(), dict(m.props or {})
     try:
@@ -392,6 +397,8 @@ def _new_entity(m: Mention, crop: str, known: list) -> Entity:
         if m.type is EntityType.GENE:
             return Entity(id=gene_id(crop, name), type=m.type, name=name, crop=crop, synonyms=list(m.synonyms), props={"symbol": name, **props})
         if m.type is EntityType.QTL:
+            if "trait" not in props and default_trait:
+                props["trait"] = default_trait  # a QTL associated with a disease is, by that very claim, a QTL for resistance to it
             if "trait" not in props:
                 raise _Stop("rejected", f"new QTL {name!r} needs props.trait")
             return Entity(id=make_id(EntityType.QTL, gene_local(name), crop), type=m.type, name=name, crop=crop, props=props)

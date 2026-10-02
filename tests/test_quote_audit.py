@@ -209,3 +209,25 @@ def test_short_cells_far_apart_do_not_verify():
 def test_every_occurrence_of_a_short_cell_is_tried():
     source = "20 js 95-60 2005 maharashtra 76 js 95-60 2007 मध्य प्रदेश 77"
     assert check_quote("JS 95-60 ... 2007 ... मध्य प्रदेश", source) == "exact"
+
+
+def test_table_cell_separators_are_neutral_on_both_sides():
+    source = "LOK 1 | S308/S331 | Lr13 | Yr2ks | Sr2+Sr9b+Sr11"            # our builder joins cells with " | "
+    assert check_quote("LOK 1 S308/S331 Lr13 Yr2ks Sr2+Sr9b+Sr11", source) == "exact"
+    assert check_quote("LOK 1 | S308/S331 | Lr13", "LOK 1 S308/S331 Lr13 Yr2ks") == "exact"  # a model's rendering of the same row
+
+
+def test_a_tables_caption_precedes_its_rows_in_the_audited_text(monkeypatch):
+    import curator.graph.quote_audit as qa
+    xml = ("<article><body><p>Intro.</p><table-wrap><caption><p>List of popular varieties.</p></caption><table><thead><tr><th>Variety</th><th>Gene</th></tr></thead>"
+           "<tbody><tr><td>LOK 1</td><td>Lr13</td></tr></tbody></table></table-wrap></body></article>")
+    monkeypatch.setattr(qa.europepmc, "get_record", lambda _id: {"title": "T", "isOpenAccess": "Y", "pmcid": "PMC1", "abstractText": "A"})
+    monkeypatch.setattr(qa.europepmc, "fetch_fulltext_xml", lambda _pmc: xml)
+    text = qa.fetch_source_text("pmid:1")
+    assert qa.check_quote("List of popular varieties. ... Variety Gene ... LOK 1 Lr13", text) == "exact"
+
+
+def test_a_bracket_that_is_part_of_the_papers_text_is_not_an_elision():
+    source = "in soybean (Glycine max [L.] Merr.). Next sentence."
+    assert check_quote("in soybean (Glycine max [L.] Merr.).", source) == "exact"
+    assert check_quote("in soybean (Glycine max [...] Merr.).", source) == "exact"   # a genuine elision still works

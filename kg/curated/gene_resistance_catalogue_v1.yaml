@@ -1,0 +1,1600 @@
+# Gene -> disease resistance statements from review articles and gene papers (work order WO04: Pm/Fhb gene catalogue incl. donor species, rust genes,
+# soybean Rpp/Rsv/Rcs, chickpea Fusarium wilt genes by race). Found by ChatGPT deep research, verified by `agrihub kg ingest-candidates`, reviewed
+# claim-by-claim 2026-10-03 (kg/review_log/2026-10-03b_wo04-wo06.md). Evidence stays `llm:` (discounted).
+
+sources:
+- id: pmid:27458472
+  type: publication
+  title: Harnessing Diversity in Wheat to Enhance Grain Yield, Climate Resilience, Disease and Insect Pest Resistance and Nutrition Through Conventional and Modern Breeding Approaches
+  year: 2016
+  venue: Frontiers in plant science
+  url: https://doi.org/10.3389/fpls.2016.00991
+  verified: true
+- id: pmid:36499375
+  type: publication
+  title: Effects of Fhb1, Fhb2 and Fhb5 on Fusarium Head Blight Resistance and the Development of Promising Lines in Winter Wheat
+  year: 2022
+  venue: International journal of molecular sciences
+  url: https://doi.org/10.3390/ijms232315047
+  verified: true
+- id: pmid:30303765
+  type: publication
+  title: Rpp1 Encodes a ULP1-NBS-LRR Protein That Controls Immunity to Phakopsora pachyrhizi in Soybean
+  year: 2019
+  venue: 'Molecular plant-microbe interactions : MPMI'
+  url: https://doi.org/10.1094/mpmi-07-18-0198-fi
+  verified: true
+- id: pmid:20977308
+  type: publication
+  title: Functional analysis of the Asian soybean rust resistance pathway mediated by Rpp2
+  year: 2011
+  venue: 'Molecular plant-microbe interactions : MPMI'
+  url: https://doi.org/10.1094/mpmi-08-10-0187
+  verified: true
+- id: pmid:19251904
+  type: publication
+  title: Identification and analyses of candidate genes for rpp4-mediated resistance to Asian soybean rust in soybean
+  year: 2009
+  venue: Plant physiology
+  url: https://doi.org/10.1104/pp.108.134551
+  verified: true
+- id: pmid:28980046
+  type: publication
+  title: Discovery of a seventh Rpp soybean rust resistance locus in soybean accession PI 605823
+  year: 2018
+  venue: TAG. Theoretical and applied genetics. Theoretische und angewandte Genetik
+  url: https://doi.org/10.1007/s00122-017-2983-4
+  verified: true
+- id: pmid:22712511
+  type: publication
+  title: The requirement of multiple defense genes in soybean Rsv1-mediated extreme resistance to soybean mosaic virus
+  year: 2012
+  venue: 'Molecular plant-microbe interactions : MPMI'
+  url: https://doi.org/10.1094/mpmi-02-12-0046-r
+  verified: true
+- id: pmid:29080441
+  type: publication
+  title: Isolation and validation of a candidate Rsv3 gene from a soybean genotype that confers strain-specific resistance to soybean mosaic virus
+  year: 2018
+  venue: Virology
+  url: https://doi.org/10.1016/j.virol.2017.10.014
+  verified: true
+- id: pmid:26649868
+  type: publication
+  title: Identification of haplotypes at the Rsv4 genomic region in soybean associated with durable resistance to soybean mosaic virus
+  year: 2016
+  venue: TAG. Theoretical and applied genetics. Theoretische und angewandte Genetik
+  url: https://doi.org/10.1007/s00122-015-2640-8
+  verified: true
+- id: pmid:39441215
+  type: publication
+  title: A single-nucleotide insertion in Rxp confers durable resistance to bacterial pustule in soybean
+  year: 2024
+  venue: TAG. Theoretical and applied genetics. Theoretische und angewandte Genetik
+  url: https://doi.org/10.1007/s00122-024-04743-5
+  verified: true
+entities:
+- id: gene:wheat:Pm4d
+  type: Gene
+  name: Pm4d
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm4d
+    origin_species: Triticum monococcum
+- id: gene:wheat:Pm1b
+  type: Gene
+  name: Pm1b
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm1b
+    origin_species: Triticum monococcum
+- id: gene:wheat:Pm1c
+  type: Gene
+  name: Pm1c
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm1c
+    origin_species: Triticum monococcum
+- id: gene:wheat:PmU
+  type: Gene
+  name: PmU
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: PmU
+    origin_species: Triticum urartu
+- id: gene:wheat:Pm25
+  type: Gene
+  name: Pm25
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm25
+    origin_species: Triticum boeoticum
+- id: gene:wheat:PmTb7A.1
+  type: Gene
+  name: PmTb7A.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: PmTb7A.1
+    origin_species: Triticum boeoticum
+- id: gene:wheat:PmTb7A.2
+  type: Gene
+  name: PmTb7A.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: PmTb7A.2
+    origin_species: Triticum boeoticum
+- id: gene:wheat:Pm16
+  type: Gene
+  name: Pm16
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm16
+    origin_species: Triticum dicoccoides
+- id: gene:wheat:Pm26
+  type: Gene
+  name: Pm26
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm26
+    origin_species: Triticum dicoccoides
+- id: gene:wheat:Pm30
+  type: Gene
+  name: Pm30
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm30
+    origin_species: Triticum dicoccoides
+- id: gene:wheat:Pm31
+  type: Gene
+  name: Pm31
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm31
+    origin_species: Triticum dicoccoides
+- id: gene:wheat:Pm36
+  type: Gene
+  name: Pm36
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm36
+    origin_species: Triticum dicoccoides
+- id: gene:wheat:Pm41
+  type: Gene
+  name: Pm41
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm41
+    origin_species: Triticum dicoccoides
+- id: gene:wheat:Pm42
+  type: Gene
+  name: Pm42
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm42
+    origin_species: Triticum dicoccoides
+- id: gene:wheat:Pm4a
+  type: Gene
+  name: Pm4a
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm4a
+    origin_species: Triticum dicoccum
+- id: gene:wheat:Pm5a
+  type: Gene
+  name: Pm5a
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm5a
+    origin_species: Triticum dicoccum
+- id: gene:wheat:Pm49
+  type: Gene
+  name: Pm49
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm49
+    origin_species: Triticum dicoccum
+- id: gene:wheat:Pm50
+  type: Gene
+  name: Pm50
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm50
+    origin_species: Triticum dicoccum
+- id: gene:wheat:Pm4b
+  type: Gene
+  name: Pm4b
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm4b
+    origin_species: Triticum carthlicum
+- id: gene:wheat:Pm33
+  type: Gene
+  name: Pm33
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm33
+    origin_species: Triticum carthlicum
+- id: gene:wheat:Pm46
+  type: Gene
+  name: Pm46
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm46
+    origin_species: Triticum carthlicum
+- id: gene:wheat:Pm1d
+  type: Gene
+  name: Pm1d
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm1d
+    origin_species: Triticum spelta
+- id: gene:wheat:Pm10
+  type: Gene
+  name: Pm10
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm10
+    origin_species: Triticum spelta
+- id: gene:wheat:Pm11
+  type: Gene
+  name: Pm11
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm11
+    origin_species: Triticum spelta
+- id: gene:wheat:Pm3b
+  type: Gene
+  name: Pm3b
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm3b
+    origin_species: Triticum sphaerococum
+- id: gene:wheat:Pm27
+  type: Gene
+  name: Pm27
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm27
+    origin_species: Triticum timopheevi
+- id: gene:wheat:Pm2
+  type: Gene
+  name: Pm2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm2
+    origin_species: Aegilops tauschii
+- id: gene:wheat:Pm19
+  type: Gene
+  name: Pm19
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm19
+    origin_species: Aegilops tauschii
+- id: gene:wheat:Pm34
+  type: Gene
+  name: Pm34
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm34
+    origin_species: Aegilops tauschii
+- id: gene:wheat:Pm35
+  type: Gene
+  name: Pm35
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm35
+    origin_species: Aegilops tauschii
+- id: gene:wheat:Pm12
+  type: Gene
+  name: Pm12
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm12
+    origin_species: Aegilops speltoides
+- id: gene:wheat:Pm32
+  type: Gene
+  name: Pm32
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm32
+    origin_species: Aegilops speltoides
+- id: gene:wheat:Pm13
+  type: Gene
+  name: Pm13
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm13
+    origin_species: Aegilops longissimi
+- id: gene:wheat:Pm29
+  type: Gene
+  name: Pm29
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm29
+    origin_species: Aegilops ovata
+- id: gene:wheat:Pm7
+  type: Gene
+  name: Pm7
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm7
+    origin_species: Secale cereale
+- id: gene:wheat:Pm8
+  type: Gene
+  name: Pm8
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm8
+    origin_species: Secale cereale
+- id: gene:wheat:Pm17
+  type: Gene
+  name: Pm17
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm17
+    origin_species: Secale cereale
+- id: gene:wheat:Pm20
+  type: Gene
+  name: Pm20
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm20
+    origin_species: Secale cereale
+- id: gene:wheat:Pm40
+  type: Gene
+  name: Pm40
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm40
+    origin_species: Thinopyrum intermedium
+- id: gene:wheat:Pm43
+  type: Gene
+  name: Pm43
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm43
+    origin_species: Thinopyrum intermedium
+- id: gene:wheat:Pm21
+  type: Gene
+  name: Pm21
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Pm21
+    origin_species: Haynaldia villosum
+- id: gene:wheat:Fhb2
+  type: Gene
+  name: Fhb2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Fhb2
+- id: gene:wheat:Fhb4
+  type: Gene
+  name: Fhb4
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Fhb4
+- id: gene:wheat:Fhb5
+  type: Gene
+  name: Fhb5
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Fhb5
+- id: gene:wheat:Fhb3
+  type: Gene
+  name: Fhb3
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Fhb3
+- id: gene:wheat:Fhb6
+  type: Gene
+  name: Fhb6
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Fhb6
+    origin_species: Elymus tsukushiensis
+- id: gene:wheat:Lr19
+  type: Gene
+  name: Lr19
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Lr19
+- id: gene:wheat:Lr42
+  type: Gene
+  name: Lr42
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Lr42
+- id: gene:wheat:Yr5
+  type: Gene
+  name: Yr5
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Yr5
+- id: gene:wheat:Yr10
+  type: Gene
+  name: Yr10
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Yr10
+- id: gene:wheat:Yr15
+  type: Gene
+  name: Yr15
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Yr15
+- id: gene:wheat:Sr22
+  type: Gene
+  name: Sr22
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Sr22
+- id: gene:wheat:Sr26
+  type: Gene
+  name: Sr26
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Sr26
+- id: gene:wheat:Lr46
+  type: Gene
+  name: Lr46
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Lr46
+- id: gene:wheat:Lr67
+  type: Gene
+  name: Lr67
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Lr67
+- id: gene:soybean:Rpp4
+  type: Gene
+  name: Rpp4
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Rpp4
+    chromosome: '18'
+- id: gene:soybean:Rpp7
+  type: Gene
+  name: Rpp7
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Rpp7
+    chromosome: '19'
+- id: gene:chickpea:h1
+  type: Gene
+  name: h1
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: h1
+- id: gene:chickpea:h2
+  type: Gene
+  name: h2
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: h2
+- id: gene:chickpea:H3
+  type: Gene
+  name: H3
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: H3
+- id: gene:chickpea:FOC-2
+  type: Gene
+  name: FOC-2
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: FOC-2
+- id: gene:chickpea:FOC-3
+  type: Gene
+  name: FOC-3
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: FOC-3
+- id: gene:chickpea:FOC-4
+  type: Gene
+  name: FOC-4
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: FOC-4
+- id: gene:chickpea:FOC-5
+  type: Gene
+  name: FOC-5
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: FOC-5
+claims:
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm4d
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum monococcum | Pm4d, Pm1b, and Pm1c
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0001
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm1b
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum monococcum | Pm4d, Pm1b, and Pm1c
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0002
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm1c
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum monococcum | Pm4d, Pm1b, and Pm1c
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0003
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:PmU
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum urartu | PmU
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0004
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm25
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum boeoticum | Pm25, PmTb7A.1, and PmTb7A.2
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0005
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:PmTb7A.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum boeoticum | Pm25, PmTb7A.1, and PmTb7A.2
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0006
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:PmTb7A.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum boeoticum | Pm25, PmTb7A.1, and PmTb7A.2
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0007
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm16
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum dicoccoides | Pm16, Pm26, Pm30, Pm31, Pm36, Pm41, Pm42, and MeIW72
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0008
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm26
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum dicoccoides | Pm16, Pm26, Pm30, Pm31, Pm36, Pm41, Pm42, and MeIW72
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0009
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm30
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum dicoccoides | Pm16, Pm26, Pm30, Pm31, Pm36, Pm41, Pm42, and MeIW72
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0010
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm31
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum dicoccoides | Pm16, Pm26, Pm30, Pm31, Pm36, Pm41, Pm42, and MeIW72
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0011
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm36
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum dicoccoides | Pm16, Pm26, Pm30, Pm31, Pm36, Pm41, Pm42, and MeIW72
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0012
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm41
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum dicoccoides | Pm16, Pm26, Pm30, Pm31, Pm36, Pm41, Pm42, and MeIW72
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0013
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm42
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum dicoccoides | Pm16, Pm26, Pm30, Pm31, Pm36, Pm41, Pm42, and MeIW72
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0014
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm4a
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum dicoccum | Pm4a, Pm5a, Pm49, and Pm50
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0015
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm5a
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum dicoccum | Pm4a, Pm5a, Pm49, and Pm50
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0016
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm49
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum dicoccum | Pm4a, Pm5a, Pm49, and Pm50
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0017
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm50
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum dicoccum | Pm4a, Pm5a, Pm49, and Pm50
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0018
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm4b
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum carthlicum | Pm4b, Pm33, and Pm46
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0019
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm33
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum carthlicum | Pm4b, Pm33, and Pm46
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0020
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm46
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum carthlicum | Pm4b, Pm33, and Pm46
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0021
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm1d
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum spelta | Pm1d, Pm10, and Pm11
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0022
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm10
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum spelta | Pm1d, Pm10, and Pm11
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0023
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm11
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum spelta | Pm1d, Pm10, and Pm11
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0024
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm3b
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum sphaerococum | Pm3b and Pm36
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0025
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm27
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Triticum timopheevi | Pm6, Pm27, and Pm37
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0027
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Aegilops tauschii | Pm2, Pm19, Pm34, and Pm35
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0029
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm19
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Aegilops tauschii | Pm2, Pm19, Pm34, and Pm35
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0030
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm34
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Aegilops tauschii | Pm2, Pm19, Pm34, and Pm35
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0031
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm35
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Aegilops tauschii | Pm2, Pm19, Pm34, and Pm35
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0032
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm12
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Aegilops speltoides | Pm12 and Pm32
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0033
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm32
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Aegilops speltoides | Pm12 and Pm32
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0034
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm13
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Aegilops longissimi | Pm13
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0035
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm29
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Aegilops ovata | Pm29
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0036
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm7
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Secale cereale | Pm7, Pm8, Pm17, and Pm20
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0037
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm8
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Secale cereale | Pm7, Pm8, Pm17, and Pm20
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0038
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm17
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Secale cereale | Pm7, Pm8, Pm17, and Pm20
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0039
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm20
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Secale cereale | Pm7, Pm8, Pm17, and Pm20
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0040
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm40
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Thinopyrum intermedium | Pm40 and Pm43
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0041
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm43
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Thinopyrum intermedium | Pm40 and Pm43
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0042
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Pm21
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, powdery mildew rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Powdery mildew (Blumeria graminis f. sp. tritici) ... Haynaldia villosum | Pm21
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0043
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Fhb2
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, Fusarium head blight rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Fusarium head blight (Fusarium graminearum) ... Triticum spp. | Fhb1, Fhb2, Fhb4, and Fhb5
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0045
+  - source: pmid:36499375
+    method: controlled_env
+    locator: Abstract
+    quote: 'The development of Fusarium head blight (FHB)-resistant winter wheat cultivars using the gene Fhb1 has been conducted in northern China. Sumai 3, a Chinese FHB-resistant spring wheat cultivar, carries three FHB resistance genes: Fhb1, Fhb2 and Fhb5.'
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0073
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Fhb4
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, Fusarium head blight rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Fusarium head blight (Fusarium graminearum) ... Triticum spp. | Fhb1, Fhb2, Fhb4, and Fhb5
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0046
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Fhb5
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, Fusarium head blight rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Fusarium head blight (Fusarium graminearum) ... Triticum spp. | Fhb1, Fhb2, Fhb4, and Fhb5
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0047
+  - source: pmid:36499375
+    method: controlled_env
+    locator: Abstract
+    quote: 'The development of Fusarium head blight (FHB)-resistant winter wheat cultivars using the gene Fhb1 has been conducted in northern China. Sumai 3, a Chinese FHB-resistant spring wheat cultivar, carries three FHB resistance genes: Fhb1, Fhb2 and Fhb5.'
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0074
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Fhb3
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, Fusarium head blight rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Fusarium head blight (Fusarium graminearum) ... Leymus rasomsus | Fhb3
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0048
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Fhb6
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Table 1, Fusarium head blight rows
+    quote: Known genes for resistance to Powdery mildew, Fusarium head blight and Septoria tritici blotch from landraces, wild relatives and synthetic wheat. ... Diseases | Source of Resistance | Genes ... Fusarium head blight (Fusarium graminearum) ... Elymus tsukushiensis | Fhb6
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0049
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr19
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, rust examples
+    quote: Although incorporation of race-specific resistance genes may be promising, it increases the risk of faster breakdown. Some examples of major genes for rust resistance include Lr19, Lr26, and Lr42 effective against leaf rust, Yr5, Yr10, and Yr15 against yellow rust and Sr22, Sr26, and Sr35 against stem rust.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0051
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr42
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, rust examples
+    quote: Although incorporation of race-specific resistance genes may be promising, it increases the risk of faster breakdown. Some examples of major genes for rust resistance include Lr19, Lr26, and Lr42 effective against leaf rust, Yr5, Yr10, and Yr15 against yellow rust and Sr22, Sr26, and Sr35 against stem rust.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0053
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Yr5
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, rust examples
+    quote: Although incorporation of race-specific resistance genes may be promising, it increases the risk of faster breakdown. Some examples of major genes for rust resistance include Lr19, Lr26, and Lr42 effective against leaf rust, Yr5, Yr10, and Yr15 against yellow rust and Sr22, Sr26, and Sr35 against stem rust.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0054
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Yr10
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, rust examples
+    quote: Although incorporation of race-specific resistance genes may be promising, it increases the risk of faster breakdown. Some examples of major genes for rust resistance include Lr19, Lr26, and Lr42 effective against leaf rust, Yr5, Yr10, and Yr15 against yellow rust and Sr22, Sr26, and Sr35 against stem rust.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0055
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Yr15
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, rust examples
+    quote: Although incorporation of race-specific resistance genes may be promising, it increases the risk of faster breakdown. Some examples of major genes for rust resistance include Lr19, Lr26, and Lr42 effective against leaf rust, Yr5, Yr10, and Yr15 against yellow rust and Sr22, Sr26, and Sr35 against stem rust.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0056
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr22
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, rust examples
+    quote: Although incorporation of race-specific resistance genes may be promising, it increases the risk of faster breakdown. Some examples of major genes for rust resistance include Lr19, Lr26, and Lr42 effective against leaf rust, Yr5, Yr10, and Yr15 against yellow rust and Sr22, Sr26, and Sr35 against stem rust.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0057
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr26
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, rust examples
+    quote: Although incorporation of race-specific resistance genes may be promising, it increases the risk of faster breakdown. Some examples of major genes for rust resistance include Lr19, Lr26, and Lr42 effective against leaf rust, Yr5, Yr10, and Yr15 against yellow rust and Sr22, Sr26, and Sr35 against stem rust.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0058
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr34
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, pleiotropic resistance genes
+    quote: Examples of these pleiotropic resistance genes are Lr34, Lr46, and Lr67 which provide resistance to leaf, yellow and stem rust and powdery mildew.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0062
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr46
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: 'Disease resistance section, pleiotropic resistance genes [alias in quote: object named ''leaf'']'
+    quote: Examples of these pleiotropic resistance genes are Lr34, Lr46, and Lr67 which provide resistance to leaf, yellow and stem rust and powdery mildew.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0064
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr46
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: 'Disease resistance section, pleiotropic resistance genes [alias in quote: object named ''yellow'']'
+    quote: Examples of these pleiotropic resistance genes are Lr34, Lr46, and Lr67 which provide resistance to leaf, yellow and stem rust and powdery mildew.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0065
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr46
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, pleiotropic resistance genes
+    quote: Examples of these pleiotropic resistance genes are Lr34, Lr46, and Lr67 which provide resistance to leaf, yellow and stem rust and powdery mildew.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0066
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr46
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, pleiotropic resistance genes
+    quote: Examples of these pleiotropic resistance genes are Lr34, Lr46, and Lr67 which provide resistance to leaf, yellow and stem rust and powdery mildew.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0067
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr67
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: 'Disease resistance section, pleiotropic resistance genes [alias in quote: object named ''leaf'']'
+    quote: Examples of these pleiotropic resistance genes are Lr34, Lr46, and Lr67 which provide resistance to leaf, yellow and stem rust and powdery mildew.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0068
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr67
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: 'Disease resistance section, pleiotropic resistance genes [alias in quote: object named ''yellow'']'
+    quote: Examples of these pleiotropic resistance genes are Lr34, Lr46, and Lr67 which provide resistance to leaf, yellow and stem rust and powdery mildew.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0069
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr67
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, pleiotropic resistance genes
+    quote: Examples of these pleiotropic resistance genes are Lr34, Lr46, and Lr67 which provide resistance to leaf, yellow and stem rust and powdery mildew.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0070
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr67
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27458472
+    method: review_statement
+    locator: Disease resistance section, pleiotropic resistance genes
+    quote: Examples of these pleiotropic resistance genes are Lr34, Lr46, and Lr67 which provide resistance to leaf, yellow and stem rust and powdery mildew.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0071
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp1
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:30303765
+    method: controlled_env
+    locator: PubMed abstract
+    quote: Phakopsora pachyrhizi is the causal agent of Asian soybean rust. ... Rpp1 is unique among the Rpp genes in that it confers an immune response (IR) to avirulent P. pachyrhizi isolates.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0075
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp2
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:20977308
+    method: controlled_env
+    locator: PubMed abstract
+    quote: Asian soybean rust is an aggressive foliar disease caused by the obligate biotrophic fungus Phakopsora pachyrhizi. ... The soybean Rpp2 gene confers resistance to specific isolates of P. pachyrhizi.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0076
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp3
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:38569009
+    method: controlled_env
+    locator: PubMed abstract
+    quote: Soybean rust is an economically significant disease caused by the fungus Phakopsora pachyrhizi ... seven genetic loci (Rpp1 to Rpp7) that provide race-specific resistance to P. pachyrhizi (Rpp) have been identified. Rpp3 was first discovered and characterized in the soybean accession PI 462312 (Ankur)
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0077
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp4
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:19251904
+    method: linked_marker
+    locator: PubMed abstract
+    quote: Asian soybean rust is a formidable threat to soybean (Glycine max) production in many areas of the world ... Rpp4 was previously identified in the resistant genotype PI459025B and mapped within 2 centimorgans of Satt288 on soybean chromosome 18 (linkage group G).
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0078
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp7
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:28980046
+    method: linked_marker
+    locator: 'PubMed abstract [alias in quote: object named ''pachyrhizi'']'
+    quote: A novel Rpp gene from PI 605823 for resistance to Phakopsora pachyrhizi was mapped on chromosome 19. ... A novel resistance gene, Rpp7, was mapped to a 154-kb interval
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0079
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rsv1
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:22712511
+    method: controlled_env
+    locator: PubMed abstract
+    quote: Soybean mosaic virus (SMV) is a major viral pathogen of soybean. Among the three SMV resistance genes, Rsv1 mediates extreme resistance (ER) against most SMV strains
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0080
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rsv3
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:29080441
+    method: controlled_env
+    locator: 'PubMed abstract [alias in quote: object named ''SMV'']'
+    quote: Rsv3, which confers strain-specific resistance to SMV, was previously mapped between the markers A519F/R and M3Satt in chromosome 14
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0081
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rsv4
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:26649868
+    method: linked_marker
+    locator: PubMed abstract
+    quote: The Soybean mosaic virus (SMV) resistance locus Rsv4 is of interest because it provides a durable type of resistance in soybean [Glycine max (L.) Merr.].
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0082
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rxp
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:39441215
+    method: controlled_env
+    locator: 'PubMed abstract [alias in quote: object named ''pustule'']'
+    quote: KEY MESSAGE The soybean Rxp gene, encoding a bHLH transcription factor and an ACT-like domain, has an rxp allele producing a truncated protein that confers resistance to pustule-causing Xanthomonas axonopodis pv. glycines.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0083
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rcs3
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:37313225
+    method: linked_marker
+    locator: PubMed abstract
+    quote: Frogeye leaf spot is a yield-reducing disease of soybean caused by the pathogen Cercospora sojina. Rcs3 has provided durable resistance to all known races of C. sojina since its discovery in the cultivar Davis during the 1980s.
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0084
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:chickpea:h1
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    resistance_type: unknown
+    spectrum: 'Fusarium oxysporum f. sp. ciceris race 1A; effect: late wilting'
+  evidence:
+  - source: pmid:37109518
+    method: review_statement
+    locator: 'Table 1 [alias in quote: object named ''chickpea wilt'']'
+    quote: Genetics of resistance to races of the chickpea wilt Fusarium oxysporum f. sp. ciceris. ... Fusarium Race | Name of Resistance Gene | Number and Nature of Wilt Resistance Gene | Effect of Resistance Gene on Wilting | Symptoms ... 1A | h1 (syn FOC-1) | Trigenic | Late wilting | Wilting
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0085
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:chickpea:h2
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    resistance_type: unknown
+    spectrum: 'Fusarium oxysporum f. sp. ciceris race 1A; effect: late wilting'
+  evidence:
+  - source: pmid:37109518
+    method: review_statement
+    locator: 'Table 1 [alias in quote: object named ''chickpea wilt'']'
+    quote: Genetics of resistance to races of the chickpea wilt Fusarium oxysporum f. sp. ciceris. ... Fusarium Race | Name of Resistance Gene | Number and Nature of Wilt Resistance Gene | Effect of Resistance Gene on Wilting | Symptoms ... 1A | h1 (syn FOC-1) | Trigenic | Late wilting | Wilting | [57] h2 | Late wilting
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0086
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:chickpea:H3
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    resistance_type: unknown
+    spectrum: 'Fusarium oxysporum f. sp. ciceris race 1A; effect: late wilting'
+  evidence:
+  - source: pmid:37109518
+    method: review_statement
+    locator: 'Table 1 [alias in quote: object named ''chickpea wilt'']'
+    quote: Genetics of resistance to races of the chickpea wilt Fusarium oxysporum f. sp. ciceris. ... Fusarium Race | Name of Resistance Gene | Number and Nature of Wilt Resistance Gene | Effect of Resistance Gene on Wilting | Symptoms ... 1A | h1 (syn FOC-1) | Trigenic | Late wilting | Wilting | [57] h2 | Late wilting H3 | Late wilting
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0087
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:chickpea:FOC-2
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    resistance_type: unknown
+    spectrum: 'Fusarium oxysporum f. sp. ciceris race 2; effect: complete resistance'
+  evidence:
+  - source: pmid:37109518
+    method: review_statement
+    locator: 'Table 1 [alias in quote: object named ''chickpea wilt'']'
+    quote: Genetics of resistance to races of the chickpea wilt Fusarium oxysporum f. sp. ciceris. ... Fusarium Race | Name of Resistance Gene | Number and Nature of Wilt Resistance Gene | Effect of Resistance Gene on Wilting | Symptoms ... 2 | FOC-2 | Monogenic | Complete resistance | Wilting
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0088
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:chickpea:FOC-3
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    resistance_type: unknown
+    spectrum: 'Fusarium oxysporum f. sp. ciceris race 3; effect: complete resistance'
+  evidence:
+  - source: pmid:37109518
+    method: review_statement
+    locator: 'Table 1 [alias in quote: object named ''chickpea wilt'']'
+    quote: Genetics of resistance to races of the chickpea wilt Fusarium oxysporum f. sp. ciceris. ... Fusarium Race | Name of Resistance Gene | Number and Nature of Wilt Resistance Gene | Effect of Resistance Gene on Wilting | Symptoms ... 3 | FOC-3/FOC-3 | Monogenic | Complete resistance | Wilting
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0089
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:chickpea:FOC-4
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    resistance_type: unknown
+    spectrum: 'Fusarium oxysporum f. sp. ciceris race 4; effect: complete resistance'
+  evidence:
+  - source: pmid:37109518
+    method: review_statement
+    locator: 'Table 1 [alias in quote: object named ''chickpea wilt'']'
+    quote: Genetics of resistance to races of the chickpea wilt Fusarium oxysporum f. sp. ciceris. ... Fusarium Race | Name of Resistance Gene | Number and Nature of Wilt Resistance Gene | Effect of Resistance Gene on Wilting | Symptoms ... 4 | FOC-4 | Monogenic recessive | Complete resistance | Wilting
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0090
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:chickpea:FOC-5
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    resistance_type: unknown
+    spectrum: 'Fusarium oxysporum f. sp. ciceris race 5; effect: complete resistance'
+  evidence:
+  - source: pmid:37109518
+    method: review_statement
+    locator: 'Table 1 [alias in quote: object named ''chickpea wilt'']'
+    quote: Genetics of resistance to races of the chickpea wilt Fusarium oxysporum f. sp. ciceris. ... Fusarium Race | Name of Resistance Gene | Number and Nature of Wilt Resistance Gene | Effect of Resistance Gene on Wilting | Symptoms ... 5 | FOC-5/FOC-5 | Monogenic | Complete resistance | Wilting
+    extractor: llm:chatgpt-deep-research@wo04-2026-10-02
+    candidate_id: WO04-0091

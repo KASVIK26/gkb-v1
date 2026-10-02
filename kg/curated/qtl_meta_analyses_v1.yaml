@@ -1,0 +1,1213 @@
+# QTL for disease resistance: 39 powdery-mildew meta-QTLs (pmid:39022610), 2 stripe-rust QTLs in Cappelle-Desprez x PBW 343, 7 chickpea Fusarium
+# wilt meta-QTLs. Work order WO06, reviewed 2026-10-03 (kg/review_log/2026-10-03b_wo04-wo06.md). Evidence stays `llm:` (discounted).
+
+sources:
+- id: pmid:39022610
+  type: publication
+  title: Exploring the genetic architecture of powdery mildew resistance in wheat through QTL meta-analysis
+  year: 2024
+  venue: Frontiers in plant science
+  url: https://doi.org/10.3389/fpls.2024.1386494
+  verified: true
+- id: pmid:28330146
+  type: publication
+  title: Mapping of stripe rust resistance QTL in Cappelle-Desprez × PBW343 RIL population effective in northern wheat belt of India
+  year: 2016
+  venue: 3 Biotech
+  url: https://doi.org/10.1007/s13205-016-0380-3
+  verified: true
+- id: pmid:40050693
+  type: publication
+  title: 'Developing resistance to Fusarium wilt in chickpea: From identifying meta-QTLs to molecular breeding'
+  year: 2025
+  venue: The plant genome
+  url: https://doi.org/10.1002/tpg2.70004
+  verified: true
+entities:
+- id: qtl:wheat:MQTL1A.1
+  type: QTL
+  name: MQTL1A.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL1A.2
+  type: QTL
+  name: MQTL1A.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL1A.3
+  type: QTL
+  name: MQTL1A.3
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL1A.4
+  type: QTL
+  name: MQTL1A.4
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL1B.3
+  type: QTL
+  name: MQTL1B.3
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL2A.1
+  type: QTL
+  name: MQTL2A.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL2A.2
+  type: QTL
+  name: MQTL2A.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL2A.3
+  type: QTL
+  name: MQTL2A.3
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL2B.1
+  type: QTL
+  name: MQTL2B.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL2B.2
+  type: QTL
+  name: MQTL2B.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL2D.1
+  type: QTL
+  name: MQTL2D.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL2D.2
+  type: QTL
+  name: MQTL2D.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL3A.1
+  type: QTL
+  name: MQTL3A.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL3B.1
+  type: QTL
+  name: MQTL3B.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL3B.2
+  type: QTL
+  name: MQTL3B.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL4A.1
+  type: QTL
+  name: MQTL4A.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL4A.2
+  type: QTL
+  name: MQTL4A.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL4A.3
+  type: QTL
+  name: MQTL4A.3
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL4D.1
+  type: QTL
+  name: MQTL4D.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL4D.2
+  type: QTL
+  name: MQTL4D.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL5A.1
+  type: QTL
+  name: MQTL5A.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL5A.2
+  type: QTL
+  name: MQTL5A.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL5B.1
+  type: QTL
+  name: MQTL5B.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL5B.2
+  type: QTL
+  name: MQTL5B.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL5D.1
+  type: QTL
+  name: MQTL5D.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL5D.2
+  type: QTL
+  name: MQTL5D.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL5D.3
+  type: QTL
+  name: MQTL5D.3
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL5D.4
+  type: QTL
+  name: MQTL5D.4
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL6A.1
+  type: QTL
+  name: MQTL6A.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL6A.2
+  type: QTL
+  name: MQTL6A.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL7A.1
+  type: QTL
+  name: MQTL7A.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL7A.2
+  type: QTL
+  name: MQTL7A.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL7A.3
+  type: QTL
+  name: MQTL7A.3
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL7B.1
+  type: QTL
+  name: MQTL7B.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL7B.2
+  type: QTL
+  name: MQTL7B.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL7D.1
+  type: QTL
+  name: MQTL7D.1
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL7D.2
+  type: QTL
+  name: MQTL7D.2
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL7D.3
+  type: QTL
+  name: MQTL7D.3
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:MQTL7D.4
+  type: QTL
+  name: MQTL7D.4
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Powdery mildew resistance
+- id: qtl:wheat:QYr.iiwbr-5B
+  type: QTL
+  name: QYr.iiwbr-5B
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Stripe rust resistance
+- id: qtl:wheat:QYr.iiwbr-2D
+  type: QTL
+  name: QYr.iiwbr-2D
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Stripe rust resistance
+- id: qtl:chickpea:MQTL1
+  type: QTL
+  name: MQTL1
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+- id: qtl:chickpea:MQTL2
+  type: QTL
+  name: MQTL2
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+- id: qtl:chickpea:MQTL3
+  type: QTL
+  name: MQTL3
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+- id: qtl:chickpea:MQTL4
+  type: QTL
+  name: MQTL4
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+- id: qtl:chickpea:MQTL5
+  type: QTL
+  name: MQTL5
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+- id: qtl:chickpea:MQTL6
+  type: QTL
+  name: MQTL6
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+- id: qtl:chickpea:MQTL7
+  type: QTL
+  name: MQTL7
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+claims:
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL1A.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Glu-A3
+    right_marker: Xgwm136
+    lod: 5.2
+    pve_pct: 14.4
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL1A.1 | Glu-A3-Xgwm136 | 22.98–31.79 | 5.2 | 14.4
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0001
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL1A.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: XGli1
+    right_marker: BS00062658_51
+    lod: 10.5
+    pve_pct: 30.2
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL1A.2 | XGli1-BS00062658_51 | 34.78–36.40 | 10.5 | 30.2
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0002
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL1A.3
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: wPt-731846
+    right_marker: Excalibur_c5139_198
+    lod: 2.9
+    pve_pct: 22.9
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL1A.3 | wPt-731846-Excalibur_c5139_198 | 47.98–48.48 | 2.9 | 22.9
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0003
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL1A.4
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xbarc263
+    right_marker: wmc95
+    lod: 8.9
+    pve_pct: 46.0
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL1A.4 | Xbarc263-wmc95 | 52.52–52.95 | 8.9 | 46
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0004
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL1B.3
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xgwm550
+    right_marker: D_GDS7LZN02GBBZ2_143
+    lod: 5.8
+    pve_pct: 21.8
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL1B.3 | Xgwm550-D_GDS7LZN02GBBZ2_143 | 453.80–457.71 | 5.8 | 21.8
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0005
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL2A.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xfba198
+    right_marker: 2A-Excalibur_c15379_1305
+    lod: 30.4
+    pve_pct: 50.7
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL2A.1 | Xfba198-2A-Excalibur_c15379_1305 | 48.58–49.92 | 30.4 | 50.7
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0006
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL2A.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Excalibur_rep_c102244_1103
+    right_marker: BS00044272_51
+    lod: 12.2
+    pve_pct: 38.2
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL2A.2 | Excalibur_rep_c102244_1103-BS00044272_51 | 99.84–127.98 | 12.2 | 38.2
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0007
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL2A.3
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xgwm356
+    right_marker: Xfba385
+    lod: 8.4
+    pve_pct: 21.9
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL2A.3 | Xgwm356-Xfba385 | 123.95–125.73 | 8.4 | 21.9
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0008
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL2B.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: BobWhite_c39184_140
+    right_marker: BS00049876_51
+    lod: 9.1
+    pve_pct: 20.4
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL2B.1 | BobWhite_c39184_140-BS00049876_51 | 60.15–60.64 | 9.1 | 20.4
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0009
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL2B.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Kukri_c23822_580
+    right_marker: BS00010318_51
+    lod: 4.0
+    pve_pct: 9.5
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL2B.2 | Kukri_c23822_580-BS00010318_51 | 75.00–76.60 | 4 | 9.5
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0010
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL2D.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xbarc90
+    right_marker: Xbarc292
+    lod: 3.6
+    pve_pct: 5.9
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL2D.1 | Xbarc90-Xbarc292 | 36.69–36.99 | 3.6 | 5.9
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0011
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL2D.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: XksuD23
+    right_marker: wsnp_CAP12_c1503_764765
+    lod: 2.7
+    pve_pct: 11.7
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL2D.2 | XksuD23-wsnp_CAP12_c1503_764765 | 59.33–72.83 | 2.7 | 11.7
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0012
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL3A.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Excalibur_c61765_220
+    right_marker: Xfba91
+    lod: 2.8
+    pve_pct: 10.3
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL3A.1 | Excalibur_c61765_220-Xfba91 | 81.10–82.26 | 2.8 | 10.3
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0013
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL3B.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xfba190
+    right_marker: Xgwm493
+    lod: 8.0
+    pve_pct: 15.9
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL3B.1 | Xfba190-Xgwm493 | 135.66–141.90 | 8 | 15.9
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0014
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL3B.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: BARC131
+    right_marker: Xwmc623
+    lod: 4.6
+    pve_pct: 11.4
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL3B.2 | BARC131-Xwmc623 | 151.83–164.03 | 4.6 | 11.4
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0015
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL4A.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Ku_c2478_227
+    right_marker: Tdurum_contig12696_528
+    lod: 15.3
+    pve_pct: 22.0
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL4A.1 | Ku_c2478_227-Tdurum_contig12696_528 | 61.37–64.45 | 15.3 | 22
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0016
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL4A.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xwmc96
+    right_marker: BS00043286_51
+    lod: 3.6
+    pve_pct: 36.4
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL4A.2 | Xwmc96-BS00043286_51 | 94.16–97.93 | 3.6 | 36.4
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0017
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL4A.3
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xgwm637
+    right_marker: Ra_c74035_586
+    lod: 3.1
+    pve_pct: 11.8
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL4A.3 | Xgwm637-Ra_c74035_586 | 105.34–115.46 | 3.1 | 11.8
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0018
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL4D.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xcfd84
+    right_marker: Xwmc622
+    lod: 8.9
+    pve_pct: 21.3
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL4D.1 | Xcfd84-Xwmc622 | 70.41–71.53 | 8.9 | 21.3
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0019
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL4D.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xcfd84
+    right_marker: Xgwm194
+    lod: 7.5
+    pve_pct: 18.2
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL4D.2 | Xcfd84-Xgwm194 | 71.20–84.14 | 7.5 | 18.2
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0020
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL5A.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: RAC875_c53808_1027
+    right_marker: Kukri_c95189_124
+    lod: 3.2
+    pve_pct: 14.2
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL5A.1 | RAC875_c53808_1027-Kukri_c95189_124 | 480.00–483.36 | 3.2 | 14.2
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0021
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL5A.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: RAC875_c53808_1027
+    right_marker: Kukri_c95189_124
+    lod: 3.0
+    pve_pct: 18.9
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL5A.2 | RAC875_c53808_1027-Kukri_c95189_124 | 492.41–499.97 | 3 | 18.9
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0022
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL5B.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: wmc149
+    right_marker: Kukri_c912_1423
+    lod: 3.3
+    pve_pct: 8.5
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL5B.1 | wmc149-Kukri_c912_1423 | 35.23–37.58 | 3.3 | 8.5
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0023
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL5B.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Tdurum_contig70554_1004
+    right_marker: Tdurum_contig70554_1006
+    lod: 3.1
+    pve_pct: 10.0
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL5B.2 | Tdurum_contig70554_1004-Tdurum_contig70554_1006 | 44.17–44.56 | 3.1 | 10
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0024
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL5D.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: gwm959c
+    right_marker: Xwgm583
+    lod: 3.4
+    pve_pct: 21.2
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL5D.1 | gwm959c-Xwgm583 | 32.86–49.95 | 3.4 | 21.2
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0025
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL5D.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xgwm583
+    right_marker: gbxG083c
+    lod: 9.4
+    pve_pct: 34.9
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL5D.2 | Xgwm583-gbxG083c | 60.92–62.68 | 9.4 | 34.9
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0026
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL5D.3
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: gbxG083c
+    right_marker: Xbarc286
+    lod: 10.8
+    pve_pct: 76.5
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL5D.3 | gbxG083c-Xbarc286 | 63.03–64.55 | 10.8 | 76.5
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0027
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL5D.4
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xgwm639
+    right_marker: Xcfd12
+    lod: 2.6
+    pve_pct: 21.7
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL5D.4 | Xgwm639-Xcfd12 | 67.63–67.69 | 2.6 | 21.7
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0028
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL6A.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: 6A-BS00103442_51
+    right_marker: Xcdo388
+    lod: 15.3
+    pve_pct: 35.4
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL6A.1 | 6A-BS00103442_51-Xcdo388 | 84.49–88.52 | 15.3 | 35.4
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0029
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL6A.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xwmc254
+    right_marker: Xwmc59
+    lod: 8.8
+    pve_pct: 16.0
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL6A.2 | Xwmc254-Xwmc59 | 180.11–184.49 | 8.8 | 16
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0030
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL7A.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Ku_c416_1522
+    right_marker: Tdurum_contig12832_116
+    lod: 3.4
+    pve_pct: 13.4
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL7A.1 | Ku_c416_1522-Tdurum_contig12832_116 | 464.72–472.43 | 3.4 | 13.4
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0031
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL7A.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xfbb121
+    right_marker: Xcdo545
+    lod: 3.1
+    pve_pct: 15.2
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL7A.2 | Xfbb121-Xcdo545 | 476.97–480.91 | 3.1 | 15.2
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0032
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL7A.3
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xwmc158
+    right_marker: BS00033782_51
+    lod: 2.7
+    pve_pct: 14.4
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL7A.3 | Xwmc158-BS00033782_51 | 483.13–484.00 | 2.7 | 14.4
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0033
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL7B.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xwmc606
+    right_marker: Xwmc323
+    lod: 4.3
+    pve_pct: 21.3
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL7B.1 | Xwmc606-Xwmc323 | 136.90–137.95 | 4.3 | 21.3
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0034
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL7B.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: CAP12_c1816_325
+    right_marker: Xgwm537
+    lod: 1.5
+    pve_pct: 14.3
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL7B.2 | CAP12_c1816_325-Xgwm537 | 177.03–179.95 | 1.5 | 14.3
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0035
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL7D.1
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xwmc506
+    right_marker: Xwmc450
+    lod: 5.1
+    pve_pct: 7.1
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL7D.1 | Xwmc506-Xwmc450 | 19.39–29.83 | 5.1 | 7.1
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0036
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL7D.2
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xmwg710.2
+    right_marker: Xgwm130
+    lod: 3.3
+    pve_pct: 21.1
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL7D.2 | Xmwg710.2-Xgwm130 | 41.02–41.93 | 3.3 | 21.1
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0037
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL7D.3
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: Xgwm1220
+    right_marker: BS00027514_51
+    lod: 5.0
+    pve_pct: 8.7
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL7D.3 | Xgwm1220-BS00027514_51 | 55.57–57.52 | 5 | 8.7
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0038
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:MQTL7D.4
+  object: dis:wheat:powdery_mildew
+  qualifiers:
+    stage: unspecified
+    left_marker: GENE-4592_95
+    right_marker: Xwmc121
+    lod: 4.0
+    pve_pct: 12.1
+    population: QTL meta-analysis of 222 powdery mildew QTLs from 33 linkage-based studies
+  evidence:
+  - source: pmid:39022610
+    method: qtl_mapping
+    locator: Table 1
+    quote: MQTLs associated with powdery mildew resistance identified in the present study. ... MQTL | Flanking Markers | CI (cM) | LOD Score | PVE% | No. of QTLs involved ... MQTL7D.4 | GENE-4592_95-Xwmc121 | 65.11–75.13 | 4 | 12.1
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0039
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:QYr.iiwbr-5B
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    stage: adult
+    left_marker: 1376633|F|0
+    right_marker: 1207571|F|0
+    lod: 8.0
+    pve_pct: 34.1
+    population: Cappelle–Desprez × PBW 343 (F9 RIL population)
+  evidence:
+  - source: pmid:28330146
+    method: qtl_mapping
+    locator: Table 1, Average row
+    quote: Identification of significant (LOD > 2.5) QTL for stripe rust resistance, their chromosomal location, flanking markers and explained phenotypic variance (R 2) ... Average QYr.iiwbr-5B 1376633|F|0–1207571|F|08.026.434.120.2
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0040
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:QYr.iiwbr-2D
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    stage: adult
+    left_marker: Xgwm484
+    right_marker: Xcfd73
+    lod: 2.6
+    pve_pct: 20.1
+    population: Cappelle–Desprez × PBW 343 (F9 RIL population)
+  evidence:
+  - source: pmid:28330146
+    method: qtl_mapping
+    locator: Table 1, Average row
+    quote: Identification of significant (LOD > 2.5) QTL for stripe rust resistance, their chromosomal location, flanking markers and explained phenotypic variance (R 2) ... Average ... QYr.iiwbr-2D Xgwm484–Xcfd73 2.634.720.18.9
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0041
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:MQTL1
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    left_marker: marker8262
+    right_marker: TA103
+    pve_pct: 21.0
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: 'Table 2 [alias in quote: object named ''fusarium resistance'']'
+    quote: Results of the meta-analysis of quantitative trait loci (QTLs) controlling fusarium resistance in chickpea. ... LG | Meta QTL | AIC value | Linked to race(s) | Map position (cM) | No. of initial QTLs | Mean R 2 (%) | L-marker | L-marker position (cM) | R-marker | R-marker position (cM) | No. of studies | Mean CI of initial QTLs | No. of genes ... MQTL1 | 69.71 | Foc1, Foc3 | 40.01 | 2 | 21.0 | marker8262 | 38.52 | TA103 | 41.49 | 1 | 4.24 | 66
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0046
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:MQTL2
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    left_marker: CAMCTA07
+    right_marker: TR14
+    pve_pct: 23.0
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: 'Table 2 [alias in quote: object named ''fusarium resistance'']'
+    quote: Results of the meta-analysis of quantitative trait loci (QTLs) controlling fusarium resistance in chickpea. ... LG | Meta QTL | AIC value | Linked to race(s) | Map position (cM) | No. of initial QTLs | Mean R 2 (%) | L-marker | L-marker position (cM) | R-marker | R-marker position (cM) | No. of studies | Mean CI of initial QTLs | No. of genes ... MQTL2 | Foc0, Foc1, Foc5 | 48.02 | 7 | 23.0 | CAMCTA07 | 47 | TR14 | 48.95 | 4 | 6.58 | 78
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0047
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:MQTL3
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    left_marker: CKaM0759
+    right_marker: CKaM1333
+    pve_pct: 36.0
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: 'Table 2 [alias in quote: object named ''fusarium resistance'']'
+    quote: Results of the meta-analysis of quantitative trait loci (QTLs) controlling fusarium resistance in chickpea. ... LG | Meta QTL | AIC value | Linked to race(s) | Map position (cM) | No. of initial QTLs | Mean R 2 (%) | L-marker | L-marker position (cM) | R-marker | R-marker position (cM) | No. of studies | Mean CI of initial QTLs | No. of genes ... MQTL3 | Foc1 | 53.92 | 6 | 36.0 | CKaM0759 | 53.13 | CKaM1333 | 54.59 | 2 | 4.77 | 190
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0048
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:MQTL4
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    left_marker: Pyruvat_Kin_oben
+    right_marker: NCPGR231
+    pve_pct: 16.3
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: 'Table 2 [alias in quote: object named ''fusarium resistance'']'
+    quote: Results of the meta-analysis of quantitative trait loci (QTLs) controlling fusarium resistance in chickpea. ... LG | Meta QTL | AIC value | Linked to race(s) | Map position (cM) | No. of initial QTLs | Mean R 2 (%) | L-marker | L-marker position (cM) | R-marker | R-marker position (cM) | No. of studies | Mean CI of initial QTLs | No. of genes ... MQTL4 | 17.55 | Foc1, Foc3 | 40.73 | 4 | 16.3 | Pyruvat_Kin_oben | 38.91 | NCPGR231 | 42.72 | 3 | 9.22 | 72
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0049
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:MQTL5
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    left_marker: CaM0805
+    right_marker: CaM0258
+    pve_pct: 58.9
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: 'Table 2 [alias in quote: object named ''fusarium resistance'']'
+    quote: Results of the meta-analysis of quantitative trait loci (QTLs) controlling fusarium resistance in chickpea. ... LG | Meta QTL | AIC value | Linked to race(s) | Map position (cM) | No. of initial QTLs | Mean R 2 (%) | L-marker | L-marker position (cM) | R-marker | R-marker position (cM) | No. of studies | Mean CI of initial QTLs | No. of genes ... MQTL5 | 19.63 | Foc0 | 81.31 | 8 | 58.9 | CaM0805 | 81.19 | CaM0258 | 82.57 | 3 | 3.45 | 73
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0050
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:MQTL6
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    left_marker: H3A052
+    right_marker: TA80
+    pve_pct: 11.9
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: 'Table 2 [alias in quote: object named ''fusarium resistance'']'
+    quote: Results of the meta-analysis of quantitative trait loci (QTLs) controlling fusarium resistance in chickpea. ... LG | Meta QTL | AIC value | Linked to race(s) | Map position (cM) | No. of initial QTLs | Mean R 2 (%) | L-marker | L-marker position (cM) | R-marker | R-marker position (cM) | No. of studies | Mean CI of initial QTLs | No. of genes ... MQTL6 | 29.36 | Foc1 | 47.99 | 3 | 11.9 | H3A052 | 43.67 | TA80 | 52.32 | 2 | 15.1 | 394
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0051
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:MQTL7
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    left_marker: TOG908356
+    right_marker: TOG899657
+    pve_pct: 10.5
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: 'Table 2 [alias in quote: object named ''fusarium resistance'']'
+    quote: Results of the meta-analysis of quantitative trait loci (QTLs) controlling fusarium resistance in chickpea. ... LG | Meta QTL | AIC value | Linked to race(s) | Map position (cM) | No. of initial QTLs | Mean R 2 (%) | L-marker | L-marker position (cM) | R-marker | R-marker position (cM) | No. of studies | Mean CI of initial QTLs | No. of genes ... MQTL7 | Foc1 | 86.11 | 2 | 10.5 | TOG908356 | 81.82 | TOG899657 | 90.51 | 1 | 12.7 | 346
+    extractor: llm:chatgpt-deep-research@wo06-2026-10-02
+    candidate_id: WO06-0052
