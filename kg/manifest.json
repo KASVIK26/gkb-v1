@@ -1,13 +1,13 @@
 {
-  "release": "2026_10_29",
-  "built_at": "2026-10-02T17:57:37.891241+00:00",
-  "git_sha": "2c1856fe8565c7db2076baa8dfa1a8ff8c22372c",
+  "release": "2026_10_30",
+  "built_at": "2026-10-02T18:35:21.048899+00:00",
+  "git_sha": "6c04b34a6a6f01b335a6002d4a7949ed3c97c715",
   "git_dirty": false,
   "counts": {
     "sources": 110,
-    "entities": 495,
-    "claims": 975,
-    "evidence": 1053
+    "entities": 501,
+    "claims": 983,
+    "evidence": 1079
   },
   "content_sources": {
     "config/vocab/diseases.yaml": "sha256:9293f54c8491e143a3bcf646b2069cd2f392376d38a03f4d46999492625321db",
@@ -24,9 +24,10 @@
     "kg/curated/gene_resistance_catalogue_v1.yaml": "sha256:851b27f3b82f02adb0889fb25be6f04f3b5a2d0b160c3131f91fe7194afe501a",
     "kg/curated/pathotypes_iiwbr_v1.yaml": "sha256:fd3b23b8345c314c3d5e6f757294194ab302c9814d2aadb395b7fe4e8e741832",
     "kg/curated/qtl_meta_analyses_v1.yaml": "sha256:2e2365845da8222a1fcc2f18f2781514a6f232bb8c0b8ffeb038e67041ac4277",
+    "kg/curated/rust_gene_links_v1.yaml": "sha256:d12d2da9367abf823edd6e9fd8d5738014ae1e7dd40c72504c38a3f05d8b227e",
     "kg/curated/soybean_chickpea_reactions_and_pathogens_v1.yaml": "sha256:365208c1c979441164a9e3aa0a084bd4c07c304b8f1018d7e6c5194248b91c15",
     "kg/curated/soybean_seed_genes.yaml": "sha256:4ca42f2d6bbdf7434f8147de6afa7c8dfebedab65d0b668c67a16bba2905f5f0",
-    "kg/curated/variety_gene_postulations_v1.yaml": "sha256:ab34758fed1ea46e6cb044120a67eccb0f9f78ec81721077a4bab8239313dfc9",
+    "kg/curated/variety_gene_postulations_v1.yaml": "sha256:33e7fe757d611f14c2c770153b948b541fc00e464534287626cceb43f72f1a4d",
     "kg/curated/variety_genes_v1.yaml": "sha256:0aa015101c0243faee2a9d7eeec26021e515dcb2a1c0626ae6f5bda53332a218",
     "kg/curated/wheat_reactions_v1.yaml": "sha256:0f71b3a2a5f8a453572ba2dc303ce416ba10a5fa32aeec52c0f3e6a13456f087",
     "kg/curated/wheat_seed_genes.yaml": "sha256:e0ffeaf357b31ed586b45bcf79c390c5a9d0dfa310fdd9a30dabf36a8ee90ac4",
