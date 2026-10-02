@@ -175,3 +175,8 @@ def test_a_bare_less_than_sign_does_not_swallow_the_text_that_follows():
 
 def test_real_tags_are_still_removed():
     assert normalise("<p>Brandnew <i>Fusarium</i> 77</p><br/>was <b>resistant</b>") == "brandnew fusarium 77 was resistant"
+
+
+def test_pdf_ligature_remnants_and_soft_hyphens_do_not_break_a_match():
+    source = "Table 2.6: Bioforti" + chr(0) + "ed Wheat Varieties for Cen" + chr(0xAD) + "tral Zone"
+    assert check_quote("Table 2.6: Biofortied Wheat Varieties for Central Zone", source) == "exact"

@@ -45,7 +45,7 @@ from curator.normalize.ids import gene_id, gene_local, make_id, slugify, variety
 # Claim types this tool will ingest. GENE_LOCATED_AT / QTL_CONTAINS_REFGENE point at reference-genome records that only
 # the genome pipeline creates, so they are accepted only when those entities already exist.
 INGESTABLE = frozenset(ClaimType)
-STATE_NAMES = {"MP": ["Madhya Pradesh", "M.P."], "MH": ["Maharashtra"]}
+STATE_NAMES = {"MP": ["Madhya Pradesh", "M.P.", "मध्य प्रदेश"], "MH": ["Maharashtra", "महाराष्ट्र"]}  # + Hindi, for ICAR pages in Hindi
 MAX_QUOTE_CHARS = 700
 TITLE_MATCH_MIN = 88  # rapidfuzz ratio between the model's title and the registry's
 NEAR_DUPLICATE_MIN = 90  # a "new" variety/gene this close to an existing name is a person's call

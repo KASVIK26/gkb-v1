@@ -20,6 +20,7 @@ Statuses per evidence row:
 from __future__ import annotations
 
 import html
+import http.client
 import io
 import json
 import re
@@ -45,6 +46,7 @@ _URL_CHECKED_TYPES = frozenset({SourceType.OFFICIAL_DOCUMENT, SourceType.TRIAL_R
 
 def normalise(text: str) -> str:
     text = html.unescape(text)  # Europe PMC titles arrive as "&lt;i&gt;Fusarium&lt;/i&gt;"
+    text = text.replace(chr(0), "").replace(chr(0xAD), "")  # PDF ligature remnants ("bioforti<NUL>ed") and soft hyphens
     text = re.sub(r"</?(?:i|b|em|strong|sub|sup|span|u)\b[^<>]*>", "", text)  # inline formatting: no gap
     # Block tags (p, h4, br...) separate words. A tag starts with a letter or "/" right after "<": a comparison such as
     # "ACI<10" or "p < 0.05" is text, and must not swallow everything up to the next ">" (it once deleted whole PDF tables).
@@ -109,8 +111,8 @@ def _read_url(url: str) -> bytes | None:
     try:
         with urllib.request.urlopen(request, timeout=40) as response:
             return response.read(MAX_DOCUMENT_BYTES)
-    except (urllib.error.URLError, TimeoutError, ValueError, OSError):
-        return None
+    except (urllib.error.URLError, TimeoutError, ValueError, OSError, http.client.HTTPException):
+        return None  # incl. a truncated download (IncompleteRead), which is not an OSError
 
 
 def _read_archived(url: str) -> bytes | None:
