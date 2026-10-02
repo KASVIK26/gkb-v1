@@ -1,0 +1,1552 @@
+# Variety -> zone recommendations and parentage from ICAR pages and the IIWBR compendium, found by ChatGPT deep research (WO03),
+# verified by `agrihub kg ingest-candidates` and reviewed claim-by-claim 2026-10-03 (kg/review_log/2026-10-03_wo01-wo03.md). Evidence stays `llm:`.
+
+sources:
+- id: doc:aicrp_soybean_varieties_html
+  type: official_document
+  title: सोयाबीन प्रजातियाँ
+  url: https://icar-nsri.res.in/newwebsitehindi/varieties.html
+  verified: true
+- id: doc:icar_iipr_chickpea_varieties_html
+  type: official_document
+  title: Research – Varieties
+  url: https://www.icar-iipr.org.in/varity/
+  verified: true
+- id: doc:iiwbr_wheat_compendium_2018_2023
+  type: official_document
+  title: Compendium of Wheat Varieties Notified in India During 2018-2023
+  year: 2023
+  url: https://iiwbr.org.in/wp-content/uploads/2024/01/RB-51-Compendium-of-Wheat-Varieties-Notified-in-India-During-2018-2023.pdf
+  verified: true
+- id: doc:iiwbr_technology_developed_2024_25
+  type: official_document
+  title: ICAR-IIWBR Technology Developed
+  year: 2024
+  url: https://iiwbr.org.in/technology-developed/
+  verified: true
+entities:
+- id: var:soybean:JS72280
+  type: Variety
+  name: JS 72-280
+  crop: soybean
+  synonyms:
+  - Durga
+  name_i18n: {}
+  props: {}
+- id: var:soybean:JS7244
+  type: Variety
+  name: JS 72-44
+  crop: soybean
+  synonyms:
+  - Gaurawa
+  name_i18n: {}
+  props: {}
+- id: var:soybean:MACS13
+  type: Variety
+  name: MACS 13
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 1985
+- id: var:soybean:PK472
+  type: Variety
+  name: PK 472
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 1986
+- id: var:soybean:JS7546
+  type: Variety
+  name: JS 75-46
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 1987
+- id: var:soybean:JS76205
+  type: Variety
+  name: JS 76-205
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 1990
+- id: var:soybean:JS71
+  type: Variety
+  name: JS 71
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:soybean:MACS57
+  type: Variety
+  name: MACS 57
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 1992
+- id: var:soybean:NRC2
+  type: Variety
+  name: NRC 2
+  crop: soybean
+  synonyms:
+  - Ahilya-1
+  name_i18n: {}
+  props: {}
+- id: var:soybean:NRC12
+  type: Variety
+  name: NRC 12
+  crop: soybean
+  synonyms:
+  - Ahilya-2
+  name_i18n: {}
+  props: {}
+- id: var:soybean:NRC7
+  type: Variety
+  name: NRC 7
+  crop: soybean
+  synonyms:
+  - Ahilya-3
+  name_i18n: {}
+  props: {}
+- id: var:soybean:JS9041
+  type: Variety
+  name: JS 90-41
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 1999
+- id: var:soybean:MAUS32
+  type: Variety
+  name: MAUS 32
+  crop: soybean
+  synonyms:
+  - Prasad
+  name_i18n: {}
+  props: {}
+- id: var:soybean:INDIRASOYA9
+  type: Variety
+  name: Indira Soya 9
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:soybean:NRC37
+  type: Variety
+  name: NRC 37
+  crop: soybean
+  synonyms:
+  - Ahilya-4
+  name_i18n: {}
+  props: {}
+- id: var:soybean:TAMS38
+  type: Variety
+  name: TAMS 38
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2005
+- id: var:soybean:DS228
+  type: Variety
+  name: DS 228
+  crop: soybean
+  synonyms:
+  - Phule Kalyani
+  name_i18n: {}
+  props: {}
+- id: var:soybean:TAMS9821
+  type: Variety
+  name: TAMS 98-21
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2007
+- id: var:soybean:MAUS158
+  type: Variety
+  name: MAUS 158
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2010
+- id: var:soybean:MAUS162
+  type: Variety
+  name: MAUS 162
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2014
+- id: var:soybean:JS2098
+  type: Variety
+  name: JS 20-98
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:soybean:NRC127
+  type: Variety
+  name: NRC 127
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2018
+- id: var:soybean:AMS1001
+  type: Variety
+  name: AMS 1001
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2019
+- id: var:soybean:AMS10039
+  type: Variety
+  name: AMS 100-39
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2021
+- id: var:soybean:RVS76
+  type: Variety
+  name: RVS 76
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2021
+- id: var:soybean:AMSMB518
+  type: Variety
+  name: AMS-MB-5-18
+  crop: soybean
+  synonyms:
+  - Suvarna Soya
+  name_i18n: {}
+  props: {}
+- id: var:soybean:JS2172
+  type: Variety
+  name: JS 21-72
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2023
+- id: var:soybean:NRC150
+  type: Variety
+  name: NRC 150
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2023
+- id: var:soybean:NRC152
+  type: Variety
+  name: NRC 152
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2023
+- id: var:soybean:NRC131
+  type: Variety
+  name: NRC 131
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:soybean:NRC181
+  type: Variety
+  name: NRC 181
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2024
+- id: var:soybean:NRC188
+  type: Variety
+  name: NRC 188
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2024
+- id: var:chickpea:IPCK200429
+  type: Variety
+  name: IPCK 2004-29
+  crop: chickpea
+  synonyms:
+  - Ujjawal
+  name_i18n: {}
+  props: {}
+- id: var:chickpea:IPC200677
+  type: Variety
+  name: IPC 2006-77
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI1634
+  type: Variety
+  name: HI 1634
+  crop: wheat
+  synonyms:
+  - Pusa Ahilya
+  name_i18n: {}
+  props: {}
+- id: var:wheat:CG1036
+  type: Variety
+  name: CG 1036
+  crop: wheat
+  synonyms:
+  - Vidhya
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI1655
+  type: Variety
+  name: HI 1655
+  crop: wheat
+  synonyms:
+  - Pusa Harsha
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI8830
+  type: Variety
+  name: HI 8830
+  crop: wheat
+  synonyms:
+  - Pusa Kirti
+  name_i18n: {}
+  props: {}
+- id: var:wheat:DDW55
+  type: Variety
+  name: DDW 55
+  crop: wheat
+  synonyms:
+  - Karan Manjari
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI8823
+  type: Variety
+  name: HI 8823
+  crop: wheat
+  synonyms:
+  - Pusa Prabhat
+  name_i18n: {}
+  props: {}
+- id: var:wheat:UAS466
+  type: Variety
+  name: UAS 466
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:wheat:CG1029
+  type: Variety
+  name: CG 1029
+  crop: wheat
+  synonyms:
+  - Kanishka
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI1650
+  type: Variety
+  name: HI 1650
+  crop: wheat
+  synonyms:
+  - Pusa Ojaswi
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI1636
+  type: Variety
+  name: HI 1636
+  crop: wheat
+  synonyms:
+  - Pusa Vakula
+  name_i18n: {}
+  props: {}
+- id: var:wheat:GW513
+  type: Variety
+  name: GW 513
+  crop: wheat
+  synonyms:
+  - Gujarat Wheat 513
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI8802
+  type: Variety
+  name: HI 8802
+  crop: wheat
+  synonyms:
+  - Pusa Wheat 8802
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI8805
+  type: Variety
+  name: HI 8805
+  crop: wheat
+  synonyms:
+  - Pusa Wheat 8805
+  name_i18n: {}
+  props: {}
+- id: var:wheat:MACS4058
+  type: Variety
+  name: MACS 4058
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI1633
+  type: Variety
+  name: HI 1633
+  crop: wheat
+  synonyms:
+  - Pusa Vani
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI8826
+  type: Variety
+  name: HI 8826
+  crop: wheat
+  synonyms:
+  - Pusa Poshtik
+  name_i18n: {}
+  props: {}
+- id: var:wheat:MPJW1358
+  type: Variety
+  name: MP (JW)1358
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:wheat:NIAW3170
+  type: Variety
+  name: NIAW 3170
+  crop: wheat
+  synonyms:
+  - Phule Satwik
+  name_i18n: {}
+  props: {}
+- id: var:wheat:NIDW1149
+  type: Variety
+  name: NIDW 1149
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:wheat:GW1346
+  type: Variety
+  name: GW 1346
+  crop: wheat
+  synonyms:
+  - Gujarat Wheat 1346
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI8663
+  type: Variety
+  name: HI 8663
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:wheat:HI8653
+  type: Variety
+  name: HI 8653
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:wheat:DBW377
+  type: Variety
+  name: DBW 377
+  crop: wheat
+  synonyms:
+  - Karan Bold
+  name_i18n: {}
+  props: {}
+- id: var:wheat:DBW303
+  type: Variety
+  name: DBW 303
+  crop: wheat
+  synonyms:
+  - Karan Vaishnavi
+  name_i18n: {}
+  props: {}
+- id: var:wheat:DBW187
+  type: Variety
+  name: DBW 187
+  crop: wheat
+  synonyms:
+  - Karan Vandana
+  name_i18n: {}
+  props: {}
+- id: var:wheat:DBW359
+  type: Variety
+  name: DBW 359
+  crop: wheat
+  synonyms:
+  - Karan Shivangi
+  name_i18n: {}
+  props: {}
+- id: var:wheat:DDW47
+  type: Variety
+  name: DDW 47
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:wheat:DDW48
+  type: Variety
+  name: DDW 48
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props: {}
+claims:
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS72280
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: दुर्गा (JS 72-280) ... 1982 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0001
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS7244
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: गौरावा (JS 72-44) ... 1982 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0002
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:MACS13
+  object: zone:soybean:MH
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: MACS–13 ... 1985 ... महाराष्ट्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0004
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:PK472
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: PK–472 ... 1986 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0006
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS7546
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS 75–46 ... 1987 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0007
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS76205
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS–76–205 ... 1990 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0008
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS71
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS–71– ... 1991 ... मालवा क्षेत्र, मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0009
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:MACS57
+  object: zone:soybean:MH
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: MACS–57 ... 1992 ... महाराष्ट्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0010
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS335
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS 335 ... 1994 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0011
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC2
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: अहिल्या–1 (NRC 2) ... 1997 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0012
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC12
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: अहिल्या–2 (NRC 12) ... 1997 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0013
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC7
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: अहिल्या–3 (NRC 7) ... 1997 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0014
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS9041
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS 90–41 ... 1999 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0015
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:MAUS32
+  object: zone:soybean:MH
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: प्रसाद (MAUS 32) ... 2000 ... महाराष्ट्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0016
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:PARBHANISONA
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: परभणी सोना (MAUS 47) ... 2000 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0017
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:INDIRASOYA9
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: 'ICAR-NSRI official variety list; row with release/notification year and adaptation area [alias in quote: subject named ''इंदिरा सोया–9'']'
+    quote: इंदिरा सोया–9 ... 2001 ... पूर्वोत्तर क्षेत्र व मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0018
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC37
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: अहिल्या–4 (NRC 37) ... 2001 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0019
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:PRATISHTA
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: प्रतिष्ठा (MAUS 61–2) ... 2002 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0020
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS9305
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS 93–05 ... 2002 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0021
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:SHAKTI
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: MAUS 81 (शक्ति) ... 2004 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0022
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:TAMS38
+  object: zone:soybean:MH
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: TAMS 38 ... 2005 ... महाराष्ट्र (विदर्भ)
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0023
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:DS228
+  object: zone:soybean:MH
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: फुले कल्याणी (DS 228) ... 2006 ... महाराष्ट्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0024
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:TAMS9821
+  object: zone:soybean:MH
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: TAMS 98–21 ... 2007 ... महाराष्ट्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0025
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS9560
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS 95–60 ... 2007 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0026
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:MAUS158
+  object: zone:soybean:MH
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: MAUS 158 ... 2010 ... महाराष्ट्र (मराठवाड़ा)
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0027
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS2029
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS 20–29 ... 2014 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0028
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS2034
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS 20–34 ... 2014 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0029
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:RVS20014
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: RVS 2001–4 ... 2014 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0030
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:MAUS162
+  object: zone:soybean:MH
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: MAUS 162 ... 2014 ... महाराष्ट्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0031
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC86
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: NRC 86 ... 2015 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0032
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS2069
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS 20–69 ... 2016 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0033
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:RAJSOYA24
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: 'ICAR-NSRI official variety list; row with release/notification year and adaptation area [alias in quote: subject named ''राज सोया-24'']'
+    quote: राज सोया-24 (RVS 2002-4) ... 2017 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0034
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:RAJSOYA18
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: 'ICAR-NSRI official variety list; row with release/notification year and adaptation area [alias in quote: subject named ''राज सोया-18'']'
+    quote: राज सोया-18 (प्रज्ञा) ... 2017 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0035
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS2098
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: जवाहर सोयाबीन 20-98 (JS 20-98) ... 2018 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0036
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:MAUS612
+  object: zone:soybean:MH
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: MAUS 612 ... 2018 ... महाराष्ट्र एवं दक्षिण क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0037
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC127
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: NRC 127 ... 2018 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0038
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:AMS1001
+  object: zone:soybean:MH
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: AMS 1001 ... 2019 ... महाराष्ट्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0040
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS2094
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS 20-94 ... 2019 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0042
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC130
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: NRC 130 ... 2021 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0043
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:MACS1520
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: MACS 1520 ... 2021 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0044
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:AMS10039
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: AMS 100-39 ... 2021 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0045
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:RVS76
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: RVS 76 ... 2021 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0046
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:AMSMB518
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: AMS-MB-5-18 (सुवर्ण सोया) ... 2020 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0047
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:JS2172
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: JS 21-72 ... 2023 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0048
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC150
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: NRC 150 ... 2023 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0050
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC152
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: NRC 152 ... 2023 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0051
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:MAUS725
+  object: zone:soybean:MH
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: MAUS 725 ... 2023 ... महाराष्ट्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0052
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC131
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: इंदौर सोय 131 (NRC 131) ... 2023 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0053
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC157
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: NRC 157 ... 2023 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0054
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC136
+  object: zone:soybean:MP
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: इंदौर सोय 136 (NRC 136) ... 2023 ... मध्य प्रदेश
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0055
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC181
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: NRC 181 ... 2024 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0056
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:soybean:NRC188
+  object: zone:soybean:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_soybean_varieties_html
+    method: official_document
+    locator: ICAR-NSRI official variety list; row with release/notification year and adaptation area
+    quote: NRC 188 ... 2024 ... मध्य क्षेत्र
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0057
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:chickpea:SHUBHRA
+  object: zone:chickpea:CZ
+  qualifiers:
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:icar_iipr_chickpea_varieties_html
+    method: official_document
+    locator: ICAR-IIPR official variety page; Central Zone recommendation
+    quote: 'IPCK 2002-29 (Shubhra, Kabuli type) Year of Release: 2009 (CVRC) ... Recommended Area: Central Zone of India ... Ecology:Suitable for irrigated and timely sown condition'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0058
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:chickpea:IPCK200429
+  object: zone:chickpea:CZ
+  qualifiers:
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:icar_iipr_chickpea_varieties_html
+    method: official_document
+    locator: ICAR-IIPR official variety page; Central Zone recommendation
+    quote: 'IPCK 2004-29 (Ujjawal, Kabuli type) Year of Release: 2010 (CVRC) ... Recommended Area:Central Zone of India ... Ecology:Suitable for irrigated and timely sown condition'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0059
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:chickpea:IPC200677
+  object: zone:chickpea:CZ
+  qualifiers:
+    sowing: late
+    water_regime: irrigated
+  evidence:
+  - source: doc:icar_iipr_chickpea_varieties_html
+    method: official_document
+    locator: ICAR-IIPR official variety page; Central Zone recommendation
+    quote: 'IPC 2006-77 (Desi type) Year of Release: 2019 (CVRC) ... Recommended Area:Central Zone ... Ecology:Suitable for irrigated and late sown condition'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0060
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1634
+  object: zone:wheat:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.5: Biofortied Wheat Varieties for Central Zone ... HI 1634 (Pusa Ahilya) ... GW 322/PBW 498'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0061
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:CG1036
+  object: zone:wheat:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... CG 1036 (Vidhya) ... HW2004/PHS832'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0062
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1655
+  object: zone:wheat:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... HI 1655 (Pusa Harsha) ... MACS 2496 / HI 1531'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0063
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI8830
+  object: zone:wheat:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... HI 8830 (Pusa Kirti) ... HI 8713/HI 8663'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0064
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DDW55
+  object: zone:wheat:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... DDW 55 (Karan Manjari) ... PDW274/PDW314//HI8498'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0065
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI8823
+  object: zone:wheat:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... HI 8823 (Pusa Prabhat) ... HI 8709/HD 4676'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0066
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:UAS466
+  object: zone:wheat:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... UAS 466 ... Amruth/Bijaga Yellow//AKDW 2997-16'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0067
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:CG1029
+  object: zone:wheat:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... CG 1029 (Kanishka) ... HW 2004/ PHS 725'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0068
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1650
+  object: zone:wheat:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... HI 1650 (Pusa Ojaswi) ... Giant-3/HI 1395'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0069
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1636
+  object: zone:wheat:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... HI 1636 (Pusa Vakula) ... DL788-2/HW4032'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0070
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:GW513
+  object: zone:wheat:CZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... GW 513 (Gujarat Wheat 513) ... PBW 559/WR 1873'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0071
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI8802
+  object: zone:wheat:PZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.7: Bio-fortied Wheat Varieties for Peninsular Zone ... HI 8802 (Pusa Wheat 8802) ... HI8627/HI8653'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0072
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI8805
+  object: zone:wheat:PZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.7: Bio-fortied Wheat Varieties for Peninsular Zone ... HI 8805 (Pusa Wheat 8805) ... IWP 5070 / HI 8638// HI 8663'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0073
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:MACS4058
+  object: zone:wheat:PZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.7: Bio-fortied Wheat Varieties for Peninsular Zone ... MACS 4058 ... MACS3125/AKDW2997-16//MACS3125'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0075
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1633
+  object: zone:wheat:PZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.7: Bio-fortied Wheat Varieties for Peninsular Zone ... HI 1633 (Pusa Vani) ... GW 322 / PBW 498'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0076
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI8826
+  object: zone:wheat:PZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.8: Wheat Varieties for Peninsular Zone ... HI 8826 (Pusa Poshtik) ... HI 8713/HI 8663'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0077
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:MPJW1358
+  object: zone:wheat:PZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.8: Wheat Varieties for Peninsular Zone ... MP (JW)1358 ... KACHU*2/MUNAL#1/K1215'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0078
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:NIAW3170
+  object: zone:wheat:PZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.8: Wheat Varieties for Peninsular Zone ... NIAW 3170 (Phule Satwik) ... SKOLL/ROLF07'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0079
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:NIDW1149
+  object: zone:wheat:PZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.8: Wheat Varieties for Peninsular Zone ... NIDW 1149 ... NIDW 295 (Godavari) X NIDW 15 (Panchavati)'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0080
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:GW1346
+  object: zone:wheat:PZ
+  qualifiers: {}
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Central Zone tables pp. 18-20; Peninsular Zone tables pp. 21-22
+    quote: 'Table 2.8: Wheat Varieties for Peninsular Zone ... GW 1346 (Gujarat Wheat 1346) ... GW 1236/ AR-06-3'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0081
+- type: VARIETY_DERIVED_FROM
+  subject: var:soybean:MAUS32
+  object: var:soybean:JS8021
+  qualifiers:
+    role: selection_from
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Annexure-II, row 26
+    quote: 26. Prasad (MAUS 32) ... Selection from JS 80-21 ... Maharashtra
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0082
+- type: VARIETY_DERIVED_FROM
+  subject: var:soybean:DS228
+  object: var:soybean:JS335
+  qualifiers:
+    role: parent
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Annexure-II, row 33
+    quote: 33. Phule Kalyani (DS 228) ... JS 335 x DS-181 (PI 4623133) ... Maharashtra
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0083
+- type: VARIETY_DERIVED_FROM
+  subject: var:wheat:HI1634
+  object: var:wheat:GW322
+  qualifiers:
+    role: parent
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Relevant zone table row
+    quote: 'Table 2.5: Biofortied Wheat Varieties for Central Zone ... HI 1634 (Pusa Ahilya) ... GW 322/PBW 498'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0084
+- type: VARIETY_DERIVED_FROM
+  subject: var:wheat:HI8830
+  object: var:wheat:HI8713
+  qualifiers:
+    role: parent
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Relevant zone table row
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... HI 8830 (Pusa Kirti) ... HI 8713/HI 8663'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0085
+- type: VARIETY_DERIVED_FROM
+  subject: var:wheat:HI8830
+  object: var:wheat:HI8663
+  qualifiers:
+    role: parent
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Relevant zone table row
+    quote: 'Table 2.6: Biofortied Wheat Varieties for Central Zone ... HI 8830 (Pusa Kirti) ... HI 8713/HI 8663'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0086
+- type: VARIETY_DERIVED_FROM
+  subject: var:wheat:HI8802
+  object: var:wheat:HI8627
+  qualifiers:
+    role: parent
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Relevant zone table row
+    quote: 'Table 2.7: Bio-fortied Wheat Varieties for Peninsular Zone ... HI 8802 (Pusa Wheat 8802) ... HI8627/HI8653'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0087
+- type: VARIETY_DERIVED_FROM
+  subject: var:wheat:HI8802
+  object: var:wheat:HI8653
+  qualifiers:
+    role: parent
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Relevant zone table row
+    quote: 'Table 2.7: Bio-fortied Wheat Varieties for Peninsular Zone ... HI 8802 (Pusa Wheat 8802) ... HI8627/HI8653'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0088
+- type: VARIETY_DERIVED_FROM
+  subject: var:wheat:HI8826
+  object: var:wheat:HI8713
+  qualifiers:
+    role: parent
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Relevant zone table row
+    quote: 'Table 2.8: Wheat Varieties for Peninsular Zone ... HI 8826 (Pusa Poshtik) ... HI 8713/HI 8663'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0089
+- type: VARIETY_DERIVED_FROM
+  subject: var:wheat:HI8826
+  object: var:wheat:HI8663
+  qualifiers:
+    role: parent
+  evidence:
+  - source: doc:iiwbr_wheat_compendium_2018_2023
+    method: official_document
+    locator: Relevant zone table row
+    quote: 'Table 2.8: Wheat Varieties for Peninsular Zone ... HI 8826 (Pusa Poshtik) ... HI 8713/HI 8663'
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0090
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DBW377
+  object: zone:wheat:CZ
+  qualifiers:
+    sowing: early
+    water_regime: irrigated
+  evidence:
+  - source: doc:iiwbr_technology_developed_2024_25
+    method: official_document
+    locator: Wheat and barley varieties under seed production programme during 2024-25
+    quote: CENTRAL ZONE (CZ) Madhya Pradesh, Chhattisgarh, Gujarat, Kota and Udaipur divisions of Rajasthan and Jhansi division of Uttar Pradesh ... Irrigated, Early Sown- High Fertility ... DBW 377 (Karan Bold) ... 2024
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0092
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DBW303
+  object: zone:wheat:CZ
+  qualifiers:
+    sowing: early
+    water_regime: irrigated
+  evidence:
+  - source: doc:iiwbr_technology_developed_2024_25
+    method: official_document
+    locator: Wheat and barley varieties under seed production programme during 2024-25
+    quote: CENTRAL ZONE (CZ) Madhya Pradesh, Chhattisgarh, Gujarat, Kota and Udaipur divisions of Rajasthan and Jhansi division of Uttar Pradesh ... Irrigated, Early Sown- High Fertility ... DBW 303 (Karan Vaishnavi) ... 2023
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0093
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DBW187
+  object: zone:wheat:CZ
+  qualifiers:
+    sowing: early
+    water_regime: irrigated
+  evidence:
+  - source: doc:iiwbr_technology_developed_2024_25
+    method: official_document
+    locator: Wheat and barley varieties under seed production programme during 2024-25
+    quote: CENTRAL ZONE (CZ) Madhya Pradesh, Chhattisgarh, Gujarat, Kota and Udaipur divisions of Rajasthan and Jhansi division of Uttar Pradesh ... Irrigated, Early Sown- High Fertility ... DBW187 (Karan Vandana) ... 2021
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0094
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DBW359
+  object: zone:wheat:CZ
+  qualifiers:
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:iiwbr_technology_developed_2024_25
+    method: official_document
+    locator: Wheat and barley varieties under seed production programme during 2024-25
+    quote: CENTRAL ZONE (CZ) Madhya Pradesh, Chhattisgarh, Gujarat, Kota and Udaipur divisions of Rajasthan and Jhansi division of Uttar Pradesh ... Irrigated Timely Sown ... DBW 359 (Karan Shivangi) ... 2024
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0095
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DBW359
+  object: zone:wheat:PZ
+  qualifiers:
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:iiwbr_technology_developed_2024_25
+    method: official_document
+    locator: Wheat and barley varieties under seed production programme during 2024-25
+    quote: PENINSULAR ZONE (PZ) Maharashtra, Karnataka, Andhra Pradesh, Goa, plains of Tamil Nadu ... Irrigated Timely Sown ... DBW 359 (Karan Shivangi) ... 2023
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0096
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DDW55
+  object: zone:wheat:CZ
+  qualifiers:
+    sowing: timely
+  evidence:
+  - source: doc:iiwbr_technology_developed_2024_25
+    method: official_document
+    locator: Wheat and barley varieties under seed production programme during 2024-25
+    quote: CENTRAL ZONE (CZ) Madhya Pradesh, Chhattisgarh, Gujarat, Kota and Udaipur divisions of Rajasthan and Jhansi division of Uttar Pradesh ... Durum Timely Sown ... DDW 55 (Karan Manjari ) ... 2023
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0097
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DDW47
+  object: zone:wheat:CZ
+  qualifiers:
+    sowing: timely
+  evidence:
+  - source: doc:iiwbr_technology_developed_2024_25
+    method: official_document
+    locator: Wheat and barley varieties under seed production programme during 2024-25
+    quote: CENTRAL ZONE (CZ) Madhya Pradesh, Chhattisgarh, Gujarat, Kota and Udaipur divisions of Rajasthan and Jhansi division of Uttar Pradesh ... Durum Timely Sown ... DDW47 ... 2020
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0098
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DDW48
+  object: zone:wheat:PZ
+  qualifiers:
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:iiwbr_technology_developed_2024_25
+    method: official_document
+    locator: Wheat and barley varieties under seed production programme during 2024-25
+    quote: PENINSULAR ZONE (PZ) Maharashtra, Karnataka, Andhra Pradesh, Goa, plains of Tamil Nadu ... Durum  Restricted irrigated-timely Sown ... DDW48  2021
+    extractor: llm:chatgpt-deep-research@wo03-2026-10-02
+    candidate_id: WO03-0099

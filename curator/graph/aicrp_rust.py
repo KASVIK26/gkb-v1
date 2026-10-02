@@ -9,8 +9,11 @@ disease column -- HS = highest score over the hot-spot centres ("20ms" = 20 % se
 coefficient of infection. The report prints the pair in either order depending on the table (the header says "aci hs" over data
 that read "hs aci"), so each token is classified by its shape: a decimal is the ACI, a token ending in a response letter is HS.
 
-Only the response letter is used for the reaction (R, MR, MS, S), as the report gives it. Trace responses (TR, TMR, TMS, TS),
-"0" and rows with missing values (ng, ni) are skipped rather than interpreted.
+The reaction follows the report's own rule, which it states before its tables ("entries with ACI up to 10.0 were categorized as
+resistant"; "found resistant (ACI<10)"): ACI <= 10.0 -> R. Above that the report gives no class, so the response letter of the highest
+score is used (MR, MS, S as printed). The first version used the letter alone, which called a row such as `10S (ACI 2.7)` susceptible when
+the report calls it resistant, and produced ~100 false conflicts with the variety notifications. A table whose rule sentence cannot be found
+is not read. Trace responses (TR, TMR, TMS, TS), "0" and rows with missing values (ng, ni) are skipped rather than interpreted.
 """
 
 from __future__ import annotations
@@ -34,6 +37,8 @@ _PAGE_HEADER = re.compile(r"aicrp-w&b, progress report, crop protection, (?:vol\
 _ACI = re.compile(r"\d+\.\d")
 _HS = re.compile(r"(\d{1,3})?(tmr|tms|tr|ts|mr|ms|r|s)|0")
 _RESPONSE = {"r": "R", "mr": "MR", "ms": "MS", "s": "S"}
+_RULE = re.compile(r"entries with aci up to 10\.0 were categorized as resistant|with aci upto 10\.0 are given below|found resistant \(aci ?< ?10\)|based on the rusts aci up to 10\.0")
+ACI_RESISTANT_MAX = 10.0
 _FLAGS = re.compile(r"\((?:c|d|i|dic\.?)\)|[*#]|\bq\b")
 
 
@@ -47,6 +52,7 @@ class RustRow:
     values: tuple         # per column: (disease_id, location_label, hs_token, aci_token)
     row_text: str         # the exact normalised text of the row
     header_text: str      # the exact normalised header it was read under
+    rule: str = ""        # the report's own sentence defining "resistant" (ACI up to 10.0), the last one before the table
 
 
 def _pair(a: str, b: str):
@@ -89,6 +95,8 @@ def parse_tables(raw_text: str) -> list[RustRow]:
         # skip the per-column "aci hs" sub-header, then read rows
         if not season:
             continue
+        rules = list(_RULE.finditer(text, 0, header.start()))
+        rule = rules[-1].group(0) if rules else ""
         tail = text[header.end(): header.end() + 60000]
         tokens = tail.split()
         i = 0
@@ -140,7 +148,7 @@ def parse_tables(raw_text: str) -> list[RustRow]:
             end = k + need
             row_text = " ".join(tokens[start:end])
             values = tuple((COLUMN_WORDS[col][0], COLUMN_WORDS[col][1], hs, aci) for col, (hs, aci) in zip(columns, pairs))
-            rows.append(RustRow(title, season, tokens[i], entry, _clean(entry), values, row_text, header.group(0)))
+            rows.append(RustRow(title, season, tokens[i], entry, _clean(entry), values, row_text, header.group(0), rule))
             i = end
             while i < len(tokens) and not re.fullmatch(rf"{expected + 1}|{expected}[a-z]", tokens[i]):
                 i += 1  # trailing columns of other diseases
@@ -152,6 +160,17 @@ def _clean(entry: str) -> str:
     return re.sub(r"\s+", " ", _FLAGS.sub(" ", entry)).strip()
 
 
+def classify(hs_token: str, aci_token: str) -> str | None:
+    """The reaction class of one (HS, ACI) pair: R when ACI <= 10.0 (the report's rule), otherwise the response letter of the HS."""
+    letter = reaction_of(hs_token)
+    if letter is None:
+        return None
+    try:
+        return "R" if float(aci_token) <= ACI_RESISTANT_MAX else letter
+    except ValueError:
+        return None
+
+
 def reaction_of(hs_token: str) -> str | None:
     """R / MR / MS / S from the response letter of an HS token, None for trace, zero or anything else."""
     m = re.fullmatch(r"(\d{1,3})?(tmr|tms|tr|ts|mr|ms|r|s)", hs_token)
@@ -161,7 +180,7 @@ def reaction_of(hs_token: str) -> str | None:
 
 
 # ───────────────────────────── from rows to a reviewable batch ─────────────────────────────
-SCALE = "highest score (HS) over the hot-spot centres; response letter as reported (R/MR/MS/S)"
+SCALE = "R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres"
 
 
 def claim_specs(rows: list[RustRow], *, source_id: str, entities: list) -> tuple[list[dict], list[str]]:
@@ -179,6 +198,8 @@ def claim_specs(rows: list[RustRow], *, source_id: str, entities: list) -> tuple
     specs: dict[str, dict] = {}
     unknown: list[str] = []
     for row in rows:
+        if not row.rule:
+            continue  # the report's definition of "resistant" was not found before this table: do not guess a class
         try:
             variety = resolve_entity_from_bundle(row.entry_clean, EntityType.VARIETY, entities, "wheat")
         except AmbiguousName:
@@ -186,9 +207,9 @@ def claim_specs(rows: list[RustRow], *, source_id: str, entities: list) -> tuple
         if variety is None:
             unknown.append(row.entry_clean)
             continue
-        quote = f"{row.table_title} ... {row.header_text} ... {row.row_text}"
+        quote = f"{row.rule} ... {row.table_title} ... {row.header_text} ... {row.row_text}"
         for disease_id, location, hs, aci in row.values:
-            reaction = reaction_of(hs)
+            reaction = classify(hs, aci)
             if reaction is None:
                 continue  # trace / zero / unreadable: not interpreted
             qualifiers = {"reaction": reaction, "stage": "adult", "season": row.season, "score_raw": f"{hs.upper()} (ACI {aci})", "scale": SCALE}

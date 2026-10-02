@@ -7,6 +7,7 @@ when there is one -- and checks every stored quote against it.
 
 Statuses per evidence row:
   exact        the quote is a substring of the source text (after whitespace/quote/dash normalisation)
+  spacing      identical to the source once whitespace is ignored (a PDF split a word); counts as verified
   fuzzy        very close but not identical (>= 95 partial match) -- worth a look, not trusted blindly
   missing      the source text was fetched and the quote is not in it
   no_text      the source could not be fetched, or only a paywalled abstract exists and the quote may
@@ -99,7 +100,20 @@ MIN_FRAGMENT_CHARS = 12
 def quote_fragments(quote: str) -> list[str]:
     """The verbatim stretches of a quote that a curator elided or edited with '...' or '[...]'."""
     pieces = [normalise(p) for p in _ELISION.split(quote)]
-    return [p for p in pieces if len(p) >= MIN_FRAGMENT_CHARS] or [normalise(quote)]
+    long_pieces = [p for p in pieces if len(p) >= MIN_FRAGMENT_CHARS]
+    if long_pieces:
+        return long_pieces
+    short_pieces = [p for p in pieces if p]
+    return short_pieces if len(short_pieces) >= 2 else [normalise(quote)]  # table cells: see _all_short
+
+
+def _all_short(quote: str) -> bool:
+    """A quote made only of short pieces joined by '...' (a name, a year, a state: the cells of one table row)."""
+    pieces = [normalise(p) for p in _ELISION.split(quote) if normalise(p)]
+    return len(pieces) >= 2 and all(len(p) < MIN_FRAGMENT_CHARS for p in pieces)
+
+
+SHORT_PIECE_WINDOW = 60  # characters allowed between consecutive short pieces: they must be neighbours, not coincidences
 
 
 MAX_DOCUMENT_BYTES = 25_000_000
@@ -152,19 +166,35 @@ def fetch_url_text(url: str) -> str | None:
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", raw))
 
 
+def _in_order(fragments: list[str], text: str, *, window: int | None = None, position: int = 0) -> bool:
+    """Each fragment appears after the previous one (and, if `window` is set, within that many characters of it).
+    Every occurrence of a fragment is tried: "js 95-60" may appear on the page for two different states."""
+    if not fragments:
+        return True
+    first, rest = fragments[0], fragments[1:]
+    start = position
+    while True:
+        found = text.find(first, start)
+        if found < 0:
+            return False
+        if (window is None or position == 0 or found - position <= window) and _in_order(rest, text, window=window, position=found + len(first)):
+            return True
+        start = found + 1
+
+
 def check_quote(quote: str, source_text: str) -> str:
-    """exact: every fragment appears verbatim, in order. fuzzy: each is very close. missing: neither."""
+    """exact: every fragment appears verbatim, in order. spacing: identical once all whitespace is ignored (PDF text often
+    splits a word: "sriganga naga"). fuzzy: each is very close but not identical. missing: neither."""
     text = normalise(source_text)
     fragments = quote_fragments(quote)
-    position, in_order = 0, True
-    for fragment in fragments:
-        found = text.find(fragment, position)
-        if found < 0:
-            in_order = False
-            break
-        position = found + len(fragment)
-    if in_order:
+    window = SHORT_PIECE_WINDOW if _all_short(quote) else None
+    if _in_order(fragments, text, window=window):
         return "exact"
+    squashed = re.sub(r"\s+", "", text)
+    if _in_order([re.sub(r"\s+", "", f) for f in fragments], squashed, window=window):
+        return "spacing"
+    if window is not None:
+        return "missing"  # short cells carry too little text for an approximate match to mean anything
     return "fuzzy" if all(fuzz.partial_ratio(f, text) >= FUZZY_THRESHOLD for f in fragments) else "missing"
 
 

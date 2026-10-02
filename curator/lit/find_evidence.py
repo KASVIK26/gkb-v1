@@ -29,10 +29,11 @@ def _squash(text: str) -> str:
 
 def term_pattern(term: str) -> re.Pattern[str]:
     """Regex for `term`, tolerant of spacing/hyphen differences but anchored on whole tokens."""
-    parts = [re.escape(p) for p in re.split(r"[\s\-_]+", term.strip()) if p]
-    loose = r"[\s\-]?".join(parts)
-    # also tolerate "HD2932" for "HD 2932" at a letter/digit boundary inside one token
-    loose = re.sub(r"(?<=[A-Za-z])(?=\d)", r"[\\s\\-]?", loose)
+    sep = r"[\s\-‐-―−]"  # whitespace, hyphen, en/em dash, minus
+    split = r"[\s\-‐-―−_]+"
+    # also tolerate "HD2932" for "HD 2932" at a letter/digit boundary inside one token (done per part, before joining)
+    parts = [re.sub(r"(?<=[A-Za-z])(?=\d)", lambda _m: sep + "?", re.escape(p)) for p in re.split(split, term.strip()) if p]
+    loose = (sep + "*").join(parts)  # "PDKV- Kanak": a hyphen AND a space between the parts
     return re.compile(rf"(?<![A-Za-z0-9]){loose}(?![A-Za-z0-9])", re.IGNORECASE)
 
 

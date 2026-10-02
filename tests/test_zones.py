@@ -55,3 +55,11 @@ def test_maharashtra_is_wheat_pz_but_only_part_of_soybean_sz(bundle):
     soy_sz = next(e for e in bundle.entities if e.id == "zone:soybean:SZ")
     assert "Maharashtra and Karnataka" == wheat_pz.props["definition"]
     assert "Southern parts of Maharashtra" in soy_sz.props["definition"]
+
+
+def test_hindi_zone_names_resolve_for_the_soybean_page(bundle):
+    from curator.extract.normalize import resolve_entity_from_bundle
+    from curator.model.enums import EntityType
+
+    assert resolve_entity_from_bundle("मध्य क्षेत्र", EntityType.AGRO_ZONE, bundle.entities, "soybean") == "zone:soybean:CZ"
+    assert resolve_entity_from_bundle("दक्षिण क्षेत्र", EntityType.AGRO_ZONE, bundle.entities, "soybean") == "zone:soybean:SZ"

@@ -133,6 +133,9 @@ def build_claim_candidate(
 def _resolve_mention(
     mention: dict[str, Any], allowed_types: frozenset[EntityType], *, entities: list, crop: Crop | str
 ) -> str | None:
+    explicit = mention.get("id")  # a reviewer pinned the entity (two names collide); it must exist and be of an allowed type
+    if explicit:
+        return explicit if any(e.id == explicit and e.type in allowed_types for e in entities) else None
     text = mention.get("text", "")
     if not text:
         return None

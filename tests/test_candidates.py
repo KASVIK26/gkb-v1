@@ -234,3 +234,48 @@ def test_aicrp_zone_by_name_or_abbreviation_and_the_quote_must_name_it(bundle):
     assert _run(bundle, {**base, "object": {"text": "CZ", "type": "AgroZone"}}, text=text).counts() == {"accepted": 1}
     # a zone of ANOTHER crop is a different entity: wheat has no "Southern Zone"
     assert _run(bundle, {**base, "object": {"text": "Southern Zone", "type": "AgroZone"}}, text=text).counts() == {"rejected": 1}
+
+
+def test_reviewer_can_name_the_entity_when_two_lookup_keys_collide(bundle):
+    """"MAUS 612" and "MAUS 61-2" (Pratishta) share the key maus612, so neither resolves by text; the override is explicit."""
+    text = PAPER_TEXT + " MAUS 61-2 was recommended for the Madhya Pradesh region in 2002."
+    base = _candidate(claim_type="VARIETY_RECOMMENDED_FOR_ZONE", subject={"text": "MAUS 61-2", "type": "Variety"},
+                      object={"text": "MP", "type": "AgroZone"}, qualifiers={}, quote="MAUS 61-2 was recommended for the Madhya Pradesh region in 2002.",
+                      evidence_basis="official_document", crop="soybean",
+                      source={"kind": "official_document", "url": "https://example.gov.in/s.html", "doc_slug": "example_soy", "title": "Soybean varieties"})
+    assert _run(bundle, base, text=text, url_text=text).counts() != {"accepted": 1}
+    pinned = {**base, "subject": {"text": "MAUS 61-2", "type": "Variety", "entity_id": "var:soybean:PRATISHTA"}}
+    result = _run(bundle, pinned, text=text, url_text=text)
+    assert result.counts() == {"accepted": 1}
+    assert next(iter(result.claims.values()))["subject"] == "var:soybean:PRATISHTA"
+    wrong_type = {**base, "subject": {"text": "x", "type": "Variety", "entity_id": "dis:soybean:rust"}}
+    assert _run(bundle, wrong_type, text=text, url_text=text).counts() == {"rejected": 1}
+
+
+def test_a_new_variety_keeps_its_common_name_as_a_synonym(bundle):
+    text = PAPER_TEXT + " The variety Brandnew 77 (Pusa Testwala) was resistant to leaf rust."
+    cand = _candidate(subject={"text": "Brandnew 77", "type": "Variety", "synonyms": ["Pusa Testwala"]}, qualifiers={"reaction": "R", "stage": "adult"},
+                      quote="The variety Brandnew 77 (Pusa Testwala) was resistant to leaf rust.")
+    result = _run(bundle, cand, text=text)
+    assert result.entities["var:wheat:BRANDNEW77"].synonyms == ["Pusa Testwala"]
+
+
+def test_pinning_works_even_when_the_pinned_entitys_own_name_collides(bundle):
+    """var:soybean:MAUS612 shares its lookup key with Pratishta's synonym "MAUS 61-2": text resolution is ambiguous, the id is not."""
+    text = PAPER_TEXT + " MAUS 612 was recommended for Maharashtra in 2018."
+    base = _candidate(claim_type="VARIETY_RECOMMENDED_FOR_ZONE", subject={"text": "MAUS 612", "type": "Variety"}, object={"text": "MH", "type": "AgroZone"},
+                      qualifiers={}, quote="MAUS 612 was recommended for Maharashtra in 2018.", evidence_basis="official_document", crop="soybean",
+                      source={"kind": "official_document", "url": "https://example.gov.in/s.html", "doc_slug": "example_soy", "title": "Soybean varieties"})
+    assert _run(bundle, base, text=text, url_text=text).counts() != {"accepted": 1}
+    pinned = {**base, "subject": {"text": "MAUS 612", "type": "Variety", "entity_id": "var:soybean:MAUS612"}}
+    result = _run(bundle, pinned, text=text, url_text=text)
+    assert result.counts() == {"accepted": 1} and next(iter(result.claims.values()))["subject"] == "var:soybean:MAUS612"
+
+
+def test_an_en_dash_name_resolves_to_the_existing_variety(bundle):
+    text = PAPER_TEXT + " RVS 2001–4 stayed resistant to soybean rust."
+    cand = _candidate(crop="soybean", subject={"text": "RVS 2001–4", "type": "Variety"}, object={"text": "Soybean rust", "type": "Disease"},
+                      qualifiers={"reaction": "R", "stage": "unspecified"}, quote="RVS 2001–4 stayed resistant to soybean rust.")
+    result = _run(bundle, cand, text=text)
+    claims = list(result.claims.values())
+    assert claims and claims[0]["subject"] == "var:soybean:RVS20014" and not result.entities

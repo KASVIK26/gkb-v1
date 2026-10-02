@@ -5,6 +5,8 @@
 # KG (config/sources/notified_varieties.yaml). `states` lists the states named in the definition (two-letter codes) -- a state
 # listed with an "except ..." clause is partly inside; read `definition` for the exact area. Nothing here is inferred.
 #
+# `synonyms` are Hindi names used by the ICAR-IISR Hindi variety page (मध्य क्षेत्र = Central Zone, दक्षिण क्षेत्र = Southern Zone).
+#
 # Chickpea: the DPD document only expands the abbreviations (CZ, NWPZ, NEPZ, SZ, NHZ) and gives no states, so no state list
 # is entered for chickpea zones rather than guessing one. Wheat has a sixth AICRP zone in some literature (Southern Hills
 # Zone) that this document does not list; it is not entered.
@@ -36,13 +38,13 @@ zones:
   - {id: "zone:soybean:NPZ", crop: soybean, name: "North Plain Zone", abbreviation: NPZ, states: [PB, HR, DL, UP, BR],
      definition: "Punjab, Haryana, Delhi, North east plains of U.P. and Western Bihar",
      definition_source: "doc:dod_soybean_varieties"}
-  - {id: "zone:soybean:CZ", crop: soybean, name: "Central Zone", abbreviation: CZ, states: [MP, CG, RJ, GJ, UP, MH],
+  - {id: "zone:soybean:CZ", crop: soybean, name: "Central Zone", abbreviation: CZ, states: [MP, CG, RJ, GJ, UP, MH], synonyms: ["मध्य क्षेत्र"],
      definition: "M.P., Chhattisgarh, Rajasthan, Gujarat, Bundlekhand region of U.P. North-West Maharashtra",
      definition_source: "doc:dod_soybean_varieties"}
   - {id: "zone:soybean:NEZ", crop: soybean, name: "North Eastern Zone", abbreviation: NEZ, states: [WB, OD, AS, SK, AR, NL, TR, ML, JH, BR],
      definition: "West Bengal, Odhissa, Assam, Sikkim, Arunachal Pradesh, Nagaland, Tripura, Meghalaya, Jharkhand and Eastern Bihar",
      definition_source: "doc:dod_soybean_varieties"}
-  - {id: "zone:soybean:SZ", crop: soybean, name: "Southern Zone", abbreviation: SZ, states: [KA, AP, TN, KL, MH],
+  - {id: "zone:soybean:SZ", crop: soybean, name: "Southern Zone", abbreviation: SZ, states: [KA, AP, TN, KL, MH], synonyms: ["दक्षिण क्षेत्र"],
      definition: "Karnataka, A.P., Tamil Nadu, Kerala and Southern parts of Maharashtra",
      definition_source: "doc:dod_soybean_varieties"}
 

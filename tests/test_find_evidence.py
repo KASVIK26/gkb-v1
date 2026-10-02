@@ -78,3 +78,14 @@ def test_term_pattern_is_anchored_on_whole_tokens():
     assert term_pattern("Lr34").search("carries Lr34, Sr2")
     assert not term_pattern("Lr34").search("Lr340 is unrelated")
     assert term_pattern("HD 2932").search("cultivar HD2932")
+
+
+def test_a_name_with_a_hyphen_and_a_space_between_parts_is_found():
+    assert term_pattern("PDKV- Kanak").search("101. PDKV- Kanak (AKG1303) 2021 Akola")
+    assert term_pattern("PDKV Kanak").search("101. PDKV- Kanak (AKG1303)")
+    assert not term_pattern("HD 29").search("HD 2932")  # whole tokens only
+
+
+def test_en_dash_and_hyphen_are_the_same_separator_in_a_name():
+    assert term_pattern("JS 20-29").search("JS 20\u201329 ... 2014")
+    assert term_pattern("JS 20\u201329").search("JS 20-29")

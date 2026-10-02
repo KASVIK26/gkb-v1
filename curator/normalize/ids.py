@@ -39,7 +39,7 @@ def lookup_key(text: str) -> str:
     meaningful in gene nomenclature (soybean rhg1 is recessive, Rhg4 dominant).
     """
     text = unicodedata.normalize("NFKC", text).casefold()
-    return re.sub(r"[\s\-_./()]+", "", text)
+    return re.sub(r"[\s\-‐-―−_./()]+", "", text)  # incl. en/em dash and minus
 
 
 def variety_local(name: str) -> str:

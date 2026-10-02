@@ -180,3 +180,32 @@ def test_real_tags_are_still_removed():
 def test_pdf_ligature_remnants_and_soft_hyphens_do_not_break_a_match():
     source = "Table 2.6: Bioforti" + chr(0) + "ed Wheat Varieties for Cen" + chr(0xAD) + "tral Zone"
     assert check_quote("Table 2.6: Biofortied Wheat Varieties for Central Zone", source) == "exact"
+
+
+def test_a_word_split_by_the_pdf_is_verified_as_spacing_not_fuzzy():
+    source = "83. GNG 2171 2017 Sriganga nagar ... tolerant to fusarium wilt disease"
+    assert check_quote("83. GNG 2171 2017 Sriganganagar ... tolerant to fusarium wilt disease", source) == "spacing"
+    assert check_quote("83. GNG 2171 2017 Sriganganagar ... tolerant to fusarium wilt disease", "83. GNG 2171 2017 Sriganganagar ... tolerant to fusarium wilt disease") == "exact"
+
+
+def test_a_corrected_typo_is_not_spacing():
+    """The source says "collor rot"; a quote that silently fixes it is not verbatim, whatever the spacing."""
+    source = "mod. resistant to dry root rot, wilt &collor rot and tolerant to Ascochyta blight and BGM."
+    assert check_quote("mod. resistant to dry root rot, wilt &collar rot and tolerant to Ascochyta blight and BGM.", source) == "fuzzy"
+
+
+def test_a_table_row_quoted_as_short_cells_is_verified_when_the_cells_are_neighbours():
+    source = "24 js 71 1991 मालवा क्षेत्र 25 js 75-46 1987 मध्य प्रदेश 26 पंत सोयाबीन 564 1991 उत्तरी"
+    assert check_quote("JS 75–46 ... 1987 ... मध्य प्रदेश", source) == "exact"
+    assert check_quote("JS 75-46 ... 1991 ... मध्य प्रदेश", source) == "missing"  # 1991 is not next to JS 75-46
+
+
+def test_short_cells_far_apart_do_not_verify():
+    filler = " lorem ipsum dolor sit amet" * 20
+    source = "js 75-46" + filler + " 1987" + filler + " मध्य प्रदेश"
+    assert check_quote("JS 75-46 ... 1987 ... मध्य प्रदेश", source) == "missing"
+
+
+def test_every_occurrence_of_a_short_cell_is_tried():
+    source = "20 js 95-60 2005 maharashtra 76 js 95-60 2007 मध्य प्रदेश 77"
+    assert check_quote("JS 95-60 ... 2007 ... मध्य प्रदेश", source) == "exact"

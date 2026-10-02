@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from curator.graph.aicrp_rust import claim_specs, parse_tables, reaction_of
+from curator.graph.aicrp_rust import SCALE, claim_specs, classify, parse_tables, reaction_of
 from curator.graph.bundle import KGBundle
 from curator.graph.quote_audit import check_quote
 from curator.graph.variety_import import variety_bundle
@@ -13,14 +13,14 @@ from curator.graph.vocab_entities import reference_bundle
 # "HS ACI" order (Table 9.2 style) and "ACI HS" order (Table 1.2 style) in one document, with a running page header in the
 # middle of the second table, a footnote mark on a value, a trace score, a missing value and an infector line.
 REPORT = (
-    "Resistant entries (ACI<10) are listed here and more text. "
+    "Resistant entries (ACI<10) are listed here and more text. Entries with ACI up to 10.0 were categorized as resistant (Table 9.1). "
     "Table 9.2 Reactions of different entries of multiple diseases screening nursery 2021-22 against diseases "
     "S. No. Entries Stem rust Leaf rust (S) Leaf rust (N) Stripe rust LB (dd) ACI HS ACI HS ACI HS ACI HS Av HS "
     "1 HS 507 5S 2.4 20MS 7.5 30S 8.3 40S 10.3 34 57 "
     "2 HI 1544 10MR 1.8 20MS 4.1 10MR 0.7 100S 70.0 57 78 "
     "2a infector 80S 80.0 80S 80.0 80S 80.0 80S 80.0 "
     "3 HD 2864 5S 2.4 TS 0.1 ng 0.0 40S 8.3 34 57 "
-    "and then some prose with a score >20 somewhere. "
+    "and then some prose with a score >20 somewhere. Rust resistance materials in AVT (2022-23) with ACI upto 10.0 are given below: "
     "Table 1.2. Adult plant response of AVT entries against three rusts under epiphytotic conditions at hot spot locations in field during 2022-23 "
     "AVT No. Entry Stem rust Leaf rust (S) Leaf rust (N) Yellow rust Gene Postulation ACI HS ACI HS ACI HS ACI HS Sr Lr Yr "
     "1 MP 4010 (C) 15.8 40S 30.9 60S 42.3 60S 54.7 80S -* Lr13+1+* Yr9+ "
@@ -80,8 +80,7 @@ def test_claims_are_made_only_for_varieties_the_kb_has_and_each_quote_is_verbati
     ids = {s["subject"] for s in specs}
     assert ids == {"var:wheat:HI1544", "var:wheat:MP4010", "var:wheat:HI8498"} and "hs 507" in unknown and "hi 1634" in unknown
     reaction = next(s for s in specs if s["subject"] == "var:wheat:HI1544" and s["object"] == "dis:wheat:stripe_rust")
-    assert reaction["qualifiers"] == {"reaction": "S", "stage": "adult", "season": "2021-22", "score_raw": "100S (ACI 70.0)",
-                                      "scale": "highest score (HS) over the hot-spot centres; response letter as reported (R/MR/MS/S)"}
+    assert reaction["qualifiers"] == {"reaction": "S", "stage": "adult", "season": "2021-22", "score_raw": "100S (ACI 70.0)", "scale": SCALE}
     for spec in specs:
         for ev in spec["evidence"]:
             assert ev["extractor"] == "parser:aicrp_rust@1" and check_quote(ev["quote"], REPORT) == "exact"
@@ -92,3 +91,31 @@ def test_leaf_rust_north_and_south_are_kept_apart():
     specs, _ = claim_specs(parse_tables(REPORT), source_id="doc:test_report", entities=entities)
     leaf = [s for s in specs if s["subject"] == "var:wheat:HI1544" and s["object"] == "dis:wheat:leaf_rust"]
     assert {s["qualifiers"]["location"] for s in leaf} == {"leaf rust (S) centres", "leaf rust (N) centres"}
+
+
+def test_the_reports_own_aci_rule_decides_resistant_not_the_letter_of_the_worst_location():
+    """Regression: `10S (ACI 2.7)` is resistant by the report's rule (ACI up to 10.0); the first parser called it susceptible and made ~100
+    false conflicts with the variety notifications."""
+    assert classify("10s", "2.7") == "R"
+    assert classify("5s", "0.7") == "R"
+    assert classify("40s", "17.0") == "S"
+    assert classify("20ms", "12.0") == "MS"
+    assert classify("40mr", "12.0") == "MR"
+    assert classify("tr", "0.0") is None and classify("0", "0.0") is None
+
+
+def test_the_row_in_the_pdf_that_read_as_susceptible_is_now_resistant():
+    entities = KGBundle.merge(reference_bundle(), variety_bundle()).entities
+    specs, _ = claim_specs(parse_tables(REPORT), source_id="doc:test_report", entities=entities)
+    by = {(s["subject"], s["object"], s["qualifiers"].get("location")): s["qualifiers"]["reaction"] for s in specs if s["subject"] == "var:wheat:HI1544"}
+    assert by[("var:wheat:HI1544", "dis:wheat:stem_rust", None)] == "R"           # 10MR, ACI 1.8
+    assert by[("var:wheat:HI1544", "dis:wheat:leaf_rust", "leaf rust (S) centres")] == "R"   # 20MS, ACI 4.1: low infection overall
+    assert by[("var:wheat:HI1544", "dis:wheat:stripe_rust", None)] == "S"          # 100S, ACI 70.0
+
+
+def test_a_table_without_the_reports_rule_sentence_makes_no_claims():
+    text = REPORT.replace("Entries with ACI up to 10.0 were categorized as resistant (Table 9.1).", "").replace(
+        "Rust resistance materials in AVT (2022-23) with ACI upto 10.0 are given below:", "")
+    entities = KGBundle.merge(reference_bundle(), variety_bundle()).entities
+    specs, _ = claim_specs(parse_tables(text), source_id="doc:test_report", entities=entities)
+    assert specs == []

@@ -73,6 +73,8 @@ class Mention(_Strict):
     text: str = Field(min_length=1)
     type: EntityType
     alias_in_quote: str | None = None  # how the quote itself names it when that is not the usual name, e.g. "FW"
+    entity_id: str | None = None  # a reviewer's override for a name the KB cannot resolve (two entities share a lookup key)
+    synonyms: list[str] = []  # other names for a NEW entity (a common name such as "Pusa Ahilya"); stored on it
     props: dict[str, Any] | None = None  # for a NEW Variety/Gene/QTL/Marker/Pathotype: its properties (see the spec)
     advisory: dict[str, Any] | None = None  # only for Advisory objects: the structured practice
 
@@ -198,7 +200,7 @@ def _process_one(c: Candidate, raw: dict, *, result: IngestResult, bundle: KGBun
             if not item["found"]:
                 detail.append(f"fragment {number} not in source (closest {item.get('closest_score', 0)}%: {item.get('closest_text', '')[:90]!r})")
         raise _Stop("rejected", "quote not found in the source text: " + "; ".join(detail))
-    if status == "fuzzy":
+    if status == "fuzzy":  # ("exact" and "spacing" both count as verbatim)
         review_flags.append("quote matches only approximately")
 
     # 3. entities ─────────────────────────────────────────────────────
@@ -207,8 +209,8 @@ def _process_one(c: Candidate, raw: dict, *, result: IngestResult, bundle: KGBun
     subject_mention = _prepare_mention(c.subject, c, working, new_entities)
     object_mention = _prepare_mention(c.object, c, working + new_entities, new_entities)
     built = build_claim_candidate(
-        {"claim_type": c.claim_type.value, "subject": {"text": subject_mention.text}, "object": {"text": object_mention.text},
-         "qualifiers": c.qualifiers},
+        {"claim_type": c.claim_type.value, "subject": {"text": subject_mention.text, "id": subject_mention.entity_id},
+         "object": {"text": object_mention.text, "id": object_mention.entity_id}, "qualifiers": c.qualifiers},
         entities=working + new_entities, crop=c.crop, supported=INGESTABLE,
     )
     if isinstance(built, RejectedCandidate):
@@ -311,7 +313,7 @@ def _near_duplicate(existing: str, proposed: str) -> bool:
     (JG 12, JG 62; HD 2967, HD 2987) are different varieties, and the quote check already guarantees the proposed
     name is spelled in the source, so a one-character difference is not treated as a typo."""
     a, b = (re.sub(r"[^a-z0-9]", "", x.lower()) for x in (existing, proposed))
-    return a == b or fuzz.ratio(a, b) >= NEAR_DUPLICATE_MIN
+    return a == b or (min(len(a), len(b)) >= 8 and fuzz.ratio(a, b) >= NEAR_DUPLICATE_MIN)
 
 
 def _title_key(title: str) -> str:
@@ -338,6 +340,11 @@ def _prepare_mention(m: Mention, c: Candidate, known: list, new_entities: list) 
     from curator.extract.normalize import _resolve_mention
 
     crop = c.crop.value
+    if m.entity_id:
+        target = next((e for e in known + new_entities if e.id == m.entity_id), None)
+        if target is None or target.type is not m.type:
+            raise _Stop("rejected", f"entity_id {m.entity_id!r} is not a {m.type.value} in the KG")
+        return Mention(text=target.name, type=m.type, entity_id=target.id)
     allowed = CLAIM_SIGNATURE[c.claim_type][0 if m is c.subject else 1]
     if m.type not in allowed:
         raise _Stop("rejected", f"{m.type.value} cannot be the {'subject' if m is c.subject else 'object'} of {c.claim_type.value}")
@@ -381,9 +388,9 @@ def _new_entity(m: Mention, crop: str, known: list) -> Entity:
     name, props = m.text.strip(), dict(m.props or {})
     try:
         if m.type is EntityType.VARIETY:
-            return Entity(id=variety_id(crop, name), type=m.type, name=name, crop=crop, props=props)
+            return Entity(id=variety_id(crop, name), type=m.type, name=name, crop=crop, synonyms=list(m.synonyms), props=props)
         if m.type is EntityType.GENE:
-            return Entity(id=gene_id(crop, name), type=m.type, name=name, crop=crop, props={"symbol": name, **props})
+            return Entity(id=gene_id(crop, name), type=m.type, name=name, crop=crop, synonyms=list(m.synonyms), props={"symbol": name, **props})
         if m.type is EntityType.QTL:
             if "trait" not in props:
                 raise _Stop("rejected", f"new QTL {name!r} needs props.trait")

@@ -1,0 +1,885 @@
+# Variety reactions from ICAR-IIPR / ICAR-IISR / AICRP reports, found by ChatGPT deep research (work order WO02), verified by
+# `agrihub kg ingest-candidates` and reviewed claim-by-claim 2026-10-03 (kg/review_log/2026-10-03_wo01-wo03.md). Evidence stays `llm:` (discounted).
+
+sources:
+- id: doc:pc_report_chickpea_2021_22
+  type: official_document
+  title: Project Coordinator’s Report (2021-22)
+  year: 2022
+  venue: ICAR-Indian Institute of Pulses Research
+  url: https://www.icar-iipr.org.in/wp-content/uploads/2023/07/PC-report-Chickpea_2021-22.pdf
+  verified: true
+- id: doc:aicrps_ar_2020_21
+  type: official_document
+  title: Annual Progress Report
+  year: 2021
+  venue: ICAR-Indian Institute of Soybean Research
+  url: https://icar-nsri.res.in/pdfdoc/AicrpsAR2020-21.pdf
+  verified: true
+- id: doc:aicrp_soybean_varieties_page
+  type: official_document
+  title: 'Varieties: All India Co-ordinated Research Project on Soybean'
+  venue: ICAR-Indian Institute of Soybean Research
+  url: https://icar-nsri.res.in/aicrps_var.html
+  verified: true
+- id: doc:mpkv_chickpea_varieties
+  type: official_document
+  title: Information about Crop wise Improved / Hybrid Varieties Developed by University
+  venue: Mahatma Phule Krishi Vidyapeeth, Rahuri
+  url: https://mpkv.ac.in/Uploads/Research/07%20-%20Cheackpea_20210608024632.pdf
+  verified: true
+entities:
+- id: var:chickpea:GNG2171
+  type: Variety
+  name: GNG 2171
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2017
+- id: var:chickpea:PANTGRAM5
+  type: Variety
+  name: Pant Gram 5
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2017
+- id: var:chickpea:GNG2207
+  type: Variety
+  name: GNG 2207
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2018
+- id: var:chickpea:CSJ515
+  type: Variety
+  name: CSJ 515
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2016
+- id: var:chickpea:JAWAHARGRAM24
+  type: Variety
+  name: Jawahar Gram 24
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2020
+- id: var:chickpea:PDKVKANAK
+  type: Variety
+  name: PDKV Kanak
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:chickpea:IPC2010134
+  type: Variety
+  name: IPC 2010-134
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2021
+- id: var:chickpea:IPC200728
+  type: Variety
+  name: IPC 2007-28
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2021
+- id: var:soybean:PUSA9712
+  type: Variety
+  name: Pusa 97-12
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:soybean:PUSA9814
+  type: Variety
+  name: Pusa 98-14
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:soybean:RKS18
+  type: Variety
+  name: RKS 18
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2007
+- id: var:soybean:PS1347
+  type: Variety
+  name: PS 1347
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2008
+- id: var:soybean:VLSOYA63
+  type: Variety
+  name: VL Soya 63
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2012
+- id: var:soybean:MACS1188
+  type: Variety
+  name: MACS 1188
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2013
+- id: var:soybean:POOJA
+  type: Variety
+  name: Pooja
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 1997
+- id: var:soybean:DSB21
+  type: Variety
+  name: DSb 21
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2015
+- id: var:soybean:DSB23
+  type: Variety
+  name: DSb 23
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2018
+- id: var:soybean:KS103
+  type: Variety
+  name: KS 103
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2018
+- id: var:soybean:KSD726
+  type: Variety
+  name: KSD 726
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2019
+- id: var:soybean:JS2094
+  type: Variety
+  name: JS 20-94
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props: {}
+- id: var:soybean:NRC128
+  type: Variety
+  name: NRC 128
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2021
+- id: var:soybean:NRC130
+  type: Variety
+  name: NRC 130
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2021
+- id: var:soybean:MACS1520
+  type: Variety
+  name: MACS 1520
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2021
+- id: var:soybean:RSC1107
+  type: Variety
+  name: RSC 11-07
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2021
+- id: var:chickpea:PHULEVISHWARAJ
+  type: Variety
+  name: Phule Vishwaraj
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    release_year: 2020
+    releasing_institute: Pulse Improvement Project, Mahatma Phule Krishi Vidyapeeth, Rahuri
+claims:
+- type: VARIETY_REACTION
+  subject: var:chickpea:GNG2171
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Table of released varieties, row 83
+    quote: 83. GNG 2171 2017 Sriganganagar ... tolerant to fusarium wilt disease
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0001
+- type: VARIETY_REACTION
+  subject: var:chickpea:PANTGRAM5
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Table of released varieties, row 84
+    quote: 84. Pant Gram 5 2017 Pantnagar ... tolerant to fusarium wilt disease
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0002
+- type: VARIETY_REACTION
+  subject: var:chickpea:GNG2207
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Table of released varieties, row 86
+    quote: 86. GNG 2207 2018 Sriganganagar ... tolerant to fusarium wilt disease
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0003
+- type: VARIETY_REACTION
+  subject: var:chickpea:PUSACHICKPEA10216
+  object: dis:chickpea:dry_root_rot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: 'Table of released varieties, row 90 [alias in quote: object named ''DRR'']'
+    quote: 90. Pusa Chickpea 10216 2020 IARI,New Delhi ... Moderate resistance against Wilt and DRR
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0004
+- type: VARIETY_REACTION
+  subject: var:chickpea:CSJ515
+  object: dis:chickpea:dry_root_rot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Table of released varieties, row 81
+    quote: 81. CSJ 515 2016 Durgapura ... mod. resistant to dry root rot, wilt &collor rot and tolerant to Ascochyta blight and BGM.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0005
+- type: VARIETY_REACTION
+  subject: var:chickpea:CSJ515
+  object: dis:chickpea:collar_rot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: 'Table of released varieties, row 81 [alias in quote: object named ''collor rot'']'
+    quote: 81. CSJ 515 2016 Durgapura ... mod. resistant to dry root rot, wilt &collor rot and tolerant to Ascochyta blight and BGM.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0006
+- type: VARIETY_REACTION
+  subject: var:chickpea:PHULEVIKRAM
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Table of released varieties, row 94
+    quote: 94. Phule Vikram (Phule G 08108) 2020 Rahuri ... resistance to Fusarium wilt
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0007
+- type: VARIETY_REACTION
+  subject: var:chickpea:JAWAHARGRAM24
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Table of released varieties, row 95
+    quote: 95. Jawahar Gram 24 (JG 2016-24) 2020 Jabalpur ... resistant against fusarium wilt
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0008
+- type: VARIETY_REACTION
+  subject: var:chickpea:JAWAHARCHANA6
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Released-variety table, row 103
+    quote: 103. JG 6 2008 Jabalpur ... It is resistant to Fusarium wilt and moderately resistant to dry root rot
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0009
+- type: VARIETY_REACTION
+  subject: var:chickpea:JAWAHARCHANA6
+  object: dis:chickpea:dry_root_rot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Released-variety table, row 103
+    quote: 103. JG 6 2008 Jabalpur ... It is resistant to Fusarium wilt and moderately resistant to dry root rot
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0010
+- type: VARIETY_REACTION
+  subject: var:chickpea:JGK5
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Released-variety table, row 115
+    quote: 115. JGK 5 2016 Jabalpur ... having resistance to Fusarium wilt and moderate resistance to root rot.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0011
+- type: VARIETY_REACTION
+  subject: var:chickpea:PUSACHICKPEA20211
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Released-variety table, row 102
+    quote: 102. Pusa Chickpea 20211 (Pusa Chickpea Manav) 2021 ICAR-IARI New Delhi ... highly resistant to fusarium wilt & MR to DRR, CR, and stunt
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0012
+- type: VARIETY_REACTION
+  subject: var:chickpea:PUSACHICKPEA20211
+  object: dis:chickpea:dry_root_rot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: 'Released-variety table, row 102 [alias in quote: object named ''DRR'']'
+    quote: 102. Pusa Chickpea 20211 (Pusa Chickpea Manav) 2021 ICAR-IARI New Delhi ... highly resistant to fusarium wilt & MR to DRR, CR, and stunt
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0013
+- type: VARIETY_REACTION
+  subject: var:chickpea:PUSACHICKPEA20211
+  object: dis:chickpea:collar_rot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: 'Released-variety table, row 102 [alias in quote: object named ''CR'']'
+    quote: 102. Pusa Chickpea 20211 (Pusa Chickpea Manav) 2021 ICAR-IARI New Delhi ... highly resistant to fusarium wilt & MR to DRR, CR, and stunt
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0014
+- type: VARIETY_REACTION
+  subject: var:chickpea:PDKVKANAK
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Released-variety table, row 101
+    quote: 101. PDKV- Kanak (AKG1303) 2021 Akola ... resistant to fusarium wilt, medium bold seeded (21.7g/100seeds)
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0015
+- type: VARIETY_REACTION
+  subject: var:chickpea:IPC2010134
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Released-variety table, row 149
+    quote: 149. IPC 2010-134 (Shiva) 2021 ICAR-IIPR ... moderately resistant against Fusarium wilt
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0016
+- type: VARIETY_REACTION
+  subject: var:chickpea:IPC200728
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:pc_report_chickpea_2021_22
+    method: official_document
+    locator: Released-variety table, row 150
+    quote: 150. IPC2007-28 (Atal) 2021 ICAR-IIPR ... Resistant against Fusarium wilt.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0017
+- type: VARIETY_REACTION
+  subject: var:soybean:PUSA9712
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 39 [alias in quote: object named ''SMV'']'
+    quote: 39. Pusa 97-12 ... Resistant to YMV, SMV, Bacterial pustules, Charcoal rot, Myrothecium leaf spot and moderately resistant to stem fly.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0018
+- type: VARIETY_REACTION
+  subject: var:soybean:PUSA9712
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 39 [alias in quote: object named ''Bacterial pustules'']'
+    quote: 39. Pusa 97-12 ... Resistant to YMV, SMV, Bacterial pustules, Charcoal rot, Myrothecium leaf spot and moderately resistant to stem fly.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0019
+- type: VARIETY_REACTION
+  subject: var:soybean:PUSA9712
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 39
+    quote: 39. Pusa 97-12 ... Resistant to YMV, SMV, Bacterial pustules, Charcoal rot, Myrothecium leaf spot and moderately resistant to stem fly.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0020
+- type: VARIETY_REACTION
+  subject: var:soybean:PUSA9814
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 40 [alias in quote: object named ''SMV'']'
+    quote: 40. Pusa 98-14 ... Resistant to YMV, SMV, pod blight and moderately resistant to stem fly
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0021
+- type: VARIETY_REACTION
+  subject: var:soybean:RKS18
+  object: dis:soybean:rust
+  qualifiers:
+    reaction: S
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 41 [alias in quote: object named ''rust'']'
+    quote: 41. RKS 18 (Pratap Soya 2) ... Moderately resistant to BP, girdle beetle and leaf miner but susceptible to rust.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0022
+- type: VARIETY_REACTION
+  subject: var:soybean:RKS18
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 41 [alias in quote: object named ''BP'']'
+    quote: 41. RKS 18 (Pratap Soya 2) ... Moderately resistant to BP, girdle beetle and leaf miner but susceptible to rust.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0023
+- type: VARIETY_REACTION
+  subject: var:soybean:PS1347
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 44
+    quote: 44. PS 1347 ... Resistant to YMV, rhizoctonia aerial blight, bacterial pustule, SMV and charcoal rot.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0024
+- type: VARIETY_REACTION
+  subject: var:soybean:PS1347
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 44 [alias in quote: object named ''SMV'']'
+    quote: 44. PS 1347 ... Resistant to YMV, rhizoctonia aerial blight, bacterial pustule, SMV and charcoal rot.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0025
+- type: VARIETY_REACTION
+  subject: var:soybean:PS1347
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 44
+    quote: 44. PS 1347 ... Resistant to YMV, rhizoctonia aerial blight, bacterial pustule, SMV and charcoal rot.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0026
+- type: VARIETY_REACTION
+  subject: var:soybean:VLSOYA63
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 48 [alias in quote: object named ''frog eye leaf spot'']'
+    quote: 48. VL Soya 63 ... Resistant to pod blight and target leaf spot, moderately resistant to frog eye leaf spot
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0028
+- type: VARIETY_REACTION
+  subject: var:soybean:MACS1188
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 49 [alias in quote: object named ''Bacterial Pustules'']'
+    quote: 49. MACS-1188 ... Resistant to Bacterial Pustules, Rhizoctonia aerial blight and Charcoal rot.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0029
+- type: VARIETY_REACTION
+  subject: var:soybean:MACS1188
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 49
+    quote: 49. MACS-1188 ... Resistant to Bacterial Pustules, Rhizoctonia aerial blight and Charcoal rot.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0030
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2029
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 50
+    quote: 50. JS 20-29 ... Resistant to YMV and Charcoal Rot; Resistant/ tolerant to insect pests; high oil content (20%)
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0031
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2034
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 51
+    quote: 51. JS 20-34 ... Extra early (87 days); resistant to Charcoal Rot; moderate to high resistance to girdle beetle; moderately resistant to stem fly
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0032
+- type: VARIETY_REACTION
+  subject: var:soybean:POOJA
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 52
+    quote: 52. Pooja (MAUS 2) ... Resistant to bacterial pustule and leaf spots.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0033
+- type: VARIETY_REACTION
+  subject: var:soybean:DSB21
+  object: dis:soybean:rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 53 [alias in quote: object named ''rust'']'
+    quote: 53. DSb-21 ... Resistant to rust
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0034
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC86
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 54
+    quote: 54. NRC 86 ... Moderately resistant to Bacterial Pustule, Pod Blight and Collar Rot; highly resistant to Charcoal Rot
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0035
+  - source: doc:aicrp_soybean_varieties_page
+    method: official_document
+    locator: 'Central zone, variety row 4 [alias in quote: object named ''bacterial pustules'']'
+    quote: NRC 86 ... Tolerant to yellow mosaic and bacterial pustules
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0050
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC86
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 54
+    quote: 54. NRC 86 ... Moderately resistant to Bacterial Pustule, Pod Blight and Collar Rot; highly resistant to Charcoal Rot
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0037
+- type: VARIETY_REACTION
+  subject: var:soybean:DSB23
+  object: dis:soybean:rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 63 [alias in quote: subject named ''DSb. 23''; object named ''rust'']'
+    quote: 63. DSb. 23 ... Highly resistant to rust.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0038
+- type: VARIETY_REACTION
+  subject: var:soybean:KS103
+  object: dis:soybean:rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 64 [alias in quote: object named ''rust'']'
+    quote: 64. KS 103 ... Field rust resistance and resistance to pest complex.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0039
+- type: VARIETY_REACTION
+  subject: var:soybean:KSD726
+  object: dis:soybean:rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 66 [alias in quote: object named ''rust'']'
+    quote: 66. KSD 726 (Phule Sangam) ... Resistant to rust (K. Digraj) and purple seed stain disease.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0040
+- type: VARIETY_REACTION
+  subject: var:soybean:JS20116
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 67
+    quote: 67. Jawahar Soybean 20-116 (JS 20-116) ... Resistant to YMV and Charcoal rot,
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0041
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2094
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 68
+    quote: 68. Jawahar Soybean 20-94 (JS 20-94) ... Resistant to YMV and Charcoal rot, Rhizoctonia aerial blight and alternatia leaf spot
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0042
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC128
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 69
+    quote: 69. NRC 128 ... Resistance to pod blight (ct) and moderately resistance to charcoal rot and MYMIV.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0043
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC130
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 70
+    quote: 70. NRC 130 ... Absolute resistant to charcoal rot
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0044
+- type: VARIETY_REACTION
+  subject: var:soybean:MACS1520
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: Released-variety table, row 76
+    quote: 76. MACS 1520 ... Resistant to charcoal rot
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0045
+- type: VARIETY_REACTION
+  subject: var:soybean:RSC1107
+  object: dis:soybean:rust
+  qualifiers:
+    reaction: S
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_ar_2020_21
+    method: official_document
+    locator: 'Released-variety table, row 77 [alias in quote: object named ''rust'']'
+    quote: 77. RSC 11-07 ... Resistant to Indian Bud Blight and Pod Blight (ct), susceptible to rust, HR to purple seed stain
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0046
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2029
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrp_soybean_varieties_page
+    method: official_document
+    locator: 'Central zone, variety row 2 [alias in quote: object named ''bacterial pustules'']'
+    quote: JS 20-29 ... Resistant to bacterial pustules
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0047
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2034
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:aicrp_soybean_varieties_page
+    method: official_document
+    locator: Central zone, variety row 3
+    quote: JS 20-34 ... Moderately resistant to Bacterial pustule and bacterial blight, resistant to soybean mosaic, yellow mosaic and Cercospora leaf spot
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0048
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2034
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrp_soybean_varieties_page
+    method: official_document
+    locator: Central zone, variety row 3
+    quote: JS 20-34 ... Moderately resistant to Bacterial pustule and bacterial blight, resistant to soybean mosaic, yellow mosaic and Cercospora leaf spot
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0049
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2094
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:aicrp_soybean_varieties_page
+    method: official_document
+    locator: Central zone, variety row 8
+    quote: Jawahar Soybean 20-94 (JS 20-94) ... Tolerant to bacterial pustule
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0052
+- type: VARIETY_REACTION
+  subject: var:soybean:JS20116
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrp_soybean_varieties_page
+    method: official_document
+    locator: Central zone, variety row 9
+    quote: Jawahar Soybean 20-116 (JS 20-116) ... Resistant o bacterial pustule
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0053
+- type: VARIETY_REACTION
+  subject: var:chickpea:PHULEVISHWARAJ
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:mpkv_chickpea_varieties
+    method: official_document
+    locator: Page 7, Chickpea-Phule Vishwaraj entry, Characters / features
+    quote: Chickpea-Phule Vishwaraj ... Suitable for rainfed condition Resistant to Fusarium wilt.
+    extractor: llm:chatgpt-deep-research@wo02-2026-10-02
+    candidate_id: WO02-0054
