@@ -163,3 +163,15 @@ def test_fetch_url_text_falls_back_to_the_internet_archive(monkeypatch):
 def test_fetch_url_text_is_none_when_neither_live_nor_archived(monkeypatch):
     monkeypatch.setattr(qa, "_read_url", lambda url: None)
     assert qa.fetch_url_text("https://x.gov.in/a.html") is None
+
+
+def test_a_bare_less_than_sign_does_not_swallow_the_text_that_follows():
+    """Regression: "(ACI<10)" on one page and ">20" on another once deleted every page in between from the audited text."""
+    text = "Resistant entries (ACI<10) are listed. Table 1.2. Adult plant response of AVT entries. Entries with score >20 failed."
+    n = normalise(text)
+    assert "table 1.2. adult plant response of avt entries" in n and "failed" in n
+    assert normalise("p < 0.05 and q <0.01, then x > 3") == "p < 0.05 and q <0.01, then x > 3"
+
+
+def test_real_tags_are_still_removed():
+    assert normalise("<p>Brandnew <i>Fusarium</i> 77</p><br/>was <b>resistant</b>") == "brandnew fusarium 77 was resistant"

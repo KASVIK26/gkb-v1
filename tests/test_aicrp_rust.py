@@ -1,0 +1,94 @@
+"""curator/graph/aicrp_rust.py -- a parser, not a model: every reading is backed by the row text it came from."""
+
+from __future__ import annotations
+
+import pytest
+
+from curator.graph.aicrp_rust import claim_specs, parse_tables, reaction_of
+from curator.graph.bundle import KGBundle
+from curator.graph.quote_audit import check_quote
+from curator.graph.variety_import import variety_bundle
+from curator.graph.vocab_entities import reference_bundle
+
+# "HS ACI" order (Table 9.2 style) and "ACI HS" order (Table 1.2 style) in one document, with a running page header in the
+# middle of the second table, a footnote mark on a value, a trace score, a missing value and an infector line.
+REPORT = (
+    "Resistant entries (ACI<10) are listed here and more text. "
+    "Table 9.2 Reactions of different entries of multiple diseases screening nursery 2021-22 against diseases "
+    "S. No. Entries Stem rust Leaf rust (S) Leaf rust (N) Stripe rust LB (dd) ACI HS ACI HS ACI HS ACI HS Av HS "
+    "1 HS 507 5S 2.4 20MS 7.5 30S 8.3 40S 10.3 34 57 "
+    "2 HI 1544 10MR 1.8 20MS 4.1 10MR 0.7 100S 70.0 57 78 "
+    "2a infector 80S 80.0 80S 80.0 80S 80.0 80S 80.0 "
+    "3 HD 2864 5S 2.4 TS 0.1 ng 0.0 40S 8.3 34 57 "
+    "and then some prose with a score >20 somewhere. "
+    "Table 1.2. Adult plant response of AVT entries against three rusts under epiphytotic conditions at hot spot locations in field during 2022-23 "
+    "AVT No. Entry Stem rust Leaf rust (S) Leaf rust (N) Yellow rust Gene Postulation ACI HS ACI HS ACI HS ACI HS Sr Lr Yr "
+    "1 MP 4010 (C) 15.8 40S 30.9 60S 42.3 60S 54.7 80S -* Lr13+1+* Yr9+ "
+    "AICRP-W&B, Progress Report, Crop Protection, 2023 Page 17 "
+    "AVT No. Entry Stem rust Leaf rust (S) Leaf rust (N) Yellow rust Gene Postulation ACI HS ACI HS ACI HS ACI HS Sr Lr Yr "
+    "2 HI 1634 (C) 3.9 10MS 3.7 10S 8.8 60S* 67.5 80S -* R Yr2+ "
+    "3 HI 8498 (C) 14.3 30MR 4.5 20MS 2.7 10S 12.8 60S Sr11+2+ Lr23+ - "
+)
+
+
+@pytest.fixture(scope="module")
+def rows():
+    return parse_tables(REPORT)
+
+
+def test_reads_both_column_orders_by_the_shape_of_each_token(rows):
+    by = {(r.table_title[:9], r.entry_clean): r for r in rows}
+    hs_first = by[("table 9.2", "hi 1544")]
+    assert [(v[0].rsplit(":", 1)[1], v[1], v[2], v[3]) for v in hs_first.values] == [
+        ("stem_rust", None, "10mr", "1.8"), ("leaf_rust", "leaf rust (S) centres", "20ms", "4.1"),
+        ("leaf_rust", "leaf rust (N) centres", "10mr", "0.7"), ("stripe_rust", None, "100s", "70.0")]
+    aci_first = by[("table 1.2", "mp 4010")]
+    assert [v[2] for v in aci_first.values] == ["40s", "60s", "60s", "80s"]
+    assert aci_first.values[3][0] == "dis:wheat:stripe_rust"  # "Yellow rust" is stripe rust
+
+
+def test_the_table_title_and_season_come_from_the_report(rows):
+    assert {r.season for r in rows} == {"2021-22", "2022-23"}
+    assert all(r.table_title.startswith("table ") for r in rows)
+
+
+def test_a_page_header_and_a_repeated_column_header_mid_table_do_not_end_the_table(rows):
+    names = [r.entry_clean for r in rows if r.table_title.startswith("table 1.2")]
+    assert names == ["mp 4010", "hi 1634", "hi 8498"]
+
+
+def test_footnote_marks_on_values_are_ignored(rows):
+    hi1634 = next(r for r in rows if r.entry_clean == "hi 1634")
+    assert hi1634.values[2][2] == "60s"
+
+
+def test_infector_lines_are_not_entries(rows):
+    assert all("infector" not in r.entry for r in rows)
+
+
+def test_a_row_with_a_missing_value_is_skipped_not_guessed(rows):
+    assert "hd 2864" not in {r.entry_clean for r in rows}  # "ng" in the third column
+
+
+def test_only_the_response_letter_is_interpreted():
+    assert [reaction_of(t) for t in ("10mr", "20ms", "5s", "r", "60s", "tr", "tms", "ts", "0", "ng")] == ["MR", "MS", "S", "R", "S", None, None, None, None, None]
+
+
+def test_claims_are_made_only_for_varieties_the_kb_has_and_each_quote_is_verbatim():
+    entities = KGBundle.merge(reference_bundle(), variety_bundle()).entities
+    specs, unknown = claim_specs(parse_tables(REPORT), source_id="doc:test_report", entities=entities)
+    ids = {s["subject"] for s in specs}
+    assert ids == {"var:wheat:HI1544", "var:wheat:MP4010", "var:wheat:HI8498"} and "hs 507" in unknown and "hi 1634" in unknown
+    reaction = next(s for s in specs if s["subject"] == "var:wheat:HI1544" and s["object"] == "dis:wheat:stripe_rust")
+    assert reaction["qualifiers"] == {"reaction": "S", "stage": "adult", "season": "2021-22", "score_raw": "100S (ACI 70.0)",
+                                      "scale": "highest score (HS) over the hot-spot centres; response letter as reported (R/MR/MS/S)"}
+    for spec in specs:
+        for ev in spec["evidence"]:
+            assert ev["extractor"] == "parser:aicrp_rust@1" and check_quote(ev["quote"], REPORT) == "exact"
+
+
+def test_leaf_rust_north_and_south_are_kept_apart():
+    entities = KGBundle.merge(reference_bundle(), variety_bundle()).entities
+    specs, _ = claim_specs(parse_tables(REPORT), source_id="doc:test_report", entities=entities)
+    leaf = [s for s in specs if s["subject"] == "var:wheat:HI1544" and s["object"] == "dis:wheat:leaf_rust"]
+    assert {s["qualifiers"]["location"] for s in leaf} == {"leaf rust (S) centres", "leaf rust (N) centres"}

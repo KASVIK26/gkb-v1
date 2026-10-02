@@ -33,7 +33,7 @@ from rapidfuzz import fuzz
 
 from curator.extract.normalize import RejectedCandidate, build_claim_candidate
 from curator.graph.bundle import KGBundle
-from curator.graph.quote_audit import check_quote, fetch_source_text, fetch_url_text, normalise
+from curator.graph.quote_audit import check_quote, explain_missing, fetch_source_text, fetch_url_text, normalise
 from curator.lit import europepmc
 from curator.lit.find_evidence import compile_term
 from curator.model import Claim, Entity, Evidence, Source
@@ -193,7 +193,11 @@ def _process_one(c: Candidate, raw: dict, *, result: IngestResult, bundle: KGBun
     if status == "missing":
         if source.type is SourceType.PUBLICATION and len(text) < 3000:
             raise _Stop("unverifiable", "only an abstract is readable and the quote is not in it")
-        raise _Stop("rejected", "quote not found in the source text")
+        detail = []
+        for number, item in enumerate(explain_missing(quote, text), 1):
+            if not item["found"]:
+                detail.append(f"fragment {number} not in source (closest {item.get('closest_score', 0)}%: {item.get('closest_text', '')[:90]!r})")
+        raise _Stop("rejected", "quote not found in the source text: " + "; ".join(detail))
     if status == "fuzzy":
         review_flags.append("quote matches only approximately")
 

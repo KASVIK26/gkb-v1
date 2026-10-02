@@ -1468,6 +1468,47 @@ are also where most of the work is.
    - **Open**: AICRP zones are not in the vocabulary (only MP and MH), so national zone documents cannot be ingested as
      zone claims yet; the stale-resistance signal from item 40 should land before the reaction batches.
 
+42. **Three gaps from item 41 closed (2026-10-03).**
+   - **Stale or disputed resistance.** A variety reported both resistant (R, MR) and susceptible (MS, S, HS) to one disease is now a
+     `conflict` whenever stage and pathotype are compatible (equal, or either unspecified); place and season may differ. This is
+     the rule competency query CQ10 already stated, which the Python scoring had been stricter than; both now agree (CQ10's SQL
+     was updated, its test passes on a real Postgres). Seedling-S with adult-R (adult-plant resistance) and R against one
+     pathotype with S against another are *not* conflicts. Separately, resistance to a race-structured disease (the rusts,
+     powdery mildew, Fusarium wilt) stated in a **notification** ages from the variety's *release year*, not the year of the PDF
+     that lists it (x0.8 beyond 10 years). Effect on the live data: Raj 4037 and HD 2932 are flagged and capped at tier C;
+     old rust resistance moves A -> B (tier A 223 -> 148). 12 new scoring tests.
+   - **AICRP zones.** `config/vocab/aicrp_zones.yaml`: 15 crop-scoped zones (wheat NWPZ/NEPZ/CZ/PZ/NHZ, soybean
+     NHZ/NPZ/CZ/NEZ/SZ, chickpea CZ/NWPZ/NEPZ/SZ/NHZ), each definition copied from and checked against the document that gives it
+     (`AgroZoneProps.definition` / `definition_source`). Crop-scoped on purpose: the wheat document puts all of Maharashtra in PZ,
+     the soybean page only its south in SZ. Chickpea zones carry no state list because the DPD document gives none.
+   - **Review capacity.** `agrihub kg review-sheet` writes a CSV an agronomist fills in Excel or Google Sheets (claim in plain words,
+     verbatim quote, clickable source, verdict OK/WRONG/UNSURE, `local_fit` for advisories; advisories over-represented in the sample);
+     `agrihub kg apply-review` refuses the batch unless every sample row has a verdict and at most 5 % of the sample is not
+     confirmed (sample = max(10, 10 % of the batch)), holds back WRONG/UNSURE rows and advisories that do not fit the region, and
+     stamps reviewer + date on OK rows, which removes the x0.6 model-evidence discount. 10 tests.
+43. **First real batches from outside, and what they taught (2026-10-03).** Two deep-research outputs went through
+   `ingest-candidates`.
+   - **WO01 (ChatGPT, 50 wheat rust reactions from AICRP reports).** First verdict from the tool: 50/50 rejected, "quote not found".
+     I then concluded the model had invented the table. **That was wrong, and the bug was mine**: `quote_audit.normalise` treated
+     any `<` as an HTML tag and deleted everything up to the next `>`, so a PDF containing "ACI<10" on one page lost all text
+     up to a ">" on another, including Table 1.2. The table, its caption and the rows exist (page 33 of the 2021-22 report). Fixed
+     (only real tags are stripped; regression tests); this bug had also been inflating the "not found / not on page" counts of
+     earlier audits. Re-run: all 50 quotes verified, but the tool held all 50 for review because the quotes name the caption
+     ("three rusts") and not the disease columns. A new deterministic reader (`curator/graph/aicrp_rust.py`, `agrihub kg
+     import-aicrp-rust`, 9 tests) then read the same tables: **46 of the model's 50 candidates match it exactly; one is a real error
+     (it skipped a `TS` cell and shifted the next value into the wrong column) and three rows it could not read (a `*` footnote
+     mark).** The parser produced 121 claims for varieties the KB has, every quote exact against the PDF, extractor `parser:`,
+     none from a model.
+   - **WO02 (ChatGPT, 54 chickpea/soybean reactions from AICRP/IIPR reports).** 43 accepted, 7 held (approximate quote, a
+     name missing from the quote), 4 rejected (soybean "collar rot" is out of scope and was refused; one variety name mismatch).
+     42 new claims, 3 new sources, 19 new varieties. Quality is high.
+   - **Lessons put into the prompts:** table quotes must be caption + column-header line + row; skipping a cell must not shift
+     the remaining values; `alias_in_quote` must be literal text of the quote. WO01 is marked superseded for AICRP Crop Protection
+     PDFs (use the parser). A check variety repeated in several AVT groups appears once per group, so the same variety can carry
+     several same-season readings (they are separate claims, with the row number in the locator).
+   - **State:** the three batches (121 + 42 claims) sit in `kg/incoming/` awaiting a person: `agrihub kg review-sheet` has made
+     their sheets. Nothing from them is in `kg/curated/`.
+
 ---
 
 ## 6. Definition of "done" reminder (unchanged from RESEARCH_ROADMAP.md §10)

@@ -165,6 +165,48 @@ def ingest_candidates_cmd(
     typer.echo(f"Wrote {out} (+ report). Next: agrihub kg review-sheet {out}")
 
 
+@kg_app.command("import-aicrp-rust")
+def import_aicrp_rust_cmd(
+    url: str = typer.Argument(..., help="URL of an AICRP Wheat & Barley Crop Protection progress report (PDF)."),
+    slug: str = typer.Option(..., help="Lowercase id fragment for the source, e.g. aicrp_crop_protection_2021_22."),
+    title: str = typer.Option(..., help="Title as printed on the report."),
+    year: int = typer.Option(..., help="Publication year of the report."),
+    out: Path = typer.Option(None, help="Batch YAML to write (default: kg/incoming/<slug>.yaml)."),
+) -> None:
+    """Read the rust-screening tables of a Crop Protection report with a parser (no language model) and write a batch.
+
+    Only rows for varieties the KB already has become claims; each is backed by the report's own row text. Needs network."""
+    import yaml
+
+    from curator.graph.aicrp_rust import claim_specs, parse_tables
+    from curator.graph.quote_audit import fetch_url_text
+
+    text = fetch_url_text(url)
+    if text is None:
+        typer.secho(f"Could not read {url}", fg=typer.colors.RED)
+        raise typer.Exit(code=1)
+    bundle = _build_bundle()
+    rows = parse_tables(text)
+    source_id = f"doc:{slug}"
+    specs, unknown = claim_specs(rows, source_id=source_id, entities=bundle.entities)
+    doc = {
+        "sources": [] if source_id in {s.id for s in bundle.sources} else [{
+            "id": source_id, "type": "official_document", "title": title, "year": year, "url": url, "verified": True,
+            "venue": "ICAR-Indian Institute of Wheat and Barley Research, Karnal (AICRP on Wheat and Barley)"}],
+        "entities": [], "claims": specs,
+    }
+    out = out or Path("kg/incoming") / f"{slug}.yaml"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    comment = [f"Read by parser:aicrp_rust@1 from {url}", "NOT yet in kg/curated/: agrihub kg review-sheet, then apply-review."]
+    body = yaml.safe_dump(doc, sort_keys=False, allow_unicode=True, width=1000)
+    out.write_text("".join(f"# {line}\n" for line in comment) + "\n" + body, encoding="utf-8", newline="\n")
+    tables = sorted({(r.table_title, r.season) for r in rows})
+    typer.echo(json.dumps({"tables_read": len(tables), "rows": len(rows), "claims": len(specs), "entries_not_in_kb": len(unknown)}))
+    for t, _ in tables:
+        typer.echo(f"  read: {t}")
+    typer.echo(f"Wrote {out}. Next: agrihub kg review-sheet {out}")
+
+
 @kg_app.command("review-sheet")
 def review_sheet_cmd(
     batch: Path = typer.Argument(..., exists=True, dir_okay=False, help="A kg/incoming/*.yaml batch from ingest-candidates."),

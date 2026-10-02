@@ -6,6 +6,10 @@ Yield figures are honest estimates of *accepted* claims, not candidates.
 
 ## WO01 | chatgpt | Wheat disease-screening reactions from AICRP reports
 
+> **Status 2026-10-03: superseded for the AICRP Crop Protection reports.** A first run (50 candidates) was 46/50 exactly right, but a parser
+> reads the same tables with no model in the loop: `agrihub kg import-aicrp-rust <pdf url> --slug ... --title ... --year ...` (121 claims from the
+> 2021-22 and 2022-23 reports so far). Run this work order only for **other** wheat documents or report years the parser cannot yet read.
+
 **Objective.** Per-variety reactions to the wheat diseases (stripe, leaf, stem rust, powdery mildew, Fusarium head blight) from the multi-location
 disease-screening tables of the All India Coordinated Research Project on Wheat & Barley and the ICAR-IIWBR.
 

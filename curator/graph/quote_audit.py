@@ -45,8 +45,10 @@ _URL_CHECKED_TYPES = frozenset({SourceType.OFFICIAL_DOCUMENT, SourceType.TRIAL_R
 
 def normalise(text: str) -> str:
     text = html.unescape(text)  # Europe PMC titles arrive as "&lt;i&gt;Fusarium&lt;/i&gt;"
-    text = re.sub(r"</?(?:i|b|em|strong|sub|sup|span|u)\b[^>]*>", "", text)  # inline formatting: no gap
-    text = re.sub(r"<[^>]+>", " ", text)  # block tags (p, h4, br...) separate words
+    text = re.sub(r"</?(?:i|b|em|strong|sub|sup|span|u)\b[^<>]*>", "", text)  # inline formatting: no gap
+    # Block tags (p, h4, br...) separate words. A tag starts with a letter or "/" right after "<": a comparison such as
+    # "ACI<10" or "p < 0.05" is text, and must not swallow everything up to the next ">" (it once deleted whole PDF tables).
+    text = re.sub(r"</?[A-Za-z][^<>]*>|<!--.*?-->", " ", text)
     text = unicodedata.normalize("NFKC", text)
     text = text.replace("‘", "'").replace("’", "'").replace("“", '"').replace("”", '"')
     text = re.sub(r"[‐-―−]", "-", text)
@@ -162,6 +164,23 @@ def check_quote(quote: str, source_text: str) -> str:
     if in_order:
         return "exact"
     return "fuzzy" if all(fuzz.partial_ratio(f, text) >= FUZZY_THRESHOLD for f in fragments) else "missing"
+
+
+def explain_missing(quote: str, source_text: str) -> list[dict]:
+    """Per fragment of `quote`: is it in the source, and if not, what is the closest passage there (with its score)?
+    For humans (and prompt authors) -- the pass/fail decision is check_quote()."""
+    text = normalise(source_text)
+    out = []
+    for fragment in quote_fragments(quote):
+        found = fragment in text
+        item = {"fragment": fragment, "found": found}
+        if not found:
+            alignment = fuzz.partial_ratio_alignment(fragment, text)
+            if alignment is not None:
+                item["closest_score"] = round(alignment.score)
+                item["closest_text"] = text[alignment.dest_start: alignment.dest_end][:240]
+        out.append(item)
+    return out
 
 
 @dataclass(frozen=True)

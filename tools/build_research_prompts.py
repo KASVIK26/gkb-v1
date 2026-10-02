@@ -74,7 +74,9 @@ def _work_orders() -> list[tuple[str, str, str, str]]:
     text = (DIR / "work_orders.md").read_text(encoding="utf-8")
     out = []
     for m in re.finditer(r"^## (WO\d+) \| (chatgpt|grok|both) \| (.+?)\n(.*?)(?=^## WO|\Z)", text, flags=re.S | re.M):
-        out.append((m.group(1), m.group(2), m.group(3).strip(), m.group(4).strip()))
+        lines = [line for line in m.group(4).splitlines() if not line.startswith(">")]  # ">" lines are notes for people
+        body = chr(10).join(lines).strip()
+        out.append((m.group(1), m.group(2), m.group(3).strip(), body))
     return out
 
 

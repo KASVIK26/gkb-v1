@@ -27,6 +27,11 @@ Today's date: {{TODAY}}.
 3. **The quote must name both parties** of the claim (the variety/gene/etc. and the disease/etc.), exactly as written in the
    source. If the source uses an abbreviation (`FW`, `LR`, `YR`), put it in `alias_in_quote` for that side. If one name is only in the
    table header or caption, use a fragment from the caption plus a fragment from the row.
+   **For a table row the quote is therefore three fragments: the caption, the column-header line that names the diseases, and the
+   row** (`<caption> ... <header line> ... <row>`). A quote with only the caption and the row never names the disease and is held
+   for a person. `alias_in_quote` must be words that are literally inside the quote, never a label you made up.
+   **When you skip a cell (`TS`, `ng`, `-`), keep every other value under its own column; do not shift them left.** A shifted column
+   puts a real value under the wrong disease, and a quote check cannot detect that.
 4. **One claim per candidate.** A table row with three diseases is three candidates (same quote is fine).
 5. **One source per candidate.** Never combine information from two documents. If two documents agree, emit two candidates (they merge
    into one claim with two sources, which is exactly what I want). If they **disagree, emit both** and set `note` to

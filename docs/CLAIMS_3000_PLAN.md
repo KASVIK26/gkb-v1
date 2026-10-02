@@ -101,13 +101,16 @@ The sample rule is statistical, not decorative: with a true error rate of 10 %, 
 
 ## 6. Known gaps in the system that this plan will hit (fix as they appear)
 
-1. **Stale resistance.** Raj 4037 is "resistant" (2004 notification, tier A) and "susceptible" (2020-22 field study); the conflict rule only pairs claims with the *same* stage/place/season.
-   Needed: a `disputed` signal across contexts and an age rule for notification-only rust resistance. Do this before step 2 or the reaction layer will mislead.
-2. **Zones.** Only MP and MH exist as AgroZones; AICRP zones are needed for national documents (step 0).
-3. **Pathotype entity ids** carry the pathogen (`pt:<pathogen>:<designation>`), so pathotype names that are only unique per host need care.
-4. **EnvTrigger entities** need numeric conditions mapped to sensor variables; WO10 produces leads and a person builds them.
-5. **Review capacity** is the real bottleneck for `reviewed` status; the Streamlit review app needs a "batch from file" view (small job).
-6. **Copyright and politeness**: only quotes of <= 700 characters, always with the link; respect robots.txt; no paywall circumvention; no personal data.
+1. ~~Stale resistance~~ **Done (PHASES item 42).** Disputed reactions are flagged and capped; notification-only rust resistance ages from the release year.
+2. ~~Zones~~ **Done (item 42).** 15 AICRP zones, definitions checked against their documents. Chickpea zones have no state list (the source gives none).
+3. ~~Review capacity~~ **Tool done (item 42).** `review-sheet` / `apply-review`; the remaining bottleneck is a person with an hour per batch.
+4. **Models misread tables, parsers do not.** In the first real batch a model was 92 % exactly right on AICRP rust tables and made one silent
+   column-shift error that no quote check can see. For recurring, regular report layouts write a parser (`aicrp_rust.py` is the template) and
+   keep the model for finding documents and for irregular text. A model batch can be cross-checked against a parser automatically.
+5. **Pathotype entity ids** carry the pathogen (`pt:<pathogen>:<designation>`), so pathotype names that are only unique per host need care.
+6. **EnvTrigger entities** need numeric conditions mapped to sensor variables; WO10 produces leads and a person builds them.
+7. **Check varieties repeat** across AVT groups in one report; they yield several same-season readings per variety (kept as separate claims).
+8. **Copyright and politeness**: only quotes of <= 700 characters, always with the link; respect robots.txt; no paywall circumvention; no personal data.
 
 ## 7. What I need from you
 
