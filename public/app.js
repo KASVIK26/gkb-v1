@@ -276,7 +276,7 @@ function renderVarietyGenes(genes, varietyName) {
       : "";
     card.innerHTML = `
       <h3>${esc(g.gene_name)} ${tierChip(g)}</h3>
-      <p class="edge-meta">How it was established: ${esc(CARRY_METHOD[g.method] ?? g.method ?? "n/a")} &nbsp;|&nbsp; ${esc(g.n_sources)} source${g.n_sources === 1 ? "" : "s"}</p>
+      <p class="edge-meta">How it was established: ${esc(CARRY_METHOD[g.method] ?? g.method ?? "n/a")}</p>
       <p class="edge-meta">${conferLine}</p>
       ${spectra.length ? `<p class="edge-meta">Spectrum — ${spectra.join("; ")}</p>` : ""}
       ${pathotypeLine ? `<p class="edge-meta">${pathotypeLine}</p>` : ""}
