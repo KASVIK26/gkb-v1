@@ -1,19 +1,20 @@
 {
-  "release": "2026_10_28",
-  "built_at": "2026-10-02T17:42:54.738135+00:00",
-  "git_sha": "e09010550266dc7fe85f8e1ebfa58e0a1b979a53",
+  "release": "2026_10_29",
+  "built_at": "2026-10-02T17:57:37.891241+00:00",
+  "git_sha": "2c1856fe8565c7db2076baa8dfa1a8ff8c22372c",
   "git_dirty": false,
   "counts": {
     "sources": 110,
-    "entities": 494,
-    "claims": 869,
-    "evidence": 923
+    "entities": 495,
+    "claims": 975,
+    "evidence": 1053
   },
   "content_sources": {
     "config/vocab/diseases.yaml": "sha256:9293f54c8491e143a3bcf646b2069cd2f392376d38a03f4d46999492625321db",
     "config/sources/notified_varieties.yaml": "sha256:b48a75cb1df597d1d01bb4fbec74b6275f38e30d08d1af9696e8397ac65bbdd9",
     "kg/curated/advisories_official_v1.yaml": "sha256:30e860f3f3a6cb98d44bd66914ac0f6f883e56a14a7b4d956319f67391b97927",
     "kg/curated/advisories_v2.yaml": "sha256:ee59f03b1e2dc639b9dc96c9e8c4cecb901f5ec848ef849ce370bc0ce09bb44c",
+    "kg/curated/aicrp_gene_postulations_v1.yaml": "sha256:31265f927f5ff4ba5ec452f209ebd02e8397e8292d3b56567004b15349b63948",
     "kg/curated/aicrp_icar_reactions_v2.yaml": "sha256:9f919bf79e2fc006123b743c0734975e05750a72502c9b6b944d86bcf8066100",
     "kg/curated/aicrp_rust_reactions_v1.yaml": "sha256:f22c3453b215455db571eab1998a66a93222802a4ff061ba5d909b162c64c7ed",
     "kg/curated/chickpea_reactions_v1.yaml": "sha256:95e1ca299708b91a700d29d15f4847f04b482e056eef8f4ce0c64cb6fd610922",
