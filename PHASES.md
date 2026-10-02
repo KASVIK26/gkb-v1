@@ -1566,6 +1566,16 @@ are also where most of the work is.
    - **Not merged with WO05's review-table claims**: 12 pairs (HD 2967, HD 3086, GW 322) now have a tier-D `stated` claim and a tier-B/C `postulation` claim (the method qualifier is part of a claim's identity).
    - **Next**: WO12 and re-runs; a decision on whether to drop the 12 `stated` duplicates.
 
+48. **Variety-specific genes, gene -> disease links, priority reset (2026-10-03, release 2026_10_30).** Checked what makes the graph credible and found two gaps: 17 of the 23 genes that
+   varieties carry (Yr2, Lr13, Sr11, Lr23, Lr10, Sr7b ...) had no gene -> disease claim, and the dashboard listed genes crop-wide because no public view joined varieties to genes.
+   - **Done**: WO13a, 20 gene -> disease claims for Sr/Lr/Yr genes from the AICRP reports' own sentences (38 evidence rows, all exact); 12 duplicate `stated` variety-gene claims removed;
+     `kg_variety_genes` view + `/api/query` + panel now show, for a chosen variety, the genes it carries, how that was established, which disease each protects against and which pathotypes defeat it
+     (`kg/review_log/2026-10-03e_gene_links.md`).
+   - **Priority order now (owner decision)**: (1) resistance-gene knowledge: gene -> disease for every in-scope disease, genes linked to varieties for all three crops; (2) reactions and pathotype prevalence;
+     (3) the IoT risk engine at very low priority (design parked in `docs/risk_engine_design.md`: capability-adaptive to whichever sensors exist, leaf-wetness sensor optional, real windowed aggregation).
+   - **Coverage today (genes per disease, GENE_CONFERS_RESISTANCE)**: wheat powdery mildew 46, stem rust 11+, stripe rust 9+, leaf rust 8+, Fusarium head blight 7; soybean rust 5, mosaic 3, frogeye 1,
+     bacterial pustule 1, anthracnose / charcoal rot / pod and stem blight / Rhizoctonia 0; chickpea Fusarium wilt 8, collar rot / dry root rot / rust 0. Variety -> gene claims exist for wheat only.
+
 ---
 
 ## 6. Definition of "done" reminder (unchanged from RESEARCH_ROADMAP.md §10)

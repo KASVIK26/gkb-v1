@@ -1,5 +1,7 @@
 # Which gene(s) popular Indian wheat varieties carry, from the rust-resistance review table (pmid:33013989, stated) and the IARI Lr gene postulation
 # (pmid:40678044). Work order WO05, reviewed 2026-10-03 (kg/review_log/2026-10-03b_wo04-wo06.md). Evidence stays `llm:` (discounted).
+# 2026-10-03: 12 `stated` claims (GW 322, HD 2967, HD 3086) removed: the AICRP Crop Protection reports postulate the same genes (kg/curated/aicrp_gene_postulations_v1.yaml),
+# so one edge per pair is kept, the better-sourced one.
 
 sources:
 - id: pmid:33013989
@@ -580,30 +582,6 @@ claims:
     quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... GW322 | PBW173/GW196 | Lr13 | - | Sr2+Sr11
     extractor: llm:chatgpt-deep-research@wo05-2026-10-02
     candidate_id: WO05-0021
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:GW322
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row GW322
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... GW322 | PBW173/GW196 | Lr13 | - | Sr2+Sr11
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0022
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:GW322
-  object: gene:wheat:Sr11
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row GW322
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... GW322 | PBW173/GW196 | Lr13 | - | Sr2+Sr11
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0023
 - type: VARIETY_CARRIES_GENE
   subject: var:wheat:RAJ3765
   object: gene:wheat:Lr13
@@ -1744,126 +1722,6 @@ claims:
     quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... HS 295 | CQT/AZ//IAS55/ALD/3/ALD/NAFN/4/PJN/PEL SL 1276.69 | Lr23+Lr34 | Yr2ks+Yr18 | Sr2+Sr8b+Sr11
     extractor: llm:chatgpt-deep-research@wo05-2026-10-02
     candidate_id: WO05-0125
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD2967
-  object: gene:wheat:Lr23
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row HD2967
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... HD2967 | ALD/CUC//URES/HD2160M/HD2278 | Lr23+ | Yr2+ | Sr8a+Sr11+Sr2
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0126
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD2967
-  object: gene:wheat:Yr2
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row HD2967
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... HD2967 | ALD/CUC//URES/HD2160M/HD2278 | Lr23+ | Yr2+ | Sr8a+Sr11+Sr2
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0127
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD2967
-  object: gene:wheat:Sr8a
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row HD2967
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... HD2967 | ALD/CUC//URES/HD2160M/HD2278 | Lr23+ | Yr2+ | Sr8a+Sr11+Sr2
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0128
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD2967
-  object: gene:wheat:Sr11
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row HD2967
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... HD2967 | ALD/CUC//URES/HD2160M/HD2278 | Lr23+ | Yr2+ | Sr8a+Sr11+Sr2
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0129
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD2967
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row HD2967
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... HD2967 | ALD/CUC//URES/HD2160M/HD2278 | Lr23+ | Yr2+ | Sr8a+Sr11+Sr2
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0130
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3086
-  object: gene:wheat:Lr13
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row HD3086
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... HD3086 | DBW14/HD2733//HUW468 | Lr13+Lr10+ | Yr2+ | Sr7b+Sr2
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0131
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3086
-  object: gene:wheat:Lr10
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row HD3086
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... HD3086 | DBW14/HD2733//HUW468 | Lr13+Lr10+ | Yr2+ | Sr7b+Sr2
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0132
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3086
-  object: gene:wheat:Yr2
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row HD3086
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... HD3086 | DBW14/HD2733//HUW468 | Lr13+Lr10+ | Yr2+ | Sr7b+Sr2
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0133
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3086
-  object: gene:wheat:Sr7b
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row HD3086
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... HD3086 | DBW14/HD2733//HUW468 | Lr13+Lr10+ | Yr2+ | Sr7b+Sr2
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0134
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3086
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: stated
-  evidence:
-  - source: pmid:33013989
-    method: review_statement
-    locator: Table 3, row HD3086
-    quote: List of popular Indian wheat varieties and their known rust resistant source. ... Variety Pedigree Gene combination (s) Leaf rust (Lr) Stripe rust (Yr) Stem rust (Sr) ... HD3086 | DBW14/HD2733//HUW468 | Lr13+Lr10+ | Yr2+ | Sr7b+Sr2
-    extractor: llm:chatgpt-deep-research@wo05-2026-10-02
-    candidate_id: WO05-0135
 - type: VARIETY_CARRIES_GENE
   subject: var:wheat:WH1105
   object: gene:wheat:Lr13

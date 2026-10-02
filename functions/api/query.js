@@ -1,14 +1,15 @@
 /**
  * POST /api/query   { crop, variety }    (variety is a var:<crop>:<LOCAL> id, or "__all__")
  *
- * Returns two independent, real slices of the live Supabase KG:
+ * Returns real slices of the live Supabase KG:
  *   - varietyReactions: VARIETY_REACTION claims for the selected variety (disease + reaction)
- *   - geneResistance:   GENE_CONFERS_RESISTANCE claims for the crop (gene + disease)
+ *   - varietyGenes:     VARIETY_CARRIES_GENE claims for the selected variety, each with the diseases the gene
+ *                       is claimed to confer resistance to and the pathotypes known to defeat it (kg_variety_genes)
+ *   - geneResistance:   GENE_CONFERS_RESISTANCE claims for the crop (gene + disease); the crop-wide list
+ *                       shown when no variety is selected
  *
- * These are kept separate rather than joined into one "edge" list like the old Neo4j-era
- * response: the KG currently has no VARIETY_CARRIES_GENE claims loaded (see PHASES.md), so a
- * variety selection cannot honestly be used to filter which genes apply -- showing them as two
- * lists is what the real data supports, not a simplification for its own sake.
+ * Only a minority of varieties have gene claims (wheat only so far); an empty varietyGenes means "none
+ * recorded in the KG", not "carries no gene", and the page says so.
  */
 
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8" };
@@ -58,7 +59,13 @@ export async function onRequestPost({ request, env }) {
     );
 
     let varietyReactions = [];
+    let varietyGenes = [];
     if (variety !== "__all__") {
+      varietyGenes = await supabaseGet(
+        env,
+        "kg_variety_genes",
+        new URLSearchParams({ variety_id: `eq.${variety}`, order: "gene_name.asc" }),
+      );
       varietyReactions = await supabaseGet(
         env,
         "kg_variety_reactions",
@@ -70,7 +77,8 @@ export async function onRequestPost({ request, env }) {
       query: { crop, variety },
       geneResistance,
       varietyReactions,
-      counts: { geneResistance: geneResistance.length, varietyReactions: varietyReactions.length },
+      varietyGenes,
+      counts: { geneResistance: geneResistance.length, varietyReactions: varietyReactions.length, varietyGenes: varietyGenes.length },
     });
   } catch (error) {
     console.error("Query error:", error);

@@ -1,0 +1,403 @@
+# Which disease each rust gene that Indian wheat varieties carry in the KB confers resistance to (Sr, Lr and Yr genes listed in the AICRP Crop Protection reports
+# 2021-22 and 2022-23 as stem, leaf and yellow rust resistance genes). Without these the 'variety carries gene' claims led nowhere. Work order WO13a, reviewed
+# 2026-10-03 (kg/review_log/2026-10-03e_gene_links.md). Resistance type is left 'unknown' (the reports do not say all-stage or adult-plant). Evidence stays `llm:` (discounted).
+
+sources: []
+entities:
+- id: gene:wheat:Sr9e
+  type: Gene
+  name: Sr9e
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Sr9e
+- id: gene:wheat:Sr13
+  type: Gene
+  name: Sr13
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Sr13
+- id: gene:wheat:Sr28
+  type: Gene
+  name: Sr28
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Sr28
+- id: gene:wheat:Sr30
+  type: Gene
+  name: Sr30
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Sr30
+- id: gene:wheat:Yra
+  type: Gene
+  name: Yra
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Yra
+- id: gene:wheat:Lr28
+  type: Gene
+  name: Lr28
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Lr28
+claims:
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr5
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Fourteen stem rust resistance genes ( Sr2, Sr5, Sr7a, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 133 entries
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0002
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Thirteen stem rust resistance genes ( Sr2, Sr5, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 93 AVT lines
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0016
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr7a
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Fourteen stem rust resistance genes ( Sr2, Sr5, Sr7a, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 133 entries
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0003
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr7b
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Fourteen stem rust resistance genes ( Sr2, Sr5, Sr7a, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 133 entries
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0004
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Thirteen stem rust resistance genes ( Sr2, Sr5, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 93 AVT lines
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0017
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr8a
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Fourteen stem rust resistance genes ( Sr2, Sr5, Sr7a, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 133 entries
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0005
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Thirteen stem rust resistance genes ( Sr2, Sr5, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 93 AVT lines
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0018
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr8b
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Fourteen stem rust resistance genes ( Sr2, Sr5, Sr7a, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 133 entries
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0006
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Thirteen stem rust resistance genes ( Sr2, Sr5, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 93 AVT lines
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0019
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr9b
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Fourteen stem rust resistance genes ( Sr2, Sr5, Sr7a, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 133 entries
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0007
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Thirteen stem rust resistance genes ( Sr2, Sr5, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 93 AVT lines
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0020
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr9e
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Fourteen stem rust resistance genes ( Sr2, Sr5, Sr7a, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 133 entries
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0008
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Thirteen stem rust resistance genes ( Sr2, Sr5, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 93 AVT lines
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0021
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr11
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Fourteen stem rust resistance genes ( Sr2, Sr5, Sr7a, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 133 entries
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0009
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Thirteen stem rust resistance genes ( Sr2, Sr5, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 93 AVT lines
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0022
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr13
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Fourteen stem rust resistance genes ( Sr2, Sr5, Sr7a, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 133 entries
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0010
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Thirteen stem rust resistance genes ( Sr2, Sr5, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 93 AVT lines
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0023
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr28
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Fourteen stem rust resistance genes ( Sr2, Sr5, Sr7a, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 133 entries
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0012
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Thirteen stem rust resistance genes ( Sr2, Sr5, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 93 AVT lines
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0025
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Sr30
+  object: dis:wheat:stem_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Fourteen stem rust resistance genes ( Sr2, Sr5, Sr7a, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 133 entries
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0013
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Thirteen stem rust resistance genes ( Sr2, Sr5, Sr7b, Sr8a, Sr8b, Sr9b, Sr9e, Sr11, Sr13, Sr24, Sr28, Sr30 and Sr31) were characterized in 93 AVT lines
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0026
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Yr2
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Three Yr genes viz. Yr2, Yr9, and YrA contributed to yellow rust resistance in Indian wheat material
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0028
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Four Yr genes viz. Yr2, Yr9, YrA and Yr18 contributed to yellow rust resistance in Indian wheat material
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0031
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Yra
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Three Yr genes viz. Yr2, Yr9, and YrA contributed to yellow rust resistance in Indian wheat material
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0030
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Four Yr genes viz. Yr2, Yr9, YrA and Yr18 contributed to yellow rust resistance in Indian wheat material
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0033
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr1
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Eight Lr genes viz. Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr28 were characterized in 100 AVT lines. Lr13 was the most commonly occurring leaf rust resistance
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0034
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Eight Lr genes Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr34 were characterized in 113 entries. Lr13 was the most commonly postulated leaf rust resistance gene
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0042
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr3
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Eight Lr genes viz. Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr28 were characterized in 100 AVT lines. Lr13 was the most commonly occurring leaf rust resistance
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0035
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Eight Lr genes Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr34 were characterized in 113 entries. Lr13 was the most commonly postulated leaf rust resistance gene
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0043
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr10
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Eight Lr genes viz. Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr28 were characterized in 100 AVT lines. Lr13 was the most commonly occurring leaf rust resistance
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0036
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Eight Lr genes Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr34 were characterized in 113 entries. Lr13 was the most commonly postulated leaf rust resistance gene
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0044
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr13
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Eight Lr genes viz. Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr28 were characterized in 100 AVT lines. Lr13 was the most commonly occurring leaf rust resistance
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0037
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Eight Lr genes Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr34 were characterized in 113 entries. Lr13 was the most commonly postulated leaf rust resistance gene
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0045
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr23
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Eight Lr genes viz. Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr28 were characterized in 100 AVT lines. Lr13 was the most commonly occurring leaf rust resistance
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0038
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Eight Lr genes Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr34 were characterized in 113 entries. Lr13 was the most commonly postulated leaf rust resistance gene
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0046
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr24
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Eight Lr genes viz. Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr28 were characterized in 100 AVT lines. Lr13 was the most commonly occurring leaf rust resistance
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0039
+  - source: doc:aicrp_crop_protection_2021_22
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2021-22)
+    quote: Eight Lr genes Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr34 were characterized in 113 entries. Lr13 was the most commonly postulated leaf rust resistance gene
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0047
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr28
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: doc:aicrp_crop_protection_2022_23
+    method: review_statement
+    locator: Programme 2, rust gene postulation (2022-23)
+    quote: Eight Lr genes viz. Lr1, Lr3, Lr10, Lr13, Lr23, Lr24, Lr26, and Lr28 were characterized in 100 AVT lines. Lr13 was the most commonly occurring leaf rust resistance
+    extractor: llm:claude-from-report-text@wo13a-2026-10-03
+    candidate_id: WO13a-0041

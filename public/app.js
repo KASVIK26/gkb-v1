@@ -221,6 +221,7 @@ const reactionStatusText = document.getElementById("reactionStatusText");
 const geneStatusText = document.getElementById("geneStatusText");
 const reactionList = document.getElementById("reactionList");
 const geneList = document.getElementById("geneList");
+const geneNote = document.getElementById("geneNote");
 
 function setStatus(el, text, state = "idle") {
   el.textContent = text;
@@ -246,6 +247,42 @@ function renderReactions(reactions, varietySelected) {
     `;
     attachEvidence(card, r.claim_id);
     reactionList.appendChild(card);
+  }
+}
+
+const CARRY_METHOD = {
+  marker: "marker test", sequence: "sequence", haplotype: "haplotype", postulation: "postulated from pathotype tests",
+  pedigree: "inferred from pedigree", stated: "stated by the source",
+};
+
+// One card per gene the selected variety carries, with what the KG knows the gene does.
+function renderVarietyGenes(genes, varietyName) {
+  geneList.innerHTML = "";
+  if (!genes.length) {
+    geneList.innerHTML = `<div class="edge-card"><p class="edge-meta">No gene is recorded for ${esc(varietyName)} in this KG yet. That means nothing is known here, not that it carries none.</p></div>`;
+    return;
+  }
+  for (const g of genes) {
+    const card = document.createElement("article");
+    card.className = "edge-card";
+    const confers = Array.isArray(g.confers) ? g.confers : [];
+    const pathotypes = Array.isArray(g.pathotypes) ? g.pathotypes : [];
+    const conferLine = confers.length
+      ? `Protects against: ${confers.map((c) => `<strong>${esc(c.disease_name)}</strong>${c.resistance_type && c.resistance_type !== "unknown" ? ` (${esc(c.resistance_type)})` : ""}`).join(", ")}`
+      : "No disease is linked to this gene in the KG yet.";
+    const spectra = confers.filter((c) => c.spectrum).map((c) => `${esc(c.disease_name)}: ${esc(c.spectrum)}`);
+    const pathotypeLine = pathotypes.length
+      ? `Pathotype record: ${pathotypes.map((p) => `${esc(p.pathotype)} ${esc(p.outcome)}${p.year ? ` ${esc(p.year)}` : ""}${p.region ? ` (${esc(p.region)})` : ""}`).join("; ")}`
+      : "";
+    card.innerHTML = `
+      <h3>${esc(g.gene_name)} ${tierChip(g)}</h3>
+      <p class="edge-meta">How it was established: ${esc(CARRY_METHOD[g.method] ?? g.method ?? "n/a")} &nbsp;|&nbsp; ${esc(g.n_sources)} source${g.n_sources === 1 ? "" : "s"}</p>
+      <p class="edge-meta">${conferLine}</p>
+      ${spectra.length ? `<p class="edge-meta">Spectrum — ${spectra.join("; ")}</p>` : ""}
+      ${pathotypeLine ? `<p class="edge-meta">${pathotypeLine}</p>` : ""}
+    `;
+    attachEvidence(card, g.claim_id);
+    geneList.appendChild(card);
   }
 }
 
@@ -284,8 +321,16 @@ async function runQuery() {
     const payload = await response.json();
     if (!response.ok) throw new Error(payload.error || "Query failed");
 
-    renderGenes(payload.geneResistance || []);
-    setStatus(geneStatusText, `${payload.counts.geneResistance} gene claim(s)`, "ready");
+    if (varietySelected) {
+      const varietyName = varietySelect.options[varietySelect.selectedIndex]?.textContent || "this variety";
+      geneNote.textContent = `Genes recorded for ${varietyName}, what each protects against, and the pathotypes known to defeat it.`;
+      renderVarietyGenes(payload.varietyGenes || [], varietyName);
+      setStatus(geneStatusText, `${payload.counts.varietyGenes} gene(s) carried`, "ready");
+    } else {
+      geneNote.textContent = "All gene-to-disease claims for the selected crop. Pick a variety to see only the genes it carries.";
+      renderGenes(payload.geneResistance || []);
+      setStatus(geneStatusText, `${payload.counts.geneResistance} gene claim(s)`, "ready");
+    }
 
     renderReactions(payload.varietyReactions || [], varietySelected);
     if (varietySelected) {

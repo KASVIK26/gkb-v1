@@ -72,8 +72,9 @@ const STEPS = [
     popover: {
       title: "Genes that protect the crop",
       description:
-        "Resistance genes for the selected crop. They are listed crop-wide because gene-to-variety links " +
-        "are not loaded yet — the page says so rather than guessing.",
+        "Pick a variety to see the genes it carries, how that was established (marker, postulation, stated), " +
+        "which disease each gene protects against and which pathotypes defeat it. Where the KG holds no gene " +
+        "for a variety the page says so rather than guessing; with “All varieties” it lists the crop-wide claims.",
     },
   },
   {

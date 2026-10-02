@@ -91,10 +91,9 @@
             <h2>Gene resistance</h2>
             <span id="geneStatusText" class="status-pill" role="status" aria-live="polite">Ready</span>
           </div>
-          <p class="edge-meta panel-note">
-            All GENE_CONFERS_RESISTANCE claims for the selected crop. Not yet linked to specific
-            varieties in this KG (no VARIETY_CARRIES_GENE claims are loaded), so this list is
-            crop-wide, not variety-specific.
+          <p class="edge-meta panel-note" id="geneNote">
+            Pick a variety to see the resistance genes it carries. With “All varieties” this lists every
+            gene-to-disease claim for the crop.
           </p>
           <div id="geneList" class="edge-list"></div>
         </section>
