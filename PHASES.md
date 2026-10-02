@@ -1402,11 +1402,46 @@ are also where most of the work is.
      disagree (Sr11+Sr2 vs Sr2+Sr36). The ICAR advisory is from the rabi 2010-11 season for the north-western
      plains, not Malwa, and is tier A only because an official document carries weight 0.90 (see item 38). Only
      advisories and triggers publish their properties through the anonymous API; verbatim quotes still do not.
-     **Step 4 (structured variety-reaction sources) was not started.**
+     Step 4 is item 40.
    - **Also fixed:** `europepmc.metadata_from_record` returned `venue=None` for core records (journal is under
      `journalInfo`; the review app showed "unknown venue"). A second promotion attempt lost its database
      connection mid-transaction ("server terminated abnormally"); it rolled back cleanly (live release and all ten
      public views untouched), and an immediate retry succeeded in 18 s. Cause unknown; worth watching.
+
+40. **Step 4: variety reactions from sources a tool can check (2026-10-02, release 2026_10_24).** The brief was
+   "structured sources (ICAR/AICRP tables), not paper by paper". What that turned out to mean in practice:
+   - **The structured sources we already had needed repair before they could be trusted more.** The audit
+     (item 39) learned to read PDFs and Internet Archive snapshots, which raised verified quotes from 75 to ~136
+     and exposed 13 notification rows whose stored wording had been "tidied" at import. The wheat ones were
+     re-read against the PDF and now carry its words (HD 2278 re-read: the clean row says "resistance to all the
+     three rusts", which adds stripe rust, and the old "tolerant to terminal heat" could not be found against
+     that variety, so it was dropped). The soybean ones were checked against the DAC page and **three claims the
+     page does not support were withdrawn**: NRC 86 "pod blight" (the page names no pathogen; the import had
+     guessed Phomopsis), NRC 157 bacterial pustule and MAUS 612 rust. JS 20-69 gained charcoal rot and bacterial
+     pustule, which the page states. The DAC page supports in-scope reaction claims for only five of 21 soybean
+     varieties; that is a limit of the source, not something more searching fixes.
+   - **Harvest, then read.** All 107 varieties were searched in open-access full text and tables for
+     resistant/susceptible statements (usable: soybean none, chickpea 3, wheat 5, out of ~300 hits). Most hits were another
+     crop sharing the name (Shubhra is a linseed, JG 12 a potato accession), heat or spot-blotch studies, "resistant
+     check" lists that do not name the disease, or per-environment severity scores with no categorical call
+     (not harmonised: that would be invention).
+   - **Added (7 claims + 1 second source)**: Fusarium wilt R for Pusa Chickpea 20211 and Super Annigeri 1, a second
+     source for Digvijay; adult-plant leaf rust classes from a 2020-22 IARI study (MP 4010 and HI 1500 R, HUW 510 MR,
+     Raj 4037 S) and HD 2932 seedling S. Field studies at one site count as `field_single_env` (tier C).
+   - **A finding worth the whole exercise: resistance that has gone.** Raj 4037 is "resistance to brown and black
+     rust" in the 2004 notification (tier A) and Susceptible as an adult in the 2020-22 field study; HD 2932 is R in
+     its notification and S at seedling in the Trinakria transfer paper. Both are shown. The conflict detector does
+     not pair them (it requires the same stage/place/season, by design), so tier A on the old claim is **now
+     misleading** and the scoring needs an age or contradiction rule: next job, see below.
+   - **Tooling fixes**: `KGBundle.merge` now treats the same claim in two curated files as one claim with the
+     evidence of both (the only way to add a second source to an existing claim), and `gate_errors` really checks
+     duplicate claim/evidence ids (its docstring said it did).
+   - Release 2026_10_24: 333 claims (A 223, B 32, C 42, D 36), live; rollback is `kg promote --release 2026_10_23`.
+     Not pushed to origin, no Cloudflare redeploy needed (data only).
+   - **Next**: (1) a "disputed" signal for opposing reactions across contexts, and an age rule for
+     notification-only rust resistance (roadmap 4.4 specifies x0.8 for old pathotype-dependent evidence, yet the 2004
+     Raj 4037 claim still scores 0.9); (2) leaf rust / powdery mildew / soybean rust advisories from Indian trials; (3) human review of the
+     claims (everything is still `unreviewed`).
 
 ---
 
