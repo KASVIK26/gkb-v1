@@ -1555,6 +1555,17 @@ are also where most of the work is.
      disease-independent (one practice, one entity).
    - **Next**: the AICRP gene-postulation reader (official-source gene claims for ~130 trial entries per year, second source for GW 322, HD 2967, HD 3086), then WO12 and re-runs.
 
+47. **AICRP gene-postulation reader (2026-10-03, release 2026_10_29: 869 -> 975 claims).** `curator/graph/aicrp_postulation.py` + `agrihub kg import-aicrp-postulation` read the
+   Sr/Lr/Yr "genes in AVT entries" tables of both Crop Protection reports with no language model (like the rust-reaction reader, item 43). 106 variety-gene claims for 33 released
+   varieties (Sr 54, Lr 32, Yr 20; 17 genes), 24 of them postulated in both reports (tier B), the rest tier C; 130 evidence rows, all exact against the live PDFs
+   (`kg/review_log/2026-10-03d_aicrp_postulation.md`).
+   - **Built-in checks**: each row's names must add up to the count the report prints (0 of 134 rows skipped; all six tables also sum to their printed totals); only varieties the KB already has
+     become claims; the quote is caption + header + the whole row.
+   - **Judgement calls**: entries marked * (different seed lot) are not used (HD 3090's two years disagree entirely); HI 1634's Yr genes are withheld (the two years contradict);
+     method `postulation` / evidence `postulation_pedigree`, so a lab inference scores 0.45 (C), 0.70 (B) with two reports.
+   - **Not merged with WO05's review-table claims**: 12 pairs (HD 2967, HD 3086, GW 322) now have a tier-D `stated` claim and a tier-B/C `postulation` claim (the method qualifier is part of a claim's identity).
+   - **Next**: WO12 and re-runs; a decision on whether to drop the 12 `stated` duplicates.
+
 ---
 
 ## 6. Definition of "done" reminder (unchanged from RESEARCH_ROADMAP.md §10)

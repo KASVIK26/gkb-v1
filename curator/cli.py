@@ -207,6 +207,42 @@ def import_aicrp_rust_cmd(
     typer.echo(f"Wrote {out}. Next: agrihub kg review-sheet {out}")
 
 
+@kg_app.command("import-aicrp-postulation")
+def import_aicrp_postulation_cmd(
+    url: str = typer.Argument(..., help="URL of an AICRP Wheat & Barley Crop Protection progress report (PDF)."),
+    slug: str = typer.Option(..., help="Id fragment of the report's source, e.g. aicrp_crop_protection_2022_23 (the source must already be in the KB)."),
+    out: Path = typer.Option(None, help="Batch YAML to write (default: kg/incoming/<slug>_postulation.yaml)."),
+) -> None:
+    """Read the Sr/Lr/Yr gene-postulation tables of a Crop Protection report with a parser (no language model) and write a batch.
+
+    A row whose names do not add up to the count the report prints is skipped; only varieties the KB already has become claims. Needs network."""
+    import yaml
+
+    from curator.graph.aicrp_postulation import claim_specs, parse_tables
+    from curator.graph.quote_audit import fetch_url_text
+
+    source_id = f"doc:{slug}"
+    bundle = _build_bundle()
+    if source_id not in {s.id for s in bundle.sources}:
+        typer.secho(f"{source_id} is not a source in the KB; import its rust tables first (kg import-aicrp-rust).", fg=typer.colors.RED)
+        raise typer.Exit(code=1)
+    text = fetch_url_text(url)
+    if text is None:
+        typer.secho(f"Could not read {url}", fg=typer.colors.RED)
+        raise typer.Exit(code=1)
+    rows = parse_tables(text)
+    specs, genes, unknown, skipped = claim_specs(rows, source_id=source_id, entities=bundle.entities)
+    out = out or Path("kg/incoming") / f"{slug}_postulation.yaml"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    comment = ["Read by parser:aicrp_postulation@1 from " + url, "NOT yet in kg/curated/: review, then copy."]
+    body = yaml.safe_dump({"sources": [], "entities": genes, "claims": specs}, sort_keys=False, allow_unicode=True, width=1000)
+    out.write_text("".join(f"# {line}\n" for line in comment) + "\n" + body, encoding="utf-8", newline="\n")
+    typer.echo(json.dumps({"rows": len(rows), "rows_skipped": len(skipped), "claims": len(specs), "new_genes": len(genes), "entries_not_in_kb": len(unknown)}))
+    for s in skipped:
+        typer.echo(f"  skipped: {s}")
+    typer.echo(f"Wrote {out}.")
+
+
 @kg_app.command("review-sheet")
 def review_sheet_cmd(
     batch: Path = typer.Argument(..., exists=True, dir_okay=False, help="A kg/incoming/*.yaml batch from ingest-candidates."),

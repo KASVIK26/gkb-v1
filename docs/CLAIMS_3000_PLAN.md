@@ -1,6 +1,6 @@
 # Plan: from 333 to 3,000+ verified claims
 
-**Progress 2026-10-03: 869 claims live (release `kg_2026_10_28`) after WO01-WO11; see PHASES.md items 43-46. Next: the AICRP gene-postulation reader, WO12, and re-runs; a crop scientist reviews the live graph.**
+**Progress 2026-10-03: 975 claims live (release `kg_2026_10_29`) after WO01-WO11 and the AICRP gene-postulation reader; see PHASES.md items 43-47. Next: the AICRP gene-postulation reader, WO12, and re-runs; a crop scientist reviews the live graph.**
 
 Written 2026-10-02 against release `kg_2026_10_24` (333 claims, 73 sources, 216 entities; tiers A 223 / B 32 / C 42 / D 36).
 Goal: **at least 3,000 claims in the live release, each with a source a machine has checked**, without lowering the bar that the
