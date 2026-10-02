@@ -53,10 +53,27 @@ def test_unmapped_phrase_raises_instead_of_guessing():
 def test_out_of_scope_diseases_never_produce_a_claim():
     """Yellow Mosaic Virus (soybean) is a different virus from Soybean mosaic virus (SMV) and is
     explicitly out of scope -- must never turn into a dis:soybean:mosaic_virus claim."""
-    assert reaction_claims_for("soybean", "resistant to Yellow Mosaic Virus") == []
-    ymv_and_rot = reaction_claims_for("soybean", "resistant to Yellow Mosaic Virus and charcoal rot")
+    assert reaction_claims_for("soybean", "Resistant to YMV") == []
+    ymv_and_rot = reaction_claims_for("soybean", "Resistant to YMV and Charcoal Rot")
     diseases = [d for d, _, _ in ymv_and_rot]
     assert diseases == ["dis:soybean:charcoal_rot"]  # YMV silently dropped, charcoal rot kept
+
+
+def test_soybean_pod_blight_is_not_guessed_into_a_disease():
+    """The DAC page says "Pod blight" with no pathogen; it must not become pod_stem_blight or anthracnose."""
+    nrc86 = reaction_claims_for("soybean", "Resistant to bacterial postule, Pod blight, collar rot, girdle beetle and Stem fly")
+    assert [d for d, _, _ in nrc86] == ["dis:soybean:bacterial_pustule"]
+    seven = reaction_claims_for(
+        "soybean", "Resistant YMV, Charcoal Rot, Bacterial Pustules, Alternaria Leaf spot, Pod blight, Indian bud blight, Target leaf spot"
+    )
+    assert [d for d, _, _ in seven] == ["dis:soybean:charcoal_rot", "dis:soybean:bacterial_pustule"]
+
+
+def test_withdrawn_soybean_phrases_are_no_longer_reviewed():
+    """These were not on the cited DAC page; they must fail loudly if someone puts them back."""
+    for phrase in ("reported rust and pest resistant", "moderately resistant to Alternaria leaf spot, bacterial pustule, target leaf spot"):
+        with pytest.raises(UnmappedResistanceText):
+            reaction_claims_for("soybean", phrase)
 
 
 def test_tolerant_maps_to_moderately_resistant_not_resistant():

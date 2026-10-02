@@ -1,0 +1,87 @@
+# Chickpea Fusarium wilt reactions backed by papers (not only by the DPD variety list), from the step-4 harvest
+# (every one of the 36 chickpea varieties searched for "resistant"/"susceptible" statements in open-access
+# papers, tables included; then READ by a person).
+#
+# 2026-10-02. What the harvest showed, honestly: of 75 hits only a handful were about a KB variety's reaction to
+# a KB disease. Most were other crops sharing a name ("Shubhra" is a linseed variety, "Akash" a person, "JG 12" a
+# potato accession), abiotic traits (JG 14 is a heat-tolerance check), or "resistant check" lists that do not say
+# which disease. Not entered for those reasons: JG 14 ("resistant checks JG14, BG3043 and RVG202" - disease not
+# stated in the sentence), JAKI 9218 (only incidental mentions in a storage-protein paper and a nutrition-farming
+# paper), Digvijay's second mention (a general Fusarium review).
+#
+# What IS entered:
+#   * Pusa Chickpea 20211: no wilt claim existed (the DPD list gave it dry root rot and collar rot only). The
+#     breeding paper reports it highly resistant to Fusarium wilt in multi-location field trials.
+#   * Super Annigeri 1: likewise no wilt claim; the paper that developed it calls it "Fusarium wilt-resistant".
+#     Its resistance is "enhanced ... over Annigeri 1" (race 4), not absolute; R is the closest reaction class.
+#   * Digvijay: already R from the DPD list; a Fusarium-wilt review independently calls it FW-resistant, which
+#     adds a second source (same claim, same qualifiers).
+
+sources:
+  - id: pmid:35991541
+    type: publication
+    title: "Development of High Yielding Fusarium Wilt Resistant Cultivar by Pyramiding of 'Genes' Through Marker-Assisted Backcrossing in Chickpea (Cicer arietinum L.)"
+    year: 2022
+    venue: Frontiers in genetics
+    url: https://doi.org/10.3389/fgene.2022.924287
+    verified: true
+    # open access: Y; pmcid: PMC9388742
+
+  # pmid:30631246 (Mannur et al. 2019) is already defined in chickpea_seed_genes.yaml
+
+  - id: pmid:38206288
+    type: publication
+    title: "Celebrating Professor Rajeev K. Varshney's transformative research odyssey from genomics to the field on his induction as Fellow of the Royal Society"
+    year: 2024
+    venue: Plant biotechnology journal
+    url: https://doi.org/10.1111/pbi.14282
+    verified: true
+    # open access: Y; pmcid: PMC11123405
+
+  - id: pmid:37109518
+    type: publication
+    title: "Breeding and Genomic Approaches towards Development of Fusarium Wilt Resistance in Chickpea"
+    year: 2023
+    venue: "Life (Basel, Switzerland)"
+    url: https://doi.org/10.3390/life13040988
+    verified: true
+    # open access: Y; pmcid: PMC10144025
+
+claims:
+  - type: VARIETY_REACTION
+    subject: var:chickpea:PUSACHICKPEA20211
+    object: dis:chickpea:fusarium_wilt
+    qualifiers: {reaction: R, stage: unspecified}
+    evidence:
+      - source: pmid:35991541
+        method: field_multi_env
+        locator: "full text"
+        quote: "We also report the release of Pusa Chickpea 20211, a variety developed by molecular breeding, which is highly resistant to FW and is superior to national check (JG 16)."
+      - source: pmid:35991541
+        method: field_multi_env
+        locator: abstract
+        quote: "the genotype IL1 (BGM 20211) was highly resistant to FW in Junagarh, Indore, New Delhi, Badnapur and moderately resistant at Sehore and Nandyal"
+
+  - type: VARIETY_REACTION
+    subject: var:chickpea:SUPERANNIGERI1
+    object: dis:chickpea:fusarium_wilt
+    qualifiers: {reaction: R, stage: unspecified}
+    evidence:
+      - source: pmid:30631246
+        method: field_multi_env
+        locator: abstract
+        quote: "Multilocation evaluation of 10 BC2F5 lines derived from Annigeri 1 provided one superior line referred to as Super Annigeri 1 with 8% increase in yield and enhanced disease resistance over Annigeri 1."
+      - source: pmid:38206288
+        method: review_statement
+        locator: full text
+        quote: "several Fusarium wilt resistant chickpea varieties, namely, Super Annigeri 1, Samriddhi, Pusa Manav, were delivered to chickpea farmers in India"
+
+  - type: VARIETY_REACTION
+    subject: var:chickpea:DIGVIJAY
+    object: dis:chickpea:fusarium_wilt
+    qualifiers: {reaction: R, stage: unspecified}
+    evidence:
+      - source: pmid:37109518
+        method: review_statement
+        locator: full text
+        quote: "The genotypes JG 62 (FW-susceptible) and Digvijay (FW-resistant) of chickpea were both found to contain a variety of defense-related proteins against FW infection"

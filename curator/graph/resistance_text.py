@@ -87,6 +87,34 @@ WHEAT: dict[str, list[ReactionSpec]] = {
         ("dis:wheat:leaf_rust", Reaction.R, PlantStage.UNSPECIFIED),
         ("dis:wheat:stripe_rust", Reaction.R, PlantStage.UNSPECIFIED),
     ],
+    # Added 2026-10-02: the PDF's own wording for rows whose stored text had been tidied (grammar/punctuation) at
+    # import time, so `agrihub kg verify-quotes` can find them. Same readings as their tidied twins above.
+    "resistance to all the three rusts": [
+        ("dis:wheat:stem_rust", Reaction.R, PlantStage.UNSPECIFIED),
+        ("dis:wheat:leaf_rust", Reaction.R, PlantStage.UNSPECIFIED),
+        ("dis:wheat:stripe_rust", Reaction.R, PlantStage.UNSPECIFIED),
+    ],
+    "fairly resistance to all the three rusts": [
+        ("dis:wheat:stem_rust", Reaction.R, PlantStage.UNSPECIFIED),
+        ("dis:wheat:leaf_rust", Reaction.R, PlantStage.UNSPECIFIED),
+        ("dis:wheat:stripe_rust", Reaction.R, PlantStage.UNSPECIFIED),
+    ],
+    "highly resistance to brown rust, foot rot and tolerant to black rust": [
+        ("dis:wheat:leaf_rust", Reaction.R, PlantStage.UNSPECIFIED),
+        ("dis:wheat:stem_rust", Reaction.MR, PlantStage.UNSPECIFIED),
+    ],
+    "resistance to black rust, brown rust and tolerant to terminal heat": [
+        ("dis:wheat:stem_rust", Reaction.R, PlantStage.UNSPECIFIED),
+        ("dis:wheat:leaf_rust", Reaction.R, PlantStage.UNSPECIFIED),
+    ],
+    "resistance to brown and black rust, heat tolerant": [
+        ("dis:wheat:leaf_rust", Reaction.R, PlantStage.UNSPECIFIED),
+        ("dis:wheat:stem_rust", Reaction.R, PlantStage.UNSPECIFIED),
+    ],
+    "high degree of resistance against stem and leaf rust": [
+        ("dis:wheat:stem_rust", Reaction.R, PlantStage.UNSPECIFIED),
+        ("dis:wheat:leaf_rust", Reaction.R, PlantStage.UNSPECIFIED),
+    ],
     "tolerance to major diseases": [],  # too vague to name a disease -- deliberately empty
     "resistance to brown rust": [("dis:wheat:leaf_rust", Reaction.R, PlantStage.UNSPECIFIED)],
     "resistance to brown rust, black rust": [
@@ -129,24 +157,30 @@ WHEAT: dict[str, list[ReactionSpec]] = {
 }
 
 SOYBEAN: dict[str, list[ReactionSpec]] = {
-    "tolerant to major leaf, pod and root diseases; tolerant to girdle beetle and semi-looper": [],
-    "resistant to Yellow Mosaic Virus and charcoal rot": [
+    # Every key is the Directorate of Oilseeds Development "Characters of notified varieties" wording, verbatim
+    # (https://oilseeds.dac.gov.in/Soyabean.aspx), so `agrihub kg verify-quotes` can find it on the page.
+    # Reviewed 2026-10-02. Skipped on purpose: YMV (a begomovirus, not soybean mosaic virus), Alternaria leaf
+    # spot, target leaf spot, Indian bud blight, collar rot, all pests, and "Pod blight" (the page names no
+    # pathogen; the anthracnose and Phomopsis pod/stem blight diseases would both be guesses).
+    "Tolerant to major leaf, pod & root diseases. Tolerant to girdle beetle & semi looper": [],
+    "Resistant to YMV and Charcoal Rot": [
         ("dis:soybean:charcoal_rot", Reaction.R, PlantStage.UNSPECIFIED),
     ],
-    "resistant to charcoal rot; tolerant to girdle beetle and stem fly": [
+    "Resistant to YMV and Charcoal rot": [
         ("dis:soybean:charcoal_rot", Reaction.R, PlantStage.UNSPECIFIED),
     ],
-    "resistant to bacterial pustule, pod blight, collar rot; tolerant to girdle beetle and stem fly": [
+    "Resistant to Charcoal Rot, Girdle beetle and Stem fly": [
+        ("dis:soybean:charcoal_rot", Reaction.R, PlantStage.UNSPECIFIED),
+    ],
+    "Resistant to bacterial postule, Pod blight, collar rot, girdle beetle and Stem fly": [
         ("dis:soybean:bacterial_pustule", Reaction.R, PlantStage.UNSPECIFIED),
-        ("dis:soybean:pod_stem_blight", Reaction.R, PlantStage.UNSPECIFIED),
     ],
-    "resistant to Yellow Mosaic Virus": [],
-    "moderately resistant to Alternaria leaf spot, bacterial pustule, target leaf spot": [
-        ("dis:soybean:bacterial_pustule", Reaction.MR, PlantStage.UNSPECIFIED),
+    "Resistant to YMV": [],
+    "Resistant YMV, Charcoal Rot, Bacterial Pustules, Alternaria Leaf spot, Pod blight, Indian bud blight, Target leaf spot": [
+        ("dis:soybean:charcoal_rot", Reaction.R, PlantStage.UNSPECIFIED),
+        ("dis:soybean:bacterial_pustule", Reaction.R, PlantStage.UNSPECIFIED),
     ],
-    "moderately resistant to Mungbean Yellow Mosaic Virus": [],
     "good performance for charcoal-rot resistance in a comparative screening (AUDPC 56.81, root-rot severity score 1.57)": [],
-    "reported rust and pest resistant": [("dis:soybean:rust", Reaction.R, PlantStage.UNSPECIFIED)],
 }
 
 CHICKPEA: dict[str, list[ReactionSpec]] = {

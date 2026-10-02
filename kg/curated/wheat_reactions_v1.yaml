@@ -1,0 +1,93 @@
+# Wheat leaf rust reactions from two primary studies found by the step-4 harvest (every one of the 50 wheat
+# varieties searched for resistant/susceptible statements and reaction tables in open-access papers, then READ).
+#
+# 2026-10-02. Of ~195 hits only these were categorical, about a KB variety, about an in-scope disease, and from
+# a study that tested the variety itself. Left out on purpose: stem-rust severity scores across nine environments
+# for HD 3090 / MP 3288 / MP 3336 (pmid:37521927 Table 5: mixed R/MS/S scores per environment, no categorical
+# call, and harmonising them would be invention); gene tables that list popular varieties with gene
+# combinations (those are postulations, handled as variety-gene links); heat- and spot-blotch papers (out of
+# scope); and "highly rust susceptible infector row" mentions (the rust is not named).
+#
+# THE INTERESTING ONE: Raj 4037. The 2004 notification (official document, claim already in the KB) says
+# "resistance to brown and black rust". This 2020-22 field study at IARI Delhi puts it in the Susceptible class
+# for adult-plant leaf rust. Both are recorded: they are different contexts (a notification with no stage,
+# place or year of testing vs a named field trial), so the conflict detector (same stage/pathotype/place/season)
+# does not pair them, but anyone reading the record sees resistance claimed in 2004 and susceptibility measured
+# in 2020-22 -- the pattern of a resistance gene losing effect as the pathogen changes.
+#
+# Mapping used (stated once): the paper's Table 4 classes come from the coefficient of infection (CI) over two
+# rabi seasons: High APR (CI <= 20) -> R; Moderate APR (CI <= 40) -> MR; Susceptible (CI > 60) -> S. The paper says
+# the 64 High-APR genotypes "consistently exhibited high APR" in both seasons. One farm, two seasons, so the
+# evidence type is field_single_env (0.50), not multi-location.
+
+sources:
+  - id: pmid:40678044
+    type: publication
+    title: "Multiple patho-phenotyping and molecular analysis to characterize wide-spectrum durable leaf rust resistance in wheat collections from India"
+    year: 2025
+    venue: Frontiers in microbiology
+    url: https://doi.org/10.3389/fmicb.2025.1596282
+    verified: true
+    # open access: Y; pmcid: PMC12267166
+
+  - id: pmid:36035125
+    type: publication
+    title: "Marker-assisted transfer of leaf and stripe rust resistance from Triticum turgidum var. durum cv. Trinakria to wheat variety HD2932"
+    year: 2022
+    venue: Frontiers in genetics
+    url: https://doi.org/10.3389/fgene.2022.941287
+    verified: true
+    # open access: Y; pmcid: PMC9403539
+
+claims:
+  - type: VARIETY_REACTION
+    subject: var:wheat:MP4010
+    object: dis:wheat:leaf_rust
+    qualifiers: {reaction: R, stage: adult, location: "ICAR-IARI, New Delhi", season: "2020-21 and 2021-22 (rabi)", n_locations: 1, scale: "adult-plant resistance level from coefficient of infection"}
+    evidence:
+      - source: pmid:40678044
+        method: field_single_env
+        locator: "Table 4 (High APR)"
+        quote: "High | 64 | NP 4, NP 100 ... MP 4010, WR 544 and HI 1500"
+
+  - type: VARIETY_REACTION
+    subject: var:wheat:HI1500
+    object: dis:wheat:leaf_rust
+    qualifiers: {reaction: R, stage: adult, location: "ICAR-IARI, New Delhi", season: "2020-21 and 2021-22 (rabi)", n_locations: 1, scale: "adult-plant resistance level from coefficient of infection"}
+    evidence:
+      - source: pmid:40678044
+        method: field_single_env
+        locator: "Table 4 (High APR)"
+        quote: "High | 64 | NP 4, NP 100 ... MP 4010, WR 544 and HI 1500"
+
+  - type: VARIETY_REACTION
+    subject: var:wheat:HUW510
+    object: dis:wheat:leaf_rust
+    qualifiers: {reaction: MR, stage: adult, location: "ICAR-IARI, New Delhi", season: "2020-21 and 2021-22 (rabi)", n_locations: 1, scale: "adult-plant resistance level from coefficient of infection"}
+    evidence:
+      - source: pmid:40678044
+        method: field_single_env
+        locator: "Table 4 (Moderate APR)"
+        quote: "Moderate | 16 | C 591, NP 770, HY 5 ... WH 291, K 7410, K 9162 and HUW 510"
+
+  - type: VARIETY_REACTION
+    subject: var:wheat:RAJ4037
+    object: dis:wheat:leaf_rust
+    qualifiers: {reaction: S, stage: adult, location: "ICAR-IARI, New Delhi", season: "2020-21 and 2021-22 (rabi)", n_locations: 1, scale: "adult-plant resistance level from coefficient of infection"}
+    evidence:
+      - source: pmid:40678044
+        method: field_single_env
+        locator: "Table 4 (Susceptible)"
+        quote: "Susceptible | 04 | K 816, NW 1014, PBW 396 and RAJ 4037"
+
+  # HD 2932: the recurrent (recipient) parent in a marker-assisted transfer study; tested as itself at seedling
+  # stage in a glasshouse against the leaf rust pathotypes, next to the susceptible check Agra Local.
+  - type: VARIETY_REACTION
+    subject: var:wheat:HD2932
+    object: dis:wheat:leaf_rust
+    qualifiers: {reaction: S, stage: seedling}
+    evidence:
+      - source: pmid:36035125
+        method: controlled_env
+        locator: "full text, Results (seedling leaf rust screening)"
+        quote: 'the recurrent parent HD2932 showed susceptible reaction with all the leaf rust pathotypes with IT “3”'
