@@ -38,6 +38,9 @@ review = [
 extract = [
     "langextract[openai]>=1.7,<2",
 ]
+audit = [
+    "pypdf>=4,<7",  # lets `agrihub kg verify-quotes` read official PDF documents
+]
 
 [project.scripts]
 agrihub-pipeline = "curator.run_pipeline:main"

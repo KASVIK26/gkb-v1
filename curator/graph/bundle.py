@@ -21,17 +21,24 @@ class KGBundle:
 
         Entities are de-duplicated by ID (last bundle wins) — e.g. a Disease entity
         materialised once from config/vocab/ can be referenced by many curated files
-        without each of them redefining it. Claims and evidence are concatenated as-is;
-        gate_errors() still catches a genuinely duplicated claim/evidence id.
+        without each of them redefining it. A claim's id is derived from its content, so the
+        same claim appearing in two files is ONE claim: the first copy is kept and the evidence
+        from both files accumulates on it (that is how a second independent source is added to
+        a claim that already exists). Evidence is concatenated as-is; gate_errors() catches a
+        duplicated evidence id.
         """
         entities: dict[str, Entity] = {}
         sources: list[Source] = []
         claims: list[Claim] = []
         evidence: list[Evidence] = []
+        seen_claims: set[str] = set()
         for b in bundles:
             entities.update({e.id: e for e in b.entities})
             sources.extend(b.sources)
-            claims.extend(b.claims)
+            for claim in b.claims:
+                if claim.id not in seen_claims:
+                    seen_claims.add(claim.id)
+                    claims.append(claim)
             evidence.extend(b.evidence)
         return KGBundle(entities=list(entities.values()), sources=sources, claims=claims, evidence=evidence)
 
@@ -42,7 +49,12 @@ class KGBundle:
         source_by_id = {s.id: s for s in self.sources}
         claim_ids = {c.id for c in self.claims}
 
-        for name, ids in (("entity", [e.id for e in self.entities]), ("source", [s.id for s in self.sources])):
+        for name, ids in (
+            ("entity", [e.id for e in self.entities]),
+            ("source", [s.id for s in self.sources]),
+            ("claim", [c.id for c in self.claims]),
+            ("evidence", [e.id for e in self.evidence]),
+        ):
             dupes = [i for i, n in Counter(ids).items() if n > 1]
             if dupes:
                 errors.append(f"duplicate {name} IDs: {sorted(dupes)}")

@@ -20,9 +20,12 @@ Statuses per evidence row:
 from __future__ import annotations
 
 import html
+import io
+import json
 import re
 import unicodedata
 import urllib.error
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter
@@ -82,16 +85,52 @@ def quote_fragments(quote: str) -> list[str]:
     return [p for p in pieces if len(p) >= MIN_FRAGMENT_CHARS] or [normalise(quote)]
 
 
-def fetch_url_text(url: str) -> str | None:
-    """Visible text of an HTML page (official documents, institute pages), or None for PDFs/errors."""
-    request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (agrihub-kb quote audit)"})
+MAX_DOCUMENT_BYTES = 25_000_000
+_USER_AGENT = {"User-Agent": "Mozilla/5.0 (agrihub-kb quote audit)"}
+
+
+def _read_url(url: str) -> bytes | None:
+    request = urllib.request.Request(url, headers=_USER_AGENT)
     try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            if "pdf" in (response.headers.get("Content-Type") or "").lower():
-                return None
-            raw = response.read(3_000_000).decode("utf-8", errors="replace")
-    except (urllib.error.URLError, TimeoutError, ValueError):
+        with urllib.request.urlopen(request, timeout=40) as response:
+            return response.read(MAX_DOCUMENT_BYTES)
+    except (urllib.error.URLError, TimeoutError, ValueError, OSError):
         return None
+
+
+def _read_archived(url: str) -> bytes | None:
+    """The Internet Archive's closest snapshot of `url`, as the original bytes -- several Indian government
+    servers are unreliable from outside India, and the curators already used archived copies of them."""
+    lookup = _read_url("https://archive.org/wayback/available?url=" + urllib.parse.quote(url, safe=""))
+    if not lookup:
+        return None
+    try:
+        snapshot = json.loads(lookup)["archived_snapshots"]["closest"]["url"]
+    except (KeyError, TypeError, ValueError):
+        return None
+    return _read_url(re.sub(r"/web/(\d+)/", r"/web/\1id_/", snapshot, count=1))  # id_ = the raw, unrewritten bytes
+
+
+def _pdf_text(data: bytes) -> str | None:
+    try:
+        from pypdf import PdfReader  # optional: install the `audit` extra
+    except ImportError:
+        return None
+    try:
+        reader = PdfReader(io.BytesIO(data))
+        return " ".join((page.extract_text() or "") for page in reader.pages[:400])
+    except Exception:  # noqa: BLE001 -- a malformed PDF is "no text", never a crash
+        return None
+
+
+def fetch_url_text(url: str) -> str | None:
+    """Visible text of an HTML page or PDF (official documents, institute pages), or None if unreachable."""
+    data = _read_url(url) or _read_archived(url)
+    if data is None:
+        return None
+    if data[:5] == b"%PDF-":
+        return _pdf_text(data)
+    raw = data.decode("utf-8", errors="replace")
     raw = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", raw, flags=re.DOTALL | re.IGNORECASE)
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", raw))
 

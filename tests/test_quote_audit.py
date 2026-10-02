@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 from curator.graph.bundle import KGBundle
 from curator.graph.quote_audit import audit_bundle, check_quote, normalise, summarize
 from curator.model import Claim, Evidence, EvidenceMethod, Source, SourceType
@@ -101,3 +103,63 @@ def test_datasets_are_never_fetched_by_url():
     bundle = KGBundle(sources=[dataset], claims=base.claims, evidence=[ev])
     rows = audit_bundle(bundle, fetch_url=lambda _u: (_ for _ in ()).throw(AssertionError("fetched")))
     assert rows[0].status == "not_checked"
+
+
+# ───────────────────────────── URL fetching: HTML, PDF and the Internet Archive fallback ─────────────────────────────
+import json
+
+import pytest
+
+import curator.graph.quote_audit as qa
+
+def _minimal_pdf(text: str) -> bytes:
+    """A valid one-page PDF (with a real xref table) whose only content is `text`."""
+    stream = f"BT /F1 12 Tf 10 50 Td ({text}) Tj ET".encode()
+    objects = [
+        b"<</Type/Catalog/Pages 2 0 R>>",
+        b"<</Type/Pages/Kids[3 0 R]/Count 1>>",
+        b"<</Type/Page/Parent 2 0 R/MediaBox[0 0 400 100]/Contents 4 0 R/Resources<</Font<</F1 5 0 R>>>>>>",
+        b"<</Length %d>>\nstream\n" % len(stream) + stream + b"\nendstream",
+        b"<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>",
+    ]
+    out, offsets = b"%PDF-1.4\n", []
+    for number, body in enumerate(objects, start=1):
+        offsets.append(len(out))
+        out += b"%d 0 obj\n" % number + body + b"\nendobj\n"
+    xref_at = len(out)
+    out += b"xref\n0 %d\n0000000000 65535 f \n" % (len(objects) + 1)
+    out += b"".join(b"%010d 00000 n \n" % offset for offset in offsets)
+    return out + b"trailer\n<</Root 1 0 R/Size %d>>\nstartxref\n%d\n%%%%EOF\n" % (len(objects) + 1, xref_at)
+
+
+def test_fetch_url_text_strips_html_scripts_and_tags(monkeypatch):
+    monkeypatch.setattr(qa, "_read_url", lambda url: b"<html><script>var x=1;</script><p>Spray  <b>Tilt</b> now</p></html>")
+    text = qa.fetch_url_text("https://example.org/page")
+    assert "Spray Tilt now" in re.sub(r"\s+", " ", text) and "var x" not in text
+
+
+def test_fetch_url_text_reads_pdfs(monkeypatch):
+    pytest.importorskip("pypdf")
+    monkeypatch.setattr(qa, "_read_url", lambda url: _minimal_pdf("Propiconazole 25 EC at 0.1 percent"))
+    assert "Propiconazole 25 EC at 0.1 percent" in qa.fetch_url_text("https://example.org/doc.pdf")
+
+
+def test_fetch_url_text_falls_back_to_the_internet_archive(monkeypatch):
+    requested = []
+
+    def fake_read(url):
+        requested.append(url)
+        if url.startswith("https://archive.org/wayback/available"):
+            return json.dumps({"archived_snapshots": {"closest": {"url": "http://web.archive.org/web/20240701000000/https://x.gov.in/a.html"}}}).encode()
+        if "20240701000000id_" in url:
+            return b"<p>archived copy</p>"
+        return None  # the live server is unreachable
+
+    monkeypatch.setattr(qa, "_read_url", fake_read)
+    assert "archived copy" in qa.fetch_url_text("https://x.gov.in/a.html")
+    assert any("20240701000000id_/https://x.gov.in/a.html" in u for u in requested)
+
+
+def test_fetch_url_text_is_none_when_neither_live_nor_archived(monkeypatch):
+    monkeypatch.setattr(qa, "_read_url", lambda url: None)
+    assert qa.fetch_url_text("https://x.gov.in/a.html") is None
