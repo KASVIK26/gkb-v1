@@ -78,6 +78,16 @@ const STEPS = [
     },
   },
   {
+    tab: "browse",
+    element: "#qtlPanel",
+    popover: {
+      title: "Genome regions (QTL)",
+      description:
+        "Where in the genome resistance has been mapped, for the selected crop: position, p-value or LOD, the study population and " +
+        "the genes inside the region. They describe the crop, not one variety, and each card has its evidence.",
+    },
+  },
+  {
     tab: "triggers",
     element: "#demoWarning",
     popover: {

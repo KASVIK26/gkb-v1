@@ -119,3 +119,12 @@ def test_a_table_without_the_reports_rule_sentence_makes_no_claims():
     entities = KGBundle.merge(reference_bundle(), variety_bundle()).entities
     specs, _ = claim_specs(parse_tables(text), source_id="doc:test_report", entities=entities)
     assert specs == []
+
+
+def test_a_multi_year_status_table_is_not_read_as_a_single_season():
+    """Table 1.4 prints one row per YEAR under each entry (2018-19, 2019-20, 2020-21 plus a mean); read as 'entry + 4 pairs' it gave wrong columns and seasons."""
+    text = ("Entries with ACI up to 10.0 were categorized as resistant. "
+            "Table 1.4: Status of disease resistance in AVT (final year entries) and check varieties during 2018-19, 2019-20 and 2020-21 "
+            "S. No. Entry Stem rust Leaf rust (S) Leaf rust (N) Stripe rust ACI HS ACI HS ACI HS ACI HS "
+            "1 HUW838 2018-19 6 20S 2.1 10MS 2.3 15S 7.5 20S 2019-20 2.4 10MS 2.6 15MS 8.1 50S 11.1 40S 2 DBW296 2018-19 6.7 20S 3 20S 4.4 15S 2.4 10S")
+    assert parse_tables(text) == []

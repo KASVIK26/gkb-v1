@@ -1,0 +1,37 @@
+# Two single-paper gene links: HI 1500 carries Lr24 (donor parent in a marker-assisted backcross, pmid:36352858) and Lr14a confers leaf rust seedling resistance (pmid:40678044 table).
+# Work orders WO14a/WO14b, reviewed 2026-10-03 (kg/review_log/2026-10-03g_gene_variety_links.md). Evidence stays llm: (discounted).
+
+sources:
+- id: pmid:36352858
+  type: publication
+  title: Marker assisted improvement for leaf rust and moisture deficit stress tolerance in wheat variety HD3086
+  year: 2022
+  venue: Frontiers in plant science
+  url: https://doi.org/10.3389/fpls.2022.1035016
+  verified: true
+entities: []
+claims:
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1500
+  object: gene:wheat:Lr24
+  qualifiers:
+    method: stated
+  evidence:
+  - source: pmid:36352858
+    method: review_statement
+    locator: Abstract
+    quote: The genotype HI1500 was used as a donor parent that possesses leaf rust-resistant gene Lr24, which confers resistance against the major pathotypes found in the production environment.
+    extractor: llm:claude-from-paper-text@wo14a-2026-10-03
+    candidate_id: WO14a-0001
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:wheat:Lr14a
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    resistance_type: ASR
+  evidence:
+  - source: pmid:40678044
+    method: postulation_pedigree
+    locator: Seedling resistance genes table
+    quote: Seedling resistance genes characterized in Indian wheat genotypes/cultivars to leaf rust. Inferred presence of the Lr gene(s) in Indian wheat collection. ... 46 | SAGARIKA | Lr14a + 10+
+    extractor: llm:claude-from-paper-text@wo14b-2026-10-03
+    candidate_id: WO14b-0001

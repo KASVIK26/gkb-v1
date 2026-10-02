@@ -34,6 +34,7 @@ COLUMN_WORDS = {
 _HEADER = re.compile(r"(?:s\. ?no\.|avt no\.) (?:entries|entry) ((?:stem rust|leaf rust \([sn]\)|leaf rust|stripe rust|yellow rust)(?: (?:stem rust|leaf rust \([sn]\)|leaf rust|stripe rust|yellow rust))*)")
 _TITLE = re.compile(r"table \d+\.\d+[.:]? [^.]{15,260}?(\d{4}-\d{2})")
 _PAGE_HEADER = re.compile(r"aicrp-w&b, progress report, crop protection, (?:vol\. iii, )?\d{4} page [ivxlc\d]+")
+_MULTI_YEAR = re.compile(r",? ?\d{4}-\d{2},? (?:and )?\d{4}-\d{2}")
 _ACI = re.compile(r"\d+\.\d")
 _HS = re.compile(r"(\d{1,3})?(tmr|tms|tr|ts|mr|ms|r|s)|0")
 _RESPONSE = {"r": "R", "mr": "MR", "ms": "MS", "s": "S"}
@@ -95,6 +96,8 @@ def parse_tables(raw_text: str) -> list[RustRow]:
         # skip the per-column "aci hs" sub-header, then read rows
         if not season:
             continue
+        if _MULTI_YEAR.match(text, header.start() - len(before) + title_match[-1].end()):
+            continue  # "status of resistance ... during 2018-19, 2019-20 and 2020-21": one row per year under each entry, not this layout
         rules = list(_RULE.finditer(text, 0, header.start()))
         rule = rules[-1].group(0) if rules else ""
         tail = text[header.end(): header.end() + 60000]

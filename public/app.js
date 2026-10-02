@@ -222,6 +222,8 @@ const geneStatusText = document.getElementById("geneStatusText");
 const reactionList = document.getElementById("reactionList");
 const geneList = document.getElementById("geneList");
 const geneNote = document.getElementById("geneNote");
+const qtlList = document.getElementById("qtlList");
+const qtlStatusText = document.getElementById("qtlStatusText");
 
 function setStatus(el, text, state = "idle") {
   el.textContent = text;
@@ -286,6 +288,53 @@ function renderVarietyGenes(genes, varietyName) {
   }
 }
 
+const fmtBp = (n) => (n == null ? null : Number(n).toLocaleString("en-US"));
+const fmtP = (p) => (p == null ? null : Number(p) < 0.001 ? Number(p).toExponential(2).replace("e-", "×10⁻").replace("+", "") : String(p));
+
+// One card per genome region, grouped under its disease: where it is, how strong the association is, and the genes inside it.
+function renderQtls(qtls) {
+  qtlList.innerHTML = "";
+  if (!qtls.length) {
+    qtlList.innerHTML = `<div class="edge-card"><p class="edge-meta">No genome regions are recorded for this crop in the KG yet.</p></div>`;
+    return;
+  }
+  let lastDisease = null;
+  for (const q of qtls) {
+    if (q.disease_name !== lastDisease) {
+      lastDisease = q.disease_name;
+      const count = qtls.filter((x) => x.disease_name === lastDisease).length;
+      const heading = document.createElement("h3");
+      heading.className = "group-heading";
+      heading.textContent = `${lastDisease} — ${count} region${count === 1 ? "" : "s"}`;
+      qtlList.appendChild(heading);
+    }
+    const stage = q.stage && q.stage !== "unspecified" ? ` (${q.stage === "adult" ? "adult plant" : q.stage})` : "";
+    const where = [q.chromosome, q.start_bp != null ? `${fmtBp(q.start_bp)}${q.end_bp != null && q.end_bp !== q.start_bp ? `–${fmtBp(q.end_bp)}` : ""} bp${q.assembly ? ` (${q.assembly})` : ""}` : null].filter(Boolean).join(" · ");
+    const flanks = q.left_marker || q.right_marker ? `Flanking markers: ${esc([q.left_marker, q.right_marker].filter(Boolean).join(" – "))}` : "";
+    const stats = [
+      q.p_value != null ? `p = ${fmtP(q.p_value)}` : null,
+      q.lod != null ? `LOD ${q.lod}` : null,
+      q.pve_pct != null ? `explains ${q.pve_pct}% of variation` : null,
+      q.n_env != null && q.n_env > 1 ? `seen in ${q.n_env} field years` : null,
+    ].filter(Boolean).join(" · ");
+    const genes = Array.isArray(q.genes) ? q.genes : [];
+    const card = document.createElement("article");
+    card.className = "edge-card";
+    card.innerHTML = `
+      <h3>${esc(q.qtl_name)}${stage} ${tierChip(q)}</h3>
+      ${where ? `<p class="edge-meta">${esc(where)}</p>` : ""}
+      ${flanks ? `<p class="edge-meta">${flanks}</p>` : ""}
+      ${stats ? `<p class="edge-meta">${esc(stats)}</p>` : ""}
+      ${q.population ? `<p class="edge-meta">Study population: ${esc(q.population)}</p>` : ""}
+      ${genes.length ? `<details class="evidence-details"><summary>${genes.length} gene${genes.length === 1 ? "" : "s"} in the region</summary><ul class="edge-meta">${genes
+        .map((g) => `<li><strong>${esc(g.gene)}</strong>${g.start_bp ? ` — ${esc(fmtBp(g.start_bp))}–${esc(fmtBp(g.end_bp))} bp` : ""}${g.description ? `<br>${esc(g.description)}` : ""}</li>`)
+        .join("")}</ul></details>` : ""}
+    `;
+    attachEvidence(card, q.claim_id);
+    qtlList.appendChild(card);
+  }
+}
+
 function renderGenes(genes) {
   geneList.innerHTML = "";
   if (!genes.length) {
@@ -331,6 +380,9 @@ async function runQuery() {
       renderGenes(payload.geneResistance || []);
       setStatus(geneStatusText, `${payload.counts.geneResistance} gene claim(s)`, "ready");
     }
+
+    renderQtls(payload.qtls || []);
+    setStatus(qtlStatusText, `${payload.counts.qtls} region(s)`, "ready");
 
     renderReactions(payload.varietyReactions || [], varietySelected);
     if (varietySelected) {

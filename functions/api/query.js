@@ -7,6 +7,8 @@
  *                       is claimed to confer resistance to and the pathotypes known to defeat it (kg_variety_genes)
  *   - geneResistance:   GENE_CONFERS_RESISTANCE claims for the crop (gene + disease); the crop-wide list
  *                       shown when no variety is selected
+ *   - qtls:             QTL_ASSOCIATION claims for the crop (genome regions / GWAS loci linked to a disease, with position,
+ *                       statistics and the reference genes in the region); never variety-specific
  *
  * Only a minority of varieties have gene claims (wheat only so far); an empty varietyGenes means "none
  * recorded in the KG", not "carries no gene", and the page says so.
@@ -58,6 +60,12 @@ export async function onRequestPost({ request, env }) {
       new URLSearchParams({ crop: `eq.${crop}`, order: "gene_name.asc" }),
     );
 
+    const qtls = await supabaseGet(
+      env,
+      "kg_qtl_associations",
+      new URLSearchParams({ crop: `eq.${crop}`, order: "disease_name.asc,qtl_name.asc" }),
+    );
+
     let varietyReactions = [];
     let varietyGenes = [];
     if (variety !== "__all__") {
@@ -78,7 +86,13 @@ export async function onRequestPost({ request, env }) {
       geneResistance,
       varietyReactions,
       varietyGenes,
-      counts: { geneResistance: geneResistance.length, varietyReactions: varietyReactions.length, varietyGenes: varietyGenes.length },
+      qtls,
+      counts: {
+        geneResistance: geneResistance.length,
+        varietyReactions: varietyReactions.length,
+        varietyGenes: varietyGenes.length,
+        qtls: qtls.length,
+      },
     });
   } catch (error) {
     console.error("Query error:", error);

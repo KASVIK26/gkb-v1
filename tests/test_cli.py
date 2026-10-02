@@ -44,7 +44,8 @@ def test_kg_load_against_a_live_database(pg_conn: psycopg.Connection, pg_dsn: st
     # wheat: Sr24 (1, added 2026-10-02)
     # + 72 distinct gene-disease claims added 2026-10-03 (work order WO04: Pm/Fhb catalogue with donor species, rust genes, soybean Rpp/Rsv/Rcs, chickpea wilt genes)
     # + 20 rust gene -> disease claims added 2026-10-03 (work order WO13a: Sr/Lr/Yr genes that varieties carry, from the AICRP reports)
-    assert gene_count == 120
+    # + 1 (Lr14a -> leaf rust, work order WO14b)
+    assert gene_count == 121
 
 
 def test_kg_load_refuses_to_overwrite_an_existing_release(pg_conn: psycopg.Connection, pg_dsn: str, release_schema: str):

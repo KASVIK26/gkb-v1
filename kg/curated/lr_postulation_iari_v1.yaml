@@ -1,0 +1,78 @@
+# Which Lr genes Indian wheat varieties carry, from the IARI seedling-test and marker table of 86 genotypes (pmid:40678044, 'Inferred presence of the Lr gene(s)'),
+# read by batches/make_lr_iari.py (no model); only genotypes that are varieties already in the KB. Reviewed 2026-10-03 (kg/review_log/2026-10-03g_gene_variety_links.md).
+
+sources: []
+entities: []
+claims:
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:PBW299
+  object: gene:wheat:Lr13
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: pmid:40678044
+    method: postulation_pedigree
+    locator: Seedling resistance genes table, row 67
+    extractor: parser:lr_table@1
+    quote: Seedling resistance genes characterized in Indian wheat genotypes/cultivars to leaf rust. Inferred presence of the Lr gene(s) in Indian wheat collection. ... S. no. | Genotype/Cultivar | Lr gene(s) | S. no. | Genotype/Cultivar | Lr gene(s) ... 67 | PBW 299 | Lr13 + 10+
+    candidate_id: lr_iari:67:Lr13
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:PBW299
+  object: gene:wheat:Lr10
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: pmid:40678044
+    method: postulation_pedigree
+    locator: Seedling resistance genes table, row 67
+    extractor: parser:lr_table@1
+    quote: Seedling resistance genes characterized in Indian wheat genotypes/cultivars to leaf rust. Inferred presence of the Lr gene(s) in Indian wheat collection. ... S. no. | Genotype/Cultivar | Lr gene(s) | S. no. | Genotype/Cultivar | Lr gene(s) ... 67 | PBW 299 | Lr13 + 10+
+    candidate_id: lr_iari:67:Lr10
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:UP262
+  object: gene:wheat:Lr34
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: pmid:40678044
+    method: postulation_pedigree
+    locator: Seedling resistance genes table, row 32
+    extractor: parser:lr_table@1
+    quote: Seedling resistance genes characterized in Indian wheat genotypes/cultivars to leaf rust. Inferred presence of the Lr gene(s) in Indian wheat collection. ... S. no. | Genotype/Cultivar | Lr gene(s) | S. no. | Genotype/Cultivar | Lr gene(s) ... 32 | UP 262 | Lr34+
+    candidate_id: lr_iari:32:Lr34
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HUW510
+  object: gene:wheat:Lr13
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: pmid:40678044
+    method: postulation_pedigree
+    locator: Seedling resistance genes table, row 80
+    extractor: parser:lr_table@1
+    quote: Seedling resistance genes characterized in Indian wheat genotypes/cultivars to leaf rust. Inferred presence of the Lr gene(s) in Indian wheat collection. ... S. no. | Genotype/Cultivar | Lr gene(s) | S. no. | Genotype/Cultivar | Lr gene(s) ... 80 | HUW 510 | Lr13 + 1+
+    candidate_id: lr_iari:80:Lr13
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HUW510
+  object: gene:wheat:Lr1
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: pmid:40678044
+    method: postulation_pedigree
+    locator: Seedling resistance genes table, row 80
+    extractor: parser:lr_table@1
+    quote: Seedling resistance genes characterized in Indian wheat genotypes/cultivars to leaf rust. Inferred presence of the Lr gene(s) in Indian wheat collection. ... S. no. | Genotype/Cultivar | Lr gene(s) | S. no. | Genotype/Cultivar | Lr gene(s) ... 80 | HUW 510 | Lr13 + 1+
+    candidate_id: lr_iari:80:Lr1
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MP4010
+  object: gene:wheat:Lr10
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: pmid:40678044
+    method: postulation_pedigree
+    locator: Seedling resistance genes table, row 83
+    extractor: parser:lr_table@1
+    quote: Seedling resistance genes characterized in Indian wheat genotypes/cultivars to leaf rust. Inferred presence of the Lr gene(s) in Indian wheat collection. ... S. no. | Genotype/Cultivar | Lr gene(s) | S. no. | Genotype/Cultivar | Lr gene(s) ... 83 | MP 4010 | Lr10+
+    candidate_id: lr_iari:83:Lr10

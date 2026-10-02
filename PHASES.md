@@ -1582,6 +1582,11 @@ are also where most of the work is.
    - **Added**: the charcoal-rot GWAS of the same panel (pmid:41477268), parsed from its Tables 6-8: 18 QTL loci (soybean charcoal rot had 0), 22 candidate defence genes placed on the KB's v6 annotation, and the two
      susceptible checks; 42 evidence rows exact (`kg/review_log/2026-10-03f_icar_soybean.md`).
 
+50. **Gene -> variety links, AICRP 2020-21, QTLs on the dashboard (2026-10-03).** Wheat varieties with a recorded gene 61 -> 65 of 105. AICRP report 2020-21 read by both parsers (postulation: three reports now,
+   134 claims, 86 in two or more; rust reactions +175); a multi-year table (Table 1.4) the parser misread was found and is now skipped; HI 1500 -> Lr24, Lr14a -> leaf rust, six Lr links from the IARI table.
+   The Browse tab gains a "Genome regions (QTL)" panel (`kg_qtl_associations`), so the 18 charcoal-rot loci, 39 wheat powdery-mildew meta-QTLs and 8 chickpea wilt QTLs are visible.
+   The 2024-25 and 2025-26 reports are password-protected PDFs and were not read (`kg/review_log/2026-10-03g_gene_variety_links.md`).
+
 ---
 
 ## 6. Definition of "done" reminder (unchanged from RESEARCH_ROADMAP.md §10)

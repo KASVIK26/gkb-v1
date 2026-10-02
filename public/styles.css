@@ -982,3 +982,12 @@ button {
   margin: 0;
   font-weight: 600;
 }
+
+.group-heading {
+  margin: 1.1rem 0 0.35rem;
+  font-size: 1rem;
+  color: var(--ink-2, inherit);
+  border-bottom: 1px solid var(--line, rgba(127, 127, 127, 0.3));
+  padding-bottom: 0.25rem;
+}
+.group-heading:first-child { margin-top: 0; }

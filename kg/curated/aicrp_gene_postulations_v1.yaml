@@ -1,5 +1,5 @@
-# Rust genes (Sr, Lr, Yr) that the AICRP Wheat & Barley Crop Protection reports 2021-22 and 2022-23 postulate for AVT entries that are released varieties in the KB
-# (Tables 2.7-2.9 of each report; seedling tests with differential pathotypes at the IIWBR Regional Station, Flowerdale, and linkage inference). Read by
+# Rust genes (Sr, Lr, Yr) that the AICRP Wheat & Barley Crop Protection reports 2020-21, 2021-22 and 2022-23 postulate for AVT entries that are released varieties in the KB
+# (the Sr/Lr/Yr gene tables of each report; seedling tests with differential pathotypes at the IIWBR Regional Station, Flowerdale, and linkage inference). Read by
 # parser:aicrp_postulation@1, no language model; entries marked * (different seed lot) are not used. Reviewed 2026-10-03
 # (kg/review_log/2026-10-03d_aicrp_postulation.md). Method `postulation`, evidence `postulation_pedigree`.
 
@@ -15,11 +15,893 @@ entities:
     symbol: Lr3
 claims:
 - type: VARIETY_CARRIES_GENE
+  subject: var:wheat:CG1029
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:cg1029:Yr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.9, row yr2+
+    quote: 'table 2.9: yr-genes in avt entries during 2021-22 yr-gene no. of lines variety/ line ... yr2+ 73 cg1029(c), dbw252(c), dbw318, dbw320, dbw327 (c) , dbw332(c), dbw352, dbw358, dbw359, dbw365, dbw366, dbw370, dbw371, dbw372, dbw373, dbw377, dbw402, dbw407, ddw47(d)(c), gw513(i)(c), gw547, hd2967(c), hd3118(c), hd3171(c), hd3293(c), hd3386, hd3397, hd3406, hd3411, hd3415, hd3418, hi1621(c), hi1628(c), hi1653, hi1654, hi8840(d), hpw349(c), hpw481, hpw484, hs490(c), hs688, huw838(i)(c), krl2021, krl210(c), mp1358(i)(c), mp3336(c), mp3535, mp3552, nidw1149(d)(c), pbw677(c), pbw826, pbw833, pbw868, pbw870, pb w871, pbw872, pbw901, pbw902, raj4083(c), skw362, uas3015, uas3019, ... vl2041, vl2043, vl2044, vl2047, vl2048, vl2049, vl2050, vl3028, vl3030, vl892(c), wh1124(c),'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.9:yr2+:cg1029:Yr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.7, row yr2+
+    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:cg1029:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW110
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:dbw110:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW187
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:dbw187:Yr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.7, row yr2+
+    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:dbw187:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW303
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:dbw303:Yr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.7, row yr2+
+    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:dbw303:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW377
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:dbw377:Yr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.9, row yr2+
+    quote: 'table 2.9: yr-genes in avt entries during 2021-22 yr-gene no. of lines variety/ line ... yr2+ 73 cg1029(c), dbw252(c), dbw318, dbw320, dbw327 (c) , dbw332(c), dbw352, dbw358, dbw359, dbw365, dbw366, dbw370, dbw371, dbw372, dbw373, dbw377, dbw402, dbw407, ddw47(d)(c), gw513(i)(c), gw547, hd2967(c), hd3118(c), hd3171(c), hd3293(c), hd3386, hd3397, hd3406, hd3411, hd3415, hd3418, hi1621(c), hi1628(c), hi1653, hi1654, hi8840(d), hpw349(c), hpw481, hpw484, hs490(c), hs688, huw838(i)(c), krl2021, krl210(c), mp1358(i)(c), mp3336(c), mp3535, mp3552, nidw1149(d)(c), pbw677(c), pbw826, pbw833, pbw868, pbw870, pb w871, pbw872, pbw901, pbw902, raj4083(c), skw362, uas3015, uas3019, ... vl2041, vl2043, vl2044, vl2047, vl2048, vl2049, vl2050, vl3028, vl3030, vl892(c), wh1124(c),'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.9:yr2+:dbw377:Yr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.7, row yr2+
+    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:dbw377:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DDW48
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:ddw48:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD2864
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:hd2864:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD2932
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:hd2932:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD2967
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:hd2967:Yr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.9, row yr2+
+    quote: 'table 2.9: yr-genes in avt entries during 2021-22 yr-gene no. of lines variety/ line ... yr2+ 73 cg1029(c), dbw252(c), dbw318, dbw320, dbw327 (c) , dbw332(c), dbw352, dbw358, dbw359, dbw365, dbw366, dbw370, dbw371, dbw372, dbw373, dbw377, dbw402, dbw407, ddw47(d)(c), gw513(i)(c), gw547, hd2967(c), hd3118(c), hd3171(c), hd3293(c), hd3386, hd3397, hd3406, hd3411, hd3415, hd3418, hi1621(c), hi1628(c), hi1653, hi1654, hi8840(d), hpw349(c), hpw481, hpw484, hs490(c), hs688, huw838(i)(c), krl2021, krl210(c), mp1358(i)(c), mp3336(c), mp3535, mp3552, nidw1149(d)(c), pbw677(c), pbw826, pbw833, pbw868, pbw870, pb w871, pbw872, pbw901, pbw902, raj4083(c), skw362, uas3015, uas3019, ... vl2041, vl2043, vl2044, vl2047, vl2048, vl2049, vl2050, vl3028, vl3030, vl892(c), wh1124(c),'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.9:yr2+:hd2967:Yr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.7, row yr2+
+    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:hd2967:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD3086
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:hd3086:Yr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.7, row yr2+
+    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:hd3086:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1605
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:hi1605:Yr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.7, row yr2+
+    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:hi1605:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1655
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:hi1655:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MACS6222
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:macs6222:Yr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.7, row yr2+
+    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:macs6222:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:WH1105
+  object: gene:wheat:Yr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr2+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr2+ 89 cg1029 (i)(c), dbw110 (c), dbw187 (c), dbw252 (c), dbw303 (i),(c), dbw313, dbw318, dbw325, dbw326, dbw327, dbw328, dbw333, dbw363, dbw364, dbw365, dbw367, dbw368, dbw370, dbw371, dbw373, dbw374, dbw375, dbw377, dbw378, ddw48 (d)(i),(c), ddw53 (d), gw528, hd2864 (c), hd2932 (c), hd2967 (c), hd3059 (c), hd3086 (c), hd3118 (c), hd3171 (c), hd3249 (c), hd3293 (i)(c), hd3354, hd3360, hd336 8, hd3403, hd3406, hd3410, hd3411, hi1563 (c), hi1605 (c), hi1612 (c), hi1621 (c), hi1628 (c), hi1653, hi1654, hi1655, hi8828 (d), hpw349 (c), hw1098 (c), huw838, k1805, k1910, krl210, macs4106 (d), macs5057, macs5058, macs6222 (c), mp3535, mp4010 (c), niaw3851, nw7096, pbw644 (c), pbw826, pbw833, pbw838, pbw848, pbw868, pbw870, pbw871, pbw872, pbw876, raj4083 (c), uas428 (d)(c), uas475 (d), vl2041, wh1105 (c), wh1124 (c), wh1252, wh1270, wh1281, wh1283, wh1404, wh1405, wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr2+:wh1105:Yr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD3090
+  object: gene:wheat:Yr9
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr9+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr9+ 12 dbw39 (c), dbw107 (c), dbw173 (c), hd3090 (c), hi1633 (i)(c), hi1634 (i)(c), hs507 (c), macs6768, pbw771 (c), up3062, vl907 (c), wh1142 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr9+:hd3090:Yr9
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.9, row yr9+
+    quote: 'table 2.9: yr-genes in avt entries during 2021-22 yr-gene no. of lines variety/ line ... yr9+ 14 hd3090(c), hi1633(c), hi1634(c), hi1650, hpw483, hpw486, hpw487, hs507(c), hs692, macs6768, mp1378, niaw3922, pbw771(c), vl907(c),'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.9:yr9+:hd3090:Yr9
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1633
+  object: gene:wheat:Yr9
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.8, row yr9+
+    quote: 'table 2.8: yr-genes in avt entries during 2020-21 yr gene''s no. of lines detail of lines ... yr9+ 12 dbw39 (c), dbw107 (c), dbw173 (c), hd3090 (c), hi1633 (i)(c), hi1634 (i)(c), hs507 (c), macs6768, pbw771 (c), up3062, vl907 (c), wh1142 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.8:yr9+:hi1633:Yr9
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.9, row yr9+
+    quote: 'table 2.9: yr-genes in avt entries during 2021-22 yr-gene no. of lines variety/ line ... yr9+ 14 hd3090(c), hi1633(c), hi1634(c), hi1650, hpw483, hpw486, hpw487, hs507(c), hs692, macs6768, mp1378, niaw3922, pbw771(c), vl907(c),'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.9:yr9+:hi1633:Yr9
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW303
+  object: gene:wheat:Lr13
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+ 23 dbw303, dbw367, dbw368, dbw373, ddk1029, hd3369, hd3403, hd3411, hi1605, hi1654 . hi8627, gw523, krl210, krl19, macs6774, mp3336, raj4083,up3060, up3096, wh1105, wh1252, wh1281, wh1404'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+:dbw303:Lr13
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+ 26 akaw5104, cg1036, cg1040, dbw187*, dbw303, dbw372*, dbw441, dbw442, hd2932, gw538, gw542, gw547*, hd3249*, hd3369, hi1605, hi1654, hpw484*, jkw261*, mp1378*, mp3557, nws2222, raj4083, pbw771*, pbw887, uas481, vl2041
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+:dbw303:Lr13
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1605
+  object: gene:wheat:Lr13
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+ 23 dbw303, dbw367, dbw368, dbw373, ddk1029, hd3369, hd3403, hd3411, hi1605, hi1654 . hi8627, gw523, krl210, krl19, macs6774, mp3336, raj4083,up3060, up3096, wh1105, wh1252, wh1281, wh1404'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+:hi1605:Lr13
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+ 26 akaw5104, cg1036, cg1040, dbw187*, dbw303, dbw372*, dbw441, dbw442, hd2932, gw538, gw542, gw547*, hd3249*, hd3369, hi1605, hi1654, hpw484*, jkw261*, mp1378*, mp3557, nws2222, raj4083, pbw771*, pbw887, uas481, vl2041
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+:hi1605:Lr13
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8627
+  object: gene:wheat:Lr13
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+ 23 dbw303, dbw367, dbw368, dbw373, ddk1029, hd3369, hd3403, hd3411, hi1605, hi1654 . hi8627, gw523, krl210, krl19, macs6774, mp3336, raj4083,up3060, up3096, wh1105, wh1252, wh1281, wh1404'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+:hi8627:Lr13
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MP3336
+  object: gene:wheat:Lr13
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+ 23 dbw303, dbw367, dbw368, dbw373, ddk1029, hd3369, hd3403, hd3411, hi1605, hi1654 . hi8627, gw523, krl210, krl19, macs6774, mp3336, raj4083,up3060, up3096, wh1105, wh1252, wh1281, wh1404'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+:mp3336:Lr13
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr13+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr13+ 22 cg1040, dbw353, dbw407, hd3369, hd3392, hd3397, hd3402, hd3411, hi1621, hi1654, hpw485, hs693, krl19, mp1380, mp3336, raj4083, uas3019, vl2041, vl2043, vl3029, wh1402, wh1403'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr13+:mp3336:Lr13
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:WH1105
+  object: gene:wheat:Lr13
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+ 23 dbw303, dbw367, dbw368, dbw373, ddk1029, hd3369, hd3403, hd3411, hi1605, hi1654 . hi8627, gw523, krl210, krl19, macs6774, mp3336, raj4083,up3060, up3096, wh1105, wh1252, wh1281, wh1404'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+:wh1105:Lr13
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:GW322
+  object: gene:wheat:Lr13
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+1+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+1+ 11 dbw322, dbw364, dbw370, gw322, hd3405, k1910,pbw644, pbw834, pbw870, pbw871,wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+1+:gw322:Lr13
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:GW322
+  object: gene:wheat:Lr1
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+1+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+1+ 11 dbw322, dbw364, dbw370, gw322, hd3405, k1910,pbw644, pbw834, pbw870, pbw871,wh1406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+1+:gw322:Lr1
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1655
+  object: gene:wheat:Lr13
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+10+1+ 8 dbw374, dbw317, dbw333, dbw363, hi1655, niaw3170, nws2180, wh1407'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+10+1+:hi1655:Lr13
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:hi1655:Lr13
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1655
+  object: gene:wheat:Lr10
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+10+1+ 8 dbw374, dbw317, dbw333, dbw363, hi1655, niaw3170, nws2180, wh1407'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+10+1+:hi1655:Lr10
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:hi1655:Lr10
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1655
+  object: gene:wheat:Lr1
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+10+1+ 8 dbw374, dbw317, dbw333, dbw363, hi1655, niaw3170, nws2180, wh1407'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+10+1+:hi1655:Lr1
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:hi1655:Lr1
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:NIAW3170
+  object: gene:wheat:Lr13
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+10+1+ 8 dbw374, dbw317, dbw333, dbw363, hi1655, niaw3170, nws2180, wh1407'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+10+1+:niaw3170:Lr13
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr13+10+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr13+10+ 16 dbw252, dbw365, ddw47*, hd3293, hd3386, hd3415, hd3437, hi1628, hpw349, niaw3170, pbw868, uas310, vl892, vl2047, vl2048, vl2050,'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr13+10+:niaw3170:Lr13
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:niaw3170:Lr13
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:NIAW3170
+  object: gene:wheat:Lr10
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+10+1+ 8 dbw374, dbw317, dbw333, dbw363, hi1655, niaw3170, nws2180, wh1407'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+10+1+:niaw3170:Lr10
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr13+10+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr13+10+ 16 dbw252, dbw365, ddw47*, hd3293, hd3386, hd3415, hd3437, hi1628, hpw349, niaw3170, pbw868, uas310, vl892, vl2047, vl2048, vl2050,'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr13+10+:niaw3170:Lr10
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:niaw3170:Lr10
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:NIAW3170
+  object: gene:wheat:Lr1
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+10+1+ 8 dbw374, dbw317, dbw333, dbw363, hi1655, niaw3170, nws2180, wh1407'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+10+1+:niaw3170:Lr1
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+1+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:niaw3170:Lr1
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD3086
+  object: gene:wheat:Lr13
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+3+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+10+3+ 5 dbw321,hd3086, hd3360, huw838, wh1124'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+10+3+:hd3086:Lr13
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+3+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+3+ 2 hd3086, hi1653
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+3+:hd3086:Lr13
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD3086
+  object: gene:wheat:Lr10
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+3+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+10+3+ 5 dbw321,hd3086, hd3360, huw838, wh1124'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+10+3+:hd3086:Lr10
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+3+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+3+ 2 hd3086, hi1653
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+3+:hd3086:Lr10
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD3086
+  object: gene:wheat:Lr3
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+3+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr13+10+3+ 5 dbw321,hd3086, hd3360, huw838, wh1124'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr13+10+3+:hd3086:Lr3
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr13+10+3+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+3+ 2 hd3086, hi1653
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+3+:hd3086:Lr3
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD2967
+  object: gene:wheat:Lr23
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr23+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr23+ 15 akdw2997-16, dbw318, dbw326, hd2967, hi1612, hi8498, hi8827, hi8828, hi8832, hi8833, hs562, nw7096, pbw826, uas428, wh1270,'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr23+:hd2967:Lr23
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr23+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr23+ 9 ddw48, dbw318, hd2967, hd3436, hi8498, hs490, krl210, pbw826, uas478'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr23+:hd2967:Lr23
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8498
+  object: gene:wheat:Lr23
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr23+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr23+ 15 akdw2997-16, dbw318, dbw326, hd2967, hi1612, hi8498, hi8827, hi8828, hi8832, hi8833, hs562, nw7096, pbw826, uas428, wh1270,'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr23+:hi8498:Lr23
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr23+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr23+ 9 ddw48, dbw318, hd2967, hd3436, hi8498, hs490, krl210, pbw826, uas478'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr23+:hi8498:Lr23
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW110
+  object: gene:wheat:Lr23
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr23+10+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr23+10+ 12 dbw110, hd3368, hd3412, k1805, mp1358, niaw3851, nidw1149, pbw848, pbw872, pbw873, pbw876, wh1283,'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr23+10+:dbw110:Lr23
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW110
+  object: gene:wheat:Lr10
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr23+10+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr23+10+ 12 dbw110, hd3368, hd3412, k1805, mp1358, niaw3851, nidw1149, pbw848, pbw872, pbw873, pbw876, wh1283,'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr23+10+:dbw110:Lr10
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:NIDW1149
+  object: gene:wheat:Lr23
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr23+10+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr23+10+ 12 dbw110, hd3368, hd3412, k1805, mp1358, niaw3851, nidw1149, pbw848, pbw872, pbw873, pbw876, wh1283,'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr23+10+:nidw1149:Lr23
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr23+10+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr23+10+ 8 hd3400, hd3401, hs688, mp1358, nidw1149, pbw872, uas3015, up3090'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr23+10+:nidw1149:Lr23
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr23+10+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr23+10+ 7 dbw173*, hpw349, mp3556, nidw1149, pbw893, uas3022, wh1306
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr23+10+:nidw1149:Lr23
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:NIDW1149
+  object: gene:wheat:Lr10
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr23+10+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr23+10+ 12 dbw110, hd3368, hd3412, k1805, mp1358, niaw3851, nidw1149, pbw848, pbw872, pbw873, pbw876, wh1283,'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr23+10+:nidw1149:Lr10
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr23+10+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr23+10+ 8 hd3400, hd3401, hs688, mp1358, nidw1149, pbw872, uas3015, up3090'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr23+10+:nidw1149:Lr10
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr23+10+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr23+10+ 7 dbw173*, hpw349, mp3556, nidw1149, pbw893, uas3022, wh1306
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr23+10+:nidw1149:Lr10
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW187
+  object: gene:wheat:Lr23
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr23+10+1+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr23+10+1+ 3 dbw187, dbw328, hd3406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr23+10+1+:dbw187:Lr23
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW187
+  object: gene:wheat:Lr10
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr23+10+1+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr23+10+1+ 3 dbw187, dbw328, hd3406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr23+10+1+:dbw187:Lr10
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW187
+  object: gene:wheat:Lr1
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr23+10+1+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr23+10+1+ 3 dbw187, dbw328, hd3406'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr23+10+1+:dbw187:Lr1
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:CG1029
+  object: gene:wheat:Lr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr24+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr24+ 14 cg1029, gw513, hd2864, hi1544, hi1563, hi1636, hi1651, hi1667, macs6222, macs6753, mp3288, mp3535, mp4010, up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr24+:cg1029:Lr24
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr24+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr24+ 3 cg1029, gw513, hi1636'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr24+:cg1029:Lr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:GW513
+  object: gene:wheat:Lr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr24+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr24+ 14 cg1029, gw513, hd2864, hi1544, hi1563, hi1636, hi1651, hi1667, macs6222, macs6753, mp3288, mp3535, mp4010, up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr24+:gw513:Lr24
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr24+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr24+ 3 cg1029, gw513, hi1636'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr24+:gw513:Lr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD2864
+  object: gene:wheat:Lr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr24+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr24+ 14 cg1029, gw513, hd2864, hi1544, hi1563, hi1636, hi1651, hi1667, macs6222, macs6753, mp3288, mp3535, mp4010, up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr24+:hd2864:Lr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1544
+  object: gene:wheat:Lr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr24+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr24+ 14 cg1029, gw513, hd2864, hi1544, hi1563, hi1636, hi1651, hi1667, macs6222, macs6753, mp3288, mp3535, mp4010, up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr24+:hi1544:Lr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1636
+  object: gene:wheat:Lr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr24+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr24+ 14 cg1029, gw513, hd2864, hi1544, hi1563, hi1636, hi1651, hi1667, macs6222, macs6753, mp3288, mp3535, mp4010, up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr24+:hi1636:Lr24
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr24+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr24+ 3 cg1029, gw513, hi1636'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr24+:hi1636:Lr24
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr24+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr24+ 3 hi1636, macs6222, mp3288
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr24+:hi1636:Lr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MACS6222
+  object: gene:wheat:Lr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr24+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr24+ 14 cg1029, gw513, hd2864, hi1544, hi1563, hi1636, hi1651, hi1667, macs6222, macs6753, mp3288, mp3535, mp4010, up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr24+:macs6222:Lr24
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr24+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr24+ 3 hi1636, macs6222, mp3288
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr24+:macs6222:Lr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MP3288
+  object: gene:wheat:Lr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr24+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr24+ 14 cg1029, gw513, hd2864, hi1544, hi1563, hi1636, hi1651, hi1667, macs6222, macs6753, mp3288, mp3535, mp4010, up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr24+:mp3288:Lr24
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.9, row lr24+
+    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr24+ 3 hi1636, macs6222, mp3288
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr24+:mp3288:Lr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MP4010
+  object: gene:wheat:Lr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr24+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr24+ 14 cg1029, gw513, hd2864, hi1544, hi1563, hi1636, hi1651, hi1667, macs6222, macs6753, mp3288, mp3535, mp4010, up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr24+:mp4010:Lr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD3090
+  object: gene:wheat:Lr26
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr26+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr26+ 7 dbw107,dbw316, hd3090, hi1633, hi1634, macs6768, vl907,'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr26+:hd3090:Lr26
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr26+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr26+ 7 hd3090, hi1633, hi1634, hi1650, hs692, macs6768, niaw3922'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr26+:hd3090:Lr26
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1633
+  object: gene:wheat:Lr26
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr26+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr26+ 7 dbw107,dbw316, hd3090, hi1633, hi1634, macs6768, vl907,'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr26+:hi1633:Lr26
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr26+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr26+ 7 hd3090, hi1633, hi1634, hi1650, hs692, macs6768, niaw3922'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr26+:hi1633:Lr26
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1634
+  object: gene:wheat:Lr26
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.9, row lr26+
+    quote: 'table 2.9: lr-genes in avt entries during 2020-21 lr gene''s no. of lines detail of lines ... lr26+ 7 dbw107,dbw316, hd3090, hi1633, hi1634, macs6768, vl907,'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.9:lr26+:hi1634:Lr26
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.8, row lr26+
+    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr26+ 7 hd3090, hi1633, hi1634, hi1650, hs692, macs6768, niaw3922'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr26+:hi1634:Lr26
+- type: VARIETY_CARRIES_GENE
   subject: var:wheat:HD3090
   object: gene:wheat:Sr31
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr31+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr31+2+ 10 dbw107 (c), dbw173 (c), dbw316, dbw39 (c), hd2733 (c), hd3043 (c), hd3090 (c), pbw771 (c), vl907 (c), wh1142 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr31+2+:hd3090:Sr31
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr31+2+
@@ -32,6 +914,12 @@ claims:
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr31+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr31+2+ 10 dbw107 (c), dbw173 (c), dbw316, dbw39 (c), hd2733 (c), hd3043 (c), hd3090 (c), pbw771 (c), vl907 (c), wh1142 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr31+2+:hd3090:Sr2
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr31+2+
@@ -44,6 +932,12 @@ claims:
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr31+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr31+ 04 hi1633 (i) (c), hi1634 (i) (c),macs6768, up3062'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr31+:hi1633:Sr31
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr31+
@@ -56,6 +950,12 @@ claims:
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr31+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr31+ 04 hi1633 (i) (c), hi1634 (i) (c),macs6768, up3062'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr31+:hi1634:Sr31
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr31+
@@ -63,23 +963,17 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2021_22:t2.7:sr31+:hi1634:Sr31
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI1650
-  object: gene:wheat:Sr31
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr31+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr31+ 07 hi1633(c), hi1634(c), hi1650, hpw483, hpw486, hpw487, mp1378'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr31+:hi1650:Sr31
-- type: VARIETY_CARRIES_GENE
   subject: var:wheat:CG1029
   object: gene:wheat:Sr24
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:cg1029:Sr24
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr24+2+
@@ -92,6 +986,12 @@ claims:
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:cg1029:Sr2
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr24+2+
@@ -99,35 +999,41 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2021_22:t2.7:sr24+2+:cg1029:Sr2
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:GW513
+  subject: var:wheat:HI1544
   object: gene:wheat:Sr24
   qualifiers:
     method: postulation
   evidence:
-  - source: doc:aicrp_crop_protection_2021_22
+  - source: doc:aicrp_crop_protection_2020_21
     method: postulation_pedigree
-    locator: Table 2.7, row sr24+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr24+2+ 03 cg1029(c), gw513(i)(c), hi1636(i)(c)'
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
     extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr24+2+:gw513:Sr24
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:hi1544:Sr24
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:GW513
+  subject: var:wheat:HI1544
   object: gene:wheat:Sr2
   qualifiers:
     method: postulation
   evidence:
-  - source: doc:aicrp_crop_protection_2021_22
+  - source: doc:aicrp_crop_protection_2020_21
     method: postulation_pedigree
-    locator: Table 2.7, row sr24+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr24+2+ 03 cg1029(c), gw513(i)(c), hi1636(i)(c)'
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
     extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr24+2+:gw513:Sr2
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:hi1544:Sr2
 - type: VARIETY_CARRIES_GENE
   subject: var:wheat:HI1636
   object: gene:wheat:Sr24
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:hi1636:Sr24
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr24+2+
@@ -146,6 +1052,12 @@ claims:
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:hi1636:Sr2
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr24+2+
@@ -159,11 +1071,131 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.8:sr24+2+:hi1636:Sr2
 - type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MACS6222
+  object: gene:wheat:Sr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:macs6222:Sr24
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr24+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr24+ 02 macs6222 (c), mp3288(c)
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr24+:macs6222:Sr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MACS6222
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:macs6222:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MP3288
+  object: gene:wheat:Sr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:mp3288:Sr24
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr24+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr24+ 02 macs6222 (c), mp3288(c)
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr24+:mp3288:Sr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MP3288
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:mp3288:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MP4010
+  object: gene:wheat:Sr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:mp4010:Sr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MP4010
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+2+ 10 cg1029 (i) (c), hi1544 (c), hi1563 (c), hi1636, hi1667, macs6222 (c), macs6753,mp3288 (c), mp4010 (c),up3095'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+2+:mp4010:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:GW513
+  object: gene:wheat:Sr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+ 04 gw513,hd2864 (c),hi1651, mp3535'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+:gw513:Sr24
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr24+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr24+2+ 03 cg1029(c), gw513(i)(c), hi1636(i)(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr24+2+:gw513:Sr24
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD2864
+  object: gene:wheat:Sr24
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr24+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr24+ 04 gw513,hd2864 (c),hi1651, mp3535'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr24+:hd2864:Sr24
+- type: VARIETY_CARRIES_GENE
   subject: var:wheat:HD2967
   object: gene:wheat:Sr8a
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr8a+11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr8a+11+2+ 01 hd2967 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr8a+11+2+:hd2967:Sr8a
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr8a+11+2+
@@ -182,6 +1214,12 @@ claims:
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr8a+11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr8a+11+2+ 01 hd2967 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr8a+11+2+:hd2967:Sr11
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr8a+11+2+
@@ -200,6 +1238,12 @@ claims:
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr8a+11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr8a+11+2+ 01 hd2967 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr8a+11+2+:hd2967:Sr2
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr8a+11+2+
@@ -218,6 +1262,12 @@ claims:
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr8a+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr8a+2+ 01 niaw3170 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr8a+2+:niaw3170:Sr8a
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr8a+2+
@@ -236,6 +1286,12 @@ claims:
   qualifiers:
     method: postulation
   evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr8a+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr8a+2+ 01 niaw3170 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr8a+2+:niaw3170:Sr2
   - source: doc:aicrp_crop_protection_2021_22
     method: postulation_pedigree
     locator: Table 2.7, row sr8a+2+
@@ -248,6 +1304,636 @@ claims:
     quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr8a+2+ 02 dbw371(i)(c), niaw3170(c)
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.8:sr8a+2+:niaw3170:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW187
+  object: gene:wheat:Sr5
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr5+11+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr5+11+ 02 dbw187 (c), dbw328'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr5+11+:dbw187:Sr5
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr5+11+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr5+11+ 01 dbw187(c)
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr5+11+:dbw187:Sr5
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DBW187
+  object: gene:wheat:Sr11
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr5+11+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr5+11+ 02 dbw187 (c), dbw328'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr5+11+:dbw187:Sr11
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr5+11+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr5+11+ 01 dbw187(c)
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr5+11+:dbw187:Sr11
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8627
+  object: gene:wheat:Sr9e
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr9e+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr9e+2+ 01 hi8627 (d) (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr9e+2+:hi8627:Sr9e
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8627
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr9e+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr9e+2+ 01 hi8627 (d) (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr9e+2+:hi8627:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DDW47
+  object: gene:wheat:Sr11
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+7b+2+ 02 ddw47 (d) (c), hd3171 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+7b+2+:ddw47:Sr11
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr11+7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+7b+2+ 03 dbw402, ddw47(d)(c), hd3171(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+7b+2+:ddw47:Sr11
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DDW47
+  object: gene:wheat:Sr7b
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+7b+2+ 02 ddw47 (d) (c), hd3171 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+7b+2+:ddw47:Sr7b
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr11+7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+7b+2+ 03 dbw402, ddw47(d)(c), hd3171(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+7b+2+:ddw47:Sr7b
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DDW47
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+7b+2+ 02 ddw47 (d) (c), hd3171 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+7b+2+:ddw47:Sr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr11+7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+7b+2+ 03 dbw402, ddw47(d)(c), hd3171(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+7b+2+:ddw47:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:GW322
+  object: gene:wheat:Sr11
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:gw322:Sr11
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr11+2+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+2+ 05 gw322(c), hd3059(c), nidw1149(d)(c), pbw644(c), uas446(d)(c)
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+2+:gw322:Sr11
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:GW322
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:gw322:Sr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr11+2+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+2+ 05 gw322(c), hd3059(c), nidw1149(d)(c), pbw644(c), uas446(d)(c)
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+2+:gw322:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8498
+  object: gene:wheat:Sr11
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:hi8498:Sr11
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr11+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:hi8498:Sr11
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8498
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:hi8498:Sr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr11+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:hi8498:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8823
+  object: gene:wheat:Sr11
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:hi8823:Sr11
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr11+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:hi8823:Sr11
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8823
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:hi8823:Sr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr11+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:hi8823:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MP3336
+  object: gene:wheat:Sr11
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:mp3336:Sr11
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr11+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:mp3336:Sr11
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MP3336
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:mp3336:Sr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr11+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:mp3336:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:NIDW1149
+  object: gene:wheat:Sr11
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:nidw1149:Sr11
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr11+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:nidw1149:Sr11
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr11+2+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+2+ 05 gw322(c), hd3059(c), nidw1149(d)(c), pbw644(c), uas446(d)(c)
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+2+:nidw1149:Sr11
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:NIDW1149
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:nidw1149:Sr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr11+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:nidw1149:Sr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr11+2+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+2+ 05 gw322(c), hd3059(c), nidw1149(d)(c), pbw644(c), uas446(d)(c)
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+2+:nidw1149:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:WH1105
+  object: gene:wheat:Sr11
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:wh1105:Sr11
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:WH1105
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+2+ 11 dbw367, ddk1029 (c), gw322 (c), hd3059 (c), hd3249 (c), hi8498(d) (c), hi8823 (d), hw1098 (c), mp3336 (c), nidw1149 (d) (i) (c), wh1105 (c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+2+:wh1105:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD2932
+  object: gene:wheat:Sr11
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+ 13 dbw368, dbw373,ddk1060, ddk1061, hd2932 (c), hi1605 (c), jkw261, macs5057, mp1358, pbw838, raj4083 (c),uas3014, wh1405'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+:hd2932:Sr11
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr11+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+ 04 hd2932(c), hi1605(c), jkw261(c) raj4083(c)
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+:hd2932:Sr11
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1605
+  object: gene:wheat:Sr11
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr11+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr11+ 13 dbw368, dbw373,ddk1060, ddk1061, hd2932 (c), hi1605 (c), jkw261, macs5057, mp1358, pbw838, raj4083 (c),uas3014, wh1405'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr11+:hi1605:Sr11
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr11+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+ 04 hd2932(c), hi1605(c), jkw261(c) raj4083(c)
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+:hi1605:Sr11
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DDW48
+  object: gene:wheat:Sr7b
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:ddw48:Sr7b
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:ddw48:Sr7b
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DDW48
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:ddw48:Sr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:ddw48:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DDW55
+  object: gene:wheat:Sr7b
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:ddw55:Sr7b
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:ddw55:Sr7b
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:DDW55
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:ddw55:Sr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:ddw55:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD3086
+  object: gene:wheat:Sr7b
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:hd3086:Sr7b
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr7b+2+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr7b+2+ 08 cg1036(i)(c), hd3086(c), hd3249(c)*, hi1612(c), hpw349(c), macs3949(d)(c), uas478(d), wh1310
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr7b+2+:hd3086:Sr7b
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HD3086
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:hd3086:Sr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr7b+2+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr7b+2+ 08 cg1036(i)(c), hd3086(c), hd3249(c)*, hi1612(c), hpw349(c), macs3949(d)(c), uas478(d), wh1310
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr7b+2+:hd3086:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8826
+  object: gene:wheat:Sr7b
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:hi8826:Sr7b
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:hi8826:Sr7b
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8826
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:hi8826:Sr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:hi8826:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8830
+  object: gene:wheat:Sr7b
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:hi8830:Sr7b
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:hi8830:Sr7b
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI8830
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:hi8830:Sr2
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:hi8830:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MACS3949
+  object: gene:wheat:Sr7b
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:macs3949:Sr7b
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr7b+2+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr7b+2+ 08 cg1036(i)(c), hd3086(c), hd3249(c)*, hi1612(c), hpw349(c), macs3949(d)(c), uas478(d), wh1310
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr7b+2+:macs3949:Sr7b
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:MACS3949
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+2+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+2+ 16 akdw2997-16 (d) (c), ddw48 (d) (i) (c), ddw53 (d), ddw55 (d), hd3086 (c), hi1612 (c), hi8826 (d),hi8830 (d), hpw349 (c), krl210 (c), macs3949 (d) (c), macs4106 (d), nidw1345 (d),nidw1348 (d), uas428 (d) (c), whd965 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+2+:macs3949:Sr2
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr7b+2+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr7b+2+ 08 cg1036(i)(c), hd3086(c), hd3249(c)*, hi1612(c), hpw349(c), macs3949(d)(c), uas478(d), wh1310
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr7b+2+:macs3949:Sr2
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:CG1036
+  object: gene:wheat:Sr7b
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2020_21
+    method: postulation_pedigree
+    locator: Table 2.10, row sr7b+
+    quote: 'table 2.10: sr genes in avt entries during 2020-21 sr gene/s no. of lines detail of lines ... sr7b+ 13 cg1036,dbw313, dbw370,dbw375, dbw376, hd3349, hd3360, hd3368, hd3411, hi1653, macs5058, pbw833, uas475 (d)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2020_21:t2.10:sr7b+:cg1036:Sr7b
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr7b+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:cg1036:Sr7b
+  - source: doc:aicrp_crop_protection_2022_23
+    method: postulation_pedigree
+    locator: Table 2.8, row sr7b+2+
+    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr7b+2+ 08 cg1036(i)(c), hd3086(c), hd3249(c)*, hi1612(c), hpw349(c), macs3949(d)(c), uas478(d), wh1310
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr7b+2+:cg1036:Sr7b
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:HI1650
+  object: gene:wheat:Sr31
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr31+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr31+ 07 hi1633(c), hi1634(c), hi1650, hpw483, hpw486, hpw487, mp1378'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr31+:hi1650:Sr31
+- type: VARIETY_CARRIES_GENE
+  subject: var:wheat:GW513
+  object: gene:wheat:Sr2
+  qualifiers:
+    method: postulation
+  evidence:
+  - source: doc:aicrp_crop_protection_2021_22
+    method: postulation_pedigree
+    locator: Table 2.7, row sr24+2+
+    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr24+2+ 03 cg1029(c), gw513(i)(c), hi1636(i)(c)'
+    extractor: parser:aicrp_postulation@1
+    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr24+2+:gw513:Sr2
 - type: VARIETY_CARRIES_GENE
   subject: var:wheat:DBW359
   object: gene:wheat:Sr9b
@@ -285,66 +1971,6 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.8:sr9b+7b+:dbw359:Sr7b
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DDW47
-  object: gene:wheat:Sr11
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr11+7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+7b+2+ 03 dbw402, ddw47(d)(c), hd3171(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+7b+2+:ddw47:Sr11
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DDW47
-  object: gene:wheat:Sr7b
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr11+7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+7b+2+ 03 dbw402, ddw47(d)(c), hd3171(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+7b+2+:ddw47:Sr7b
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DDW47
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr11+7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+7b+2+ 03 dbw402, ddw47(d)(c), hd3171(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+7b+2+:ddw47:Sr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI8498
-  object: gene:wheat:Sr11
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr11+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:hi8498:Sr11
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI8498
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr11+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:hi8498:Sr2
-- type: VARIETY_CARRIES_GENE
   subject: var:wheat:HI8759
   object: gene:wheat:Sr11
   qualifiers:
@@ -369,108 +1995,6 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:hi8759:Sr2
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI8823
-  object: gene:wheat:Sr11
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr11+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:hi8823:Sr11
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI8823
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr11+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:hi8823:Sr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:MP3336
-  object: gene:wheat:Sr11
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr11+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:mp3336:Sr11
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:MP3336
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr11+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:mp3336:Sr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:NIDW1149
-  object: gene:wheat:Sr11
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr11+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:nidw1149:Sr11
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr11+2+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+2+ 05 gw322(c), hd3059(c), nidw1149(d)(c), pbw644(c), uas446(d)(c)
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+2+:nidw1149:Sr11
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:NIDW1149
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr11+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr11+2+ 06 hd3249(c), hi8498(c), hi8759(c), hi8823(d)(i)(c), mp3336(c), nidw1149(d)(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr11+2+:nidw1149:Sr2
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr11+2+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+2+ 05 gw322(c), hd3059(c), nidw1149(d)(c), pbw644(c), uas446(d)(c)
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+2+:nidw1149:Sr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:CG1036
-  object: gene:wheat:Sr7b
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:cg1036:Sr7b
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr7b+2+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr7b+2+ 08 cg1036(i)(c), hd3086(c), hd3249(c)*, hi1612(c), hpw349(c), macs3949(d)(c), uas478(d), wh1310
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr7b+2+:cg1036:Sr7b
-- type: VARIETY_CARRIES_GENE
   subject: var:wheat:CG1036
   object: gene:wheat:Sr2
   qualifiers:
@@ -489,102 +2013,6 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.8:sr7b+2+:cg1036:Sr2
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DDW48
-  object: gene:wheat:Sr7b
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:ddw48:Sr7b
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DDW48
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:ddw48:Sr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DDW55
-  object: gene:wheat:Sr7b
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:ddw55:Sr7b
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DDW55
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:ddw55:Sr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI8826
-  object: gene:wheat:Sr7b
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:hi8826:Sr7b
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI8826
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:hi8826:Sr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI8830
-  object: gene:wheat:Sr7b
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:hi8830:Sr7b
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI8830
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.7, row sr7b+2+
-    quote: 'table 2.7: sr genes in avt entries during 2021-22 sr-gene no. of lines variety/line ... sr7b+2+ 10 cg1036, ddw48(d)(c), ddw55(d), hi8826(d), hi8830(d), hpw349(c), krl210(c), pbw833, uas478(d), wh1124(c)'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.7:sr7b+2+:hi8830:Sr2
-- type: VARIETY_CARRIES_GENE
   subject: var:wheat:HI1655
   object: gene:wheat:Sr2
   qualifiers:
@@ -597,54 +2025,6 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2021_22:t2.7:sr2+:hi1655:Sr2
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:MP3336
-  object: gene:wheat:Lr13
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr13+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr13+ 22 cg1040, dbw353, dbw407, hd3369, hd3392, hd3397, hd3402, hd3411, hi1621, hi1654, hpw485, hs693, krl19, mp1380, mp3336, raj4083, uas3019, vl2041, vl2043, vl3029, wh1402, wh1403'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr13+:mp3336:Lr13
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:NIAW3170
-  object: gene:wheat:Lr13
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr13+10+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr13+10+ 16 dbw252, dbw365, ddw47*, hd3293, hd3386, hd3415, hd3437, hi1628, hpw349, niaw3170, pbw868, uas310, vl892, vl2047, vl2048, vl2050,'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr13+10+:niaw3170:Lr13
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr13+10+1+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:niaw3170:Lr13
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:NIAW3170
-  object: gene:wheat:Lr10
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr13+10+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr13+10+ 16 dbw252, dbw365, ddw47*, hd3293, hd3386, hd3415, hd3437, hi1628, hpw349, niaw3170, pbw868, uas310, vl892, vl2047, vl2048, vl2050,'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr13+10+:niaw3170:Lr10
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr13+10+1+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:niaw3170:Lr10
-- type: VARIETY_CARRIES_GENE
   subject: var:wheat:DDW48
   object: gene:wheat:Lr23
   qualifiers:
@@ -656,30 +2036,6 @@ claims:
     quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr23+ 9 ddw48, dbw318, hd2967, hd3436, hi8498, hs490, krl210, pbw826, uas478'
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2021_22:t2.8:lr23+:ddw48:Lr23
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD2967
-  object: gene:wheat:Lr23
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr23+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr23+ 9 ddw48, dbw318, hd2967, hd3436, hi8498, hs490, krl210, pbw826, uas478'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr23+:hd2967:Lr23
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI8498
-  object: gene:wheat:Lr23
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr23+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr23+ 9 ddw48, dbw318, hd2967, hd3436, hi8498, hs490, krl210, pbw826, uas478'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr23+:hi8498:Lr23
 - type: VARIETY_CARRIES_GENE
   subject: var:wheat:DBW377
   object: gene:wheat:Lr23
@@ -705,120 +2061,6 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2021_22:t2.8:lr23+1+:dbw377:Lr1
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:NIDW1149
-  object: gene:wheat:Lr23
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr23+10+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr23+10+ 8 hd3400, hd3401, hs688, mp1358, nidw1149, pbw872, uas3015, up3090'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr23+10+:nidw1149:Lr23
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr23+10+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr23+10+ 7 dbw173*, hpw349, mp3556, nidw1149, pbw893, uas3022, wh1306
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr23+10+:nidw1149:Lr23
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:NIDW1149
-  object: gene:wheat:Lr10
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr23+10+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr23+10+ 8 hd3400, hd3401, hs688, mp1358, nidw1149, pbw872, uas3015, up3090'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr23+10+:nidw1149:Lr10
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr23+10+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr23+10+ 7 dbw173*, hpw349, mp3556, nidw1149, pbw893, uas3022, wh1306
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr23+10+:nidw1149:Lr10
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:CG1029
-  object: gene:wheat:Lr24
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr24+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr24+ 3 cg1029, gw513, hi1636'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr24+:cg1029:Lr24
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:GW513
-  object: gene:wheat:Lr24
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr24+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr24+ 3 cg1029, gw513, hi1636'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr24+:gw513:Lr24
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI1636
-  object: gene:wheat:Lr24
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr24+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr24+ 3 cg1029, gw513, hi1636'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr24+:hi1636:Lr24
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr24+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr24+ 3 hi1636, macs6222, mp3288
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr24+:hi1636:Lr24
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3090
-  object: gene:wheat:Lr26
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr26+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr26+ 7 hd3090, hi1633, hi1634, hi1650, hs692, macs6768, niaw3922'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr26+:hd3090:Lr26
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI1633
-  object: gene:wheat:Lr26
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr26+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr26+ 7 hd3090, hi1633, hi1634, hi1650, hs692, macs6768, niaw3922'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr26+:hi1633:Lr26
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI1634
-  object: gene:wheat:Lr26
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.8, row lr26+
-    quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr26+ 7 hd3090, hi1633, hi1634, hi1650, hs692, macs6768, niaw3922'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.8:lr26+:hi1634:Lr26
-- type: VARIETY_CARRIES_GENE
   subject: var:wheat:HI1650
   object: gene:wheat:Lr26
   qualifiers:
@@ -830,24 +2072,6 @@ claims:
     quote: 'table 2.8: lr-genes in avt entries during 2021-22 lr-gene no. of lines line/variety ... lr26+ 7 hd3090, hi1633, hi1634, hi1650, hs692, macs6768, niaw3922'
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2021_22:t2.8:lr26+:hi1650:Lr26
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:CG1029
-  object: gene:wheat:Yr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.9, row yr2+
-    quote: 'table 2.9: yr-genes in avt entries during 2021-22 yr-gene no. of lines variety/ line ... yr2+ 73 cg1029(c), dbw252(c), dbw318, dbw320, dbw327 (c) , dbw332(c), dbw352, dbw358, dbw359, dbw365, dbw366, dbw370, dbw371, dbw372, dbw373, dbw377, dbw402, dbw407, ddw47(d)(c), gw513(i)(c), gw547, hd2967(c), hd3118(c), hd3171(c), hd3293(c), hd3386, hd3397, hd3406, hd3411, hd3415, hd3418, hi1621(c), hi1628(c), hi1653, hi1654, hi8840(d), hpw349(c), hpw481, hpw484, hs490(c), hs688, huw838(i)(c), krl2021, krl210(c), mp1358(i)(c), mp3336(c), mp3535, mp3552, nidw1149(d)(c), pbw677(c), pbw826, pbw833, pbw868, pbw870, pb w871, pbw872, pbw901, pbw902, raj4083(c), skw362, uas3015, uas3019, ... vl2041, vl2043, vl2044, vl2047, vl2048, vl2049, vl2050, vl3028, vl3030, vl892(c), wh1124(c),'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.9:yr2+:cg1029:Yr2
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.7, row yr2+
-    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:cg1029:Yr2
 - type: VARIETY_CARRIES_GENE
   subject: var:wheat:DBW359
   object: gene:wheat:Yr2
@@ -866,24 +2090,6 @@ claims:
     quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:dbw359:Yr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DBW377
-  object: gene:wheat:Yr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.9, row yr2+
-    quote: 'table 2.9: yr-genes in avt entries during 2021-22 yr-gene no. of lines variety/ line ... yr2+ 73 cg1029(c), dbw252(c), dbw318, dbw320, dbw327 (c) , dbw332(c), dbw352, dbw358, dbw359, dbw365, dbw366, dbw370, dbw371, dbw372, dbw373, dbw377, dbw402, dbw407, ddw47(d)(c), gw513(i)(c), gw547, hd2967(c), hd3118(c), hd3171(c), hd3293(c), hd3386, hd3397, hd3406, hd3411, hd3415, hd3418, hi1621(c), hi1628(c), hi1653, hi1654, hi8840(d), hpw349(c), hpw481, hpw484, hs490(c), hs688, huw838(i)(c), krl2021, krl210(c), mp1358(i)(c), mp3336(c), mp3535, mp3552, nidw1149(d)(c), pbw677(c), pbw826, pbw833, pbw868, pbw870, pb w871, pbw872, pbw901, pbw902, raj4083(c), skw362, uas3015, uas3019, ... vl2041, vl2043, vl2044, vl2047, vl2048, vl2049, vl2050, vl3028, vl3030, vl892(c), wh1124(c),'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.9:yr2+:dbw377:Yr2
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.7, row yr2+
-    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:dbw377:Yr2
 - type: VARIETY_CARRIES_GENE
   subject: var:wheat:DDW47
   object: gene:wheat:Yr2
@@ -915,24 +2121,6 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:gw513:Yr2
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD2967
-  object: gene:wheat:Yr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.9, row yr2+
-    quote: 'table 2.9: yr-genes in avt entries during 2021-22 yr-gene no. of lines variety/ line ... yr2+ 73 cg1029(c), dbw252(c), dbw318, dbw320, dbw327 (c) , dbw332(c), dbw352, dbw358, dbw359, dbw365, dbw366, dbw370, dbw371, dbw372, dbw373, dbw377, dbw402, dbw407, ddw47(d)(c), gw513(i)(c), gw547, hd2967(c), hd3118(c), hd3171(c), hd3293(c), hd3386, hd3397, hd3406, hd3411, hd3415, hd3418, hi1621(c), hi1628(c), hi1653, hi1654, hi8840(d), hpw349(c), hpw481, hpw484, hs490(c), hs688, huw838(i)(c), krl2021, krl210(c), mp1358(i)(c), mp3336(c), mp3535, mp3552, nidw1149(d)(c), pbw677(c), pbw826, pbw833, pbw868, pbw870, pb w871, pbw872, pbw901, pbw902, raj4083(c), skw362, uas3015, uas3019, ... vl2041, vl2043, vl2044, vl2047, vl2048, vl2049, vl2050, vl3028, vl3030, vl892(c), wh1124(c),'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.9:yr2+:hd2967:Yr2
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.7, row yr2+
-    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:hd2967:Yr2
-- type: VARIETY_CARRIES_GENE
   subject: var:wheat:MP3336
   object: gene:wheat:Yr2
   qualifiers:
@@ -963,30 +2151,6 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:nidw1149:Yr2
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3090
-  object: gene:wheat:Yr9
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.9, row yr9+
-    quote: 'table 2.9: yr-genes in avt entries during 2021-22 yr-gene no. of lines variety/ line ... yr9+ 14 hd3090(c), hi1633(c), hi1634(c), hi1650, hpw483, hpw486, hpw487, hs507(c), hs692, macs6768, mp1378, niaw3922, pbw771(c), vl907(c),'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.9:yr9+:hd3090:Yr9
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI1633
-  object: gene:wheat:Yr9
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2021_22
-    method: postulation_pedigree
-    locator: Table 2.9, row yr9+
-    quote: 'table 2.9: yr-genes in avt entries during 2021-22 yr-gene no. of lines variety/ line ... yr9+ 14 hd3090(c), hi1633(c), hi1634(c), hi1650, hpw483, hpw486, hpw487, hs507(c), hs692, macs6768, mp1378, niaw3922, pbw771(c), vl907(c),'
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2021_22:t2.9:yr9+:hi1633:Yr9
-- type: VARIETY_CARRIES_GENE
   subject: var:wheat:HI1650
   object: gene:wheat:Yr9
   qualifiers:
@@ -999,54 +2163,6 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2021_22:t2.9:yr9+:hi1650:Yr9
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DBW187
-  object: gene:wheat:Yr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.7, row yr2+
-    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:dbw187:Yr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DBW303
-  object: gene:wheat:Yr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.7, row yr2+
-    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:dbw303:Yr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3086
-  object: gene:wheat:Yr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.7, row yr2+
-    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:hd3086:Yr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI1605
-  object: gene:wheat:Yr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.7, row yr2+
-    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:hi1605:Yr2
-- type: VARIETY_CARRIES_GENE
   subject: var:wheat:MACS3949
   object: gene:wheat:Yr2
   qualifiers:
@@ -1058,18 +2174,6 @@ claims:
     quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:macs3949:Yr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:MACS6222
-  object: gene:wheat:Yr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.7, row yr2+
-    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr2+ 62 cg1029(c), cg1044, dbw173(c)*, dbw187(c), dbw296(c), dbw303(c), dbw359, dbw372(i)(c), dbw377, dbw398, ... dbw442, dbw444, gw513(c), gw542, gw543, gw547, hd2967(c), hd3086(c), hd3090(c)*, hd3171(c), hd3369(i)(c), hd3428, hd3470, hd3471, hi1605(c), hi1612(c), hi 1633(c)*, hi1634(c), hi1650(i)(c)*, hi1654(i)(c), hi1673, hi1674, hi8840(d), hpw349(c), hs562(c), hs692*, macs3949(d)(c), macs4100(d)(i)(c), macs6222 (c), mp1378*, mp3288(c), mp3556, niaw3170(c), niaw4114, niaw4120, nidw1149(d)(c), nws2222, pbw644(c), pbw8 72(i)(c), pbw893, raj4083(c), uas3020, uas3021, uas3022, uas446(d)(c), uas478(d), up3083, up3102, vl2041(i)(c), vl3028, vl892(c), vl907(c)*
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:macs6222:Yr2
 - type: VARIETY_CARRIES_GENE
   subject: var:wheat:MP3288
   object: gene:wheat:Yr2
@@ -1095,162 +2199,6 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.7:yr2+:niaw3170:Yr2
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:MP4010
-  object: gene:wheat:Yr9
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.7, row yr9+
-    quote: table 2.7 yr genes in avtlines during 2022-23 yr-gene no. of lines details of lines ... yr9+ 8 dbw443,gw322(c)*, hi1672, macs6811, macs6768(i)(c), mp1386,mp4010(c), niaw4153
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.7:yr9+:mp4010:Yr9
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:MACS6222
-  object: gene:wheat:Sr24
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr24+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr24+ 02 macs6222 (c), mp3288(c)
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr24+:macs6222:Sr24
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:MP3288
-  object: gene:wheat:Sr24
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr24+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr24+ 02 macs6222 (c), mp3288(c)
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr24+:mp3288:Sr24
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DBW187
-  object: gene:wheat:Sr5
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr5+11+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr5+11+ 01 dbw187(c)
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr5+11+:dbw187:Sr5
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DBW187
-  object: gene:wheat:Sr11
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr5+11+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr5+11+ 01 dbw187(c)
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr5+11+:dbw187:Sr11
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:GW322
-  object: gene:wheat:Sr11
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr11+2+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+2+ 05 gw322(c), hd3059(c), nidw1149(d)(c), pbw644(c), uas446(d)(c)
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+2+:gw322:Sr11
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:GW322
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr11+2+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+2+ 05 gw322(c), hd3059(c), nidw1149(d)(c), pbw644(c), uas446(d)(c)
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+2+:gw322:Sr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD2932
-  object: gene:wheat:Sr11
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr11+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+ 04 hd2932(c), hi1605(c), jkw261(c) raj4083(c)
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+:hd2932:Sr11
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI1605
-  object: gene:wheat:Sr11
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr11+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr11+ 04 hd2932(c), hi1605(c), jkw261(c) raj4083(c)
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr11+:hi1605:Sr11
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3086
-  object: gene:wheat:Sr7b
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr7b+2+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr7b+2+ 08 cg1036(i)(c), hd3086(c), hd3249(c)*, hi1612(c), hpw349(c), macs3949(d)(c), uas478(d), wh1310
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr7b+2+:hd3086:Sr7b
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3086
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr7b+2+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr7b+2+ 08 cg1036(i)(c), hd3086(c), hd3249(c)*, hi1612(c), hpw349(c), macs3949(d)(c), uas478(d), wh1310
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr7b+2+:hd3086:Sr2
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:MACS3949
-  object: gene:wheat:Sr7b
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr7b+2+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr7b+2+ 08 cg1036(i)(c), hd3086(c), hd3249(c)*, hi1612(c), hpw349(c), macs3949(d)(c), uas478(d), wh1310
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr7b+2+:macs3949:Sr7b
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:MACS3949
-  object: gene:wheat:Sr2
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.8, row sr7b+2+
-    quote: table 2.8. sr genes in avt entries during 2022-23 sr-genes no. of lines detail of lines ... sr7b+2+ 08 cg1036(i)(c), hd3086(c), hd3249(c)*, hi1612(c), hpw349(c), macs3949(d)(c), uas478(d), wh1310
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.8:sr7b+2+:macs3949:Sr2
-- type: VARIETY_CARRIES_GENE
   subject: var:wheat:CG1036
   object: gene:wheat:Lr13
   qualifiers:
@@ -1263,18 +2211,6 @@ claims:
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+:cg1036:Lr13
 - type: VARIETY_CARRIES_GENE
-  subject: var:wheat:DBW303
-  object: gene:wheat:Lr13
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr13+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+ 26 akaw5104, cg1036, cg1040, dbw187*, dbw303, dbw372*, dbw441, dbw442, hd2932, gw538, gw542, gw547*, hd3249*, hd3369, hi1605, hi1654, hpw484*, jkw261*, mp1378*, mp3557, nws2222, raj4083, pbw771*, pbw887, uas481, vl2041
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+:dbw303:Lr13
-- type: VARIETY_CARRIES_GENE
   subject: var:wheat:HD2932
   object: gene:wheat:Lr13
   qualifiers:
@@ -1286,18 +2222,6 @@ claims:
     quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+ 26 akaw5104, cg1036, cg1040, dbw187*, dbw303, dbw372*, dbw441, dbw442, hd2932, gw538, gw542, gw547*, hd3249*, hd3369, hi1605, hi1654, hpw484*, jkw261*, mp1378*, mp3557, nws2222, raj4083, pbw771*, pbw887, uas481, vl2041
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+:hd2932:Lr13
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI1605
-  object: gene:wheat:Lr13
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr13+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+ 26 akaw5104, cg1036, cg1040, dbw187*, dbw303, dbw372*, dbw441, dbw442, hd2932, gw538, gw542, gw547*, hd3249*, hd3369, hi1605, hi1654, hpw484*, jkw261*, mp1378*, mp3557, nws2222, raj4083, pbw771*, pbw887, uas481, vl2041
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+:hi1605:Lr13
 - type: VARIETY_CARRIES_GENE
   subject: var:wheat:DBW359
   object: gene:wheat:Lr13
@@ -1322,111 +2246,3 @@ claims:
     quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+ 23 dbw252, dbw359, dbw380, dbw397, dbw398, gw543, hd3090*, hd3293, hd3471, hi1670, hs692*, macs6809, macs6814, mp1388, niaw4114, niaw4183, pbw826*, pbw891, uas446*, uas3020, up3111, vl892, vl3028*
     extractor: parser:aicrp_postulation@1
     candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+:dbw359:Lr10
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI1655
-  object: gene:wheat:Lr13
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr13+10+1+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:hi1655:Lr13
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI1655
-  object: gene:wheat:Lr10
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr13+10+1+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:hi1655:Lr10
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HI1655
-  object: gene:wheat:Lr1
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr13+10+1+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:hi1655:Lr1
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:NIAW3170
-  object: gene:wheat:Lr1
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr13+10+1+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+1+ 4 akaw5100, hi1655, hi1674, niaw3170
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+1+:niaw3170:Lr1
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3086
-  object: gene:wheat:Lr13
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr13+10+3+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+3+ 2 hd3086, hi1653
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+3+:hd3086:Lr13
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3086
-  object: gene:wheat:Lr10
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr13+10+3+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+3+ 2 hd3086, hi1653
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+3+:hd3086:Lr10
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:HD3086
-  object: gene:wheat:Lr3
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr13+10+3+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr13+10+3+ 2 hd3086, hi1653
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr13+10+3+:hd3086:Lr3
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:MACS6222
-  object: gene:wheat:Lr24
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr24+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr24+ 3 hi1636, macs6222, mp3288
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr24+:macs6222:Lr24
-- type: VARIETY_CARRIES_GENE
-  subject: var:wheat:MP3288
-  object: gene:wheat:Lr24
-  qualifiers:
-    method: postulation
-  evidence:
-  - source: doc:aicrp_crop_protection_2022_23
-    method: postulation_pedigree
-    locator: Table 2.9, row lr24+
-    quote: table 2.9. lr genes in avt entries during 2022-23 lr-gene no. of lines lines/varieties ... lr24+ 3 hi1636, macs6222, mp3288
-    extractor: parser:aicrp_postulation@1
-    candidate_id: aicrp_crop_protection_2022_23:t2.9:lr24+:mp3288:Lr24
