@@ -11,17 +11,27 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Manrope:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/driver.js@1.8.0/dist/driver.css"
+      integrity="sha384-XUGWln86d3kDvw/W1Qbii8QQyeWs2LcFYfGhYrmSZ0ZiXxowttKpfdhPdLE+WMFx"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="shell">
-      <section class="hero">
+      <section class="hero" id="hero">
         <p class="eyebrow">AgriHub Genomic Knowledge Base</p>
         <h1>Explore crop disease resistance as a graph.</h1>
         <p class="lede">
           Query wheat, soybean, and chickpea resistance relationships, and check simulated
           IoT sensor readings against the trigger library — backed by the live Supabase KG.
         </p>
+        <div class="hero-actions">
+          <button id="tourButton" type="button" class="tour-btn">▶ Take the 1-minute tour</button>
+          <span class="hero-hint">New here? The tour shows what each view does.</span>
+        </div>
       </section>
 
       <!-- Stats bar — populated by /api/stats on page load -->
@@ -37,7 +47,7 @@
         <span class="stats-item"><span id="statCrops">—</span> crops</span>
       </div>
 
-      <nav class="tabs" role="tablist" aria-label="View">
+      <nav class="tabs" id="mainTabs" role="tablist" aria-label="View">
         <button class="tab-btn" data-tab="browse" role="tab" aria-selected="true">Browse the graph</button>
         <button class="tab-btn" data-tab="triggers" role="tab" aria-selected="false">Check sensor readings</button>
         <button class="tab-btn" data-tab="graph" role="tab" aria-selected="false">Visualize the graph</button>
@@ -45,7 +55,7 @@
 
       <!-- ─────────────────────── TAB: Browse the graph ─────────────────────── -->
       <section id="tab-browse" class="tab-panel" data-active="true">
-        <section class="panel controls">
+        <section class="panel controls" id="browseControls">
           <label>
             Crop
             <select id="cropSelect">
@@ -65,7 +75,7 @@
           <button id="searchButton" type="button">Search knowledge graph</button>
         </section>
 
-        <section class="panel results">
+        <section class="panel results" id="reactionsPanel">
           <div class="results-header">
             <h2>Variety reactions</h2>
             <span id="reactionStatusText" class="status-pill" role="status" aria-live="polite">Select a variety</span>
@@ -76,7 +86,7 @@
           <div id="reactionList" class="edge-list"></div>
         </section>
 
-        <section class="panel results">
+        <section class="panel results" id="genePanel">
           <div class="results-header">
             <h2>Gene resistance</h2>
             <span id="geneStatusText" class="status-pill" role="status" aria-live="polite">Ready</span>
@@ -92,7 +102,7 @@
 
       <!-- ─────────────────────── TAB: Check sensor readings ─────────────────────── -->
       <section id="tab-triggers" class="tab-panel" data-active="false">
-        <p class="demo-warning">
+        <p class="demo-warning" id="demoWarning">
           <strong>Demo, not the real risk engine:</strong> each trigger's conditions describe a
           value <em>aggregated over a time window</em> (e.g. "mean over 24h"). This form compares
           the single number you type directly against those bounds — a snapshot check, not a real
@@ -118,7 +128,7 @@
           </label>
         </section>
 
-        <section class="panel controls sensor-grid">
+        <section class="panel controls sensor-grid" id="sensorGrid">
           <label>
             Air temperature (°C)
             <input type="number" step="0.1" id="reading-air_temp_c" placeholder="e.g. 22" />
@@ -146,7 +156,7 @@
           <button id="checkTriggersButton" type="button">Check disease risk</button>
         </section>
 
-        <section class="panel results">
+        <section class="panel results" id="triggerResultsPanel">
           <div class="results-header">
             <h2>Trigger results</h2>
             <span id="triggerStatusText" class="status-pill" role="status" aria-live="polite">Ready</span>
@@ -157,7 +167,7 @@
 
       <!-- ─────────────────────── TAB: Visualize the graph ─────────────────────── -->
       <section id="tab-graph" class="tab-panel" data-active="false">
-        <section class="panel controls graph-controls">
+        <section class="panel controls graph-controls" id="graphControls">
           <label>
             Crop
             <select id="graphCropSelect">
@@ -187,11 +197,28 @@
             <span id="graphStatusText" class="status-pill" role="status" aria-live="polite">Loading...</span>
           </div>
           <p class="edge-meta panel-note">
-            Every node and claim currently in the live KG, fetched once and cached in your
-            browser — pick a crop, a disease, or specific relationship types to focus the view.
-            Hover a node to see its name, click it to highlight its neighborhood and list its
-            relationships below, click empty space to reset.
+            Every entity and claim currently in the live knowledge base. Start with a question
+            below, or use the filters above.
           </p>
+          <div id="graphPresets" class="graph-presets" role="group" aria-label="Quick questions"></div>
+          <details class="graph-guide" id="graphGuide" open>
+            <summary>How to read this graph</summary>
+            <ol>
+              <li>
+                <strong>Each shape is an entity</strong> — a variety, gene, disease, advisory…
+                Colour <em>and</em> shape show its type (see the key). Bigger = more connections.
+              </li>
+              <li>
+                <strong>Each arrow is one claim</strong> taken from a cited source, read
+                <em>from → to</em>: “Sr33 confers resistance to stem rust”.
+              </li>
+              <li>
+                <strong>Hover</strong> for a one-line meaning · <strong>click</strong> an entity to
+                see everything linked to it · <strong>click a key item</strong> to hide that type.
+              </li>
+            </ol>
+          </details>
+          <p id="graphConfidence" class="graph-confidence" role="note"></p>
           <div class="graph-layout">
             <div class="graph-canvas-wrap">
               <div id="graphCanvas" class="graph-canvas"></div>
@@ -201,6 +228,9 @@
                 <button id="graphZoomFit" type="button" title="Fit to screen" aria-label="Fit to screen">⤢</button>
               </div>
               <div id="graphTooltip" class="graph-tooltip" hidden></div>
+              <div id="graphEmpty" class="graph-empty" hidden>
+                No claims match these filters. Try “Show everything”.
+              </div>
             </div>
             <div id="graphLegend" class="graph-legend"></div>
           </div>
@@ -209,6 +239,11 @@
       </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/driver.js@1.8.0/dist/driver.js.iife.js"
+      integrity="sha384-ZD4UAn12lO2plEJ4lonOHO0fRSCgq0VAuoDx6/rglijDjzDYIXgCexIVu3PFJpJf"
+      crossorigin="anonymous"
+    ></script>
     <script type="module" src="./app.js"></script>
   </body>
 </html>

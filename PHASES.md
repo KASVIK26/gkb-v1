@@ -4,7 +4,7 @@
 for **this repo only**. Read it, correct anything wrong, and it becomes the thing we both check each session.
 `RESEARCH_ROADMAP.md` and `TECH_STACK.md` hold the reasoning; this file holds the status.
 
-**Last updated:** 2026-09-27
+**Last updated:** 2026-10-02
 
 ---
 
@@ -1308,6 +1308,36 @@ are also where most of the work is.
      claim type) remain informational-only by design this pass -- approving them would need a manual
      entity-override UI, scoped out explicitly rather than half-built. The full-text LLM timeout
      above is unrelated but still real.
+
+37. **Made the graph self-explanatory, fixed the node colours, and added a guided tour (mentor feedback,
+   2026-10-02).** Six node types (Advisory, AgroZone, Gene, QTL, RefGene, Variety) all rendered as near-identical
+   greens, and Variety and Advisory shared the *exact* same hex.
+   - **Colours chosen by measurement, not by eye.** With 11 entity types, colour alone cannot be
+     pairwise-distinct (the dataviz validator's all-pairs run fails on the 8 chromatic hues, as its docs predict),
+     so shape is now the second channel. Hues were assigned by brute-forcing every hue-to-type assignment against
+     the type pairs that *actually share an edge* in the live graph (Variety-Disease 119 edges, Variety-AgroZone
+     114, Gene-Disease 27, Disease-Advisory/Trigger/Pathogen 17 each…) and each final pair re-run through
+     `validate_palette.js`. Disease moved to a deeper crimson (`#a61b2a`): the stock red could not clear the
+     colour-blind floor next to the other hues (best 7.2), the deeper one gives 20.6. Final worst real-edge pair:
+     **18.6 colour-blind / 19.6 normal-vision ΔE** (targets 8 / 15). Only one green-family hue remains on a common
+     type (AgroZone). Yellow/aqua/pink are < 3:1 on the cream canvas, so every node also carries a darkened outline
+     and landmark labels (the validator's required "relief").
+   - **Self-explanatory graph:** plain-language key that hides/shows types on click; relationship filters written as
+     sentences with counts; quick-question buttons; a "how to read this graph" strip; always-on labels for diseases;
+     node size by connections; edge hover as a sentence; clicking a disease shows a *whole-KB* coverage checklist
+     and clickable neighbour chips; a computed confidence note; an empty state.
+   - **Guided tour** with driver.js 1.8.0 (MIT, 25 KB, no dependencies) rather than Shepherd (larger) or Intro.js
+     (AGPL — a licensing problem for anything commercial). 15 steps across all three tabs, SRI-pinned from jsDelivr,
+     auto-starts once per visitor, replayable from the hero button, respects `prefers-reduced-motion`.
+   - **Verified in a browser** against the live KG: key/preset/hide interactions, tour end-to-end, no horizontal
+     overflow at 375 px. Found and fixed along the way: a CSS grid squeezing legend rows over each other, anchor
+     labels hidden by `min-zoomed-font-size` at fit zoom, and orphan nodes left behind when hiding a type.
+   - **What this surfaced about the data (live release, measured 2026-10-02):** all 315 claims cite a source
+     (60 verified sources) but **every claim is `unreviewed` and none has a score or tier**; 307/315 rest on a
+     single source; 202 of 323 evidence rows come from only 3 official documents. `VARIETY_CARRIES_GENE` has **0**
+     claims, so genes and varieties are disconnected clusters in the graph. Each disease has exactly one
+     advisory (soybean mosaic has none) and one trigger. 34 of 107 varieties have no documented reaction; soybean
+     has 7 variety reactions in total. These, not extraction volume, are the credibility and coverage gaps.
 
 ---
 

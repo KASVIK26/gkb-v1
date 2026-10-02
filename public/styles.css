@@ -360,7 +360,8 @@ button {
 
 /* ── Graph visualizer ──────────────────────────────────────────── */
 .graph-controls {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) 2fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) 3fr;
+  align-items: start;
 }
 
 .graph-claim-types {
@@ -368,9 +369,9 @@ button {
 }
 
 .graph-checkbox-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 18px;
   font-weight: 500;
 }
 
@@ -406,7 +407,7 @@ button {
   position: relative;
   flex: 1;
   min-width: 0;
-  height: 560px;
+  height: 600px;
   border-radius: 18px;
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.9);
@@ -465,30 +466,188 @@ button {
 }
 
 .graph-legend {
-  width: 160px;
+  width: 230px;
   flex-shrink: 0;
   display: grid;
-  gap: 8px;
-  padding: 14px;
+  align-content: start;
+  grid-auto-rows: max-content;
+  gap: 4px;
+  padding: 12px;
   border-radius: 18px;
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.72);
-  align-self: stretch;
+  align-self: flex-start;
 }
 
-.graph-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
+.graph-legend-title {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.graph-legend-title span {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--muted);
 }
 
-.graph-legend-swatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
+/* A legend row is a real button: clicking it hides/shows that entity type. */
+.graph-legend-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  min-height: 0;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text);
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+
+.graph-legend-item:hover {
+  background: rgba(23, 32, 24, 0.05);
+}
+
+.graph-legend-item:focus-visible,
+.graph-preset:focus-visible,
+.node-chip:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.graph-legend-item[data-hidden="true"] {
+  opacity: 0.45;
+}
+
+.graph-legend-item[data-hidden="true"] .graph-legend-name {
+  text-decoration: line-through;
+}
+
+.graph-legend-shape {
   flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.graph-legend-text {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.graph-legend-name {
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.graph-legend-blurb {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.graph-count {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(23, 32, 24, 0.08);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Quick-question shortcuts above the graph */
+.graph-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.graph-preset {
+  min-height: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.graph-preset:hover {
+  background: #fff;
+  border-color: rgba(23, 32, 24, 0.3);
+}
+
+.graph-preset[aria-pressed="true"] {
+  background: var(--text);
+  border-color: var(--text);
+  color: #fff;
+}
+
+.graph-guide {
+  margin: 0 0 12px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--border);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.graph-guide summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.graph-guide ol {
+  margin: 8px 0 2px;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.graph-guide li + li {
+  margin-top: 4px;
+}
+
+.graph-confidence {
+  margin: 0 0 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(165, 120, 20, 0.09);
+  border: 1px solid rgba(165, 120, 20, 0.22);
+  color: #6b4d10;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.graph-empty {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.graph-empty[hidden] {
+  display: none;
 }
 
 .graph-detail {
@@ -506,6 +665,175 @@ button {
 .graph-detail h3 {
   margin: 0 0 8px;
   font-size: 1.05rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.type-chip {
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1.5px solid var(--chip, var(--muted));
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.detail-subhead {
+  margin: 14px 0 6px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.coverage-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.coverage-list li {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.coverage-list li[data-ok="true"] {
+  background: rgba(31, 107, 68, 0.12);
+  color: #1a5c3a;
+}
+
+.coverage-list li[data-ok="false"] {
+  background: rgba(23, 32, 24, 0.06);
+  color: var(--muted);
+}
+
+.detail-group h4 {
+  margin: 10px 0 6px;
+  font-size: 0.9rem;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.node-chip {
+  min-height: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.node-chip:hover {
+  border-color: rgba(23, 32, 24, 0.4);
+  background: rgba(23, 32, 24, 0.04);
+}
+
+.chip-more {
+  margin-top: 6px;
+  font-size: 0.82rem;
+}
+
+.chip-more summary {
+  cursor: pointer;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ── Hero tour entry point ─────────────────────────────────────── */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-top: 20px;
+}
+
+.hero-hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ── Guided tour (driver.js popover, themed to the site) ───────── */
+.driver-popover.agrihub-tour {
+  max-width: 340px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: #fffefb;
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
+  box-shadow: 0 24px 60px rgba(23, 32, 24, 0.28);
+}
+
+.driver-popover.agrihub-tour .driver-popover-title {
+  font-family: "Fraunces", serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.driver-popover.agrihub-tour .driver-popover-description {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.driver-popover.agrihub-tour .driver-popover-description strong {
+  color: var(--text);
+}
+
+.driver-popover.agrihub-tour .driver-popover-progress-text {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.driver-popover.agrihub-tour .driver-popover-footer button {
+  min-height: 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-shadow: none;
+}
+
+.driver-popover.agrihub-tour .driver-popover-next-btn {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #fff;
+}
+
+.driver-popover.agrihub-tour .driver-popover-arrow-side-left.driver-popover-arrow {
+  border-left-color: #fffefb;
+}
+.driver-popover.agrihub-tour .driver-popover-arrow-side-right.driver-popover-arrow {
+  border-right-color: #fffefb;
+}
+.driver-popover.agrihub-tour .driver-popover-arrow-side-top.driver-popover-arrow {
+  border-top-color: #fffefb;
+}
+.driver-popover.agrihub-tour .driver-popover-arrow-side-bottom.driver-popover-arrow {
+  border-bottom-color: #fffefb;
 }
 
 @media (max-width: 820px) {
@@ -529,8 +857,12 @@ button {
 
   .graph-legend {
     width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
+    max-height: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .graph-legend-title {
+    grid-column: 1 / -1;
   }
 
   .graph-canvas-wrap {

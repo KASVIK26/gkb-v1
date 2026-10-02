@@ -10,7 +10,8 @@ scope note in `functions/api/triggers.js` for exactly what's simplified here and
 
 ## What it does
 
-Two tabs:
+Three tabs, plus a guided tour (the **Take the 1-minute tour** button; it also starts once
+automatically for a first-time visitor — `?tour=1` forces it, `?tour=0` suppresses it):
 
 - **Browse the graph** — pick a crop and variety, see its documented `VARIETY_REACTION` claims,
   and browse all `GENE_CONFERS_RESISTANCE` claims for that crop. (Gene claims are shown crop-wide,
@@ -21,11 +22,32 @@ Two tabs:
   claims' conditions are met, not met, or can't be evaluated (missing reading) — with the matching
   disease's `DISEASE_MANAGED_BY` advisory and the selected variety's own documented reaction, if
   known.
+- **Visualize the graph** — the whole KG as an interactive Cytoscape.js graph, built to be readable
+  without explanation:
+  - **Colour *and* shape** encode entity type (11 types can't be told apart by hue alone for
+    colour-blind readers). Hues come from the dataviz skill's validated categorical palette, with
+    Disease a deeper crimson; every pair of types that actually shares an edge in the live graph
+    measured ≥ 18.6 colour-blind (protan/deutan) and ≥ 19.6 normal-vision ΔE (OKLab ×100; targets
+    8 and 15). The palette lives in `NODE_STYLE` in `app.js`.
+  - The **key** doubles as a control: each row names the type, says what it is, shows its count, and
+    hides/shows that type on click.
+  - **Quick-question buttons** ("Which genes confer resistance?"…) pick the right relationship types;
+    relationship filters are written as sentences with counts.
+  - Crops and diseases are always labelled; node size grows with connections; hover gives a
+    one-line sentence ("Sr33 confers resistance to stem rust"); clicking a disease shows what the
+    KB holds for it across the **whole** KB (cause, trigger, advisory, resistance genes, variety
+    reactions) and what is still missing, with click-to-jump chips for its neighbours.
+  - An honest **confidence note** is computed from the data: today every claim cites a source but
+    none has a confidence tier or a reviewed status yet, and the page says so.
 
 Everything shown is read live from Supabase via `public.kg_*` bridge views
 (`supabase/migrations/20260926120000_dashboard_views.sql`), which sit on top of `kg_current` — the
 schema `curator/graph/promote.py` atomically repoints at whichever release is live. No caching, no
 mock data.
+
+The tour is [driver.js](https://driverjs.com) 1.8.0 (MIT, 25 KB), loaded from jsDelivr with
+subresource-integrity hashes (`index.html`) and driven by `tour.js`, which switches tabs between
+steps. If the CDN is blocked the tour button removes itself instead of dying.
 
 ## Running it locally
 

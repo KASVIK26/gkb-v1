@@ -1,5 +1,7 @@
 // AgriHub KB — frontend controller (rebuilt against the Postgres/Supabase KG, 2026-09-26)
 
+import { initTour } from "./tour.js";
+
 // ---------------------------------------------------------------------------
 // Tabs
 // ---------------------------------------------------------------------------
@@ -12,24 +14,32 @@ const tabPanels = {
 };
 
 let graphInitialized = false;
+let graphLoad = null;
+
+// Resolves once /api/graph has loaded and the first render is done -- the guided tour waits on it.
+function whenGraphReady() {
+  return graphLoad ?? Promise.resolve();
+}
+
+function showTab(name) {
+  for (const b of tabButtons) b.setAttribute("aria-selected", String(b.dataset.tab === name));
+  for (const [tabName, panel] of Object.entries(tabPanels)) {
+    panel.dataset.active = String(tabName === name);
+  }
+  if (name === "graph") {
+    if (!graphInitialized) {
+      graphInitialized = true;
+      graphLoad = loadGraphData();
+    } else if (cy) {
+      // The canvas was display:none while hidden -- cytoscape needs an explicit resize/fit.
+      cy.resize();
+      cy.fit();
+    }
+  }
+}
 
 for (const btn of tabButtons) {
-  btn.addEventListener("click", () => {
-    for (const b of tabButtons) b.setAttribute("aria-selected", String(b === btn));
-    for (const [name, panel] of Object.entries(tabPanels)) {
-      panel.dataset.active = String(name === btn.dataset.tab);
-    }
-    if (btn.dataset.tab === "graph") {
-      if (!graphInitialized) {
-        graphInitialized = true;
-        loadGraphData();
-      } else if (cy) {
-        // The canvas was display:none while hidden -- cytoscape needs an explicit resize/fit.
-        cy.resize();
-        cy.fit();
-      }
-    }
-  });
+  btn.addEventListener("click", () => showTab(btn.dataset.tab));
 }
 
 // ---------------------------------------------------------------------------
@@ -277,30 +287,78 @@ const graphTooltip = document.getElementById("graphTooltip");
 const graphZoomIn = document.getElementById("graphZoomIn");
 const graphZoomOut = document.getElementById("graphZoomOut");
 const graphZoomFit = document.getElementById("graphZoomFit");
+const graphPresets = document.getElementById("graphPresets");
+const graphConfidence = document.getElementById("graphConfidence");
+const graphEmpty = document.getElementById("graphEmpty");
 
-// Matches curator.model.enums.EntityType -- one color per node type, shown in the legend.
-const NODE_COLORS = {
-  Crop: "#8a6d3b",
-  Variety: "#2f6b44",
-  Gene: "#1f4e31",
-  QTL: "#3d7a99",
-  Marker: "#6a4f9c",
-  RefGene: "#4a5b8c",
-  Disease: "#a53c31",
-  Pathogen: "#c76b2e",
-  Pathotype: "#c76b2e",
-  EnvTrigger: "#1a7a8c",
-  AgroZone: "#7a8c1a",
-  Advisory: "#2f6b44",
+const esc = (value) =>
+  String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
+function darken(hex, factor) {
+  const n = parseInt(hex.slice(1), 16);
+  const channels = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => Math.round(v * factor));
+  return `#${channels.map((v) => v.toString(16).padStart(2, "0")).join("")}`;
+}
+
+// Colour AND shape encode entity type: 11 types cannot be told apart by hue alone for everyone.
+// Hues are the dataviz-validated palette (Disease a deeper red); every type pair that shares an edge
+// in the live graph measured >= 18.6 colour-blind / 19.6 normal-vision distance (see PHASES.md).
+const NODE_STYLE = {
+  Crop: { name: "Crop", color: "#2b2a27", shape: "rectangle", size: 30, anchor: true, blurb: "A crop species covered here." },
+  Disease: { name: "Disease", color: "#a61b2a", shape: "octagon", size: 26, anchor: true, blurb: "A crop disease; most claims link to it." },
+  Pathogen: { name: "Pathogen", color: "#eb6834", shape: "triangle", size: 22, blurb: "The organism causing a disease." },
+  Pathotype: { name: "Pathotype", color: "#eb6834", shape: "pentagon", size: 20, blurb: "A race or strain of a pathogen." },
+  Variety: { name: "Variety", color: "#2a78d6", shape: "ellipse", size: 13, blurb: "A named cultivar." },
+  Gene: { name: "Gene", color: "#4a3aa7", shape: "diamond", size: 22, blurb: "A gene that confers resistance." },
+  RefGene: { name: "Reference gene", color: "#6b7785", shape: "star", size: 24, blurb: "Where a gene sits in the reference genome." },
+  Marker: { name: "Marker", color: "#4a3aa7", shape: "round-diamond", size: 18, blurb: "A DNA marker used to track a resistance gene." },
+  QTL: { name: "QTL", color: "#1baf7a", shape: "hexagon", size: 22, blurb: "A genome region linked to resistance." },
+  EnvTrigger: { name: "Weather trigger", color: "#eda100", shape: "rhomboid", size: 22, blurb: "Weather that favours infection." },
+  Advisory: { name: "Advisory", color: "#e87ba4", shape: "round-rectangle", size: 22, blurb: "A recommended management practice." },
+  AgroZone: { name: "Growing zone", color: "#008300", shape: "cut-rectangle", size: 20, blurb: "A region a variety suits." },
 };
-const DEFAULT_NODE_COLOR = "#5d6a61";
+const LEGEND_ORDER = Object.keys(NODE_STYLE);
+const styleOf = (type) => NODE_STYLE[type] || { name: type, color: "#6b7785", shape: "ellipse", size: 16, blurb: "" };
 
-// Fetched once from /api/graph and kept here for the life of the page -- every filter change
-// (crop, disease, relationship type) re-derives the visible subgraph from this cache instead of
-// hitting the network again. This is the "fast, cache it, synchronous" requirement: at 210
-// entities / 315 claims the full graph is small enough that client-side filtering is instant.
+// Plain-language meaning of each relationship. `verb` reads subject -> object; `out`/`inn` are the
+// headings used in the detail panel from the subject's / object's point of view.
+const CLAIM_INFO = {
+  VARIETY_REACTION: { from: "Variety", to: "Disease", verb: "has a documented reaction to", out: "Documented reactions", inn: "Varieties with a documented reaction" },
+  VARIETY_RECOMMENDED_FOR_ZONE: { from: "Variety", to: "AgroZone", verb: "is recommended for", out: "Recommended for zones", inn: "Recommended varieties" },
+  GENE_CONFERS_RESISTANCE: { from: "Gene", to: "Disease", verb: "confers resistance to", out: "Confers resistance to", inn: "Resistance genes" },
+  DISEASE_MANAGED_BY: { from: "Disease", to: "Advisory", verb: "is managed by", out: "Managed by", inn: "Diseases it helps manage" },
+  DISEASE_ENV_TRIGGER: { from: "Disease", to: "EnvTrigger", verb: "is favoured by", out: "Favoured by", inn: "Diseases it favours" },
+  DISEASE_CAUSED_BY: { from: "Disease", to: "Pathogen", verb: "is caused by", out: "Caused by", inn: "Diseases it causes" },
+  GENE_PATHOTYPE_INTERACTION: { from: "Gene", to: "Pathotype", verb: "interacts with", out: "Interacts with pathotype", inn: "Interacting genes" },
+  PATHOTYPE_VARIANT_OF: { from: "Pathotype", to: "Pathogen", verb: "is a variant of", out: "Variant of", inn: "Known variants" },
+  QTL_ASSOCIATION: { from: "QTL", to: "Disease", verb: "is associated with", out: "Associated with", inn: "Associated QTLs" },
+  GENE_LOCATED_AT: { from: "Gene", to: "RefGene", verb: "is located at", out: "Located at", inn: "Genes located here" },
+};
+function claimInfo(claimType) {
+  const fallback = claimType.replaceAll("_", " ").toLowerCase();
+  return CLAIM_INFO[claimType] || { from: null, to: null, verb: fallback, out: fallback, inn: fallback };
+}
+function claimLabel(claimType) {
+  const info = claimInfo(claimType);
+  if (!info.from) return info.verb;
+  return `${styleOf(info.from).name} ${info.verb} ${styleOf(info.to).name.toLowerCase()}`;
+}
+
+// Questions a visitor is likely to have; each one just selects the matching relationship types.
+const GRAPH_PRESETS = [
+  { id: "genes", label: "Which genes confer resistance?", types: ["GENE_CONFERS_RESISTANCE"] },
+  { id: "varieties", label: "Which varieties resist which diseases?", types: ["VARIETY_REACTION"] },
+  { id: "profile", label: "How is each disease caused, triggered and managed?", types: ["DISEASE_CAUSED_BY", "DISEASE_ENV_TRIGGER", "DISEASE_MANAGED_BY"] },
+  { id: "zones", label: "Where is each variety recommended?", types: ["VARIETY_RECOMMENDED_FOR_ZONE"] },
+  { id: "all", label: "Show everything", types: null },
+];
+
+// Fetched once from /api/graph and kept for the life of the page -- every filter change re-derives
+// the visible subgraph from this cache, so filtering is instant and never hits the network again.
 let graphCache = null;
 let cy = null; // the cytoscape instance, created lazily on first activation of this tab
+let activePreset = "all";
+const hiddenTypes = new Set();
 
 async function loadGraphData() {
   setStatus(graphStatusText, "Loading graph...", "loading");
@@ -310,25 +368,67 @@ async function loadGraphData() {
     if (!response.ok) throw new Error(payload.error || "Could not load the graph");
     graphCache = payload;
     populateGraphFilters(payload);
+    renderGraphPresets();
+    renderGraphConfidence(payload);
     renderGraph();
   } catch (error) {
     setStatus(graphStatusText, "Error", "error");
-    graphCanvas.innerHTML = `<div class="edge-card edge-card-error"><h3>Could not load the graph</h3><p class="edge-meta">${error.message}</p></div>`;
+    graphCanvas.innerHTML = `<div class="edge-card edge-card-error"><h3>Could not load the graph</h3><p class="edge-meta">${esc(error.message)}</p></div>`;
   }
 }
 
 function populateGraphFilters(payload) {
-  const claimTypes = [...new Set(payload.edges.map((e) => e.claim_type))].sort();
+  const counts = new Map();
+  for (const edge of payload.edges) counts.set(edge.claim_type, (counts.get(edge.claim_type) || 0) + 1);
+  const claimTypes = [...counts.keys()].sort();
   graphClaimTypesContainer.replaceChildren(
     ...claimTypes.map((type) => {
       const label = document.createElement("label");
       label.className = "graph-checkbox";
-      label.innerHTML = `<input type="checkbox" value="${type}" checked /> ${type.replaceAll("_", " ").toLowerCase()}`;
-      label.querySelector("input").addEventListener("change", renderGraph);
+      label.innerHTML = `<input type="checkbox" value="${esc(type)}" checked /> ${esc(claimLabel(type))} <span class="graph-count">${counts.get(type)}</span>`;
+      label.querySelector("input").addEventListener("change", () => {
+        activePreset = null;
+        renderGraphPresets();
+        renderGraph();
+      });
       return label;
     }),
   );
   updateDiseaseOptions();
+}
+
+function renderGraphPresets() {
+  graphPresets.replaceChildren(
+    ...GRAPH_PRESETS.map((preset) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "graph-preset";
+      button.textContent = preset.label;
+      button.setAttribute("aria-pressed", String(preset.id === activePreset));
+      button.addEventListener("click", () => applyPreset(preset));
+      return button;
+    }),
+  );
+}
+
+function applyPreset(preset) {
+  activePreset = preset.id;
+  hiddenTypes.clear();
+  for (const box of graphClaimTypesContainer.querySelectorAll("input")) {
+    box.checked = !preset.types || preset.types.includes(box.value);
+  }
+  renderGraphPresets();
+  renderGraph();
+}
+
+function renderGraphConfidence(payload) {
+  const total = payload.edges.length;
+  const tiered = payload.edges.filter((e) => e.tier).length;
+  const reviewed = payload.edges.filter((e) => e.status && e.status !== "unreviewed").length;
+  graphConfidence.innerHTML = tiered
+    ? `<strong>About confidence:</strong> ${tiered} of ${total} claims have a confidence tier; ${reviewed} have been human-reviewed. Every claim links to a cited source.`
+    : `<strong>About confidence:</strong> every one of these ${total} claims links to a cited source, but confidence tiers are <em>not computed yet</em>` +
+      ` and ${reviewed ? `only ${reviewed} have` : "none have"} been marked reviewed. Read this as <em>curated and cited</em>, not yet <em>scored</em>.`;
 }
 
 function updateDiseaseOptions() {
@@ -346,7 +446,8 @@ function updateDiseaseOptions() {
   graphDiseaseSelect.value = values.includes(previous) ? previous : "__all__";
 }
 
-function filteredGraph() {
+// `applyHidden: false` gives the set the legend should list (so a hidden type stays clickable).
+function filteredGraph({ applyHidden = true } = {}) {
   if (!graphCache) return { nodes: [], edges: [] };
   const crop = graphCropSelect.value;
   const disease = graphDiseaseSelect.value;
@@ -363,32 +464,101 @@ function filteredGraph() {
   }
 
   const nodeIds = new Set(edges.flatMap((e) => [e.subject_id, e.object_id]));
-  const nodes = graphCache.nodes.filter((n) => nodeIds.has(n.id));
+  let nodes = graphCache.nodes.filter((n) => nodeIds.has(n.id));
+  if (applyHidden && hiddenTypes.size) {
+    nodes = nodes.filter((n) => !hiddenTypes.has(n.type));
+    const kept = new Set(nodes.map((n) => n.id));
+    edges = edges.filter((e) => kept.has(e.subject_id) && kept.has(e.object_id));
+    const connected = new Set(edges.flatMap((e) => [e.subject_id, e.object_id]));
+    nodes = nodes.filter((n) => connected.has(n.id));
+  }
   return { nodes, edges };
 }
 
-function renderGraphLegend(nodes) {
-  const types = [...new Set(nodes.map((n) => n.type))].sort();
+function ngon(sides, startDeg, radius = 8.6) {
+  return Array.from({ length: sides }, (_, i) => {
+    const angle = ((startDeg + (360 / sides) * i) * Math.PI) / 180;
+    return `${(10 + radius * Math.cos(angle)).toFixed(1)},${(10 + radius * Math.sin(angle)).toFixed(1)}`;
+  }).join(" ");
+}
+
+function starPoints() {
+  return Array.from({ length: 10 }, (_, i) => {
+    const angle = ((-90 + 36 * i) * Math.PI) / 180;
+    const radius = i % 2 === 0 ? 9.2 : 4.2;
+    return `${(10 + radius * Math.cos(angle)).toFixed(1)},${(10 + radius * Math.sin(angle)).toFixed(1)}`;
+  }).join(" ");
+}
+
+// Legend swatch drawn in the same shape the node has on the canvas.
+function shapeSvg(shape, color) {
+  const paint = `fill="${color}" stroke="${darken(color, 0.6)}" stroke-width="1.4" stroke-linejoin="round"`;
+  const polygon = (points) => `<polygon points="${points}" ${paint}/>`;
+  const body = {
+    ellipse: `<circle cx="10" cy="10" r="7.5" ${paint}/>`,
+    rectangle: `<rect x="3" y="4" width="14" height="12" ${paint}/>`,
+    "round-rectangle": `<rect x="3" y="4" width="14" height="12" rx="3.5" ${paint}/>`,
+    "cut-rectangle": polygon("5,3.5 15,3.5 18,6.5 18,13.5 15,16.5 5,16.5 2,13.5 2,6.5"),
+    diamond: polygon("10,1.5 18.5,10 10,18.5 1.5,10"),
+    "round-diamond": polygon("10,3 17,10 10,17 3,10"),
+    hexagon: polygon(ngon(6, 0)),
+    octagon: polygon(ngon(8, 22.5)),
+    pentagon: polygon(ngon(5, -90)),
+    triangle: polygon("10,2.5 18,16.5 2,16.5"),
+    star: polygon(starPoints()),
+    rhomboid: polygon("2,3.5 12.5,3.5 18,16.5 7.5,16.5"),
+  }[shape] || `<circle cx="10" cy="10" r="7.5" ${paint}/>`;
+  return `<svg class="graph-legend-shape" viewBox="0 0 20 20" width="22" height="22" aria-hidden="true">${body}</svg>`;
+}
+
+function renderGraphLegend() {
+  const { nodes } = filteredGraph({ applyHidden: false });
+  const counts = new Map();
+  for (const node of nodes) counts.set(node.type, (counts.get(node.type) || 0) + 1);
+  const types = [...counts.keys()].sort((a, b) => {
+    const ia = LEGEND_ORDER.indexOf(a);
+    const ib = LEGEND_ORDER.indexOf(b);
+    return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+  });
+
+  const title = document.createElement("p");
+  title.className = "graph-legend-title";
+  title.innerHTML = `Key <span>click to hide a type</span>`;
+
   graphLegend.replaceChildren(
+    title,
     ...types.map((type) => {
-      const item = document.createElement("span");
+      const style = styleOf(type);
+      const hidden = hiddenTypes.has(type);
+      const item = document.createElement("button");
+      item.type = "button";
       item.className = "graph-legend-item";
-      item.innerHTML = `<span class="graph-legend-swatch" style="background:${NODE_COLORS[type] || DEFAULT_NODE_COLOR}"></span>${type}`;
+      item.dataset.hidden = String(hidden);
+      item.setAttribute("aria-pressed", String(!hidden));
+      item.title = style.blurb;
+      item.innerHTML =
+        `${shapeSvg(style.shape, style.color)}` +
+        `<span class="graph-legend-text"><span class="graph-legend-name">${esc(style.name)} <span class="graph-count">${counts.get(type)}</span></span>` +
+        `<span class="graph-legend-blurb">${esc(style.blurb)}</span></span>`;
+      item.addEventListener("click", () => {
+        if (hiddenTypes.has(type)) hiddenTypes.delete(type);
+        else hiddenTypes.add(type);
+        renderGraph();
+      });
       return item;
     }),
   );
 }
 
 // Tuned so ~200 nodes settle without piling on top of each other -- more repulsion/spacing than
-// cytoscape's defaults, and nodeDimensionsIncludeLabels so a node's (usually hidden) label still
-// counts toward its footprint when one is shown.
+// cytoscape's defaults, and nodeDimensionsIncludeLabels so a shown label counts toward its footprint.
 const GRAPH_LAYOUT = {
   name: "cose",
   animate: false,
   fit: true,
   padding: 32,
   nodeDimensionsIncludeLabels: true,
-  nodeRepulsion: () => 14000,
+  nodeRepulsion: () => 16000,
   idealEdgeLength: () => 100,
   edgeElasticity: () => 100,
   nodeOverlap: 24,
@@ -409,6 +579,56 @@ function resetGraphHighlight() {
   graphDetail.hidden = true;
 }
 
+function chipRow(items) {
+  const chip = (item) => `<button type="button" class="node-chip" data-node-id="${esc(item.id)}">${esc(item.label)}</button>`;
+  const head = items.slice(0, 12).map(chip).join("");
+  if (items.length <= 12) return `<div class="chip-row">${head}</div>`;
+  return `<div class="chip-row">${head}</div><details class="chip-more"><summary>Show ${items.length - 12} more</summary><div class="chip-row">${items.slice(12).map(chip).join("")}</div></details>`;
+}
+
+// Coverage of one disease across the WHOLE knowledge base (not just the filtered view), so a
+// reader can see at a glance what is documented and what is still missing.
+function diseaseCoverage(diseaseId) {
+  const count = (claimType, side) =>
+    graphCache.edges.filter((e) => e.claim_type === claimType && e[side] === diseaseId).length;
+  const row = (n, yes, no) => `<li data-ok="${n > 0}">${n > 0 ? `✓ ${yes(n)}` : `✗ ${no}`}</li>`;
+  return `
+    <p class="detail-subhead">What the knowledge base holds for this disease</p>
+    <ul class="coverage-list">
+      ${row(count("DISEASE_CAUSED_BY", "subject_id"), () => "Cause identified", "Cause not recorded")}
+      ${row(count("DISEASE_ENV_TRIGGER", "subject_id"), () => "Weather trigger", "No weather trigger yet")}
+      ${row(count("DISEASE_MANAGED_BY", "subject_id"), () => "Management advisory", "No advisory yet")}
+      ${row(count("GENE_CONFERS_RESISTANCE", "object_id"), (n) => `${n} resistance gene${n > 1 ? "s" : ""}`, "No resistance genes yet")}
+      ${row(count("VARIETY_REACTION", "object_id"), (n) => `${n} variet${n > 1 ? "ies" : "y"} with a documented reaction`, "No variety reactions yet")}
+    </ul>`;
+}
+
+function buildNodeDetail(node) {
+  const style = styleOf(node.data("type"));
+  const groups = new Map();
+  for (const edge of node.connectedEdges()) {
+    const outgoing = edge.source().id() === node.id();
+    const other = outgoing ? edge.target() : edge.source();
+    const info = claimInfo(edge.data("claimType"));
+    const key = `${edge.data("claimType")}|${outgoing ? "out" : "in"}`;
+    if (!groups.has(key)) groups.set(key, { heading: outgoing ? info.out : info.inn, items: [] });
+    groups.get(key).items.push({ id: other.id(), label: other.data("label") });
+  }
+  const sections = [...groups.values()]
+    .sort((a, b) => b.items.length - a.items.length)
+    .map((group) => {
+      group.items.sort((a, b) => a.label.localeCompare(b.label));
+      return `<section class="detail-group"><h4>${esc(group.heading)} <span class="graph-count">${group.items.length}</span></h4>${chipRow(group.items)}</section>`;
+    });
+
+  return `
+    <h3>${esc(node.data("label"))} <span class="type-chip" style="--chip:${style.color}">${esc(style.name)}</span></h3>
+    <p class="edge-meta">${esc(style.blurb)}</p>
+    ${node.data("type") === "Disease" ? diseaseCoverage(node.id()) : ""}
+    ${sections.length ? `<p class="detail-subhead">Connected in the current view — click any name to jump to it</p>${sections.join("")}` : ""}
+  `;
+}
+
 function showNodeDetail(node) {
   cy.elements().addClass("dimmed").removeClass("highlighted show-label");
   const neighborhood = node.closedNeighborhood();
@@ -416,17 +636,20 @@ function showNodeDetail(node) {
   neighborhood.nodes().addClass("show-label");
   node.addClass("highlighted");
 
-  const lines = node.connectedEdges().map((edge) => {
-    const outgoing = edge.source().id() === node.id();
-    const other = outgoing ? edge.target() : edge.source();
-    return `<li>${outgoing ? "→" : "←"} <strong>${edge.data("claimLabel")}</strong> ${outgoing ? "→" : "←"} ${other.data("label")}</li>`;
-  });
-
   graphDetail.hidden = false;
-  graphDetail.innerHTML = `
-    <h3>${node.data("label")} <span class="edge-meta">(${node.data("type")})</span></h3>
-    <ul class="condition-list">${lines.join("")}</ul>
-  `;
+  graphDetail.innerHTML = buildNodeDetail(node);
+  for (const chip of graphDetail.querySelectorAll("[data-node-id]")) {
+    chip.addEventListener("click", () => focusNode(chip.dataset.nodeId));
+  }
+  graphDetail.scrollIntoView({ block: "nearest", behavior: "smooth" });
+}
+
+function focusNode(id) {
+  if (!cy) return;
+  const node = cy.getElementById(id);
+  if (node.empty()) return;
+  cy.animate({ center: { eles: node }, zoom: Math.max(cy.zoom(), 1.1) }, { duration: 250 });
+  showNodeDetail(node);
 }
 
 function positionTooltip(evt) {
@@ -458,19 +681,41 @@ function hideTooltip() {
 function renderGraph() {
   if (!graphCache) return;
   const { nodes, edges } = filteredGraph();
-  setStatus(graphStatusText, `${nodes.length} node(s) / ${edges.length} edge(s)`, "ready");
-  renderGraphLegend(nodes);
+  setStatus(graphStatusText, `${nodes.length} entities / ${edges.length} claims`, "ready");
+  renderGraphLegend();
   graphDetail.hidden = true;
+  graphEmpty.hidden = nodes.length > 0;
   hideTooltip();
 
+  const degree = new Map();
+  for (const e of edges) {
+    degree.set(e.subject_id, (degree.get(e.subject_id) || 0) + 1);
+    degree.set(e.object_id, (degree.get(e.object_id) || 0) + 1);
+  }
+
   const elements = [
-    ...nodes.map((n) => ({ data: { id: n.id, label: n.name, type: n.type } })),
+    ...nodes.map((n) => {
+      const style = styleOf(n.type);
+      const deg = degree.get(n.id) || 0;
+      return {
+        data: {
+          id: n.id,
+          label: n.name,
+          type: n.type,
+          color: style.color,
+          ring: darken(style.color, 0.6),
+          shape: style.shape,
+          size: style.size + Math.min(12, Math.round(2.4 * Math.sqrt(deg))),
+          anchor: Boolean(style.anchor),
+          deg,
+        },
+      };
+    }),
     ...edges.map((e) => ({
       data: {
         id: e.claim_id,
         source: e.subject_id,
         target: e.object_id,
-        claimLabel: e.claim_type.replaceAll("_", " ").toLowerCase(),
         claimType: e.claim_type,
       },
     })),
@@ -484,41 +729,51 @@ function renderGraph() {
         {
           selector: "node",
           style: {
-            "background-color": (ele) => NODE_COLORS[ele.data("type")] || DEFAULT_NODE_COLOR,
+            shape: "data(shape)",
+            "background-color": "data(color)",
+            width: "data(size)",
+            height: "data(size)",
             label: "",
             color: "#172018",
             "font-size": "10px",
             "text-valign": "bottom",
             "text-margin-y": 4,
             "text-background-color": "#fbfaf6",
-            "text-background-opacity": 0.85,
+            "text-background-opacity": 0.88,
             "text-background-padding": "2px",
-            width: 16,
-            height: 16,
-            "border-width": 1,
-            "border-color": "rgba(255,255,255,0.9)",
+            "min-zoomed-font-size": 7,
+            "border-width": 1.5,
+            "border-color": "data(ring)",
           },
         },
-        // Labels stay off canvas by default (that was the main source of "text on text" clutter
-        // at ~200 nodes) -- shown only on hover (.hovered) or for a clicked node's neighborhood
-        // (.show-label), via the JS event handlers below.
-        { selector: "node.show-label, node.hovered", style: { label: "data(label)" } },
+        // Crops and diseases are the landmarks: always labelled so the graph can be read without
+        // hovering. Everything else is labelled on hover or inside a clicked node's neighbourhood.
+        {
+          selector: "node[?anchor]",
+          style: {
+            label: "data(label)",
+            "font-size": "15px",
+            "font-weight": 700,
+            "text-wrap": "wrap",
+            "text-max-width": "120px",
+            "min-zoomed-font-size": 5,
+          },
+        },
+        { selector: "node.show-label, node.hovered", style: { label: "data(label)", "z-index": 20 } },
         {
           selector: "edge",
           style: {
             width: 1.2,
-            "line-color": "rgba(23,32,24,0.2)",
-            "target-arrow-color": "rgba(23,32,24,0.3)",
+            "line-color": "rgba(23,32,24,0.22)",
+            "target-arrow-color": "rgba(23,32,24,0.34)",
             "target-arrow-shape": "triangle",
             "arrow-scale": 0.7,
             "curve-style": "bezier",
-            // No on-canvas edge label -- with hundreds of edges the text just overlapped itself;
-            // the relationship name shows in the hover tooltip and the click-detail list instead.
           },
         },
-        { selector: "node.highlighted", style: { "border-width": 3, "border-color": "#2f6b44", width: 22, height: 22 } },
+        { selector: "node.highlighted", style: { "border-width": 3.5, "border-color": "#172018" } },
         { selector: "node.dimmed, edge.dimmed", style: { opacity: 0.12 } },
-        { selector: "edge.hovered", style: { "line-color": "#2f6b44", "target-arrow-color": "#2f6b44", width: 2.2, opacity: 1 } },
+        { selector: "edge.hovered", style: { "line-color": "#172018", "target-arrow-color": "#172018", width: 2.4, opacity: 1 } },
       ],
       layout: GRAPH_LAYOUT,
       minZoom: 0.15,
@@ -531,8 +786,10 @@ function renderGraph() {
       if (evt.target === cy) resetGraphHighlight();
     });
     cy.on("mouseover", "node", (evt) => {
-      evt.target.addClass("hovered");
-      showTooltip(evt, `<strong>${evt.target.data("label")}</strong><br>${evt.target.data("type")}`);
+      const node = evt.target;
+      node.addClass("hovered");
+      const deg = node.data("deg");
+      showTooltip(evt, `<strong>${esc(node.data("label"))}</strong><br>${esc(styleOf(node.data("type")).name)} · ${deg} claim${deg === 1 ? "" : "s"}<br><em>click for details</em>`);
     });
     cy.on("mouseout", "node", (evt) => {
       evt.target.removeClass("hovered");
@@ -542,7 +799,8 @@ function renderGraph() {
     cy.on("mouseover", "edge", (evt) => {
       const edge = evt.target;
       edge.addClass("hovered");
-      showTooltip(evt, `<strong>${edge.data("claimLabel")}</strong><br>${edge.source().data("label")} → ${edge.target().data("label")}`);
+      const verb = claimInfo(edge.data("claimType")).verb;
+      showTooltip(evt, `<strong>${esc(edge.source().data("label"))}</strong> ${esc(verb)} <strong>${esc(edge.target().data("label"))}</strong>`);
     });
     cy.on("mouseout", "edge", (evt) => {
       evt.target.removeClass("hovered");
@@ -580,3 +838,4 @@ graphZoomFit.addEventListener("click", () => cy && cy.animate({ fit: { eles: cy.
 loadVarietiesInto(cropSelect, varietySelect, (t, s) => setStatus(reactionStatusText, t, s));
 loadVarietiesInto(triggerCropSelect, triggerVarietySelect);
 loadStats();
+initTour({ showTab, whenGraphReady });
