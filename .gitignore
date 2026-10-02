@@ -33,3 +33,6 @@ pipeline_run_log.txt
 # Intermediate output of `agrihub kg ingest-candidates` (verified batches awaiting a human spot-check)
 kg/incoming/
 batches/
+
+# large unpublished genotype data shared by ICAR-IISR Indore (never committed)
+icar_soybean_files/

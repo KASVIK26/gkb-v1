@@ -1,0 +1,1159 @@
+# Charcoal rot GWAS of 214 soybean accessions (Frontiers in Plant Science 2025, pmid:41477268): 18 SNP loci (Tables 6-7: glasshouse seedling and 3-year sick-plot adult-plant),
+# the 23 defence-related genes within 200 kb of the loci (Table 8, Wm82.a2.v1 coordinates) and the two susceptible checks. Read from the paper's tables by
+# batches/make_gwas_charcoal_rot.py (no model for the tables). Most SNPs are 'suggestive' in the paper's own classification (p between 1e-4 and the Bonferroni cutoff 7.46e-7).
+# Reviewed 2026-10-03 (kg/review_log/2026-10-03f_icar_soybean.md).
+
+sources: []
+entities:
+- id: qtl:soybean:S8_16817767
+  type: QTL
+  name: S8_16817767
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm08
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S10_52066337
+  type: QTL
+  name: S10_52066337
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm10
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S14_50857981
+  type: QTL
+  name: S14_50857981
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm14
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S15_32620059
+  type: QTL
+  name: S15_32620059
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm15
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S16_34569104
+  type: QTL
+  name: S16_34569104
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm16
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S16_37878937
+  type: QTL
+  name: S16_37878937
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm16
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S17_1689021
+  type: QTL
+  name: S17_1689021
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm17
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S18_9413708
+  type: QTL
+  name: S18_9413708
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm18
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S6_41109641
+  type: QTL
+  name: S6_41109641
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm06
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S6_41863847
+  type: QTL
+  name: S6_41863847
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm06
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S10_40644409
+  type: QTL
+  name: S10_40644409
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm10
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S10_44768495
+  type: QTL
+  name: S10_44768495
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm10
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S12_14977708
+  type: QTL
+  name: S12_14977708
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm12
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S14_51754926
+  type: QTL
+  name: S14_51754926
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm14
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S16_33491560
+  type: QTL
+  name: S16_33491560
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm16
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S18_25004105
+  type: QTL
+  name: S18_25004105
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm18
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S18_55655188
+  type: QTL
+  name: S18_55655188
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm18
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: qtl:soybean:S18_56366541
+  type: QTL
+  name: S18_56366541
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: charcoal rot resistance
+    chromosome: Gm18
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+- id: ref:soybean:Glyma.14G203000
+  type: RefGene
+  name: Glyma.14G203000
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.14G203000
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm14
+    start_bp: 50490066
+    end_bp: 50493438
+    strand: '-'
+    description: Abscisic acid, jasmonic acid, and ethylene-mediated signaling pathway (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 46787303-46790554)
+    domains:
+    - NAF domain
+    - protein kinase domain
+- id: ref:soybean:Glyma.14G203700
+  type: RefGene
+  name: Glyma.14G203700
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.14G203700
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm14
+    start_bp: 50531463
+    end_bp: 50537117
+    strand: '-'
+    description: Cellular response to water deprivation; galactolipid biosynthetic process; organ senescence; protein autophosphorylation (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 46828582-46834138)
+    domains:
+    - Protein kinase domain
+- id: ref:soybean:Glyma.14G204500
+  type: RefGene
+  name: Glyma.14G204500
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.14G204500
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm14
+    start_bp: 50648581
+    end_bp: 50659877
+    strand: +
+    description: Defense response (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 46946496-46957734)
+    domains:
+    - NB-ARC domain
+- id: ref:soybean:Glyma.14G204600
+  type: RefGene
+  name: Glyma.14G204600
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.14G204600
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm14
+    start_bp: 50670805
+    end_bp: 50676709
+    strand: +
+    description: Defense response (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 46968705-46974585)
+    domains:
+    - NB-ARC domain
+- id: ref:soybean:Glyma.14G205000
+  type: RefGene
+  name: Glyma.14G205000
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.14G205000
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm14
+    start_bp: 50714594
+    end_bp: 50720409
+    strand: +
+    description: Defense response (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 47005574-47019661)
+    domains:
+    - NB-ARC domain
+- id: ref:soybean:Glyma.17G021400
+  type: RefGene
+  name: Glyma.17G021400
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.17G021400
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm17
+    start_bp: 1580629
+    end_bp: 1589695
+    strand: '-'
+    description: Response to jasmonic acid stimulus; response to wounding (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 1566684-1575389)
+    domains:
+    - Inosine–uridine preferring nucleoside hydrolase
+- id: ref:soybean:Glyma.17G022700
+  type: RefGene
+  name: Glyma.17G022700
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.17G022700
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm17
+    start_bp: 1675328
+    end_bp: 1677824
+    strand: +
+    description: Cellular response to osmotic stress; response to fungus (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 1661386-1663779)
+    domains:
+    - F-box domain
+    - Tub family
+- id: ref:soybean:Glyma.17G023400
+  type: RefGene
+  name: Glyma.17G023400
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.17G023400
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm17
+    start_bp: 1717702
+    end_bp: 1720779
+    strand: '-'
+    description: Negative regulation of defense response to bacterium; protein ubiquitination (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 1703497-1707050)
+    domains:
+    - CHY zinc finger
+    - zinc finger, C3HC4 type (RING finger)
+- id: ref:soybean:Glyma.06G244200
+  type: RefGene
+  name: Glyma.06G244200
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.06G244200
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm06
+    start_bp: 42448324
+    end_bp: 42449211
+    strand: '-'
+    description: Abscisic acid and ethylene-mediated signaling pathway; intracellular signal transduction; protein phosphorylation; response to water deprivation (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 40759629-40760516)
+    domains:
+    - Protein kinase domain
+- id: ref:soybean:Glyma.14G209900
+  type: RefGene
+  name: Glyma.14G209900
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.14G209900
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm14
+    start_bp: 51218991
+    end_bp: 51225040
+    strand: +
+    description: Callose deposition in phloem sieve plate; galactolipid biosynthetic process; sucrose biosynthetic process (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 47515899-47521687)
+    domains:
+    - Sucrose synthase
+    - glycosyl transferases group 1
+- id: ref:soybean:Glyma.14G210200
+  type: RefGene
+  name: Glyma.14G210200
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.14G210200
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm14
+    start_bp: 51238952
+    end_bp: 51248985
+    strand: '-'
+    description: Autophagy; defense response to fungus; leaf senescence; response to starvation (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 47535839-47545840)
+    domains:
+    - Autophagy protein Apg5
+- id: ref:soybean:Glyma.14G211300
+  type: RefGene
+  name: Glyma.14G211300
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.14G211300
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm14
+    start_bp: 51328965
+    end_bp: 51331571
+    strand: '-'
+    description: Defense response to fungus (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 47625904-47630956)
+    domains:
+    - Universal stress protein family
+- id: ref:soybean:Glyma.14G211600
+  type: RefGene
+  name: Glyma.14G211600
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.14G211600
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm14
+    start_bp: 51349625
+    end_bp: 51356010
+    strand: '-'
+    description: RNA processing; nuclear-transcribed mRNA catabolic process; response to salt stress (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 47645652-47651977)
+    domains:
+    - PRP38 family
+- id: ref:soybean:Glyma.14G212200
+  type: RefGene
+  name: Glyma.14G212200
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.14G212200
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm14
+    start_bp: 51446880
+    end_bp: 51448752
+    strand: +
+    description: Intracellular signal transduction; proline transport; protein ubiquitination; response to chitin (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 47742907-47744519)
+    domains:
+    - U-box domain
+- id: ref:soybean:Glyma.14G212500
+  type: RefGene
+  name: Glyma.14G212500
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.14G212500
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm14
+    start_bp: 51461903
+    end_bp: 51474867
+    strand: '-'
+    description: Defense response to fungus; response to abscisic acid stimulus; response to chitin; transmembrane transport (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 47758067-47768578)
+    domains:
+    - Ankyrin repeat
+    - domain of unknown function (DUF3354)
+    - cyclic nucleotide-binding domain
+    - ion transport protein
+- id: ref:soybean:Glyma.18G236800
+  type: RefGene
+  name: Glyma.18G236800
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.18G236800
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm18
+    start_bp: 55250029
+    end_bp: 55255721
+    strand: '-'
+    description: Abscisic acid, jasmonic acid and ethylene-mediated signaling pathway; defense response to fungus; detection of biotic stimulus; intracellular signal transduction (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 52562784-52568422)
+    domains:
+    - Protein kinase domain
+- id: ref:soybean:Glyma.18G237900
+  type: RefGene
+  name: Glyma.18G237900
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.18G237900
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm18
+    start_bp: 55343710
+    end_bp: 55347937
+    strand: '-'
+    description: Protein phosphorylation; response to abscisic acid stimulus (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 52656634-52660776)
+    domains:
+    - Protein kinase domain
+    - salt stress response/antifungal
+- id: ref:soybean:Glyma.18G238700
+  type: RefGene
+  name: Glyma.18G238700
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.18G238700
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm18
+    start_bp: 55443451
+    end_bp: 55446323
+    strand: +
+    description: Defense response to fungus; response to water deprivation; response to wounding (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 52756503-52759147)
+    domains:
+    - Late embryogenesis abundant protein
+- id: ref:soybean:Glyma.18G239600
+  type: RefGene
+  name: Glyma.18G239600
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.18G239600
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm18
+    start_bp: 55525194
+    end_bp: 55528365
+    strand: +
+    description: Defense response to fungus; protein autophosphorylation; response to chitin (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 52837347-52840571)
+    domains:
+    - LysM domain
+    - protein kinase domain
+- id: ref:soybean:Glyma.18G245900
+  type: RefGene
+  name: Glyma.18G245900
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.18G245900
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm18
+    start_bp: 56041424
+    end_bp: 56043697
+    strand: +
+    description: Defense response to virus; fatty acid biosynthetic process; production of miRNAs involved in gene silencing; production of ta-siRNAs involved in RNA interference (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 53353413-53355664)
+    domains:
+    - Phosphopantetheine attachment site
+- id: ref:soybean:Glyma.18G246400
+  type: RefGene
+  name: Glyma.18G246400
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.18G246400
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm18
+    start_bp: 56079565
+    end_bp: 56084567
+    strand: +
+    description: Innate immune response; negative regulation of cell death; salicylic acid biosynthetic process; systemic acquired resistance (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 53390263-53393453)
+    domains:
+    - Leucine-rich repeat N-terminal domain
+- id: ref:soybean:Glyma.18G248100
+  type: RefGene
+  name: Glyma.18G248100
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    locus_id: Glyma.18G248100
+    assembly: Wm82.gnm6.ann1
+    chromosome: Gm18
+    start_bp: 56206708
+    end_bp: 56211999
+    strand: '-'
+    description: Protein folding; response to oxidative stress (GO terms as listed in pmid:41477268 Table 8; Wm82.a2.v1 position 53511479-53516777)
+    domains:
+    - Cyclophilin type peptidyl-prolyl cis-trans isomerase/CLD
+claims:
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S8_16817767
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: seedling
+    assembly: Wm82.a2.v1
+    start_bp: 16522710
+    end_bp: 16522710
+    p_value: 1.36e-07
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 6, SNP S8_16817767
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under glasshouse conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | p-value | Effect | SIG/SUG ... 1 | S8_16817767 | 8 | 16522710 | FarmCPU | NLA | 1.36E−07 | 0.3897 | SUG
+    candidate_id: gwas_cr:table6:S8_16817767
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S10_52066337
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: seedling
+    assembly: Wm82.a2.v1
+    start_bp: 48596702
+    end_bp: 48596702
+    p_value: 2.39e-06
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 6, SNP S10_52066337
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under glasshouse conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | p-value | Effect | SIG/SUG ... 2 | S10_52066337 | 10 | 48596702 | FarmCPU | NLA | 2.39E−06 | 8.0376 | SUG
+    candidate_id: gwas_cr:table6:S10_52066337
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S14_50857981
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: seedling
+    assembly: Wm82.a2.v1
+    start_bp: 46785684
+    end_bp: 46785684
+    p_value: 5.89e-06
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 6, SNP S14_50857981
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under glasshouse conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | p-value | Effect | SIG/SUG ... 3 | S14_50857981 | 14 | 46785684 | FarmCPU | NLA | 5.89E−06 | 0.9875 | SUG
+    candidate_id: gwas_cr:table6:S14_50857981
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S15_32620059
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: seedling
+    assembly: Wm82.a2.v1
+    start_bp: 35894370
+    end_bp: 35894370
+    p_value: 3.65e-06
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 6, SNP S15_32620059
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under glasshouse conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | p-value | Effect | SIG/SUG ... 4 | S15_32620059 | 15 | 35894370 | Blink | NLA | 3.65E−06 | 0.9875 | SUG
+    candidate_id: gwas_cr:table6:S15_32620059
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S16_34569104
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: seedling
+    assembly: Wm82.a2.v1
+    start_bp: 32934723
+    end_bp: 32934723
+    p_value: 1.64e-05
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 6, SNP S16_34569104
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under glasshouse conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | p-value | Effect | SIG/SUG ... 5 | S16_34569104 | 16 | 32934723 | FarmCPU | NLA | 1.64E−05 | −0.6075 | SUG
+    candidate_id: gwas_cr:table6:S16_34569104
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S16_37878937
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: seedling
+    assembly: Wm82.a2.v1
+    start_bp: 36707683
+    end_bp: 36707683
+    p_value: 1.24e-05
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 6, SNP S16_37878937
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under glasshouse conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | p-value | Effect | SIG/SUG ... 6 | S16_37878937 | 16 | 36707683 | Blink | NLA | 1.24E−05 | 0.3256 | SUG
+    candidate_id: gwas_cr:table6:S16_37878937
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S17_1689021
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: seedling
+    assembly: Wm82.a2.v1
+    start_bp: 1665571
+    end_bp: 1665571
+    p_value: 4.89e-11
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 6, SNP S17_1689021
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under glasshouse conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | p-value | Effect | SIG/SUG ... 7 | S17_1689021 | 17 | 1665571 | FarmCPU | AUDPCA | 6.18E−05 | 14.0025 | SUG Blink | AUDPCA | 6.18E−05 | 287.9616 | SUG Blink | NLA | 4.89E−11 | 0.0814 | SIG FarmCPU | NLA | 5.04E−07 | −0.9428 | SUG
+    candidate_id: gwas_cr:table6:S17_1689021
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S18_9413708
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: seedling
+    assembly: Wm82.a2.v1
+    start_bp: 9646515
+    end_bp: 9646515
+    p_value: 6.81e-09
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 6, SNP S18_9413708
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under glasshouse conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | p-value | Effect | SIG/SUG ... 8 | S18_9413708 | 18 | 9646515 | FarmCPU | NLA | 6.81E−09 | 1.0012 | SIG
+    candidate_id: gwas_cr:table6:S18_9413708
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S6_41109641
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: adult
+    assembly: Wm82.a2.v1
+    start_bp: 40867173
+    end_bp: 40867173
+    p_value: 1.44e-07
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+    n_env: 2
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 7, SNP S6_41109641
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under sick plot conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | Year | p-value | Effect | SIG/SUG ... 1 | S6_41109641 | 6 | 40867173 | Blink | PDI | 2021 | 2.74E−05 | 0.0775 | SUG FarmCPU | PDI | 2021 | 1.44E−07 | −17.0573 | SUG Blink | RSS | 2023 | 6.00E−05 | 0.0860 | SUG FarmCPU | RSS | 2023 | 6.00E−05 | 0.4866 | SUG
+    candidate_id: gwas_cr:table7:S6_41109641
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S6_41863847
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: adult
+    assembly: Wm82.a2.v1
+    start_bp: 41371875
+    end_bp: 41371875
+    p_value: 1.36e-07
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+    n_env: 1
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 7, SNP S6_41863847
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under sick plot conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | Year | p-value | Effect | SIG/SUG ... 2 | S6_41863847 | 6 | 41371875 | Blink | PDI | 2021 | 4.20E−05 | 0.0775 | SUG Blink | AUDPC | 2021 | 1.36E−07 | 0.1033 | SUG
+    candidate_id: gwas_cr:table7:S6_41863847
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S10_40644409
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: adult
+    assembly: Wm82.a2.v1
+    start_bp: 37297350
+    end_bp: 37297350
+    p_value: 1.18e-07
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+    n_env: 1
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 7, SNP S10_40644409
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under sick plot conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | Year | p-value | Effect | SIG/SUG ... 3 | S10_40644409 | 10 | 37297350 | FarmCPU | PDI | 2021 | 1.18E−07 | −17.0573 | SUG
+    candidate_id: gwas_cr:table7:S10_40644409
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S10_44768495
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: adult
+    assembly: Wm82.a2.v1
+    start_bp: 41391571
+    end_bp: 41391571
+    p_value: 5.03e-06
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+    n_env: 1
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 7, SNP S10_44768495
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under sick plot conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | Year | p-value | Effect | SIG/SUG ... 4 | S10_44768495 | 10 | 41391571 | FarmCPU | PDI | 2021 | 5.03E−06 | 7.7626 | SUG
+    candidate_id: gwas_cr:table7:S10_44768495
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S12_14977708
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: adult
+    assembly: Wm82.a2.v1
+    start_bp: 14725785
+    end_bp: 14725785
+    p_value: 2.12e-06
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+    n_env: 1
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 7, SNP S12_14977708
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under sick plot conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | Year | p-value | Effect | SIG/SUG ... 5 | S12_14977708 | 12 | 14725785 | FarmCPU | PDI | 2021 | 2.12E−06 | −9.1799 | SUG
+    candidate_id: gwas_cr:table7:S12_14977708
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S14_51754926
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: adult
+    assembly: Wm82.a2.v1
+    start_bp: 47666485
+    end_bp: 47666485
+    p_value: 1.33e-09
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+    n_env: 1
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 7, SNP S14_51754926
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under sick plot conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | Year | p-value | Effect | SIG/SUG ... 6 | S14_51754926 | 14 | 47666485 | Blink | AUDPC | 2021 | 2.64E−09 | 0.3897 | SIG FarmCPU | AUDPC | 2021 | 3.23E−05 | 251.4130 | SUG Blink | PDI | 2021 | 1.33E−09 | 0.3897 | SIG FarmCPU | PDI | 2021 | 7.05E−07 | 8.0376 | SUG
+    candidate_id: gwas_cr:table7:S14_51754926
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S16_33491560
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: adult
+    assembly: Wm82.a2.v1
+    start_bp: 31867097
+    end_bp: 31867097
+    p_value: 5.06e-06
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+    n_env: 1
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 7, SNP S16_33491560
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under sick plot conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | Year | p-value | Effect | SIG/SUG ... 7 | S16_33491560 | 16 | 31867097 | FarmCPU | PDI | 2021 | 5.06E−06 | 7.7626 | SUG
+    candidate_id: gwas_cr:table7:S16_33491560
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S18_25004105
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: adult
+    assembly: Wm82.a2.v1
+    start_bp: 25092187
+    end_bp: 25092187
+    p_value: 9.28e-06
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+    n_env: 1
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 7, SNP S18_25004105
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under sick plot conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | Year | p-value | Effect | SIG/SUG ... 8 | S18_25004105 | 18 | 25092187 | Blink | AUDPC | 2023 | 9.28E−06 | 0.1698 | SUG FarmCPU | AUDPC | 2023 | 9.28E−06 | 0.1698 | SUG Blink | PDI | 2023 | 3.44E−05 | 0.1698 | SUG FarmCPU | PDI | 2023 | 3.44E−05 | 0.1698 | SUG
+    candidate_id: gwas_cr:table7:S18_25004105
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S18_55655188
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: adult
+    assembly: Wm82.a2.v1
+    start_bp: 52619040
+    end_bp: 52619040
+    p_value: 9.49e-05
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+    n_env: 1
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 7, SNP S18_55655188
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under sick plot conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | Year | p-value | Effect | SIG/SUG ... 9 | S18_55655188 | 18 | 52619040 | Blink | PDI | 2022 | 9.49E−05 | 0.2605 | SUG FarmCPU | PDI | 2022 | 9.49E−05 | 0.2605 | SUG
+    candidate_id: gwas_cr:table7:S18_55655188
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:S18_56366541
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    stage: adult
+    assembly: Wm82.a2.v1
+    start_bp: 53324416
+    end_bp: 53324416
+    p_value: 7.14e-05
+    population: 214 diverse soybean accessions (GBS, GWAS with FarmCPU and BLINK)
+    n_env: 1
+  evidence:
+  - source: pmid:41477268
+    method: gwas
+    locator: Table 7, SNP S18_56366541
+    extractor: parser:gwas_table@1
+    quote: SNPs associated with charcoal rot resistance under sick plot conditions. ... S. no. | SNP | Chr | Position (Williams 82) | Model | Trait | Year | p-value | Effect | SIG/SUG ... 10 | S18_56366541 | 18 | 53324416 | Blink | AUDPC | 2022 | 7.30E−05 | 0.2628 | SUG FarmCPU | AUDPC | 2022 | 7.30E−05 | 0.2628 | SUG Blink | PDI | 2022 | 7.14E−05 | 0.2605 | SUG FarmCPU | PDI | 2022 | 7.14E−05 | 0.2605 | SUG
+    candidate_id: gwas_cr:table7:S18_56366541
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S14_50857981
+  object: ref:soybean:Glyma.14G203000
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S14_50857981 / Glyma.14G203000
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S14_50857981 | Glyma.14G203000 | 46787303 | 46790554
+    candidate_id: gwas_cr:table8:Glyma.14G203000
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S14_50857981
+  object: ref:soybean:Glyma.14G203700
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S14_50857981 / Glyma.14G203700
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S14_50857981 | Glyma.14G203000 | 46787303 | 46790554 ... Glyma.14G203700 | 46828582 | 46834138 | Cellular response to water deprivation; galactolipid biosynthetic process; organ senescence; protein autophosphorylation | Protein kinase domain
+    candidate_id: gwas_cr:table8:Glyma.14G203700
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S14_50857981
+  object: ref:soybean:Glyma.14G204500
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S14_50857981 / Glyma.14G204500
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S14_50857981 | Glyma.14G203000 | 46787303 | 46790554 ... Glyma.14G204500 | 46946496 | 46957734 | Defense response | NB-ARC domain
+    candidate_id: gwas_cr:table8:Glyma.14G204500
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S14_50857981
+  object: ref:soybean:Glyma.14G204600
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S14_50857981 / Glyma.14G204600
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S14_50857981 | Glyma.14G203000 | 46787303 | 46790554 ... Glyma.14G204600 | 46968705 | 46974585 | Defense response | NB-ARC domain
+    candidate_id: gwas_cr:table8:Glyma.14G204600
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S14_50857981
+  object: ref:soybean:Glyma.14G205000
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S14_50857981 / Glyma.14G205000
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S14_50857981 | Glyma.14G203000 | 46787303 | 46790554 ... Glyma.14G205000 | 47005574 | 47019661 | Defense response | NB-ARC domain
+    candidate_id: gwas_cr:table8:Glyma.14G205000
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S17_1689021
+  object: ref:soybean:Glyma.17G021400
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S17_1689021 / Glyma.17G021400
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S17_1689021 | Glyma.17G021400 | 1566684 | 1575389
+    candidate_id: gwas_cr:table8:Glyma.17G021400
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S17_1689021
+  object: ref:soybean:Glyma.17G022700
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S17_1689021 / Glyma.17G022700
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S17_1689021 | Glyma.17G021400 | 1566684 | 1575389 ... Glyma.17G022700 | 1661386 | 1663779 | Cellular response to osmotic stress; response to fungus | F-box domain; Tub family
+    candidate_id: gwas_cr:table8:Glyma.17G022700
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S17_1689021
+  object: ref:soybean:Glyma.17G023400
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S17_1689021 / Glyma.17G023400
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S17_1689021 | Glyma.17G021400 | 1566684 | 1575389 ... Glyma.17G023400 | 1703497 | 1707050 | Negative regulation of defense response to bacterium; protein ubiquitination | CHY zinc finger; zinc finger, C3HC4 type (RING finger)
+    candidate_id: gwas_cr:table8:Glyma.17G023400
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S6_41109641
+  object: ref:soybean:Glyma.06G244200
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S6_41109641 / Glyma.06G244200
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S6_41109641 | Glyma.06G244200 | 40759629 | 40760516
+    candidate_id: gwas_cr:table8:Glyma.06G244200
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S14_51754926
+  object: ref:soybean:Glyma.14G209900
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S14_51754926 / Glyma.14G209900
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S14_51754926 | Glyma.14G209900 | 47515899 | 47521687
+    candidate_id: gwas_cr:table8:Glyma.14G209900
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S14_51754926
+  object: ref:soybean:Glyma.14G210200
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S14_51754926 / Glyma.14G210200
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S14_51754926 | Glyma.14G209900 | 47515899 | 47521687 ... Glyma.14G210200 | 47535839 | 47545840 | Autophagy; defense response to fungus; leaf senescence; response to starvation | Autophagy protein Apg5
+    candidate_id: gwas_cr:table8:Glyma.14G210200
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S14_51754926
+  object: ref:soybean:Glyma.14G211300
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S14_51754926 / Glyma.14G211300
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S14_51754926 | Glyma.14G209900 | 47515899 | 47521687 ... Glyma.14G211300 | 47625904 | 47630956 | Defense response to fungus | Universal stress protein family
+    candidate_id: gwas_cr:table8:Glyma.14G211300
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S14_51754926
+  object: ref:soybean:Glyma.14G211600
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S14_51754926 / Glyma.14G211600
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S14_51754926 | Glyma.14G209900 | 47515899 | 47521687 ... Glyma.14G211600 | 47645652 | 47651977 | RNA processing; nuclear-transcribed mRNA catabolic process; response to salt stress | PRP38 family
+    candidate_id: gwas_cr:table8:Glyma.14G211600
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S14_51754926
+  object: ref:soybean:Glyma.14G212200
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S14_51754926 / Glyma.14G212200
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S14_51754926 | Glyma.14G209900 | 47515899 | 47521687 ... Glyma.14G212200 | 47742907 | 47744519 | Intracellular signal transduction; proline transport; protein ubiquitination; response to chitin | U-box domain
+    candidate_id: gwas_cr:table8:Glyma.14G212200
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S14_51754926
+  object: ref:soybean:Glyma.14G212500
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S14_51754926 / Glyma.14G212500
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S14_51754926 | Glyma.14G209900 | 47515899 | 47521687 ... Glyma.14G212500 | 47758067 | 47768578 | Defense response to fungus; response to abscisic acid stimulus; response to chitin; transmembrane transport | Ankyrin repeat; domain of unknown function (DUF3354); cyclic nucleotide-binding domain; ion transport protein
+    candidate_id: gwas_cr:table8:Glyma.14G212500
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S18_55655188
+  object: ref:soybean:Glyma.18G236800
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S18_55655188 / Glyma.18G236800
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S18_55655188 | Glyma.18G236800 | 52562784 | 52568422
+    candidate_id: gwas_cr:table8:Glyma.18G236800
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S18_55655188
+  object: ref:soybean:Glyma.18G237900
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S18_55655188 / Glyma.18G237900
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S18_55655188 | Glyma.18G236800 | 52562784 | 52568422 ... Glyma.18G237900 | 52656634 | 52660776 | Protein phosphorylation; response to abscisic acid stimulus | Protein kinase domain; salt stress response/antifungal
+    candidate_id: gwas_cr:table8:Glyma.18G237900
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S18_55655188
+  object: ref:soybean:Glyma.18G238700
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S18_55655188 / Glyma.18G238700
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S18_55655188 | Glyma.18G236800 | 52562784 | 52568422 ... Glyma.18G238700 | 52756503 | 52759147 | Defense response to fungus; response to water deprivation; response to wounding | Late embryogenesis abundant protein
+    candidate_id: gwas_cr:table8:Glyma.18G238700
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S18_55655188
+  object: ref:soybean:Glyma.18G239600
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S18_55655188 / Glyma.18G239600
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S18_55655188 | Glyma.18G236800 | 52562784 | 52568422 ... Glyma.18G239600 | 52837347 | 52840571 | Defense response to fungus; protein autophosphorylation; response to chitin | LysM domain; protein kinase domain
+    candidate_id: gwas_cr:table8:Glyma.18G239600
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S18_56366541
+  object: ref:soybean:Glyma.18G245900
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S18_56366541 / Glyma.18G245900
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S18_56366541 | Glyma.18G245900 | 53353413 | 53355664
+    candidate_id: gwas_cr:table8:Glyma.18G245900
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S18_56366541
+  object: ref:soybean:Glyma.18G246400
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S18_56366541 / Glyma.18G246400
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S18_56366541 | Glyma.18G245900 | 53353413 | 53355664 ... Glyma.18G246400 | 53390263 | 53393453 | Innate immune response; negative regulation of cell death; salicylic acid biosynthetic process; systemic acquired resistance | Leucine-rich repeat N-terminal domain
+    candidate_id: gwas_cr:table8:Glyma.18G246400
+- type: QTL_CONTAINS_REFGENE
+  subject: qtl:soybean:S18_56366541
+  object: ref:soybean:Glyma.18G248100
+  qualifiers:
+    assembly: Wm82.a2.v1
+  evidence:
+  - source: pmid:41477268
+    method: computational
+    locator: Table 8, S18_56366541 / Glyma.18G248100
+    extractor: parser:gwas_table@1
+    quote: Candidate genes with biological process description and PFAM descriptions. ... Experiment | Loci | Genes | Start | Stop | Biological process, description | PFAM_descriptions ... S18_56366541 | Glyma.18G245900 | 53353413 | 53355664 ... Glyma.18G248100 | 53511479 | 53516777 | Protein folding; response to oxidative stress | Cyclophilin type peptidyl-prolyl cis-trans isomerase/CLD
+    candidate_id: gwas_cr:table8:Glyma.18G248100
+- type: VARIETY_REACTION
+  subject: var:soybean:JS9560
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2021-2023
+    location: charcoal rot sick plot (artificial inoculation)
+  evidence:
+  - source: pmid:41477268
+    method: field_multi_env
+    locator: Results, phenotypic evaluation under sick plot conditions
+    extractor: llm:claude-from-paper-text@gwas-cr
+    quote: Across 3 years, the two checks (JS 95–60 and JS 93-05) showed susceptible disease reaction, indicating sufficient and uniform disease pressure in the sick plot.
+    candidate_id: gwas_cr:check:JS 95-60
+- type: VARIETY_REACTION
+  subject: var:soybean:JS9305
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2021-2023
+    location: charcoal rot sick plot (artificial inoculation)
+  evidence:
+  - source: pmid:41477268
+    method: field_multi_env
+    locator: Results, phenotypic evaluation under sick plot conditions
+    extractor: llm:claude-from-paper-text@gwas-cr
+    quote: Across 3 years, the two checks (JS 95–60 and JS 93-05) showed susceptible disease reaction, indicating sufficient and uniform disease pressure in the sick plot.
+    candidate_id: gwas_cr:check:JS 93-05

@@ -1576,6 +1576,12 @@ are also where most of the work is.
    - **Coverage today (genes per disease, GENE_CONFERS_RESISTANCE)**: wheat powdery mildew 46, stem rust 11+, stripe rust 9+, leaf rust 8+, Fusarium head blight 7; soybean rust 5, mosaic 3, frogeye 1,
      bacterial pustule 1, anthracnose / charcoal rot / pod and stem blight / Rhizoctonia 0; chickpea Fusarium wilt 8, collar rot / dry root rot / rust 0. Variety -> gene claims exist for wheat only.
 
+49. **ICAR-IISR Indore soybean files (2026-10-03).** Four files shared by an ICAR scientist (two GBS VCFs on Gmax v6.0, two sample sheets; 395 samples; gitignored). They hold genotypes and
+   **no phenotypes**. QC found 64 libraries >= 90 % missing but imputed anyway, 22 of 27 same-name pairs genetically far apart, and several of the charcoal-rot paper's best genotypes among the failures, so
+   no variety-gene claim was made from them. A QC report with the asks (phenotypes, clean re-run, plate map) is in `icar_soybean_files/derived/` for the scientist.
+   - **Added**: the charcoal-rot GWAS of the same panel (pmid:41477268), parsed from its Tables 6-8: 18 QTL loci (soybean charcoal rot had 0), 22 candidate defence genes placed on the KB's v6 annotation, and the two
+     susceptible checks; 42 evidence rows exact (`kg/review_log/2026-10-03f_icar_soybean.md`).
+
 ---
 
 ## 6. Definition of "done" reminder (unchanged from RESEARCH_ROADMAP.md §10)

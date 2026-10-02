@@ -152,3 +152,16 @@ def test_production_claims_only_cite_verified_publications():
         source = sources[ev.source_id]
         if source.type.value == "publication":
             assert source.verified, f"{source.id} is cited but not marked verified"
+
+
+def test_charcoal_rot_gwas_loci_come_from_the_papers_tables():
+    """pmid:41477268 Tables 6-8: 18 SNP loci (8 glasshouse/seedling, 10 sick-plot/adult), positions in Wm82.a2.v1, and the defence genes near them."""
+    bundle = _production_bundle()
+    qtl = {c.subject_id: c for c in bundle.claims if c.type is ClaimType.QTL_ASSOCIATION and c.object_id == "dis:soybean:charcoal_rot"}
+    assert len(qtl) == 18
+    peak = qtl["qtl:soybean:S14_51754926"].qualifiers
+    assert (peak["stage"], peak["assembly"], peak["start_bp"], peak["p_value"]) == ("adult", "Wm82.a2.v1", 47666485, 1.33e-09)
+    assert qtl["qtl:soybean:S14_50857981"].qualifiers["stage"] == "seedling"
+    contains = [c for c in bundle.claims if c.type is ClaimType.QTL_CONTAINS_REFGENE and c.subject_id.startswith("qtl:soybean:")]
+    assert len(contains) >= 20
+    assert {e.id for e in bundle.entities if e.id.startswith("ref:soybean:Glyma.14G2045")} == {"ref:soybean:Glyma.14G204500"}
