@@ -1,0 +1,2224 @@
+# QTL and GWAS loci for soybean rust, soybean mosaic virus, frogeye leaf spot, bacterial pustule and chickpea Fusarium wilt, read from the tables of eight open-access papers by
+# batches/make_open_loci.py (no model). Each locus is one table row and each claim quotes the header and the row. Reference positions are kept only where the paper states the
+# assembly. Study populations are Chinese, Brazilian, Ugandan and Thai; they are crop-level loci, not Indian-variety statements. Reviewed 2026-10-03
+# (kg/review_log/2026-10-03h_open_loci.md).
+
+sources:
+- id: pmid:34895144
+  type: publication
+  title: Genome-wide association of single nucleotide polymorphism loci and candidate genes for frogeye leaf spot (Cercospora sojina) resistance in soybean
+  year: 2021
+  venue: BMC plant biology
+  url: https://doi.org/10.1186/s12870-021-03366-y
+  verified: true
+- id: pmid:36672760
+  type: publication
+  title: Mapping QTLs Controlling Soybean Rust Disease Resistance in Chiang Mai 5, an Induced Mutant Cultivar
+  year: 2022
+  venue: Genes
+  url: https://doi.org/10.3390/genes14010019
+  verified: true
+- id: pmid:40604369
+  type: publication
+  title: Genome-wide association analysis study and genomic prediction for resistance to soybean mosaic virus in soybean population
+  year: 2025
+  venue: BMC plant biology
+  url: https://doi.org/10.1186/s12870-025-06775-5
+  verified: true
+- id: pmid:41963778
+  type: publication
+  title: GWAS and genomic prediction for resistance to soybean mosaic virus strain SC7
+  year: 2026
+  venue: BMC plant biology
+  url: https://doi.org/10.1186/s12870-026-08620-9
+  verified: true
+- id: pmid:42122877
+  type: publication
+  title: Identification of Genomic Regions for Partial Resistance to Soybean Rust Under Field Conditions Using FarmCPU and Machine Learning Approaches
+  year: 2026
+  venue: Plants (Basel, Switzerland)
+  url: https://doi.org/10.3390/plants15091385
+  verified: true
+- id: pmid:42199232
+  type: publication
+  title: QTL mapping and key candidate gene identification of resistance to frogeye leaf spot (&lt;i&gt;Cercospora sojina&lt;/i&gt;) in soybean
+  year: 2026
+  venue: Frontiers in plant science
+  url: https://doi.org/10.3389/fpls.2026.1773160
+  verified: true
+entities:
+- id: qtl:soybean:SBR-PR_ss14979891
+  type: QTL
+  name: SBR-PR_ss14979891
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean rust resistance
+    chromosome: Gm01
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+- id: qtl:soybean:SBR-PR_ss14976936
+  type: QTL
+  name: SBR-PR_ss14976936
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean rust resistance
+    chromosome: Gm13
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+- id: qtl:soybean:SBR-PR_ss100090907
+  type: QTL
+  name: SBR-PR_ss100090907
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean rust resistance
+    chromosome: Gm12
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+- id: qtl:soybean:SBR-PR_ss14980636
+  type: QTL
+  name: SBR-PR_ss14980636
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean rust resistance
+    chromosome: Gm17
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+- id: qtl:soybean:SBR-PR_ss14980189
+  type: QTL
+  name: SBR-PR_ss14980189
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean rust resistance
+    chromosome: Gm16
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+- id: qtl:soybean:SBR-PR_ss14972850
+  type: QTL
+  name: SBR-PR_ss14972850
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean rust resistance
+    chromosome: Gm13
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+- id: qtl:soybean:qSBR18.1
+  type: QTL
+  name: qSBR18.1
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean rust resistance
+    chromosome: Gm18
+    population: 108 RILs of Sukhothai 2 x Chiang Mai 5 (field, Thailand)
+- id: qtl:soybean:SMV-SC3_2_20087084
+  type: QTL
+  name: SMV-SC3_2_20087084
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm02
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_4_7299944
+  type: QTL
+  name: SMV-SC3_4_7299944
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm04
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_7_20806632
+  type: QTL
+  name: SMV-SC3_7_20806632
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm07
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_9_3688624
+  type: QTL
+  name: SMV-SC3_9_3688624
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm09
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_9_9780764
+  type: QTL
+  name: SMV-SC3_9_9780764
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm09
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_9_20315101
+  type: QTL
+  name: SMV-SC3_9_20315101
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm09
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_13_29481618
+  type: QTL
+  name: SMV-SC3_13_29481618
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm13
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_13_29721393
+  type: QTL
+  name: SMV-SC3_13_29721393
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm13
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_13_30715051
+  type: QTL
+  name: SMV-SC3_13_30715051
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm13
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_13_30736398
+  type: QTL
+  name: SMV-SC3_13_30736398
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm13
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_14_41112562
+  type: QTL
+  name: SMV-SC3_14_41112562
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm14
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_17_35074071
+  type: QTL
+  name: SMV-SC3_17_35074071
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm17
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_19_27848978
+  type: QTL
+  name: SMV-SC3_19_27848978
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm19
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC3_20_34232189
+  type: QTL
+  name: SMV-SC3_20_34232189
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm20
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+- id: qtl:soybean:SMV-SC7_Chr11_27826328
+  type: QTL
+  name: SMV-SC7_Chr11_27826328
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm11
+    population: 290 soybean germplasm accessions inoculated with SMV strain SC7 (four GWAS models)
+- id: qtl:soybean:SMV-SC7_Chr13_30467101
+  type: QTL
+  name: SMV-SC7_Chr13_30467101
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm13
+    population: 290 soybean germplasm accessions inoculated with SMV strain SC7 (four GWAS models)
+- id: qtl:soybean:SMV-SC7_Chr13_30715051
+  type: QTL
+  name: SMV-SC7_Chr13_30715051
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm13
+    population: 290 soybean germplasm accessions inoculated with SMV strain SC7 (four GWAS models)
+- id: qtl:soybean:SMV-SC7_Chr16_34392503
+  type: QTL
+  name: SMV-SC7_Chr16_34392503
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm16
+    population: 290 soybean germplasm accessions inoculated with SMV strain SC7 (four GWAS models)
+- id: qtl:soybean:SMV-SC7_Chr17_18822285
+  type: QTL
+  name: SMV-SC7_Chr17_18822285
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: soybean mosaic virus resistance
+    chromosome: Gm17
+    population: 290 soybean germplasm accessions inoculated with SMV strain SC7 (four GWAS models)
+- id: qtl:soybean:FLS-GWAS_Affx-89062122
+  type: QTL
+  name: FLS-GWAS_Affx-89062122
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm05
+    population: 234 Chinese soybean cultivars, 30,890 SNPs (GLM and MLM)
+- id: qtl:soybean:FLS-GWAS_Affx-89220750
+  type: QTL
+  name: FLS-GWAS_Affx-89220750
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm05
+    population: 234 Chinese soybean cultivars, 30,890 SNPs (GLM and MLM)
+- id: qtl:soybean:FLS-GWAS_Affx-89210591
+  type: QTL
+  name: FLS-GWAS_Affx-89210591
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm20
+    population: 234 Chinese soybean cultivars, 30,890 SNPs (GLM and MLM)
+- id: qtl:soybean:FLS-GWAS_Affx-89163218
+  type: QTL
+  name: FLS-GWAS_Affx-89163218
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm20
+    population: 234 Chinese soybean cultivars, 30,890 SNPs (GLM and MLM)
+- id: qtl:soybean:FLS-RIL_qFLSm-2-1
+  type: QTL
+  name: FLS-RIL_qFLSm-2-1
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm02
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-2-2
+  type: QTL
+  name: FLS-RIL_qFLSm-2-2
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm02
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-2-3
+  type: QTL
+  name: FLS-RIL_qFLSm-2-3
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm02
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-3-1
+  type: QTL
+  name: FLS-RIL_qFLSm-3-1
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm03
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-6-1
+  type: QTL
+  name: FLS-RIL_qFLSm-6-1
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm06
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-9-1
+  type: QTL
+  name: FLS-RIL_qFLSm-9-1
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm09
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-15-1
+  type: QTL
+  name: FLS-RIL_qFLSm-15-1
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm15
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-15-2
+  type: QTL
+  name: FLS-RIL_qFLSm-15-2
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm15
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-15-3
+  type: QTL
+  name: FLS-RIL_qFLSm-15-3
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm15
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-15-4
+  type: QTL
+  name: FLS-RIL_qFLSm-15-4
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm15
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-15-5
+  type: QTL
+  name: FLS-RIL_qFLSm-15-5
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm15
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-15-6
+  type: QTL
+  name: FLS-RIL_qFLSm-15-6
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm15
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-16-1
+  type: QTL
+  name: FLS-RIL_qFLSm-16-1
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm16
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-17-1
+  type: QTL
+  name: FLS-RIL_qFLSm-17-1
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm17
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-17-2
+  type: QTL
+  name: FLS-RIL_qFLSm-17-2
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm17
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-17-3
+  type: QTL
+  name: FLS-RIL_qFLSm-17-3
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm17
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-18-1
+  type: QTL
+  name: FLS-RIL_qFLSm-18-1
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm18
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-19-1
+  type: QTL
+  name: FLS-RIL_qFLSm-19-1
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm19
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:FLS-RIL_qFLSm-19-2
+  type: QTL
+  name: FLS-RIL_qFLSm-19-2
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: frogeye leaf spot resistance
+    chromosome: Gm19
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+- id: qtl:soybean:BP-IBS333_Gm06_49886965
+  type: QTL
+  name: BP-IBS333_Gm06_49886965
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: bacterial pustule resistance
+    chromosome: Gm06
+    population: Brazilian and American soybean cultivars, isolate IBS 333 (GBS, GWAS with four models)
+- id: qtl:soybean:BP-IBS327_Gm18_1872252
+  type: QTL
+  name: BP-IBS327_Gm18_1872252
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: bacterial pustule resistance
+    chromosome: Gm18
+    population: Brazilian and American soybean cultivars, isolate IBS 327 (GBS, GWAS with four models)
+- id: qtl:chickpea:FW-R0_1
+  type: QTL
+  name: FW-R0_1
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG05
+    population: CA2139 × JG62 RILs (F6:7), n=79; Cobos et al., 2005
+- id: qtl:chickpea:FW-R0_2
+  type: QTL
+  name: FW-R0_2
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG05
+    population: CA2139 × JG62 RILs (F6:7), n=79; Cobos et al., 2005
+- id: qtl:chickpea:FW-R0_3
+  type: QTL
+  name: FW-R0_3
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: CA2139 × JG62 RILs (F6:7), n=160; Halila et al., 2009
+- id: qtl:chickpea:FW-R0_4
+  type: QTL
+  name: FW-R0_4
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG05
+    population: CA2156 × JG62 RILs (F6:7), n=160; Halila et al., 2009
+- id: qtl:chickpea:FW-R0_5
+  type: QTL
+  name: FW-R0_5
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG05
+    population: CA2156 × JG62 RILs (F6:8), n=80; Jendoubi et al., 2016
+- id: qtl:chickpea:FW-R0_6
+  type: QTL
+  name: FW-R0_6
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG05
+    population: CA2156 × JG62 RILs (F6:8), n=80; Jendoubi et al., 2016
+- id: qtl:chickpea:FW-R0_7
+  type: QTL
+  name: FW-R0_7
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG05
+    population: ILC3279 × JG62 RILs (F6:8), n=115; Jendoubi et al., 2016
+- id: qtl:chickpea:FW-R0_8
+  type: QTL
+  name: FW-R0_8
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG05
+    population: ILC3279 × JG62 RILs (F6:8), n=115; Jendoubi et al., 2016
+- id: qtl:chickpea:FW-R0_9
+  type: QTL
+  name: FW-R0_9
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG05
+    population: JG62 × ILC72 RILs (F6:8), n=102; Jendoubi et al., 2016
+- id: qtl:chickpea:FW-R0_10
+  type: QTL
+  name: FW-R0_10
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: Ca × Cr RILs (F6:7), n=104; Palomino et al., 2009
+- id: qtl:chickpea:FW-R1_1
+  type: QTL
+  name: FW-R1_1
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG06
+    population: C214 × WR315 F2:3, n=188; Sabbavarapu et al., 2013
+- id: qtl:chickpea:FW-R1_2
+  type: QTL
+  name: FW-R1_2
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG06
+    population: C214 × WR315 F2:3, n=188; Sabbavarapu et al., 2013
+- id: qtl:chickpea:FW-R1_3
+  type: QTL
+  name: FW-R1_3
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: JG62 × WR315 RILs (F9:10), n=125; Patil et al., 2014
+- id: qtl:chickpea:FW-R1_4
+  type: QTL
+  name: FW-R1_4
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: JG62 × WR315 RILs (F9:10), n=125; Patil et al., 2014
+- id: qtl:chickpea:FW-R1_5
+  type: QTL
+  name: FW-R1_5
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+- id: qtl:chickpea:FW-R1_6
+  type: QTL
+  name: FW-R1_6
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+- id: qtl:chickpea:FW-R1_7
+  type: QTL
+  name: FW-R1_7
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+- id: qtl:chickpea:FW-R1_8
+  type: QTL
+  name: FW-R1_8
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG06
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+- id: qtl:chickpea:FW-R1_9
+  type: QTL
+  name: FW-R1_9
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG06
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+- id: qtl:chickpea:FW-R1_10
+  type: QTL
+  name: FW-R1_10
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+- id: qtl:chickpea:FW-R1_11
+  type: QTL
+  name: FW-R1_11
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG04
+    population: K850 × WR315 RILs (F12), n=141; Raghu, 2016
+- id: qtl:chickpea:FW-R1_12
+  type: QTL
+  name: FW-R1_12
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: JG62 × ICCV05530 RILs (F8), n=188; Garg et al., 2018
+- id: qtl:chickpea:FW-R1_13
+  type: QTL
+  name: FW-R1_13
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG04
+    population: JG62 × ICCV05530 RILs (F8), n=188; Garg et al., 2018
+- id: qtl:chickpea:FW-R1_14
+  type: QTL
+  name: FW-R1_14
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG06
+    population: JG62 × ICCV05530 RILs (F8), n=188; Garg et al., 2018
+- id: qtl:chickpea:FW-R1_15
+  type: QTL
+  name: FW-R1_15
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: K850 × WR315 RILs (F10:11), n=141; Jingade & Ravikumar, 2015
+- id: qtl:chickpea:FW-R1_16
+  type: QTL
+  name: FW-R1_16
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: K850 × WR315 RILs (F10:11), n=141; Jingade & Ravikumar, 2015
+- id: qtl:chickpea:FW-R1_17
+  type: QTL
+  name: FW-R1_17
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG04
+    population: JG62 × WR315 RILs (F7:8), n=125; Lal et al., 2022
+- id: qtl:chickpea:FW-R1_18
+  type: QTL
+  name: FW-R1_18
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: JG62 × WR315 RILs (F7:8), n=125; Lal et al. 2022
+- id: qtl:chickpea:FW-R1_19
+  type: QTL
+  name: FW-R1_19
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: JG62 × WR315 RILs (F7:8), n=125; Lal et al. 2022
+- id: qtl:chickpea:FW-R3_1
+  type: QTL
+  name: FW-R3_1
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: JG62 × ICCV05530 RILs (F8), n=188; Garg et al., 2018
+- id: qtl:chickpea:FW-R3_2
+  type: QTL
+  name: FW-R3_2
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG04
+    population: JG62 × ICCV05530 RILs (F8), n=188; Garg et al., 2018
+- id: qtl:chickpea:FW-R5_1
+  type: QTL
+  name: FW-R5_1
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium wilt resistance
+    chromosome: CaLG02
+    population: Ca × Cr RILs (F6:7), n=104; Palomino et al., 2009
+claims:
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SBR-PR_ss14979891
+  object: dis:soybean:rust
+  qualifiers:
+    stage: unspecified
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+    assembly: Wm82.a4.v1
+    start_bp: 45120978
+    end_bp: 45120978
+    p_value: 1.71234e-11
+    pve_pct: 24.0345233
+    n_env: 6
+  evidence:
+  - source: pmid:42122877
+    method: gwas
+    locator: Table of FarmCPU SNPs
+    extractor: parser:open_paper_table@1
+    quote: Significant SNPs associated with PR to SBR identified by FarmCPU. ... SNP ID (ss) | Chr a | Pos b | p-Value | Allele | Effect | PVE (%) c ... 14979891 | 1 | 45,120,978 | 1.71234 × 10−11 | C/T | 0.18906918 | 24.0345233
+    candidate_id: open_loci:42122877:SBR-PR_ss14979891
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SBR-PR_ss14976936
+  object: dis:soybean:rust
+  qualifiers:
+    stage: unspecified
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+    assembly: Wm82.a4.v1
+    start_bp: 18289721
+    end_bp: 18289721
+    p_value: 2.15314e-08
+    pve_pct: 2.30802392
+    n_env: 6
+  evidence:
+  - source: pmid:42122877
+    method: gwas
+    locator: Table of FarmCPU SNPs
+    extractor: parser:open_paper_table@1
+    quote: Significant SNPs associated with PR to SBR identified by FarmCPU. ... SNP ID (ss) | Chr a | Pos b | p-Value | Allele | Effect | PVE (%) c ... 14976936 | 13 | 18,289,721 | 2.15314 × 10−8 | T/A | −0.08086888 | 2.30802392
+    candidate_id: open_loci:42122877:SBR-PR_ss14976936
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SBR-PR_ss100090907
+  object: dis:soybean:rust
+  qualifiers:
+    stage: unspecified
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+    assembly: Wm82.a4.v1
+    start_bp: 40504145
+    end_bp: 40504145
+    p_value: 1.42323e-07
+    n_env: 6
+  evidence:
+  - source: pmid:42122877
+    method: gwas
+    locator: Table of FarmCPU SNPs
+    extractor: parser:open_paper_table@1
+    quote: Significant SNPs associated with PR to SBR identified by FarmCPU. ... SNP ID (ss) | Chr a | Pos b | p-Value | Allele | Effect | PVE (%) c ... 100090907 | 12 | 40,504,145 | 1.42323 × 10−7 | G/A | −0.137702623 | 0
+    candidate_id: open_loci:42122877:SBR-PR_ss100090907
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SBR-PR_ss14980636
+  object: dis:soybean:rust
+  qualifiers:
+    stage: unspecified
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+    assembly: Wm82.a4.v1
+    start_bp: 11433946
+    end_bp: 11433946
+    p_value: 4.06185e-06
+    pve_pct: 2.16663329
+    n_env: 6
+  evidence:
+  - source: pmid:42122877
+    method: gwas
+    locator: Table of FarmCPU SNPs
+    extractor: parser:open_paper_table@1
+    quote: Significant SNPs associated with PR to SBR identified by FarmCPU. ... SNP ID (ss) | Chr a | Pos b | p-Value | Allele | Effect | PVE (%) c ... 14980636 | 17 | 11,433,946 | 4.06185 × 10−6 | C/A | 0.086254818 | 2.16663329
+    candidate_id: open_loci:42122877:SBR-PR_ss14980636
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SBR-PR_ss14980189
+  object: dis:soybean:rust
+  qualifiers:
+    stage: unspecified
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+    assembly: Wm82.a4.v1
+    start_bp: 24984485
+    end_bp: 24984485
+    p_value: 6.75758e-06
+    pve_pct: 0.01117974
+    n_env: 6
+  evidence:
+  - source: pmid:42122877
+    method: gwas
+    locator: Table of FarmCPU SNPs
+    extractor: parser:open_paper_table@1
+    quote: Significant SNPs associated with PR to SBR identified by FarmCPU. ... SNP ID (ss) | Chr a | Pos b | p-Value | Allele | Effect | PVE (%) c ... 14980189 | 16 | 24,984,485 | 6.75758 × 10−6 | T/C | 0.091080129 | 0.01117974
+    candidate_id: open_loci:42122877:SBR-PR_ss14980189
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SBR-PR_ss14972850
+  object: dis:soybean:rust
+  qualifiers:
+    stage: unspecified
+    population: 312 soybean accessions, natural infection in six Ugandan environments (FarmCPU)
+    assembly: Wm82.a4.v1
+    start_bp: 14117808
+    end_bp: 14117808
+    p_value: 3.6107000000000005e-05
+    pve_pct: 0.04977956
+    n_env: 6
+  evidence:
+  - source: pmid:42122877
+    method: gwas
+    locator: Table of FarmCPU SNPs
+    extractor: parser:open_paper_table@1
+    quote: Significant SNPs associated with PR to SBR identified by FarmCPU. ... SNP ID (ss) | Chr a | Pos b | p-Value | Allele | Effect | PVE (%) c ... 14972850 | 13 | 14,117,808 | 3.6107 × 10−5 | G/T | −0.089186901 | 0.04977956
+    candidate_id: open_loci:42122877:SBR-PR_ss14972850
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:qSBR18.1
+  object: dis:soybean:rust
+  qualifiers:
+    stage: unspecified
+    population: 108 RILs of Sukhothai 2 x Chiang Mai 5 (field, Thailand)
+    left_marker: T001855631m
+    right_marker: sc21_3420
+    lod: 10.9
+    pve_pct: 37.55
+  evidence:
+  - source: pmid:36672760
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTLs were detected by the inclusive composite interval mapping method. ... Trait | QTL Name | LinkageGroup | Position(cM) | LOD Score | Flanking Markers | Percentage of Variance Explained | Additive Effect ... Rust disease | qSBR 18.1 | G | 123 | 10.90 | T001855631m—sc21_3420 | 37.55 | 0.36
+    candidate_id: open_loci:36672760:qSBR18.1
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_2_20087084
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 20087084
+    end_bp: 20087084
+    p_value: 1.3489628825916533e-05
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 1 | 2_20087084 | 2 | 2E + 07 | 4.58/4.87/4.23/4.02 | 0.62/0.26/0.61/0.62 | BLINK/FarmCPU/MLM/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_2_20087084
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_4_7299944
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 7299944
+    end_bp: 7299944
+    p_value: 1.9952623149688828e-11
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 2 | 4_7299944 | 4 | 7,299,944 | 7.72/10.7/5.69/5.53 | 0.0039/0.00001/0.106/0.309 | BLINK/FarmCPU/MLM/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_4_7299944
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_7_20806632
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 20806632
+    end_bp: 20806632
+    p_value: 3.548133892335753e-08
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 3 | 7_20806632 | 7 | 2.1E + 07 | 7.45/4.21/4.44 | 0.025/0.6145/0.6215 | FarmCPU/MLM/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_7_20806632
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_9_3688624
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 3688624
+    end_bp: 3688624
+    p_value: 5.623413251903491e-06
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 4 | 9_3688624 | 9 | 3,688,624 | 3.96/5.25/3.54 | 0.69/0.145/0.668 | BLINK/FarmCPU/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_9_3688624
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_9_9780764
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 9780764
+    end_bp: 9780764
+    p_value: 5.623413251903491e-05
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 5 | 9_9780764 | 9 | 9,780,764 | 4.02/4.25/3.99 | 0.68/0.789/0.760 | BLINK/MLM/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_9_9780764
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_9_20315101
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 20315101
+    end_bp: 20315101
+    p_value: 2.089296130854041e-05
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 6 | 9_20315101 | 9 | 2E + 07 | 4.68/3.38/3.77 | 0.611/0.751/0.789 | BLINK/MLM/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_9_20315101
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_13_29481618
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 29481618
+    end_bp: 29481618
+    p_value: 1.5135612484362072e-08
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 7 | 13_29481618 | 13 | 2.9E + 07 | 6.62/7.82/5.26/3.36 | 0.016/0.002/0.229/0.810 | BLINK/FarmCPU/MLM/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_13_29481618
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_13_29721393
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 29721393
+    end_bp: 29721393
+    p_value: 4.7863009232263804e-05
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 8 | 13_29721393 | 13 | 3E + 07 | 4.15/4.32 | 0.612/0.615 | BLINK/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_13_29721393
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_13_30715051
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 30715051
+    end_bp: 30715051
+    p_value: 4.168693834703355e-08
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 9 | 13_30715051 | 13 | 3.1E + 07 | 7.38/6.55 | 0.0343/0.0088 | MLM
+    candidate_id: open_loci:40604369:SMV-SC3_13_30715051
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_13_30736398
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 30736398
+    end_bp: 30736398
+    p_value: 3.311311214825908e-07
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 10 | 13_30736398 | 13 | 3.1E + 07 | 5.72/6.48 | 0.099/0.034 | BLINK/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_13_30736398
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_14_41112562
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 41112562
+    end_bp: 41112562
+    p_value: 3.0199517204020192e-05
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 11 | 14_41112562 | 14 | 4.1E + 07 | 4.25/4.04/3.65/4.52 | 0.612/0.712/0.685/0.710 | BLINK/FarmCPU/MLM/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_14_41112562
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_17_35074071
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 35074071
+    end_bp: 35074071
+    p_value: 5.128613839913648e-05
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 12 | 17_35074071 | 17 | 3.5E + 07 | 4.29/4.09 | 0.615/0.644 | MLM/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_17_35074071
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_19_27848978
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 27848978
+    end_bp: 27848978
+    p_value: 1.0e-07
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 13 | 19_27848978 | 19 | 2.8E + 07 | 3.77/7.00/3.77/4.50/3.73 | 0.746/0.005/0.614/0.685 | BLINK/FarmCPU/MLM/MLM
+    candidate_id: open_loci:40604369:SMV-SC3_19_27848978
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC3_20_34232189
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean accessions inoculated with SMV strain SC3 (BLINK, FarmCPU, MLM, MLMM)
+    assembly: Wm82.a2.v1
+    start_bp: 34232189
+    end_bp: 34232189
+    p_value: 5.4954087385762485e-06
+  evidence:
+  - source: pmid:40604369
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: Num | SNP | Chr | Pos | -log(P.value) | H&B.P.Value | Model ... 14 | 20_34232189 | 20 | 3.4E + 07 | 5.26/4.03 | 0.683/0.146 | BLINK/FarmCPU
+    candidate_id: open_loci:40604369:SMV-SC3_20_34232189
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC7_Chr11_27826328
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean germplasm accessions inoculated with SMV strain SC7 (four GWAS models)
+    p_value: 5.888436553555884e-09
+  evidence:
+  - source: pmid:41963778
+    method: gwas
+    locator: Table of significant SNPs
+    extractor: parser:open_paper_table@1
+    quote: Significant SNPs associated with SMV SC7 resistance detected by GWAS ... Num | SNP | Chr | Pos | -log(P) | Model | References ... 1 | Chr11_27826328 | 11 | 27,826,328 | 8.23/5.33/5.7
+    candidate_id: open_loci:41963778:SMV-SC7_Chr11_27826328
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC7_Chr13_30467101
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean germplasm accessions inoculated with SMV strain SC7 (four GWAS models)
+    p_value: 6.606934480075964e-06
+  evidence:
+  - source: pmid:41963778
+    method: gwas
+    locator: Table of significant SNPs
+    extractor: parser:open_paper_table@1
+    quote: Significant SNPs associated with SMV SC7 resistance detected by GWAS ... Num | SNP | Chr | Pos | -log(P) | Model | References ... 2 | Chr13_30467101 | 13 | 30,467,101 | 5.18/4.89
+    candidate_id: open_loci:41963778:SMV-SC7_Chr13_30467101
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC7_Chr13_30715051
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean germplasm accessions inoculated with SMV strain SC7 (four GWAS models)
+    p_value: 8.511380382023759e-07
+  evidence:
+  - source: pmid:41963778
+    method: gwas
+    locator: Table of significant SNPs
+    extractor: parser:open_paper_table@1
+    quote: Significant SNPs associated with SMV SC7 resistance detected by GWAS ... Num | SNP | Chr | Pos | -log(P) | Model | References ... 3 | Chr13_30715051 | 13 | 30,715,051 | 5.64/6.07
+    candidate_id: open_loci:41963778:SMV-SC7_Chr13_30715051
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC7_Chr16_34392503
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean germplasm accessions inoculated with SMV strain SC7 (four GWAS models)
+    p_value: 1.0715193052376071e-07
+  evidence:
+  - source: pmid:41963778
+    method: gwas
+    locator: Table of significant SNPs
+    extractor: parser:open_paper_table@1
+    quote: Significant SNPs associated with SMV SC7 resistance detected by GWAS ... Num | SNP | Chr | Pos | -log(P) | Model | References ... 4 | Chr16_34392503 | 16 | 34,392,503 | 6.97/4.13
+    candidate_id: open_loci:41963778:SMV-SC7_Chr16_34392503
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:SMV-SC7_Chr17_18822285
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    stage: unspecified
+    population: 290 soybean germplasm accessions inoculated with SMV strain SC7 (four GWAS models)
+    p_value: 1.9498445997580454e-06
+  evidence:
+  - source: pmid:41963778
+    method: gwas
+    locator: Table of significant SNPs
+    extractor: parser:open_paper_table@1
+    quote: Significant SNPs associated with SMV SC7 resistance detected by GWAS ... Num | SNP | Chr | Pos | -log(P) | Model | References ... 5 | Chr17_18822285 | 17 | 18,822,285 | 5.71/4.14/4.34
+    candidate_id: open_loci:41963778:SMV-SC7_Chr17_18822285
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-GWAS_Affx-89062122
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: 234 Chinese soybean cultivars, 30,890 SNPs (GLM and MLM)
+    p_value: 1.33e-05
+  evidence:
+  - source: pmid:34895144
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: SNP loci significantly associated with C. sojina resistance traits by GWAS ... Methods | Marker | Chromosome | Position | Marker F | p value | Add F | Add p | Dom F | Dom p ... Affx-89,062,122 | 5 | 34,658,974 | 11.79327 | 1.33E-05
+    candidate_id: open_loci:34895144:FLS-GWAS_Affx-89062122
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-GWAS_Affx-89220750
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: 234 Chinese soybean cultivars, 30,890 SNPs (GLM and MLM)
+    p_value: 8.31e-05
+  evidence:
+  - source: pmid:34895144
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: SNP loci significantly associated with C. sojina resistance traits by GWAS ... Methods | Marker | Chromosome | Position | Marker F | p value | Add F | Add p | Dom F | Dom p ... Affx-89,220,750 | 5 | 34,687,389 | 9.78979 | 8.31E-05
+    candidate_id: open_loci:34895144:FLS-GWAS_Affx-89220750
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-GWAS_Affx-89210591
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: 234 Chinese soybean cultivars, 30,890 SNPs (GLM and MLM)
+    p_value: 8.43e-05
+  evidence:
+  - source: pmid:34895144
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: SNP loci significantly associated with C. sojina resistance traits by GWAS ... Methods | Marker | Chromosome | Position | Marker F | p value | Add F | Add p | Dom F | Dom p ... Affx-89,210,591 | 20 | 40,270,311 | 9.77378 | 8.43E-05
+    candidate_id: open_loci:34895144:FLS-GWAS_Affx-89210591
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-GWAS_Affx-89163218
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: 234 Chinese soybean cultivars, 30,890 SNPs (GLM and MLM)
+    p_value: 9.71e-05
+  evidence:
+  - source: pmid:34895144
+    method: gwas
+    locator: Table of significant SNP loci
+    extractor: parser:open_paper_table@1
+    quote: SNP loci significantly associated with C. sojina resistance traits by GWAS ... Methods | Marker | Chromosome | Position | Marker F | p value | Add F | Add p | Dom F | Dom p ... Affx-89,163,218 | 20 | 40,262,553 | 9.62294 | 9.71E-05
+    candidate_id: open_loci:34895144:FLS-GWAS_Affx-89163218
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-2-1
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c02006
+    right_marker: 36c02007
+    lod: 13.466
+    pve_pct: 2.68
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-2-1 | 2 | 36c02006 | 36c02007 | 1005213 | 1737807 | MEAN | 11.11 | 1.633 | 0.057 AC | 13.466 | 2.68 | -0.063
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-2-1
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-2-2
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c02091
+    right_marker: 36c02090
+    lod: 7.995
+    pve_pct: 3.436
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-2-2 | 2 | 36c02091 | 36c02090 | 15514794 | 16523887 | AC | 7.995 | 3.436 | -0.063
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-2-2
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-2-3
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c02124
+    right_marker: 36c02123
+    lod: 3.28
+    pve_pct: 1.482
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-2-3 | 2 | 36c02124 | 36c02123 | 45454175 | 45617954 | MEAN | 3.28 | 1.482 | -0.058
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-2-3
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-3-1
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c03077
+    right_marker: 36c03076
+    lod: 6.17
+    pve_pct: 1.624
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-3-1 | 3 | 36c03077 | 36c03076 | 42578675 | 42755661 | MEAN | 6.17 | 1.624 | -0.051
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-3-1
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-6-1
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c06108
+    right_marker: 36c06107
+    lod: 9.919
+    pve_pct: 1.625
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-6-1 | 6 | 36c06108 | 36c06107 | 46053890 | 46327836 | MEAN | 9.919 | 1.625 | -0.057 AC | 2.617 | 2.433 | -1.245
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-6-1
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-9-1
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c09057
+    right_marker: 36c09058
+    lod: 2.52
+    pve_pct: 1.609
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-9-1 | 9 | 36c09057 | 36c09058 | 9947171 | 10828881 | AC | 2.52 | 1.609 | -0.031
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-9-1
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-15-1
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c15158
+    right_marker: 36c15157
+    lod: 12.341
+    pve_pct: 2.888
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-15-1 | 15 | 36c15158 | 36c15157 | 48636935 | 48862458 | AC | 12.341 | 2.888 | -0.055 MEAN | 10.635 | 1.66 | -0.056
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-15-1
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-15-2
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c15157
+    right_marker: 36c15156
+    lod: 12.476
+    pve_pct: 2.917
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-15-2 | 15 | 36c15157 | 36c15156 | 48573120 | 48692029 | MEAN | 10.705 | 1.66 | -0.056 AC | 12.476 | 2.917 | -0.053
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-15-2
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-15-3
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c15018
+    right_marker: 36c15019
+    lod: 6.683
+    pve_pct: 1.635
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-15-3 | 15 | 36c15018 | 36c15019 | 5225054 | 5703286 | MEAN | 6.683 | 1.635 | -0.056
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-15-3
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-15-4
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c15005
+    right_marker: 36c15006
+    lod: 10.642
+    pve_pct: 2.846
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-15-4 | 15 | 36c15005 | 36c15006 | 2216621 | 2645649 | MEAN | 9.01 | 1.627 | -0.056 | Dong et al, 2011;Jiang et al., 2020 AC | 10.642 | 2.846 | -0.058
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-15-4
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-15-5
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c15006
+    right_marker: 36c15007
+    lod: 7.251
+    pve_pct: 1.639
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-15-5 | 15 | 36c15006 | 36c15007 | 2413555 | 2739374 | MEAN | 7.251 | 1.639 | -0.055
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-15-5
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-15-6
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c15009
+    right_marker: 36c15010
+    lod: 6.8
+    pve_pct: 1.628
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-15-6 | 15 | 36c15009 | 36c15010 | 2795948 | 3600842 | MEAN | 6.8 | 1.628 | -0.056
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-15-6
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-16-1
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c16016
+    right_marker: 36c16015
+    lod: 10.683
+    pve_pct: 2.573
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-16-1 | 16 | 36c16016 | 36c16015 | 5115530 | 5460013 | MEAN | 7.968 | 1.606 | -0.051 AC | 10.683 | 2.573 | -0.043
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-16-1
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-17-1
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c17077
+    right_marker: 36c17076
+    lod: 3.572
+    pve_pct: 1.124
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-17-1 | 17 | 36c17077 | 36c17076 | 37559338 | 37816385 | MEAN | 3.572 | 1.124 | -0.035
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-17-1
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-17-2
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c17083
+    right_marker: 36c17082
+    lod: 12.404
+    pve_pct: 2.686
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-17-2 | 17 | 36c17083 | 36c17082 | 38236561 | 39149223 | MEAN | 10.45 | 1.641 | -0.057 | Sun et al, 2022 AC | 12.404 | 2.686 | -0.063
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-17-2
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-17-3
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c17019
+    right_marker: 36c17020
+    lod: 6.386
+    pve_pct: 1.637
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-17-3 | 17 | 36c17019 | 36c17020 | 9876026 | 11105395 | MEAN | 6.386 | 1.637 | -0.056
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-17-3
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-18-1
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c18041
+    right_marker: 36c18040
+    lod: 23.755
+    pve_pct: 18.926
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-18-1 | 18 | 36c18041 | 36c18040 | 18297976 | 18525349 | MEAN | 7.669 | 1.642 | -0.057 AC | 23.755 | 18.926 | -0.111
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-18-1
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-19-1
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c19109
+    right_marker: 36c19108
+    lod: 5.521
+    pve_pct: 1.637
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-19-1 | 19 | 36c19109 | 36c19108 | 49343392 | 49503893 | MEAN | 5.521 | 1.637 | -0.056
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-19-1
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:FLS-RIL_qFLSm-19-2
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    stage: unspecified
+    population: RIL3613 (Dongnong L13 x Heihe 36), two environments
+    left_marker: 36c19108
+    right_marker: 36c19107
+    lod: 5.783
+    pve_pct: 1.642
+    n_env: 2
+  evidence:
+  - source: pmid:42199232
+    method: qtl_mapping
+    locator: QTL table
+    extractor: parser:open_paper_table@1
+    quote: QTL associated with resistance to mixed races of frogeye leaf spot disease. ... QTL | Chromosome | Leftmarker | Rightmarker | 5'-positon | 3'-positon | Environment | LOD | PVE(%) | Add | Reported QTL ... qFLSm-19-2 | 19 | 36c19108 | 36c19107 | 49076176 | 49428145 | MEAN | 5.783 | 1.642 | -0.056 Distribution of QTLs associated with FLS of the present and previous researches.
+    candidate_id: open_loci:42199232:FLS-RIL_qFLSm-19-2
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:BP-IBS333_Gm06_49886965
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    stage: unspecified
+    population: Brazilian and American soybean cultivars, isolate IBS 333 (GBS, GWAS with four models)
+    p_value: 6.0e-20
+  evidence:
+  - source: pmid:39273969
+    method: gwas
+    locator: SNP table
+    extractor: parser:open_paper_table@1
+    quote: ISOLATE | SNP | MLM | CMLM | FarmCPU | BLINK Chr | Position | Trait | p | FDR | Effect | MAF | p | FDR | Effect | MAF | p | FDR | Effect | MAF | p | FDR | Effect | MAF ... 49,886,965 | DS | 2 × 10−9 | 4.4 × 10−5 | −0.82 | 0.44 | 2 × 10−9 | 4.4 × 10−5 | −0.82 | 0.44 | 2 × 10−7 | 3.3 × 10−3 | −0.44 | 0.44 | 6 × 10−20 | 1.7 × 10−15 | −0.93 | 0.44
+    candidate_id: open_loci:39273969:BP-IBS333_Gm06_49886965
+- type: QTL_ASSOCIATION
+  subject: qtl:soybean:BP-IBS327_Gm18_1872252
+  object: dis:soybean:bacterial_pustule
+  qualifiers:
+    stage: unspecified
+    population: Brazilian and American soybean cultivars, isolate IBS 327 (GBS, GWAS with four models)
+    p_value: 1.0e-11
+  evidence:
+  - source: pmid:39273969
+    method: gwas
+    locator: SNP table
+    extractor: parser:open_paper_table@1
+    quote: ISOLATE | SNP | MLM | CMLM | FarmCPU | BLINK Chr | Position | Trait | p | FDR | Effect | MAF | p | FDR | Effect | MAF | p | FDR | Effect | MAF | p | FDR | Effect | MAF ... 1,872,252 | DS | 3 × 10−7 | 6.8 × 10−3 | −0.70 | 0.44 | 3 × 10−7 | 6.8 × 10−3 | −0.70 | 0.44 | 2 × 10−12 | 4.5 × 10−8 | −0.57 | 0.44 | 1 × 10−11 | 2.6 × 10−7 | −0.69 | 0.44
+    candidate_id: open_loci:39273969:BP-IBS327_Gm18_1872252
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R0_1
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: CA2139 × JG62 RILs (F6:7), n=79; Cobos et al., 2005
+    lod: 7.3
+    pve_pct: 34.8
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... 0 | R0_1 | CA2139 × JG62 | RILs (F6:7) | 79 | 34.8 | 5 | ISSR, STMS, and RAPD | 7.3 | (Cobos et al., 2005)
+    candidate_id: open_loci:40050693:FW-R0_1
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R0_2
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: CA2139 × JG62 RILs (F6:7), n=79; Cobos et al., 2005
+    lod: 8.2
+    pve_pct: 37.8
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R0_2 | CA2139 × JG62 | RILs (F6:7) | 79 | 37.8 | 5 | ISSR, STMS, and RAPD | 8.2 | (Cobos et al., 2005)
+    candidate_id: open_loci:40050693:FW-R0_2
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R0_3
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: CA2139 × JG62 RILs (F6:7), n=160; Halila et al., 2009
+    lod: 5.4
+    pve_pct: 26.2
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R0_3 | CA2139 × JG62 | RILs (F6:7) | 160 | 26.2 | 2 | STMS | 5.4 | (Halila et al., 2009)
+    candidate_id: open_loci:40050693:FW-R0_3
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R0_4
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: CA2156 × JG62 RILs (F6:7), n=160; Halila et al., 2009
+    lod: 8.5
+    pve_pct: 21.8
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R0_4 | CA2156 × JG62 | RILs (F6:7) | 160 | 21.8 | 5 | STMS | 8.5 | (Halila et al., 2009)
+    candidate_id: open_loci:40050693:FW-R0_4
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R0_5
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: CA2156 × JG62 RILs (F6:8), n=80; Jendoubi et al., 2016
+    lod: 15.8
+    pve_pct: 61.2
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R0_5 | CA2156 × JG62 | RILs (F6:8) | 80 | 61.2 | 5 | STMS, SSR, SCAR, CAPS, and gene‐specific | 15.8 | (Jendoubi et al., 2016)
+    candidate_id: open_loci:40050693:FW-R0_5
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R0_6
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: CA2156 × JG62 RILs (F6:8), n=80; Jendoubi et al., 2016
+    lod: 37.1
+    pve_pct: 88.5
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R0_6 | CA2156 × JG62 | RILs (F6:8) | 80 | 88.5 | 5 | STMS, SSR, SCAR, CAPS, and gene‐specific | 37.1 | (Jendoubi et al., 2016)
+    candidate_id: open_loci:40050693:FW-R0_6
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R0_7
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: ILC3279 × JG62 RILs (F6:8), n=115; Jendoubi et al., 2016
+    lod: 32.0
+    pve_pct: 82.3
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R0_7 | ILC3279 × JG62 | RILs (F6:8) | 115 | 82.3 | 5 | STMS, SSR, SCAR, CAPS, and gene‐specific | 32.0 | (Jendoubi et al., 2016)
+    candidate_id: open_loci:40050693:FW-R0_7
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R0_8
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: ILC3279 × JG62 RILs (F6:8), n=115; Jendoubi et al., 2016
+    lod: 31.0
+    pve_pct: 75.3
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R0_8 | ILC3279 × JG62 | RILs (F6:8) | 115 | 75.3 | 5 | STMS, SSR, SCAR, CAPS, and gene‐specific | 31.0 | (Jendoubi et al., 2016)
+    candidate_id: open_loci:40050693:FW-R0_8
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R0_9
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × ILC72 RILs (F6:8), n=102; Jendoubi et al., 2016
+    lod: 20.4
+    pve_pct: 69.5
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R0_9 | JG62 × ILC72 | RILs (F6:8) | 102 | 69.5 | 5 | STMS, SSR, SCAR, CAPS, and gene‐specific | 20.4 | (Jendoubi et al., 2016)
+    candidate_id: open_loci:40050693:FW-R0_9
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R0_10
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: Ca × Cr RILs (F6:7), n=104; Palomino et al., 2009
+    lod: 4.0
+    pve_pct: 20.1
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R0_10 | Ca × Cr | RILs (F6:7) | 104 | 20.1 | 2 | CAPS and dCAPS | 4.0 | (Palomino et al., 2009)
+    candidate_id: open_loci:40050693:FW-R0_10
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_1
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: C214 × WR315 F2:3, n=188; Sabbavarapu et al., 2013
+    lod: 8.0
+    pve_pct: 16.4
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... 1 | R1_1 | C214 × WR315 | F2:3 | 188 | 16.4 | 6 | SSR | 8.0 | (Sabbavarapu et al., 2013)
+    candidate_id: open_loci:40050693:FW-R1_1
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_2
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: C214 × WR315 F2:3, n=188; Sabbavarapu et al., 2013
+    lod: 7.6
+    pve_pct: 18.8
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_2 | C214 × WR315 | F2:3 | 188 | 18.8 | 6 | SSR | 7.6 | (Sabbavarapu et al., 2013)
+    candidate_id: open_loci:40050693:FW-R1_2
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_3
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × WR315 RILs (F9:10), n=125; Patil et al., 2014
+    lod: 9.2
+    pve_pct: 36.0
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_3 | JG62 × WR315 | RILs (F9:10) | 125 | 36.0 | 2 | STMS and AFLP | 9.2 | (Patil et al., 2014)
+    candidate_id: open_loci:40050693:FW-R1_3
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_4
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × WR315 RILs (F9:10), n=125; Patil et al., 2014
+    lod: 3.5
+    pve_pct: 16.0
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_4 | JG62 × WR315 | RILs (F9:10) | 125 | 16.0 | 2 | STMS and AFLP | 3.5 | (Patil et al., 2014)
+    candidate_id: open_loci:40050693:FW-R1_4
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_5
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+    lod: 6.8
+    pve_pct: 23.6
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_5 | JG62 × WR315 | RILs (F12) | 125 | 23.6 | 2 | SSR | 6.8 | (Raghu, 2016)
+    candidate_id: open_loci:40050693:FW-R1_5
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_6
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+    lod: 7.9
+    pve_pct: 25.9
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_6 | JG62 × WR315 | RILs (F12) | 125 | 25.9 | 2 | SSR | 7.9 | (Raghu, 2016)
+    candidate_id: open_loci:40050693:FW-R1_6
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_7
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+    lod: 4.9
+    pve_pct: 17.3
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_7 | JG62 × WR315 | RILs (F12) | 125 | 17.3 | 2 | SSR | 4.9 | (Raghu, 2016)
+    candidate_id: open_loci:40050693:FW-R1_7
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_8
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+    lod: 3.6
+    pve_pct: 12.8
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_8 | JG62 × WR315 | RILs (F12) | 125 | 12.8 | 6 | SSR | 3.6 | (Raghu, 2016)
+    candidate_id: open_loci:40050693:FW-R1_8
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_9
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+    lod: 2.5
+    pve_pct: 8.6
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_9 | JG62 × WR315 | RILs (F12) | 125 | 8.6 | 6 | SSR | 2.5 | (Raghu, 2016)
+    candidate_id: open_loci:40050693:FW-R1_9
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_10
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × WR315 RILs (F12), n=125; Raghu, 2016
+    lod: 2.6
+    pve_pct: 18.6
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_10 | JG62 × WR315 | RILs (F12) | 125 | 18.6 | 2 | SSR | 2.6 | (Raghu, 2016)
+    candidate_id: open_loci:40050693:FW-R1_10
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_11
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: K850 × WR315 RILs (F12), n=141; Raghu, 2016
+    lod: 2.7
+    pve_pct: 9.5
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_11 | K850 × WR315 | RILs (F12) | 141 | 9.5 | 4 | SSR | 2.7 | (Raghu, 2016)
+    candidate_id: open_loci:40050693:FW-R1_11
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_12
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × ICCV05530 RILs (F8), n=188; Garg et al., 2018
+    lod: 18.5
+    pve_pct: 24.6
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_12 | JG62 × ICCV05530 | RILs (F8) | 188 | 24.6 | 2 | SSR and SNP | 18.5 | (Garg et al., 2018)
+    candidate_id: open_loci:40050693:FW-R1_12
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_13
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × ICCV05530 RILs (F8), n=188; Garg et al., 2018
+    lod: 5.6
+    pve_pct: 7.9
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_13 | JG62 × ICCV05530 | RILs (F8) | 188 | 7.9 | 4 | SSR and SNP | 5.6 | (Garg et al., 2018)
+    candidate_id: open_loci:40050693:FW-R1_13
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_14
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × ICCV05530 RILs (F8), n=188; Garg et al., 2018
+    lod: 4.4
+    pve_pct: 6.6
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_14 | JG62 × ICCV05530 | RILs (F8) | 188 | 6.6 | 6 | SSR and SNP | 4.4 | (Garg et al., 2018)
+    candidate_id: open_loci:40050693:FW-R1_14
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_15
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: K850 × WR315 RILs (F10:11), n=141; Jingade & Ravikumar, 2015
+    lod: 8.9
+    pve_pct: 69.8
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_15 | K850 × WR315 | RILs (F10:11) | 141 | 69.8 | 2 | SSR | 8.9 | (Jingade & Ravikumar, 2015)
+    candidate_id: open_loci:40050693:FW-R1_15
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_16
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: K850 × WR315 RILs (F10:11), n=141; Jingade & Ravikumar, 2015
+    lod: 4.4
+    pve_pct: 60.8
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_16 | K850 × WR315 | RILs (F10:11) | 141 | 60.8 | 2 | SSR | 4.4 | (Jingade & Ravikumar, 2015)
+    candidate_id: open_loci:40050693:FW-R1_16
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_17
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × WR315 RILs (F7:8), n=125; Lal et al., 2022
+    lod: 3.0
+    pve_pct: 11.89
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_17 | JG62 × WR315 | RILs (F7:8) | 125 | 11.89 | 4 | STMS, SSR, SCAR, CAPS, and gene‐specific | 3.0 | (Lal et al., 2022)
+    candidate_id: open_loci:40050693:FW-R1_17
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_18
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × WR315 RILs (F7:8), n=125; Lal et al. 2022
+    lod: 3.1
+    pve_pct: 11.62
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_18 | JG62 × WR315 | RILs (F7:8) | 125 | 11.62 | 2 | STMS, SSR, SCAR, CAPS, and gene‐specific | 3.1 | (Lal et al. 2022)
+    candidate_id: open_loci:40050693:FW-R1_18
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R1_19
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × WR315 RILs (F7:8), n=125; Lal et al. 2022
+    lod: 5.2
+    pve_pct: 26.62
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R1_19 | JG62 × WR315 | RILs (F7:8) | 125 | 26.62 | 2 | STMS, SSR, SCAR, CAPS, and gene‐specific | 5.2 | (Lal et al. 2022)
+    candidate_id: open_loci:40050693:FW-R1_19
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R3_1
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × ICCV05530 RILs (F8), n=188; Garg et al., 2018
+    lod: 12.3
+    pve_pct: 17.5
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... 3 | R3_1 | JG62 × ICCV05530 | RILs (F8) | 188 | 17.5 | 2 | SSR and SNP | 12.3 | (Garg et al., 2018)
+    candidate_id: open_loci:40050693:FW-R3_1
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R3_2
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: JG62 × ICCV05530 RILs (F8), n=188; Garg et al., 2018
+    lod: 21.0
+    pve_pct: 31.6
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... R3_2 | JG62 × ICCV05530 | RILs (F8) | 188 | 31.6 | 4 | SSR and SNP | 21.0 | (Garg et al., 2018)
+    candidate_id: open_loci:40050693:FW-R3_2
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:FW-R5_1
+  object: dis:chickpea:fusarium_wilt
+  qualifiers:
+    stage: unspecified
+    population: Ca × Cr RILs (F6:7), n=104; Palomino et al., 2009
+    lod: 2.9
+    pve_pct: 24.2
+  evidence:
+  - source: pmid:40050693
+    method: review_statement
+    locator: QTL table (input to the meta-analysis)
+    extractor: parser:open_paper_table@1
+    quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... 5 | R5_1 | Ca × Cr | RILs (F6:7) | 104 | 24.2 | 2 | CAPS and dCAPS | 2.9 | (Palomino et al., 2009)
+    candidate_id: open_loci:40050693:FW-R5_1

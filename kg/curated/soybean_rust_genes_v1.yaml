@@ -1,0 +1,120 @@
+# The seven Asian soybean rust resistance genes mapped in pmid:37375888 (Rpp1, Rpp1-b, Rpp2, Rpp3, Rpp4, Rpp5, Rpp6) as gene -> soybean rust claims; Rpp1-b, Rpp5 and Rpp6 are new to the KB. Work order WO15a, reviewed 2026-10-03 (kg/review_log/2026-10-03h_open_loci.md). Evidence stays llm: (discounted).
+
+sources:
+- id: pmid:37375888
+  type: publication
+  title: Genetic Mapping of Seven Kinds of Locus for Resistance to Asian Soybean Rust
+  year: 2023
+  venue: Plants (Basel, Switzerland)
+  url: https://doi.org/10.3390/plants12122263
+  verified: true
+entities:
+- id: gene:soybean:Rpp1-b
+  type: Gene
+  name: Rpp1-b
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Rpp1-b
+- id: gene:soybean:Rpp5
+  type: Gene
+  name: Rpp5
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Rpp5
+- id: gene:soybean:Rpp6
+  type: Gene
+  name: Rpp6
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Rpp6
+claims:
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp1
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:37375888
+    method: qtl_mapping
+    locator: Abstract
+    quote: Asian soybean rust (ASR), caused by Phakopsora pachyrhizi, is one of the most serious soybean (Glycine max) diseases in tropical and subtropical regions. ... To facilitate the development of resistant varieties using gene pyramiding, DNA markers closely linked to seven resistance genes, namely, Rpp1, Rpp1-b, Rpp2, Rpp3, Rpp4, Rpp5, and Rpp6, were identified.
+    extractor: llm:claude-from-paper-text@wo15a-2026-10-03
+    candidate_id: WO15a-0001
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp1-b
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:37375888
+    method: qtl_mapping
+    locator: Abstract
+    quote: Asian soybean rust (ASR), caused by Phakopsora pachyrhizi, is one of the most serious soybean (Glycine max) diseases in tropical and subtropical regions. ... To facilitate the development of resistant varieties using gene pyramiding, DNA markers closely linked to seven resistance genes, namely, Rpp1, Rpp1-b, Rpp2, Rpp3, Rpp4, Rpp5, and Rpp6, were identified.
+    extractor: llm:claude-from-paper-text@wo15a-2026-10-03
+    candidate_id: WO15a-0002
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp2
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:37375888
+    method: qtl_mapping
+    locator: Abstract
+    quote: Asian soybean rust (ASR), caused by Phakopsora pachyrhizi, is one of the most serious soybean (Glycine max) diseases in tropical and subtropical regions. ... To facilitate the development of resistant varieties using gene pyramiding, DNA markers closely linked to seven resistance genes, namely, Rpp1, Rpp1-b, Rpp2, Rpp3, Rpp4, Rpp5, and Rpp6, were identified.
+    extractor: llm:claude-from-paper-text@wo15a-2026-10-03
+    candidate_id: WO15a-0003
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp3
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:37375888
+    method: qtl_mapping
+    locator: Abstract
+    quote: Asian soybean rust (ASR), caused by Phakopsora pachyrhizi, is one of the most serious soybean (Glycine max) diseases in tropical and subtropical regions. ... To facilitate the development of resistant varieties using gene pyramiding, DNA markers closely linked to seven resistance genes, namely, Rpp1, Rpp1-b, Rpp2, Rpp3, Rpp4, Rpp5, and Rpp6, were identified.
+    extractor: llm:claude-from-paper-text@wo15a-2026-10-03
+    candidate_id: WO15a-0004
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp4
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:37375888
+    method: qtl_mapping
+    locator: Abstract
+    quote: Asian soybean rust (ASR), caused by Phakopsora pachyrhizi, is one of the most serious soybean (Glycine max) diseases in tropical and subtropical regions. ... To facilitate the development of resistant varieties using gene pyramiding, DNA markers closely linked to seven resistance genes, namely, Rpp1, Rpp1-b, Rpp2, Rpp3, Rpp4, Rpp5, and Rpp6, were identified.
+    extractor: llm:claude-from-paper-text@wo15a-2026-10-03
+    candidate_id: WO15a-0005
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp5
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:37375888
+    method: qtl_mapping
+    locator: Abstract
+    quote: Asian soybean rust (ASR), caused by Phakopsora pachyrhizi, is one of the most serious soybean (Glycine max) diseases in tropical and subtropical regions. ... To facilitate the development of resistant varieties using gene pyramiding, DNA markers closely linked to seven resistance genes, namely, Rpp1, Rpp1-b, Rpp2, Rpp3, Rpp4, Rpp5, and Rpp6, were identified.
+    extractor: llm:claude-from-paper-text@wo15a-2026-10-03
+    candidate_id: WO15a-0006
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rpp6
+  object: dis:soybean:rust
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:37375888
+    method: qtl_mapping
+    locator: Abstract
+    quote: Asian soybean rust (ASR), caused by Phakopsora pachyrhizi, is one of the most serious soybean (Glycine max) diseases in tropical and subtropical regions. ... To facilitate the development of resistant varieties using gene pyramiding, DNA markers closely linked to seven resistance genes, namely, Rpp1, Rpp1-b, Rpp2, Rpp3, Rpp4, Rpp5, and Rpp6, were identified.
+    extractor: llm:claude-from-paper-text@wo15a-2026-10-03
+    candidate_id: WO15a-0007

@@ -1587,6 +1587,10 @@ are also where most of the work is.
    The Browse tab gains a "Genome regions (QTL)" panel (`kg_qtl_associations`), so the 18 charcoal-rot loci, 39 wheat powdery-mildew meta-QTLs and 8 chickpea wilt QTLs are visible.
    The 2024-25 and 2025-26 reports are password-protected PDFs and were not read (`kg/review_log/2026-10-03g_gene_variety_links.md`).
 
+51. **Open-literature sweep for soybean and chickpea loci (2026-10-03).** Eight open-access mapping papers parsed table-by-table (`batches/make_open_loci.py`): 83 QTL/GWAS loci (soybean rust 7, mosaic virus 19, frogeye 23,
+   bacterial pustule 2, chickpea Fusarium wilt 32) plus three new soybean rust genes (Rpp1-b, Rpp5, Rpp6); all evidence rows exact (`kg/review_log/2026-10-03h_open_loci.md`). Searches found no open mapping paper for chickpea
+   dry root rot, collar rot or rust, nor for soybean anthracnose, pod and stem blight or Rhizoctonia root rot: for those the gap is the literature, not the tooling.
+
 ---
 
 ## 6. Definition of "done" reminder (unchanged from RESEARCH_ROADMAP.md §10)
