@@ -1,0 +1,160 @@
+# Management advisories added after the first release, with structured detail where the source states it
+# (product, rate, timing, crop stage, where it was tested -- see AdvisoryProps in curator/model/entities.py).
+#
+# Every source below was looked up on Europe PMC and its title/year/journal copied from that record; every
+# quote was checked as a verbatim substring of the paper's text by `agrihub kg verify-quotes`.
+#
+# 2026-10-02 -- soybean mosaic virus (SMV), the one disease that had no advisory. The earlier blocker
+# (docs/research_needed.md) was that the two sources found were pre-DOI Korean journal articles that this
+# schema cannot cite. These two have PMIDs, so no schema change was needed.
+
+sources:
+  - id: pmid:29134790
+    type: publication
+    title: "Soybean mosaic virus: a successful potyvirus with a wide distribution but restricted natural host range"
+    year: 2018
+    venue: Molecular plant pathology
+    url: https://doi.org/10.1111/mpp.12644
+    verified: true
+    # open access: N (abstract used); a pathogen-profile review, so a review statement, not a trial result
+
+  - id: pmid:30780527
+    type: publication
+    title: "Potential for Integrated Management of Soybean Virus Disease"
+    year: 2007
+    venue: Plant disease
+    url: https://doi.org/10.1094/pdis-91-10-1255
+    verified: true
+    # open access: N (abstract used); the paper's own four location-year field study
+
+  - id: doc:icar_stripe_rust_control_rabi_2010_11
+    type: official_document
+    title: "Stripe Rust (Yellow Rust) of Wheat control in major wheat growing states in rabi 2010-11"
+    year: 2011
+    venue: "Indian Council of Agricultural Research (text credited to the Directorate of Wheat Research, Karnal)"
+    url: https://icar.org.in/node/5291
+    verified: true
+    # Read from the page's own HTML on 2026-10-02. The page footer's "last updated" date is the website's
+    # and not the advisory's; the advisory itself is for the rabi 2010-11 season.
+
+  - id: doi:10.1016/j.biocontrol.2006.06.006
+    type: publication
+    title: "Evaluation of Trichoderma species against Fusarium oxysporum f. sp. ciceris for integrated management of chickpea wilt"
+    year: 2007
+    venue: "Biological control : theory and applications in pest management"
+    url: https://doi.org/10.1016/j.biocontrol.2006.06.006
+    verified: true
+    # open access: N (abstract used). Indian study: four Indian races of the pathogen; field trials over three seasons.
+
+  - id: doi:10.1016/j.cropro.2012.09.003
+    type: publication
+    title: "Evaluation of bio-control agents for management of dry root rot of chickpea caused by Macrophomina phaseolina"
+    year: 2013
+    venue: Crop Protection
+    url: https://doi.org/10.1016/j.cropro.2012.09.003
+    verified: true
+    # open access: N (abstract used). Indian study ("tropical regions"); the abstract does not state the number of seasons.
+
+entities:
+  - id: adv:soybean:mosaic_virus_virus_free_seed
+    type: Advisory
+    name: "Plant virus-free seed: SMV is seed-transmitted, and clean seed is among the most effective ways to limit losses"
+    crop: soybean
+    props:
+      action_type: cultural
+
+  - id: adv:soybean:mosaic_virus_resistant_cultivars
+    type: Advisory
+    name: "Grow cultivars carrying dominant SMV resistance (R) genes, single or pyramided; rely on host-plant resistance rather than insecticide sprays against the aphid vector"
+    crop: soybean
+    props:
+      action_type: varietal
+      region: northern United States
+
+  - id: adv:wheat:stripe_rust_propiconazole_dwr
+    type: Advisory
+    name: "If yellow rust is noticed in the crop, spray Propiconazole (Tilt) 25 EC at 0.1% (1 ml/litre), about 0.5 litre of fungicide per hectare"
+    crop: wheat
+    props:
+      action_type: chemical
+      active_ingredient: Propiconazole (Tilt) 25 EC
+      dose: "0.1% (1 ml/litre); 0.5 litre per hectare"
+      timing: as soon as yellow rust is noticed in the crop
+      region: "North Western Plain Zone and Northern Hill Zone, India (Punjab, Haryana, J&K, tarai UP and Uttarakhand)"
+
+  - id: adv:chickpea:fusarium_wilt_trichoderma_carboxin_seed
+    type: Advisory
+    name: "Treat seed with Trichoderma harzianum plus carboxin: the best treatment in three seasons of wilt-sick-field trials, cutting wilt incidence 44-60% and raising yield 43-73%"
+    crop: chickpea
+    props:
+      action_type: biological
+      active_ingredient: Trichoderma harzianum plus carboxin
+      dose: "T. harzianum 10^6 spores/ml per 10 g seed; carboxin 2 g/kg seed"
+      timing: as a seed treatment
+      region: India
+
+  - id: adv:chickpea:dry_root_rot_bioagent_seed_and_fym
+    type: Advisory
+    name: "Treat seed with a native Trichoderma viride or Pseudomonas fluorescens isolate and also apply the bio-agent in farm-yard manure to the soil: the best treatment tested, including against carbendazim and hexaconazole seed treatment"
+    crop: chickpea
+    props:
+      action_type: biological
+      active_ingredient: Trichoderma viride or Pseudomonas fluorescens (native isolates), seed treatment plus bio-agent-enriched farm-yard manure
+      timing: seed treatment combined with soil application at sowing
+      region: India
+
+claims:
+  - type: DISEASE_MANAGED_BY
+    subject: dis:soybean:mosaic_virus
+    object: adv:soybean:mosaic_virus_virus_free_seed
+    evidence:
+      - source: pmid:29134790
+        method: review_statement
+        locator: abstract
+        quote: "The most effective means of managing losses from SMV are the planting of virus-free seeds and cultivars containing single or multiple R genes."
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:soybean:mosaic_virus
+    object: adv:soybean:mosaic_virus_resistant_cultivars
+    evidence:
+      - source: pmid:30780527
+        method: field_multi_env
+        locator: abstract
+        quote: "Host plant resistance, not vector control, is the most effective tactic to control SMV."
+      - source: pmid:30780527
+        method: field_multi_env
+        locator: abstract
+        quote: "foliar application of the pyrethroid insecticide lambda-cyhalothrin (Warrior) or the organophosphate chlorpyrifos (Lorsban 4E) timed to suppress soybean aphid populations does not reduce SMV."
+      - source: pmid:29134790
+        method: review_statement
+        locator: abstract
+        quote: "The most effective means of managing losses from SMV are the planting of virus-free seeds and cultivars containing single or multiple R genes."
+
+  # ───────────── wheat stripe (yellow) rust: ICAR / Directorate of Wheat Research recommendation ─────────────
+  - type: DISEASE_MANAGED_BY
+    subject: dis:wheat:stripe_rust
+    object: adv:wheat:stripe_rust_propiconazole_dwr
+    evidence:
+      - source: doc:icar_stripe_rust_control_rabi_2010_11
+        method: official_document
+        locator: advisory text
+        quote: "If the yellow rust is noticed in the wheat crop, it is advised to spray the crop with Propiconazole (Tilt) 25 EC @ 0.1 % (1 ml / litre) using power sprayer or tractor mounted boom sprayers. 0.5 litre per hectare of the fungicide shall be sufficient to effectively cover the wheat crop."
+
+  # ───────────── chickpea: two Indian field studies with product, rate and how to apply ─────────────
+  - type: DISEASE_MANAGED_BY
+    subject: dis:chickpea:fusarium_wilt
+    object: adv:chickpea:fusarium_wilt_trichoderma_carboxin_seed
+    evidence:
+      - source: doi:10.1016/j.biocontrol.2006.06.006
+        method: field_multi_env
+        locator: abstract
+        quote: "The integration of T. harzianum (10(6) spores/ml/10 g seed) and carboxin (2 g kg-1 seed) for seed treatment was the best which enhanced seed germination by 12.0-14.0% and grain yields by 42.6-72.9% and reduced wilt incidence (44.1-60.3%) during experimentations."
+
+  - type: DISEASE_MANAGED_BY
+    subject: dis:chickpea:dry_root_rot
+    object: adv:chickpea:dry_root_rot_bioagent_seed_and_fym
+    evidence:
+      - source: doi:10.1016/j.cropro.2012.09.003
+        method: field_single_env
+        locator: abstract
+        quote: "It was found that this combination showed maximum germination, least root rot incidence and highest yields as compared to the other biological or chemical seed treatments included in this study."

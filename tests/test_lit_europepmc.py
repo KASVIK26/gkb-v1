@@ -109,3 +109,17 @@ def test_fetch_fulltext_xml_returns_none_on_404():
         "url", 404, "Not Found", {}, None
     )):
         assert europepmc.fetch_fulltext_xml("PMC0000000") is None
+
+
+def test_metadata_venue_falls_back_to_journal_info_for_core_records():
+    # Europe PMC "core" records often have no journalTitle at all, only journalInfo.journal.title --
+    # previously every such paper was verified with venue=None (the review app showed "unknown venue").
+    record = {"pmid": "29134790", "title": "A title.", "pubYear": "2018", "isOpenAccess": "N",
+              "journalInfo": {"journal": {"title": "Molecular plant pathology"}}}
+    assert europepmc.metadata_from_record(record, "pmid:29134790").venue == "Molecular plant pathology"
+
+
+def test_metadata_prefers_journal_title_and_tolerates_neither():
+    base = {"pmid": "1", "title": "T.", "pubYear": "2020", "isOpenAccess": "N"}
+    assert europepmc.metadata_from_record({**base, "journalTitle": "J1", "journalInfo": {"journal": {"title": "J2"}}}, "pmid:1").venue == "J1"
+    assert europepmc.metadata_from_record(base, "pmid:1").venue is None

@@ -953,3 +953,32 @@ button {
   font-size: 0.8rem;
   color: var(--muted);
 }
+
+.advisory-facts {
+  display: grid;
+  gap: 4px 18px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  margin: 8px 0 4px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(23, 32, 24, 0.045);
+  font-size: 0.84rem;
+}
+
+.advisory-facts div {
+  display: grid;
+  gap: 1px;
+}
+
+.advisory-facts dt {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.advisory-facts dd {
+  margin: 0;
+  font-weight: 600;
+}

@@ -336,6 +336,7 @@ Each Evidence record gets a weight `w` from **evidence type** (mapped to ECO cod
 | Diagnostic marker genotyping / sequence-confirmed haplotype | 0.85 |
 | Multi-location field screening (≥ 3 locations or seasons), standard scale | 0.80 |
 | Fine-mapping / bi-parental QTL (LOD ≥ 3, replicated) | 0.70 |
+| Closely linked (non-diagnostic) marker genotyping of a named line, added 2026-10-02 | 0.65 |
 | GWAS association (significant after multiple-testing correction) | 0.60 |
 | Single-location or greenhouse screening | 0.50 |
 | Gene postulation / pedigree inference | 0.45 |

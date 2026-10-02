@@ -137,7 +137,8 @@ def metadata_from_record(record: dict, identifier: str) -> VerifiedMetadata:
         id=identifier,
         title=record.get("title", "").rstrip("."),
         year=int(year_raw) if year_raw else None,
-        venue=record.get("journalTitle") or None,
+        # "lite" results carry journalTitle; "core" results usually carry only journalInfo.journal.title
+        venue=record.get("journalTitle") or (record.get("journalInfo") or {}).get("journal", {}).get("title") or None,
         is_open_access=record.get("isOpenAccess") == "Y",
         pmcid=record.get("pmcid") or None,
     )

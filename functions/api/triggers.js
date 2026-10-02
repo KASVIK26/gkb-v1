@@ -121,7 +121,24 @@ export async function onRequestPost({ request, env }) {
       conditions: t.conditions,
       advisories: advisoryRows
         .filter((a) => a.disease_id === t.disease_id)
-        .map((a) => ({ name: a.advisory_name, actionType: a.action_type })),
+        .map((a) => ({
+          name: a.advisory_name,
+          actionType: a.action_type,
+          claimId: a.claim_id,
+          tier: a.tier,
+          score: a.score,
+          nSources: a.n_sources,
+          activeIngredient: a.active_ingredient,
+          dose: a.dose,
+          timing: a.timing,
+          bbchFrom: a.bbch_from,
+          bbchTo: a.bbch_to,
+          region: a.region,
+        })),
+      claimId: t.claim_id,
+      tier: t.tier,
+      score: t.score,
+      nSources: t.n_sources,
       varietyReaction: reactionByDisease[t.disease_id]
         ? { reaction: reactionByDisease[t.disease_id].reaction, stage: reactionByDisease[t.disease_id].stage }
         : null,

@@ -184,6 +184,7 @@ class EvidenceMethod(StrEnum):
 
     CLONED_VALIDATED = "cloned_validated"
     DIAGNOSTIC_MARKER = "diagnostic_marker"
+    LINKED_MARKER = "linked_marker"  # genotyped with a closely linked, non-diagnostic marker
     SEQUENCE_HAPLOTYPE = "sequence_haplotype"
     FIELD_MULTI_ENV = "field_multi_env"
     QTL_MAPPING = "qtl_mapping"
@@ -202,6 +203,7 @@ EVIDENCE_WEIGHT: dict[EvidenceMethod, float] = {
     EvidenceMethod.CLONED_VALIDATED: 1.00,
     EvidenceMethod.OFFICIAL_DOCUMENT: 0.90,
     EvidenceMethod.DIAGNOSTIC_MARKER: 0.85,
+    EvidenceMethod.LINKED_MARKER: 0.65,
     EvidenceMethod.SEQUENCE_HAPLOTYPE: 0.85,
     EvidenceMethod.FIELD_MULTI_ENV: 0.80,
     EvidenceMethod.QTL_MAPPING: 0.70,

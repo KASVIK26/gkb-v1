@@ -397,7 +397,7 @@ claims:
       - source: pmid:19229000
         method: cloned_validated
         locator: abstract
-        quote: "the wheat gene Lr34 has supported resistance to leaf rust, stripe rust, and powdery mildew for more than 50 years"
+        quote: "Some of the most devastating fungal pathogens in wheat are leaf rust, stripe rust, and powdery mildew. The wheat gene Lr34 has supported resistance to these pathogens for more than 50 years."
 
   - type: GENE_CONFERS_RESISTANCE
     subject: gene:wheat:Lr34
@@ -407,7 +407,7 @@ claims:
       - source: pmid:19229000
         method: cloned_validated
         locator: abstract
-        quote: "the wheat gene Lr34 has supported resistance to leaf rust, stripe rust, and powdery mildew for more than 50 years"
+        quote: "Some of the most devastating fungal pathogens in wheat are leaf rust, stripe rust, and powdery mildew. The wheat gene Lr34 has supported resistance to these pathogens for more than 50 years."
 
   - type: GENE_CONFERS_RESISTANCE
     subject: gene:wheat:Lr34
@@ -417,7 +417,7 @@ claims:
       - source: pmid:19229000
         method: cloned_validated
         locator: abstract
-        quote: "the wheat gene Lr34 has supported resistance to leaf rust, stripe rust, and powdery mildew for more than 50 years"
+        quote: "Some of the most devastating fungal pathogens in wheat are leaf rust, stripe rust, and powdery mildew. The wheat gene Lr34 has supported resistance to these pathogens for more than 50 years."
 
   - type: GENE_CONFERS_RESISTANCE
     subject: gene:wheat:Sr2
@@ -490,7 +490,7 @@ claims:
       - source: pmid:30841334
         method: controlled_env
         locator: abstract
-        quote: "a novel pathotype virulent to the Sr31 resistance gene, designated Pgt-Ug99"
+        quote: "which served as a selective host for the new rust culture, designated Pgt-Ug99"
 
   - type: GENE_CONFERS_RESISTANCE
     subject: gene:wheat:Fhb1

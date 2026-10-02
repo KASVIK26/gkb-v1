@@ -82,6 +82,7 @@ const METHOD_LABEL = {
   official_document: "Official release document",
   cloned_validated: "Cloned and functionally validated gene",
   diagnostic_marker: "Diagnostic marker",
+  linked_marker: "Closely linked molecular marker",
   sequence_haplotype: "Sequence haplotype",
   field_multi_env: "Multi-location field trials",
   qtl_mapping: "QTL mapping",
@@ -117,6 +118,29 @@ function evidenceHtml(rows) {
         <span class="edge-meta">${esc(METHOD_LABEL[r.method] ?? r.method)} · weight ${Number(r.weight).toFixed(2)}${r.locator ? ` · ${esc(r.locator)}` : ""}${r.human_reviewed ? " · human-reviewed" : ""}</span></li>`;
     })
     .join("")}</ul>`;
+}
+
+// The "do this" facts of an advisory, limited to what its source actually states.
+function advisoryFacts(p) {
+  const rows = [
+    ["Product", p.active_ingredient],
+    ["Rate", p.dose],
+    ["When", p.timing],
+    ["Crop stage", p.bbch_from != null && p.bbch_to != null ? `BBCH ${p.bbch_from}–${p.bbch_to}` : null],
+    ["Applies to", p.region],
+  ].filter(([, value]) => value);
+  if (!rows.length) return "";
+  return `<dl class="advisory-facts">${rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`;
+}
+
+// The numeric conditions of a weather trigger, e.g. "soil_temp_c 22–26 (mean over 24 h)".
+function triggerFacts(p) {
+  const conditions = Array.isArray(p.conditions) ? p.conditions : [];
+  if (!conditions.length) return "";
+  const bound = (c) => [c.min != null ? `≥ ${c.min}` : null, c.max != null ? `≤ ${c.max}` : null].filter(Boolean).join(" and ");
+  const rows = conditions.map((c) => `<div><dt>${esc(c.variable)}</dt><dd>${esc(bound(c))} (${esc(c.aggregation)} over ${esc(c.window_h)} h)</dd></div>`);
+  if (p.bbch_from != null) rows.push(`<div><dt>Crop stage</dt><dd>BBCH ${esc(p.bbch_from)}–${esc(p.bbch_to)}${p.phase ? ` · ${esc(p.phase)}` : ""}</dd></div>`);
+  return `<dl class="advisory-facts">${rows.join("")}</dl>`;
 }
 
 const evidenceCache = new Map();
@@ -322,7 +346,16 @@ function renderTriggers(results) {
     if (r.status === "fired") card.classList.add("edge-card-fired");
 
     const advisoryLines = r.advisories.length
-      ? r.advisories.map((a) => `<p class="edge-meta">Advisory (${a.actionType}): ${a.name}</p>`).join("")
+      ? r.advisories
+          .map(
+            (a) =>
+              `<p class="edge-meta">Advisory (${esc(a.actionType)}): ${esc(a.name)} ${tierChip({ tier: a.tier, score: a.score, n_sources: a.nSources })}</p>` +
+              advisoryFacts({
+                active_ingredient: a.activeIngredient, dose: a.dose, timing: a.timing,
+                bbch_from: a.bbchFrom, bbch_to: a.bbchTo, region: a.region,
+              }),
+          )
+          .join("")
       : `<p class="edge-meta">No DISEASE_MANAGED_BY advisory loaded for this disease yet.</p>`;
 
     const reactionLine = r.varietyReaction
@@ -736,6 +769,8 @@ function buildNodeDetail(node) {
   return `
     <h3>${esc(node.data("label"))} <span class="type-chip" style="--chip:${style.color}">${esc(style.name)}</span></h3>
     <p class="edge-meta">${esc(style.blurb)}</p>
+    ${node.data("type") === "Advisory" && node.data("props") ? `<p class="edge-meta"><strong>${esc(node.data("props").action_type ?? "")}</strong> practice</p>${advisoryFacts(node.data("props"))}` : ""}
+    ${node.data("type") === "EnvTrigger" && node.data("props") ? triggerFacts(node.data("props")) : ""}
     ${node.data("type") === "Disease" ? diseaseCoverage(node.id()) : ""}
     ${sections.length ? `<p class="detail-subhead">Connected in the current view — click any name to jump to it</p>${sections.join("")}` : ""}
   `;
@@ -845,6 +880,7 @@ function renderGraph() {
           shape: style.shape,
           size: style.size + Math.min(12, Math.round(2.4 * Math.sqrt(deg))),
           anchor: Boolean(style.anchor),
+          props: n.props || null,
           deg,
         },
       };

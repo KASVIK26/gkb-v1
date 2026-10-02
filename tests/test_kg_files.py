@@ -11,6 +11,7 @@ from pydantic import ValidationError
 
 from curator.graph.bundle import KGBundle
 from curator.graph.kg_files import load_curated_dir, load_curated_file
+from curator.graph.variety_import import variety_bundle
 from curator.graph.vocab_entities import reference_bundle
 from curator.model import ClaimType, EntityType
 
@@ -19,7 +20,8 @@ KG_CURATED_DIR = ROOT_DIR / "kg" / "curated"
 
 
 def _production_bundle() -> KGBundle:
-    return KGBundle.merge(reference_bundle(), load_curated_dir(KG_CURATED_DIR))
+    # same composition as curator.cli._build_bundle: curated claims may name notified varieties
+    return KGBundle.merge(reference_bundle(), variety_bundle(), load_curated_dir(KG_CURATED_DIR))
 
 
 # ─────────────────────────── reference_bundle() ───────────────────────────

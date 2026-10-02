@@ -113,6 +113,27 @@ def load(
     typer.echo(f"Note: this does not repoint kg_current — run `agrihub kg promote --release {release}` to go live.")
 
 
+@kg_app.command("verify-quotes")
+def verify_quotes_cmd(
+    show_ok: bool = typer.Option(False, help="Also list quotes that verified exactly."),
+) -> None:
+    """Re-fetch every cited paper and check each stored quote against its text (needs network).
+
+    Exits 1 if any quote is MISSING from a source whose text was available; 'no_text' (paywalled or
+    unreachable) is reported but is not a failure, because it cannot be checked from here."""
+    from curator.graph.quote_audit import audit_bundle, summarize as summarize_audit
+
+    rows = audit_bundle(_build_bundle())
+    typer.echo(json.dumps(summarize_audit(rows)))
+    bad = [r for r in rows if r.status in ("missing", "fuzzy")]
+    for row in rows if show_ok else bad:
+        if row.status == "exact" and not show_ok:
+            continue
+        typer.echo(f"  [{row.status}] {row.claim_id} <- {row.source_id} ({row.locator}): {(row.quote or '')[:110]}")
+    if any(r.status == "missing" for r in rows):
+        raise typer.Exit(code=1)
+
+
 @kg_app.command("promote")
 def promote_cmd(
     release: str = typer.Option(..., help="Release tag to make live, e.g. 2026_10_2 -> promotes schema kg_2026_10_2"),
@@ -292,6 +313,30 @@ def _render_staged_yaml(rows: list[dict]) -> str:
         })
     doc = {"sources": list(sources_by_id.values()), "claims": claims}
     return yaml.dump(doc, sort_keys=False, allow_unicode=True, default_flow_style=False)
+
+
+@lit_app.command("find")
+def lit_find_cmd(
+    a: list[str] = typer.Option(..., "--a", help="First thing to find, e.g. a variety. Repeat for name variants."),
+    b: list[str] = typer.Option(..., "--b", help="Second thing, e.g. a gene. Repeat for name variants."),
+    max_papers: int = typer.Option(15, help="How many matching open-access papers to read."),
+) -> None:
+    """Print verbatim sentences / table rows where both things appear together in open-access papers.
+
+    A finder, not an extractor: nothing is paraphrased or generated, so every line is a real substring of a
+    real paper. What it means (carries? lacks? merely cited?) is for a human to judge before it becomes a claim."""
+    from curator.lit.find_evidence import find_evidence
+
+    hits = find_evidence(a, b, max_papers=max_papers)
+    if not hits:
+        typer.echo("No co-occurring text found in open-access papers.")
+        return
+    current = None
+    for hit in hits:
+        if hit.source_id != current:
+            current = hit.source_id
+            typer.echo(f"\n[{hit.source_id} | {hit.year} | {hit.journal}] {hit.title}")
+        typer.echo(f"  ({hit.locator}) {hit.text}")
 
 
 @lit_app.command("export-staged")

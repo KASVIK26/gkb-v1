@@ -1,0 +1,125 @@
+# Variety -> gene links (VARIETY_CARRIES_GENE), the claim type that was empty: genes and varieties were
+# disconnected clusters in the graph, so "which varieties carry Sr24?" could not be answered.
+#
+# 2026-10-02. Found with `agrihub lit find` (curator/lit/find_evidence.py) and then READ by a person: a
+# sentence naming a variety beside a gene is not automatically a claim. Two traps this file deliberately avoids:
+#   * Review sentences like "HD 2932 (Lr19/Sr25+Lr24/Sr24+Yr10)" and "HUW510 (Lr34)" describe IMPROVED
+#     LINES that had those genes introduced; a paper in the same search says HD2932 was the recipient
+#     background, i.e. it did not carry Lr19/Sr25 itself. Not asserted for the released varieties.
+#   * HI 8498: this study postulates Sr11+Sr2, another paper reports Sr2+Sr36 (pyramided by breeding). Two
+#     reports that disagree are not entered until the disagreement can be resolved against a primary source.
+#
+# What IS entered: gene calls made on the named released varieties themselves by an ICAR-IIWBR study of 40
+# recently released Indian wheat varieties, using markers "closely linked" to each gene (e.g. Xgwm533 for
+# Sr2). That is good evidence but not diagnostic genotyping, so it uses the linked_marker evidence type
+# (weight 0.65), not diagnostic_marker (0.85).
+
+sources:
+  - id: pmid:37521927
+    type: publication
+    title: "Virulence and genetic analysis of Puccinia graminis tritici in the Indian sub-continent from 2016 to 2022 and evaluation of wheat varieties for stem rust resistance"
+    year: 2023
+    venue: Frontiers in plant science
+    url: https://doi.org/10.3389/fpls.2023.1196808
+    verified: true
+    # open access: Y; pmcid: PMC10376725 -- quotes below are from its full text and tables
+
+  - id: pmid:38079439
+    type: publication
+    title: "Comparative transcriptomics of stem rust resistance in wheat NILs mediated by Sr24 rust resistance gene"
+    year: 2023
+    venue: PloS one
+    url: https://doi.org/10.1371/journal.pone.0295202
+    verified: true
+    # open access: Y; pmcid: PMC10712884
+
+  - id: pmid:38834653
+    type: publication
+    title: "Cytological and molecular characterization of wheat lines carrying leaf rust and stem rust resistance genes Lr24 and Sr24"
+    year: 2024
+    venue: Scientific reports
+    url: https://doi.org/10.1038/s41598-024-63835-w
+    verified: true
+    # open access: Y; pmcid: PMC11150516
+
+entities:
+  # Sr24 is a catalogued stem rust resistance gene, introgressed from Thinopyrum; it is entered as its own
+  # entity (not as a synonym of Lr24): the sources call them linked genes on one alien segment, not one gene.
+  # No chromosome or donor species is entered because none was verified against a source here.
+  - id: gene:wheat:Sr24
+    type: Gene
+    name: Sr24
+    crop: wheat
+    props: {symbol: Sr24}
+
+claims:
+  - type: GENE_CONFERS_RESISTANCE
+    subject: gene:wheat:Sr24
+    object: dis:wheat:stem_rust
+    qualifiers: {resistance_type: ASR}
+    evidence:
+      - source: pmid:37521927
+        method: review_statement
+        locator: "full text, Methods"
+        quote: "three all stage (ASR) Sr genes (Sr24/Lr24, Sr31/Lr26/Yr9, and Sr38/Lr37/Yr17)"
+      - source: pmid:38079439
+        method: controlled_env
+        locator: abstract
+        quote: "for better insights of the Sr24-mediated stem rust resistance"
+      - source: pmid:38834653
+        method: review_statement
+        locator: abstract
+        quote: "rust resistance genes Lr24 and Sr24 on chromosome arm 3AgL"
+
+  # ── HD3090 (also sold as Pusa Amulya): Sr24, Sr31 and Sr2 detected with linked markers ──
+  - type: VARIETY_CARRIES_GENE
+    subject: var:wheat:HD3090
+    object: gene:wheat:Sr24
+    qualifiers: {method: marker}
+    evidence:
+      - source: pmid:37521927
+        method: linked_marker
+        locator: "full text, Results (markers closely linked to the Sr genes)"
+        quote: "A combination of two/three Sr genes was marked in CG1029 (Sr31 and Sr2), HD3043 (Sr38 and Sr2), HD3090 (Sr24, Sr31, and Sr2)"
+
+  - type: VARIETY_CARRIES_GENE
+    subject: var:wheat:HD3090
+    object: gene:wheat:Sr31
+    qualifiers: {method: marker}
+    evidence:
+      - source: pmid:37521927
+        method: linked_marker
+        locator: "full text, Results (markers closely linked to the Sr genes)"
+        quote: "A combination of two/three Sr genes was marked in CG1029 (Sr31 and Sr2), HD3043 (Sr38 and Sr2), HD3090 (Sr24, Sr31, and Sr2)"
+
+  - type: VARIETY_CARRIES_GENE
+    subject: var:wheat:HD3090
+    object: gene:wheat:Sr2
+    qualifiers: {method: marker}
+    evidence:
+      - source: pmid:37521927
+        method: linked_marker
+        locator: "full text, Results (markers closely linked to the Sr genes)"
+        quote: "A combination of two/three Sr genes was marked in CG1029 (Sr31 and Sr2), HD3043 (Sr38 and Sr2), HD3090 (Sr24, Sr31, and Sr2)"
+
+  # ── MP 3288 (JW 3288): Sr24 ──
+  - type: VARIETY_CARRIES_GENE
+    subject: var:wheat:MP3288
+    object: gene:wheat:Sr24
+    qualifiers: {method: marker}
+    evidence:
+      - source: pmid:37521927
+        method: linked_marker
+        locator: "full text, Discussion"
+        quote: "these pathotypes were unable to establish a compatible relationship with two Sr24-containing wheat varieties (CG1029 and MP3288)"
+
+  # ── MP 3336 (JW 3336): Sr2 ──
+  - type: VARIETY_CARRIES_GENE
+    subject: var:wheat:MP3336
+    object: gene:wheat:Sr2
+    qualifiers: {method: marker}
+    evidence:
+      - source: pmid:37521927
+        method: linked_marker
+        locator: "Table 5 (Sr genes identified using molecular markers)"
+        quote: "MP3336 | 0 | 10S | 20S | 10MS | 10MS | 0 | 20MS | 0 | 0 | 40MS | 9.40 | 314.00 | 0.034 | 30 | Sr2"

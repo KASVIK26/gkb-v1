@@ -130,7 +130,25 @@ class AgroZoneProps(_Props):
 
 
 class AdvisoryProps(_Props):
+    """What to do, structured enough to act on. Everything but action_type is optional and is recorded
+    as the source states it -- never inferred or converted -- so an advisory without a dose says so
+    rather than guessing one."""
+
     action_type: Literal["cultural", "biological", "chemical", "varietal", "monitoring"]
+    active_ingredient: str | None = None  # product / active ingredient and formulation, as published
+    dose: str | None = None  # rate with its unit, as published (e.g. "1 mL/L", "0.1%")
+    timing: str | None = None  # when to act, in the source's words
+    bbch_from: int | None = Field(default=None, ge=0, le=99)
+    bbch_to: int | None = Field(default=None, ge=0, le=99)
+    region: str | None = None  # where the source says this applies (trial site or issuing zone): local relevance varies
+
+    @model_validator(mode="after")
+    def _stage_window(self) -> AdvisoryProps:
+        if (self.bbch_from is None) != (self.bbch_to is None):
+            raise ValueError("set bbch_from and bbch_to together, or neither")
+        if self.bbch_from is not None and self.bbch_from > self.bbch_to:
+            raise ValueError("bbch_from must be <= bbch_to")
+        return self
 
 
 PROPS_MODEL: dict[EntityType, type[_Props]] = {
