@@ -1,13 +1,13 @@
 {
-  "release": "2026_10_26",
-  "built_at": "2026-10-02T14:53:59.809266+00:00",
-  "git_sha": "9dfcefeeb3ba34f8fc5b953f35d5f7b5833266c4",
-  "git_dirty": false,
+  "release": "2026_10_27",
+  "built_at": "2026-10-02T15:55:54.080271+00:00",
+  "git_sha": "69944f8a91cdbb7ce6753165cb5045e616867908",
+  "git_dirty": true,
   "counts": {
-    "sources": 83,
-    "entities": 318,
-    "claims": 578,
-    "evidence": 612
+    "sources": 97,
+    "entities": 473,
+    "claims": 833,
+    "evidence": 876
   },
   "content_sources": {
     "config/vocab/diseases.yaml": "sha256:9293f54c8491e143a3bcf646b2069cd2f392376d38a03f4d46999492625321db",
@@ -18,7 +18,10 @@
     "kg/curated/chickpea_reactions_v1.yaml": "sha256:95e1ca299708b91a700d29d15f4847f04b482e056eef8f4ce0c64cb6fd610922",
     "kg/curated/chickpea_seed_genes.yaml": "sha256:dce22ec42768d4029b5cc32a60bf6bf23ecc3f73a26dcd8e9930791d3b69310c",
     "kg/curated/env_triggers_v1.yaml": "sha256:bd6ea3129e87150db1b19789380faa6bd8626786d3fb1cd310f067d7e0fc3de5",
+    "kg/curated/gene_resistance_catalogue_v1.yaml": "sha256:851b27f3b82f02adb0889fb25be6f04f3b5a2d0b160c3131f91fe7194afe501a",
+    "kg/curated/qtl_meta_analyses_v1.yaml": "sha256:2e2365845da8222a1fcc2f18f2781514a6f232bb8c0b8ffeb038e67041ac4277",
     "kg/curated/soybean_seed_genes.yaml": "sha256:4ca42f2d6bbdf7434f8147de6afa7c8dfebedab65d0b668c67a16bba2905f5f0",
+    "kg/curated/variety_gene_postulations_v1.yaml": "sha256:ab34758fed1ea46e6cb044120a67eccb0f9f78ec81721077a4bab8239313dfc9",
     "kg/curated/variety_genes_v1.yaml": "sha256:0aa015101c0243faee2a9d7eeec26021e515dcb2a1c0626ae6f5bda53332a218",
     "kg/curated/wheat_reactions_v1.yaml": "sha256:0f71b3a2a5f8a453572ba2dc303ce416ba10a5fa32aeec52c0f3e6a13456f087",
     "kg/curated/wheat_seed_genes.yaml": "sha256:e0ffeaf357b31ed586b45bcf79c390c5a9d0dfa310fdd9a30dabf36a8ee90ac4",

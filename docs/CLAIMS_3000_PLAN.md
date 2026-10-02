@@ -1,6 +1,6 @@
 # Plan: from 333 to 3,000+ verified claims
 
-**Progress 2026-10-03: 578 claims live (release `kg_2026_10_26`) after WO01-WO03; see PHASES.md items 43-44. Next: WO04-WO12, and an AI-or-human review of each batch (the review log shows how).**
+**Progress 2026-10-03: 833 claims live (release `kg_2026_10_27`) after WO01-WO06; see PHASES.md items 43-45. Next: WO04-WO12, and an AI-or-human review of each batch (the review log shows how).**
 
 Written 2026-10-02 against release `kg_2026_10_24` (333 claims, 73 sources, 216 entities; tiers A 223 / B 32 / C 42 / D 36).
 Goal: **at least 3,000 claims in the live release, each with a source a machine has checked**, without lowering the bar that the

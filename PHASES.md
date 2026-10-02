@@ -1525,6 +1525,23 @@ are also where most of the work is.
    - **Limits:** reviewer is an AI; WO02/WO03 are one source per claim; the parser reads only the AICRP Crop Protection layout; check varieties repeated
      across AVT groups give several same-season readings. A human pass is still the way to raise confidence (`review-sheet` / `apply-review`).
 
+45. **WO04-WO06 reviewed and released (2026-10-03, release 2026_10_27: 578 -> 833 claims).** Gene catalogue (WO04), variety-gene (WO05) and QTL (WO06)
+   batches. From here a crop scientist on the team reviews the live hosted graph and sends corrections to the owner, so the AI review in
+   `kg/review_log/2026-10-03b_wo04-wo06.md` is a first pass, not a sign-off (same policy as item 44: no reviewer stamp, `llm:` evidence stays discounted).
+   255 claims added (variety-gene 135, QTL 48, gene-disease 72), none removed; 2 existing claims rose a tier on gaining a second source. 262 claims
+   trace to this work (212 tier D: review-article statements and postulations). All 264 new evidence rows verify against live documents (232 exact, 32 whitespace-only).
+   - **New knowledge**: the first chickpea Fusarium-wilt genes by race (h1/h2/H3 for race 1A, FOC-2..5) and seven chickpea wilt meta-QTLs; 39 wheat powdery-mildew
+     meta-QTLs with flanking markers, LOD and PVE; two stripe-rust QTLs from an Indian RIL population (Cappelle-Desprez x PBW 343); wheat Pm/Fhb genes with their
+     donor species (54 genes now carry `origin_species`); gene combinations of 31 popular Indian wheat varieties.
+   - **How it was checked beyond the verifier**: WO05's 128 rows were cross-checked mechanically (variety = the row's first cell, gene = an exact token among the row's gene
+     cells); WO06's 39 meta-QTLs were compared cell by cell (name, LOD, PVE, markers) with 0 mismatches; WO04's catalogue rows were rebuilt from the paper's own table text.
+   - **Judgement calls recorded**: five Lr "marker" claims were downgraded to *postulation* (the table says "inferred presence", derived from seedling reactions against isogenic lines);
+     donor species not recorded when the cell is a genus placeholder or a misspelling; 9 vaguer "resistance_type unknown" duplicates of existing claims dropped; GWAS marker rows and
+     comma-containing SNP ids dropped.
+   - **Five defects in my own tooling fixed**: a table caption sat after its rows in the audited text (breaking every caption-header-row quote); cell separators were compared on one side
+     only; a strict schema rejected a whole batch for one extra key in `source`; real brackets in a paper's text were treated as an editorial cut; a new QTL's trait now defaults to the disease of its claim.
+   - **Next**: donor species is stored but not yet shown on the dashboard (the public gene view does not expose `origin_species`); WO07-WO12 (pathotypes, advisories, epidemiology, gap-filler).
+
 ---
 
 ## 6. Definition of "done" reminder (unchanged from RESEARCH_ROADMAP.md §10)
