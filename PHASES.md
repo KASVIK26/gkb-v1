@@ -1542,6 +1542,19 @@ are also where most of the work is.
      only; a strict schema rejected a whole batch for one extra key in `source`; real brackets in a paper's text were treated as an editorial cut; a new QTL's trait now defaults to the disease of its claim.
    - **Next**: donor species is stored but not yet shown on the dashboard (the public gene view does not expose `origin_species`); WO07-WO12 (pathotypes, advisories, epidemiology, gap-filler).
 
+46. **WO07-WO11 reviewed and released (2026-10-03, release 2026_10_28: 833 -> 869 claims).** Pathotypes (WO07), fungicide recommendations (WO08, WO09),
+   epidemiology triggers (WO10, not converted) and the soybean/chickpea gap-filler runs (WO11, ChatGPT + Grok). AI first-pass review as in items 44-45
+   (`kg/review_log/2026-10-03c_wo07-wo11.md`; no reviewer stamp, `llm:` evidence discounted). 43 curated claims of which 36 are new and 7 add a second source to an existing claim
+   (4 existing claims rose C -> B); new claims: 3 tier B, 17 C, 16 D. All 47 new evidence rows verify against the live documents (37 exact, 10 whitespace-only).
+   - **New knowledge**: pathotypes of the three wheat rusts (Pst 238S119/46S119/78S84/110S119, Pgt 11, Pt 52-4/52/77-9/52-6/77-9) tied to their pathogens, and brown-rust pathotype 52-6
+     defeating Lr24 and Lr39 (Maharashtra); AESA/CIBRC fungicide doses for wheat rusts, powdery mildew and soybean rust; field-trial recommendations (soybean anthracnose, wheat stem and leaf rust, chickpea rust);
+     charcoal-rot and dry-root-rot reactions of named soybean/chickpea varieties.
+   - **Left out, with reasons in the log**: pathotype claims the source makes about a whole pathogen *population*; a mancozeb dose that is ten times the label (source error); a CIBRC stem-rust row carrying the
+     powdery-mildew pathogen's name; germplasm accessions; 21 bacterial-pustule rows (paper not verifiable); 7 Grok rows with a title but no PMID/DOI; the WO10 trigger rows (a trigger needs aggregation, window and BBCH fields no source states).
+   - **Tooling**: Crossref fallback for DOIs Europe PMC does not index (`curator/lit/crossref.py`) and the same fallback in the final audit; a new pathotype takes its pathogen from the claim; advisory ids are
+     disease-independent (one practice, one entity).
+   - **Next**: the AICRP gene-postulation reader (official-source gene claims for ~130 trial entries per year, second source for GW 322, HD 2967, HD 3086), then WO12 and re-runs.
+
 ---
 
 ## 6. Definition of "done" reminder (unchanged from RESEARCH_ROADMAP.md §10)
