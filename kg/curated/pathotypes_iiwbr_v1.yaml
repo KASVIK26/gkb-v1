@@ -1,0 +1,273 @@
+# Rust pathotypes reported by the IIWBR Mehtaensis newsletters (2020, 2026) and a genome-sequencing paper (pmid:36327308): which pathotypes of yellow, black
+# and brown rust are predominant in India, the new brown-rust pathotype 52-6 and the genes it defeats. Work order WO07, reviewed 2026-10-03
+# (kg/review_log/2026-10-03c_wo07-wo11.md). Evidence stays `llm:` (discounted).
+
+sources:
+- id: doc:mehtaensis_46_2_2026
+  type: official_document
+  title: 'Mehtaensis: Six-monthly newsletter'
+  year: 2026
+  venue: ICAR-Indian Institute of Wheat and Barley Research, Regional Station, Flowerdale, Shimla
+  url: https://iiwbr.org.in/wp-content/uploads/2026/08/Mehtaensis-462-July-26-1.pdf
+  verified: true
+- id: doc:mehtaensis_40_2_2020
+  type: official_document
+  title: 'Mehtaensis: Six-monthly newsletter'
+  year: 2020
+  venue: ICAR-Indian Institute of Wheat and Barley Research, Regional Station, Flowerdale, Shimla
+  url: https://iiwbr.org.in/wp-content/uploads/2023/09/Mehtaensis-40-2-July-2020.pdf
+  verified: true
+- id: pmid:36327308
+  type: publication
+  title: Whole genome resequencing and comparative genome analysis of three Puccinia striiformis f. sp. tritici pathotypes prevalent in India
+  year: 2022
+  venue: PloS one
+  url: https://doi.org/10.1371/journal.pone.0261697
+  verified: true
+entities:
+- id: pt:puccinia_striiformis_f_sp_tritici:238S119
+  type: Pathotype
+  name: Pst 238S119
+  synonyms:
+  - 238S119
+  - Pst238S119
+  name_i18n: {}
+  props:
+    designation: 238S119
+- id: pt:puccinia_striiformis_f_sp_tritici:46S119
+  type: Pathotype
+  name: Pst 46S119
+  synonyms:
+  - 46S119
+  - Pst46S119
+  name_i18n: {}
+  props:
+    designation: 46S119
+- id: pt:puccinia_graminis_f_sp_tritici:11
+  type: Pathotype
+  name: Pgt 11
+  synonyms:
+  - '11'
+  - Pgt11
+  name_i18n: {}
+  props:
+    designation: '11'
+- id: pt:puccinia_triticina:52-4
+  type: Pathotype
+  name: Pt 52-4
+  synonyms:
+  - 52-4
+  - Pt52-4
+  name_i18n: {}
+  props:
+    designation: 52-4
+- id: pt:puccinia_triticina:52_77-9
+  type: Pathotype
+  name: Pt 52/77-9
+  synonyms:
+  - 52/77-9
+  - Pt52/77-9
+  name_i18n: {}
+  props:
+    designation: 52/77-9
+- id: pt:puccinia_triticina:52-6
+  type: Pathotype
+  name: Pt 52-6
+  synonyms:
+  - 52-6
+  - Pt52-6
+  name_i18n: {}
+  props:
+    designation: 52-6
+- id: gene:wheat:Lr39
+  type: Gene
+  name: Lr39
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Lr39
+- id: pt:puccinia_triticina:77-9
+  type: Pathotype
+  name: Pt 77-9
+  synonyms:
+  - 77-9
+  - Pt77-9
+  name_i18n: {}
+  props:
+    designation: 77-9
+- id: pt:puccinia_striiformis_f_sp_tritici:78S84
+  type: Pathotype
+  name: Pst 78S84
+  synonyms:
+  - 78S84
+  - Pst78S84
+  name_i18n: {}
+  props:
+    designation: 78S84
+- id: pt:puccinia_striiformis_f_sp_tritici:110S119
+  type: Pathotype
+  name: Pst 110S119
+  synonyms:
+  - 110S119
+  - Pst110S119
+  name_i18n: {}
+  props:
+    designation: 110S119
+claims:
+- type: PATHOTYPE_VARIANT_OF
+  subject: pt:puccinia_striiformis_f_sp_tritici:238S119
+  object: path:puccinia_striiformis_f_sp_tritici
+  qualifiers: {}
+  evidence:
+  - source: doc:mehtaensis_46_2_2026
+    method: official_document
+    locator: 'Executive summary (English) [alias in quote: object named ''wheat yellow rust'']'
+    quote: Seven pathotypes of wheat yellow rust and one pathotype of barley yellow rust pathogens were identified, with pathotype 238S119 being the most predominant, followed by 46S119.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0001
+  - source: doc:mehtaensis_40_2_2020
+    method: official_document
+    locator: 'Executive summary (English) [alias in quote: object named ''Puccinia striiformis tritici'']'
+    quote: Pathotyping of rust samples revealed that the frequency of Puccinia striiformis tritici (Pst; Yellow rust) pathotype 238S119 was maximum (44.06%) followed by pathotype 46S119 (33.2%) and 110S119 in 18.98% of the analyzed samples.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0013
+- type: PATHOTYPE_VARIANT_OF
+  subject: pt:puccinia_striiformis_f_sp_tritici:46S119
+  object: path:puccinia_striiformis_f_sp_tritici
+  qualifiers: {}
+  evidence:
+  - source: doc:mehtaensis_46_2_2026
+    method: official_document
+    locator: 'Executive summary (English) [alias in quote: object named ''wheat yellow rust'']'
+    quote: Seven pathotypes of wheat yellow rust and one pathotype of barley yellow rust pathogens were identified, with pathotype 238S119 being the most predominant, followed by 46S119.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0002
+  - source: pmid:36327308
+    method: controlled_env
+    locator: 'Abstract [alias in quote: subject named ''Pst46S119''; object named ''Pst'']'
+    quote: we conducted whole-genome re-sequencing of three prevalent Indian Pst pathotypes Pst46S119, Pst78S84 and Pst110S119.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0016
+- type: PATHOTYPE_VARIANT_OF
+  subject: pt:puccinia_graminis_f_sp_tritici:11
+  object: path:puccinia_graminis_f_sp_tritici
+  qualifiers: {}
+  evidence:
+  - source: doc:mehtaensis_46_2_2026
+    method: official_document
+    locator: 'Executive summary (English) [alias in quote: object named ''black rust'']'
+    quote: Among 49 black rust samples analysed, eight pathotypes were identified, with pathotype 11 remaining the most prevalent.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0006
+  - source: doc:mehtaensis_40_2_2020
+    method: official_document
+    locator: 'Executive summary (English) [alias in quote: object named ''P. graminis tritici'']'
+    quote: Pathotype 11 of P. graminis tritici (Pgt; black rust) was the most frequent and was observed in 88.2% of the samples analyzed followed by 40A and 40-2 which were recorded in 4.7 and 3.9% samples, respectively.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0015
+- type: PATHOTYPE_VARIANT_OF
+  subject: pt:puccinia_triticina:52-4
+  object: path:puccinia_triticina
+  qualifiers: {}
+  evidence:
+  - source: doc:mehtaensis_46_2_2026
+    method: official_document
+    locator: 'Executive summary (English) [alias in quote: object named ''brown rust'']'
+    quote: Analysis of 302 brown rust isolates resulted in the identification of 25 pathotypes, among which 52-4 and 52/77-9 together constituted nearly two-thirds of the total population, indicating their dominance across India and Nepal.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0008
+- type: PATHOTYPE_VARIANT_OF
+  subject: pt:puccinia_triticina:52_77-9
+  object: path:puccinia_triticina
+  qualifiers: {}
+  evidence:
+  - source: doc:mehtaensis_46_2_2026
+    method: official_document
+    locator: 'Executive summary (English) [alias in quote: object named ''brown rust'']'
+    quote: Analysis of 302 brown rust isolates resulted in the identification of 25 pathotypes, among which 52-4 and 52/77-9 together constituted nearly two-thirds of the total population, indicating their dominance across India and Nepal.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0009
+- type: PATHOTYPE_VARIANT_OF
+  subject: pt:puccinia_triticina:52-6
+  object: path:puccinia_triticina
+  qualifiers: {}
+  evidence:
+  - source: doc:mehtaensis_46_2_2026
+    method: official_document
+    locator: 'Executive summary (English) [alias in quote: object named ''brown rust'']'
+    quote: A major scientific achievement during the season was the identification of a new brown rust pathotype, designated as 52-6, from Maharashtra. This pathotype possesses additional virulence against the resistance genes Lr24 and Lr39 while remaining avirulent to Lr26.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0010
+- type: GENE_PATHOTYPE_INTERACTION
+  subject: gene:wheat:Lr24
+  object: pt:puccinia_triticina:52-6
+  qualifiers:
+    outcome: defeated
+    region: Maharashtra
+  evidence:
+  - source: doc:mehtaensis_46_2_2026
+    method: official_document
+    locator: Executive summary (English)
+    quote: A major scientific achievement during the season was the identification of a new brown rust pathotype, designated as 52-6, from Maharashtra. This pathotype possesses additional virulence against the resistance genes Lr24 and Lr39 while remaining avirulent to Lr26.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0011
+- type: GENE_PATHOTYPE_INTERACTION
+  subject: gene:wheat:Lr39
+  object: pt:puccinia_triticina:52-6
+  qualifiers:
+    outcome: defeated
+    region: Maharashtra
+  evidence:
+  - source: doc:mehtaensis_46_2_2026
+    method: official_document
+    locator: Executive summary (English)
+    quote: A major scientific achievement during the season was the identification of a new brown rust pathotype, designated as 52-6, from Maharashtra. This pathotype possesses additional virulence against the resistance genes Lr24 and Lr39 while remaining avirulent to Lr26.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0019
+- type: GENE_PATHOTYPE_INTERACTION
+  subject: gene:wheat:Lr26
+  object: pt:puccinia_triticina:52-6
+  qualifiers:
+    outcome: effective
+    region: Maharashtra
+  evidence:
+  - source: doc:mehtaensis_46_2_2026
+    method: official_document
+    locator: Executive summary (English)
+    quote: A major scientific achievement during the season was the identification of a new brown rust pathotype, designated as 52-6, from Maharashtra. This pathotype possesses additional virulence against the resistance genes Lr24 and Lr39 while remaining avirulent to Lr26.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0012
+- type: PATHOTYPE_VARIANT_OF
+  subject: pt:puccinia_triticina:77-9
+  object: path:puccinia_triticina
+  qualifiers: {}
+  evidence:
+  - source: doc:mehtaensis_40_2_2020
+    method: official_document
+    locator: 'Executive summary (English) [alias in quote: object named ''triticina'']'
+    quote: Pathotypes 77-9, 77-5 and 77-1 were the most predominant in ... triticina (Pt; brown rut) population and were identified in 50.3, 28.2 and 7.1 % of the samples, respectively.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0014
+- type: PATHOTYPE_VARIANT_OF
+  subject: pt:puccinia_striiformis_f_sp_tritici:78S84
+  object: path:puccinia_striiformis_f_sp_tritici
+  qualifiers: {}
+  evidence:
+  - source: pmid:36327308
+    method: controlled_env
+    locator: 'Abstract [alias in quote: subject named ''Pst78S84''; object named ''Pst'']'
+    quote: we conducted whole-genome re-sequencing of three prevalent Indian Pst pathotypes Pst46S119, Pst78S84 and Pst110S119.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0017
+- type: PATHOTYPE_VARIANT_OF
+  subject: pt:puccinia_striiformis_f_sp_tritici:110S119
+  object: path:puccinia_striiformis_f_sp_tritici
+  qualifiers: {}
+  evidence:
+  - source: pmid:36327308
+    method: controlled_env
+    locator: 'Abstract [alias in quote: subject named ''Pst110S119''; object named ''Pst'']'
+    quote: we conducted whole-genome re-sequencing of three prevalent Indian Pst pathotypes Pst46S119, Pst78S84 and Pst110S119.
+    extractor: llm:grok-deepsearch@wo07-2026-10-02
+    candidate_id: WO07-0018

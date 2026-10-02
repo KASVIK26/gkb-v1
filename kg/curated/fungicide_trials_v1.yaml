@@ -1,0 +1,108 @@
+# Fungicide field trials: soybean anthracnose (Legume Research), wheat stem rust at Indore (AICRP crop protection report 2022-23), wheat leaf rust
+# (Maharashtra). Work order WO09, reviewed 2026-10-03 (kg/review_log/2026-10-03c_wo07-wo11.md). Evidence stays `llm:` (discounted).
+
+sources:
+- id: doi:10.18805/lr-4783
+  type: publication
+  title: Evaluation of Novel Fungicide for the Management of Soybean Anthracnose Disease and Yield Loss Estimation
+  year: 2022
+  venue: LEGUME RESEARCH - AN INTERNATIONAL JOURNAL
+  url: https://doi.org/10.18805/lr-4783
+  verified: true
+- id: doi:10.33545/2664844x.2025.v7.i9d.760
+  type: publication
+  title: Evaluation of fungicides against leaf rust of wheat incited by Puccinia triticina Eriks
+  year: 2025
+  venue: International Journal of Agriculture and Food Science
+  url: https://doi.org/10.33545/2664844x.2025.v7.i9d.760
+  verified: true
+entities:
+- id: adv:soybean:picoxystrobin_7_05_propiconazole_11_71_w_6b997ee6
+  type: Advisory
+  name: Picoxystrobin 7.05% + Propiconazole 11.71% w/w foliar spray @ 0.2%
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    action_type: chemical
+    active_ingredient: Picoxystrobin 7.05% + Propiconazole 11.71% w/w
+    dose: 0.20 per cent
+    timing: three foliar applications
+- id: adv:soybean:hexaconazole_5_ec_e8ece6f2
+  type: Advisory
+  name: Hexaconazole 5% EC foliar spray @ 0.1%
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    action_type: chemical
+    active_ingredient: Hexaconazole 5% EC
+    dose: 0.1%
+    timing: three foliar sprays, at 30, 45 and 60 days after sowing
+- id: adv:wheat:tebuconazole_50_trifloxystrobin_25_wg_9105d72f
+  type: Advisory
+  name: Tebuconazole 50% + Trifloxystrobin 25% WG @ 0.06%
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    action_type: chemical
+    active_ingredient: Tebuconazole 50% + Trifloxystrobin 25% WG
+    dose: 0.06 %
+    timing: at disease initiation and repeated after 14 days
+    region: Indore
+- id: adv:wheat:tebuconazole_50_trifloxystrobin_25_wg_a86e111f
+  type: Advisory
+  name: Tebuconazole 50% + Trifloxystrobin 25% WG @ 0.1%
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    action_type: chemical
+    active_ingredient: Tebuconazole 50% + Trifloxystrobin 25% WG
+    dose: 0.1%
+claims:
+- type: DISEASE_MANAGED_BY
+  subject: dis:soybean:anthracnose
+  object: adv:soybean:picoxystrobin_7_05_propiconazole_11_71_w_6b997ee6
+  qualifiers: {}
+  evidence:
+  - source: doi:10.18805/lr-4783
+    method: field_single_env
+    locator: 'Abstract / Result / Conclusion [alias in quote: subject named ''soybean anthracnose'']'
+    quote: After three foliar applications of the novel fungicide, Picoxystrobin 7.05 per cent + Propiconazole 11.71 per cent w/w @ 0.20 per cent, the maximum disease control (PDC), the lowest disease index (PDI) and the area under the disease progress curve (AUDPC) were obtained. ... Foliar application of novel fungicide, Picoxystrobin 7.05% + Propiconazole 11.71% w/w @ 0.2% was found to be the best treatment for the management of soybean anthracnose
+    extractor: llm:grok-deepsearch@wo09-2026-10-02
+    candidate_id: WO09-0001
+- type: DISEASE_MANAGED_BY
+  subject: dis:soybean:anthracnose
+  object: adv:soybean:hexaconazole_5_ec_e8ece6f2
+  qualifiers: {}
+  evidence:
+  - source: doi:10.18805/lr-4783
+    method: field_single_env
+    locator: 'Abstract / Result [alias in quote: subject named ''soybean anthracnose'']'
+    quote: other treatments were selected as picoxystrobin 22.52% w/w SC @ 0.08%, propiconazole 25% w/w EC @ 0.1%, pyraclostrobin 20% w/w WG @ 0.1%, hexaconazole 5% EC @ 0.1% and control was untreated. ... foliar spray of each treatment was given thrice, each at 30 days after sowing (DAS), 45 DAS and 60 DAS. ... all the treatments were found significantly effective against soybean anthracnose during both the years.
+    extractor: llm:grok-deepsearch@wo09-2026-10-02
+    candidate_id: WO09-0002
+- type: DISEASE_MANAGED_BY
+  subject: dis:wheat:stem_rust
+  object: adv:wheat:tebuconazole_50_trifloxystrobin_25_wg_9105d72f
+  qualifiers: {}
+  evidence:
+  - source: doc:aicrp_crop_protection_2022_23
+    method: field_single_env
+    locator: Indore stem rust chemical control table / text
+    quote: for the management of stem rust of wheat at Indore location during 2022-2023. ... The foliar spray of Tebuconazole 50% + Trifloxystrobin 25% WG @ 0.06 % followed by Tebuconazole 25.9 % EC @0.1% was found significantly best among all the treatments when applied at disease initiation and repeated after 14 days.
+    extractor: llm:grok-deepsearch@wo09-2026-10-02
+    candidate_id: WO09-0003
+- type: DISEASE_MANAGED_BY
+  subject: dis:wheat:leaf_rust
+  object: adv:wheat:tebuconazole_50_trifloxystrobin_25_wg_a86e111f
+  qualifiers: {}
+  evidence:
+  - source: doi:10.33545/2664844x.2025.v7.i9d.760
+    method: field_single_env
+    locator: Abstract / Results
+    quote: against the leaf rust of wheat, the study's finding showed that, of the different fungicides treatments, (T 3 ) Tebuconazole 50% + Trifloxystrobin 25% WG @ 0.1% was the most successful, as evidenced by the significantly higher grain yield (29.11 q/ha), plant height (80.95 cm), 1000 grain weight (49.19 gm) and dry matter yield (54.11 q/ha)
+    extractor: llm:grok-deepsearch@wo09-2026-10-02
+    candidate_id: WO09-0005

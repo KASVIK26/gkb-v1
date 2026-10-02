@@ -78,7 +78,10 @@ def fetch_source_text(source_id: str) -> str | None:
     """Abstract plus (when open access) the full text and table rows for a pmid:/doi: source, or None."""
     try:
         record = europepmc.get_record(source_id)
-    except (europepmc.EuropePMCError, europepmc.PublicationNotFound):
+    except europepmc.PublicationNotFound:
+        # A DOI Europe PMC does not index (many Indian journals): the publisher's page, as the ingest step read it (candidates._verify_via_crossref).
+        return fetch_url_text("https://doi.org/" + source_id.removeprefix("doi:")) if source_id.startswith("doi:") else None
+    except europepmc.EuropePMCError:
         return None
     parts = [record.get("title") or "", europepmc.abstract_from_record(record) or ""]
     pmcid = record.get("pmcid")

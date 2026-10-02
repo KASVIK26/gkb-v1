@@ -34,7 +34,7 @@ from rapidfuzz import fuzz
 from curator.extract.normalize import RejectedCandidate, build_claim_candidate
 from curator.graph.bundle import KGBundle
 from curator.graph.quote_audit import check_quote, explain_missing, fetch_source_text, fetch_url_text, normalise
-from curator.lit import europepmc
+from curator.lit import crossref, europepmc
 from curator.lit.find_evidence import compile_term
 from curator.model import Claim, Entity, Evidence, Source
 from curator.model.claims import MIN_QUOTE_CHARS
@@ -147,6 +147,7 @@ def process_candidates(
     fetch_record: Callable[[str], dict] = europepmc.get_record,
     fetch_text: Callable[[str], str | None] = fetch_source_text,
     fetch_url: Callable[[str], str | None] = fetch_url_text,
+    fetch_work: Callable[[str], dict | None] = crossref.get_work,
 ) -> IngestResult:
     result = IngestResult()
     known_sources = {s.id for s in bundle.sources}
@@ -173,6 +174,7 @@ def process_candidates(
             outcome = _process_one(
                 candidate, raw, result=result, bundle=bundle, entities=entities, known_sources=known_sources,
                 records=records, texts=texts, fetch_record=fetch_record, fetch_text=fetch_text, fetch_url=fetch_url,
+                fetch_work=fetch_work,
             )
         except _Stop as stop:
             outcome = Outcome(candidate.candidate_id, stop.bucket, stop.reason, raw)
@@ -181,7 +183,7 @@ def process_candidates(
 
 
 def _process_one(c: Candidate, raw: dict, *, result: IngestResult, bundle: KGBundle, entities: list, known_sources: set,
-                 records: dict, texts: dict, fetch_record, fetch_text, fetch_url) -> Outcome:
+                 records: dict, texts: dict, fetch_record, fetch_text, fetch_url, fetch_work) -> Outcome:
     quote = c.quote.strip()
     if len(quote) < MIN_QUOTE_CHARS or len(quote) > MAX_QUOTE_CHARS:
         raise _Stop("rejected", f"quote length {len(quote)} outside {MIN_QUOTE_CHARS}-{MAX_QUOTE_CHARS}")
@@ -190,13 +192,15 @@ def _process_one(c: Candidate, raw: dict, *, result: IngestResult, bundle: KGBun
     review_flags: list[str] = []
 
     # 1. the source is real ─────────────────────────────────────────────
-    source, text, is_review = _verify_source(c, records, texts, fetch_record, fetch_text, fetch_url)
+    source, text, is_review, landing_only = _verify_source(c, records, texts, fetch_record, fetch_text, fetch_url, fetch_work)
 
     # 2. the quote is verbatim ──────────────────────────────────────────
     if text is None:
         raise _Stop("unverifiable", "source text could not be read from here")
     status = check_quote(quote, text)
     if status == "missing":
+        if landing_only:
+            raise _Stop("unverifiable", "paper is not on Europe PMC; its publisher page was readable but does not contain the quote (full text not available here)")
         if source.type is SourceType.PUBLICATION and len(text) < 3000:
             raise _Stop("unverifiable", "only an abstract is readable and the quote is not in it")
         detail = []
@@ -244,10 +248,15 @@ def _process_one(c: Candidate, raw: dict, *, result: IngestResult, bundle: KGBun
             else:
                 review_flags.append(f"quote does not name the {side} ({entity.name})")
     if c.object.type is EntityType.ADVISORY:
-        for key in ("active_ingredient", "dose"):
-            value = (c.object.advisory or {}).get(key)
-            if value and re.sub(r"\s+", "", value.lower()) not in re.sub(r"\s+", "", normalise(quote)):
-                review_flags.append(f"advisory {key} {value!r} is not in the quote")
+        advisory = c.object.advisory or {}
+        squashed = re.sub(r"\s+", "", normalise(quote))
+        if advisory.get("active_ingredient") and re.sub(r"\s+", "", advisory["active_ingredient"].lower()) not in squashed:
+            review_flags.append(f"advisory active_ingredient {advisory['active_ingredient']!r} is not in the quote")
+        spaced = normalise(quote)
+        missing = [n for n in re.findall(r"\d+(?:[.,]\d+)?", advisory.get("dose") or "")
+                   if not re.search(rf"(?<![\d.,]){re.escape(n)}(?![\d])", spaced)]   # whole numbers only: "5" is not in "25"
+        if missing:
+            review_flags.append(f"advisory dose {advisory['dose']!r} has number(s) {missing} that are not in the quote")
 
     # 5. accept ───────────────────────────────────────────────────────
     method = _cap_method(BASIS_TO_METHOD[c.evidence_basis], source, is_review, claim)
@@ -273,7 +282,7 @@ def _process_one(c: Candidate, raw: dict, *, result: IngestResult, bundle: KGBun
 
 
 # ───────────────────────────── helpers ─────────────────────────────
-def _verify_source(c: Candidate, records, texts, fetch_record, fetch_text, fetch_url) -> tuple[Source, str | None, bool]:
+def _verify_source(c: Candidate, records, texts, fetch_record, fetch_text, fetch_url, fetch_work) -> tuple[Source, str | None, bool, bool]:
     ref = c.source
     if ref.kind == "publication":
         identifier = f"pmid:{ref.pmid}" if ref.pmid else (f"doi:{ref.doi}" if ref.doi else None)
@@ -286,6 +295,8 @@ def _verify_source(c: Candidate, records, texts, fetch_record, fetch_text, fetch
                 records[identifier] = None
         record = records[identifier]
         if record is None:
+            if ref.doi and not ref.pmid:
+                return _verify_via_crossref(ref, texts, fetch_url, fetch_work)
             raise _Stop("rejected", f"{identifier} not found on Europe PMC")
         meta = europepmc.metadata_from_record(record, identifier)
         if fuzz.ratio(_title_key(ref.title), _title_key(meta.title)) < TITLE_MATCH_MIN:
@@ -299,7 +310,7 @@ def _verify_source(c: Candidate, records, texts, fetch_record, fetch_text, fetch
         if stored_id not in texts:
             texts[stored_id] = fetch_text(stored_id)
         pub_types = " ".join((record.get("pubTypeList") or {}).get("pubType", [])).lower()
-        return source, texts[stored_id], "review" in pub_types
+        return source, texts[stored_id], "review" in pub_types, False
     if ref.kind == "official_document":
         if not (ref.url or "").startswith("http") or not ref.doc_slug or not _SLUG_RE.match(ref.doc_slug):
             raise _Stop("rejected", "official_document needs an http(s) url and a lowercase doc_slug")
@@ -308,8 +319,28 @@ def _verify_source(c: Candidate, records, texts, fetch_record, fetch_text, fetch
             texts[source_id] = fetch_url(ref.url)
         source = Source(id=source_id, type=SourceType.OFFICIAL_DOCUMENT, title=ref.title, year=ref.year,
                         venue=ref.publisher, url=ref.url, verified=True)
-        return source, texts[source_id], False
+        return source, texts[source_id], False, False
     raise _Stop("rejected", f"source kind {ref.kind!r} is not auto-ingestable (publication and official_document only)")
+
+
+def _verify_via_crossref(ref: SourceRef, texts: dict, fetch_url, fetch_work) -> tuple[Source, str | None, bool, bool]:
+    """A DOI Europe PMC does not know: verify it against Crossref and look for the quote on the publisher's page (and PDF, if linked)."""
+    try:
+        work = fetch_work(ref.doi)
+    except crossref.CrossrefError as exc:
+        raise _Stop("unverifiable", f"Crossref could not be reached for doi:{ref.doi}: {str(exc)[:80]}") from exc
+    if work is None:
+        raise _Stop("rejected", f"doi:{ref.doi} is not registered on Europe PMC or Crossref")
+    title = crossref.title_of(work)
+    if not title or fuzz.ratio(_title_key(ref.title), _title_key(title)) < TITLE_MATCH_MIN:
+        raise _Stop("rejected", f"title mismatch: model said {ref.title[:70]!r}, Crossref says {title[:70]!r}")
+    doi = (work.get("DOI") or ref.doi).lower()
+    source = Source(id=f"doi:{doi}", type=SourceType.PUBLICATION, title=title.replace('"', "'"), year=crossref.year_of(work),
+                    venue=crossref.venue_of(work), url=f"https://doi.org/{doi}", verified=True)
+    if source.id not in texts:
+        pages = [fetch_url(f"https://doi.org/{doi}")] + [fetch_url(u) for u in crossref.pdf_links(work)[:2]]
+        texts[source.id] = " ".join(p for p in pages if p) or None
+    return source, texts[source.id], "review" in title.lower(), True
 
 
 def _near_duplicate(existing: str, proposed: str) -> bool:
@@ -362,13 +393,14 @@ def _prepare_mention(m: Mention, c: Candidate, known: list, new_entities: list) 
             props = AdvisoryProps.model_validate(m.advisory)
         except ValidationError as exc:
             raise _Stop("rejected", f"advisory block invalid: {str(exc)[:120]}") from exc
-        digest = hashlib.sha1(json.dumps([m.text, m.advisory], sort_keys=True).encode()).hexdigest()[:6]
-        local = f"{slugify(c.subject.text)[:30]}_{slugify(props.active_ingredient or props.action_type)[:30]}_{digest}"
+        # One advisory is one PRACTICE (product, dose, timing, place); it can manage several diseases, so its id must not name a disease.
+        digest = hashlib.sha1(json.dumps([crop, m.text, m.advisory], sort_keys=True).encode()).hexdigest()[:8]
+        local = f"{slugify(props.active_ingredient or props.action_type)[:40]}_{digest}"
         entity = Entity(id=make_id(EntityType.ADVISORY, local, crop), type=EntityType.ADVISORY, name=m.text[:140], crop=crop,
                         props=props.model_dump(exclude_none=True))
         if entity.id not in {e.id for e in known + new_entities}:
             new_entities.append(entity)
-        return Mention(text=entity.name, type=m.type)
+        return Mention(text=entity.name, type=m.type, entity_id=entity.id)
     if m.type is EntityType.AGRO_ZONE:
         zone = next((e for e in known if e.id == f"zone:{crop}:{m.text.strip().upper()}"), None)
         if zone is None:
@@ -380,15 +412,38 @@ def _prepare_mention(m: Mention, c: Candidate, known: list, new_entities: list) 
         if close:
             raise _Stop("needs_review", f"new {m.type.value} {m.text!r} is very close to existing {close[0]!r}")
         default_trait = f"{c.object.text} resistance" if (c.claim_type is ClaimType.QTL_ASSOCIATION and m is c.subject) else None
-        new_entities.append(_new_entity(m, crop, known + new_entities, default_trait=default_trait))
+        new_entities.append(_new_entity(m, crop, known + new_entities, default_trait=default_trait,
+                                        default_pathogen=_pathogen_for(m, c, known + new_entities)))
         return m
     return m  # unresolved: build_claim_candidate will reject with the reason, and we log the missing entity
+
+
+# The gene-symbol class names the pathogen it acts on (Yr -> stripe rust, Lr -> leaf rust, Sr -> stem rust, Pm -> powdery mildew).
+_PATHOGEN_OF_GENE_CLASS = {"yr": "path:puccinia_striiformis_f_sp_tritici", "lr": "path:puccinia_triticina",
+                           "sr": "path:puccinia_graminis_f_sp_tritici", "pm": "path:blumeria_graminis_f_sp_tritici"}
+
+
+def _pathogen_for(m: Mention, c: Candidate, known: list) -> str | None:
+    """Which pathogen a NEW pathotype belongs to, when the claim itself says so: 'pathotype X is a variant of <pathogen>', or a
+    pathotype that a Yr/Lr/Sr/Pm gene is effective or defeated against."""
+    if m.type is not EntityType.PATHOTYPE:
+        return None
+    if c.claim_type is ClaimType.PATHOTYPE_VARIANT_OF and m is c.subject:
+        from curator.extract.normalize import resolve_entity_from_bundle
+        try:
+            return resolve_entity_from_bundle(c.object.text, EntityType.PATHOGEN, known, c.crop.value)
+        except Exception:  # noqa: BLE001 -- ambiguous or unknown: the caller rejects with the usual message
+            return None
+    if c.claim_type is ClaimType.GENE_PATHOTYPE_INTERACTION and m is c.object:
+        match = re.match(r"(Yr|Lr|Sr|Pm)\d", c.subject.text.strip(), flags=re.IGNORECASE)
+        return _PATHOGEN_OF_GENE_CLASS.get(match.group(1).lower()) if match else None
+    return None
 
 
 AUTO_CREATE = frozenset({EntityType.VARIETY, EntityType.GENE, EntityType.QTL, EntityType.MARKER, EntityType.PATHOTYPE})
 
 
-def _new_entity(m: Mention, crop: str, known: list, *, default_trait: str | None = None) -> Entity:
+def _new_entity(m: Mention, crop: str, known: list, *, default_trait: str | None = None, default_pathogen: str | None = None) -> Entity:
     """Build the entity a candidate introduces, from the candidate's own `props`; never invent a property."""
     name, props = m.text.strip(), dict(m.props or {})
     try:
@@ -406,11 +461,12 @@ def _new_entity(m: Mention, crop: str, known: list, *, default_trait: str | None
             if "marker_type" not in props:
                 raise _Stop("rejected", f"new Marker {name!r} needs props.marker_type (KASP|SSR|STS|SNP|CAPS|SCAR|other)")
             return Entity(id=make_id(EntityType.MARKER, gene_local(name), crop), type=m.type, name=name, crop=crop, props=props)
-        pathogen = props.pop("pathogen", None)
+        pathogen = props.pop("pathogen", None) or default_pathogen
         if not pathogen or not any(e.id == pathogen and e.type is EntityType.PATHOGEN for e in known):
             raise _Stop("rejected", f"new Pathotype {name!r} needs props.pathogen set to an existing path:<slug> id")
-        return Entity(id=f"pt:{pathogen.split(':', 1)[1]}:{gene_local(name)}", type=m.type, name=name,
-                      props={"designation": name, **props})
+        local = re.sub(r"[^A-Za-z0-9._\-]+", "_", name).strip("_")        # "52/77-9" -> "52_77-9" in the id; the name stays as printed
+        return Entity(id=f"pt:{pathogen.split(':', 1)[1]}:{local}", type=m.type, name=name,
+                      props={"designation": name, **props}, synonyms=list(m.synonyms))
     except (ValidationError, ValueError) as exc:
         raise _Stop("rejected", f"cannot create {m.type.value} {name!r}: {str(exc)[:140]}") from exc
 

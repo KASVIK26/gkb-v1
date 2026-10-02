@@ -214,7 +214,11 @@ def test_pathotype_is_created_only_under_an_existing_pathogen(bundle):
     base = _candidate(claim_type="GENE_PATHOTYPE_INTERACTION", subject={"text": "Sr31", "type": "Gene"},
                       object={"text": "TKTTF", "type": "Pathotype"}, qualifiers={"outcome": "defeated"},
                       quote="Sr31 was defeated by pathotype TKTTF in Ethiopia.", evidence_basis="primary_field")
-    assert _run(bundle, base, text=text).counts() == {"rejected": 1}
+    # an Sr gene acts on the stem rust pathogen, so the new pathotype's pathogen is known from the claim itself ...
+    assert _run(bundle, base, text=text).counts() == {"accepted": 1}
+    # ... but a gene whose symbol names no pathogen class gives no such default
+    unknown_class = {**base, "subject": {"text": "Rpp1", "type": "Gene"}, "quote": "Sr31 was defeated by pathotype TKTTF in Ethiopia."}
+    assert _run(bundle, unknown_class, text=text.replace("Sr31", "Rpp1")).counts() != {"accepted": 1}
     good = {**base, "object": {"text": "TKTTF", "type": "Pathotype", "props": {"pathogen": "path:puccinia_graminis_f_sp_tritici"}}}
     result = _run(bundle, good, text=text)
     assert result.counts() == {"accepted": 1}
@@ -295,3 +299,89 @@ def test_a_new_qtl_for_a_disease_gets_that_disease_as_its_trait_but_a_marker_sti
     result = _run(bundle, cand, text=text)
     assert result.counts() == {"accepted": 1}
     assert result.entities["qtl:wheat:MQTL1A.1"].props["trait"] == "leaf rust resistance"
+
+
+# ---------- papers Europe PMC does not index: Crossref fallback ----------
+WORK = {"DOI": "10.18805/lr-9999", "title": ["Screening of chickpea genotypes against Fusarium wilt"], "issued": {"date-parts": [[2021]]},
+        "container-title": ["Legume Research"]}
+
+
+def _doi_candidate(**over):
+    return _candidate(source={"kind": "publication", "doi": "10.18805/LR-9999", "title": "Screening of chickpea genotypes against Fusarium wilt"},
+                      quote="HI 1544 stayed moderately resistant to leaf rust.", **over)
+
+
+def _run_doi(bundle, work, page_text):
+    def fetch_record(identifier):
+        raise europepmc.PublicationNotFound(identifier)
+    return process_candidates([json.dumps(_doi_candidate())], bundle=bundle, fetch_record=fetch_record, fetch_text=lambda _i: None,
+                              fetch_url=lambda _u: page_text, fetch_work=lambda _d: work)
+
+
+def test_a_doi_unknown_to_europe_pmc_is_verified_through_crossref_and_the_publisher_page(bundle):
+    result = _run_doi(bundle, WORK, PAPER_TEXT)
+    assert result.counts() == {"accepted": 1}
+    source = result.sources["doi:10.18805/lr-9999"]
+    assert source.verified and source.venue == "Legume Research" and source.year == 2021
+
+
+def test_a_quote_not_on_the_publishers_page_is_unverifiable_not_rejected(bundle):
+    result = _run_doi(bundle, WORK, "Abstract only. " * 400)        # the page is readable but the quote lives in the PDF we cannot read
+    assert result.counts() == {"unverifiable": 1}
+
+
+def test_crossref_title_mismatch_and_unregistered_doi_are_rejected(bundle):
+    assert _run_doi(bundle, {**WORK, "title": ["A completely unrelated paper on maize silage"]}, PAPER_TEXT).counts() == {"rejected": 1}
+    assert _run_doi(bundle, None, PAPER_TEXT).counts() == {"rejected": 1}
+
+
+# ---------- pathotypes and shared advisories ----------
+def test_a_new_pathotype_takes_its_pathogen_from_the_claim(bundle):
+    text = PAPER_TEXT + " Pathotype 238S119 is a variant of Puccinia striiformis f. sp. tritici."
+    cand = _candidate(claim_type="PATHOTYPE_VARIANT_OF", subject={"text": "238S119", "type": "Pathotype"},
+                      object={"text": "Puccinia striiformis f. sp. tritici", "type": "Pathogen"}, qualifiers={},
+                      quote="Pathotype 238S119 is a variant of Puccinia striiformis f. sp. tritici.", evidence_basis="official_document",
+                      source={"kind": "official_document", "url": "https://example.gov.in/p.pdf", "doc_slug": "example_path", "title": "Pathotypes"})
+    result = _run(bundle, cand, text=text, url_text=text)
+    assert result.counts() == {"accepted": 1}
+    assert "pt:puccinia_striiformis_f_sp_tritici:238S119" in result.entities
+
+
+def test_one_advisory_can_manage_several_diseases_without_colliding(bundle):
+    text = "For rust control spray Propiconazole 25 EC at 0.1% on wheat against yellow rust and leaf rust. " + "x " * 2000
+    adv = {"text": "Propiconazole spray", "type": "Advisory",
+           "advisory": {"action_type": "chemical", "active_ingredient": "Propiconazole 25 EC", "dose": "0.1%"}}
+    base = _candidate(claim_type="DISEASE_MANAGED_BY", qualifiers={}, object=adv, evidence_basis="review_or_secondary",
+                      quote="spray Propiconazole 25 EC at 0.1% on wheat against yellow rust and leaf rust")
+    two = [json.dumps({**base, "candidate_id": "A1", "subject": {"text": "yellow rust", "type": "Disease"}}),
+           json.dumps({**base, "candidate_id": "A2", "subject": {"text": "leaf rust", "type": "Disease"}})]
+    result = process_candidates(two, bundle=bundle, fetch_record=lambda _i: RECORD, fetch_text=lambda _i: text, fetch_url=lambda _u: None)
+    assert result.counts() == {"accepted": 2}
+    advisories = [e for e in result.entities.values() if e.type.value == "Advisory"]
+    assert len(advisories) == 1                                    # one practice ...
+    assert len({spec["subject"] for spec in result.claims.values()}) == 2   # ... managing two diseases
+
+
+def test_pathotype_with_a_slash_gets_a_safe_id_and_keeps_its_printed_name(bundle):
+    text = PAPER_TEXT + " Among 302 brown rust isolates, pathotypes 52-4 and 52/77-9 together constituted two-thirds of the population."
+    cand = _candidate(claim_type="PATHOTYPE_VARIANT_OF", subject={"text": "52/77-9", "type": "Pathotype"},
+                      object={"text": "Puccinia triticina", "type": "Pathogen", "alias_in_quote": "brown rust"}, qualifiers={},
+                      quote="Among 302 brown rust isolates, pathotypes 52-4 and 52/77-9 together constituted two-thirds of the population.",
+                      evidence_basis="official_document",
+                      source={"kind": "official_document", "url": "https://example.gov.in/m.pdf", "doc_slug": "example_mehta", "title": "Mehtaensis"})
+    result = _run(bundle, cand, text=text, url_text=text)
+    assert result.counts() == {"accepted": 1}
+    assert result.entities["pt:puccinia_triticina:52_77-9"].name == "52/77-9"
+
+
+def test_a_decoded_dose_is_accepted_when_its_numbers_are_in_the_quote_and_refused_when_one_is_not(bundle):
+    text = "Propiconazole 25% EC ... Wheat ... Stripe rust 125gm 500gm 750 30 " + "x " * 2000
+    def cand(dose):
+        return _candidate(claim_type="DISEASE_MANAGED_BY", qualifiers={}, subject={"text": "stripe rust", "type": "Disease"}, evidence_basis="official_document",
+                          object={"text": "Propiconazole 25% EC spray", "type": "Advisory", "advisory": {"action_type": "chemical", "active_ingredient": "Propiconazole 25% EC", "dose": dose}},
+                          quote="Propiconazole 25% EC ... Wheat ... Stripe rust 125gm 500gm 750 30",
+                          source={"kind": "official_document", "url": "https://example.gov.in/c.pdf", "doc_slug": "example_cibrc", "title": "CIBRC"})
+    ok = _run(bundle, cand("125gm a.i. and 500gm formulation per ha in 750 l water"), text=text, url_text=text)
+    assert ok.counts() == {"accepted": 1}
+    bad = _run(bundle, cand("150gm a.i. and 500gm formulation per ha in 750 l water"), text=text, url_text=text)
+    assert bad.counts() == {"needs_review": 1} and "150" in bad.outcomes[0].reason

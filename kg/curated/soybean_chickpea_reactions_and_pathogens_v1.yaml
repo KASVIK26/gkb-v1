@@ -1,0 +1,288 @@
+# Soybean/chickpea: charcoal rot, dry root rot and anthracnose reactions of named varieties, causal organisms, SMV and frogeye resistance genes, chickpea
+# rust fungicides. Work order WO11 (ChatGPT complete run + Grok run), reviewed 2026-10-03 (kg/review_log/2026-10-03c_wo07-wo11.md).
+# Evidence stays `llm:` (discounted).
+
+sources:
+- id: pmid:41233748
+  type: publication
+  title: Virulence patterns of Colletotrichum truncatum isolates causing soybean anthracnose disease and identification of resistance sources
+  year: 2025
+  venue: BMC plant biology
+  url: https://doi.org/10.1186/s12870-025-07680-7
+  verified: true
+- id: doi:10.5958/2249-8788.2019.00021.0
+  type: publication
+  title: Resistance in soybean varieties against charcoal rot disease caused by Macrophomina phaseolina
+  year: 2019
+  venue: Plant Disease Research
+  url: https://doi.org/10.5958/2249-8788.2019.00021.0
+  verified: true
+- id: pmid:41477268
+  type: publication
+  title: Unveiling key genetic determinants of charcoal rot resistance in soybean via genome-wide association studies
+  year: 2025
+  venue: Frontiers in plant science
+  url: https://doi.org/10.3389/fpls.2025.1649397
+  verified: true
+- id: doi:10.18805/lr-4061
+  type: publication
+  title: Screening Chickpea Genotypes for Resistance to Rhizoctonia bataticola in Controlled Conditions
+  year: 2019
+  venue: LEGUME RESEARCH-AN INTERNATIONAL JOURNAL
+  url: https://doi.org/10.18805/lr-4061
+  verified: true
+- id: pmid:27965641
+  type: publication
+  title: The Current Status of the Soybean-Soybean Mosaic Virus (SMV) Pathosystem
+  year: 2016
+  venue: Frontiers in microbiology
+  url: https://doi.org/10.3389/fmicb.2016.01906
+  verified: true
+- id: doi:10.22271/phyto.2021.v10.i1m.13449
+  type: publication
+  title: Field evaluation of different fungicides against Uromyces ciceris-arietini causing rust in chickpea in northern Karnataka
+  year: 2021
+  venue: Journal of Pharmacognosy and Phytochemistry
+  url: https://doi.org/10.22271/phyto.2021.v10.i1m.13449
+  verified: true
+entities:
+- id: adv:chickpea:azoxystrobin_18_2_difenoconazole_11_4_sc_7da78dc3
+  type: Advisory
+  name: Azoxystrobin 18.2% + Difenoconazole 11.4% SC two sprays @ 0.1%
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    action_type: chemical
+    active_ingredient: azoxystrobin 18.2% + difenoconazole 11.4% sc
+    dose: 0.1%
+    timing: two sprays at 15 days interval
+- id: adv:chickpea:tebuconazole_50_trifloxystrobin_25_w_w_7_b1aa2b76
+  type: Advisory
+  name: Tebuconazole 50% + Trifloxystrobin 25% WG @ 0.5 g/l
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    action_type: chemical
+    active_ingredient: Tebuconazole 50%+ Trifloxystrobin 25% w/w 75WG
+    dose: 0.5 g/l water
+    region: Dharwad and Arabhavi
+claims:
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC130
+  object: dis:soybean:anthracnose
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: pmid:41233748
+    method: controlled_env
+    locator: 'Abstract; resistance-screening result [alias in quote: object named ''Anthracnose disease'']'
+    quote: Anthracnose disease caused by Colletotrichum truncatum is a major disease in soybean in India. ... Further, a total of ninety-five soybean genotypes were screened against CT-18 (OP133629), where no genotype was found highly resistant. However, seven genotypes viz., NRC 130 (DS = 1.80), NB 208 (DS = 1.85), AGS 136 A (DS = 2.00), NRC 202 (DS = 2.00), NRC 152 (DS = 2.00), EC 34,106 (DS = 2.00) and CAT 1504 (DS = 2.00) were found to be resistant.
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0001
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC152
+  object: dis:soybean:anthracnose
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: pmid:41233748
+    method: controlled_env
+    locator: 'Abstract; resistance-screening result [alias in quote: object named ''Anthracnose disease'']'
+    quote: Anthracnose disease caused by Colletotrichum truncatum is a major disease in soybean in India. ... Further, a total of ninety-five soybean genotypes were screened against CT-18 (OP133629), where no genotype was found highly resistant. However, seven genotypes viz., NRC 130 (DS = 1.80), NB 208 (DS = 1.85), AGS 136 A (DS = 2.00), NRC 202 (DS = 2.00), NRC 152 (DS = 2.00), EC 34,106 (DS = 2.00) and CAT 1504 (DS = 2.00) were found to be resistant.
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0005
+- type: DISEASE_CAUSED_BY
+  subject: dis:soybean:anthracnose
+  object: path:colletotrichum_truncatum
+  qualifiers: {}
+  evidence:
+  - source: pmid:41233748
+    method: controlled_env
+    locator: 'Abstract [alias in quote: subject named ''Anthracnose disease'']'
+    quote: Anthracnose disease caused by Colletotrichum truncatum is a major disease in soybean in India.
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0008
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2098
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2018 & 2019
+  evidence:
+  - source: doi:10.5958/2249-8788.2019.00021.0
+    method: field_single_env
+    locator: Abstract; field study
+    quote: In two years (2018 & 2019) field study, out of twenty two varieties, only three (JS 20–98, JS 20–34 and MAUS 162) were found to be absolutely/highly resistant whereas four (JS 20–69, NRC 86, MACS 450, PS 1225) showed moderately resistant reaction against the charcoal rot.
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0035
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2034
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2018 & 2019
+  evidence:
+  - source: doi:10.5958/2249-8788.2019.00021.0
+    method: field_single_env
+    locator: Abstract; field study
+    quote: In two years (2018 & 2019) field study, out of twenty two varieties, only three (JS 20–98, JS 20–34 and MAUS 162) were found to be absolutely/highly resistant whereas four (JS 20–69, NRC 86, MACS 450, PS 1225) showed moderately resistant reaction against the charcoal rot.
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0036
+- type: VARIETY_REACTION
+  subject: var:soybean:MAUS162
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2018 & 2019
+  evidence:
+  - source: doi:10.5958/2249-8788.2019.00021.0
+    method: field_single_env
+    locator: Abstract; field study
+    quote: In two years (2018 & 2019) field study, out of twenty two varieties, only three (JS 20–98, JS 20–34 and MAUS 162) were found to be absolutely/highly resistant whereas four (JS 20–69, NRC 86, MACS 450, PS 1225) showed moderately resistant reaction against the charcoal rot.
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0037
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2069
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+    season: 2018 & 2019
+  evidence:
+  - source: doi:10.5958/2249-8788.2019.00021.0
+    method: field_single_env
+    locator: Abstract; field study
+    quote: In two years (2018 & 2019) field study, out of twenty two varieties, only three (JS 20–98, JS 20–34 and MAUS 162) were found to be absolutely/highly resistant whereas four (JS 20–69, NRC 86, MACS 450, PS 1225) showed moderately resistant reaction against the charcoal rot.
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0038
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC86
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+    season: 2018 & 2019
+  evidence:
+  - source: doi:10.5958/2249-8788.2019.00021.0
+    method: field_single_env
+    locator: Abstract; field study
+    quote: In two years (2018 & 2019) field study, out of twenty two varieties, only three (JS 20–98, JS 20–34 and MAUS 162) were found to be absolutely/highly resistant whereas four (JS 20–69, NRC 86, MACS 450, PS 1225) showed moderately resistant reaction against the charcoal rot.
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0039
+- type: DISEASE_CAUSED_BY
+  subject: dis:soybean:charcoal_rot
+  object: path:macrophomina_phaseolina
+  qualifiers: {}
+  evidence:
+  - source: doi:10.5958/2249-8788.2019.00021.0
+    method: field_single_env
+    locator: Title and abstract
+    quote: Resistance in soybean varieties against charcoal rot disease caused by Macrophomina phaseolina
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0042
+  - source: pmid:41477268
+    method: gwas
+    locator: Abstract
+    quote: Charcoal rot is a soil- and seed-borne disease caused by a necrotrophic fungal pathogen—Macrophomina phaseolina.
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0044
+- type: VARIETY_REACTION
+  subject: var:chickpea:JAKI9218
+  object: dis:chickpea:dry_root_rot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doi:10.18805/lr-4061
+    method: controlled_env
+    locator: Abstract; 520-genotype screening
+    quote: Among 520 genotypes, three were resistant viz., PG 06102, BG 2094 and IC 552137; 21 were moderate resistant viz., IC 15167, IC 2867, JAKI 9218, ICC 9023, ICC-14346, IC-269768, PG 01103, Pule 9801, KGD 120, NbeG 28, WR 315, IC-269488, IC 552198, IC 552178, IC 552132, IC 552320, IC 552214, IC 552232, CLH 29, IC 552102, IC 552224; 76 were moderate susceptible, 337 were susceptible and the rest eighty three were highly susceptible for dry root rot.
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0050
+- type: DISEASE_CAUSED_BY
+  subject: dis:chickpea:rust
+  object: path:uromyces_ciceris_arietini
+  qualifiers: {}
+  evidence:
+  - source: doi:10.56093/ijas.v94i7.140504
+    method: field_single_env
+    locator: Title; abstract
+    quote: Field efficacy of novel fungicides against chickpea rust (Uromyces ciceris-arietini)
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0071
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rsv1
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27965641
+    method: review_statement
+    locator: 'Table 1; Rsv1 discussion [alias in quote: object named ''SMV'']'
+    quote: Rsv1 was originally identified in the soybean line PI 96983 (Kiihl and Hartwig, 1979), and it confers extreme resistance (ER) to SMV-G1 through G6 but not to SMV-G7 (Chen et al., 1991; Hajimorad and Hill, 2001; Table 1).
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0073
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rsv3
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27965641
+    method: review_statement
+    locator: 'Table 1; Rsv3 discussion [alias in quote: object named ''SMV'']'
+    quote: The diverse soybean cultivars carrying Rsv3 alleles condition resistance to SMV G5 through G7, but not G1 through G4 (Jeong et al., 2002; Table 1).
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0074
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:soybean:Rsv4
+  object: dis:soybean:mosaic_virus
+  qualifiers:
+    resistance_type: unknown
+  evidence:
+  - source: pmid:27965641
+    method: review_statement
+    locator: 'Rsv4 discussion [alias in quote: object named ''SMV'']'
+    quote: Rsv4 confer resistance to all 7 SMV strains (Chen et al., 1993; Ma et al., 1995). It was identified in soybean cultivars V94-5152 and mapped to a 0.4 cM interval between the proximal marker Rat2 and the distal marker S6ac
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0075
+- type: DISEASE_CAUSED_BY
+  subject: dis:soybean:frogeye_leaf_spot
+  object: path:cercospora_sojina
+  qualifiers: {}
+  evidence:
+  - source: pmid:37313225
+    method: linked_marker
+    locator: Abstract
+    quote: Frogeye leaf spot is a yield-reducing disease of soybean caused by the pathogen Cercospora sojina.
+    extractor: llm:chatgpt-deep-research@wo11-chatgpt-deep-research-2026-10-02
+    candidate_id: WO11c-0079
+- type: DISEASE_MANAGED_BY
+  subject: dis:chickpea:rust
+  object: adv:chickpea:azoxystrobin_18_2_difenoconazole_11_4_sc_7da78dc3
+  qualifiers: {}
+  evidence:
+  - source: doi:10.56093/ijas.v94i7.140504
+    method: field_single_env
+    locator: 'Abstract [alias in quote: subject named ''rust severity'']'
+    quote: two sprays of 0.1% azoxystrobin 18.2% + difenoconazole 11.4% sc fungicide at 15 days interval minimizes the rust severity to the tune of >77%
+    extractor: llm:grok-deepsearch@wo11-grok-2026-10-02
+    candidate_id: WO11g-0001
+- type: DISEASE_MANAGED_BY
+  subject: dis:chickpea:rust
+  object: adv:chickpea:tebuconazole_50_trifloxystrobin_25_w_w_7_b1aa2b76
+  qualifiers: {}
+  evidence:
+  - source: doi:10.22271/phyto.2021.v10.i1m.13449
+    method: field_single_env
+    locator: Abstract
+    quote: A field experiment was conducted to evaluate different fungicides against chickpea rust caused by Uromyces ciceris-arietini at Main Agricultural Research Station (MARS), Dharwad and ARS, Arabhavi during Rabi 2017 and 2018. ... less percent disease index was observed in spray with Tebuconazole 50%+ Trifloxystrobin 25% w/w 75WG @ 0.5 g/l water and it was found effective in managing the disease with 15.81%
+    extractor: llm:grok-deepsearch@wo11-grok-2026-10-02
+    candidate_id: WO11g-0002

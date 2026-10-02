@@ -138,9 +138,11 @@ def test_production_tracks_a_defeated_gene():
         c for c in bundle.claims
         if c.type is ClaimType.GENE_PATHOTYPE_INTERACTION and c.qualifiers.get("outcome") == "defeated"
     ]
-    assert [(c.subject_id, c.object_id, c.qualifiers["year"]) for c in defeated] == [
-        ("gene:wheat:Sr31", "pt:puccinia_graminis_f_sp_tritici:Ug99", 1999)
-    ]
+    dated = [(c.subject_id, c.object_id, c.qualifiers["year"]) for c in defeated if "year" in c.qualifiers]
+    assert dated == [("gene:wheat:Sr31", "pt:puccinia_graminis_f_sp_tritici:Ug99", 1999)]
+    # IIWBR Mehtaensis 2026 (work order WO07): the new brown-rust pathotype 52-6 defeats Lr24 and Lr39, undated in the source
+    assert {(c.subject_id, c.object_id) for c in defeated if "year" not in c.qualifiers} == {
+        ("gene:wheat:Lr24", "pt:puccinia_triticina:52-6"), ("gene:wheat:Lr39", "pt:puccinia_triticina:52-6")}
 
 
 def test_production_claims_only_cite_verified_publications():

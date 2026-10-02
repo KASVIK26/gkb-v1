@@ -1,0 +1,183 @@
+# Fungicide recommendations from two official documents: the PPQS AESA IPM package for wheat (2014) and the CIBRC Major Uses of Pesticides (Fungicides)
+# as on 31.03.2024 (dose columns decoded with the table header, which is quoted). Work order WO08, reviewed 2026-10-03
+# (kg/review_log/2026-10-03c_wo07-wo11.md). Evidence stays `llm:` (discounted).
+
+sources:
+- id: doc:ppqs_aesa_ipm_wheat_2014
+  type: official_document
+  title: AESA based IPM Package WHEAT
+  year: 2014
+  venue: National Institute of Plant Health Management / Directorate of Plant Protection Quarantine & Storage
+  url: https://ppqs.gov.in/sites/default/files/wheat.pdf
+  verified: true
+- id: doc:cibrc_fungicides_31_03_2024
+  type: official_document
+  title: Major Uses of Pesticides (Fungicides) as on 31.03.2024
+  year: 2024
+  venue: Central Insecticide Board & Registration Committee / PPQS
+  url: https://ppqs.gov.in/sites/default/files/fungicides_31.03.2024.pdf
+  verified: true
+entities:
+- id: adv:wheat:propiconazole_25_ec_902abd09
+  type: Advisory
+  name: Propiconazole 25% EC @ 200 ml in 200 l of water/acre
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    action_type: chemical
+    active_ingredient: Propiconazole 25% EC
+    dose: 200 ml in 200 l of water/acre
+- id: adv:wheat:tebuconazole_25_ec_249ad85d
+  type: Advisory
+  name: Tebuconazole 25% EC @ 200 ml in 200 l of water/acre
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    action_type: chemical
+    active_ingredient: tebuconazole 25% EC
+    dose: 200 ml in 200 l of water/acre
+- id: adv:wheat:propiconazole_25_ec_c4fdee53
+  type: Advisory
+  name: Propiconazole 25% EC @ 125 g a.i. / 500 g formulation / 750 L water per ha
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    action_type: chemical
+    active_ingredient: Propiconazole 25% EC
+    dose: 125 g a.i. / 500 g formulation / 750 L water per ha
+    timing: 'waiting period from last application to harvest: 30 days'
+- id: adv:soybean:propiconazole_25_ec_19a3181a
+  type: Advisory
+  name: Propiconazole 25% EC @ 125 g a.i. / 500 g formulation / 500 L water per ha
+  crop: soybean
+  synonyms: []
+  name_i18n: {}
+  props:
+    action_type: chemical
+    active_ingredient: Propiconazole 25% EC
+    dose: 125 g a.i. / 500 g formulation / 500 L water per ha
+    timing: 'waiting period from last application to harvest: 26 days'
+- id: adv:wheat:triadimefon_25_wp_d850237c
+  type: Advisory
+  name: Triadimefon 25% WP @ 200 g in 300 l of water/acre
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    action_type: chemical
+    active_ingredient: Triadimefon 25% WP
+    dose: 200 g in 300 l of water/acre
+claims:
+- type: DISEASE_MANAGED_BY
+  subject: dis:wheat:stripe_rust
+  object: adv:wheat:propiconazole_25_ec_902abd09
+  qualifiers: {}
+  evidence:
+  - source: doc:ppqs_aesa_ipm_wheat_2014
+    method: official_document
+    locator: Chemical control section for Black, brown and yellow rust
+    quote: 'Black, brown and yellow rust ... Chemical control: • Propiconazole 25% EC @ 200 ml in 200 l of water/acre'
+    extractor: llm:grok-deepsearch@wo08-2026-10-02
+    candidate_id: WO08-0001
+- type: DISEASE_MANAGED_BY
+  subject: dis:wheat:leaf_rust
+  object: adv:wheat:propiconazole_25_ec_902abd09
+  qualifiers: {}
+  evidence:
+  - source: doc:ppqs_aesa_ipm_wheat_2014
+    method: official_document
+    locator: 'Chemical control section for Black, brown and yellow rust [alias in quote: subject named ''brown'']'
+    quote: 'Black, brown and yellow rust ... Chemical control: • Propiconazole 25% EC @ 200 ml in 200 l of water/acre'
+    extractor: llm:grok-deepsearch@wo08-2026-10-02
+    candidate_id: WO08-0002
+- type: DISEASE_MANAGED_BY
+  subject: dis:wheat:stem_rust
+  object: adv:wheat:propiconazole_25_ec_902abd09
+  qualifiers: {}
+  evidence:
+  - source: doc:ppqs_aesa_ipm_wheat_2014
+    method: official_document
+    locator: 'Chemical control section for Black, brown and yellow rust [alias in quote: subject named ''Black'']'
+    quote: 'Black, brown and yellow rust ... Chemical control: • Propiconazole 25% EC @ 200 ml in 200 l of water/acre'
+    extractor: llm:grok-deepsearch@wo08-2026-10-02
+    candidate_id: WO08-0003
+- type: DISEASE_MANAGED_BY
+  subject: dis:wheat:stripe_rust
+  object: adv:wheat:tebuconazole_25_ec_249ad85d
+  qualifiers: {}
+  evidence:
+  - source: doc:ppqs_aesa_ipm_wheat_2014
+    method: official_document
+    locator: Chemical control section for Black, brown and yellow rust
+    quote: 'Black, brown and yellow rust ... Chemical control: • Propiconazole 25% EC @ 200 ml in 200 l of water/acre or tebuconazole 25% EC @ 200 ml in 200 l of water/acre'
+    extractor: llm:grok-deepsearch@wo08-2026-10-02
+    candidate_id: WO08-0004
+- type: DISEASE_MANAGED_BY
+  subject: dis:wheat:leaf_rust
+  object: adv:wheat:tebuconazole_25_ec_249ad85d
+  qualifiers: {}
+  evidence:
+  - source: doc:ppqs_aesa_ipm_wheat_2014
+    method: official_document
+    locator: 'Chemical control section for Black, brown and yellow rust [alias in quote: subject named ''brown'']'
+    quote: 'Black, brown and yellow rust ... Chemical control: • Propiconazole 25% EC @ 200 ml in 200 l of water/acre or tebuconazole 25% EC @ 200 ml in 200 l of water/acre'
+    extractor: llm:grok-deepsearch@wo08-2026-10-02
+    candidate_id: WO08-0005
+- type: DISEASE_MANAGED_BY
+  subject: dis:wheat:stem_rust
+  object: adv:wheat:tebuconazole_25_ec_249ad85d
+  qualifiers: {}
+  evidence:
+  - source: doc:ppqs_aesa_ipm_wheat_2014
+    method: official_document
+    locator: 'Chemical control section for Black, brown and yellow rust [alias in quote: subject named ''Black'']'
+    quote: 'Black, brown and yellow rust ... Chemical control: • Propiconazole 25% EC @ 200 ml in 200 l of water/acre or tebuconazole 25% EC @ 200 ml in 200 l of water/acre'
+    extractor: llm:grok-deepsearch@wo08-2026-10-02
+    candidate_id: WO08-0006
+- type: DISEASE_MANAGED_BY
+  subject: dis:wheat:stripe_rust
+  object: adv:wheat:propiconazole_25_ec_c4fdee53
+  qualifiers: {}
+  evidence:
+  - source: doc:cibrc_fungicides_31_03_2024
+    method: official_document
+    locator: Propiconazole 25% EC entry for Wheat
+    quote: Crop Common name of the disease Dosage per ha Waiting period from last application to harvest (in days) a. i. (g) Formulation (g/ml)/% Dilution in water(L) ... Propiconazole 25% EC ... Wheat ... Stripe rust /Yellow Rust (P. striiformis) 125gm 500gm 750 30
+    extractor: llm:grok-deepsearch@wo08-2026-10-02
+    candidate_id: WO08-0010
+- type: DISEASE_MANAGED_BY
+  subject: dis:wheat:leaf_rust
+  object: adv:wheat:propiconazole_25_ec_c4fdee53
+  qualifiers: {}
+  evidence:
+  - source: doc:cibrc_fungicides_31_03_2024
+    method: official_document
+    locator: Propiconazole 25% EC entry for Wheat
+    quote: Crop Common name of the disease Dosage per ha Waiting period from last application to harvest (in days) a. i. (g) Formulation (g/ml)/% Dilution in water(L) ... Propiconazole 25% EC ... Wheat ... Leaf rust / Brown Rust (Pucciniarecondite F.sp. tritici) 125gm 500gm 750 30
+    extractor: llm:grok-deepsearch@wo08-2026-10-02
+    candidate_id: WO08-0011
+- type: DISEASE_MANAGED_BY
+  subject: dis:soybean:rust
+  object: adv:soybean:propiconazole_25_ec_19a3181a
+  qualifiers: {}
+  evidence:
+  - source: doc:cibrc_fungicides_31_03_2024
+    method: official_document
+    locator: 'Propiconazole 25% EC entry for Soyabean [alias in quote: subject named ''Rust'']'
+    quote: Crop Common name of the disease Dosage per ha Waiting period from last application to harvest (in days) a. i. (g) Formulation (g/ml)/% Dilution in water(L) ... Propiconazole 25% EC ... Soyabean ... Rust(Phakopsoa pachyrhizi) 125gm 500gm 500 26
+    extractor: llm:grok-deepsearch@wo08-2026-10-02
+    candidate_id: WO08-0013
+- type: DISEASE_MANAGED_BY
+  subject: dis:wheat:powdery_mildew
+  object: adv:wheat:triadimefon_25_wp_d850237c
+  qualifiers: {}
+  evidence:
+  - source: doc:ppqs_aesa_ipm_wheat_2014
+    method: official_document
+    locator: Powdery mildew Chemical control
+    quote: 'Powdery mildew ... Chemical control: • Triadimefon 25% WP @ 200 g in 300 l of water/acre'
+    extractor: llm:grok-deepsearch@wo08-2026-10-02
+    candidate_id: WO08-0014

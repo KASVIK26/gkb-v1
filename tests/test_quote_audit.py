@@ -231,3 +231,18 @@ def test_a_bracket_that_is_part_of_the_papers_text_is_not_an_elision():
     source = "in soybean (Glycine max [L.] Merr.). Next sentence."
     assert check_quote("in soybean (Glycine max [L.] Merr.).", source) == "exact"
     assert check_quote("in soybean (Glycine max [...] Merr.).", source) == "exact"   # a genuine elision still works
+
+
+def test_a_doi_europe_pmc_does_not_index_is_audited_against_the_publishers_page(monkeypatch):
+    import curator.graph.quote_audit as qa
+
+    def not_indexed(_id):
+        raise qa.europepmc.PublicationNotFound(_id)
+
+    seen = []
+    monkeypatch.setattr(qa.europepmc, "get_record", not_indexed)
+    monkeypatch.setattr(qa, "fetch_url_text", lambda url: seen.append(url) or "Abstract: Hexaconazole 5% EC @ 0.1% was effective.")
+    text = qa.fetch_source_text("doi:10.18805/lr-4783")
+    assert seen == ["https://doi.org/10.18805/lr-4783"]
+    assert qa.check_quote("Hexaconazole 5% EC @ 0.1% was effective.", text) == "exact"
+    assert qa.fetch_source_text("pmid:1") is None          # a PMID has no publisher page to fall back to
