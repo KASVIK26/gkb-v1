@@ -134,6 +134,43 @@ def verify_quotes_cmd(
         raise typer.Exit(code=1)
 
 
+@kg_app.command("ingest-candidates")
+def ingest_candidates_cmd(
+    candidates: Path = typer.Argument(..., exists=True, dir_okay=False, help="JSONL file: one candidate claim per line."),
+    out: Path = typer.Option(None, help="Curated YAML to write (default: kg/incoming/<input name>.yaml)."),
+    sample_rate: float = typer.Option(0.1, min=0.0, max=1.0, help="Share of accepted candidates listed for a human spot-check."),
+    seed: int = typer.Option(7, help="Seed for the spot-check sample."),
+) -> None:
+    """Verify claim candidates made outside this repo (ChatGPT/Grok deep research) and write the survivors.
+
+    Every candidate is checked against the real source (Europe PMC record and title, verbatim quote, entity
+    resolution); nothing is written to kg/curated/. Outputs go next to --out: the YAML batch, a report, and the
+    needs_review / unverifiable / rejected candidates with their reasons. Needs network."""
+    import random
+
+    from curator.lit.candidates import process_candidates, report_markdown, to_curated_yaml
+
+    out = out or Path("kg/incoming") / f"{candidates.stem}.yaml"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    result = process_candidates(candidates.read_text(encoding="utf-8").splitlines(), bundle=_build_bundle())
+
+    accepted = [o.candidate_id for o in result.outcomes if o.bucket == "accepted"]
+    sample = sorted(random.Random(seed).sample(accepted, max(1, round(len(accepted) * sample_rate))) if accepted and sample_rate else [])
+    header = (
+        f"Verified from {candidates.name} by `agrihub kg ingest-candidates`. NOT yet in kg/curated/:\n"
+        "spot-check the sample in the report, then move this file there."
+    )
+    out.write_text(to_curated_yaml(result, header), encoding="utf-8", newline="\n")
+    out.with_suffix(".report.md").write_text(report_markdown(result, sample=sample), encoding="utf-8", newline="\n")
+    for bucket in ("needs_review", "unverifiable", "rejected"):
+        rows = [o for o in result.outcomes if o.bucket == bucket]
+        if rows:
+            lines = [json.dumps({"candidate_id": o.candidate_id, "reason": o.reason, "candidate": o.raw}, ensure_ascii=False) for o in rows]
+            out.with_suffix(f".{bucket}.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+    typer.echo(json.dumps({"outcomes": result.counts(), "new_claims": len(result.claims), "new_sources": len(result.sources), "new_entities": len(result.entities)}))
+    typer.echo(f"Wrote {out} (+ report). Review the sample, then: git mv {out} kg/curated/")
+
+
 @kg_app.command("promote")
 def promote_cmd(
     release: str = typer.Option(..., help="Release tag to make live, e.g. 2026_10_2 -> promotes schema kg_2026_10_2"),

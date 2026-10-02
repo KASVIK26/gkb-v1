@@ -53,6 +53,17 @@ def normalise(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip().casefold()
 
 
+def _captions(root: ET.Element) -> list[str]:
+    """Figure and table captions: real sentences of the paper (e.g. 'JG 62, the susceptible check, completely
+    wilted...') that the plain-text body leaves out."""
+    out = []
+    for wrapper in list(root.iter("fig")) + list(root.iter("table-wrap")):
+        caption = wrapper.find("caption")
+        if caption is not None:
+            out.append(_squash("".join(caption.itertext())))
+    return out
+
+
 def fetch_source_text(source_id: str) -> str | None:
     """Abstract plus (when open access) the full text and table rows for a pmid:/doi: source, or None."""
     try:
@@ -68,8 +79,10 @@ def fetch_source_text(source_id: str) -> str | None:
             xml_text = None
         if xml_text:
             try:
+                root = ET.fromstring(_DOCTYPE_RE.sub("", xml_text))
                 parts.append(jats.extract_plain_text(xml_text))
-                parts.extend(row for _, row in _table_rows(ET.fromstring(_DOCTYPE_RE.sub("", xml_text))))
+                parts.extend(row for _, row in _table_rows(root))
+                parts.extend(_captions(root))
             except ET.ParseError:
                 pass
     return " ".join(p for p in parts if p)

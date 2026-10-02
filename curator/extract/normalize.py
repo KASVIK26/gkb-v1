@@ -76,6 +76,7 @@ def build_claim_candidate(
     *,
     entities: list,
     crop: Crop | str,
+    supported: frozenset[ClaimType] = SUPPORTED_CLAIM_TYPES,
 ) -> Claim | RejectedCandidate:
     """Turn one raw LLM candidate dict into a real Claim, or a rejection with a reason.
 
@@ -92,7 +93,7 @@ def build_claim_candidate(
     except ValueError:
         return RejectedCandidate(reason=f"unknown claim_type {raw_type!r}", raw=candidate)
 
-    if claim_type not in SUPPORTED_CLAIM_TYPES:
+    if claim_type not in supported:
         return RejectedCandidate(
             reason=f"claim_type {claim_type.value!r} is not extracted by this pipeline yet", raw=candidate
         )

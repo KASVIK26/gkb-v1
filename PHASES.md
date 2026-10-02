@@ -1439,9 +1439,34 @@ are also where most of the work is.
    - Release 2026_10_24: 333 claims (A 223, B 32, C 42, D 36), live; rollback is `kg promote --release 2026_10_23`.
      Not pushed to origin, no Cloudflare redeploy needed (data only).
    - **Next**: (1) a "disputed" signal for opposing reactions across contexts, and an age rule for
-     notification-only rust resistance (roadmap 4.4 specifies x0.8 for old pathotype-dependent evidence, yet the 2004
+     notification-only rust resistance (the x0.8 staleness factor of roadmap 4.4 applies only to claims that carry a pathotype, so the 2004
      Raj 4037 claim still scores 0.9); (2) leaf rust / powdery mildew / soybean rust advisories from Indian trials; (3) human review of the
      claims (everything is still `unreviewed`).
+
+41. **Plan for 3,000+ claims, and the verifier that makes outside research usable (2026-10-02).** Item 40 measured the
+   cost of reading paper by paper (~4 % usable), so the route to scale is documents that already are tables of facts,
+   scouted by ChatGPT/Grok deep research and *verified by machine*. Written down in `docs/CLAIMS_3000_PLAN.md`
+   (budget by claim type, 6 steps from 333 to ~3,400, quality gates, known gaps).
+   - **`agrihub kg ingest-candidates FILE.jsonl`** (`curator/lit/candidates.py`): for each candidate it checks that the
+     paper exists on Europe PMC and that the title the model gave matches the registry (the registry's is stored), that the
+     quote is verbatim in the real text (fragments joined by ` ... `; captions and table rows included), that both entities
+     resolve (new Variety/Gene/QTL/Marker/Pathotype/Advisory are built only from properties the candidate states; near-duplicate
+     names go to a person), that the quote names both parties (an alias is allowed and recorded in the locator) and, for
+     advisories, contains the product and dose. The evidence method is capped by the source (a review is always
+     `review_statement`) and the extractor is `llm:`, so scoring applies its x0.6 discount until a person reviews. Output
+     goes to `kg/incoming/` (gitignored) with a report and a random 10 % spot-check list, never straight into the KB.
+     19 tests; live run on real papers accepted the two good candidates and rejected an invented title, a paraphrased quote
+     and an out-of-scope disease.
+   - **Prompts**: `docs/research_prompts/` holds the shared spec (rules, JSONL schema, claim-type table, quality bar),
+     one preamble per tool, 12 work orders (AICRP reaction tables, notified-variety lists, gene catalogues, variety-gene
+     studies, QTL tables, rust pathotypes, CIB&RC and trial advisories, epidemiology leads, gap-filler, cross-tool re-check),
+     and `tools/build_research_prompts.py`, which regenerates 14 ready-to-paste prompts from the live KB (vocabulary,
+     known varieties, a "where the KB is thin" table) so a prompt never asks for what we already have.
+   - **Fixed on the way**: figure and table captions are now part of the text the audit searches (a real quote from a
+     figure legend had been "not found"); `build_claim_candidate` takes a `supported` set so ingestion can use all 15
+     claim types while LLM extraction keeps its narrower six.
+   - **Open**: AICRP zones are not in the vocabulary (only MP and MH), so national zone documents cannot be ingested as
+     zone claims yet; the stale-resistance signal from item 40 should land before the reaction batches.
 
 ---
 
