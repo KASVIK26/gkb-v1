@@ -172,7 +172,7 @@ def test_written_yaml_loads_and_passes_the_release_gates_with_the_reference_data
     merged = KGBundle.merge(bundle, loaded)
     assert merged.gate_errors() == []
     assert yaml.safe_load(path.read_text(encoding="utf-8"))["claims"][0]["evidence"][0]["extractor"].startswith("llm:")
-    assert "Candidate ingest report" in report_markdown(result, sample=["T-1"])
+    assert "Candidate ingest report" in report_markdown(result)
 
 
 def test_alias_used_in_the_quote_is_accepted_and_recorded(bundle):
@@ -219,3 +219,18 @@ def test_pathotype_is_created_only_under_an_existing_pathogen(bundle):
     result = _run(bundle, good, text=text)
     assert result.counts() == {"accepted": 1}
     assert "pt:puccinia_graminis_f_sp_tritici:TKTTF" in result.entities
+
+
+def test_aicrp_zone_by_name_or_abbreviation_and_the_quote_must_name_it(bundle):
+    text = PAPER_TEXT + " HI 1544 is recommended for the Central Zone under timely sown irrigated conditions."
+    base = _candidate(claim_type="VARIETY_RECOMMENDED_FOR_ZONE", subject={"text": "HI 1544", "type": "Variety"},
+                      object={"text": "Central Zone", "type": "AgroZone"}, qualifiers={"sowing": "timely", "water_regime": "irrigated"},
+                      quote="HI 1544 is recommended for the Central Zone under timely sown irrigated conditions.", evidence_basis="primary_field")
+    result = _run(bundle, base, text=text)
+    assert result.counts() == {"accepted": 1}
+    (spec,) = result.claims.values()
+    assert spec["object"] == "zone:wheat:CZ"
+    # "CZ" resolves to the same zone, and the quote names it by one of its accepted names
+    assert _run(bundle, {**base, "object": {"text": "CZ", "type": "AgroZone"}}, text=text).counts() == {"accepted": 1}
+    # a zone of ANOTHER crop is a different entity: wheat has no "Southern Zone"
+    assert _run(bundle, {**base, "object": {"text": "Southern Zone", "type": "AgroZone"}}, text=text).counts() == {"rejected": 1}

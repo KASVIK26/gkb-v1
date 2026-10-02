@@ -131,14 +131,14 @@ not read, ambiguous cases you skipped and why, conflicting statements, and anyth
 |---|---|---|---|
 | VARIETY_REACTION | Variety -> Disease | **reaction** R/MR/I/MS/S/HS, **stage** seedling/adult/unspecified, location, season (`2021-22` rabi, `2022` kharif), n_locations (int), score_raw, scale, pathotype_id (only an id from my list) | official_document, primary_field, primary_controlled |
 | VARIETY_CARRIES_GENE | Variety -> Gene | **method** marker/sequence/haplotype/postulation/pedigree/stated, allele | primary_marker, primary_postulation, review_or_secondary |
-| VARIETY_RECOMMENDED_FOR_ZONE | Variety -> AgroZone (`MP` or `MH` only; other zones go to leads) | season kharif/rabi/summer, sowing early/timely/late, water_regime irrigated/rainfed/restricted_irrigation | official_document |
+| VARIETY_RECOMMENDED_FOR_ZONE | Variety -> AgroZone (a zone of THAT crop from the zone table in section 5; any other zone goes to leads) | season kharif/rabi/summer, sowing early/timely/late, water_regime irrigated/rainfed/restricted_irrigation | official_document |
 | VARIETY_DERIVED_FROM | Variety -> Variety | **role** parent/selection_from/backcross_donor/recurrent_parent | official_document, primary_postulation |
 | GENE_CONFERS_RESISTANCE | Gene -> Disease | **resistance_type** ASR (all-stage)/APR (adult-plant)/quantitative/unknown, spectrum (text) | primary_*, review_or_secondary |
 | GENE_PATHOTYPE_INTERACTION | Gene -> Pathotype | **outcome** effective/defeated, year, region | primary_controlled, primary_field |
 | QTL_ASSOCIATION | QTL -> Disease | stage, left_marker, right_marker, assembly, lod, p_value, pve_pct, population, n_env | primary_qtl, primary_gwas |
 | MARKER_LINKAGE | Marker -> Gene or QTL | distance_cm, diagnostic (true/false) | primary_marker, primary_qtl |
 | PATHOTYPE_VARIANT_OF | Pathotype -> Pathogen | (none) | any |
-| PATHOTYPE_PREVALENCE | Pathotype -> AgroZone (`MP`/`MH`) | **years** [list of ints], frequency_pct | official_document, primary_field |
+| PATHOTYPE_PREVALENCE | Pathotype -> AgroZone (a zone from section 5) | **years** [list of ints], frequency_pct | official_document, primary_field |
 | DISEASE_CAUSED_BY | Disease -> Pathogen | (none) | any |
 | DISEASE_MANAGED_BY | Disease -> Advisory | (none; the practice goes in the object's `advisory` block) | official_document, primary_field, review_or_secondary |
 
@@ -170,6 +170,10 @@ disease is in an earlier sentence). Give `bbch_from/to` only if the source state
 **Pathogens** (ids for `props.pathogen`):
 
 {{PATHOGENS}}
+
+**Zones** (`object.text` = the id's last part or the name; zones belong to ONE crop, and the same name is drawn differently per crop):
+
+{{ZONES}}
 
 **Pathotype already present:** `pt:puccinia_graminis_f_sp_tritici:Ug99`.
 

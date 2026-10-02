@@ -126,7 +126,9 @@ class EnvTriggerProps(_Props):
 
 class AgroZoneProps(_Props):
     system: Literal["AICRP", "agroclimatic", "state", "district"]
-    states: list[str] = []
+    states: list[str] = []  # states named in the definition; one with an "except ..." clause is only partly inside
+    definition: str | None = None  # the zone's definition, copied from `definition_source`
+    definition_source: str | None = None  # id of the KG source that defines it
 
 
 class AdvisoryProps(_Props):

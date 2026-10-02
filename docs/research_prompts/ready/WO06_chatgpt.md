@@ -147,14 +147,14 @@ not read, ambiguous cases you skipped and why, conflicting statements, and anyth
 |---|---|---|---|
 | VARIETY_REACTION | Variety -> Disease | **reaction** R/MR/I/MS/S/HS, **stage** seedling/adult/unspecified, location, season (`2021-22` rabi, `2022` kharif), n_locations (int), score_raw, scale, pathotype_id (only an id from my list) | official_document, primary_field, primary_controlled |
 | VARIETY_CARRIES_GENE | Variety -> Gene | **method** marker/sequence/haplotype/postulation/pedigree/stated, allele | primary_marker, primary_postulation, review_or_secondary |
-| VARIETY_RECOMMENDED_FOR_ZONE | Variety -> AgroZone (`MP` or `MH` only; other zones go to leads) | season kharif/rabi/summer, sowing early/timely/late, water_regime irrigated/rainfed/restricted_irrigation | official_document |
+| VARIETY_RECOMMENDED_FOR_ZONE | Variety -> AgroZone (a zone of THAT crop from the zone table in section 5; any other zone goes to leads) | season kharif/rabi/summer, sowing early/timely/late, water_regime irrigated/rainfed/restricted_irrigation | official_document |
 | VARIETY_DERIVED_FROM | Variety -> Variety | **role** parent/selection_from/backcross_donor/recurrent_parent | official_document, primary_postulation |
 | GENE_CONFERS_RESISTANCE | Gene -> Disease | **resistance_type** ASR (all-stage)/APR (adult-plant)/quantitative/unknown, spectrum (text) | primary_*, review_or_secondary |
 | GENE_PATHOTYPE_INTERACTION | Gene -> Pathotype | **outcome** effective/defeated, year, region | primary_controlled, primary_field |
 | QTL_ASSOCIATION | QTL -> Disease | stage, left_marker, right_marker, assembly, lod, p_value, pve_pct, population, n_env | primary_qtl, primary_gwas |
 | MARKER_LINKAGE | Marker -> Gene or QTL | distance_cm, diagnostic (true/false) | primary_marker, primary_qtl |
 | PATHOTYPE_VARIANT_OF | Pathotype -> Pathogen | (none) | any |
-| PATHOTYPE_PREVALENCE | Pathotype -> AgroZone (`MP`/`MH`) | **years** [list of ints], frequency_pct | official_document, primary_field |
+| PATHOTYPE_PREVALENCE | Pathotype -> AgroZone (a zone from section 5) | **years** [list of ints], frequency_pct | official_document, primary_field |
 | DISEASE_CAUSED_BY | Disease -> Pathogen | (none) | any |
 | DISEASE_MANAGED_BY | Disease -> Advisory | (none; the practice goes in the object's `advisory` block) | official_document, primary_field, review_or_secondary |
 
@@ -221,6 +221,32 @@ Wheat synonyms the pipeline also understands: brown rust = leaf rust, black rust
 - `path:fusarium_oxysporum_f_sp_ciceris` (Fusarium oxysporum f. sp. ciceris)
 - `path:athelia_rolfsii` (Athelia rolfsii)
 - `path:uromyces_ciceris_arietini` (Uromyces ciceris-arietini)
+
+**Zones** (`object.text` = the id's last part or the name; zones belong to ONE crop, and the same name is drawn differently per crop):
+
+| zone id | name | also accepted | definition (from the KG's source) |
+|---|---|---|---|
+| `zone:chickpea:CZ` | Central Zone (chickpea) | Central Zone, CZ | cz- central zone |
+| `zone:chickpea:MH` | MH (chickpea) | - | state-level zone |
+| `zone:chickpea:MP` | MP (chickpea) | - | state-level zone |
+| `zone:chickpea:NEPZ` | North Eastern Plain Zone (chickpea) | North Eastern Plain Zone, NEPZ | nepz-north eastern plain zone |
+| `zone:chickpea:NHZ` | Northern Hills Zone (chickpea) | Northern Hills Zone, NHZ | nhz-northern hills zone |
+| `zone:chickpea:NWPZ` | North Western Plain Zone (chickpea) | North Western Plain Zone, NWPZ | nwpz- north western plain zone |
+| `zone:chickpea:SZ` | South Zone (chickpea) | South Zone, SZ | sz-south zone |
+| `zone:soybean:CZ` | Central Zone (soybean) | Central Zone, CZ | M.P., Chhattisgarh, Rajasthan, Gujarat, Bundlekhand region of U.P. North-West Maharashtra |
+| `zone:soybean:MH` | MH (soybean) | - | state-level zone |
+| `zone:soybean:MP` | MP (soybean) | - | state-level zone |
+| `zone:soybean:NEZ` | North Eastern Zone (soybean) | North Eastern Zone, NEZ | West Bengal, Odhissa, Assam, Sikkim, Arunachal Pradesh, Nagaland, Tripura, Meghalaya, Jharkhand and Eastern Bihar |
+| `zone:soybean:NHZ` | North Hill Zone (soybean) | North Hill Zone, NHZ | Himachal Pradesh and Uttarakhand |
+| `zone:soybean:NPZ` | North Plain Zone (soybean) | North Plain Zone, NPZ | Punjab, Haryana, Delhi, North east plains of U.P. and Western Bihar |
+| `zone:soybean:SZ` | Southern Zone (soybean) | Southern Zone, SZ | Karnataka, A.P., Tamil Nadu, Kerala and Southern parts of Maharashtra |
+| `zone:wheat:CZ` | Central Zone (wheat) | Central Zone, CZ | Madhya Pradesh, Chhattisgarh, Gujarat, Rajasthan (Kota and Udaipur divisions) and Uttar Pradesh (Jhansi division) |
+| `zone:wheat:MH` | MH (wheat) | - | state-level zone |
+| `zone:wheat:MP` | MP (wheat) | - | state-level zone |
+| `zone:wheat:NEPZ` | North Eastern Plains Zone (wheat) | North Eastern Plains Zone, NEPZ | Eastern UP, Bihar, Jharkhand, Odisha, West Bengal and plains of Assam |
+| `zone:wheat:NHZ` | Northern Hills Zone (wheat) | Northern Hills Zone, NHZ | Western Himalayan regions of J&K (except Jammu and Kathua distt.); Himachal Pradesh (except Una and Paonta valley); Uttarakhand (except Tarai area); Sikkim and hills of West Bengal and N.E. States |
+| `zone:wheat:NWPZ` | North Western Plains Zone (wheat) | North Western Plains Zone, NWPZ | Punjab, Haryana, Delhi, Rajasthan (except Kota and Udaipur divisions) and Western UP (except Jhansi division), parts of J&K (Jammu and Kathua distt.) and parts of HP (Una distt. and Paonta valley) and Uttarakhand (Tarai region) |
+| `zone:wheat:PZ` | Peninsular Zone (wheat) | Peninsular Zone, PZ | Maharashtra and Karnataka |
 
 **Pathotype already present:** `pt:puccinia_graminis_f_sp_tritici:Ug99`.
 

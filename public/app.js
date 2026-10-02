@@ -101,7 +101,7 @@ const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
 function tierChip(item) {
   if (!item || !item.tier) return "";
   const score = typeof item.score === "number" ? ` (score ${item.score.toFixed(2)})` : "";
-  const title = `${TIER_MEANING[item.tier] ?? ""}${score}${item.conflict ? ". Conflicting reports exist for this claim." : ""}`;
+  const title = `${TIER_MEANING[item.tier] ?? ""}${score}${item.conflict ? ". Other reports of this variety and disease disagree (another place or year, or no stage stated): read the evidence before relying on it." : ""}`;
   const sources = item.n_sources ? ` · ${plural(item.n_sources, "source")}` : "";
   return `<span class="tier-chip" data-tier="${esc(item.tier)}" title="${esc(title)}"><span class="tier-swatch" aria-hidden="true"></span>Tier ${esc(item.tier)}${sources}${item.conflict ? " · conflict" : ""}</span>`;
 }

@@ -42,7 +42,12 @@ def _vocab_tables(bundle) -> dict[str, str]:
             by_crop.setdefault(e.crop.value, []).append(e.name)
     varieties = "\n".join(f"- **{crop}** ({len(names)}): " + "; ".join(sorted(names)) for crop, names in sorted(by_crop.items()))
     genes = ", ".join(sorted(f"{e.name} ({e.crop.value})" for e in bundle.entities if e.type.value == "Gene"))
-    return {"DISEASES": "\n".join(rows), "PATHOGENS": "\n".join(pathogens), "KNOWN_VARIETIES": varieties, "KNOWN_GENES": genes}
+    zone_rows = ["| zone id | name | also accepted | definition (from the KG's source) |", "|---|---|---|---|"]
+    for e in sorted((e for e in bundle.entities if e.type.value == "AgroZone"), key=lambda e: e.id):
+        definition = (e.props.get("definition") or "state-level zone").replace("|", "/")
+        zone_rows.append(f"| `{e.id}` | {e.name} | {', '.join(e.synonyms) or '-'} | {definition} |")
+    return {"DISEASES": "\n".join(rows), "PATHOGENS": "\n".join(pathogens), "KNOWN_VARIETIES": varieties,
+            "KNOWN_GENES": genes, "ZONES": "\n".join(zone_rows)}
 
 
 def _coverage(bundle) -> str:

@@ -16,7 +16,7 @@ reports, "Wheat Rust Surveillance" bulletins). Years: 2015-16 to the latest avai
 **Extract.** `VARIETY_REACTION` rows where the table gives a categorical class or a class legend in the same document, for varieties **released/notified
 in India** (HD, DBW, PBW, HI, MP, MACS, GW, UAS, DWR, WH, K, NIAW, AKAW, HUW, Raj, NW, KRL and similar), ideally those recommended for the Central Zone
 or Peninsular Zone. Each (variety, disease, season, location set) is one candidate. `evidence_basis` = `official_document`. Also emit
-`VARIETY_RECOMMENDED_FOR_ZONE` (to `MP`/`MH` only) when a notified-varieties table names Madhya Pradesh / Maharashtra and the conditions (season, sowing, water regime).
+`VARIETY_RECOMMENDED_FOR_ZONE` when a notified-varieties table names a zone (e.g. CZ, PZ, NWPZ) or Madhya Pradesh / Maharashtra, with the conditions (season, sowing, water regime). Use the AICRP zone when the document uses one, the state zone (MP/MH) when it names the state; do not convert between them.
 
 **Skip.** Entries still in trial (coded lines like `DBW 2023-45`); numeric-only columns (list the table in leads); anything not a wheat disease in scope.
 
@@ -50,7 +50,7 @@ Existing KB claims for these varieties come from only two lists, so a **second i
 `https://seednet.gov.in/`; DAC&FW "Notified varieties" lists; IIWBR "wheat varieties notified in India"; DPD chickpea variety list; DOD soybean list; ICAR "Crop varieties"
 publications; state seed corporation (MPSSCL, Mahabeej) variety lists.
 
-**Extract.** (1) `VARIETY_RECOMMENDED_FOR_ZONE` -> `MP` or `MH` with season/sowing/water_regime when stated. (2) `VARIETY_DERIVED_FROM` for each parent named in a
+**Extract.** (1) `VARIETY_RECOMMENDED_FOR_ZONE` -> the zone the document names (AICRP zone, or `MP`/`MH` when it names the state) with season/sowing/water_regime when stated. (2) `VARIETY_DERIVED_FROM` for each parent named in a
 pedigree table (`role: parent`; `backcross_donor`/`recurrent_parent` only if the source says so), `evidence_basis` = `official_document`. New varieties: put
 `props` with release_year, releasing_institute, notification, pedigree, market_type **only as stated**.
 
@@ -116,7 +116,7 @@ needs `props.marker_type`. Quote = the table row (with caption fragment naming t
 striiformis pathotypes (78S84, 46S119, 110S119, 238S119, 31S0 ...), P. triticina pathotypes (77-5, 77-9, 104-2, 12-5 ...), P. graminis (Ug99 lineage, 11, 40A) in India; differential-set
 papers listing which Yr/Lr/Sr genes are effective or defeated.
 
-**Extract.** `PATHOTYPE_VARIANT_OF` (pathotype -> its Pathogen, new pathotype needs `props.pathogen`), `PATHOTYPE_PREVALENCE` (pathotype -> `MP`/`MH` with `years` list; `frequency_pct` only if stated for that
+**Extract.** `PATHOTYPE_VARIANT_OF` (pathotype -> its Pathogen, new pathotype needs `props.pathogen`), `PATHOTYPE_PREVALENCE` (pathotype -> a zone from section 5 with `years` list; `frequency_pct` only if stated for that
 state; national figures are NOT a state figure - put them in leads), `GENE_PATHOTYPE_INTERACTION` (`outcome` effective/defeated from the paper's own differential test or survey; `year`, `region` as stated).
 
 **Skip.** Pathotype names that appear only in news/social posts; anything where the host gene is unnamed.

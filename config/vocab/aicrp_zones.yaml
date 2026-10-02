@@ -1,0 +1,59 @@
+# AICRP production zones, per crop (zones are crop-scoped: the wheat Peninsular Zone and the soybean Southern Zone
+# draw their boundaries differently, e.g. all of Maharashtra is wheat PZ but only its south is soybean SZ).
+#
+# 2026-10-03. Every `definition` is copied from the document named in `definition_source`, which is also a source in the
+# KG (config/sources/notified_varieties.yaml). `states` lists the states named in the definition (two-letter codes) -- a state
+# listed with an "except ..." clause is partly inside; read `definition` for the exact area. Nothing here is inferred.
+#
+# Chickpea: the DPD document only expands the abbreviations (CZ, NWPZ, NEPZ, SZ, NHZ) and gives no states, so no state list
+# is entered for chickpea zones rather than guessing one. Wheat has a sixth AICRP zone in some literature (Southern Hills
+# Zone) that this document does not list; it is not entered.
+
+schema_version: 1
+
+zones:
+  # ---------------------------------------------- WHEAT (doc:iiwbr_wheat_varieties_notified, Table 1.2) ----------------------------------------------
+  - {id: "zone:wheat:NWPZ", crop: wheat, name: "North Western Plains Zone", abbreviation: NWPZ, states: [PB, HR, DL, RJ, UP, JK, HP, UK],
+     definition: "Punjab, Haryana, Delhi, Rajasthan (except Kota and Udaipur divisions) and Western UP (except Jhansi division), parts of J&K (Jammu and Kathua distt.) and parts of HP (Una distt. and Paonta valley) and Uttarakhand (Tarai region)",
+     definition_source: "doc:iiwbr_wheat_varieties_notified"}
+  - {id: "zone:wheat:NEPZ", crop: wheat, name: "North Eastern Plains Zone", abbreviation: NEPZ, states: [UP, BR, JH, OD, WB, AS],
+     definition: "Eastern UP, Bihar, Jharkhand, Odisha, West Bengal and plains of Assam",
+     definition_source: "doc:iiwbr_wheat_varieties_notified"}
+  - {id: "zone:wheat:CZ", crop: wheat, name: "Central Zone", abbreviation: CZ, states: [MP, CG, GJ, RJ, UP],
+     definition: "Madhya Pradesh, Chhattisgarh, Gujarat, Rajasthan (Kota and Udaipur divisions) and Uttar Pradesh (Jhansi division)",
+     definition_source: "doc:iiwbr_wheat_varieties_notified"}
+  - {id: "zone:wheat:PZ", crop: wheat, name: "Peninsular Zone", abbreviation: PZ, states: [MH, KA],
+     definition: "Maharashtra and Karnataka",
+     definition_source: "doc:iiwbr_wheat_varieties_notified"}
+  - {id: "zone:wheat:NHZ", crop: wheat, name: "Northern Hills Zone", abbreviation: NHZ, states: [JK, HP, UK, SK, WB],
+     definition: "Western Himalayan regions of J&K (except Jammu and Kathua distt.); Himachal Pradesh (except Una and Paonta valley); Uttarakhand (except Tarai area); Sikkim and hills of West Bengal and N.E. States",
+     definition_source: "doc:iiwbr_wheat_varieties_notified"}
+
+  # ---------------------------------------------- SOYBEAN (doc:dod_soybean_varieties, zone table at the foot of the page) ----------------------------------------------
+  - {id: "zone:soybean:NHZ", crop: soybean, name: "North Hill Zone", abbreviation: NHZ, states: [HP, UK],
+     definition: "Himachal Pradesh and Uttarakhand",
+     definition_source: "doc:dod_soybean_varieties"}
+  - {id: "zone:soybean:NPZ", crop: soybean, name: "North Plain Zone", abbreviation: NPZ, states: [PB, HR, DL, UP, BR],
+     definition: "Punjab, Haryana, Delhi, North east plains of U.P. and Western Bihar",
+     definition_source: "doc:dod_soybean_varieties"}
+  - {id: "zone:soybean:CZ", crop: soybean, name: "Central Zone", abbreviation: CZ, states: [MP, CG, RJ, GJ, UP, MH],
+     definition: "M.P., Chhattisgarh, Rajasthan, Gujarat, Bundlekhand region of U.P. North-West Maharashtra",
+     definition_source: "doc:dod_soybean_varieties"}
+  - {id: "zone:soybean:NEZ", crop: soybean, name: "North Eastern Zone", abbreviation: NEZ, states: [WB, OD, AS, SK, AR, NL, TR, ML, JH, BR],
+     definition: "West Bengal, Odhissa, Assam, Sikkim, Arunachal Pradesh, Nagaland, Tripura, Meghalaya, Jharkhand and Eastern Bihar",
+     definition_source: "doc:dod_soybean_varieties"}
+  - {id: "zone:soybean:SZ", crop: soybean, name: "Southern Zone", abbreviation: SZ, states: [KA, AP, TN, KL, MH],
+     definition: "Karnataka, A.P., Tamil Nadu, Kerala and Southern parts of Maharashtra",
+     definition_source: "doc:dod_soybean_varieties"}
+
+  # ---------------------------------------------- CHICKPEA (doc:dpd_chickpea_varieties, abbreviation key under the table) ----------------------------------------------
+  - {id: "zone:chickpea:CZ", crop: chickpea, name: "Central Zone", abbreviation: CZ, states: [],
+     definition: "cz- central zone", definition_source: "doc:dpd_chickpea_varieties"}
+  - {id: "zone:chickpea:NWPZ", crop: chickpea, name: "North Western Plain Zone", abbreviation: NWPZ, states: [],
+     definition: "nwpz- north western plain zone", definition_source: "doc:dpd_chickpea_varieties"}
+  - {id: "zone:chickpea:NEPZ", crop: chickpea, name: "North Eastern Plain Zone", abbreviation: NEPZ, states: [],
+     definition: "nepz-north eastern plain zone", definition_source: "doc:dpd_chickpea_varieties"}
+  - {id: "zone:chickpea:SZ", crop: chickpea, name: "South Zone", abbreviation: SZ, states: [],
+     definition: "sz-south zone", definition_source: "doc:dpd_chickpea_varieties"}
+  - {id: "zone:chickpea:NHZ", crop: chickpea, name: "Northern Hills Zone", abbreviation: NHZ, states: [],
+     definition: "nhz-northern hills zone", definition_source: "doc:dpd_chickpea_varieties"}

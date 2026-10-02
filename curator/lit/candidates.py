@@ -258,7 +258,7 @@ def _process_one(c: Candidate, raw: dict, *, result: IngestResult, bundle: KGBun
     })
     if not any(e["source"] == evidence.source_id and e["quote"] == evidence.quote for e in spec["evidence"]):
         spec["evidence"].append({"source": evidence.source_id, "method": method.value, "locator": evidence.locator,
-                                 "quote": evidence.quote, "extractor": evidence.extractor})
+                                 "quote": evidence.quote, "extractor": evidence.extractor, "candidate_id": c.candidate_id})
     return Outcome(c.candidate_id, "accepted", "", raw)
 
 
@@ -414,7 +414,7 @@ def to_curated_yaml(result: IngestResult, header: str) -> str:
     return "".join(f"# {line}\n" for line in header.splitlines()) + "\n" + _dump(doc)
 
 
-def report_markdown(result: IngestResult, *, sample: list[str]) -> str:
+def report_markdown(result: IngestResult) -> str:
     counts = result.counts()
     lines = ["# Candidate ingest report", "", f"Candidates: {sum(counts.values())}  |  " + "  |  ".join(f"{k}: {v}" for k, v in counts.items()), ""]
     lines += [f"New claims: {len(result.claims)}  |  new sources: {len(result.sources)}  |  new entities: {len(result.entities)}", ""]
@@ -426,7 +426,8 @@ def report_markdown(result: IngestResult, *, sample: list[str]) -> str:
         lines += ["## Entities the KG does not have (create these, or fix the spelling, then re-run)", ""]
         lines += [f"- {name} (x{n})" for name, n in result.missing_entities.most_common(60)]
         lines.append("")
-    if sample:
-        lines += ["## Human spot-check sample (read these against their sources before moving the batch into kg/curated/)", ""]
-        lines += [f"- {cid}" for cid in sample]
+    lines += ["## Next", "",
+              "1. `agrihub kg review-sheet <this batch>.yaml` makes a spreadsheet with a random sample marked (max(10, 10 %), advisories over-represented).",
+              "2. Someone who knows the crop fills `verdict` (OK / WRONG / UNSURE) and, for advisories, `local_fit`.",
+              "3. `agrihub kg apply-review <batch>.yaml <sheet>.csv --reviewer \"Name\"` enforces the sample gate and writes the batch to kg/curated/.", ""]
     return "\n".join(lines) + "\n"

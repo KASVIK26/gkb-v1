@@ -1,7 +1,9 @@
--- CQ10: Where is evidence conflicting? Same variety, disease, stage and pathotype context,
--- reported resistant in one claim and susceptible in another. R vs S against *different*
--- pathotypes is expected for race-specific genes and is not a conflict.
--- params: crop (text or NULL for all crops)
+-- CQ10: Where is evidence conflicting? Same variety and disease, reported resistant in one claim and
+-- susceptible in another, where the contexts are compatible: stage and pathotype equal, or either one
+-- unspecified (a report that does not say could be about either). Place and season may differ -- that is the
+-- "resistant in 2004, susceptible in 2021" case. Seedling-S with adult-R (adult-plant resistance) and R against
+-- one pathotype with S against another are expected for race-specific genes and are not conflicts.
+-- Same rule as curator/graph/scoring.py. params: crop (text or NULL for all crops)
 SELECT a.variety_id,
        v.name AS variety_name,
        a.disease_id, a.stage, a.pathotype_id,
@@ -13,8 +15,8 @@ FROM v_variety_reaction a
 JOIN v_variety_reaction b
   ON b.variety_id = a.variety_id
  AND b.disease_id = a.disease_id
- AND b.stage = a.stage
- AND b.pathotype_id IS NOT DISTINCT FROM a.pathotype_id
+ AND (b.stage = a.stage OR a.stage = 'unspecified' OR b.stage = 'unspecified')
+ AND (b.pathotype_id IS NULL OR a.pathotype_id IS NULL OR b.pathotype_id = a.pathotype_id)
 JOIN entity v ON v.id = a.variety_id
 WHERE a.reaction IN ('R', 'MR')
   AND b.reaction IN ('MS', 'S', 'HS')

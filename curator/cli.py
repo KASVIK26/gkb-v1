@@ -138,37 +138,71 @@ def verify_quotes_cmd(
 def ingest_candidates_cmd(
     candidates: Path = typer.Argument(..., exists=True, dir_okay=False, help="JSONL file: one candidate claim per line."),
     out: Path = typer.Option(None, help="Curated YAML to write (default: kg/incoming/<input name>.yaml)."),
-    sample_rate: float = typer.Option(0.1, min=0.0, max=1.0, help="Share of accepted candidates listed for a human spot-check."),
-    seed: int = typer.Option(7, help="Seed for the spot-check sample."),
 ) -> None:
     """Verify claim candidates made outside this repo (ChatGPT/Grok deep research) and write the survivors.
 
     Every candidate is checked against the real source (Europe PMC record and title, verbatim quote, entity
     resolution); nothing is written to kg/curated/. Outputs go next to --out: the YAML batch, a report, and the
     needs_review / unverifiable / rejected candidates with their reasons. Needs network."""
-    import random
-
     from curator.lit.candidates import process_candidates, report_markdown, to_curated_yaml
 
     out = out or Path("kg/incoming") / f"{candidates.stem}.yaml"
     out.parent.mkdir(parents=True, exist_ok=True)
     result = process_candidates(candidates.read_text(encoding="utf-8").splitlines(), bundle=_build_bundle())
 
-    accepted = [o.candidate_id for o in result.outcomes if o.bucket == "accepted"]
-    sample = sorted(random.Random(seed).sample(accepted, max(1, round(len(accepted) * sample_rate))) if accepted and sample_rate else [])
     header = (
         f"Verified from {candidates.name} by `agrihub kg ingest-candidates`. NOT yet in kg/curated/:\n"
-        "spot-check the sample in the report, then move this file there."
+        "make a review sheet (agrihub kg review-sheet), have it filled, then agrihub kg apply-review."
     )
     out.write_text(to_curated_yaml(result, header), encoding="utf-8", newline="\n")
-    out.with_suffix(".report.md").write_text(report_markdown(result, sample=sample), encoding="utf-8", newline="\n")
+    out.with_suffix(".report.md").write_text(report_markdown(result), encoding="utf-8", newline="\n")
     for bucket in ("needs_review", "unverifiable", "rejected"):
         rows = [o for o in result.outcomes if o.bucket == bucket]
         if rows:
             lines = [json.dumps({"candidate_id": o.candidate_id, "reason": o.reason, "candidate": o.raw}, ensure_ascii=False) for o in rows]
             out.with_suffix(f".{bucket}.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     typer.echo(json.dumps({"outcomes": result.counts(), "new_claims": len(result.claims), "new_sources": len(result.sources), "new_entities": len(result.entities)}))
-    typer.echo(f"Wrote {out} (+ report). Review the sample, then: git mv {out} kg/curated/")
+    typer.echo(f"Wrote {out} (+ report). Next: agrihub kg review-sheet {out}")
+
+
+@kg_app.command("review-sheet")
+def review_sheet_cmd(
+    batch: Path = typer.Argument(..., exists=True, dir_okay=False, help="A kg/incoming/*.yaml batch from ingest-candidates."),
+    out: Path = typer.Option(None, help="CSV to write (default: next to the batch, .review.csv)."),
+    rate: float = typer.Option(0.1, min=0.0, max=1.0, help="Share of rows in the mandatory sample (minimum 10 rows)."),
+    seed: int = typer.Option(7, help="Seed for the sample."),
+    everything: bool = typer.Option(False, help="Mark every row as in-sample (review the whole batch)."),
+) -> None:
+    """Write the spreadsheet a crop expert fills in: plain-words claim, verbatim quote, source link, verdict column."""
+    from curator.lit.review_sheet import make_sheet
+
+    out = out or batch.with_suffix(".review.csv")
+    counts = make_sheet(batch, _build_bundle(), out, rate=rate, seed=seed, everything=everything)
+    typer.echo(json.dumps(counts))
+    typer.echo(f"Wrote {out}. Send it to the reviewer (opens in Excel / Google Sheets); then: agrihub kg apply-review {batch} {out} --reviewer NAME")
+
+
+@kg_app.command("apply-review")
+def apply_review_cmd(
+    batch: Path = typer.Argument(..., exists=True, dir_okay=False),
+    sheet: Path = typer.Argument(..., exists=True, dir_okay=False, help="The filled-in review CSV."),
+    reviewer: str = typer.Option(None, help="Default reviewer name for OK rows that have none in the sheet."),
+    out: Path = typer.Option(None, help="Curated YAML to write (default: kg/curated/<batch name>.yaml)."),
+) -> None:
+    """Apply a filled review sheet: enforce the sample gate, stamp reviewers, hold back what was not confirmed."""
+    from curator.lit.review_sheet import ReviewError, apply_review
+
+    out = out or Path("kg/curated") / batch.name
+    try:
+        result = apply_review(batch, sheet, out, reviewer=reviewer)
+    except ReviewError as exc:
+        typer.secho(f"Not applied: {exc}", fg=typer.colors.RED)
+        raise typer.Exit(code=1) from exc
+    typer.echo(json.dumps({"claims_written": result.accepted_claims, "of_which_reviewed": result.reviewed_claims,
+                           "sample": result.sample_n, "sample_not_confirmed": result.sample_not_ok, "held_back": len(result.held)}))
+    for row in result.held:
+        typer.echo(f"  held back [{row['why']}] {row['row_id']}: {row['claim'][:90]} {row['comment']}")
+    typer.echo(f"Wrote {out}. Next: agrihub kg build && agrihub kg verify-quotes")
 
 
 @kg_app.command("promote")

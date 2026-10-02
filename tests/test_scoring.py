@@ -94,9 +94,45 @@ def test_resistant_vs_susceptible_in_the_same_context_is_a_conflict():
     assert conflicted_claim_ids([resistant, susceptible]) == {resistant.id, susceptible.id}
 
 
-def test_different_locations_are_not_a_conflict():
-    resistant, susceptible = _reaction("R", location="Indore"), _reaction("S", location="Pune")
-    assert conflicted_claim_ids([resistant, susceptible]) == set()
+def test_different_places_and_seasons_are_still_a_conflict():
+    """Same variety, disease, stage: resistant in one place/year and susceptible in another is exactly the dispute to show
+    (competency query CQ10 uses the same definition)."""
+    resistant, susceptible = _reaction("R", location="Indore", season="2004"), _reaction("S", location="Delhi", season="2021-22")
+    assert conflicted_claim_ids([resistant, susceptible]) == {resistant.id, susceptible.id}
+
+
+def test_a_report_that_states_no_stage_could_be_about_any_stage():
+    stageless = Claim(type="VARIETY_REACTION", subject_id=VARIETY, object_id=DISEASE, qualifiers={"reaction": "R", "stage": "unspecified"})
+    susceptible = _reaction("S")
+    assert conflicted_claim_ids([stageless, susceptible]) == {stageless.id, susceptible.id}
+
+
+def test_seedling_susceptible_with_adult_resistant_is_adult_plant_resistance_not_a_conflict():
+    seedling = Claim(type="VARIETY_REACTION", subject_id=VARIETY, object_id=DISEASE, qualifiers={"reaction": "S", "stage": "seedling"})
+    assert conflicted_claim_ids([seedling, _reaction("R")]) == set()
+
+
+def test_resistant_to_one_pathotype_and_susceptible_to_another_is_not_a_conflict():
+    one, other = _reaction("R", pathotype_id="pt:puccinia_striiformis_f_sp_tritici:A"), _reaction("S", pathotype_id="pt:puccinia_striiformis_f_sp_tritici:B")
+    assert conflicted_claim_ids([one, other]) == set()
+    assert conflicted_claim_ids([one, _reaction("S")]) == {one.id, _reaction("S").id}  # one side names no pathotype
+
+
+def test_notification_resistance_to_a_rust_ages_from_the_release_year_not_the_year_of_the_pdf():
+    claim = _reaction("R", stage="unspecified")
+    pdf = _source(1, year=2021)
+    ev = _evidence(claim, pdf, EvidenceMethod.OFFICIAL_DOCUMENT)
+    released_2004 = {VARIETY: 2004}
+    assert claim_score(claim, [ev], {pdf.id: pdf}, as_of_year=2026, release_years=released_2004) == pytest.approx(0.72)  # 0.9 * 0.8
+    assert claim_score(claim, [ev], {pdf.id: pdf}, as_of_year=2026, release_years={VARIETY: 2019}) == pytest.approx(0.90)
+    assert claim_score(claim, [ev], {pdf.id: pdf}, as_of_year=2026) == pytest.approx(0.90)  # no release year known: the PDF's year
+
+
+def test_old_resistance_to_a_disease_without_races_is_not_discounted():
+    claim = Claim(type="VARIETY_REACTION", subject_id="var:soybean:TESTS1", object_id="dis:soybean:charcoal_rot", qualifiers={"reaction": "R", "stage": "unspecified"})
+    pdf = _source(1, year=2021)
+    ev = _evidence(claim, pdf, EvidenceMethod.OFFICIAL_DOCUMENT)
+    assert claim_score(claim, [ev], {pdf.id: pdf}, as_of_year=2026, release_years={"var:soybean:TESTS1": 1994}) == pytest.approx(0.90)
 
 
 def test_intermediate_reactions_do_not_conflict():

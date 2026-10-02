@@ -30,6 +30,16 @@ def reference_bundle(path: Path = VOCAB_DIR / "diseases.yaml") -> KGBundle:
     claims: list[Claim] = []
     evidence: list[Evidence] = []
 
+    zones_path = path.parent / "aicrp_zones.yaml"
+    if zones_path.exists():
+        for z in yaml.safe_load(zones_path.read_text(encoding="utf-8"))["zones"]:
+            entities[z["id"]] = Entity(
+                id=z["id"], type="AgroZone", name=f"{z['name']} ({z['crop']})", crop=z["crop"],
+                synonyms=[z["name"], z["abbreviation"]],
+                props={"system": "AICRP", "states": z["states"], "definition": z["definition"],
+                       "definition_source": z["definition_source"]},
+            )
+
     for d in vocab["diseases"]:
         entities[d["id"]] = Entity(
             id=d["id"],
