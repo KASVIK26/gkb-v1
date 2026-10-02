@@ -5,7 +5,8 @@
 -- see TECH_STACK.md Sec 3, which already names Cytoscape.js as the intended library for this.
 --
 -- Selects from kg_current, which curator/graph/promote.py repoints atomically on every release,
--- so these views keep resolving correctly after every future promotion without redefinition.
+-- and re-applies this file inside the promotion transaction (curator/graph/promote.py
+-- bridge_view_sql), so these views keep resolving after every future promotion.
 
 CREATE OR REPLACE VIEW public.kg_graph_nodes AS
 SELECT

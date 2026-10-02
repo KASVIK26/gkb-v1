@@ -22,7 +22,8 @@ from curator.graph.bundle import KGBundle
 from curator.graph.kg_files import load_curated_dir
 from curator.graph.manifest import MANIFEST_PATH, write_manifest
 from curator.graph.pg import GateError, create_release_schema, load_bundle
-from curator.graph.promote import PromoteError, current_release, promote, release_history
+from curator.graph.promote import PromoteError, bridge_view_sql, current_release, promote, release_history
+from curator.graph.scoring import score_bundle, summarize
 from curator.graph.variety_import import variety_bundle
 from curator.graph.vocab_entities import reference_bundle
 from curator.graph import staging
@@ -44,8 +45,9 @@ app.add_typer(lit_app, name="lit")
 def _build_bundle() -> KGBundle:
     """Reference entities (config/vocab/), notified varieties (config/sources/), and everything
     hand-curated in kg/curated/. The first two are generated fresh from their source files on
-    every build, never hand-typed -- see vocab_entities.py and variety_import.py."""
-    return KGBundle.merge(reference_bundle(), variety_bundle(), load_curated_dir(KG_CURATED_DIR))
+    every build, never hand-typed -- see vocab_entities.py and variety_import.py. Every claim then
+    gets its computed score/tier/conflict (curator/graph/scoring.py), so no release ships unscored."""
+    return score_bundle(KGBundle.merge(reference_bundle(), variety_bundle(), load_curated_dir(KG_CURATED_DIR)))
 
 
 def _report_counts(bundle: KGBundle) -> dict[str, int]:
@@ -62,6 +64,7 @@ def build(allow_test_sources: bool = typer.Option(False, help="Allow SourceType.
     """Validate every kg/ source file and report what a release would contain. Loads nothing."""
     bundle = _build_bundle()
     typer.echo(json.dumps(_report_counts(bundle), indent=2))
+    typer.echo("confidence: " + json.dumps(summarize(bundle)))
 
     errors = bundle.gate_errors(allow_test_sources=allow_test_sources)
     if errors:
@@ -120,8 +123,10 @@ def promote_cmd(
     """Atomically repoint kg_current at an already-loaded release schema."""
     schema = f"kg_{release}"
     with psycopg.connect(database_url, autocommit=True) as conn:
+        # The public.kg_* bridge views grant to Supabase's `anon` role; a plain Postgres has none.
+        has_api_roles = conn.execute("SELECT 1 FROM pg_roles WHERE rolname = 'anon'").fetchone() is not None
         try:
-            result = promote(conn, schema)
+            result = promote(conn, schema, bridge_sql=bridge_view_sql() if has_api_roles else ())
         except PromoteError as exc:
             typer.secho(f"Promotion refused: {exc}", fg=typer.colors.RED)
             raise typer.Exit(code=1) from exc

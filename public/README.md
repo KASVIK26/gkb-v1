@@ -37,8 +37,11 @@ automatically for a first-time visitor — `?tour=1` forces it, `?tour=0` suppre
     one-line sentence ("Sr33 confers resistance to stem rust"); clicking a disease shows what the
     KB holds for it across the **whole** KB (cause, trigger, advisory, resistance genes, variety
     reactions) and what is still missing, with click-to-jump chips for its neighbours.
-  - An honest **confidence note** is computed from the data: today every claim cites a source but
-    none has a confidence tier or a reviewed status yet, and the page says so.
+  - **Confidence is visible:** each claim has a tier A (strongest) to D, computed by
+    `curator/graph/scoring.py` from the strength of its evidence combined across independent sources.
+    Lines are solid (A/B), dashed (C) or dotted (D); clicking a line shows its sources (`/api/evidence`);
+    Browse cards carry a tier chip and a "Show evidence" row. A note states the tier mix, how many claims
+    rest on a single source, and how many are human-reviewed.
 
 Everything shown is read live from Supabase via `public.kg_*` bridge views
 (`supabase/migrations/20260926120000_dashboard_views.sql`), which sit on top of `kg_current` — the

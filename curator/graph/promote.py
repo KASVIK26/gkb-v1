@@ -18,12 +18,27 @@ current, and since when" is auditable without extra bookkeeping inside each rele
 
 from __future__ import annotations
 
+from collections.abc import Sequence
+from pathlib import Path
+
 import psycopg
 
 from curator.graph.pg import _check_schema
 
 KG_META_SCHEMA = "kg_meta"
 KG_CURRENT_SCHEMA = "kg_current"
+MIGRATIONS_DIR = Path(__file__).resolve().parents[2] / "supabase" / "migrations"
+
+
+def bridge_view_sql(migrations_dir: Path = MIGRATIONS_DIR) -> list[str]:
+    """SQL of every public bridge-view migration (`*_views.sql`), oldest first.
+
+    The dashboard reads `public.kg_*` views that sit on top of `kg_current`. Promotion drops the
+    `kg_current` views with CASCADE, which silently drops those dependents too -- found the hard way
+    on the first promotion after they existed (the live dashboard 404'd until they were re-applied).
+    promote() re-applies this SQL inside its own transaction so they are never missing. Every file
+    must stay idempotent (CREATE OR REPLACE VIEW / GRANT)."""
+    return [path.read_text(encoding="utf-8") for path in sorted(migrations_dir.glob("*_views.sql"))]
 
 
 class PromoteError(RuntimeError):
@@ -59,9 +74,17 @@ def _relations_in_schema(conn: psycopg.Connection, schema: str) -> list[str]:
 
 
 def promote(
-    conn: psycopg.Connection, release_schema: str, *, min_entities: int = 1, min_claims: int = 1
+    conn: psycopg.Connection,
+    release_schema: str,
+    *,
+    min_entities: int = 1,
+    min_claims: int = 1,
+    bridge_sql: Sequence[str] = (),
 ) -> dict[str, object]:
     """Atomically point kg_current at `release_schema`.
+
+    `bridge_sql` is re-run in the same transaction after the views are recreated (see
+    bridge_view_sql); if any of it fails, the whole promotion rolls back and kg_current is untouched.
 
     Raises PromoteError (without touching kg_current) if the schema doesn't exist, has no
     tables/views, or looks implausibly empty. This is a light sanity gate, not the full QC
@@ -97,6 +120,8 @@ def promote(
             conn.execute(f'DROP VIEW IF EXISTS {KG_CURRENT_SCHEMA}."{name}" CASCADE')
         for name in relations:
             conn.execute(f'CREATE VIEW {KG_CURRENT_SCHEMA}."{name}" AS SELECT * FROM {release_schema}."{name}"')
+        for sql in bridge_sql:
+            conn.execute(sql)
         conn.execute(f"INSERT INTO {KG_META_SCHEMA}.release_history (release) VALUES (%s)", (release_schema,))
 
     return {"promoted": release_schema, "entities": n_entities, "claims": n_claims, "relations": len(relations)}

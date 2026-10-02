@@ -195,6 +195,18 @@ input[type="number"] {
   background: #fff;
 }
 
+/* A grid item's min-width defaults to its content, so a long option ("Anthracnose (pod blight)")
+   widened the select past its column and over the neighbouring one. */
+.controls > label,
+.controls select {
+  min-width: 0;
+}
+
+.controls select {
+  width: 100%;
+  text-overflow: ellipsis;
+}
+
 .sensor-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -870,4 +882,74 @@ button {
     width: 100%;
     height: 420px;
   }
+}
+
+/* ── Confidence tier chips (ordinal: one neutral ramp, validated with --ordinal) ─────────── */
+.tier-chip {
+  --tier-fill: #9ca89f;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 9px 2px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text);
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.4;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.tier-chip[data-tier="A"] { --tier-fill: #1f2a22; }
+.tier-chip[data-tier="B"] { --tier-fill: #47564b; }
+.tier-chip[data-tier="C"] { --tier-fill: #738077; }
+.tier-chip[data-tier="D"] { --tier-fill: #9ca89f; }
+
+.tier-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--tier-fill);
+}
+
+.evidence-details {
+  margin-top: 10px;
+  font-size: 0.85rem;
+}
+
+.evidence-details summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--accent-strong);
+}
+
+.evidence-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  line-height: 1.5;
+}
+
+.evidence-list li + li {
+  margin-top: 8px;
+}
+
+.evidence-list a {
+  color: var(--accent-strong);
+}
+
+.graph-line-key {
+  margin-top: 10px;
+  padding: 10px 8px 0;
+  border-top: 1px solid var(--border);
+}
+
+.graph-line-key p:not(.graph-legend-title) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+  font-size: 0.8rem;
+  color: var(--muted);
 }

@@ -9,7 +9,15 @@ import pytest
 from kg_toy import toy_bundle
 
 from curator.graph.pg import create_release_schema, load_bundle
-from curator.graph.promote import KG_CURRENT_SCHEMA, PromoteError, current_release, promote, release_history
+from curator.graph.promote import (
+    KG_CURRENT_SCHEMA,
+    MIGRATIONS_DIR,
+    PromoteError,
+    bridge_view_sql,
+    current_release,
+    promote,
+    release_history,
+)
 
 
 @pytest.fixture()
@@ -96,3 +104,62 @@ def test_promote_rejects_invalid_schema_name(pg_conn):
 def test_current_release_is_none_before_any_promotion(pg_conn):
     assert current_release(pg_conn) is None
     assert release_history(pg_conn) == []
+
+
+# ───────── dependents of kg_current (the public.kg_* bridge views the dashboard reads) ─────────
+
+def _make_second_release(pg_conn) -> str:
+    second = f"kg_test_{uuid.uuid4().hex[:10]}"
+    create_release_schema(pg_conn, second)
+    load_bundle(pg_conn, second, toy_bundle(), allow_test_sources=True)
+    return second
+
+
+def _view_exists(pg_conn, name: str) -> bool:
+    return pg_conn.execute(
+        "SELECT 1 FROM information_schema.views WHERE table_schema = 'public' AND table_name = %s", (name,)
+    ).fetchone() is not None
+
+
+def test_promoting_again_drops_views_built_on_kg_current_unless_they_are_reapplied(pg_conn, loaded_schema):
+    # The hazard that took the live dashboard down: promote() drops kg_current's views with CASCADE.
+    view = f"bridge_{uuid.uuid4().hex[:8]}"
+    promote(pg_conn, loaded_schema)
+    pg_conn.execute(f"CREATE VIEW public.{view} AS SELECT id FROM kg_current.entity")
+    second = _make_second_release(pg_conn)
+    try:
+        promote(pg_conn, second)
+        assert not _view_exists(pg_conn, view)
+    finally:
+        pg_conn.execute(f"DROP VIEW IF EXISTS public.{view}")
+        pg_conn.execute(f"DROP SCHEMA IF EXISTS {second} CASCADE")
+
+
+def test_bridge_sql_keeps_dependent_views_alive_across_promotions(pg_conn, loaded_schema):
+    view = f"bridge_{uuid.uuid4().hex[:8]}"
+    bridge = [f"CREATE OR REPLACE VIEW public.{view} AS SELECT id, name FROM kg_current.entity"]
+    promote(pg_conn, loaded_schema, bridge_sql=bridge)
+    second = _make_second_release(pg_conn)
+    try:
+        promote(pg_conn, second, bridge_sql=bridge)
+        assert _view_exists(pg_conn, view)
+        assert pg_conn.execute(f"SELECT count(*) FROM public.{view}").fetchone()[0] > 0
+    finally:
+        pg_conn.execute(f"DROP VIEW IF EXISTS public.{view}")
+        pg_conn.execute(f"DROP SCHEMA IF EXISTS {second} CASCADE")
+
+
+def test_failing_bridge_sql_rolls_the_whole_promotion_back(pg_conn, loaded_schema):
+    with pytest.raises(psycopg.Error):
+        promote(pg_conn, loaded_schema, bridge_sql=["CREATE VIEW public.never_created AS SELECT nope FROM kg_current.entity"])
+    assert current_release(pg_conn) is None
+    assert pg_conn.execute(
+        "SELECT 1 FROM information_schema.views WHERE table_schema = %s", (KG_CURRENT_SCHEMA,)
+    ).fetchone() is None
+
+
+def test_bridge_view_sql_picks_up_only_the_views_migrations_in_order():
+    files = sorted(p.name for p in MIGRATIONS_DIR.glob("*_views.sql"))
+    assert files == sorted(files) and len(files) >= 3
+    assert all("staging" not in name for name in files)
+    assert len(bridge_view_sql()) == len(files)

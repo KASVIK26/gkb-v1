@@ -86,7 +86,7 @@ are also where most of the work is.
 | 6 | Gold-standard evaluation of the extraction pipeline | 🟡 **5-paper pilot + 2 real 6.4 ablations, 2026-09-27**: guideline + harness are real and working; v1 prompt scores 2/5 clean, 3/5 fail on well-diagnosed causes (§3 items 29-30). Two interventions tried and A/B tested against the same 5 papers — a few-shot prompt (v2, item 31) and a corrective retry pass (item 32) — **both come back net negative/mixed**, and both independently produced the same quote-fidelity-degradation side effect, a stronger cross-cutting finding than either alone. v1 stays production, `retry` stays opt-in and off everywhere live. One real code bug found and fixed (a vocab-synonym wiring gap). Still needed: 40 more papers, a second independent annotator (double-annotation + κ), and the now-evidence-backed two-step (quote-then-structure) architecture as the next attempt |
 | 7 | Structured trial/germplasm data (AICRP, GRIN) | ⬜ Not started — biggest lever on the `VARIETY_REACTION` count (234 today vs. a ≥3,000 target; literature alone won't close that gap) |
 | 8 | Environmental trigger library | 🟡 **15/17 diseases have a cited env trigger, 16/17 have a management advisory** (manual research passes, see §3 items 21–26) — but no back-testing against historical weather (NASA POWER) and no risk-scoring engine (`curator/risk/`) yet |
-| 9 | Confidence scoring, conflict detection, QC reports | 🟡 Partially built early (see §3) |
+| 9 | Confidence scoring, conflict detection, QC reports | 🟡 **Scoring + conflict detection built and live, 2026-10-02** (`curator/graph/scoring.py`, §3 item 38): every claim has a score, a tier A–D and a conflict flag; tiers and sources are shown in the dashboard. Still missing: a QC report beyond `kg build`'s tier summary, a sensitivity analysis for the paper, and a human-review workflow for curated claims (all 315 are still `unreviewed`) |
 | 10 | API for the other three products | ⬜ Not started — **shape depends on Q1/Q2** |
 | 11 | Integration contracts with (a)/(b)/(d) | ⬜ Not started — **reframed**, see §7 |
 | 12 | Analytics / research findings (vulnerability index, gene deployment) | ⬜ Not started |
@@ -1338,6 +1338,38 @@ are also where most of the work is.
      claims, so genes and varieties are disconnected clusters in the graph. Each disease has exactly one
      advisory (soybean mosaic has none) and one trigger. 34 of 107 varieties have no documented reaction; soybean
      has 7 variety reactions in total. These, not extraction volume, are the credibility and coverage gaps.
+
+38. **Computed confidence is live: every claim has a score, a tier and its sources are one click away (2026-10-02).**
+   Step 1 of the credibility track after item 37 showed all 315 claims `unreviewed` with no score or tier.
+   - `curator/graph/scoring.py` implements RESEARCH_ROADMAP §4.4: `score = 1 - prod(1 - w_s)` over *independent
+     sources* (a source contributes only its strongest evidence row, so a paper repeating itself is not
+     corroboration), x0.6 for unreviewed LLM-extracted evidence, x0.8 for pathotype-dependent evidence older than
+     10 years, and a conflict flag (resistant vs susceptible, same variety/disease/stage/pathotype/location/season)
+     that caps the tier at C. Tiers A >= 0.85, B >= 0.65, C >= 0.40, D below. `kg build` and `kg load` now score
+     every bundle, so no release can ship unscored; claim IDs are unaffected. 14 tests.
+   - **Result on the live data:** A 219, B 24, C 36, D 36; 0 conflicts; 310 of 315 claims rest on one source.
+   - **Read tier A with care.** 202 of the 219 A's are variety reactions and zone recommendations whose strongest
+     evidence is an *official release document* at the project's documented weight of 0.90. Sensitivity (run
+     2026-10-02): at 0.80 or 0.70 all of them become B, at 0.60 they become C. Tier A for varieties therefore
+     rests on one heuristic constant and on three official documents, so the UI shows the source count beside
+     every tier and the confidence note says most claims are single-sourced. The weights were left as documented,
+     not tuned to look better.
+   - **Dashboard:** tier chip + source count on Browse cards with a "Show evidence" row; graph lines are solid
+     (A/B), dashed (C) or dotted (D); clicking a line shows the claim, why it has its tier, and its sources
+     (`/api/evidence`). Verbatim quotes are deliberately not published through the anonymous API.
+   - **Incident, found and fixed the hard way.** Promoting release `2026_10_22` took the live dashboard's data
+     API down for a few minutes: `promote()` drops the `kg_current` views with `CASCADE`, which silently dropped
+     every `public.kg_*` bridge view built on them (the earlier migration comment claiming they survive promotion
+     was an assumption that had never been tested — no promotion had happened since they existed). Restored by
+     re-applying the three `*_views.sql` migrations. Root cause fixed: `promote()` now re-applies every
+     `supabase/migrations/*_views.sql` inside its own transaction (`bridge_view_sql`), so they are never missing
+     and a failure rolls the whole promotion back; the CLI skips this on a database without Supabase's `anon`
+     role. Four regression tests, including one that demonstrates the original hazard. Verified by re-promoting
+     the live release through the fixed path: all ten public views kept answering. Rule going forward: any new
+     public bridge view goes in a `*_views.sql` migration.
+   - **Not done:** `status` stays `unreviewed` for every curated claim; flipping it needs a real human re-check
+     against the source, not a script. Next: variety-to-gene links, advisory depth, structured variety-reaction
+     sources (see the order recorded under item 37).
 
 ---
 

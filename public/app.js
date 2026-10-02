@@ -64,6 +64,99 @@ async function loadStats() {
 }
 
 // ---------------------------------------------------------------------------
+// Shared: escaping, confidence chips and the evidence behind a claim
+// ---------------------------------------------------------------------------
+
+const esc = (value) =>
+  String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
+// Tier = strength of the cited evidence, combined across independent sources (curator/graph/scoring.py).
+const TIER_MEANING = {
+  A: "Strong evidence (validated, official or multi-location)",
+  B: "Good evidence",
+  C: "Moderate evidence",
+  D: "Weak evidence (for example a single statement in a review)",
+};
+
+const METHOD_LABEL = {
+  official_document: "Official release document",
+  cloned_validated: "Cloned and functionally validated gene",
+  diagnostic_marker: "Diagnostic marker",
+  sequence_haplotype: "Sequence haplotype",
+  field_multi_env: "Multi-location field trials",
+  qtl_mapping: "QTL mapping",
+  gwas: "GWAS association",
+  field_single_env: "Single-environment field trial",
+  controlled_env: "Controlled-environment study",
+  postulation_pedigree: "Pedigree or postulation",
+  review_statement: "Statement in a review article",
+  computational: "Computational prediction",
+  curator_assertion: "Curated vocabulary entry",
+};
+
+const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+
+// `item` may be a row from any of the public views: it carries tier, score, n_sources, conflict.
+function tierChip(item) {
+  if (!item || !item.tier) return "";
+  const score = typeof item.score === "number" ? ` (score ${item.score.toFixed(2)})` : "";
+  const title = `${TIER_MEANING[item.tier] ?? ""}${score}${item.conflict ? ". Conflicting reports exist for this claim." : ""}`;
+  const sources = item.n_sources ? ` · ${plural(item.n_sources, "source")}` : "";
+  return `<span class="tier-chip" data-tier="${esc(item.tier)}" title="${esc(title)}"><span class="tier-swatch" aria-hidden="true"></span>Tier ${esc(item.tier)}${sources}${item.conflict ? " · conflict" : ""}</span>`;
+}
+
+function evidenceHtml(rows) {
+  if (!rows.length) return `<p class="edge-meta">No evidence rows are published for this claim.</p>`;
+  return `<ul class="evidence-list">${rows
+    .map((r) => {
+      const where = [r.source_venue, r.source_year].filter(Boolean).join(", ");
+      const title = r.source_url
+        ? `<a href="${esc(r.source_url)}" target="_blank" rel="noopener noreferrer">${esc(r.source_title)}</a>`
+        : esc(r.source_title);
+      return `<li><strong>${title}</strong>${where ? ` <span class="edge-meta">(${esc(where)})</span>` : ""}<br>
+        <span class="edge-meta">${esc(METHOD_LABEL[r.method] ?? r.method)} · weight ${Number(r.weight).toFixed(2)}${r.locator ? ` · ${esc(r.locator)}` : ""}${r.human_reviewed ? " · human-reviewed" : ""}</span></li>`;
+    })
+    .join("")}</ul>`;
+}
+
+const evidenceCache = new Map();
+
+async function fetchEvidence(claimId) {
+  if (!evidenceCache.has(claimId)) {
+    const response = await fetch(`/api/evidence?claim_id=${encodeURIComponent(claimId)}`);
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || "Could not load the evidence");
+    evidenceCache.set(claimId, payload.evidence);
+  }
+  return evidenceCache.get(claimId);
+}
+
+async function renderEvidenceInto(container, claimId) {
+  container.innerHTML = `<p class="edge-meta">Loading the sources…</p>`;
+  try {
+    container.innerHTML = evidenceHtml(await fetchEvidence(claimId));
+  } catch (error) {
+    container.innerHTML = `<p class="edge-meta">Could not load the evidence: ${esc(error.message)}</p>`;
+  }
+}
+
+// A collapsed "Show evidence" row on a Browse card; the sources are fetched the first time it opens.
+function attachEvidence(card, claimId) {
+  if (!claimId) return;
+  const details = document.createElement("details");
+  details.className = "evidence-details";
+  details.innerHTML = `<summary>Show evidence</summary><div class="evidence-body"></div>`;
+  details.addEventListener("toggle", () => {
+    const body = details.querySelector(".evidence-body");
+    if (details.open && !body.dataset.loaded) {
+      body.dataset.loaded = "1";
+      renderEvidenceInto(body, claimId);
+    }
+  });
+  card.appendChild(details);
+}
+
+// ---------------------------------------------------------------------------
 // Shared: variety loader (used by both tabs' crop/variety selects)
 // ---------------------------------------------------------------------------
 
@@ -124,9 +217,10 @@ function renderReactions(reactions, varietySelected) {
     const card = document.createElement("article");
     card.className = "edge-card";
     card.innerHTML = `
-      <h3>${r.disease_name}</h3>
-      <p class="edge-meta">Reaction: <strong>${r.reaction ?? "n/a"}</strong> &nbsp;|&nbsp; Stage: ${r.stage ?? "n/a"}</p>
+      <h3>${esc(r.disease_name)} ${tierChip(r)}</h3>
+      <p class="edge-meta">Reaction: <strong>${esc(r.reaction ?? "n/a")}</strong> &nbsp;|&nbsp; Stage: ${esc(r.stage ?? "n/a")}</p>
     `;
+    attachEvidence(card, r.claim_id);
     reactionList.appendChild(card);
   }
 }
@@ -142,11 +236,12 @@ function renderGenes(genes) {
     card.className = "edge-card";
     const clonedBadge = g.cloned ? `<span class="confidence-badge" data-level="High">cloned</span>` : "";
     card.innerHTML = `
-      <h3>${g.gene_name} → ${g.disease_name} ${clonedBadge}</h3>
+      <h3>${esc(g.gene_name)} → ${esc(g.disease_name)} ${clonedBadge} ${tierChip(g)}</h3>
       <p class="edge-meta">Chromosome: ${g.chromosome ?? "n/a"} &nbsp;|&nbsp; Type: ${g.resistance_type ?? "n/a"}</p>
       <p class="edge-meta">${g.gene_class ?? ""}</p>
-      ${g.spectrum ? `<p class="edge-meta">Spectrum: ${g.spectrum}</p>` : ""}
+      ${g.spectrum ? `<p class="edge-meta">Spectrum: ${esc(g.spectrum)}</p>` : ""}
     `;
+    attachEvidence(card, g.claim_id);
     geneList.appendChild(card);
   }
 }
@@ -291,9 +386,6 @@ const graphPresets = document.getElementById("graphPresets");
 const graphConfidence = document.getElementById("graphConfidence");
 const graphEmpty = document.getElementById("graphEmpty");
 
-const esc = (value) =>
-  String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-
 function darken(hex, factor) {
   const n = parseInt(hex.slice(1), 16);
   const channels = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => Math.round(v * factor));
@@ -423,12 +515,23 @@ function applyPreset(preset) {
 
 function renderGraphConfidence(payload) {
   const total = payload.edges.length;
-  const tiered = payload.edges.filter((e) => e.tier).length;
+  const tiers = { A: 0, B: 0, C: 0, D: 0 };
+  for (const edge of payload.edges) if (edge.tier in tiers) tiers[edge.tier] += 1;
+  const tiered = Object.values(tiers).reduce((a, b) => a + b, 0);
   const reviewed = payload.edges.filter((e) => e.status && e.status !== "unreviewed").length;
-  graphConfidence.innerHTML = tiered
-    ? `<strong>About confidence:</strong> ${tiered} of ${total} claims have a confidence tier; ${reviewed} have been human-reviewed. Every claim links to a cited source.`
-    : `<strong>About confidence:</strong> every one of these ${total} claims links to a cited source, but confidence tiers are <em>not computed yet</em>` +
-      ` and ${reviewed ? `only ${reviewed} have` : "none have"} been marked reviewed. Read this as <em>curated and cited</em>, not yet <em>scored</em>.`;
+  const single = payload.edges.filter((e) => e.n_sources === 1).length;
+  const conflicts = payload.edges.filter((e) => e.conflict).length;
+
+  if (!tiered) {
+    graphConfidence.innerHTML = `<strong>About confidence:</strong> every one of these ${total} claims links to a cited source, but confidence tiers are <em>not computed in this release</em>.`;
+    return;
+  }
+  graphConfidence.innerHTML =
+    `<strong>About confidence:</strong> each claim has a tier from A (strongest) to D (weakest) — the strength of its cited evidence, combined across independent sources. ` +
+    `Here: ${Object.entries(tiers).map(([t, n]) => `<strong>${t}</strong> ${n}`).join(" · ")}. ` +
+    `${single} of ${total} claims rest on a single source, so a tier describes how good that one source is, not independent confirmation; ` +
+    `${reviewed ? `${reviewed} have` : "none have"} been human-reviewed${conflicts ? ` and ${conflicts} have conflicting reports` : ""}. ` +
+    `<em>Click any line to see its sources.</em>`;
 }
 
 function updateDiseaseOptions() {
@@ -525,6 +628,14 @@ function renderGraphLegend() {
   title.className = "graph-legend-title";
   title.innerHTML = `Key <span>click to hide a type</span>`;
 
+  const lines = document.createElement("div");
+  lines.className = "graph-line-key";
+  lines.innerHTML = `
+    <p class="graph-legend-title">Lines <span>confidence of the claim</span></p>
+    <p><svg width="34" height="8" aria-hidden="true"><line x1="1" y1="4" x2="33" y2="4" stroke="#172018" stroke-opacity=".55" stroke-width="2"/></svg> Tier A–B</p>
+    <p><svg width="34" height="8" aria-hidden="true"><line x1="1" y1="4" x2="33" y2="4" stroke="#172018" stroke-opacity=".55" stroke-width="2" stroke-dasharray="6 4"/></svg> Tier C</p>
+    <p><svg width="34" height="8" aria-hidden="true"><line x1="1" y1="4" x2="33" y2="4" stroke="#172018" stroke-opacity=".55" stroke-width="2.4" stroke-dasharray="1 4" stroke-linecap="round"/></svg> Tier D</p>`;
+
   graphLegend.replaceChildren(
     title,
     ...types.map((type) => {
@@ -547,6 +658,7 @@ function renderGraphLegend() {
       });
       return item;
     }),
+    lines,
   );
 }
 
@@ -644,6 +756,32 @@ function showNodeDetail(node) {
   graphDetail.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
 
+// A claim's own panel: the sentence it states, how confident we are and why, and its sources.
+function showEdgeDetail(edge) {
+  cy.elements().addClass("dimmed").removeClass("highlighted show-label");
+  const ends = edge.connectedNodes();
+  edge.removeClass("dimmed");
+  ends.removeClass("dimmed").addClass("show-label");
+
+  const info = claimInfo(edge.data("claimType"));
+  const claim = {
+    tier: edge.data("tier"),
+    score: edge.data("score"),
+    n_sources: edge.data("nSources"),
+    conflict: edge.data("conflict"),
+  };
+  graphDetail.hidden = false;
+  graphDetail.innerHTML = `
+    <h3>${esc(edge.source().data("label"))} ${esc(info.verb)} ${esc(edge.target().data("label"))}</h3>
+    <p class="edge-meta">${tierChip(claim) || "No confidence tier is computed for this claim."}
+    ${claim.tier ? ` &nbsp; ${esc(TIER_MEANING[claim.tier] ?? "")}.` : ""}</p>
+    ${claim.n_sources === 1 ? `<p class="edge-meta">This claim rests on a single source — the tier reflects that source's evidence type, not independent confirmation.</p>` : ""}
+    <p class="detail-subhead">Sources</p>
+    <div class="evidence-body"></div>`;
+  renderEvidenceInto(graphDetail.querySelector(".evidence-body"), edge.id());
+  graphDetail.scrollIntoView({ block: "nearest", behavior: "smooth" });
+}
+
 function focusNode(id) {
   if (!cy) return;
   const node = cy.getElementById(id);
@@ -717,6 +855,10 @@ function renderGraph() {
         source: e.subject_id,
         target: e.object_id,
         claimType: e.claim_type,
+        tier: e.tier ?? "",
+        score: e.score,
+        nSources: e.n_sources,
+        conflict: Boolean(e.conflict),
       },
     })),
   ];
@@ -771,6 +913,10 @@ function renderGraph() {
             "curve-style": "bezier",
           },
         },
+        // Line style carries the claim's confidence tier: solid A/B, dashed C, dotted D.
+        { selector: "edge[tier = 'C']", style: { "line-style": "dashed", "line-dash-pattern": [6, 4] } },
+        { selector: "edge[tier = 'D']", style: { "line-style": "dotted", "line-dash-pattern": [2, 4], "line-cap": "round" } },
+        { selector: "edge[?conflict]", style: { "line-color": "#a61b2a", "target-arrow-color": "#a61b2a" } },
         { selector: "node.highlighted", style: { "border-width": 3.5, "border-color": "#172018" } },
         { selector: "node.dimmed, edge.dimmed", style: { opacity: 0.12 } },
         { selector: "edge.hovered", style: { "line-color": "#172018", "target-arrow-color": "#172018", width: 2.4, opacity: 1 } },
@@ -782,6 +928,7 @@ function renderGraph() {
     });
 
     cy.on("tap", "node", (evt) => showNodeDetail(evt.target));
+    cy.on("tap", "edge", (evt) => showEdgeDetail(evt.target));
     cy.on("tap", (evt) => {
       if (evt.target === cy) resetGraphHighlight();
     });
@@ -800,7 +947,13 @@ function renderGraph() {
       const edge = evt.target;
       edge.addClass("hovered");
       const verb = claimInfo(edge.data("claimType")).verb;
-      showTooltip(evt, `<strong>${esc(edge.source().data("label"))}</strong> ${esc(verb)} <strong>${esc(edge.target().data("label"))}</strong>`);
+      const tier = edge.data("tier");
+      showTooltip(
+        evt,
+        `<strong>${esc(edge.source().data("label"))}</strong> ${esc(verb)} <strong>${esc(edge.target().data("label"))}</strong>` +
+          (tier ? `<br>Tier ${esc(tier)} · ${plural(edge.data("nSources") ?? 0, "source")}` : "") +
+          `<br><em>click for the evidence</em>`,
+      );
     });
     cy.on("mouseout", "edge", (evt) => {
       evt.target.removeClass("hovered");

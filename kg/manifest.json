@@ -1,7 +1,7 @@
 {
-  "release": "2026_10_21",
-  "built_at": "2026-09-26T17:56:19.334269+00:00",
-  "git_sha": "3e913a69cd9161888fdf6111a89489aefbe94772",
+  "release": "2026_10_22",
+  "built_at": "2026-10-02T09:10:37.130477+00:00",
+  "git_sha": "3e2decc9be1eb3324c161bb2316c5f1dea618cbf",
   "git_dirty": true,
   "counts": {
     "sources": 60,
@@ -10,7 +10,7 @@
     "evidence": 323
   },
   "content_sources": {
-    "config/vocab/diseases.yaml": "sha256:aab1e2394ee223f88db0d08fcce79702a348870e5cde434b5fae7aaa42bd70e5",
+    "config/vocab/diseases.yaml": "sha256:9293f54c8491e143a3bcf646b2069cd2f392376d38a03f4d46999492625321db",
     "config/sources/notified_varieties.yaml": "sha256:a50a1a2758931c34ce5fe965f30659e10cda8dc683a2d691fb975da93433a447",
     "kg/curated/chickpea_seed_genes.yaml": "sha256:dce22ec42768d4029b5cc32a60bf6bf23ecc3f73a26dcd8e9930791d3b69310c",
     "kg/curated/env_triggers_v1.yaml": "sha256:bd6ea3129e87150db1b19789380faa6bd8626786d3fb1cd310f067d7e0fc3de5",

@@ -61,8 +61,9 @@ const STEPS = [
     popover: {
       title: "Variety reactions",
       description:
-        "Each card is one claim: the disease, how the variety reacts (resistant, susceptible…), and the " +
-        "<strong>paper or official document</strong> it comes from.",
+        "Each card is one claim: the disease and how the variety reacts. The <strong>tier chip</strong> (A strongest, " +
+        "D weakest) says how strong its evidence is, and <strong>Show evidence</strong> opens the paper or official " +
+        "document it comes from.",
     },
   },
   {
@@ -109,9 +110,9 @@ const STEPS = [
     popover: {
       title: "The graph",
       description:
-        "Every shape is an <strong>entity</strong>; every arrow is one <strong>cited claim</strong>. " +
-        "Hover for a one-line meaning. <strong>Click</strong> an entity to light up what it connects to — " +
-        "click a disease to see what the knowledge base holds for it, and what is still missing.",
+        "Every shape is an <strong>entity</strong>; every arrow is one <strong>cited claim</strong>. Solid lines are " +
+        "strong evidence, dashed and dotted are weaker. <strong>Click an entity</strong> to see what it connects to " +
+        "(a disease shows what is still missing), or <strong>click a line</strong> to see its sources.",
     },
   },
   {
@@ -148,8 +149,8 @@ const STEPS = [
     popover: {
       title: "Know what you are looking at",
       description:
-        "Every claim cites a source, but confidence scoring is a later phase — this note always says " +
-        "how much has been scored so far.",
+        "Every claim cites a source and carries a tier A–D. This note always says how many sit in each tier, " +
+        "how many rest on a single source, and how many have been human-reviewed.",
     },
   },
   {

@@ -2,7 +2,9 @@
 -- default REST API (PostgREST exposes the `public` schema out of the box -- no dashboard config
 -- needed). Each view selects from kg_current, which is a schema of views that
 -- curator/graph/promote.py repoints atomically on every release -- so these bridge views keep
--- resolving correctly after every future promotion without needing to be redefined.
+-- resolving after every future promotion: promote() drops kg_current's views with CASCADE (which
+-- drops these too) and re-applies every supabase/migrations/*_views.sql in the same transaction
+-- (curator/graph/promote.py bridge_view_sql), so keep each *_views.sql idempotent.
 --
 -- IMPORTANT SCOPE NOTE: this is a DEMO query layer for exercising the KG interactively, not the
 -- real risk-engine API (RESEARCH_ROADMAP.md Phase 11, still not built). In particular, the
