@@ -1,11 +1,11 @@
 {
-  "release": "2026_10_24",
-  "built_at": "2026-10-02T10:57:06.288147+00:00",
-  "git_sha": "a97d9011e4adb2e7b545fa1edb03e82c4869084e",
+  "release": "2026_10_25",
+  "built_at": "2026-10-02T14:17:00.428707+00:00",
+  "git_sha": "a5347bcc90e41db00398d9d038ca756edc71d9f5",
   "git_dirty": false,
   "counts": {
     "sources": 73,
-    "entities": 216,
+    "entities": 231,
     "claims": 333,
     "evidence": 348
   },
