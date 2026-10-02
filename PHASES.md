@@ -80,7 +80,7 @@ are also where most of the work is.
 | 0 | Cleanup: bad data removed, tests fixed, secrets hooked, docs consolidated | ✅ **Done** |
 | 1 | Scope, data model, ID rules, release schema, competency questions | ✅ **Done** |
 | 2 | Supabase live setup + versioned build pipeline | ✅ **Done** — five real releases (`kg_2026_10_1` through `_5`) built; `kg_current` atomic switchover live and pointing at `kg_2026_10_5`; `kg/manifest.json` (checksums, git SHA, counts) written on every `kg load`, verified by reading it back |
-| 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
+| 3 | Reference layer: gene catalogues, varieties, zones for Central India | 🟡 **Varieties done for MP+Maharashtra; first 5 variety-gene links added 2026-10-02 (§3 item 39)** (110 sourced, loaded as 108 entities + 234 claims — see below). Gene catalogue: 14 wheat genes, 6 soybean genes, 1 chickpea QTL — several diseases per crop still genuinely uncurated (no locus found in the literature, not just "not gotten to yet") |
 | 4 | Genomic layer: NLR candidates, QTL anchoring from your 3 genome files | 🟡 **4.1/4.2/4.6 done** (streaming parser, domain-based NLR classification, chromosome stats) for chickpea+soybean; wheat structural data loaded but not NLR-classified (its GFF has no domain annotations at all). **4.3 started**: NCBI BLAST+ installed, 1 gene (Lr34) confidently anchored to its real chromosome/position; 3 more attempted and correctly rejected (see below). **4.4 (marker anchoring) not started** |
 | 5 | Literature pipeline v2 (grounded LLM extraction) | 🟡 **Core pipeline + review UI + graph visualizer + real full-paper test done, 2026-09-27** — search/verify (Europe PMC), grounded LLM extraction, quote-grounding, normalization (`curator/lit`/`curator/llm`/`curator/extract`), now including a real JATS full-text parser (`curator/lit/jats.py`, task 5.3) after a real bug was found sending raw XML to the LLM; a staging Postgres schema + FastAPI service (`api/`) + Streamlit review app (`tools/review_app/`) + `agrihub lit export-staged` take a paper from extraction through human approval to a `kg build`-ready YAML. A second extraction backend (Google's LangExtract, `curator/extract/langextract_pipeline.py`) is built and proven correct at small scale, but its full-paper timeout is unresolved — 3 live attempts via NVIDIA all timed out on a real ~32K-character paper (§3 item 33); **NVIDIA has since been dropped entirely** (code deleted, not deprecated) in favor of Gemini (now LangExtract's default) and Groq, both verified live and real-tested through the actual pipeline with clean 1.00 precision/recall/F1 results (§3 item 34) — the full-paper timeout itself hasn't been retried against Gemini yet. A separate, read-only full-graph visualizer (Cytoscape.js) is also live on the dashboard. Still missing: dictionary NER (5.5), relevance classifier (5.4), JATS table extraction (5.9 — variety-reaction tables in papers are invisible to it), and the corpus-scale run (5.11 wants 300–500 papers; only 6 have gone through the live pipeline: 5 abstracts + 1 real full paper) |
 | 6 | Gold-standard evaluation of the extraction pipeline | 🟡 **5-paper pilot + 2 real 6.4 ablations, 2026-09-27**: guideline + harness are real and working; v1 prompt scores 2/5 clean, 3/5 fail on well-diagnosed causes (§3 items 29-30). Two interventions tried and A/B tested against the same 5 papers — a few-shot prompt (v2, item 31) and a corrective retry pass (item 32) — **both come back net negative/mixed**, and both independently produced the same quote-fidelity-degradation side effect, a stronger cross-cutting finding than either alone. v1 stays production, `retry` stays opt-in and off everywhere live. One real code bug found and fixed (a vocab-synonym wiring gap). Still needed: 40 more papers, a second independent annotator (double-annotation + κ), and the now-evidence-backed two-step (quote-then-structure) architecture as the next attempt |
@@ -1370,6 +1370,43 @@ are also where most of the work is.
    - **Not done:** `status` stays `unreviewed` for every curated claim; flipping it needs a real human re-check
      against the source, not a script. Next: variety-to-gene links, advisory depth, structured variety-reaction
      sources (see the order recorded under item 37).
+
+39. **Credibility tooling, and the first content added with it (2026-10-02).** Steps 2-3 of the order recorded under
+   item 37 (variety-gene links, advisory depth), done with a rule: nothing goes in that a tool has not checked
+   against the source text.
+   - **Quote audit** (`agrihub kg verify-quotes`, `curator/graph/quote_audit.py`): re-fetches every cited paper
+     (abstract, open-access full text and table rows) or official document and checks each stored quote,
+     fragment by fragment for `...` / `[...]` elisions. **Its first run found two real defects in existing data**:
+     three Lr34 claims quoted a sentence that had been merged and reworded ("...for leaf rust, stripe rust, and
+     powdery mildew" where the paper says "these pathogens"), and the Ug99 `PATHOTYPE_VARIANT_OF` claim quoted a
+     sentence that is not in the paper at all. Both corrected to what the sources say. Final state: **75 quotes
+     verified verbatim, 0 missing**, 7 not found on a landing-page URL (the DAC soybean list, unverifiable not
+     wrong), 124 unverifiable (paywalled full text, PDFs), 131 evidence rows with no quote (variety-release
+     rows). So the audit proves 75 quotes real; it cannot yet speak for the other ~250 rows.
+   - **Evidence finder** (`agrihub lit find`, `curator/lit/find_evidence.py`): returns only verbatim sentences or
+     table rows where, say, a variety and a gene co-occur in open-access papers. Run over all 50 wheat, 21 soybean
+     and 36 chickpea varieties: 43 + 3 + 3 candidate sentences, **most of which were not claims**. Review
+     articles write "HD 2932 (Lr19/Sr25+Lr24/Sr24+Yr10)" and "HUW510 (Lr34)" about *improved lines* that had those
+     genes introduced; a Sci Rep paper in the same results says HD2932 was the recipient background. Asserting
+     those for the released varieties would have been wrong, which is why a person reads every hit.
+   - **Added (11 claims, release 2026_10_23)**: the first five `VARIETY_CARRIES_GENE` claims (HD 3090: Sr24, Sr31,
+     Sr2; MP 3288: Sr24; MP 3336: Sr2) from an ICAR-IIWBR study of 40 released varieties that used markers closely
+     linked to each gene -> new `linked_marker` evidence type (weight 0.65, between GWAS and QTL mapping, not
+     the 0.85 of a diagnostic marker); the Sr24 gene and its resistance claim; and five advisories: two for
+     soybean mosaic virus (the one disease with none; DOI/PMID papers found, so no schema change was needed),
+     ICAR's stripe-rust propiconazole recommendation, and two Indian chickpea field studies (wilt seed treatment,
+     dry-root-rot bio-agents). Advisories now record product, rate, timing, crop stage and where the source says
+     it applies (`AdvisoryProps`, all optional); they show in the Sensor tab and in the graph's node panel.
+   - **Real limits, stated plainly.** Variety-gene coverage is 5 claims for 3 of 107 varieties; soybean and
+     chickpea produced nothing usable from open-access text. The HI 8498 entry was left out because two reports
+     disagree (Sr11+Sr2 vs Sr2+Sr36). The ICAR advisory is from the rabi 2010-11 season for the north-western
+     plains, not Malwa, and is tier A only because an official document carries weight 0.90 (see item 38). Only
+     advisories and triggers publish their properties through the anonymous API; verbatim quotes still do not.
+     **Step 4 (structured variety-reaction sources) was not started.**
+   - **Also fixed:** `europepmc.metadata_from_record` returned `venue=None` for core records (journal is under
+     `journalInfo`; the review app showed "unknown venue"). A second promotion attempt lost its database
+     connection mid-transaction ("server terminated abnormally"); it rolled back cleanly (live release and all ten
+     public views untouched), and an immediate retry succeeded in 18 s. Cause unknown; worth watching.
 
 ---
 

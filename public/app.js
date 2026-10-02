@@ -451,6 +451,7 @@ const CLAIM_INFO = {
   VARIETY_REACTION: { from: "Variety", to: "Disease", verb: "has a documented reaction to", out: "Documented reactions", inn: "Varieties with a documented reaction" },
   VARIETY_RECOMMENDED_FOR_ZONE: { from: "Variety", to: "AgroZone", verb: "is recommended for", out: "Recommended for zones", inn: "Recommended varieties" },
   GENE_CONFERS_RESISTANCE: { from: "Gene", to: "Disease", verb: "confers resistance to", out: "Confers resistance to", inn: "Resistance genes" },
+  VARIETY_CARRIES_GENE: { from: "Variety", to: "Gene", verb: "carries", out: "Carries genes", inn: "Varieties carrying it" },
   DISEASE_MANAGED_BY: { from: "Disease", to: "Advisory", verb: "is managed by", out: "Managed by", inn: "Diseases it helps manage" },
   DISEASE_ENV_TRIGGER: { from: "Disease", to: "EnvTrigger", verb: "is favoured by", out: "Favoured by", inn: "Diseases it favours" },
   DISEASE_CAUSED_BY: { from: "Disease", to: "Pathogen", verb: "is caused by", out: "Caused by", inn: "Diseases it causes" },
@@ -473,6 +474,7 @@ function claimLabel(claimType) {
 const GRAPH_PRESETS = [
   { id: "genes", label: "Which genes confer resistance?", types: ["GENE_CONFERS_RESISTANCE"] },
   { id: "varieties", label: "Which varieties resist which diseases?", types: ["VARIETY_REACTION"] },
+  { id: "carries", label: "Which varieties carry which genes?", types: ["VARIETY_CARRIES_GENE", "GENE_CONFERS_RESISTANCE"] },
   { id: "profile", label: "How is each disease caused, triggered and managed?", types: ["DISEASE_CAUSED_BY", "DISEASE_ENV_TRIGGER", "DISEASE_MANAGED_BY"] },
   { id: "zones", label: "Where is each variety recommended?", types: ["VARIETY_RECOMMENDED_FOR_ZONE"] },
   { id: "all", label: "Show everything", types: null },
