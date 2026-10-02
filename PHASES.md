@@ -1509,6 +1509,22 @@ are also where most of the work is.
    - **State:** the three batches (121 + 42 claims) sit in `kg/incoming/` awaiting a person: `agrihub kg review-sheet` has made
      their sheets. Nothing from them is in `kg/curated/`.
 
+44. **WO01-WO03 reviewed and released (2026-10-03, release 2026_10_26: 333 -> 578 claims).** No human reviewer was available, so the owner asked
+   me (Claude) to take charge. Every candidate was read against its quote, not sampled; the log is `kg/review_log/2026-10-03_wo01-wo03.md`
+   (decisions, drops with reasons, corrections) with originals, reviewed files and scripts beside it. **No reviewer name and no `reviewed` status
+   were written** (the public views would call that "human-reviewed"); model-found evidence keeps its `llm:` discount, so most of these claims are
+   tier C by construction. 245 claims added (reactions 161, zone recommendations 75, parentage 9), none removed; 11 soybean claims rose D -> B on
+   gaining a second source; 10 rust claims fell to C because new field data contradicts their notifications. Final tiers A 146 / B 190 / C 217 / D 25,
+   55 claims flagged as disputed (16 variety-disease pairs). All 264 new evidence rows verify against their live documents (243 exact, 21 whitespace-only).
+   - **WO01 became a parser.** The model's 50 wheat rust rows matched a deterministic reader of the same tables on 46 (one silent column shift, three
+     unreadable rows), so the tables are now read by `curator/graph/aicrp_rust.py` (121 claims, no model).
+   - **Four defects of mine surfaced and were fixed, each with tests:** (1) `normalise` deleted text between a bare `<` and the next `>`, hiding a real table
+     (I had wrongly concluded the model invented it); (2) the parser classified by the response letter of the worst location instead of the reports'
+     own rule (ACI <= 10.0 is resistant), which made ~100 false conflicts; (3) name matching ignored en-dashes and "X- Y" spacing, and short table-cell
+     quotes could not verify; (4) the near-duplicate guard fired on numbered series (NRC 12 / NRC 127).
+   - **Limits:** reviewer is an AI; WO02/WO03 are one source per claim; the parser reads only the AICRP Crop Protection layout; check varieties repeated
+     across AVT groups give several same-season readings. A human pass is still the way to raise confidence (`review-sheet` / `apply-review`).
+
 ---
 
 ## 6. Definition of "done" reminder (unchanged from RESEARCH_ROADMAP.md §10)

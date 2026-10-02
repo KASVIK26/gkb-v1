@@ -1,25 +1,28 @@
 {
-  "release": "2026_10_25",
-  "built_at": "2026-10-02T14:17:00.428707+00:00",
-  "git_sha": "a5347bcc90e41db00398d9d038ca756edc71d9f5",
+  "release": "2026_10_26",
+  "built_at": "2026-10-02T14:53:59.809266+00:00",
+  "git_sha": "9dfcefeeb3ba34f8fc5b953f35d5f7b5833266c4",
   "git_dirty": false,
   "counts": {
-    "sources": 73,
-    "entities": 231,
-    "claims": 333,
-    "evidence": 348
+    "sources": 83,
+    "entities": 318,
+    "claims": 578,
+    "evidence": 612
   },
   "content_sources": {
     "config/vocab/diseases.yaml": "sha256:9293f54c8491e143a3bcf646b2069cd2f392376d38a03f4d46999492625321db",
     "config/sources/notified_varieties.yaml": "sha256:b48a75cb1df597d1d01bb4fbec74b6275f38e30d08d1af9696e8397ac65bbdd9",
     "kg/curated/advisories_v2.yaml": "sha256:ee59f03b1e2dc639b9dc96c9e8c4cecb901f5ec848ef849ce370bc0ce09bb44c",
+    "kg/curated/aicrp_icar_reactions_v2.yaml": "sha256:9f919bf79e2fc006123b743c0734975e05750a72502c9b6b944d86bcf8066100",
+    "kg/curated/aicrp_rust_reactions_v1.yaml": "sha256:f22c3453b215455db571eab1998a66a93222802a4ff061ba5d909b162c64c7ed",
     "kg/curated/chickpea_reactions_v1.yaml": "sha256:95e1ca299708b91a700d29d15f4847f04b482e056eef8f4ce0c64cb6fd610922",
     "kg/curated/chickpea_seed_genes.yaml": "sha256:dce22ec42768d4029b5cc32a60bf6bf23ecc3f73a26dcd8e9930791d3b69310c",
     "kg/curated/env_triggers_v1.yaml": "sha256:bd6ea3129e87150db1b19789380faa6bd8626786d3fb1cd310f067d7e0fc3de5",
     "kg/curated/soybean_seed_genes.yaml": "sha256:4ca42f2d6bbdf7434f8147de6afa7c8dfebedab65d0b668c67a16bba2905f5f0",
     "kg/curated/variety_genes_v1.yaml": "sha256:0aa015101c0243faee2a9d7eeec26021e515dcb2a1c0626ae6f5bda53332a218",
     "kg/curated/wheat_reactions_v1.yaml": "sha256:0f71b3a2a5f8a453572ba2dc303ce416ba10a5fa32aeec52c0f3e6a13456f087",
-    "kg/curated/wheat_seed_genes.yaml": "sha256:e0ffeaf357b31ed586b45bcf79c390c5a9d0dfa310fdd9a30dabf36a8ee90ac4"
+    "kg/curated/wheat_seed_genes.yaml": "sha256:e0ffeaf357b31ed586b45bcf79c390c5a9d0dfa310fdd9a30dabf36a8ee90ac4",
+    "kg/curated/zones_and_pedigree_v1.yaml": "sha256:09869fabc9b1be510e2122563200141ee51460ab67d2c5ae5fe74c641f2290bb"
   },
   "validation_dependencies": {
     "config/vocab/sensors.yaml": "sha256:c14b208ad0e7e6570b097bc05ac45ebfc0202376b88bdde7d10d9be633ab64be"
