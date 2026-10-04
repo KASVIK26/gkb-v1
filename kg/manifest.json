@@ -1,13 +1,13 @@
 {
-  "release": "2026_10_35",
-  "built_at": "2026-10-04T13:57:57.838876+00:00",
-  "git_sha": "256dcbb5b780f7eaced03f15571b2d6d74db5d2a",
+  "release": "2026_10_36",
+  "built_at": "2026-10-04T14:18:27.465301+00:00",
+  "git_sha": "352e926379d6561c13bf184fa943d4ed33a28f51",
   "git_dirty": false,
   "counts": {
-    "sources": 132,
-    "entities": 715,
-    "claims": 1654,
-    "evidence": 1859
+    "sources": 135,
+    "entities": 722,
+    "claims": 1661,
+    "evidence": 1866
   },
   "content_sources": {
     "config/vocab/diseases.yaml": "sha256:9293f54c8491e143a3bcf646b2069cd2f392376d38a03f4d46999492625321db",
@@ -19,6 +19,7 @@
     "kg/curated/aicrp_rust_reactions_2020_21_v1.yaml": "sha256:b1c79f4e7143d156409ae0b9ffdd3bbdd7035fd5811dfabc0489fb0bd814b926",
     "kg/curated/aicrp_rust_reactions_2023_24_v1.yaml": "sha256:b45504ab893fd80256d749c43476f43eec5bdf5bd217937f6821f2fe6196a543",
     "kg/curated/aicrp_rust_reactions_v1.yaml": "sha256:f22c3453b215455db571eab1998a66a93222802a4ff061ba5d909b162c64c7ed",
+    "kg/curated/chickpea_last_try_v1.yaml": "sha256:c3b3e62e0566a0ab605894baa07e5f43de1a1eece2eb545d81034a3e140b723e",
     "kg/curated/chickpea_reactions_v1.yaml": "sha256:95e1ca299708b91a700d29d15f4847f04b482e056eef8f4ce0c64cb6fd610922",
     "kg/curated/chickpea_seed_genes.yaml": "sha256:dce22ec42768d4029b5cc32a60bf6bf23ecc3f73a26dcd8e9930791d3b69310c",
     "kg/curated/env_triggers_v1.yaml": "sha256:bd6ea3129e87150db1b19789380faa6bd8626786d3fb1cd310f067d7e0fc3de5",
