@@ -18,12 +18,26 @@ sources:
   venue: Genes
   url: https://doi.org/10.3390/genes14010019
   verified: true
+- id: pmid:40430810
+  type: publication
+  title: Evaluation of Fusarium Head Blight Resistance Through a Genome-Wide Association Study in CIMMYT and South Asian Wheat Germplasm
+  year: 2025
+  venue: Pathogens (Basel, Switzerland)
+  url: https://doi.org/10.3390/pathogens14050490
+  verified: true
 - id: pmid:40604369
   type: publication
   title: Genome-wide association analysis study and genomic prediction for resistance to soybean mosaic virus in soybean population
   year: 2025
   venue: BMC plant biology
   url: https://doi.org/10.1186/s12870-025-06775-5
+  verified: true
+- id: pmid:41882545
+  type: publication
+  title: Dissecting adult plant resistance to stripe and leaf rust in advanced Indian wheat breeding lines through a genome-wide association study
+  year: 2026
+  venue: BMC plant biology
+  url: https://doi.org/10.1186/s12870-026-08430-z
   verified: true
 - id: pmid:41963778
   type: publication
@@ -877,6 +891,436 @@ entities:
     trait: Fusarium wilt resistance
     chromosome: CaLG02
     population: Ca × Cr RILs (F6:7), n=104; Palomino et al., 2009
+- id: qtl:wheat:LR-GWAS_AX-94677910
+  type: QTL
+  name: LR-GWAS_AX-94677910
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 1B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94484256
+  type: QTL
+  name: LR-GWAS_AX-94484256
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 3A
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94715535
+  type: QTL
+  name: LR-GWAS_AX-94715535
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 3B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-95225219
+  type: QTL
+  name: LR-GWAS_AX-95225219
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 3D
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94464472
+  type: QTL
+  name: LR-GWAS_AX-94464472
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 4B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94508980
+  type: QTL
+  name: LR-GWAS_AX-94508980
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 4B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94707905
+  type: QTL
+  name: LR-GWAS_AX-94707905
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 4B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94499431
+  type: QTL
+  name: LR-GWAS_AX-94499431
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 5B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94559013
+  type: QTL
+  name: LR-GWAS_AX-94559013
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 5B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94634359
+  type: QTL
+  name: LR-GWAS_AX-94634359
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 5B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94964037
+  type: QTL
+  name: LR-GWAS_AX-94964037
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 6A
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94640138
+  type: QTL
+  name: LR-GWAS_AX-94640138
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 6B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94682575
+  type: QTL
+  name: LR-GWAS_AX-94682575
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 6B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94732920
+  type: QTL
+  name: LR-GWAS_AX-94732920
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 6D
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94619468
+  type: QTL
+  name: LR-GWAS_AX-94619468
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 7B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-94672454
+  type: QTL
+  name: LR-GWAS_AX-94672454
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 7B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:LR-GWAS_AX-95122304
+  type: QTL
+  name: LR-GWAS_AX-95122304
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: leaf rust resistance
+    chromosome: 7B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:YR-GWAS_AX-94574509
+  type: QTL
+  name: YR-GWAS_AX-94574509
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: stripe rust resistance
+    chromosome: 1A
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:YR-GWAS_AX-94394403
+  type: QTL
+  name: YR-GWAS_AX-94394403
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: stripe rust resistance
+    chromosome: 2B
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:YR-GWAS_AX-94988703
+  type: QTL
+  name: YR-GWAS_AX-94988703
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: stripe rust resistance
+    chromosome: 2D
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:YR-GWAS_AX-94550243
+  type: QTL
+  name: YR-GWAS_AX-94550243
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: stripe rust resistance
+    chromosome: 3A
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:YR-GWAS_AX-95024816
+  type: QTL
+  name: YR-GWAS_AX-95024816
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: stripe rust resistance
+    chromosome: 3A
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:YR-GWAS_AX-95166612
+  type: QTL
+  name: YR-GWAS_AX-95166612
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: stripe rust resistance
+    chromosome: 3D
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:YR-GWAS_AX-94486740
+  type: QTL
+  name: YR-GWAS_AX-94486740
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: stripe rust resistance
+    chromosome: 6A
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+- id: qtl:wheat:FHB-GWAS_wsnp_Ex_c11055_17927668
+  type: QTL
+  name: FHB-GWAS_wsnp_Ex_c11055_17927668
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 5D
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_Tdurum_contig44948_1812
+  type: QTL
+  name: FHB-GWAS_Tdurum_contig44948_1812
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 7B
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_Tdurum_contig28176_55
+  type: QTL
+  name: FHB-GWAS_Tdurum_contig28176_55
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 7B
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_Tdurum_contig102328_129
+  type: QTL
+  name: FHB-GWAS_Tdurum_contig102328_129
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 7B
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_Tdurum_contig10036_474
+  type: QTL
+  name: FHB-GWAS_Tdurum_contig10036_474
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 1A
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_RAC875_rep_c111159_57
+  type: QTL
+  name: FHB-GWAS_RAC875_rep_c111159_57
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 7A
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_RAC875_c60218_63
+  type: QTL
+  name: FHB-GWAS_RAC875_c60218_63
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 4A
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_RAC875_c32611_347
+  type: QTL
+  name: FHB-GWAS_RAC875_c32611_347
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 4A
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_RAC875_c2456_849
+  type: QTL
+  name: FHB-GWAS_RAC875_c2456_849
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 4B
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_Ra_c58315_265
+  type: QTL
+  name: FHB-GWAS_Ra_c58315_265
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 1A
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_Kukri_c9683_723
+  type: QTL
+  name: FHB-GWAS_Kukri_c9683_723
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 7A
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_Ku_c20136_198
+  type: QTL
+  name: FHB-GWAS_Ku_c20136_198
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 7B
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_Excalibur_rep_c111660_89
+  type: QTL
+  name: FHB-GWAS_Excalibur_rep_c111660_89
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 7A
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_Excalibur_c59894_97
+  type: QTL
+  name: FHB-GWAS_Excalibur_c59894_97
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 1A
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_BS00059062_51
+  type: QTL
+  name: FHB-GWAS_BS00059062_51
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 7B
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_BS00059061_51
+  type: QTL
+  name: FHB-GWAS_BS00059061_51
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 7B
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_BobWhite_c14736_188
+  type: QTL
+  name: FHB-GWAS_BobWhite_c14736_188
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 7B
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_AX-94793903
+  type: QTL
+  name: FHB-GWAS_AX-94793903
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 1D
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+- id: qtl:wheat:FHB-GWAS_AX-94639168
+  type: QTL
+  name: FHB-GWAS_AX-94639168
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: Fusarium head blight resistance
+    chromosome: 2B
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
 claims:
 - type: QTL_ASSOCIATION
   subject: qtl:soybean:SBR-PR_ss14979891
@@ -2222,3 +2666,653 @@ claims:
     extractor: parser:open_paper_table@1
     quote: Quantitative trait loci (QTLs) information of resistance to some chickpea Fusarium wilt (FW) races used in the meta‐analysis. ... Race | QTL | Parents | Population type | Population size (n) | R 2 | CaLG | Genotyping method | LOD score | References ... 5 | R5_1 | Ca × Cr | RILs (F6:7) | 104 | 24.2 | 2 | CAPS and dCAPS | 2.9 | (Palomino et al., 2009)
     candidate_id: open_loci:40050693:FW-R5_1
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94677910
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 6.9e-07
+    pve_pct: 3.3
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94677910 | 1B | 139,281,434 | G/A | 139281172 | 139672208 | 391 | 6.9X10-07 | 3.30 | E3
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94677910
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94484256
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 1.8e-07
+    pve_pct: 7.43
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94484256 | 3A | 38,372,922 | A/C | 36492079 | 39308015 | 2815 | 1.8X 10-07 | 7.43 | E3
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94484256
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94715535
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 8.4e-11
+    pve_pct: 12.44
+    n_env: 2
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94715535 | 3B | 809,600,739 | A/G | 807288990 | 809600739 | 2311 | 8.4X10-11 | 12.44 | E2 3.2X10-06 | 8.67 | E3
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94715535
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-95225219
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 6.5e-06
+    pve_pct: 4.22
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-95225219 | 3D | 228,180,751 | C/T | - | - | - | 6.5X10-06 | 4.22 | E1
+    candidate_id: open_loci:41882545:LR-GWAS_AX-95225219
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94464472
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 1.3e-06
+    pve_pct: 4.07
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94464472 | 4B | 532,719,023 | G/C | 532441060 | 532719023 | 277 | 1.3X10-06 | 4.07 | E2
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94464472
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94508980
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 2.0e-08
+    pve_pct: 5.55
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94508980 | 4B | 27,522,453 | C/A | 26665241 | 27522453 | 857 | 2.0X10-08 | 5.55 | E1
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94508980
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94707905
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 5.0999999999999995e-06
+    pve_pct: 6.06
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94707905 | 4B | 36,456,775 | C/T | 36456775 | 37553323 | 1096 | 5.1X10-06 | 6.06 | E2
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94707905
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94499431
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 1.2e-10
+    pve_pct: 17.15
+    n_env: 2
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94499431 | 5B | 681,699,356 | T/A | 681048488 | 681699356 | 650 | 1.2X10-10 | 17.15 | E1 2.5X10-06 | 8.26 | E3
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94499431
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94559013
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 2.1e-06
+    pve_pct: 12.92
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94559013 | 5B | 662,035,734 | T/C | 662035734 | 662977713 | 941 | 2.1X10-06 | 12.92 | E1
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94559013
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94634359
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 4.5999999999999995e-08
+    pve_pct: 2.55
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94634359 | 5B | 10,060,262 | A/C | 10060262 | 10449146 | 388 | 4.6X10-08 | 2.55 | E1
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94634359
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94964037
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 1.6000000000000003e-05
+    pve_pct: 3.52
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94964037 | 6A | 430,279,313 | T/C | 428072653 | 430279313 | 2206 | 1.6X10-05 | 3.52 | E2
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94964037
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94640138
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 5.3e-07
+    pve_pct: 5.85
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94640138 | 6B | 684,270,622 | G/T | 683494580 | 686416101 | 2921 | 5.3X10-07 | 5.85 | E2
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94640138
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94682575
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 1.6000000000000003e-05
+    pve_pct: 4.48
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94682575 | 6B | 532,900,329 | C/T | 530987159 | 532900329 | 1913 | 1.6X10-05 | 4.48 | E1
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94682575
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94732920
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 1.6e-07
+    pve_pct: 4.89
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94732920 | 6D | 3,992,719 | C/T | 3992719 | 4271508 | 278 | 1.6X10-07 | 4.89 | E3
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94732920
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94619468
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 2.5e-10
+    pve_pct: 33.67
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94619468 | 7B | 569,422,618 | T/C | 569419689 | 569956310 | 536 | 2.5X10-10 | 33.67 | E2
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94619468
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-94672454
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 1.4e-06
+    pve_pct: 7.02
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94672454 | 7B | 409,875,825 | C/T | 409875825 | 411049466 | 1173 | 1.4X10-06 | 7.02 | E1
+    candidate_id: open_loci:41882545:LR-GWAS_AX-94672454
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:LR-GWAS_AX-95122304
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 5.5e-08
+    pve_pct: 17.49
+    n_env: 2
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-95122304 | 7B | 643,352,902 | C/T | 641377257 | 643352902 | 1975 | 5.5X10-08 | 17.49 | E1 2.8X10-06 | 18.01 | E3
+    candidate_id: open_loci:41882545:LR-GWAS_AX-95122304
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:YR-GWAS_AX-94574509
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 7.9e-06
+    pve_pct: 7.79
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94574509 | 1A | 9,580,120 | C/T | 9357652 | 9642918 | 1345 | 7.9X10-06 | 7.79 | E1
+    candidate_id: open_loci:41882545:YR-GWAS_AX-94574509
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:YR-GWAS_AX-94394403
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 1.8000000000000002e-08
+    pve_pct: 10.77
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94394403 | 2B | 157,711,976 | G/C | - | - | - | 1.8X10-08 | 10.77 | E1
+    candidate_id: open_loci:41882545:YR-GWAS_AX-94394403
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:YR-GWAS_AX-94988703
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 3.2999999999999997e-06
+    pve_pct: 18.51
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94988703 | 2D | 67,441,387 | C/T | - | - | - | 3.3X10-06 | 18.51 | E2
+    candidate_id: open_loci:41882545:YR-GWAS_AX-94988703
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:YR-GWAS_AX-94550243
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 2.8999999999999998e-08
+    pve_pct: 11.31
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94550243 | 3A | 657,945,808 | A/G | 657945808 | 658701701 | 755 | 2.9X10-08 | 11.31 | E2
+    candidate_id: open_loci:41882545:YR-GWAS_AX-94550243
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:YR-GWAS_AX-95024816
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 2.0e-05
+    pve_pct: 6.56
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-95024816 | 3A | 725,838,969 | C/G | 724649140 | 725838969 | 1189 | 2.0X10-05 | 6.56 | E2
+    candidate_id: open_loci:41882545:YR-GWAS_AX-95024816
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:YR-GWAS_AX-95166612
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 5.7999999999999995e-06
+    pve_pct: 21.33
+    n_env: 1
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-95166612 | 3D | 4,046,769 | C/T | 3631876 | 4169908 | 538 | 5.8X10-06 | 21.33 | E2
+    candidate_id: open_loci:41882545:YR-GWAS_AX-95166612
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:YR-GWAS_AX-94486740
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    stage: adult
+    population: Indian advanced wheat breeding lines, three seasons, BLINK multi-locus GWAS
+    p_value: 1.5e-07
+    pve_pct: 33.77
+    n_env: 3
+  evidence:
+  - source: pmid:41882545
+    method: gwas
+    locator: MTA table
+    extractor: parser:open_paper_table@1
+    quote: Trait | MTA | Chr. | Position (bp) | Allele | LD Blocks | p-value | PVE (%) | Environment Start | End | Kb ... AX-94486740 | 6A | 556,888,147 | C/T | 555738572 | 556888147 | 1149 | 1.6X10-06 | 27.98 | E1 1.7X10-06 | 12.64 | E2 1.5X10-07 | 33.77 | E3
+    candidate_id: open_loci:41882545:YR-GWAS_AX-94486740
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_wsnp_Ex_c11055_17927668
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000794
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHBm | wsnp_Ex_c11055_17927668 | 5D | 561706128 | 0.000794 | 3.06
+    candidate_id: open_loci:40430810:FHB-GWAS_wsnp_Ex_c11055_17927668
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_Tdurum_contig44948_1812
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000648
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB21 | Tdurum_contig44948_1812 | 7B | 699838421 | 0.000648 | 2.91
+    candidate_id: open_loci:40430810:FHB-GWAS_Tdurum_contig44948_1812
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_Tdurum_contig28176_55
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000251
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB23 | Tdurum_contig28176_55 | 7B | 544138607 | 0.000251 | 5.49
+    candidate_id: open_loci:40430810:FHB-GWAS_Tdurum_contig28176_55
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_Tdurum_contig102328_129
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000138
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB21 | *Tdurum_contig102328_129 | 7B | 565742062 | 0.000138 | 3.44
+    candidate_id: open_loci:40430810:FHB-GWAS_Tdurum_contig102328_129
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_Tdurum_contig10036_474
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000521
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB21 | Tdurum_contig10036_474 | 1A | 556304788 | 0.000521 | 2.61
+    candidate_id: open_loci:40430810:FHB-GWAS_Tdurum_contig10036_474
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_RAC875_rep_c111159_57
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000859
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB21 | RAC875_rep_c111159_57 | 7A | 700808659 | 0.000859 | 2.81
+    candidate_id: open_loci:40430810:FHB-GWAS_RAC875_rep_c111159_57
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_RAC875_c60218_63
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000257
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHBm | RAC875_c60218_63 | 4A | 217653852 | 0.000257 | 2.05
+    candidate_id: open_loci:40430810:FHB-GWAS_RAC875_c60218_63
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_RAC875_c32611_347
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000427
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB23 | RAC875_c32611_347 | 4A | 669816688 | 0.000427 | 4.46
+    candidate_id: open_loci:40430810:FHB-GWAS_RAC875_c32611_347
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_RAC875_c2456_849
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000409
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB21 | RAC875_c2456_849 | 4B | 562356529 | 0.000409 | 4.25
+    candidate_id: open_loci:40430810:FHB-GWAS_RAC875_c2456_849
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_Ra_c58315_265
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000152
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHBm | *Ra_c58315_265 | 1A | 473637106 | 0.000152 | 4.99
+    candidate_id: open_loci:40430810:FHB-GWAS_Ra_c58315_265
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_Kukri_c9683_723
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000537
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB21 | Kukri_c9683_723 | 7A | 700702592 | 0.000537 | 2.97
+    candidate_id: open_loci:40430810:FHB-GWAS_Kukri_c9683_723
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_Ku_c20136_198
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000434
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB23 | *Ku_c20136_198 | 7B | 609385718 | 0.000434 | 3.92
+    candidate_id: open_loci:40430810:FHB-GWAS_Ku_c20136_198
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_Excalibur_rep_c111660_89
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 4.6500000000000005e-05
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB23 | Excalibur_rep_c111660_89 | 7A | 585065925 | 4.65 × 10−5 | 6.23
+    candidate_id: open_loci:40430810:FHB-GWAS_Excalibur_rep_c111660_89
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_Excalibur_c59894_97
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000928
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHBm | Excalibur_c59894_97 | 1A | 463813596 | 0.000928 | 3.71
+    candidate_id: open_loci:40430810:FHB-GWAS_Excalibur_c59894_97
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_BS00059062_51
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 4.6500000000000005e-05
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB23 | BS00059062_51 | 7B | 545991407 | 4.65 × 10−5 | 6.23
+    candidate_id: open_loci:40430810:FHB-GWAS_BS00059062_51
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_BS00059061_51
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000251
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB23 | BS00059061_51 | 7B | 545991505 | 0.000251 | 5.49
+    candidate_id: open_loci:40430810:FHB-GWAS_BS00059061_51
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_BobWhite_c14736_188
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.000492
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB21 | BobWhite_c14736_188 | 7B | 699375055 | 0.000492 | 3.02
+    candidate_id: open_loci:40430810:FHB-GWAS_BobWhite_c14736_188
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_AX-94793903
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 0.00022
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHBm | AX-94793903 | 1D | 291636258 | 0.00022 | 2.11
+    candidate_id: open_loci:40430810:FHB-GWAS_AX-94793903
+- type: QTL_ASSOCIATION
+  subject: qtl:wheat:FHB-GWAS_AX-94639168
+  object: dis:wheat:fusarium_head_blight
+  qualifiers:
+    stage: adult
+    population: 174 bread-wheat genotypes of CIMMYT and South Asian germplasm, FHB index over three years (MLMM)
+    p_value: 8.980000000000001e-05
+  evidence:
+  - source: pmid:40430810
+    method: gwas
+    locator: Table of marker-trait associations
+    extractor: parser:open_paper_table@1
+    quote: Traits | SNP | Chr | Pos | p-Value | Effect ... FHB23 | AX-94639168 | 2B | 107117765 | 8.98 × 10−5 | 4.11
+    candidate_id: open_loci:40430810:FHB-GWAS_AX-94639168

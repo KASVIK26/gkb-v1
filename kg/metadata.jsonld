@@ -1,0 +1,28 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "AgriHub Genomic Knowledge Base: disease resistance of wheat, soybean and chickpea for Central India",
+  "description": "A scored, evidence-backed knowledge graph of crop varieties, their disease reactions, resistance genes and genome regions, pathotype surveys, weather triggers and management advisories. Every claim cites a source with a verbatim quote; confidence tiers A-D are computed, not asserted.",
+  "version": "2026_10_35",
+  "dateModified": "2026-10-04",
+  "url": "https://github.com/KASVIK26/gkb-v1",
+  "license": "TO BE CHOSEN BY THE OWNER (code and data licences are not yet set)",
+  "keywords": [
+    "wheat",
+    "soybean",
+    "chickpea",
+    "disease resistance",
+    "knowledge graph",
+    "India",
+    "rust",
+    "pathotype"
+  ],
+  "variableMeasured": [
+    "715 entities",
+    "1654 claims",
+    "1859 evidence rows",
+    "132 sources"
+  ],
+  "measurementTechnique": "Verified quotation from open literature and official documents (parsers for tables, a verifier for outside-research candidates); AI first-pass review, no human reviewer yet",
+  "isAccessibleForFree": true
+}

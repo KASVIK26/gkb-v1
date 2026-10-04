@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this knowledge graph, please cite it as below and name the release (kg/manifest.json) you read."
+title: "AgriHub Genomic Knowledge Base: disease resistance of wheat, soybean and chickpea for Central India"
+type: dataset
+repository-code: "https://github.com/KASVIK26/gkb-v1"
+authors:
+  - name: "AgriHub project team"
+abstract: >-
+  A scored, evidence-backed knowledge graph of crop varieties, their disease reactions, resistance genes and genome regions, pathotype surveys,
+  weather triggers and management advisories for wheat, soybean and chickpea in Central India. Every claim cites a source with a verbatim quote;
+  confidence tiers A-D are computed. No claim has yet been reviewed by a person.
+keywords: [wheat, soybean, chickpea, disease resistance, knowledge graph, India]
+# license: to be chosen by the owner (not yet set; see kg/metadata.jsonld)

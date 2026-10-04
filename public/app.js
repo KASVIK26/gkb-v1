@@ -9,6 +9,7 @@ import { initTour } from "./tour.js";
 const tabButtons = document.querySelectorAll(".tab-btn");
 const tabPanels = {
   browse: document.getElementById("tab-browse"),
+  profiles: document.getElementById("tab-profiles"),
   triggers: document.getElementById("tab-triggers"),
   graph: document.getElementById("tab-graph"),
 };
@@ -26,6 +27,7 @@ function showTab(name) {
   for (const [tabName, panel] of Object.entries(tabPanels)) {
     panel.dataset.active = String(tabName === name);
   }
+  if (name === "profiles") initProfiles();
   if (name === "graph") {
     if (!graphInitialized) {
       graphInitialized = true;
@@ -1127,3 +1129,180 @@ loadVarietiesInto(cropSelect, varietySelect, (t, s) => setStatus(reactionStatusT
 loadVarietiesInto(triggerCropSelect, triggerVarietySelect);
 loadStats();
 initTour({ showTab, whenGraphReady });
+
+
+// ---------------------------------------------------------------------------
+// TAB: Profiles -- one page per variety, disease or gene (RESEARCH_ROADMAP.md phase 10)
+// ---------------------------------------------------------------------------
+
+const profileType = document.getElementById("profileType");
+const profileCrop = document.getElementById("profileCrop");
+const profileItem = document.getElementById("profileItem");
+const profileItemLabel = document.getElementById("profileItemLabel");
+const profileButton = document.getElementById("profileButton");
+const profileStatus = document.getElementById("profileStatus");
+const profileResult = document.getElementById("profileResult");
+let profilesReady = false;
+
+const REACTION_WORD = { R: "resistant", MR: "moderately resistant", MS: "moderately susceptible", S: "susceptible", HS: "highly susceptible" };
+const TYPE_WORD = { variety: "Variety", disease: "Disease", gene: "Gene" };
+
+async function loadProfileItems(selectId) {
+  setStatus(profileStatus, "Loading…", "loading");
+  profileItemLabel.textContent = TYPE_WORD[profileType.value];
+  try {
+    const response = await fetch(`/api/profile?type=${profileType.value}&crop=${profileCrop.value}&list=1`);
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || "Could not load the list");
+    profileItem.replaceChildren(...payload.items.map((it) => Object.assign(document.createElement("option"), { value: it.id, textContent: it.name })));
+    if (selectId) profileItem.value = selectId;
+    setStatus(profileStatus, `${payload.items.length} ${profileType.value}${payload.items.length === 1 ? "" : "s"}`, "ready");
+  } catch (error) {
+    profileItem.replaceChildren();
+    setStatus(profileStatus, "Error", "error");
+    profileResult.innerHTML = `<div class="edge-card edge-card-error"><h3>Could not load the list</h3><p class="edge-meta">${esc(error.message)}</p></div>`;
+  }
+}
+
+function initProfiles() {
+  if (profilesReady) return;
+  profilesReady = true;
+  profileType.addEventListener("change", () => loadProfileItems());
+  profileCrop.addEventListener("change", () => loadProfileItems());
+  profileButton.addEventListener("click", () => showProfile());
+  loadProfileItems();
+}
+
+async function openProfile(type, id, crop) {
+  showTab("profiles");
+  initProfiles();
+  profileType.value = type;
+  if (crop) profileCrop.value = crop;
+  await loadProfileItems(id);
+  profileItem.value = id;
+  showProfile();
+}
+
+// A clickable name that opens that entity's profile.
+const profileLink = (type, id, crop, label) =>
+  `<button type="button" class="link-btn" data-open="${esc(type)}" data-id="${esc(id)}" data-crop="${esc(crop)}">${esc(label)}</button>`;
+
+function card(html, claimId) {
+  const el = document.createElement("article");
+  el.className = "edge-card";
+  el.innerHTML = html;
+  if (claimId) attachEvidence(el, claimId);
+  return el;
+}
+
+function section(title, count, cards, emptyText) {
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `<h3 class="group-heading">${esc(title)}${count != null ? ` — ${count}` : ""}</h3>`;
+  if (!cards.length && emptyText) {
+    const p = document.createElement("p");
+    p.className = "edge-meta";
+    p.textContent = emptyText;
+    wrap.appendChild(p);
+  }
+  for (const c of cards) wrap.appendChild(c);
+  return wrap;
+}
+
+function renderVariety(p) {
+  const bits = [p.crop, p.release_year ? `released ${p.release_year}` : null, p.releasing_institute, p.notification].filter(Boolean);
+  const out = [];
+  const head = document.createElement("div");
+  head.innerHTML = `<h2>${esc(p.name)}</h2><p class="edge-meta">${esc(bits.join(" · "))}</p>
+    ${p.synonyms.length ? `<p class="edge-meta">Also known as: ${esc(p.synonyms.join(", "))}</p>` : ""}
+    ${p.pedigree ? `<p class="edge-meta">Pedigree: ${esc(p.pedigree)}</p>` : ""}
+    <p class="edge-meta"><a href="/api/features?variety_id=${encodeURIComponent(p.id)}" target="_blank" rel="noopener">Numeric feature vector (JSON) for the models</a></p>`;
+  out.push(head);
+  const resistant = p.reactions.filter((r) => ["R", "MR"].includes(r.reaction)).length;
+  const susceptible = p.reactions.filter((r) => ["MS", "S", "HS"].includes(r.reaction)).length;
+  const reactionSection = section("Disease reactions", p.reactions.length, p.reactions.map((r) => card(
+    `<h3>${profileLink("disease", r.disease_id, p.crop, r.disease_name)} — <strong>${esc(REACTION_WORD[r.reaction] ?? r.reaction ?? "n/a")}</strong> ${tierChip(r)}</h3>
+     <p class="edge-meta">${esc([r.season ? `season ${r.season}` : null, r.stage && r.stage !== "unspecified" ? `stage ${r.stage}` : null, r.location].filter(Boolean).join(" · ") || "no season or place stated")}</p>`, r.claim_id)),
+    "No reaction to a disease is recorded for this variety.");
+  if (p.reactions.length) reactionSection.querySelector("h3").insertAdjacentHTML("afterend", `<p class="edge-meta">${resistant} resistant or moderately resistant · ${susceptible} susceptible readings.</p>`);
+  out.push(reactionSection);
+  out.push(section("Resistance genes it carries", p.genes.length, p.genes.map((g) => card(
+    `<h3>${profileLink("gene", g.gene_id, p.crop, g.gene_name)} ${tierChip(g)}</h3>
+     <p class="edge-meta">Established by: ${esc(CARRY_METHOD[g.method] ?? g.method ?? "n/a")}</p>
+     <p class="edge-meta">${g.diseases.length ? `Protects against: ${esc(g.diseases.join(", "))}` : "No disease is linked to this gene yet."}</p>`, g.claim_id)),
+    "No gene is recorded for this variety (that means unknown, not that it carries none)."));
+  out.push(section("Recommended zones", p.zones.length, p.zones.map((z) => card(
+    `<h3>${esc(z.zone_name)} ${tierChip(z)}</h3><p class="edge-meta">${esc([z.sowing ? `${z.sowing} sown` : null, z.water_regime ? z.water_regime.replace("_", " ") : null, z.season].filter(Boolean).join(" · ") || "production condition not stated")}</p>`, z.claim_id)),
+    "No zone recommendation is recorded."));
+  return out;
+}
+
+function renderDisease(p) {
+  const out = [];
+  const head = document.createElement("div");
+  head.innerHTML = `<h2>${esc(p.name)}</h2><p class="edge-meta">${esc(p.crop)}${p.pathogens.length ? ` · caused by ${esc(p.pathogens.map((x) => x.name).join(", "))}` : ""}</p>
+    <p class="edge-meta">${p.n_resistant_varieties} varieties resistant or moderately resistant · ${p.n_susceptible_varieties} susceptible (varieties with at least one such reading).</p>`;
+  out.push(head);
+  const rv = document.createElement("article");
+  rv.className = "edge-card";
+  rv.innerHTML = `<p class="edge-meta">${p.resistant_varieties
+    .map((v) => `${profileLink("variety", v.variety_id, p.crop, v.variety_name)} <span class="edge-meta">(${esc(v.reaction)}, tier ${esc(v.tier)}${v.conflict ? ", conflict" : ""})</span>`)
+    .join(" · ")}</p>`;
+  out.push(section("Resistant varieties", p.resistant_varieties.length, p.resistant_varieties.length ? [rv] : [], "No variety is recorded as resistant."));
+  out.push(section("Resistance genes", p.genes.length, p.genes.map((g) => card(
+    `<h3>${profileLink("gene", g.gene_id, p.crop, g.gene_name)} ${tierChip(g)}</h3><p class="edge-meta">${esc([g.resistance_type && g.resistance_type !== "unknown" ? g.resistance_type : null, g.chromosome ? `chromosome ${g.chromosome}` : null, g.spectrum].filter(Boolean).join(" · ") || "type not stated")}</p>`, g.claim_id)),
+    "No resistance gene is recorded for this disease."));
+  out.push(section("Genome regions (QTL / GWAS loci)", p.qtls.length, p.qtls.map((q) => card(
+    `<h3>${esc(q.qtl_name)}${q.stage && q.stage !== "unspecified" ? ` (${esc(q.stage === "adult" ? "adult plant" : q.stage)})` : ""} ${tierChip(q)}</h3><p class="edge-meta">${esc([q.chromosome, q.lod != null ? `LOD ${q.lod}` : null, q.pve_pct != null ? `explains ${q.pve_pct}%` : null].filter(Boolean).join(" · "))}</p>`, q.claim_id)),
+    "No QTL or GWAS locus is recorded for this disease."));
+  out.push(section("Weather triggers", p.triggers.length, p.triggers.map((t) => card(`<h3>${esc(t.phase)} ${tierChip(t)}</h3>${triggerFacts(t)}`, t.claim_id)), "No weather trigger is recorded."));
+  out.push(section("Management advisories", p.advisories.length, p.advisories.map((a) => card(
+    `<h3>${esc(a.name)} ${tierChip(a)}</h3>${advisoryFacts({ active_ingredient: a.product, dose: a.dose, timing: a.timing, region: a.region })}`, a.claim_id)), "No management advisory is recorded."));
+  const rows = p.pathotype_prevalence.map((x) => `<tr><td>${esc(x.pathotype)}</td><td>${esc(x.zone)}</td><td>${esc((x.years || []).join(", "))}</td><td>${esc(x.frequency_pct)}%</td></tr>`).join("");
+  const prevCard = document.createElement("article");
+  prevCard.className = "edge-card";
+  prevCard.innerHTML = `<table class="data-table"><thead><tr><th>Pathotype</th><th>State</th><th>Season end</th><th>Share of isolates</th></tr></thead><tbody>${rows}</tbody></table>`;
+  out.push(section("Pathotype prevalence by state", p.pathotype_prevalence.length, rows ? [prevCard] : [], "No survey data is recorded."));
+  return out;
+}
+
+function renderGene(p) {
+  const out = [];
+  const head = document.createElement("div");
+  head.innerHTML = `<h2>${esc(p.name)}</h2><p class="edge-meta">${esc([p.crop, p.chromosome ? `chromosome ${p.chromosome}` : null, p.gene_class && p.gene_class !== "unknown" ? p.gene_class : null, p.origin_species ? `donor: ${p.origin_species}` : null, p.cloned ? "cloned" : null].filter(Boolean).join(" · "))}</p>`;
+  out.push(head);
+  out.push(section("Protects against", p.diseases.length, p.diseases.map((d) => card(
+    `<h3>${profileLink("disease", d.disease_id, p.crop, d.disease_name)} ${tierChip(d)}</h3><p class="edge-meta">${esc([d.resistance_type && d.resistance_type !== "unknown" ? d.resistance_type : null, d.spectrum].filter(Boolean).join(" · ") || "type not stated")}</p>`, d.claim_id)),
+    "No disease is linked to this gene."));
+  const carriers = document.createElement("article");
+  carriers.className = "edge-card";
+  carriers.innerHTML = `<p class="edge-meta">${p.carriers
+    .map((c) => `${profileLink("variety", c.variety_id, p.crop, c.variety_name)} <span class="edge-meta">(${esc(CARRY_METHOD[c.method] ?? c.method)}, tier ${esc(c.tier)})</span>`)
+    .join(" · ")}</p>`;
+  out.push(section("Varieties that carry it", p.carriers.length, p.carriers.length ? [carriers] : [], "No variety is recorded as carrying this gene."));
+  out.push(section("Pathotype record", p.pathotypes.length, p.pathotypes.map((x) => card(
+    `<h3>${esc(x.pathotype)} — ${esc(x.outcome)}</h3><p class="edge-meta">${esc([x.year, x.region].filter(Boolean).join(" · "))}</p>`, x.claim_id)),
+    "No pathotype that defeats or is stopped by this gene is recorded."));
+  return out;
+}
+
+async function showProfile() {
+  const id = profileItem.value;
+  if (!id) return;
+  setStatus(profileStatus, "Loading…", "loading");
+  try {
+    const response = await fetch(`/api/profile?type=${profileType.value}&id=${encodeURIComponent(id)}`);
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || "Could not load the profile");
+    const parts = { variety: renderVariety, disease: renderDisease, gene: renderGene }[profileType.value](payload.profile);
+    profileResult.replaceChildren(...parts);
+    setStatus(profileStatus, "Ready", "ready");
+  } catch (error) {
+    setStatus(profileStatus, "Error", "error");
+    profileResult.innerHTML = `<div class="edge-card edge-card-error"><h3>Could not load the profile</h3><p class="edge-meta">${esc(error.message)}</p></div>`;
+  }
+}
+
+profileResult.addEventListener("click", (event) => {
+  const btn = event.target.closest("button[data-open]");
+  if (btn) openProfile(btn.dataset.open, btn.dataset.id, btn.dataset.crop);
+});

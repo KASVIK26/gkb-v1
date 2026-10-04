@@ -1,4 +1,4 @@
-# Wheat varieties released or identified by the AICRP (Director's reports 2020-21, 2022-23, 2025-26): the zone and production condition of each release and the rust reactions the release table states in its special-features column. Central India (Central and Peninsular zones, MP and Gujarat state releases) plus the Indore-bred NWPZ releases. Work order WO16, reviewed 2026-10-04 (kg/review_log/2026-10-04b_releases_and_pathotypes.md). Evidence stays llm: (discounted).
+# Wheat varieties released or identified by the AICRP (Director's reports 2020-21, 2022-23, 2025-26): the zone and production condition of each release and the rust reactions the release table states in its special-features column. Central India (Central and Peninsular zones, MP and Gujarat state releases) plus the Indore-bred NWPZ releases. Work order WO16, reviewed 2026-10-04 (kg/review_log/2026-10-04b_releases_and_pathotypes.md). Evidence stays llm: (discounted). HI 8849 is not given the synonym 'Pusa Mangal' (it already names HI 8713).
 
 sources:
 - id: doc:aicrp_wb_director_report_2020_21
@@ -205,8 +205,7 @@ entities:
   type: Variety
   name: HI 8849
   crop: wheat
-  synonyms:
-  - Pusa Mangal
+  synonyms: []
   name_i18n: {}
   props:
     releasing_institute: ICAR-IARI Regional Station, Indore

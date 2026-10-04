@@ -243,6 +243,60 @@ def import_aicrp_postulation_cmd(
     typer.echo(f"Wrote {out}.")
 
 
+@kg_app.command("publish-files")
+def publish_files_cmd(
+    release: str = typer.Option(..., help="Release tag, e.g. 2026_10_35."),
+    crosswalk_out: Path = typer.Option(Path("kg/ids_crosswalk.tsv"), help="Shared ID crosswalk for the other AgriHub products."),
+    dictionary_out: Path = typer.Option(Path("docs/DATA_DICTIONARY.md"), help="Data dictionary generated from the models."),
+    metadata_out: Path = typer.Option(Path("kg/metadata.jsonld"), help="schema.org Dataset description."),
+) -> None:
+    """Write the publication files that must not drift from the code: the ID crosswalk (task 11.4), the data dictionary and the dataset metadata (no network)."""
+    from curator.graph.publish import crosswalk_tsv, data_dictionary_markdown, metadata_json
+
+    bundle = _build_bundle()
+    for path, text in ((crosswalk_out, crosswalk_tsv(bundle)), (dictionary_out, data_dictionary_markdown()), (metadata_out, metadata_json(bundle, release=release))):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8", newline="\n")
+        typer.echo(f"Wrote {path}")
+
+
+@kg_app.command("analytics")
+def analytics_cmd(
+    out: Path = typer.Option(Path("docs/ANALYTICS.md"), help="Markdown report to write."),
+    release: str = typer.Option("", help="Release tag to print in the title (informational)."),
+) -> None:
+    """Write the research tables computed from the curated graph (no network): multi-rust donors, observed susceptibility, rust-gene deployment by zone,
+    dominant pathotypes by state and season, and the widely recommended varieties with the most unrecorded disease readings."""
+    from curator.graph.analytics import analytics, to_markdown
+
+    result = analytics(_build_bundle())
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(to_markdown(result, release=release), encoding="utf-8", newline="\n")
+    typer.echo(json.dumps({"multi_rust_donors": len(result["multi_rust_donors"]), "zones_with_gene_deployment": len(result["gene_deployment"]),
+                           "dominant_pathotype_rows": len(result["dominant_pathotypes"]), "untested_varieties": len(result["recommended_but_untested"])}))
+    typer.echo(f"Wrote {out}.")
+
+
+@kg_app.command("qc")
+def qc_cmd(
+    out: Path = typer.Option(Path("docs/QC_REPORT.md"), help="Markdown report to write."),
+    release: str = typer.Option("", help="Release tag to print in the title (informational)."),
+) -> None:
+    """Write the QC report and the scoring sensitivity analysis for the curated graph (no network).
+
+    Provenance integrity, confidence tiers, coverage per crop and disease, structural checks, distance to the roadmap targets, and how many
+    claims change tier when the scoring constants change."""
+    from curator.graph.qc import qc_report, sensitivity, to_markdown
+
+    bundle = _build_bundle()
+    report, sens = qc_report(bundle), sensitivity(bundle)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(to_markdown(report, sens, release=release), encoding="utf-8", newline="\n")
+    typer.echo(json.dumps({"claims": report["provenance"]["claims"], "tiers": report["confidence"]["tiers"], "conflicts": report["confidence"]["conflicts"],
+                           "gaps": len(report["disease_gaps"]), "max_share_changing_tier": max(x["share_changing"] for x in sens["scenarios"])}))
+    typer.echo(f"Wrote {out}.")
+
+
 @kg_app.command("review-sheet")
 def review_sheet_cmd(
     batch: Path = typer.Argument(..., exists=True, dir_okay=False, help="A kg/incoming/*.yaml batch from ingest-candidates."),

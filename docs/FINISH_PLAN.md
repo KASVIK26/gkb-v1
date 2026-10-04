@@ -24,3 +24,9 @@ and, at the checkpoints, a release (`kg load` + `kg promote`) and a dashboard de
 - **Phase 5 corpus-scale extraction and phase 6 gold standard:** the verified outside-research route replaced the in-house LLM extraction; a 40-paper annotation set with a second annotator needs people.
 - **Password-protected AICRP reports 2024-25 and 2025-26:** cannot be opened; a copy from IIWBR is needed.
 - **Chickpea dry root rot / collar rot / rust and soybean anthracnose / pod and stem blight / Rhizoctonia loci:** no open mapping paper exists.
+
+## Progress (2026-10-04)
+Done today, in order: (1) pathotype prevalence by state, 68 claims; (2) reaction volume: wheat release tables (89 claims, 24 varieties), AICRP 2023-24 rust tables (121), soybean AICRPS reactions (21); (3) variety coverage: wheat 105 -> 129
+(the soybean and chickpea lists have no official release table reachable from here: the ICAR-IIPR and several ICAR-institute sites do not resolve); (4) wheat gaps: leaf / stripe rust and Fusarium head blight GWAS loci (43);
+(5) Profiles tab, `/api/profile`, `/api/features`; (6) `agrihub kg qc` and the sensitivity analysis; (7) `agrihub kg analytics`; (8) `docs/INTEGRATION.md`, ID crosswalk, data dictionary, metadata, citation, changelog; (9) PHASES refresh.
+Still open and out of reach today: see "Not done on purpose" above, plus the licence (owner), a copy of the two protected reports (IIWBR) and the other products' crosswalk labels.

@@ -1,0 +1,428 @@
+kg_id	type	crop	name	synonyms	report_abbreviations	release_year	phenomic_model_label	iot_label	mobile_app_label
+zone:chickpea:CZ	AgroZone	chickpea	Central Zone (chickpea)	Central Zone; CZ					
+zone:chickpea:MH	AgroZone	chickpea	MH (chickpea)						
+zone:chickpea:MP	AgroZone	chickpea	MP (chickpea)						
+zone:chickpea:NEPZ	AgroZone	chickpea	North Eastern Plain Zone (chickpea)	North Eastern Plain Zone; NEPZ					
+zone:chickpea:NWPZ	AgroZone	chickpea	North Western Plain Zone (chickpea)	North Western Plain Zone; NWPZ					
+zone:chickpea:NHZ	AgroZone	chickpea	Northern Hills Zone (chickpea)	Northern Hills Zone; NHZ					
+zone:chickpea:SZ	AgroZone	chickpea	South Zone (chickpea)	South Zone; SZ					
+zone:soybean:CZ	AgroZone	soybean	Central Zone (soybean)	Central Zone; CZ; मध्य क्षेत्र					
+zone:soybean:MH	AgroZone	soybean	MH (soybean)						
+zone:soybean:MP	AgroZone	soybean	MP (soybean)						
+zone:soybean:NEZ	AgroZone	soybean	North Eastern Zone (soybean)	North Eastern Zone; NEZ					
+zone:soybean:NHZ	AgroZone	soybean	North Hill Zone (soybean)	North Hill Zone; NHZ					
+zone:soybean:NPZ	AgroZone	soybean	North Plain Zone (soybean)	North Plain Zone; NPZ					
+zone:soybean:SZ	AgroZone	soybean	Southern Zone (soybean)	Southern Zone; SZ; दक्षिण क्षेत्र					
+zone:wheat:CZ	AgroZone	wheat	Central Zone (wheat)	Central Zone; CZ					
+zone:wheat:DL	AgroZone	wheat	DL (wheat)	Delhi					
+zone:wheat:GJ	AgroZone	wheat	GJ (wheat)	Gujarat					
+zone:wheat:HP	AgroZone	wheat	HP (wheat)	Himachal Pradesh					
+zone:wheat:HR	AgroZone	wheat	HR (wheat)	Haryana					
+zone:wheat:MH	AgroZone	wheat	MH (wheat)						
+zone:wheat:MP	AgroZone	wheat	MP (wheat)						
+zone:wheat:NEPZ	AgroZone	wheat	North Eastern Plains Zone (wheat)	North Eastern Plains Zone; NEPZ					
+zone:wheat:NWPZ	AgroZone	wheat	North Western Plains Zone (wheat)	North Western Plains Zone; NWPZ					
+zone:wheat:NHZ	AgroZone	wheat	Northern Hills Zone (wheat)	Northern Hills Zone; NHZ					
+zone:wheat:PB	AgroZone	wheat	PB (wheat)	Punjab					
+zone:wheat:PZ	AgroZone	wheat	Peninsular Zone (wheat)	Peninsular Zone; PZ					
+zone:wheat:RJ	AgroZone	wheat	RJ (wheat)	Rajasthan					
+zone:wheat:TN	AgroZone	wheat	TN (wheat)	Tamil Nadu					
+zone:wheat:UK	AgroZone	wheat	UK (wheat)	Uttarakhand					
+zone:wheat:UP	AgroZone	wheat	UP (wheat)	Uttar Pradesh					
+crop:chickpea	Crop	chickpea	Chickpea						
+crop:soybean	Crop	soybean	Soybean						
+crop:wheat	Crop	wheat	Wheat						
+dis:chickpea:rust	Disease	chickpea	Chickpea rust						
+dis:chickpea:collar_rot	Disease	chickpea	Collar rot		CR (chickpea)				
+dis:chickpea:dry_root_rot	Disease	chickpea	Dry root rot		DRR				
+dis:chickpea:fusarium_wilt	Disease	chickpea	Fusarium wilt		FW; Foc				
+dis:soybean:anthracnose	Disease	soybean	Anthracnose (pod blight)		PB(CT); pod blight (Colletotrichum truncatum)				
+dis:soybean:bacterial_pustule	Disease	soybean	Bacterial pustule		BP				
+dis:soybean:charcoal_rot	Disease	soybean	Charcoal rot		CR				
+dis:soybean:frogeye_leaf_spot	Disease	soybean	Frogeye leaf spot		FLS				
+dis:soybean:pod_stem_blight	Disease	soybean	Pod and stem blight						
+dis:soybean:rhizoctonia_root_rot	Disease	soybean	Rhizoctonia root rot		RAB (aerial blight form)				
+dis:soybean:mosaic_virus	Disease	soybean	Soybean mosaic		SMV				
+dis:soybean:rust	Disease	soybean	Soybean rust	Asian soybean rust	ASR; SBR				
+dis:wheat:fusarium_head_blight	Disease	wheat	Fusarium head blight	head scab; FHB	FHB; head scab				
+dis:wheat:leaf_rust	Disease	wheat	Leaf rust	brown rust	brown rust; Lr				
+dis:wheat:powdery_mildew	Disease	wheat	Powdery mildew		PM				
+dis:wheat:stem_rust	Disease	wheat	Stem rust	black rust	black rust; Sr				
+dis:wheat:stripe_rust	Disease	wheat	Stripe rust	yellow rust	yellow rust; Yr				
+gene:chickpea:Ca_14301	Gene	chickpea	Ca_14301						
+gene:chickpea:FOC-2	Gene	chickpea	FOC-2						
+gene:chickpea:FOC-3	Gene	chickpea	FOC-3						
+gene:chickpea:FOC-4	Gene	chickpea	FOC-4						
+gene:chickpea:FOC-5	Gene	chickpea	FOC-5						
+gene:chickpea:H3	Gene	chickpea	H3						
+gene:chickpea:h1	Gene	chickpea	h1						
+gene:chickpea:h2	Gene	chickpea	h2						
+gene:soybean:Rcs3	Gene	soybean	Rcs3						
+gene:soybean:Rpp1	Gene	soybean	Rpp1						
+gene:soybean:Rpp1-b	Gene	soybean	Rpp1-b						
+gene:soybean:Rpp2	Gene	soybean	Rpp2						
+gene:soybean:Rpp3	Gene	soybean	Rpp3						
+gene:soybean:Rpp4	Gene	soybean	Rpp4						
+gene:soybean:Rpp5	Gene	soybean	Rpp5						
+gene:soybean:Rpp6	Gene	soybean	Rpp6						
+gene:soybean:Rpp7	Gene	soybean	Rpp7						
+gene:soybean:Rsv1	Gene	soybean	Rsv1	Rsv1-h					
+gene:soybean:Rsv3	Gene	soybean	Rsv3						
+gene:soybean:Rsv4	Gene	soybean	Rsv4						
+gene:soybean:Rxp	Gene	soybean	Rxp						
+gene:wheat:Fhb1	Gene	wheat	Fhb1						
+gene:wheat:Fhb2	Gene	wheat	Fhb2						
+gene:wheat:Fhb3	Gene	wheat	Fhb3						
+gene:wheat:Fhb4	Gene	wheat	Fhb4						
+gene:wheat:Fhb5	Gene	wheat	Fhb5						
+gene:wheat:Fhb6	Gene	wheat	Fhb6						
+gene:wheat:Fhb7	Gene	wheat	Fhb7						
+gene:wheat:Lr1	Gene	wheat	Lr1						
+gene:wheat:Lr10	Gene	wheat	Lr10						
+gene:wheat:Lr13	Gene	wheat	Lr13						
+gene:wheat:Lr14a	Gene	wheat	Lr14a						
+gene:wheat:Lr19	Gene	wheat	Lr19						
+gene:wheat:Lr21	Gene	wheat	Lr21						
+gene:wheat:Lr23	Gene	wheat	Lr23						
+gene:wheat:Lr24	Gene	wheat	Lr24						
+gene:wheat:Lr26	Gene	wheat	Lr26						
+gene:wheat:Lr28	Gene	wheat	Lr28						
+gene:wheat:Lr3	Gene	wheat	Lr3						
+gene:wheat:Lr34	Gene	wheat	Lr34	Yr18; Sr57; Pm38					
+gene:wheat:Lr39	Gene	wheat	Lr39						
+gene:wheat:Lr42	Gene	wheat	Lr42						
+gene:wheat:Lr46	Gene	wheat	Lr46						
+gene:wheat:Lr67	Gene	wheat	Lr67						
+gene:wheat:Pm10	Gene	wheat	Pm10						
+gene:wheat:Pm11	Gene	wheat	Pm11						
+gene:wheat:Pm12	Gene	wheat	Pm12						
+gene:wheat:Pm13	Gene	wheat	Pm13						
+gene:wheat:Pm16	Gene	wheat	Pm16						
+gene:wheat:Pm17	Gene	wheat	Pm17						
+gene:wheat:Pm19	Gene	wheat	Pm19						
+gene:wheat:Pm1b	Gene	wheat	Pm1b						
+gene:wheat:Pm1c	Gene	wheat	Pm1c						
+gene:wheat:Pm1d	Gene	wheat	Pm1d						
+gene:wheat:Pm2	Gene	wheat	Pm2						
+gene:wheat:Pm20	Gene	wheat	Pm20						
+gene:wheat:Pm21	Gene	wheat	Pm21						
+gene:wheat:Pm25	Gene	wheat	Pm25						
+gene:wheat:Pm26	Gene	wheat	Pm26						
+gene:wheat:Pm27	Gene	wheat	Pm27						
+gene:wheat:Pm29	Gene	wheat	Pm29						
+gene:wheat:Pm30	Gene	wheat	Pm30						
+gene:wheat:Pm31	Gene	wheat	Pm31						
+gene:wheat:Pm32	Gene	wheat	Pm32						
+gene:wheat:Pm33	Gene	wheat	Pm33						
+gene:wheat:Pm34	Gene	wheat	Pm34						
+gene:wheat:Pm35	Gene	wheat	Pm35						
+gene:wheat:Pm36	Gene	wheat	Pm36						
+gene:wheat:Pm37	Gene	wheat	Pm37						
+gene:wheat:Pm3b	Gene	wheat	Pm3b						
+gene:wheat:Pm40	Gene	wheat	Pm40						
+gene:wheat:Pm41	Gene	wheat	Pm41						
+gene:wheat:Pm42	Gene	wheat	Pm42						
+gene:wheat:Pm43	Gene	wheat	Pm43						
+gene:wheat:Pm46	Gene	wheat	Pm46						
+gene:wheat:Pm49	Gene	wheat	Pm49						
+gene:wheat:Pm4a	Gene	wheat	Pm4a						
+gene:wheat:Pm4b	Gene	wheat	Pm4b						
+gene:wheat:Pm4d	Gene	wheat	Pm4d						
+gene:wheat:Pm50	Gene	wheat	Pm50						
+gene:wheat:Pm5a	Gene	wheat	Pm5a						
+gene:wheat:Pm6	Gene	wheat	Pm6	Pm52					
+gene:wheat:Pm7	Gene	wheat	Pm7						
+gene:wheat:Pm8	Gene	wheat	Pm8						
+gene:wheat:PmTb7A.1	Gene	wheat	PmTb7A.1						
+gene:wheat:PmTb7A.2	Gene	wheat	PmTb7A.2						
+gene:wheat:PmU	Gene	wheat	PmU						
+gene:wheat:Sr11	Gene	wheat	Sr11						
+gene:wheat:Sr13	Gene	wheat	Sr13						
+gene:wheat:Sr2	Gene	wheat	Sr2						
+gene:wheat:Sr22	Gene	wheat	Sr22						
+gene:wheat:Sr24	Gene	wheat	Sr24						
+gene:wheat:Sr26	Gene	wheat	Sr26						
+gene:wheat:Sr28	Gene	wheat	Sr28						
+gene:wheat:Sr30	Gene	wheat	Sr30						
+gene:wheat:Sr31	Gene	wheat	Sr31						
+gene:wheat:Sr33	Gene	wheat	Sr33						
+gene:wheat:Sr35	Gene	wheat	Sr35						
+gene:wheat:Sr5	Gene	wheat	Sr5						
+gene:wheat:Sr50	Gene	wheat	Sr50						
+gene:wheat:Sr7a	Gene	wheat	Sr7a						
+gene:wheat:Sr7b	Gene	wheat	Sr7b						
+gene:wheat:Sr8a	Gene	wheat	Sr8a						
+gene:wheat:Sr8b	Gene	wheat	Sr8b						
+gene:wheat:Sr9b	Gene	wheat	Sr9b						
+gene:wheat:Sr9e	Gene	wheat	Sr9e						
+gene:wheat:Yr10	Gene	wheat	Yr10						
+gene:wheat:Yr15	Gene	wheat	Yr15						
+gene:wheat:Yr2	Gene	wheat	Yr2						
+gene:wheat:Yr27	Gene	wheat	Yr27						
+gene:wheat:Yr2ks	Gene	wheat	Yr2ks						
+gene:wheat:Yr5	Gene	wheat	Yr5						
+gene:wheat:Yr6NLR1	Gene	wheat	Yr6NLR1						
+gene:wheat:Yr6NLR2	Gene	wheat	Yr6NLR2						
+gene:wheat:Yr9	Gene	wheat	Yr9						
+gene:wheat:Yra	Gene	wheat	Yra						
+path:athelia_rolfsii	Pathogen		Athelia rolfsii	Sclerotium rolfsii					
+path:blumeria_graminis_f_sp_tritici	Pathogen		Blumeria graminis f. sp. tritici						
+path:cercospora_sojina	Pathogen		Cercospora sojina	C. sojina					
+path:colletotrichum_truncatum	Pathogen		Colletotrichum truncatum						
+path:diaporthe_phaseolorum_var_sojae	Pathogen		Diaporthe phaseolorum var. sojae						
+path:fusarium_graminearum_species_complex	Pathogen		Fusarium graminearum species complex						
+path:fusarium_oxysporum_f_sp_ciceris	Pathogen		Fusarium oxysporum f. sp. ciceris						
+path:macrophomina_phaseolina	Pathogen		Macrophomina phaseolina						
+path:phakopsora_pachyrhizi	Pathogen		Phakopsora pachyrhizi						
+path:puccinia_graminis_f_sp_tritici	Pathogen		Puccinia graminis f. sp. tritici						
+path:puccinia_striiformis_f_sp_tritici	Pathogen		Puccinia striiformis f. sp. tritici						
+path:puccinia_triticina	Pathogen		Puccinia triticina						
+path:rhizoctonia_solani	Pathogen		Rhizoctonia solani						
+path:soybean_mosaic_virus_smv_potyvirus	Pathogen		Soybean mosaic virus (SMV, Potyvirus)						
+path:uromyces_ciceris_arietini	Pathogen		Uromyces ciceris-arietini						
+path:xanthomonas_citri_pv_glycines	Pathogen		Xanthomonas citri pv. glycines	Xanthomonas axonopodis pv. glycines					
+var:chickpea:AKASH	Variety	chickpea	Akash	BDNG 797		2007			
+var:chickpea:BDNGK798	Variety	chickpea	BDNGK 798			2016			
+var:chickpea:CSJ515	Variety	chickpea	CSJ 515			2016			
+var:chickpea:DIGVIJAY	Variety	chickpea	Digvijay			2007			
+var:chickpea:GNG2171	Variety	chickpea	GNG 2171			2017			
+var:chickpea:GNG2207	Variety	chickpea	GNG 2207			2018			
+var:chickpea:IPC200677	Variety	chickpea	IPC 2006-77						
+var:chickpea:IPC200728	Variety	chickpea	IPC 2007-28			2021			
+var:chickpea:IPC2010134	Variety	chickpea	IPC 2010-134			2021			
+var:chickpea:IPCK200429	Variety	chickpea	IPCK 2004-29	Ujjawal					
+var:chickpea:JAKI9218	Variety	chickpea	JAKI 9218			2008			
+var:chickpea:JG12	Variety	chickpea	JG 12			2014			
+var:chickpea:JG14	Variety	chickpea	JG 14			2009			
+var:chickpea:JG36	Variety	chickpea	JG 36	Jawahar Gram 36		2016			
+var:chickpea:JGK5	Variety	chickpea	JGK 5			2016			
+var:chickpea:JGK2	Variety	chickpea	JGK-2			2007			
+var:chickpea:JGK3	Variety	chickpea	JGK-3	JGK 19		2007			
+var:chickpea:JAWAHARCHANA6	Variety	chickpea	Jawahar Chana 6	JG 6		2009			
+var:chickpea:JAWAHARGRAM226	Variety	chickpea	Jawahar Gram 226	JG 226		2007			
+var:chickpea:JAWAHARGRAM24	Variety	chickpea	Jawahar Gram 24			2020			
+var:chickpea:JAWAHARGRAMKABULI6	Variety	chickpea	Jawahar Gram Kabuli 6	JGK 6 / JGK 2017-32		2021			
+var:chickpea:KRIPA	Variety	chickpea	Kripa	Phule G 0517		2009			
+var:chickpea:PDKVKANAK	Variety	chickpea	PDKV Kanak						
+var:chickpea:PDKVKANCHAN	Variety	chickpea	PDKV Kanchan	AKG-1109		2019			
+var:chickpea:PKVHARITA	Variety	chickpea	PKV Harita	AKG 9303-12		2012			
+var:chickpea:PKVKABULI4	Variety	chickpea	PKV Kabuli 4			2010			
+var:chickpea:PANTGRAM5	Variety	chickpea	Pant Gram 5			2017			
+var:chickpea:PHULEVIKRAM	Variety	chickpea	Phule Vikram	Phule G 08108		2020			
+var:chickpea:PHULEVIKRANT	Variety	chickpea	Phule Vikrant	Phule G 0405		2018			
+var:chickpea:PHULEVISHWARAJ	Variety	chickpea	Phule Vishwaraj			2020			
+var:chickpea:PUSACHICKPEA10216	Variety	chickpea	Pusa Chickpea 10216	BGM 10216		2020			
+var:chickpea:PUSACHICKPEA20211	Variety	chickpea	Pusa Chickpea 20211	Pusa Chickpea Manav		2021			
+var:chickpea:PUSAPARVATI	Variety	chickpea	Pusa Parvati	BG3062		2020			
+var:chickpea:RAJVIJAYGRAM202	Variety	chickpea	Raj Vijay Gram 202	RVG 202 / JSC 55		2015			
+var:chickpea:RAJVIJAYGRAM203	Variety	chickpea	Raj Vijay Gram 203	RVG 203 / JSC 56		2013			
+var:chickpea:RAJVIJAYGRAM204	Variety	chickpea	Raj Vijay Gram 204	RVG 204 / RVSSG-8102		2021			
+var:chickpea:RAJVIJAYGRAM205	Variety	chickpea	Raj Vijay Gram 205	RVG 205 / RVSSG-32		2019			
+var:chickpea:RAJVIJAYGRAM210	Variety	chickpea	Raj Vijay Gram 210	RVG 210		2021			
+var:chickpea:RAJVIJAYKABULIGRAM101	Variety	chickpea	Raj Vijay Kabuli Gram 101	RVG 101 / JSC 42		2012			
+var:chickpea:RAJVIJAYKABULIGRAM111	Variety	chickpea	Raj Vijay Kabuli Gram 111	RVG 111 / RVSSG-24		2019			
+var:chickpea:RAJVIJAYKABULIGRAM121	Variety	chickpea	Raj Vijay Kabuli Gram 121	RVKG 121		2021			
+var:chickpea:RAJVIJAYKABULIGRAM151	Variety	chickpea	Raj Vijay Kabuli Gram 151	RVG 151 / RVSSG-37		2019			
+var:chickpea:RAJVIJAYKABULIGRAM201	Variety	chickpea	Raj Vijay Kabuli Gram 201	RVG 201 / JSC 40		2011			
+var:chickpea:RAJVIJAYKABULIGRAM2020	Variety	chickpea	Raj Vijay Kabuli Gram 2020	RVSSG-63		2021			
+var:chickpea:RAJAS	Variety	chickpea	Rajas	Phule-G-9425-9		2007			
+var:chickpea:SHUBHRA	Variety	chickpea	Shubhra	IPCK 2002-29		2009			
+var:chickpea:SUPERANNIGERI1	Variety	chickpea	Super Annigeri-1	MABCWR-SAI		2019			
+var:soybean:AMS10039	Variety	soybean	AMS 100-39			2021			
+var:soybean:AMS1001	Variety	soybean	AMS 1001			2019			
+var:soybean:AMSMB518	Variety	soybean	AMS-MB-5-18	Suvarna Soya					
+var:soybean:DS228	Variety	soybean	DS 228	Phule Kalyani					
+var:soybean:DSB21	Variety	soybean	DSb 21			2015			
+var:soybean:DSB23	Variety	soybean	DSb 23			2018			
+var:soybean:INDIRASOYA9	Variety	soybean	Indira Soya 9						
+var:soybean:JS20116	Variety	soybean	JS 20-116			2019			
+var:soybean:JS2029	Variety	soybean	JS 20-29			2014			
+var:soybean:JS2034	Variety	soybean	JS 20-34			2014			
+var:soybean:JS2069	Variety	soybean	JS 20-69			2016			
+var:soybean:JS2094	Variety	soybean	JS 20-94						
+var:soybean:JS2098	Variety	soybean	JS 20-98						
+var:soybean:JS2172	Variety	soybean	JS 21-72			2023			
+var:soybean:JS335	Variety	soybean	JS 335			1994			
+var:soybean:JS71	Variety	soybean	JS 71						
+var:soybean:JS72280	Variety	soybean	JS 72-280	Durga					
+var:soybean:JS7244	Variety	soybean	JS 72-44	Gaurawa					
+var:soybean:JS7546	Variety	soybean	JS 75-46			1987			
+var:soybean:JS76205	Variety	soybean	JS 76-205			1990			
+var:soybean:JS8021	Variety	soybean	JS 80-21						
+var:soybean:JS9041	Variety	soybean	JS 90-41			1999			
+var:soybean:JS9305	Variety	soybean	JS 93-05			2002			
+var:soybean:JS9560	Variety	soybean	JS 95-60			2007			
+var:soybean:KS103	Variety	soybean	KS 103			2018			
+var:soybean:KSD726	Variety	soybean	KSD 726			2019			
+var:soybean:MACS1188	Variety	soybean	MACS 1188			2013			
+var:soybean:MACS13	Variety	soybean	MACS 13			1985			
+var:soybean:MACS1520	Variety	soybean	MACS 1520			2021			
+var:soybean:MACS57	Variety	soybean	MACS 57			1992			
+var:soybean:MACS58	Variety	soybean	MACS 58			1989			
+var:soybean:MAUS158	Variety	soybean	MAUS 158			2010			
+var:soybean:MAUS162	Variety	soybean	MAUS 162			2014			
+var:soybean:MAUS32	Variety	soybean	MAUS 32	Prasad					
+var:soybean:MAUS612	Variety	soybean	MAUS 612			2018			
+var:soybean:MAUS725	Variety	soybean	MAUS 725						
+var:soybean:NRC12	Variety	soybean	NRC 12	Ahilya-2					
+var:soybean:NRC127	Variety	soybean	NRC 127			2018			
+var:soybean:NRC128	Variety	soybean	NRC 128			2021			
+var:soybean:NRC130	Variety	soybean	NRC 130			2021			
+var:soybean:NRC131	Variety	soybean	NRC 131						
+var:soybean:NRC136	Variety	soybean	NRC 136						
+var:soybean:NRC150	Variety	soybean	NRC 150			2023			
+var:soybean:NRC152	Variety	soybean	NRC 152			2023			
+var:soybean:NRC157	Variety	soybean	NRC 157						
+var:soybean:NRC181	Variety	soybean	NRC 181			2024			
+var:soybean:NRC188	Variety	soybean	NRC 188			2024			
+var:soybean:NRC2	Variety	soybean	NRC 2	Ahilya-1					
+var:soybean:NRC37	Variety	soybean	NRC 37	Ahilya-4					
+var:soybean:NRC7	Variety	soybean	NRC 7	Ahilya-3					
+var:soybean:NRC86	Variety	soybean	NRC 86	Ahilya-6		2015			
+var:soybean:PK472	Variety	soybean	PK 472			1986			
+var:soybean:PS1347	Variety	soybean	PS 1347			2008			
+var:soybean:PARBHANISONA	Variety	soybean	Parbhani Sona	MAUS 47		2000			
+var:soybean:POOJA	Variety	soybean	Pooja			1997			
+var:soybean:PRATISHTA	Variety	soybean	Pratishta	MAUS 61-2		2002			
+var:soybean:PUSA9712	Variety	soybean	Pusa 97-12						
+var:soybean:PUSA9814	Variety	soybean	Pusa 98-14						
+var:soybean:RKS18	Variety	soybean	RKS 18			2007			
+var:soybean:RSC1107	Variety	soybean	RSC 11-07			2021			
+var:soybean:RVS20014	Variety	soybean	RVS 2001-4			2014			
+var:soybean:RVS76	Variety	soybean	RVS 76			2021			
+var:soybean:RAJSOYA18	Variety	soybean	Raj Soya-18			2017			
+var:soybean:RAJSOYA24	Variety	soybean	Raj Soya-24			2017			
+var:soybean:SAMRUDHI	Variety	soybean	Samrudhi	MAUS 71		2002			
+var:soybean:SHAKTI	Variety	soybean	Shakti	MAUS 81		2003			
+var:soybean:TAMS38	Variety	soybean	TAMS 38			2005			
+var:soybean:TAMS9821	Variety	soybean	TAMS 98-21			2007			
+var:soybean:VLSOYA63	Variety	soybean	VL Soya 63			2012			
+var:wheat:AKAW4627	Variety	wheat	AKAW 4627			2012			
+var:wheat:AKW1071	Variety	wheat	AKW 1071	Purna		1995			
+var:wheat:C306	Variety	wheat	C 306						
+var:wheat:CG1029	Variety	wheat	CG 1029	Kanishka					
+var:wheat:CG1036	Variety	wheat	CG 1036	Vidhya					
+var:wheat:CG1047	Variety	wheat	CG 1047	Chhattisgarh Trombay Kumud					
+var:wheat:DBW110	Variety	wheat	DBW 110			2015			
+var:wheat:DBW168	Variety	wheat	DBW 168			2018			
+var:wheat:DBW17	Variety	wheat	DBW 17						
+var:wheat:DBW187	Variety	wheat	DBW 187	Karan Vandana					
+var:wheat:DBW303	Variety	wheat	DBW 303	Karan Vaishnavi					
+var:wheat:DBW359	Variety	wheat	DBW 359	Karan Shivangi					
+var:wheat:DBW377	Variety	wheat	DBW 377	Karan Bold					
+var:wheat:DBW425	Variety	wheat	DBW 425						
+var:wheat:DBW426	Variety	wheat	DBW 426	Karan Devika					
+var:wheat:DBW445	Variety	wheat	DBW 445	Karan Gourav					
+var:wheat:DDW47	Variety	wheat	DDW 47						
+var:wheat:DDW48	Variety	wheat	DDW 48						
+var:wheat:DDW55	Variety	wheat	DDW 55	Karan Manjari					
+var:wheat:DWR162	Variety	wheat	DWR 162			1993			
+var:wheat:DWR195	Variety	wheat	DWR 195	Anuradha		1995			
+var:wheat:GW1346	Variety	wheat	GW 1346	Gujarat Wheat 1346					
+var:wheat:GW190	Variety	wheat	GW 190						
+var:wheat:GW273	Variety	wheat	GW 273			1998			
+var:wheat:GW322	Variety	wheat	GW 322			2002			
+var:wheat:GW366	Variety	wheat	GW 366			2007			
+var:wheat:GW513	Variety	wheat	GW 513	Gujarat Wheat 513					
+var:wheat:GW555	Variety	wheat	GW 555	Sorath Amber					
+var:wheat:GW556	Variety	wheat	GW 556	Sorath Ushma					
+var:wheat:HD2189	Variety	wheat	HD 2189						
+var:wheat:HD2278	Variety	wheat	HD 2278	Parvati		1984			
+var:wheat:HD2285	Variety	wheat	HD 2285						
+var:wheat:HD2329	Variety	wheat	HD 2329						
+var:wheat:HD2781	Variety	wheat	HD 2781	Aditya		2002			
+var:wheat:HD2833	Variety	wheat	HD 2833	Pusa Wheat 105		2006			
+var:wheat:HD2864	Variety	wheat	HD 2864	Urja		2005			
+var:wheat:HD2932	Variety	wheat	HD 2932	Pusa Wheat 111		2008			
+var:wheat:HD2967	Variety	wheat	HD 2967						
+var:wheat:HD2987	Variety	wheat	HD 2987	Pusa Bahar		2011			
+var:wheat:HD3086	Variety	wheat	HD 3086						
+var:wheat:HD3463	Variety	wheat	HD 3463						
+var:wheat:HD4728	Variety	wheat	HD 4728	Pusa Malwi		2016			
+var:wheat:HD3090	Variety	wheat	HD3090	Pusa Amulya		2014			
+var:wheat:HI1077	Variety	wheat	HI 1077	Mangla		1989			
+var:wheat:HI1500	Variety	wheat	HI 1500	Amrita		2003			
+var:wheat:HI1531	Variety	wheat	HI 1531	Harshita		2006			
+var:wheat:HI1544	Variety	wheat	HI 1544	Purna		2008			
+var:wheat:HI1605	Variety	wheat	HI 1605	Pusa Ujala		2017			
+var:wheat:HI1633	Variety	wheat	HI 1633	Pusa Vani					
+var:wheat:HI1634	Variety	wheat	HI 1634	Pusa Ahilya					
+var:wheat:HI1636	Variety	wheat	HI 1636	Pusa Vakula					
+var:wheat:HI1650	Variety	wheat	HI 1650	Pusa Ojaswi					
+var:wheat:HI1653	Variety	wheat	HI 1653	Pusa Jagra		2022			
+var:wheat:HI1654	Variety	wheat	HI 1654	Pusa Adi		2022			
+var:wheat:HI1655	Variety	wheat	HI 1655	Pusa Harsha					
+var:wheat:HI1683	Variety	wheat	HI 1683	Pusa Samrat					
+var:wheat:HI1687	Variety	wheat	HI 1687	Pusa Atal					
+var:wheat:HI385	Variety	wheat	HI 385	Mukta		1976			
+var:wheat:HI617	Variety	wheat	HI 617	Sujata		1982			
+var:wheat:HI8381	Variety	wheat	HI 8381	Malvashri		1995			
+var:wheat:HI8498	Variety	wheat	HI 8498	Malav Shakti		1999			
+var:wheat:HI8627	Variety	wheat	HI 8627	Malav Kirti		2007			
+var:wheat:HI8653	Variety	wheat	HI 8653						
+var:wheat:HI8663	Variety	wheat	HI 8663						
+var:wheat:HI8713	Variety	wheat	HI 8713	Pusa Mangal		2013			
+var:wheat:HI8737	Variety	wheat	HI 8737	Pusa Anmol		2015			
+var:wheat:HI8759	Variety	wheat	HI 8759	Pusa Tejas		2017			
+var:wheat:HI8802	Variety	wheat	HI 8802	Pusa Wheat 8802					
+var:wheat:HI8805	Variety	wheat	HI 8805	Pusa Wheat 8805					
+var:wheat:HI8823	Variety	wheat	HI 8823	Pusa Prabhat					
+var:wheat:HI8826	Variety	wheat	HI 8826	Pusa Poshtik					
+var:wheat:HI8830	Variety	wheat	HI 8830	Pusa Kirti					
+var:wheat:HI8849	Variety	wheat	HI 8849						
+var:wheat:HI8850	Variety	wheat	HI 8850	Pusa Poshan Shakti					
+var:wheat:HI8851	Variety	wheat	HI 8851	Pusa Prachand					
+var:wheat:HS295	Variety	wheat	HS 295						
+var:wheat:HUW234	Variety	wheat	HUW 234						
+var:wheat:HUW510	Variety	wheat	HUW 510	Malviya 510		2001			
+var:wheat:JNK4W184	Variety	wheat	JNK-4W-184	Jairaj		1980			
+var:wheat:JW1398	Variety	wheat	JW 1398	MP 1398					
+var:wheat:JW1399	Variety	wheat	JW 1399	MP 1399					
+var:wheat:JWS17	Variety	wheat	JWS17	Swapnil		1997			
+var:wheat:K9644	Variety	wheat	K 9644	Atal		2000			
+var:wheat:LOK1	Variety	wheat	LOK 1						
+var:wheat:MACS2496	Variety	wheat	MACS 2496						
+var:wheat:MACS3949	Variety	wheat	MACS 3949			2017			
+var:wheat:MACS4028	Variety	wheat	MACS 4028			2018			
+var:wheat:MACS4058	Variety	wheat	MACS 4058						
+var:wheat:MACS4100	Variety	wheat	MACS 4100	MACS Jejuri		2022			
+var:wheat:MACS4135	Variety	wheat	MACS 4135	MACS Mahabal					
+var:wheat:MACS6222	Variety	wheat	MACS 6222			2010			
+var:wheat:MACS6478	Variety	wheat	MACS 6478			2014			
+var:wheat:MACS6830	Variety	wheat	MACS 6830	MACS Shivneri					
+var:wheat:MACS6837	Variety	wheat	MACS 6837	MACS Vindhya					
+var:wheat:MPJW1358	Variety	wheat	MP (JW)1358						
+var:wheat:MP1203	Variety	wheat	MP 1203			2009			
+var:wheat:MP3173	Variety	wheat	MP 3173	JW 3173		2009			
+var:wheat:MP3288	Variety	wheat	MP 3288	JW 3288		2011			
+var:wheat:MP3336	Variety	wheat	MP 3336	JW 3336		2013			
+var:wheat:MP3465	Variety	wheat	MP 3465			2021			
+var:wheat:MP4010	Variety	wheat	MP 4010			2003			
+var:wheat:NIAW1415	Variety	wheat	NIAW 1415	Netravati		2011			
+var:wheat:NIAW3170	Variety	wheat	NIAW 3170	Phule Satwik					
+var:wheat:NIAW4267	Variety	wheat	NIAW 4267	Phule Sampanna					
+var:wheat:NIAW917	Variety	wheat	NIAW 917	Tapovan		2006			
+var:wheat:NIDW1149	Variety	wheat	NIDW 1149						
+var:wheat:PBW226	Variety	wheat	PBW 226						
+var:wheat:PBW299	Variety	wheat	PBW 299						
+var:wheat:PBW343	Variety	wheat	PBW 343						
+var:wheat:PBW373	Variety	wheat	PBW 373						
+var:wheat:PBW502	Variety	wheat	PBW 502						
+var:wheat:PBW550	Variety	wheat	PBW 550						
+var:wheat:PBW906	Variety	wheat	PBW 906						
+var:wheat:RAJ3765	Variety	wheat	RAJ 3765						
+var:wheat:RAJ4037	Variety	wheat	RAJ 4037			2004			
+var:wheat:RAJ4238	Variety	wheat	Raj 4238			2016			
+var:wheat:SONALIKA	Variety	wheat	Sonalika						
+var:wheat:UAS304	Variety	wheat	UAS 304			2013			
+var:wheat:UAS375	Variety	wheat	UAS 375			2018			
+var:wheat:UAS466	Variety	wheat	UAS 466						
+var:wheat:UAS484	Variety	wheat	UAS 484						
+var:wheat:UP2338	Variety	wheat	UP 2338						
+var:wheat:UP262	Variety	wheat	UP 262						
+var:wheat:WH1105	Variety	wheat	WH 1105						
+var:wheat:WH147	Variety	wheat	WH 147						
+var:wheat:WH283	Variety	wheat	WH 283						
+var:wheat:WH542	Variety	wheat	WH 542						
+var:wheat:WH711	Variety	wheat	WH 711						
+var:wheat:WSM138	Variety	wheat	WSM 138						

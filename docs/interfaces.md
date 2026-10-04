@@ -1,6 +1,6 @@
 # Module interfaces (IoT ↔ API ↔ KG ↔ models)
 
-⚠️ **Superseded, 2026-09-25 — see [PHASES.md](../PHASES.md).** Sections 2–4 below (device registration, sensor
+⚠️ **Superseded: the read API, identifiers, feature vector and versioning are now in [INTEGRATION.md](INTEGRATION.md) (2026-10-04).** The text below is the 2026-09-25 draft; see also [PHASES.md](../PHASES.md). Sections 2–4 below (device registration, sensor
 ingest, `/v1/risk`) assumed the IoT device stores its readings in this repo's database. It does not — the IoT
 device has its own Supabase project. Sections 1 (identifiers), 5 (phenomic model) and 6 (hardware notes) still
 hold. Not yet rewritten; pending the open questions in PHASES.md.

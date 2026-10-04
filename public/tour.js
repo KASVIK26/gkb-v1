@@ -88,6 +88,17 @@ const STEPS = [
     },
   },
   {
+    tab: "profiles",
+    element: "#profileControls",
+    popover: {
+      title: "Profiles",
+      description:
+        "One page per variety, disease or gene: a variety's reactions, genes and zones; a disease's resistant varieties, genes, " +
+        "genome regions, weather triggers, advisories and pathotype survey; a gene's diseases and carriers. Names are links, and " +
+        "every statement shows its strength and evidence.",
+    },
+  },
+  {
     tab: "triggers",
     element: "#demoWarning",
     popover: {
