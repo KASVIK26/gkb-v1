@@ -1,0 +1,1486 @@
+# Wheat varieties released or identified by the AICRP (Director's reports 2020-21, 2022-23, 2025-26): the zone and production condition of each release and the rust reactions the release table states in its special-features column. Central India (Central and Peninsular zones, MP and Gujarat state releases) plus the Indore-bred NWPZ releases. Work order WO16, reviewed 2026-10-04 (kg/review_log/2026-10-04b_releases_and_pathotypes.md). Evidence stays llm: (discounted).
+
+sources:
+- id: doc:aicrp_wb_director_report_2020_21
+  type: official_document
+  title: 'AICRP on Wheat and Barley: Director''s Report 2020-21'
+  year: 2021
+  venue: ICAR-Indian Institute of Wheat and Barley Research, Karnal (AICRP on Wheat and Barley)
+  url: http://www.aicrpwheatbarleyicar.in/wp-content/uploads/2021/10/DIRECTOR-REPORT-2021-Corrected_compressed.pdf
+  verified: true
+- id: doc:aicrp_wb_director_report_2022_23
+  type: official_document
+  title: 'AICRP on Wheat and Barley: Director''s Report 2022-23'
+  year: 2023
+  venue: ICAR-Indian Institute of Wheat and Barley Research, Karnal (AICRP on Wheat and Barley)
+  url: http://www.aicrpwheatbarleyicar.in/wp-content/uploads/2023/08/Directors-Report-2022-23.pdf
+  verified: true
+- id: doc:aicrp_wb_director_report_2025_26
+  type: official_document
+  title: 'AICRP on Wheat and Barley: Director''s Report 2025-26'
+  year: 2026
+  venue: ICAR-Indian Institute of Wheat and Barley Research, Karnal (AICRP on Wheat and Barley)
+  url: http://www.aicrpwheatbarleyicar.in/wp-content/uploads/2026/09/Director-report-2026.pdf
+  verified: true
+entities:
+- id: var:wheat:MACS4100
+  type: Variety
+  name: MACS 4100
+  crop: wheat
+  synonyms:
+  - MACS Jejuri
+  name_i18n: {}
+  props:
+    release_year: 2022
+    releasing_institute: ARI, Pune
+- id: var:wheat:HI1653
+  type: Variety
+  name: HI 1653
+  crop: wheat
+  synonyms:
+  - Pusa Jagra
+  name_i18n: {}
+  props:
+    release_year: 2022
+    releasing_institute: ICAR-IARI Regional Station, Indore
+- id: var:wheat:HI1654
+  type: Variety
+  name: HI 1654
+  crop: wheat
+  synonyms:
+  - Pusa Adi
+  name_i18n: {}
+  props:
+    release_year: 2022
+    releasing_institute: ICAR-IARI Regional Station, Indore
+- id: var:wheat:JW1399
+  type: Variety
+  name: JW 1399
+  crop: wheat
+  synonyms:
+  - MP 1399
+  name_i18n: {}
+  props:
+    releasing_institute: Powarkheda
+- id: var:wheat:DBW426
+  type: Variety
+  name: DBW 426
+  crop: wheat
+  synonyms:
+  - Karan Devika
+  name_i18n: {}
+  props:
+    releasing_institute: ICAR-IIWBR, Karnal
+- id: var:wheat:PBW906
+  type: Variety
+  name: PBW 906
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    releasing_institute: PAU, Ludhiana
+- id: var:wheat:GW555
+  type: Variety
+  name: GW 555
+  crop: wheat
+  synonyms:
+  - Sorath Amber
+  name_i18n: {}
+  props:
+    releasing_institute: Wheat Research Station, JAU, Junagadh
+- id: var:wheat:GW556
+  type: Variety
+  name: GW 556
+  crop: wheat
+  synonyms:
+  - Sorath Ushma
+  name_i18n: {}
+  props:
+    releasing_institute: Wheat Research Station, JAU, Junagadh
+- id: var:wheat:NIAW4267
+  type: Variety
+  name: NIAW 4267
+  crop: wheat
+  synonyms:
+  - Phule Sampanna
+  name_i18n: {}
+  props:
+    releasing_institute: MPKV, Agricultural Research Station, Niphad
+- id: var:wheat:WSM138
+  type: Variety
+  name: WSM 138
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    releasing_institute: Wheat Research Unit, PDKV, Akola
+- id: var:wheat:MACS6837
+  type: Variety
+  name: MACS 6837
+  crop: wheat
+  synonyms:
+  - MACS Vindhya
+  name_i18n: {}
+  props:
+    releasing_institute: ARI, Pune
+- id: var:wheat:MACS6830
+  type: Variety
+  name: MACS 6830
+  crop: wheat
+  synonyms:
+  - MACS Shivneri
+  name_i18n: {}
+  props:
+    releasing_institute: ARI, Pune
+- id: var:wheat:HI1683
+  type: Variety
+  name: HI 1683
+  crop: wheat
+  synonyms:
+  - Pusa Samrat
+  name_i18n: {}
+  props:
+    releasing_institute: ICAR-IARI Regional Station, Indore
+- id: var:wheat:HI1687
+  type: Variety
+  name: HI 1687
+  crop: wheat
+  synonyms:
+  - Pusa Atal
+  name_i18n: {}
+  props:
+    releasing_institute: ICAR-IARI Regional Station, Indore
+- id: var:wheat:DBW425
+  type: Variety
+  name: DBW 425
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    releasing_institute: ICAR-IIWBR, Karnal
+- id: var:wheat:DBW445
+  type: Variety
+  name: DBW 445
+  crop: wheat
+  synonyms:
+  - Karan Gourav
+  name_i18n: {}
+  props:
+    releasing_institute: ICAR-IIWBR, Karnal
+- id: var:wheat:CG1047
+  type: Variety
+  name: CG 1047
+  crop: wheat
+  synonyms:
+  - Chhattisgarh Trombay Kumud
+  name_i18n: {}
+  props:
+    releasing_institute: IGKV, Bilaspur and BARC, Trombay
+- id: var:wheat:HD3463
+  type: Variety
+  name: HD 3463
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    releasing_institute: ICAR-IARI, New Delhi
+- id: var:wheat:JW1398
+  type: Variety
+  name: JW 1398
+  crop: wheat
+  synonyms:
+  - MP 1398
+  name_i18n: {}
+  props:
+    releasing_institute: Powarkheda
+- id: var:wheat:UAS484
+  type: Variety
+  name: UAS 484
+  crop: wheat
+  synonyms: []
+  name_i18n: {}
+  props:
+    releasing_institute: UAS, Dharwad
+- id: var:wheat:HI8849
+  type: Variety
+  name: HI 8849
+  crop: wheat
+  synonyms:
+  - Pusa Mangal
+  name_i18n: {}
+  props:
+    releasing_institute: ICAR-IARI Regional Station, Indore
+- id: var:wheat:HI8851
+  type: Variety
+  name: HI 8851
+  crop: wheat
+  synonyms:
+  - Pusa Prachand
+  name_i18n: {}
+  props:
+    releasing_institute: ICAR-IARI Regional Station, Indore
+- id: var:wheat:HI8850
+  type: Variety
+  name: HI 8850
+  crop: wheat
+  synonyms:
+  - Pusa Poshan Shakti
+  name_i18n: {}
+  props:
+    releasing_institute: ICAR-IARI Regional Station, Indore
+- id: var:wheat:MACS4135
+  type: Variety
+  name: MACS 4135
+  crop: wheat
+  synonyms:
+  - MACS Mahabal
+  name_i18n: {}
+  props:
+    releasing_institute: ARI, Pune
+claims:
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:CG1029
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: late
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: Release / identification table 2020-21
+    quote: cg 1029 (kanishka) cz ls, ir 94.90 52.10 good chapatti quality and tolerance to heat stress
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0001
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1634
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: late
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: Release / identification table 2020-21
+    quote: hi 1634 (pusa ahilya) cz ls, ir 95.70 51.60 good chapatti quality, resistance to brown & black rusts
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0002
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1634
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2020-21
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: 'Release / identification table 2020-21, special features [alias in quote: object named ''brown'']'
+    quote: hi 1634 (pusa ahilya) cz ls, ir 95.70 51.60 good chapatti quality, resistance to brown & black rusts
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0003
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1634
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2020-21
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: 'Release / identification table 2020-21, special features [alias in quote: object named ''black'']'
+    quote: hi 1634 (pusa ahilya) cz ls, ir 95.70 51.60 good chapatti quality, resistance to brown & black rusts
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0004
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1633
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: late
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: Release / identification table 2020-21
+    quote: hi 1633 (pusa vani) pz ls, ir 65.80 41.70 grain protein (12.4%), iron =41.6ppm and zinc =41.1ppm
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0005
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:NIDW1149
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: Release / identification table 2020-21
+    quote: nidw 1149 (d) pz ts, rir 36.80 29.70 resistance to brown and yellow rusts
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0006
+- type: VARIETY_REACTION
+  subject: var:wheat:NIDW1149
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2020-21
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: 'Release / identification table 2020-21, special features [alias in quote: object named ''brown'']'
+    quote: nidw 1149 (d) pz ts, rir 36.80 29.70 resistance to brown and yellow rusts
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0007
+- type: VARIETY_REACTION
+  subject: var:wheat:NIDW1149
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2020-21
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: 'Release / identification table 2020-21, special features [alias in quote: object named ''yellow'']'
+    quote: nidw 1149 (d) pz ts, rir 36.80 29.70 resistance to brown and yellow rusts
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0008
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DDW48
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: Release / identification table 2020-21
+    quote: ddw 48 (d) pz ts, ir 72.00 47.40 high pasta score
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0009
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:MACS4058
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: Release / identification table 2020-21
+    quote: macs4058 (d) pz ts, rir 37.10 30.60 resistant to leaf & stem rusts, protein content (12.8%) 13 ... state releases the state recommended wheat varieties were also notified (500 (e) dated 29.01.2021) by the central sub-committee on crops standards, notification and release of varieties for agricultural crops for different production conditions prevailing in the named states. wheat varieties rele
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0010
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS4058
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2020-21
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: 'Release / identification table 2020-21, special features [alias in quote: object named ''leaf'']'
+    quote: macs4058 (d) pz ts, rir 37.10 30.60 resistant to leaf & stem rusts, protein content (12.8%) 13 ... state releases the state recommended wheat varieties were also notified (500 (e) dated 29.01.2021) by the central sub-committee on crops standards, notification and release of varieties for agricultural crops for different production conditions prevailing in the named states. wheat varieties rele
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0011
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS4058
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2020-21
+  evidence:
+  - source: doc:aicrp_wb_director_report_2020_21
+    method: official_document
+    locator: 'Release / identification table 2020-21, special features [alias in quote: object named ''stem'']'
+    quote: macs4058 (d) pz ts, rir 37.10 30.60 resistant to leaf & stem rusts, protein content (12.8%) 13 ... state releases the state recommended wheat varieties were also notified (500 (e) dated 29.01.2021) by the central sub-committee on crops standards, notification and release of varieties for agricultural crops for different production conditions prevailing in the named states. wheat varieties rele
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0012
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1650
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23
+    quote: hi 1650 icar-iari rs, cz ts, ir 57.2 73.8 highly resistant to leaf and (pusa ojaswi) indore stem rust, high zinc content (42.7 ppm)
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0013
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1650
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: 'Release / identification table 2022-23, special features [alias in quote: object named ''leaf'']'
+    quote: hi 1650 icar-iari rs, cz ts, ir 57.2 73.8 highly resistant to leaf and (pusa ojaswi) indore stem rust, high zinc content (42.7 ppm)
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0014
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1650
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23, special features
+    quote: hi 1650 icar-iari rs, cz ts, ir 57.2 73.8 highly resistant to leaf and (pusa ojaswi) indore stem rust, high zinc content (42.7 ppm)
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0015
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:CG1036
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23
+    quote: cg 1036 igkv rs, cz ts, ri 39.3 60.4 hard grain, good chapa (vidhya) bilaspur score (8.5), resistance to leaf and stem rust
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0016
+- type: VARIETY_REACTION
+  subject: var:wheat:CG1036
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: 'Release / identification table 2022-23, special features [alias in quote: object named ''leaf'']'
+    quote: cg 1036 igkv rs, cz ts, ri 39.3 60.4 hard grain, good chapa (vidhya) bilaspur score (8.5), resistance to leaf and stem rust
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0017
+- type: VARIETY_REACTION
+  subject: var:wheat:CG1036
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23, special features
+    quote: cg 1036 igkv rs, cz ts, ri 39.3 60.4 hard grain, good chapa (vidhya) bilaspur score (8.5), resistance to leaf and stem rust
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0018
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1655
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23
+    quote: hi1655 icar-iari rs, cz ts, ri 38.8 59.8 hard grain, good chapa (pusa harsha) indore score (8.4), resistance to leaf and stem rust dbw 303 icar-iiwbr, cz ir, es/ts, 58.3 80.3 high yield, resistance and (area extension) karnal wider adaptability durum wheat
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0019
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1655
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: 'Release / identification table 2022-23, special features [alias in quote: object named ''leaf'']'
+    quote: hi1655 icar-iari rs, cz ts, ri 38.8 59.8 hard grain, good chapa (pusa harsha) indore score (8.4), resistance to leaf and stem rust dbw 303 icar-iiwbr, cz ir, es/ts, 58.3 80.3 high yield, resistance and (area extension) karnal wider adaptability durum wheat
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0020
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1655
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23, special features
+    quote: hi1655 icar-iari rs, cz ts, ri 38.8 59.8 hard grain, good chapa (pusa harsha) indore score (8.4), resistance to leaf and stem rust dbw 303 icar-iiwbr, cz ir, es/ts, 58.3 80.3 high yield, resistance and (area extension) karnal wider adaptability durum wheat
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0021
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI8830
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23
+    quote: hi 8830 (pusa kir) icar-iari rs, cz ts, ri 40.4 65.3 resistance to leaf and stem indore rust, good amount of yellow pigment (7.4)
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0022
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8830
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: 'Release / identification table 2022-23, special features [alias in quote: object named ''leaf'']'
+    quote: hi 8830 (pusa kir) icar-iari rs, cz ts, ri 40.4 65.3 resistance to leaf and stem indore rust, good amount of yellow pigment (7.4)
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0023
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8830
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: 'Release / identification table 2022-23, special features [alias in quote: object named ''stem'']'
+    quote: hi 8830 (pusa kir) icar-iari rs, cz ts, ri 40.4 65.3 resistance to leaf and stem indore rust, good amount of yellow pigment (7.4)
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0024
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DDW55
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23
+    quote: ddw55 icar-iiwbr, cz ts, ri 35.6 56.5 zn (43.3 ppm), hard grains, (karan manjari) karnal good hectoliter weight
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0025
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI8826
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23
+    quote: hi8826 icar-iari rs, pz ts, ir 48.8 73.7 resistance to leaf and stem (pusa poshk) indore rust, hard grains
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0026
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8826
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: 'Release / identification table 2022-23, special features [alias in quote: object named ''leaf'']'
+    quote: hi8826 icar-iari rs, pz ts, ir 48.8 73.7 resistance to leaf and stem (pusa poshk) indore rust, hard grains
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0027
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8826
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: 'Release / identification table 2022-23, special features [alias in quote: object named ''stem'']'
+    quote: hi8826 icar-iari rs, pz ts, ir 48.8 73.7 resistance to leaf and stem (pusa poshk) indore rust, hard grains
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0028
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:MACS4100
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23
+    quote: macs4100 ari, pune pz ts, ir 46.0 61.8 resistance to leaf rust, hard (macs jejuri) grains and good amount of yellow pigment (7.1); good pasta acceptability(6.6)
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0029
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS4100
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23, special features
+    quote: macs4100 ari, pune pz ts, ir 46.0 61.8 resistance to leaf rust, hard (macs jejuri) grains and good amount of yellow pigment (7.1); good pasta acceptability(6.6)
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0030
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1653
+  object: zone:wheat:NWPZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23
+    quote: hi 1653 icar-iari rs, nwpz ts, ri 51.1 69.3 resistant to wheat blast (pusa jagra) indore and leaf rust
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0031
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1653
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23, special features
+    quote: hi 1653 icar-iari rs, nwpz ts, ri 51.1 69.3 resistant to wheat blast (pusa jagra) indore and leaf rust
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0032
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1654
+  object: zone:wheat:NWPZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23
+    quote: hi 1654 icar-iari rs, nwpz ts, ri 51.8 78.2 tolerant to wheat blast and (pusa adi) indore leaf rust dbw 316 icar-iiwbr, nepz ls, ir 41 68 resistant to wheat blast and (karan prema) karnal all the three rusts, protein content (13.2%), tolerant to drought (dsi-0.88) and heat stress(hsi- 0.19) pbw833 pau, ludhiana nepz ls, ir 42.75 58.8 good chapa quality (score 8.2) and protein content (12.9%) hi 1650 icar-iari rs, cz
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0033
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1654
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+    season: 2022-23
+  evidence:
+  - source: doc:aicrp_wb_director_report_2022_23
+    method: official_document
+    locator: Release / identification table 2022-23, special features
+    quote: hi 1654 icar-iari rs, nwpz ts, ri 51.8 78.2 tolerant to wheat blast and (pusa adi) indore leaf rust dbw 316 icar-iiwbr, nepz ls, ir 41 68 resistant to wheat blast and (karan prema) karnal all the three rusts, protein content (13.2%), tolerant to drought (dsi-0.88) and heat stress(hsi- 0.19) pbw833 pau, ludhiana nepz ls, ir 42.75 58.8 good chapa quality (score 8.2) and protein content (12.9%) hi 1650 icar-iari rs, cz
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0034
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:JW1399
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: early
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: jw 1399 powarkheda cz irrigated, early sown, 68.77 99.4 good amount of protein (mp1399) high fertility (12.15%), iron (39.8 conditions ppm) content 3
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0035
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DBW426
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: late
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: dbw 426 icar-iiwbr, pz irrigated, 44.7 69.8 resistant to brown and (karan karnal late sown black rust; bio-fortiied devika) genotype with grain zinc (44.9 ppm), iron (45.6ppm) and protein (13.4%) content 4
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0036
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW426
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''brown'']'
+    quote: dbw 426 icar-iiwbr, pz irrigated, 44.7 69.8 resistant to brown and (karan karnal late sown black rust; bio-fortiied devika) genotype with grain zinc (44.9 ppm), iron (45.6ppm) and protein (13.4%) content 4
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0037
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW426
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: dbw 426 icar-iiwbr, pz irrigated, 44.7 69.8 resistant to brown and (karan karnal late sown black rust; bio-fortiied devika) genotype with grain zinc (44.9 ppm), iron (45.6ppm) and protein (13.4%) content 4
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0038
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:PBW906
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: early
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: pbw 906 pau, ludhiana cz irrigated, early sown, 67.4 96 resistant to brown rust high fertility and moderately conditions resistant to black rust; good amount of iron (40.3 ppm) 5 pbw 915 pau, ludhiana nepz irrigated, timely 52.5 65.4 highly resistant to sown yellow and brown rusts; good amount of protein content (12.6%) and iron (39.6) 6
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0039
+- type: VARIETY_REACTION
+  subject: var:wheat:PBW906
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: pbw 906 pau, ludhiana cz irrigated, early sown, 67.4 96 resistant to brown rust high fertility and moderately conditions resistant to black rust; good amount of iron (40.3 ppm) 5 pbw 915 pau, ludhiana nepz irrigated, timely 52.5 65.4 highly resistant to sown yellow and brown rusts; good amount of protein content (12.6%) and iron (39.6) 6
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0040
+- type: VARIETY_REACTION
+  subject: var:wheat:PBW906
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: pbw 906 pau, ludhiana cz irrigated, early sown, 67.4 96 resistant to brown rust high fertility and moderately conditions resistant to black rust; good amount of iron (40.3 ppm) 5 pbw 915 pau, ludhiana nepz irrigated, timely 52.5 65.4 highly resistant to sown yellow and brown rusts; good amount of protein content (12.6%) and iron (39.6) 6
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0041
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:GW555
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: 'gw 555 wheat research cz irrigated, timely 58.3 76.9 heat and drought (sorath station, jau, sown tolerant (hsi (0.93) and amber) junagadh dsi (0.84); high level of resistance to black rust (aci: 6.8) and brown rust (aci: 3.4); zinc (40.8 ppm). 7'
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0042
+- type: VARIETY_REACTION
+  subject: var:wheat:GW555
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: 'gw 555 wheat research cz irrigated, timely 58.3 76.9 heat and drought (sorath station, jau, sown tolerant (hsi (0.93) and amber) junagadh dsi (0.84); high level of resistance to black rust (aci: 6.8) and brown rust (aci: 3.4); zinc (40.8 ppm). 7'
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0043
+- type: VARIETY_REACTION
+  subject: var:wheat:GW555
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: 'gw 555 wheat research cz irrigated, timely 58.3 76.9 heat and drought (sorath station, jau, sown tolerant (hsi (0.93) and amber) junagadh dsi (0.84); high level of resistance to black rust (aci: 6.8) and brown rust (aci: 3.4); zinc (40.8 ppm). 7'
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0044
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:GW556
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: late
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: 'gw 556 wheat research cz irrigated, late 48.9 60.7 high level of resistance (sorath station, jau, sown against brown rust (aci: ushma) junagadh 4.0) and black rust (aci: 8.9) crop improvement major research achievements ... sn variety developed zone/ production grain yield (q/ha) special features name by state condition avg. pot. 8'
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0045
+- type: VARIETY_REACTION
+  subject: var:wheat:GW556
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: 'gw 556 wheat research cz irrigated, late 48.9 60.7 high level of resistance (sorath station, jau, sown against brown rust (aci: ushma) junagadh 4.0) and black rust (aci: 8.9) crop improvement major research achievements ... sn variety developed zone/ production grain yield (q/ha) special features name by state condition avg. pot. 8'
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0046
+- type: VARIETY_REACTION
+  subject: var:wheat:GW556
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: 'gw 556 wheat research cz irrigated, late 48.9 60.7 high level of resistance (sorath station, jau, sown against brown rust (aci: ushma) junagadh 4.0) and black rust (aci: 8.9) crop improvement major research achievements ... sn variety developed zone/ production grain yield (q/ha) special features name by state condition avg. pot. 8'
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0047
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:NIAW4267
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: niaw4267 mpkv pz restricted irrigation, 34.8 40.8 highly resistant to (phule agricultural timely sown condition brown rust; bio-fortiie sampanna) research station, with good amount of niphad protein (12.6%), iron (45.5ppm) and zinc (40.0ppm) 9
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0048
+- type: VARIETY_REACTION
+  subject: var:wheat:NIAW4267
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: niaw4267 mpkv pz restricted irrigation, 34.8 40.8 highly resistant to (phule agricultural timely sown condition brown rust; bio-fortiie sampanna) research station, with good amount of niphad protein (12.6%), iron (45.5ppm) and zinc (40.0ppm) 9
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0049
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:WSM138
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: late
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: wsm 138 wheat research cz irrigated, late 47.22 59.5 highly resistant to unit, pdkv, sown brown and black rust, akola resistant to all the pathotypes of black rust in srt 10
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0050
+- type: VARIETY_REACTION
+  subject: var:wheat:WSM138
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''brown'']'
+    quote: wsm 138 wheat research cz irrigated, late 47.22 59.5 highly resistant to unit, pdkv, sown brown and black rust, akola resistant to all the pathotypes of black rust in srt 10
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0051
+- type: VARIETY_REACTION
+  subject: var:wheat:WSM138
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: wsm 138 wheat research cz irrigated, late 47.22 59.5 highly resistant to unit, pdkv, sown brown and black rust, akola resistant to all the pathotypes of black rust in srt 10
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0052
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:MACS6837
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: macs 6837 ari, pune cz irrigated, timely 56.7 72.8 resistant to black and (macs sown brown rusts; better vindhya) grain quality (protein 12.0%; chapati score 7.7) 11
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0053
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS6837
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''black'']'
+    quote: macs 6837 ari, pune cz irrigated, timely 56.7 72.8 resistant to black and (macs sown brown rusts; better vindhya) grain quality (protein 12.0%; chapati score 7.7) 11
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0054
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS6837
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''brown'']'
+    quote: macs 6837 ari, pune cz irrigated, timely 56.7 72.8 resistant to black and (macs sown brown rusts; better vindhya) grain quality (protein 12.0%; chapati score 7.7) 11
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0055
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:MACS6830
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: late
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: macs 6830 ari, pune pz irrigated, late 45.8 65.4 highly resistant to black (macs sown and brown rusts; better shivneri) grain quality (protein 12.9%; iron 44.5 ppm; and zinc 40.9 ppm content) 12
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0056
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS6830
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''black'']'
+    quote: macs 6830 ari, pune pz irrigated, late 45.8 65.4 highly resistant to black (macs sown and brown rusts; better shivneri) grain quality (protein 12.9%; iron 44.5 ppm; and zinc 40.9 ppm content) 12
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0057
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS6830
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''brown'']'
+    quote: macs 6830 ari, pune pz irrigated, late 45.8 65.4 highly resistant to black (macs sown and brown rusts; better shivneri) grain quality (protein 12.9%; iron 44.5 ppm; and zinc 40.9 ppm content) 12
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0058
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1683
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: hi 1683 (pusa iari regional cz irrigated, timely 56.1 77.5 moderately tolerant to biofortiied station, indore sown heat (0.90) & drought wheat (0.93); resistance samrat) against black and brown rusts; good amount of iron (40.4 ppm) and low gluten index (53) 13
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0059
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1683
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''black'']'
+    quote: hi 1683 (pusa iari regional cz irrigated, timely 56.1 77.5 moderately tolerant to biofortiied station, indore sown heat (0.90) & drought wheat (0.93); resistance samrat) against black and brown rusts; good amount of iron (40.4 ppm) and low gluten index (53) 13
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0060
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1683
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''brown'']'
+    quote: hi 1683 (pusa iari regional cz irrigated, timely 56.1 77.5 moderately tolerant to biofortiied station, indore sown heat (0.90) & drought wheat (0.93); resistance samrat) against black and brown rusts; good amount of iron (40.4 ppm) and low gluten index (53) 13
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0061
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI1687
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: late
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: hi 1687 (pusa iari regional pz irrigated, late 46.5 70.9 resistant to black and biofortiied station, indore sown brown rust; bio-fortiied wheat atal) wheat with good amount of protein (12.1%) and iron (42.5 ppm) and zinc (43.3 ppm) content 14
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0062
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1687
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''black'']'
+    quote: hi 1687 (pusa iari regional pz irrigated, late 46.5 70.9 resistant to black and biofortiied station, indore sown brown rust; bio-fortiied wheat atal) wheat with good amount of protein (12.1%) and iron (42.5 ppm) and zinc (43.3 ppm) content 14
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0063
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1687
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: hi 1687 (pusa iari regional pz irrigated, late 46.5 70.9 resistant to black and biofortiied station, indore sown brown rust; bio-fortiied wheat atal) wheat with good amount of protein (12.1%) and iron (42.5 ppm) and zinc (43.3 ppm) content 14
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0064
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DBW425
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: late
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: dbw 425 icar-iiwbr, cz irrigated, late 47.9 59 resistance to black and karnal sown brown rusts; protein 12.3%. 15
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0065
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW425
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''black'']'
+    quote: dbw 425 icar-iiwbr, cz irrigated, late 47.9 59 resistance to black and karnal sown brown rusts; protein 12.3%. 15
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0066
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW425
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''brown'']'
+    quote: dbw 425 icar-iiwbr, cz irrigated, late 47.9 59 resistance to black and karnal sown brown rusts; protein 12.3%. 15
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0067
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:DBW445
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: early
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: dbw 445 icar-iiwbr, cz irrigated, early sown, 68.4 101.5 highly resistant to black (karan gourav) karnal high fertility conditions and brown rusts; low grain hardness index (50.9) with high biscuit spread factor (8.9), 16
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0068
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW445
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''black'']'
+    quote: dbw 445 icar-iiwbr, cz irrigated, early sown, 68.4 101.5 highly resistant to black (karan gourav) karnal high fertility conditions and brown rusts; low grain hardness index (50.9) with high biscuit spread factor (8.9), 16
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0069
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW445
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''brown'']'
+    quote: dbw 445 icar-iiwbr, cz irrigated, early sown, 68.4 101.5 highly resistant to black (karan gourav) karnal high fertility conditions and brown rusts; low grain hardness index (50.9) with high biscuit spread factor (8.9), 16
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0070
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:CG1047
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: cg 1047 igkv btc college pz restricted irrigation, 32.14 37.6 bio-fortiied variety (chhattisgarh of agriculture timely sown having grain protein trombay bilaspur and condition (12.37%), zinc (41.15 kumud) barc, trombay, ppm) and iron (41.7 mumbai (ms) ppm) content 17
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0071
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HD3463
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: early
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: hd 3463 icar-iari, cz irrigated, early 65.49 95.8 highly resistant to black n. delhi sown, high fertility and brown rust; grain conditions protein content (12.1%) and grain iron content (40.1 ppm) durum wheat 18
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0072
+- type: VARIETY_REACTION
+  subject: var:wheat:HD3463
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''black'']'
+    quote: hd 3463 icar-iari, cz irrigated, early 65.49 95.8 highly resistant to black n. delhi sown, high fertility and brown rust; grain conditions protein content (12.1%) and grain iron content (40.1 ppm) durum wheat 18
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0073
+- type: VARIETY_REACTION
+  subject: var:wheat:HD3463
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: hd 3463 icar-iari, cz irrigated, early 65.49 95.8 highly resistant to black n. delhi sown, high fertility and brown rust; grain conditions protein content (12.1%) and grain iron content (40.1 ppm) durum wheat 18
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0074
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:JW1398
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: jw1398 powarkheda cz restricted irrigation, 38.6 66 good amount of protein (mpo1398)(d) timely sown condition (12.0%), iron (40.7) and zinc(38.3) content 19
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0075
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:UAS484
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: uas 484 (d) uas, dharwad cz restricted irrigation, 38.4 80.3 resistance to black and timely sown condition brown rusts; yellow pigment (7.3ppm), iron content (40 ppm) 20
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0076
+- type: VARIETY_REACTION
+  subject: var:wheat:UAS484
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''black'']'
+    quote: uas 484 (d) uas, dharwad cz restricted irrigation, 38.4 80.3 resistance to black and timely sown condition brown rusts; yellow pigment (7.3ppm), iron content (40 ppm) 20
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0077
+- type: VARIETY_REACTION
+  subject: var:wheat:UAS484
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''brown'']'
+    quote: uas 484 (d) uas, dharwad cz restricted irrigation, 38.4 80.3 resistance to black and timely sown condition brown rusts; yellow pigment (7.3ppm), iron content (40 ppm) 20
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0078
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI8849
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: hi 8849 (pusa iari regional pz timely sown, 51.9 71.8 high level of resistance biofortiied station, indore irrigated against black and brown wheat pusa rust, grain zinc content mangal) (d) (41.1 ppm) ... new wheat varieties identiied a total of 23 wheat varieties, comprising 17 bread wheat and six durum wheat cultivars, were identiied for release during 2025-26 for irrigated, restricted irrig
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0079
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8849
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''black'']'
+    quote: hi 8849 (pusa iari regional pz timely sown, 51.9 71.8 high level of resistance biofortiied station, indore irrigated against black and brown wheat pusa rust, grain zinc content mangal) (d) (41.1 ppm) ... new wheat varieties identiied a total of 23 wheat varieties, comprising 17 bread wheat and six durum wheat cultivars, were identiied for release during 2025-26 for irrigated, restricted irrig
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0080
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8849
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''brown'']'
+    quote: hi 8849 (pusa iari regional pz timely sown, 51.9 71.8 high level of resistance biofortiied station, indore irrigated against black and brown wheat pusa rust, grain zinc content mangal) (d) (41.1 ppm) ... new wheat varieties identiied a total of 23 wheat varieties, comprising 17 bread wheat and six durum wheat cultivars, were identiied for release during 2025-26 for irrigated, restricted irrig
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0081
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI8851
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: restricted_irrigation
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: hi 8851(pusa iari regional cz restricted irrigation, 39.3 61.8 moderately tolerant to biofortiied station, indore timely sown condition heat (hsi- 0.97), and wheat pusa drought stress (dsi prachand) (d) 0.90) across the zones; resistant to brown and black rust; bio-fortiied variety with grain zinc content (44.3 ppm) and iron content (40.2 ppm) 22
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0082
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8851
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''brown'']'
+    quote: hi 8851(pusa iari regional cz restricted irrigation, 39.3 61.8 moderately tolerant to biofortiied station, indore timely sown condition heat (hsi- 0.97), and wheat pusa drought stress (dsi prachand) (d) 0.90) across the zones; resistant to brown and black rust; bio-fortiied variety with grain zinc content (44.3 ppm) and iron content (40.2 ppm) 22
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0083
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8851
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: hi 8851(pusa iari regional cz restricted irrigation, 39.3 61.8 moderately tolerant to biofortiied station, indore timely sown condition heat (hsi- 0.97), and wheat pusa drought stress (dsi prachand) (d) 0.90) across the zones; resistant to brown and black rust; bio-fortiied variety with grain zinc content (44.3 ppm) and iron content (40.2 ppm) 22
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0084
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:HI8850
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: hi 8850 (pusa iari regional cz irrigated, timely 56.5 86.2 moderately tolerant to biofortiied station, indore sown heat (hsi- 0.90), and wheat poshan drought stress (dsi- shakti (d) 0.98) across the zones; good amount of grain zinc content (41.4 ppm), resistance to brown and black rust 23
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0085
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8850
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: 'Release / identification table 2025-26, special features [alias in quote: object named ''brown'']'
+    quote: hi 8850 (pusa iari regional cz irrigated, timely 56.5 86.2 moderately tolerant to biofortiied station, indore sown heat (hsi- 0.90), and wheat poshan drought stress (dsi- shakti (d) 0.98) across the zones; good amount of grain zinc content (41.4 ppm), resistance to brown and black rust 23
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0086
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8850
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+    season: 2025-26
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26, special features
+    quote: hi 8850 (pusa iari regional cz irrigated, timely 56.5 86.2 moderately tolerant to biofortiied station, indore sown heat (hsi- 0.90), and wheat poshan drought stress (dsi- shakti (d) 0.98) across the zones; good amount of grain zinc content (41.4 ppm), resistance to brown and black rust 23
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0087
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:MACS4135
+  object: zone:wheat:CZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: macs 4135 ari, pune cz, pz irrigated, timely 57.6(cz), 84.2 better nutritional quality (macs sown 51.5(pz) (cz), with good amount of zinc mahabal) 78.2 (41.2 ppm) and iron (pz) (41.3 ppm) in central zone ... the rigorous quality assurance measures adopted under the coordinated programme.
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0088
+- type: VARIETY_RECOMMENDED_FOR_ZONE
+  subject: var:wheat:MACS4135
+  object: zone:wheat:PZ
+  qualifiers:
+    season: rabi
+    sowing: timely
+    water_regime: irrigated
+  evidence:
+  - source: doc:aicrp_wb_director_report_2025_26
+    method: official_document
+    locator: Release / identification table 2025-26
+    quote: macs 4135 ari, pune cz, pz irrigated, timely 57.6(cz), 84.2 better nutritional quality (macs sown 51.5(pz) (cz), with good amount of zinc mahabal) 78.2 (41.2 ppm) and iron (pz) (41.3 ppm) in central zone ... the rigorous quality assurance measures adopted under the coordinated programme.
+    extractor: llm:claude-from-report-text@wo16-2026-10-04
+    candidate_id: WO16-0089

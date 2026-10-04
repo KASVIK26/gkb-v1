@@ -1,0 +1,2015 @@
+# Rust reactions of wheat varieties from the AICRP Crop Protection report 2023-24 (Tables 1.2 and 9.1), read by parser:aicrp_rust@1 (no language model).
+# Same rules as aicrp_rust_reactions_v1.yaml: ACI <= 10.0 is resistant (the report's rule, quoted in every claim). Table 1.4 (one row per year) is not read.
+# Reviewed 2026-10-04 (kg/review_log/2026-10-04b_releases_and_pathotypes.md).
+
+sources:
+- id: doc:aicrp_crop_protection_2023_24
+  type: official_document
+  title: AICRP-W&B Progress Report Crop Protection 2023-24
+  year: 2024
+  url: http://www.aicrpwheatbarleyicar.in/wp-content/uploads/2024/09/Crop-Protection-_-Annual-Progress-Report-2023-24-1.pdf
+  verified: true
+  venue: ICAR-Indian Institute of Wheat and Barley Research, Karnal (AICRP on Wheat and Barley)
+entities: []
+claims:
+- type: VARIETY_REACTION
+  subject: var:wheat:HD2967
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 24.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 14
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 14 hd2967 24.3 40s 5.8 20s 19.3 60s 46.7 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r14:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HD2967
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 20S (ACI 5.8)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 14
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 14 hd2967 24.3 40s 5.8 20s 19.3 60s 46.7 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r14:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HD2967
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 60S (ACI 19.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 14
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 14 hd2967 24.3 40s 5.8 20s 19.3 60s 46.7 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r14:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HD2967
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 60S (ACI 46.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 14
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 14 hd2967 24.3 40s 5.8 20s 19.3 60s 46.7 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r14:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:NIAW3170
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 80S (ACI 28.5)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 35
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 35 niaw3170(c) 28.5 80s 12.5 40s 3.1 10s 27.6 60ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r35:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:NIAW3170
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 40S (ACI 12.5)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 35
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 35 niaw3170(c) 28.5 80s 12.5 40s 3.1 10s 27.6 60ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r35:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:NIAW3170
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 10S (ACI 3.1)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 35
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 35 niaw3170(c) 28.5 80s 12.5 40s 3.1 10s 27.6 60ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r35:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:NIAW3170
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: MS
+    stage: adult
+    season: 2023-24
+    score_raw: 60MS (ACI 27.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 35
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 35 niaw3170(c) 28.5 80s 12.5 40s 3.1 10s 27.6 60ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r35:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS4135
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 40MS (ACI 9.5)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 70
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 70 macs4135(d) 9.5 40ms 2.5 10s 1.1 10ms 1.6 20mr'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r70:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS4135
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10S (ACI 2.5)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 70
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 70 macs4135(d) 9.5 40ms 2.5 10s 1.1 10ms 1.6 20mr'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r70:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS4135
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 10MS (ACI 1.1)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 70
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 70 macs4135(d) 9.5 40ms 2.5 10s 1.1 10ms 1.6 20mr'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r70:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS4135
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20MR (ACI 1.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 70
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 70 macs4135(d) 9.5 40ms 2.5 10s 1.1 10ms 1.6 20mr'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r70:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8849
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20MS (ACI 6.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 75
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 75 hi8849(d) 6.4 20ms 6.3 20ms 0.4 10mr 6.1 20ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r75:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8849
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 20MS (ACI 6.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 75
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 75 hi8849(d) 6.4 20ms 6.3 20ms 0.4 10mr 6.1 20ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r75:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8849
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 10MR (ACI 0.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 75
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 75 hi8849(d) 6.4 20ms 6.3 20ms 0.4 10mr 6.1 20ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r75:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8849
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20MS (ACI 6.1)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 75
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 75 hi8849(d) 6.4 20ms 6.3 20ms 0.4 10mr 6.1 20ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r75:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8850
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 10MS (ACI 3.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 76
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 76 hi8850(d) 3.6 10ms 2.3 10mr 0.1 tms 4.2 10s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r76:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8850
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10MR (ACI 2.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 76
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 76 hi8850(d) 3.6 10ms 2.3 10mr 0.1 tms 4.2 10s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r76:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8850
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 10S (ACI 4.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 76
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 76 hi8850(d) 3.6 10ms 2.3 10mr 0.1 tms 4.2 10s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r76:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:GW555
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 40MS (ACI 6.8)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 78
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 78 gw555 6.8 40ms 4.7 20ms 2.1 10s 64.4 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r78:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:GW555
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 20MS (ACI 4.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 78
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 78 gw555 6.8 40ms 4.7 20ms 2.1 10s 64.4 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r78:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:GW555
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 10S (ACI 2.1)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 78
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 78 gw555 6.8 40ms 4.7 20ms 2.1 10s 64.4 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r78:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:GW555
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 80S (ACI 64.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 78
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 78 gw555 6.8 40ms 4.7 20ms 2.1 10s 64.4 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r78:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1650
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 30MS (ACI 8.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 83
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 83 hi1650 8.3 30ms 1.4 10mr 2.6 10ms 30.4 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r83:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1650
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10MR (ACI 1.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 83
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 83 hi1650 8.3 30ms 1.4 10mr 2.6 10ms 30.4 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r83:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1650
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 10MS (ACI 2.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 83
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 83 hi1650 8.3 30ms 1.4 10mr 2.6 10ms 30.4 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r83:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1650
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 60S (ACI 30.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 83
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 83 hi1650 8.3 30ms 1.4 10mr 2.6 10ms 30.4 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r83:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8737
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: MS
+    stage: adult
+    season: 2023-24
+    score_raw: 40MS (ACI 13.5)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 85
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 85 hi8737(d) 13.5 40ms 2.6 10s 1.7 15ms 4.9 10ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r85:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8737
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10S (ACI 2.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 85
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 85 hi8737(d) 13.5 40ms 2.6 10s 1.7 15ms 4.9 10ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r85:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8737
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 15MS (ACI 1.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 85
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 85 hi8737(d) 13.5 40ms 2.6 10s 1.7 15ms 4.9 10ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r85:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8737
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 10MS (ACI 4.9)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 85
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 85 hi8737(d) 13.5 40ms 2.6 10s 1.7 15ms 4.9 10ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r85:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8713
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 40MS (ACI 7.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 86
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 86 hi8713(d) 7.3 40ms 3.4 10ms 1.6 15ms 15.2 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r86:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8713
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10MS (ACI 3.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 86
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 86 hi8713(d) 7.3 40ms 3.4 10ms 1.6 15ms 15.2 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r86:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8713
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 15MS (ACI 1.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 86
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 86 hi8713(d) 7.3 40ms 3.4 10ms 1.6 15ms 15.2 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r86:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8713
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 60S (ACI 15.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 86
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 86 hi8713(d) 7.3 40ms 3.4 10ms 1.6 15ms 15.2 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r86:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS6830
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 30MR (ACI 5.1)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 90
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 90 macs6830 5.1 30mr 1.7 10ms 0.9 10ms 71.1 100s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r90:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS6830
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10MS (ACI 1.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 90
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 90 macs6830 5.1 30mr 1.7 10ms 0.9 10ms 71.1 100s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r90:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS6830
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 10MS (ACI 0.9)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 90
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 90 macs6830 5.1 30mr 1.7 10ms 0.9 10ms 71.1 100s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r90:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:MACS6830
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 100S (ACI 71.1)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 90
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 90 macs6830 5.1 30mr 1.7 10ms 0.9 10ms 71.1 100s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r90:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1634
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 12.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 95
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 95 hi1634 12.6 40s 2.4 10s 4.2 20s 46.2 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r95:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1634
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10S (ACI 2.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 95
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 95 hi1634 12.6 40s 2.4 10s 4.2 20s 46.2 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r95:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1634
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 20S (ACI 4.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 95
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 95 hi1634 12.6 40s 2.4 10s 4.2 20s 46.2 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r95:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1634
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 80S (ACI 46.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 95
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 95 hi1634 12.6 40s 2.4 10s 4.2 20s 46.2 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r95:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:CG1029
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 11.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 96
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 96 cg1029 11.6 40s 2.4 10s 4.2 20s 67.8 90s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r96:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:CG1029
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10S (ACI 2.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 96
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 96 cg1029 11.6 40s 2.4 10s 4.2 20s 67.8 90s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r96:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:CG1029
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 20S (ACI 4.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 96
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 96 cg1029 11.6 40s 2.4 10s 4.2 20s 67.8 90s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r96:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:CG1029
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 90S (ACI 67.8)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 96
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 96 cg1029 11.6 40s 2.4 10s 4.2 20s 67.8 90s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r96:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:UAS484
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 14.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 101
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 101 uas484(d) 14.3 40s 6.7 20s 2.3 20s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r101:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:UAS484
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 20S (ACI 6.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 101
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 101 uas484(d) 14.3 40s 6.7 20s 2.3 20s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r101:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:UAS484
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 20S (ACI 2.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 101
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 101 uas484(d) 14.3 40s 6.7 20s 2.3 20s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r101:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:UAS484
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20S (ACI 6.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 101
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 101 uas484(d) 14.3 40s 6.7 20s 2.3 20s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r101:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8851
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 30MS (ACI 7.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 103
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 103 hi8851(d) 7.3 30ms 3.2 10s 1.7 5s 3.1 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r103:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8851
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10S (ACI 3.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 103
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 103 hi8851(d) 7.3 30ms 3.2 10s 1.7 5s 3.1 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r103:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8851
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 5S (ACI 1.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 103
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 103 hi8851(d) 7.3 30ms 3.2 10s 1.7 5s 3.1 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r103:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8851
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20S (ACI 3.1)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 103
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 103 hi8851(d) 7.3 30ms 3.2 10s 1.7 5s 3.1 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r103:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW110
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: MS
+    stage: adult
+    season: 2023-24
+    score_raw: 40MS (ACI 19.5)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 107
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 107 dbw110 19.5 40ms 4.1 10s 12.7 40s 40.9 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r107:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW110
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10S (ACI 4.1)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 107
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 107 dbw110 19.5 40ms 4.1 10s 12.7 40s 40.9 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r107:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW110
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 40S (ACI 12.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 107
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 107 dbw110 19.5 40ms 4.1 10s 12.7 40s 40.9 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r107:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW110
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 80S (ACI 40.9)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 107
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 107 dbw110 19.5 40ms 4.1 10s 12.7 40s 40.9 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r107:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1655
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 10MS (ACI 1.9)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 109
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 109 hi1655* 1.9 10ms 1.9 10s 0.6 5s 33.6 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r109:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1655
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10S (ACI 1.9)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 109
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 109 hi1655* 1.9 10ms 1.9 10s 0.6 5s 33.6 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r109:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1655
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 5S (ACI 0.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 109
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 109 hi1655* 1.9 10ms 1.9 10s 0.6 5s 33.6 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r109:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1655
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 60S (ACI 33.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 109
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 109 hi1655* 1.9 10ms 1.9 10s 0.6 5s 33.6 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r109:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8627
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20S (ACI 5.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 110
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 110 hi8627(d) 5.6 20s 4.4 20s 0.6 5s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r110:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8627
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 20S (ACI 4.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 110
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 110 hi8627(d) 5.6 20s 4.4 20s 0.6 5s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r110:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8627
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 5S (ACI 0.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 110
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 110 hi8627(d) 5.6 20s 4.4 20s 0.6 5s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r110:leaf_rust-N
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 248
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 248 hi8627(d)(c) 6.1 20ms 5.4 20ms 0.6 5s 5.3 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r248:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8627
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20S (ACI 6.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 110
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 110 hi8627(d) 5.6 20s 4.4 20s 0.6 5s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r110:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8823
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20S (ACI 6.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 111
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 111 hi8823(d) 6.2 20s 2.7 10ms 1.6 10s 12.3 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r111:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8823
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10MS (ACI 2.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 111
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 111 hi8823(d) 6.2 20s 2.7 10ms 1.6 10s 12.3 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r111:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8823
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 10S (ACI 1.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 111
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 111 hi8823(d) 6.2 20s 2.7 10ms 1.6 10s 12.3 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r111:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8823
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 12.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 111
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 111 hi8823(d) 6.2 20s 2.7 10ms 1.6 10s 12.3 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r111:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW359
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 15.8)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 112
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 112 dbw359(i) 15.8 40s 13.7 40s 16.4 40s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r112:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW359
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 40S (ACI 13.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 112
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 112 dbw359(i) 15.8 40s 13.7 40s 16.4 40s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r112:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW359
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 40S (ACI 16.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 112
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 112 dbw359(i) 15.8 40s 13.7 40s 16.4 40s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r112:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW359
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20S (ACI 6.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 112
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 112 dbw359(i) 15.8 40s 13.7 40s 16.4 40s 6.7 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r112:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW426
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 30S (ACI 11.8)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 129
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 129 dbw426 11.8 30s 1.4 10mr 0.6 5s 8.2 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r129:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW426
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10MR (ACI 1.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 129
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 129 dbw426 11.8 30s 1.4 10mr 0.6 5s 8.2 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r129:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW426
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 5S (ACI 0.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 129
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 129 dbw426 11.8 30s 1.4 10mr 0.6 5s 8.2 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r129:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW426
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20S (ACI 8.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 129
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 129 dbw426 11.8 30s 1.4 10mr 0.6 5s 8.2 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r129:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:CG1047
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 15.5)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 139
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 139 cg1047 15.5 40s 6.5 20ms 19.4 40s 41.3 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r139:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:CG1047
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 20MS (ACI 6.5)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 139
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 139 cg1047 15.5 40s 6.5 20ms 19.4 40s 41.3 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r139:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:CG1047
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 40S (ACI 19.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 139
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 139 cg1047 15.5 40s 6.5 20ms 19.4 40s 41.3 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r139:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:CG1047
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 80S (ACI 41.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 139
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 139 cg1047 15.5 40s 6.5 20ms 19.4 40s 41.3 80s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r139:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:NIDW1149
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20S (ACI 8.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 144
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 144 nidw1149(d) 8.3 20s 2.3 10s 0.2 ts 1.1 10s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r144:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:NIDW1149
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10S (ACI 2.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 144
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 144 nidw1149(d) 8.3 20s 2.3 10s 0.2 ts 1.1 10s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r144:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:NIDW1149
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 10S (ACI 1.1)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 144
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 144 nidw1149(d) 8.3 20s 2.3 10s 0.2 ts 1.1 10s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r144:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1633
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 30MS (ACI 6.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 161
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 161 hi1633(c) 6.2 30ms 1.5 10ms 9.6 40s 39.8 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r161:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1633
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10MS (ACI 1.5)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 161
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 161 hi1633(c) 6.2 30ms 1.5 10ms 9.6 40s 39.8 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r161:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1633
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 40S (ACI 9.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 161
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 161 hi1633(c) 6.2 30ms 1.5 10ms 9.6 40s 39.8 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r161:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HI1633
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 60S (ACI 39.8)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 161
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 161 hi1633(c) 6.2 30ms 1.5 10ms 9.6 40s 39.8 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r161:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:NIAW3170
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 60S (ACI 21.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 226
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 226 niaw3170(c) 21.3 60s 5.7 10s 2.8 10s 29.1 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r226:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:NIAW3170
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10S (ACI 5.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 226
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 226 niaw3170(c) 21.3 60s 5.7 10s 2.8 10s 29.1 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r226:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:NIAW3170
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 10S (ACI 2.8)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 226
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 226 niaw3170(c) 21.3 60s 5.7 10s 2.8 10s 29.1 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r226:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:NIAW3170
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 29.1)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 226
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 226 niaw3170(c) 21.3 60s 5.7 10s 2.8 10s 29.1 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r226:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8627
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20MS (ACI 6.1)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 248
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 248 hi8627(d)(c) 6.1 20ms 5.4 20ms 0.6 5s 5.3 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r248:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8627
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 20MS (ACI 5.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 248
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 248 hi8627(d)(c) 6.1 20ms 5.4 20ms 0.6 5s 5.3 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r248:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HI8627
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20S (ACI 5.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 248
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 248 hi8627(d)(c) 6.1 20ms 5.4 20ms 0.6 5s 5.3 20s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r248:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW303
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 13.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 269
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 269 dbw303(c) 13.3 40s 2.4 10s 2.6 10s 21.2 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r269:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW303
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10S (ACI 2.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 269
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 269 dbw303(c) 13.3 40s 2.4 10s 2.6 10s 21.2 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r269:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW303
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 10S (ACI 2.6)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 269
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 269 dbw303(c) 13.3 40s 2.4 10s 2.6 10s 21.2 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r269:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW303
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 21.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 269
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 269 dbw303(c) 13.3 40s 2.4 10s 2.6 10s 21.2 40s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r269:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW445
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 14.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 281
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 281 dbw445 14.4 40s 2.7 10ms 7.9 40s 13.4 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r281:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW445
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10MS (ACI 2.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 281
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 281 dbw445 14.4 40s 2.7 10ms 7.9 40s 13.4 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r281:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW445
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 40S (ACI 7.9)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 281
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 281 dbw445 14.4 40s 2.7 10ms 7.9 40s 13.4 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r281:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW445
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 60S (ACI 13.4)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 281
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 281 dbw445 14.4 40s 2.7 10ms 7.9 40s 13.4 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r281:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HD3463
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20MS (ACI 4.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 283
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 283 hd3463 4.3 20ms 1.7 10ms 2.3 10s 5.7 20ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r283:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:HD3463
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10MS (ACI 1.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 283
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 283 hd3463 4.3 20ms 1.7 10ms 2.3 10s 5.7 20ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r283:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:HD3463
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 10S (ACI 2.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 283
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 283 hd3463 4.3 20ms 1.7 10ms 2.3 10s 5.7 20ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r283:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:HD3463
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20MS (ACI 5.7)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 283
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 283 hd3463 4.3 20ms 1.7 10ms 2.3 10s 5.7 20ms'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r283:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:JW1399
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 15.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 286
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 286 mp1399 15.3 40s 12.3 40s 6.9 20s 41.2 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r286:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:JW1399
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 40S (ACI 12.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 286
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 286 mp1399 15.3 40s 12.3 40s 6.9 20s 41.2 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r286:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:JW1399
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 20S (ACI 6.9)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 286
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 286 mp1399 15.3 40s 12.3 40s 6.9 20s 41.2 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r286:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:JW1399
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 60S (ACI 41.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 286
+    quote: 'found resistant (aci<10) ... table: 1.2. adult plant response of avt entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 ... avt no. entry stem rust (s) leaf rust (s) leaf rust (n) stripe rust (n) ... 286 mp1399 15.3 40s 12.3 40s 6.9 20s 41.2 60s'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r286:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW377
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 13.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 40
+    quote: 'based on the rusts aci up to 10.0 ... table: 9.1. entries tested in elite multiple disease screening nursery (2023-24 ... s. no. entry rusts lb kb pm fs fh b ccn south north 0-9(dd) % 0-9 % 0-5 stem leaf leaf stripe ... 40 dbw377 40s 13.2 10ms 5.3 30s 23.3 40s 11.2'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r40:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW377
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10MS (ACI 5.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 40
+    quote: 'based on the rusts aci up to 10.0 ... table: 9.1. entries tested in elite multiple disease screening nursery (2023-24 ... s. no. entry rusts lb kb pm fs fh b ccn south north 0-9(dd) % 0-9 % 0-5 stem leaf leaf stripe ... 40 dbw377 40s 13.2 10ms 5.3 30s 23.3 40s 11.2'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r40:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW377
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 30S (ACI 23.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 40
+    quote: 'based on the rusts aci up to 10.0 ... table: 9.1. entries tested in elite multiple disease screening nursery (2023-24 ... s. no. entry rusts lb kb pm fs fh b ccn south north 0-9(dd) % 0-9 % 0-5 stem leaf leaf stripe ... 40 dbw377 40s 13.2 10ms 5.3 30s 23.3 40s 11.2'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r40:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW377
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 40S (ACI 11.2)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 40
+    quote: 'based on the rusts aci up to 10.0 ... table: 9.1. entries tested in elite multiple disease screening nursery (2023-24 ... s. no. entry rusts lb kb pm fs fh b ccn south north 0-9(dd) % 0-9 % 0-5 stem leaf leaf stripe ... 40 dbw377 40s 13.2 10ms 5.3 30s 23.3 40s 11.2'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r40:stripe_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW359
+  object: dis:wheat:stem_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    season: 2023-24
+    score_raw: 60S (ACI 18.0)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 42
+    quote: 'based on the rusts aci up to 10.0 ... table: 9.1. entries tested in elite multiple disease screening nursery (2023-24 ... s. no. entry rusts lb kb pm fs fh b ccn south north 0-9(dd) % 0-9 % 0-5 stem leaf leaf stripe ... 42 dbw359 60s 18.0 10s 6.0 20s 15.0 20s 8.3'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r42:stem_rust
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW359
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    location: leaf rust (S) centres
+    season: 2023-24
+    score_raw: 10S (ACI 6.0)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 42
+    quote: 'based on the rusts aci up to 10.0 ... table: 9.1. entries tested in elite multiple disease screening nursery (2023-24 ... s. no. entry rusts lb kb pm fs fh b ccn south north 0-9(dd) % 0-9 % 0-5 stem leaf leaf stripe ... 42 dbw359 60s 18.0 10s 6.0 20s 15.0 20s 8.3'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r42:leaf_rust-S
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW359
+  object: dis:wheat:leaf_rust
+  qualifiers:
+    reaction: S
+    stage: adult
+    location: leaf rust (N) centres
+    season: 2023-24
+    score_raw: 20S (ACI 15.0)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 42
+    quote: 'based on the rusts aci up to 10.0 ... table: 9.1. entries tested in elite multiple disease screening nursery (2023-24 ... s. no. entry rusts lb kb pm fs fh b ccn south north 0-9(dd) % 0-9 % 0-5 stem leaf leaf stripe ... 42 dbw359 60s 18.0 10s 6.0 20s 15.0 20s 8.3'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r42:leaf_rust-N
+- type: VARIETY_REACTION
+  subject: var:wheat:DBW359
+  object: dis:wheat:stripe_rust
+  qualifiers:
+    reaction: R
+    stage: adult
+    season: 2023-24
+    score_raw: 20S (ACI 8.3)
+    scale: R if ACI <= 10.0 (the report's rule for resistant entries), else the response letter of the highest score (HS) over the hot-spot centres
+  evidence:
+  - source: doc:aicrp_crop_protection_2023_24
+    method: field_multi_env
+    locator: table, row 42
+    quote: 'based on the rusts aci up to 10.0 ... table: 9.1. entries tested in elite multiple disease screening nursery (2023-24 ... s. no. entry rusts lb kb pm fs fh b ccn south north 0-9(dd) % 0-9 % 0-5 stem leaf leaf stripe ... 42 dbw359 60s 18.0 10s 6.0 20s 15.0 20s 8.3'
+    extractor: parser:aicrp_rust@1
+    candidate_id: aicrp_crop_protection_2023_24:table:r42:stripe_rust

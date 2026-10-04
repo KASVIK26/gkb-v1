@@ -1,0 +1,363 @@
+# Soybean variety reactions stated in the plant-pathology narrative of the AICRP on Soybean annual reports 2017-18 to 2024-25 (ICAR-NSRI Indore): highly / absolutely resistant (HR, AR) and moderately resistant (MR) entries for rust, charcoal rot, frogeye leaf spot and pod blight (Colletotrichum truncatum, anthracnose), for varieties already in the KB. Work order WO17, reviewed 2026-10-04 (kg/review_log/2026-10-04b_releases_and_pathotypes.md). Evidence stays llm: (discounted).
+
+sources:
+- id: doc:aicrps_annual_report_2017_18
+  type: official_document
+  title: AICRP on Soybean annual report 2017-18
+  year: 2018
+  venue: ICAR-Indian Institute of Soybean Research, Indore (AICRP on Soybean)
+  url: https://icar-nsri.res.in/newwebsitehindi/pdfdoc/AicrpsAR2017-18.pdf
+  verified: true
+- id: doc:aicrps_annual_report_2018_19
+  type: official_document
+  title: AICRP on Soybean annual report 2018-19
+  year: 2019
+  venue: ICAR-Indian Institute of Soybean Research, Indore (AICRP on Soybean)
+  url: https://icar-nsri.res.in/newwebsitehindi/pdfdoc/AicrpsAR2018-19.pdf
+  verified: true
+- id: doc:aicrps_annual_report_2019_20
+  type: official_document
+  title: AICRP on Soybean annual report 2019-20
+  year: 2020
+  venue: ICAR-Indian Institute of Soybean Research, Indore (AICRP on Soybean)
+  url: https://icar-nsri.res.in/newwebsitehindi/pdfdoc/AicrpsAR2019-20.pdf
+  verified: true
+- id: doc:aicrps_annual_report_2020_21
+  type: official_document
+  title: AICRP on Soybean annual report 2020-21
+  year: 2021
+  venue: ICAR-Indian Institute of Soybean Research, Indore (AICRP on Soybean)
+  url: https://icar-nsri.res.in/newwebsitehindi/pdfdoc/AicrpsAR2020-21.pdf
+  verified: true
+- id: doc:aicrps_annual_report_2023_24
+  type: official_document
+  title: AICRP on Soybean annual report 2023-24
+  year: 2024
+  venue: ICAR-Indian Institute of Soybean Research, Indore (AICRP on Soybean)
+  url: https://icar-nsri.res.in/pdfdoc/AicrpsAR2023-24.pdf
+  verified: true
+- id: doc:aicrps_annual_report_2024_25
+  type: official_document
+  title: AICRP on Soybean annual report 2024-25
+  year: 2025
+  venue: ICAR-Indian Institute of Soybean Research, Indore (AICRP on Soybean)
+  url: https://icar-nsri.res.in/pdfdoc/AicrpsAR2024-25.pdf
+  verified: true
+- id: doc:aicrps_annual_report_2022_23
+  type: official_document
+  title: AICRP on Soybean annual report 2022-23
+  year: 2023
+  venue: ICAR-Indian Institute of Soybean Research, Indore (AICRP on Soybean)
+  url: https://icar-nsri.res.in/pdfdoc/AicrpsAR2022_23.pdf
+  verified: true
+entities: []
+claims:
+- type: VARIETY_REACTION
+  subject: var:soybean:DSB21
+  object: dis:soybean:rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2017_18
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2017-18 [alias in quote: object named ''rust'']'
+    quote: the variety dsb 21 maintained hr reaction to rust for the last eight years both at ugarkhurd and dharwad.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0001
+  - source: doc:aicrps_annual_report_2018_19
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2018-19 [alias in quote: object named ''rust'']'
+    quote: the variety dsb 21 maintained hr reaction to rust for the last nine years both at ugarkhurd and dharwad.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0002
+  - source: doc:aicrps_annual_report_2019_20
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2019-20 [alias in quote: object named ''rust'']'
+    quote: the entries dsb 21, dsb 23 & dsb 28 maintained their hr reaction to rust at their 8 th year of testing.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0003
+  - source: doc:aicrps_annual_report_2020_21
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2020-21 [alias in quote: object named ''rust'']'
+    quote: the entries dsb 21, and dsb 23 , dsb 28 maintained their hr reaction t o rust at their 9 th year of testing at dharwad center.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0005
+  - source: doc:aicrps_annual_report_2023_24
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2023-24 [alias in quote: object named ''rust'']'
+    quote: for rust, all ivt(n) entries except vls99 at k.digraj showed hs to s reaction, whereas, avt(n) entry dsb21 showed hr reaction; nrc 142, macs 1188 showed mr reaction to rust disease at the same location.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0007
+- type: VARIETY_REACTION
+  subject: var:soybean:DSB23
+  object: dis:soybean:rust
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2019_20
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2019-20 [alias in quote: object named ''rust'']'
+    quote: the entries dsb 21, dsb 23 & dsb 28 maintained their hr reaction to rust at their 8 th year of testing.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0004
+  - source: doc:aicrps_annual_report_2020_21
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2020-21 [alias in quote: object named ''rust'']'
+    quote: the entries dsb 21, and dsb 23 , dsb 28 maintained their hr reaction t o rust at their 9 th year of testing at dharwad center.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0006
+- type: VARIETY_REACTION
+  subject: var:soybean:MACS1188
+  object: dis:soybean:rust
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2023_24
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2023-24 [alias in quote: object named ''rust'']'
+    quote: for rust, all ivt(n) entries except vls99 at k.digraj showed hs to s reaction, whereas, avt(n) entry dsb21 showed hr reaction; nrc 142, macs 1188 showed mr reaction to rust disease at the same location.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0008
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2034
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2019_20
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2019-20 [alias in quote: object named ''cr'']'
+    quote: at jabalpur, the entries js 20-34, js 20-98, js 20-36 and nrc 125 showed hr reaction t o cr at their 6 th year of testing.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0009
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2098
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2019_20
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2019-20 [alias in quote: object named ''cr'']'
+    quote: at jabalpur, the entries js 20-34, js 20-98, js 20-36 and nrc 125 showed hr reaction t o cr at their 6 th year of testing.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0010
+  - source: doc:aicrps_annual_report_2024_25
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2024-25 [alias in quote: object named ''cr'']'
+    quote: js 20-98, js 20-20 showed hr reaction for cr disease at jabalpur in 9th year of testing, whereas, js 21-05, js 21-72 showed hr reaction in 7th year at jabalpur.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0011
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2172
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2020_21
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2020-21 [alias in quote: object named ''cr'']'
+    quote: in cz, three entries js 21 -72, nrc 142, nrc 150 showed hr reaction towards cr at jabalpur centre and amravati.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0012
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC150
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2020_21
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2020-21 [alias in quote: object named ''cr'']'
+    quote: in cz, three entries js 21 -72, nrc 142, nrc 150 showed hr reaction towards cr at jabalpur centre and amravati.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0013
+- type: VARIETY_REACTION
+  subject: var:soybean:AMS10039
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2018_19
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2018-19 [alias in quote: object named ''cr'']'
+    quote: in cz at jabalpur, the entries ams 100 -39.kds 992,nrc 130,ps 1613 and vls 94 showed ar reaction to cr.at sehore,none of entries showed ar /hr reaction to tls ..in sz at dharwad,dsb 3 4 showed hr reaction to dharwad, ugarkhurd and mr at k.digraj.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0014
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC130
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2018_19
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2018-19 [alias in quote: object named ''cr'']'
+    quote: in cz at jabalpur, the entries ams 100 -39.kds 992,nrc 130,ps 1613 and vls 94 showed ar reaction to cr.at sehore,none of entries showed ar /hr reaction to tls ..in sz at dharwad,dsb 3 4 showed hr reaction to dharwad, ugarkhurd and mr at k.digraj.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0015
+- type: VARIETY_REACTION
+  subject: var:soybean:MACS1520
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2017_18
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2017-18 [alias in quote: object named ''cr'']'
+    quote: in cz at jabalpur, the entries macs 1520,nrc 125 and rsc 10 -52 showed ar reaction to cr.at sehore,none of entries showed ar reaction to tls while 11 entries showed hr reaction to tls.in sz at dharwad,dsb 32 showed hr reaction to dharwad, ugarkhurd and k.digraj.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0016
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC181
+  object: dis:soybean:charcoal_rot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2022_23
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2022-23 [alias in quote: object named ''cr'']'
+    quote: addition ally, five entries (js 22-12, js 22-18, nrc 181, js 23-03 and js 23-09) showed hr reaction against cr at bot h centers of cz.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0017
+- type: VARIETY_REACTION
+  subject: var:soybean:JS20116
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2017_18
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2017-18 [alias in quote: object named ''fls'']'
+    quote: in nhz, at palampur js 20-116 recorded ar reaction and ps 1572 showed hr reaction for fls.none of entries showed ar/hr reaction at almora.however, entry vls 89 show ed mr reaction for fls at palampur and almora centers.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0018
+- type: VARIETY_REACTION
+  subject: var:soybean:JS20116
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    reaction: MR
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2024_25
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2024-25 [alias in quote: object named ''fls'']'
+    quote: himso 1685 & js 20-116 showed mr reaction to fls at almora in 8 th year of testing.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0019
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC150
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2023_24
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2023-24 [alias in quote: object named ''fls'']'
+    quote: for fls disease, ivt(n) entries nrc 266, nrc 138, ds 1480, nrc 150, js 25 - 06, maus 787, nrc 265, js 20-34, pusa sipani 33 and kds 1201 showed hr reaction at indore centre.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0020
+- type: VARIETY_REACTION
+  subject: var:soybean:JS2034
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2023_24
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2023-24 [alias in quote: object named ''fls'']'
+    quote: for fls disease, ivt(n) entries nrc 266, nrc 138, ds 1480, nrc 150, js 25 - 06, maus 787, nrc 265, js 20-34, pusa sipani 33 and kds 1201 showed hr reaction at indore centre.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0021
+- type: VARIETY_REACTION
+  subject: var:soybean:RSC1107
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2018_19
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2018-19 [alias in quote: object named ''fls'']'
+    quote: in nhz, at palampur two entries (nrc 147 and vls 94 ) showed ar reaction to fls while entries ( rsc 11-07 and sl 1123 ) showed hr reaction.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0022
+- type: VARIETY_REACTION
+  subject: var:soybean:PS1347
+  object: dis:soybean:frogeye_leaf_spot
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2017_18
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2017-18 [alias in quote: object named ''fls'']'
+    quote: at palampur, cat 1328, cat 1878 and ps 1347 entries were ar and 16 hr to fls.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0023
+- type: VARIETY_REACTION
+  subject: var:soybean:AMSMB518
+  object: dis:soybean:anthracnose
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2017_18
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2017-18 [alias in quote: object named ''pb(ct)'']'
+    quote: in nehz, at medziphema two entries(nrc 126 and rvs 2009 -9) showed ar reaction to pb(ct) while six entries(ams -mb5-18,ds 3105,kds 921,kds 1045,macs 1520 and nrc 127) showed hr reaction to pb(ct).at b .chairali,kds 980 and macs 1520 showed ar reaction to collr while five entries (ams mb 5 -18,dsb 32,kds 921 ,kds 1045 and nrc 127 ) recorded hr reaction for collr.in case of smv at b.chairali,nine entries showed ar reaction except ds 3106,rsc 1 0-52 and rsc 10 -70 showed ms reaction.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0024
+- type: VARIETY_REACTION
+  subject: var:soybean:MACS1520
+  object: dis:soybean:anthracnose
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2017_18
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2017-18 [alias in quote: object named ''pb(ct)'']'
+    quote: in nehz, at medziphema two entries(nrc 126 and rvs 2009 -9) showed ar reaction to pb(ct) while six entries(ams -mb5-18,ds 3105,kds 921,kds 1045,macs 1520 and nrc 127) showed hr reaction to pb(ct).at b .chairali,kds 980 and macs 1520 showed ar reaction to collr while five entries (ams mb 5 -18,dsb 32,kds 921 ,kds 1045 and nrc 127 ) recorded hr reaction for collr.in case of smv at b.chairali,nine entries showed ar reaction except ds 3106,rsc 1 0-52 and rsc 10 -70 showed ms reaction.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0025
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC127
+  object: dis:soybean:anthracnose
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2017_18
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2017-18 [alias in quote: object named ''pb(ct)'']'
+    quote: in nehz, at medziphema two entries(nrc 126 and rvs 2009 -9) showed ar reaction to pb(ct) while six entries(ams -mb5-18,ds 3105,kds 921,kds 1045,macs 1520 and nrc 127) showed hr reaction to pb(ct).at b .chairali,kds 980 and macs 1520 showed ar reaction to collr while five entries (ams mb 5 -18,dsb 32,kds 921 ,kds 1045 and nrc 127 ) recorded hr reaction for collr.in case of smv at b.chairali,nine entries showed ar reaction except ds 3106,rsc 1 0-52 and rsc 10 -70 showed ms reaction.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0026
+- type: VARIETY_REACTION
+  subject: var:soybean:NRC128
+  object: dis:soybean:anthracnose
+  qualifiers:
+    reaction: R
+    stage: unspecified
+  evidence:
+  - source: doc:aicrps_annual_report_2018_19
+    method: official_document
+    locator: 'Plant pathology, AICRP soybean 2018-19 [alias in quote: object named ''pb(ct)'']'
+    quote: in nehz, at medziphema two entri es(ps 1611 and rsc 11 -03) showed ar reaction to pb(ct) while five entries(ams-2014-1, ds 3108, nrc 128,nrc 132,sl 1068 ) showed hr reaction to pb(ct).at jorhat,csb 10112,rsc 11-03,vls 94 and vls 95 showed hr reaction to collr.
+    extractor: llm:claude-from-report-text@wo17-2026-10-04
+    candidate_id: WO17-0027

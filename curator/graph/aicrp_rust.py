@@ -28,13 +28,18 @@ COLUMN_WORDS = {
     "leaf rust (s)": ("dis:wheat:leaf_rust", "leaf rust (S) centres"),
     "leaf rust (n)": ("dis:wheat:leaf_rust", "leaf rust (N) centres"),
     "stripe rust": ("dis:wheat:stripe_rust", None),
+    "stem rust (s)": ("dis:wheat:stem_rust", None),
+    "stripe rust (n)": ("dis:wheat:stripe_rust", None),
     "yellow rust": ("dis:wheat:stripe_rust", None),
     "leaf rust": ("dis:wheat:leaf_rust", None),
 }
-_HEADER = re.compile(r"(?:s\. ?no\.|avt no\.) (?:entries|entry) ((?:stem rust|leaf rust \([sn]\)|leaf rust|stripe rust|yellow rust)(?: (?:stem rust|leaf rust \([sn]\)|leaf rust|stripe rust|yellow rust))*)")
-_TITLE = re.compile(r"table \d+\.\d+[.:]? [^.]{15,260}?(\d{4}-\d{2})")
+_HEADER = re.compile(r"(?:s\. ?no\.|avt no\.) (?:entries|entry) ((?:stem rust(?: \([sn]\))?|leaf rust \([sn]\)|leaf rust|stripe rust(?: \([sn]\))?|yellow rust)(?: (?:stem rust(?: \([sn]\))?|leaf rust \([sn]\)|leaf rust|stripe rust(?: \([sn]\))?|yellow rust))*)")
+_TITLE = re.compile(r"table:? \d+\.\d+[.:]? [^.]{15,260}?(\d{4}-\d{2})")
+# The 2023-24 report heads its elite multiple-disease nursery table "entry rusts lb kb pm ... south north ... stem leaf leaf stripe": the same four (HS, ACI) pairs, leaf rust south / north.
+_HEADER_ELITE = re.compile(r"s\. ?no\. entry rusts lb kb pm fs fh ?b ccn south north .{0,60}?stem leaf leaf stripe")
+ELITE_COLUMNS = ["stem rust", "leaf rust (s)", "leaf rust (n)", "stripe rust"]
 _PAGE_HEADER = re.compile(r"aicrp-w&b, progress report, crop protection, (?:vol\. iii, )?\d{4} page [ivxlc\d]+")
-_MULTI_YEAR = re.compile(r",? ?\d{4}-\d{2},? (?:and )?\d{4}-\d{2}")
+_MULTI_YEAR = re.compile(r",? ?\d{4}-\d{2,4},? (?:and )?\d{4}-\d{2,4}")
 _ACI = re.compile(r"\d+\.\d")
 _HS = re.compile(r"(\d{1,3})?(tmr|tms|tr|ts|mr|ms|r|s)|0")
 _RESPONSE = {"r": "R", "mr": "MR", "ms": "MS", "s": "S"}
@@ -87,8 +92,9 @@ def _skip_page_furniture(tokens: list[str], i: int, header_tokens: list[str]) ->
 def parse_tables(raw_text: str) -> list[RustRow]:
     text = normalise(raw_text)
     rows: list[RustRow] = []
-    for header in _HEADER.finditer(text):
-        columns = re.findall(r"stem rust|leaf rust \([sn]\)|leaf rust|stripe rust|yellow rust", header.group(1))
+    headers = [(h, re.findall(r"stem rust(?: \([sn]\))?|leaf rust \([sn]\)|leaf rust|stripe rust(?: \([sn]\))?|yellow rust", h.group(1))) for h in _HEADER.finditer(text)]
+    headers += [(h, ELITE_COLUMNS) for h in _HEADER_ELITE.finditer(text)]
+    for header, columns in sorted(headers, key=lambda hc: hc[0].start()):
         before = text[max(0, header.start() - 400): header.start()]
         title_match = list(_TITLE.finditer(before))
         title = title_match[-1].group(0) if title_match else ""
@@ -96,7 +102,8 @@ def parse_tables(raw_text: str) -> list[RustRow]:
         # skip the per-column "aci hs" sub-header, then read rows
         if not season:
             continue
-        if _MULTI_YEAR.match(text, header.start() - len(before) + title_match[-1].end()):
+        base = header.start() - len(before)
+        if _MULTI_YEAR.search(text, base + title_match[-1].start(), base + title_match[-1].end() + 40):
             continue  # "status of resistance ... during 2018-19, 2019-20 and 2020-21": one row per year under each entry, not this layout
         rules = list(_RULE.finditer(text, 0, header.start()))
         rule = rules[-1].group(0) if rules else ""

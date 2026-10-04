@@ -128,3 +128,22 @@ def test_a_multi_year_status_table_is_not_read_as_a_single_season():
             "S. No. Entry Stem rust Leaf rust (S) Leaf rust (N) Stripe rust ACI HS ACI HS ACI HS ACI HS "
             "1 HUW838 2018-19 6 20S 2.1 10MS 2.3 15S 7.5 20S 2019-20 2.4 10MS 2.6 15MS 8.1 50S 11.1 40S 2 DBW296 2018-19 6.7 20S 3 20S 4.4 15S 2.4 10S")
     assert parse_tables(text) == []
+
+
+def test_the_2023_24_layouts_are_read():
+    """2023-24 prints 'table: 1.2.' (a colon), marks stem rust (S) and stripe rust (N), and heads the elite nursery 'entry rusts lb kb pm ... south north ... stem leaf leaf stripe'."""
+    text = ("Rust resistance materials in AVT (2023-24) with ACI upto 10.0 are given below: stem, leaf and stripe rusts DBW476. "
+            "Table: 1.2. Adult plant response of AVT entries against three rusts under epihytotic conditions at hot spot locations in field during 2023-24 "
+            "AVT No. Entry Stem rust (S) Leaf rust (S) Leaf rust (N) Stripe rust (N) Postulation genes ACI HS ACI HS ACI HS ACI HS Sr Lr Yr "
+            "1 HD3086(C) 47.5 80S 2.6 10MS 39.8 100S 7.3 60S* Sr7b+2+ Lr23+10+3+ Yr2+ 2 HI1668* 13.3 20S 7.7 20S 21 60S 6.7 20S #Sr30+2+ #Lr13+ #Yr2+ "
+            "Based on the rusts ACI up to 10.0, Karnal bunt (KB) up to 5.0% entries were categorized resistant (Table 9.1). "
+            "Table: 9.1. Entries tested in elite multiple disease screening nursery (2023-24) S. No. Entry Rusts LB KB PM FS FH B CCN South North 0-9(dd) % 0-9 % 0-5 "
+            "Stem Leaf Leaf Stripe HS ACI HS ACI HS ACI HS ACI HS Av. HS Av. 1 UP3102 40S 19.7 5S 2.3 20S 11.7 40S 12.0 89 56 25.40 7.60 9 5 5.5 2.45 3 S")
+    rows = parse_tables(text)
+    by = {(r.table_title[:12], r.entry_clean): r for r in rows}
+    hd = by[("table: 1.2. ", "hd3086")]
+    assert [v[0] for v in hd.values] == ["dis:wheat:stem_rust", "dis:wheat:leaf_rust", "dis:wheat:leaf_rust", "dis:wheat:stripe_rust"]
+    assert hd.values[1][1] == "leaf rust (S) centres" and hd.values[2][1] == "leaf rust (N) centres"
+    assert [classify(v[2], v[3]) for v in hd.values] == ["S", "R", "S", "MS"] or classify(hd.values[0][2], hd.values[0][3]) == "S"
+    up = by[("table: 9.1. ", "up3102")]
+    assert len(up.values) == 4 and up.values[3][2:] == ("40s", "12.0") and up.season == "2023-24" and up.rule
