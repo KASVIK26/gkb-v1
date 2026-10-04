@@ -1,13 +1,13 @@
 {
-  "release": "2026_10_34",
-  "built_at": "2026-10-04T13:38:22.304716+00:00",
-  "git_sha": "a3ede84eeb4eee421659ccdb8f3a4820d26b3770",
+  "release": "2026_10_35",
+  "built_at": "2026-10-04T13:57:57.838876+00:00",
+  "git_sha": "256dcbb5b780f7eaced03f15571b2d6d74db5d2a",
   "git_dirty": false,
   "counts": {
-    "sources": 130,
-    "entities": 672,
-    "claims": 1611,
-    "evidence": 1816
+    "sources": 132,
+    "entities": 715,
+    "claims": 1654,
+    "evidence": 1859
   },
   "content_sources": {
     "config/vocab/diseases.yaml": "sha256:9293f54c8491e143a3bcf646b2069cd2f392376d38a03f4d46999492625321db",
@@ -24,7 +24,7 @@
     "kg/curated/env_triggers_v1.yaml": "sha256:bd6ea3129e87150db1b19789380faa6bd8626786d3fb1cd310f067d7e0fc3de5",
     "kg/curated/fungicide_trials_v1.yaml": "sha256:beb1218ff627239326b12cc48e924fa51f308bd4317a71040e5f95aadbe4d8ec",
     "kg/curated/gene_resistance_catalogue_v1.yaml": "sha256:851b27f3b82f02adb0889fb25be6f04f3b5a2d0b160c3131f91fe7194afe501a",
-    "kg/curated/loci_open_papers_v1.yaml": "sha256:c481e325c56b9b4f8eedd45ff537a040e2ac5f38b1086474e30fb119b61a0d1c",
+    "kg/curated/loci_open_papers_v1.yaml": "sha256:0e95c7b302d256174e8b1b7bb02b6ef7a4d76d4dca4e0b1238ef76eaaec4c638",
     "kg/curated/lr_postulation_iari_v1.yaml": "sha256:5c2297928823ff891eb63b6b4ca82a9df8e871380e2704a4a5ab342135a2ed78",
     "kg/curated/pathotype_prevalence_v1.yaml": "sha256:3b9fef3d8650298cbd1e2df4aa8897770ce830a30621fd8183a1d27b5ccbeb39",
     "kg/curated/pathotypes_iiwbr_v1.yaml": "sha256:fd3b23b8345c314c3d5e6f757294194ab302c9814d2aadb395b7fe4e8e741832",
@@ -39,7 +39,7 @@
     "kg/curated/variety_gene_postulations_v1.yaml": "sha256:33e7fe757d611f14c2c770153b948b541fc00e464534287626cceb43f72f1a4d",
     "kg/curated/variety_genes_v1.yaml": "sha256:0aa015101c0243faee2a9d7eeec26021e515dcb2a1c0626ae6f5bda53332a218",
     "kg/curated/wheat_reactions_v1.yaml": "sha256:0f71b3a2a5f8a453572ba2dc303ce416ba10a5fa32aeec52c0f3e6a13456f087",
-    "kg/curated/wheat_releases_aicrp_v1.yaml": "sha256:63790f7d1095a602324ac9210f3f6297dd4019db3fcfc6a0040f09a7684a4f3d",
+    "kg/curated/wheat_releases_aicrp_v1.yaml": "sha256:32e819684b4bc7eddd45fc6880ae582bd2a0a7e45241ffff0f8f9a0e0401004e",
     "kg/curated/wheat_seed_genes.yaml": "sha256:e0ffeaf357b31ed586b45bcf79c390c5a9d0dfa310fdd9a30dabf36a8ee90ac4",
     "kg/curated/zones_and_pedigree_v1.yaml": "sha256:09869fabc9b1be510e2122563200141ee51460ab67d2c5ae5fe74c641f2290bb"
   },
