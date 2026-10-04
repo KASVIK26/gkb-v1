@@ -10,4 +10,7 @@ abstract: >-
   weather triggers and management advisories for wheat, soybean and chickpea in Central India. Every claim cites a source with a verbatim quote;
   confidence tiers A-D are computed. No claim has yet been reviewed by a person.
 keywords: [wheat, soybean, chickpea, disease resistance, knowledge graph, India]
-# license: to be chosen by the owner (not yet set; see kg/metadata.jsonld)
+license: CC-BY-4.0
+license-note: >-
+  The dataset (knowledge graph data) is CC BY 4.0. The software in this repository (curation pipeline,
+  API, dashboard) is licensed separately under MIT -- see LICENSE.

@@ -1,0 +1,31 @@
+AgriHub Genomic Knowledge Base — data licence
+
+The knowledge graph's data — entities, claims, evidence rows, and the curated files under `kg/curated/` and `kg/review_log/` — is licensed under
+
+    Creative Commons Attribution 4.0 International (CC BY 4.0)
+    https://creativecommons.org/licenses/by/4.0/
+
+Copyright (c) 2026 AgriHub project team.
+
+You are free to share (copy and redistribute in any medium or format) and adapt (remix, transform, and
+build upon) this data for any purpose, including commercially, as long as you give appropriate credit,
+provide a link to this licence, and indicate if changes were made. See the full legal text at the link
+above for the exact terms.
+
+Suggested attribution: "AgriHub Genomic Knowledge Base (<release tag>, <date>), <repository URL>."
+A machine-readable citation is in `/CITATION.cff`; `kg/metadata.jsonld` carries the same licence as
+structured dataset metadata; `kg/manifest.json` records the exact release this applies to.
+
+## What this licence does and does not cover
+
+- It covers the structured facts this project curated: the typed claims, their qualifiers, confidence
+  scores and tiers, and the entity records (varieties, genes, diseases, zones, pathotypes, QTLs, markers,
+  advisories, triggers) built from them.
+- It does **not** relicense the verbatim quotes or full text of third-party sources that evidence rows
+  cite (AICRP/ICAR official documents, journal papers, government advisories). Those remain under their
+  original terms; this project reproduces only short excerpts as evidence, consistent with fair use /
+  fair dealing for citation and verification, never full source documents.
+- It does not cover the software that builds, serves or displays this data (the curation pipeline, API
+  and dashboard), which is licensed separately under MIT — see `/LICENSE`.
+- No claim in this release has been reviewed by a person; see `docs/QC_REPORT.md` and the review logs
+  under `kg/review_log/` for what "AI first-pass review" means here, and treat accordingly.

@@ -70,3 +70,12 @@ both deliberately independent of the legacy code above.
 (`supabase/migrations/20260926120000_dashboard_views.sql`) — see [public/README.md](public/README.md) for
 what it can do and how to run it locally. It is a demo query layer, not the real risk-engine API
 (RESEARCH_ROADMAP.md Phase 11, not built yet).
+
+## Licence
+
+Two licences, for two different things:
+
+- **Data** (the knowledge graph: entities, claims, evidence, `kg/curated/`) — **CC BY 4.0**. See [`kg/LICENSE-DATA`](kg/LICENSE-DATA).
+- **Code** (curation pipeline, API, dashboard — everything else in this repo) — **MIT**. See [`LICENSE`](LICENSE).
+
+Third-party sources that evidence rows cite or quote (AICRP/ICAR documents, journal papers) keep their own terms; this project reproduces only short verification excerpts, never full source documents.

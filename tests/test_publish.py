@@ -27,7 +27,9 @@ def test_the_data_dictionary_covers_every_claim_type_and_the_scoring_policy():
     assert "official_document" in text and "Tiers: A >= 0.85" in text
 
 
-def test_the_dataset_metadata_does_not_invent_a_licence():
+def test_the_dataset_metadata_states_the_cc_by_licence_and_notes_the_split_from_the_code_licence():
     meta = dataset_metadata(_production_bundle(), release="test")
-    assert meta["@type"] == "Dataset" and meta["version"] == "test" and "TO BE CHOSEN" in meta["license"]
+    assert meta["@type"] == "Dataset" and meta["version"] == "test"
+    assert meta["license"] == "https://creativecommons.org/licenses/by/4.0/"
+    assert "MIT" in meta["licenseNote"] and "CC BY" in meta["licenseNote"]
     json.dumps(meta)

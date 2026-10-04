@@ -97,7 +97,9 @@ def dataset_metadata(bundle: KGBundle, *, release: str, repo_url: str = "https:/
         "description": ("A scored, evidence-backed knowledge graph of crop varieties, their disease reactions, resistance genes and genome regions, pathotype surveys, weather triggers and "
                         "management advisories. Every claim cites a source with a verbatim quote; confidence tiers A-D are computed, not asserted."),
         "version": release, "dateModified": date.today().isoformat(), "url": repo_url,
-        "license": "TO BE CHOSEN BY THE OWNER (code and data licences are not yet set)",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "licenseNote": "Dataset (this knowledge graph) is CC BY 4.0 -- see kg/LICENSE-DATA. The software that builds and serves it (curator/, api/, functions/, public/) is MIT -- see /LICENSE. "
+                       "Third-party sources that evidence rows cite or quote keep their own terms; this project reproduces only short verification excerpts, never full source documents.",
         "keywords": ["wheat", "soybean", "chickpea", "disease resistance", "knowledge graph", "India", "rust", "pathotype"],
         "variableMeasured": [f"{len(bundle.entities)} entities", f"{len(claims)} claims", f"{len(bundle.evidence)} evidence rows", f"{len(bundle.sources)} sources"],
         "measurementTechnique": "Verified quotation from open literature and official documents (parsers for tables, a verifier for outside-research candidates); AI first-pass review, no human reviewer yet",
