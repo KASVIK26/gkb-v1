@@ -46,7 +46,8 @@ def test_kg_load_against_a_live_database(pg_conn: psycopg.Connection, pg_dsn: st
     # + 20 rust gene -> disease claims added 2026-10-03 (work order WO13a: Sr/Lr/Yr genes that varieties carry, from the AICRP reports)
     # + 1 (Lr14a -> leaf rust, work order WO14b)
     # + 3 (Rpp1-b, Rpp5, Rpp6 -> soybean rust, work order WO15a)
-    assert gene_count == 124
+    # + 1 (Uca1 -> chickpea rust, work order WO18)
+    assert gene_count == 125
 
 
 def test_kg_load_refuses_to_overwrite_an_existing_release(pg_conn: psycopg.Connection, pg_dsn: str, release_schema: str):

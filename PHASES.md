@@ -1599,6 +1599,11 @@ Measured 2026-10-04 against release 2026_10_35 (`docs/QC_REPORT.md`, generated b
    constant changes), `agrihub kg analytics`, `agrihub kg publish-files` (ID crosswalk, data dictionary, metadata), `docs/INTEGRATION.md`, citation file, changelog. The status table in section 2 is refreshed.
    QC found and fixed a variety synonym clash (HI 8849 / HI 8713). Left open (reasons in the plan): licence, protected reports, other products' crosswalk labels, risk engine, human review, ICAR Indore data.
 
+53. **Chickpea last try: dry root rot and rust (2026-10-04, release 2026_10_36: 1,654 -> 1,661 claims).** A second literature pass (title-focused web search, not just Europe PMC's own open-access-filtered search)
+   found three papers Europe PMC does not index with a PMID: qDRR-8 (a QTL on CaLG08), a second dry-root-rot locus with two co-segregating SSR markers, and the candidate gene Uca1 for chickpea rust with two flanking
+   markers. All three are abstract-only (Crossref-verified, no full text reachable); 7 evidence rows, all exact (`kg/review_log/2026-10-04d_chickpea_last_try.md`). Chickpea rust and dry root rot are no longer empty
+   of genes/QTLs; **collar rot still has nothing** — the search found only germplasm screening and one unrelated-pathogen QTL paper.
+
 ---
 
 ## 6. Definition of "done" reminder (unchanged from RESEARCH_ROADMAP.md §10)

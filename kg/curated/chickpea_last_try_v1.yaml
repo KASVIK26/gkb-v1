@@ -1,0 +1,176 @@
+# Chickpea dry-root-rot and rust loci from abstracts of three papers not open-access (Crossref-verified title + abstract text): qDRR-8 (CaLG08, Talekar et al. 2021), a second dry-root-rot locus with two co-segregating SSR markers ICCM0299/ICCM0120b (Talekar et al. 2017), and the candidate gene Uca1 for chickpea rust with flanking markers TA18/TA180 (Madrid et al. 2008). Work order WO18, a last attempt at the three previously-empty chickpea diseases (2026-10-04). Evidence stays llm: (discounted); the dry-root-rot/rust loci are from abstracts only, not full text.
+
+sources:
+- id: doi:10.1007/s10681-021-02854-4
+  type: publication
+  title: Molecular mapping of dry root rot resistance genes in chickpea (Cicer arietinum L.)
+  year: 2021
+  venue: Euphytica.
+  url: https://doi.org/10.1007/s10681-021-02854-4
+  verified: true
+- id: doi:10.1111/pbr.12448
+  type: publication
+  title: Identification of resistant sources and DNA markers linked to genomic region conferring dry root rot resistance in chickpea (Cicer arietinum L.)
+  year: 2017
+  venue: Plant breeding = Zeitschrift fur Pflanzenzuchtung
+  url: https://doi.org/10.1111/pbr.12448
+  verified: true
+- id: doi:10.1007/s10658-007-9240-7
+  type: publication
+  title: Mechanism and molecular markers associated with rust resistance in a chickpea interspecific cross (Cicer arietinum x Cicer reticulatum)
+  year: 2008
+  venue: Eur J Plant Pathol.
+  url: https://doi.org/10.1007/s10658-007-9240-7
+  verified: true
+entities:
+- id: qtl:chickpea:qDRR-8
+  type: QTL
+  name: qDRR-8
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: dry root rot resistance
+    chromosome: CaLG08
+    population: 182 F9 RILs, BG 212 x ICCV 08305, screened against Rb 6 isolate of R. bataticola, paper towel method, controlled environment, ICRISAT 2016-2017
+- id: qtl:chickpea:qDRR-L550xPG06102
+  type: QTL
+  name: qDRR-L550xPG06102
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    trait: dry root rot resistance
+    population: 129 F2:3 progeny, L550 x PG06102
+- id: mk:chickpea:ICCM0299
+  type: Marker
+  name: ICCM0299
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    marker_type: SSR
+- id: mk:chickpea:ICCM0120b
+  type: Marker
+  name: ICCM0120b
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    marker_type: SSR
+- id: gene:chickpea:Uca1
+  type: Gene
+  name: Uca1
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    symbol: Uca1
+    chromosome: CaLG07
+- id: mk:chickpea:TA18
+  type: Marker
+  name: TA18
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    marker_type: SSR
+- id: mk:chickpea:TA180
+  type: Marker
+  name: TA180
+  crop: chickpea
+  synonyms: []
+  name_i18n: {}
+  props:
+    marker_type: SSR
+claims:
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:qDRR-8
+  object: dis:chickpea:dry_root_rot
+  qualifiers:
+    stage: unspecified
+    lod: 3.34
+    pve_pct: 6.7
+    population: 182 F9 RILs, BG 212 x ICCV 08305, screened against Rb 6 isolate of R. bataticola, paper towel method, controlled environment, ICRISAT 2016-2017
+    n_env: 2
+  evidence:
+  - source: doi:10.1007/s10681-021-02854-4
+    method: qtl_mapping
+    locator: 'Abstract [alias in quote: object named ''DRR'']'
+    quote: A single minor QTL (‘qDRR-8’) explaining 6.70% PVE with LOD scores 3.34 was identified on CaLG08 for DRR resistance
+    extractor: llm:claude-last-try@wo18-2026-10-04
+    candidate_id: WO18-0001
+- type: QTL_ASSOCIATION
+  subject: qtl:chickpea:qDRR-L550xPG06102
+  object: dis:chickpea:dry_root_rot
+  qualifiers:
+    stage: unspecified
+    population: 129 F2:3 progeny, L550 x PG06102, blotter paper technique, laboratory conditions, phenotyped 2013 winter
+  evidence:
+  - source: doi:10.1111/pbr.12448
+    method: qtl_mapping
+    locator: 'Abstract [alias in quote: subject named ''dry root rot resistance'']'
+    quote: Phenotyping the mapping population consisting of 129 F2:3 progeny derived from the cross L550 × PG06102 during 2013 winter indicated monogenic inheritance of dry root rot resistance.
+    extractor: llm:claude-last-try@wo18-2026-10-04
+    candidate_id: WO18-0002
+- type: MARKER_LINKAGE
+  subject: mk:chickpea:ICCM0299
+  object: qtl:chickpea:qDRR-L550xPG06102
+  qualifiers:
+    diagnostic: false
+  evidence:
+  - source: doi:10.1111/pbr.12448
+    method: qtl_mapping
+    locator: 'Abstract [alias in quote: object named ''dry root rot'']'
+    quote: Linkage analysis using 129 F2 plants revealed that two markers ICCM0299 and ICCM0120b were co‐segregating with resistance to dry root rot.
+    extractor: llm:claude-last-try@wo18-2026-10-04
+    candidate_id: WO18-0003
+- type: MARKER_LINKAGE
+  subject: mk:chickpea:ICCM0120b
+  object: qtl:chickpea:qDRR-L550xPG06102
+  qualifiers:
+    diagnostic: false
+  evidence:
+  - source: doi:10.1111/pbr.12448
+    method: qtl_mapping
+    locator: 'Abstract [alias in quote: object named ''dry root rot'']'
+    quote: Linkage analysis using 129 F2 plants revealed that two markers ICCM0299 and ICCM0120b were co‐segregating with resistance to dry root rot.
+    extractor: llm:claude-last-try@wo18-2026-10-04
+    candidate_id: WO18-0004
+- type: GENE_CONFERS_RESISTANCE
+  subject: gene:chickpea:Uca1
+  object: dis:chickpea:rust
+  qualifiers:
+    resistance_type: unknown
+    spectrum: incomplete, non-hypersensitive (pre-haustorial) resistance; a QTL at this locus explains 31% of disease severity in seedlings and 81% of AUDPC in adult plants
+  evidence:
+  - source: doi:10.1007/s10658-007-9240-7
+    method: qtl_mapping
+    locator: 'Abstract [alias in quote: object named ''rust'']'
+    quote: it was hypothesised that a single dominant gene (proposed as Uca1/uca1) controlled resistance to rust in adult plants
+    extractor: llm:claude-last-try@wo18-2026-10-04
+    candidate_id: WO18-0005
+- type: MARKER_LINKAGE
+  subject: mk:chickpea:TA18
+  object: gene:chickpea:Uca1
+  qualifiers:
+    diagnostic: false
+  evidence:
+  - source: doi:10.1007/s10658-007-9240-7
+    method: qtl_mapping
+    locator: Abstract
+    quote: it was hypothesised that a single dominant gene (proposed as Uca1/uca1) controlled resistance to rust in adult plants. This allowed us to locate the gene on the genetic linkage map. Two Sequence Tagged Microsatellite Sites (STMS) markers, TA18 and TA180 (3.9 cM apart) were identified that flank the resistance gene.
+    extractor: llm:claude-last-try@wo18-2026-10-04
+    candidate_id: WO18-0006
+- type: MARKER_LINKAGE
+  subject: mk:chickpea:TA180
+  object: gene:chickpea:Uca1
+  qualifiers:
+    diagnostic: false
+  evidence:
+  - source: doi:10.1007/s10658-007-9240-7
+    method: qtl_mapping
+    locator: Abstract
+    quote: it was hypothesised that a single dominant gene (proposed as Uca1/uca1) controlled resistance to rust in adult plants. This allowed us to locate the gene on the genetic linkage map. Two Sequence Tagged Microsatellite Sites (STMS) markers, TA18 and TA180 (3.9 cM apart) were identified that flank the resistance gene.
+    extractor: llm:claude-last-try@wo18-2026-10-04
+    candidate_id: WO18-0007
